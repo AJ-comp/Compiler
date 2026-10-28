@@ -1,0 +1,27 @@
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(13,18): error TS1109: Expression expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(13,26): error TS1442: Expected '=' for property initializer.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(13,27): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(50,14): error TS1109: Expression expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(50,26): error TS1442: Expected '=' for property initializer.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(50,27): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(51,19): error TS1005: '{' expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(51,27): error TS1442: Expected '=' for property initializer.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(51,28): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(52,14): error TS1109: Expression expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(52,28): error TS1442: Expected '=' for property initializer.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(52,29): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(53,17): error TS1109: Expression expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(53,25): error TS1442: Expected '=' for property initializer.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(53,26): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(54,18): error TS1005: ']' expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(54,26): error TS1442: Expected '=' for property initializer.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(54,27): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(55,18): error TS1005: ']' expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(55,26): error TS1442: Expected '=' for property initializer.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(55,27): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(56,18): error TS1005: ']' expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(56,26): error TS1442: Expected '=' for property initializer.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(56,27): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(57,19): error TS1005: ']' expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(57,27): error TS1442: Expected '=' for property initializer.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-names.ts(57,28): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.

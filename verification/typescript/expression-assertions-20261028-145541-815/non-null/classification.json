@@ -1,0 +1,559 @@
+{
+  "version": "7.0.2",
+  "revision": "2bd066d87f5bafd315be9f40889d0a60b9e58e0b",
+  "positiveCases": 50,
+  "negativeCases": 15,
+  "checkerContext": "Exact snippets preceded by use strict and any-valued declarations, then export {}; parser oracle uses exact unmodified snippets.",
+  "cases": [
+    {
+      "id": 0,
+      "source": "value!;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 1,
+      "source": "value!!;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 2,
+      "source": "value !;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 3,
+      "source": "value/* comment */!;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 4,
+      "source": "!value!;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 5,
+      "source": "value!.property;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 6,
+      "source": "value![index];",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 7,
+      "source": "f()!;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 8,
+      "source": "f()!.property;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 9,
+      "source": "f()!();",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 10,
+      "source": "f!();",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 11,
+      "source": "f!.property![index]!;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 12,
+      "source": "(value + other)!;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 13,
+      "source": "new C!();",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 14,
+      "source": "new C()!;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 15,
+      "source": "new C!.Nested();",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 16,
+      "source": "tag!`text`;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 17,
+      "source": "tag!`value ${value!}`;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 18,
+      "source": "/ab/!.test(text);",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 19,
+      "source": "({ property: 1 })!.property;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 20,
+      "source": "value! = next;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 21,
+      "source": "value! += 1;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 22,
+      "source": "value!++;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 23,
+      "source": "++value!;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 24,
+      "source": "object!.property = next;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 25,
+      "source": "object!.property!++;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 26,
+      "source": "({ target: value! } = source);",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 27,
+      "source": "([value!] = source);",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 28,
+      "source": "base?.property!;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 29,
+      "source": "base!.property?.next;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 30,
+      "source": "base?.method!();",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 31,
+      "source": "base?.property!.next;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 32,
+      "source": "(base?.property)!.next = value;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 33,
+      "source": "(base?.property)!`text`;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 34,
+      "source": "base?.tag!`text`;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 35,
+      "source": "(base?.property)!();",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 36,
+      "source": "new (base?.Ctor)!();",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 37,
+      "source": "new (base?.tag!`text`)();",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 38,
+      "source": "value\n!other;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 39,
+      "source": "value/*\n*/!other;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 40,
+      "source": "value\n!other!;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 41,
+      "source": "value!\n.property;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 42,
+      "source": "f!\n();",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 43,
+      "source": "value!\n++other;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 44,
+      "source": "value != other;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 45,
+      "source": "value !== other;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 46,
+      "source": "value!!=other;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 47,
+      "source": "value!!==other;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 48,
+      "source": "value!!!=other;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 49,
+      "source": "!!value;",
+      "expectedSyntaxAccept": true,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 50,
+      "source": "1! = value;",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": [
+        2364
+      ]
+    },
+    {
+      "id": 51,
+      "source": "(value + other)! = next;",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": [
+        2364
+      ]
+    },
+    {
+      "id": 52,
+      "source": "f()! = value;",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": [
+        2364
+      ]
+    },
+    {
+      "id": 53,
+      "source": "f()!++;",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": [
+        2357
+      ]
+    },
+    {
+      "id": 54,
+      "source": "1!++;",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": [
+        2357
+      ]
+    },
+    {
+      "id": 55,
+      "source": "base?.property! = next;",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": [
+        2779
+      ]
+    },
+    {
+      "id": 56,
+      "source": "base?.property!.next = next;",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": [
+        2779
+      ]
+    },
+    {
+      "id": 57,
+      "source": "++base?.property!;",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": [
+        2777
+      ]
+    },
+    {
+      "id": 58,
+      "source": "base?.property!++;",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": [
+        2777
+      ]
+    },
+    {
+      "id": 59,
+      "source": "new base?.Ctor!();",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": false,
+      "nativeParserCodes": [
+        1209
+      ],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 60,
+      "source": "new base?.tag!`text`();",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": false,
+      "nativeParserCodes": [
+        1209
+      ],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 61,
+      "source": "new base?.tag!`text`.Ctor();",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": false,
+      "nativeParserCodes": [
+        1209
+      ],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 62,
+      "source": "delete value!;",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": true,
+      "nativeParserCodes": [],
+      "nativeCheckerCodes": [
+        2703
+      ]
+    },
+    {
+      "id": 63,
+      "source": "let result = value\n!;",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": false,
+      "nativeParserCodes": [
+        1109
+      ],
+      "nativeCheckerCodes": []
+    },
+    {
+      "id": 64,
+      "source": "let result = value\n!.property;",
+      "expectedSyntaxAccept": false,
+      "nativeParserAccept": false,
+      "nativeParserCodes": [
+        1109
+      ],
+      "nativeCheckerCodes": []
+    }
+  ]
+}

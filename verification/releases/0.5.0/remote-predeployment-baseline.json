@@ -1,0 +1,138 @@
+{
+  "observedAtUtc": "2026-10-21T02:01:12.486206+00:00",
+  "state": "Baseline while PR8 CI runs; no deployment completion inferred",
+  "expectedReleaseAssets": {
+    "playgroundUnicodeLicense": {
+      "path": "grammars/javascript/unicode/LICENSE.txt",
+      "bytes": 1995,
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+      "workingTreeBytes": 1995,
+      "workingTreeSha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+      "expectationSource": "Git HEAD blob, matching Linux CI checkout line endings"
+    },
+    "pagesCursorDocument": {
+      "path": "docs/ko/parser-driven-lexing.html",
+      "bytes": 58909,
+      "sha256": "ba011f372314ba8e4f82d9f183f386b02d9346640d681b3d38845da4359c9f48",
+      "workingTreeBytes": 59329,
+      "workingTreeSha256": "8b5d565549d5ea79d4baae9a64c96cb96c6248f6efce257752707adf8913646f",
+      "expectationSource": "Git HEAD blob, matching Linux CI checkout line endings"
+    },
+    "pagesCursorFields": {
+      "path": "docs/images/token-cursor-fields.png",
+      "bytes": 115173,
+      "sha256": "c0f6103d5c5b8edf3c1292e536696735eeaf8e48b2918818655b1ef6e1297417",
+      "workingTreeBytes": 115173,
+      "workingTreeSha256": "c0f6103d5c5b8edf3c1292e536696735eeaf8e48b2918818655b1ef6e1297417",
+      "expectationSource": "Git HEAD blob, matching Linux CI checkout line endings"
+    },
+    "pagesCursorStorage": {
+      "path": "docs/images/token-cursor-storage.png",
+      "bytes": 157531,
+      "sha256": "4fc6686a6b88a7d42500c7f2a3759c05258eab95c2694d12064675710b14ea13",
+      "workingTreeBytes": 157531,
+      "workingTreeSha256": "4fc6686a6b88a7d42500c7f2a3759c05258eab95c2694d12064675710b14ea13",
+      "expectationSource": "Git HEAD blob, matching Linux CI checkout line endings"
+    },
+    "pagesCursorPeek": {
+      "path": "docs/images/token-cursor-peek.png",
+      "bytes": 138988,
+      "sha256": "24801a5b717bd72a58a9a7715db82467c1d3ff9a4af4198d6fc1440bef2d818a",
+      "workingTreeBytes": 138988,
+      "workingTreeSha256": "24801a5b717bd72a58a9a7715db82467c1d3ff9a4af4198d6fc1440bef2d818a",
+      "expectationSource": "Git HEAD blob, matching Linux CI checkout line endings"
+    }
+  },
+  "remoteBaseline": {
+    "nugetIndex": {
+      "url": "https://api.nuget.org/v3-flatcontainer/janglim/index.json",
+      "status": 200,
+      "contentType": "application/json",
+      "bytes": 197,
+      "sha256": "32f8d3e6862278a1647fd5144d8b4a8f500e79f4749b499cb0ed59893d1ac11d",
+      "finalUrl": "https://api.nuget.org/v3-flatcontainer/janglim/index.json",
+      "version050Exists": false,
+      "latestVersions": [
+        "0.2.0-preview.3",
+        "0.3.0-preview.1",
+        "0.3.0-preview.2",
+        "0.3.0",
+        "0.4.0"
+      ]
+    },
+    "nuget050Nuspec": {
+      "url": "https://api.nuget.org/v3-flatcontainer/janglim/0.5.0/janglim.nuspec",
+      "status": 404,
+      "contentType": "application/xml",
+      "bytes": 215,
+      "sha256": "44f9601c8565730fdd2cbde2bf67be9f271ca995b5121405b784c81dadc9cd22",
+      "finalUrl": "https://api.nuget.org/v3-flatcontainer/janglim/0.5.0/janglim.nuspec"
+    },
+    "playgroundRoot": {
+      "url": "https://janglim.mythosia.net/",
+      "status": 200,
+      "contentType": "text/html",
+      "bytes": 3537,
+      "sha256": "9f263200932618dcbe49a6028b4ce687989df45faeccaff06d679a5e2fad9328",
+      "finalUrl": "https://janglim.mythosia.net/",
+      "htmlTitle": "Janglim Playground · Explore your grammar"
+    },
+    "playgroundUnicodeLicense": {
+      "url": "https://janglim.mythosia.net/licenses/Unicode-LICENSE.txt",
+      "status": 200,
+      "contentType": "text/html",
+      "bytes": 3537,
+      "sha256": "9f263200932618dcbe49a6028b4ce687989df45faeccaff06d679a5e2fad9328",
+      "finalUrl": "https://janglim.mythosia.net/licenses/Unicode-LICENSE.txt",
+      "matchesExpectedReleaseBytes": false,
+      "htmlTitle": "Janglim Playground · Explore your grammar"
+    },
+    "pagesRoot": {
+      "url": "https://aj-comp.github.io/Compiler/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 10798,
+      "sha256": "0fc8a36d4f25861e59b3ec223758f063c1bda23bdceb0903e47a84770e66faf6",
+      "finalUrl": "https://aj-comp.github.io/Compiler/",
+      "htmlTitle": "Janglim | Janglim — an LR/LALR parser-generator for .NET "
+    },
+    "pagesCursorDocument": {
+      "url": "https://aj-comp.github.io/Compiler/ko/parser-driven-lexing.html",
+      "status": 404,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 9379,
+      "sha256": "b620507312c5e97566a3c6cfaf99144fefc18a0da7d941401dfa0f5f58fb0368",
+      "finalUrl": "https://aj-comp.github.io/Compiler/ko/parser-driven-lexing.html",
+      "matchesExpectedReleaseBytes": false,
+      "htmlTitle": "Page not found &middot; GitHub Pages"
+    },
+    "pagesCursorFields": {
+      "url": "https://aj-comp.github.io/Compiler/images/token-cursor-fields.png",
+      "status": 404,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 9379,
+      "sha256": "b620507312c5e97566a3c6cfaf99144fefc18a0da7d941401dfa0f5f58fb0368",
+      "finalUrl": "https://aj-comp.github.io/Compiler/images/token-cursor-fields.png",
+      "matchesExpectedReleaseBytes": false
+    },
+    "pagesCursorStorage": {
+      "url": "https://aj-comp.github.io/Compiler/images/token-cursor-storage.png",
+      "status": 404,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 9379,
+      "sha256": "b620507312c5e97566a3c6cfaf99144fefc18a0da7d941401dfa0f5f58fb0368",
+      "finalUrl": "https://aj-comp.github.io/Compiler/images/token-cursor-storage.png",
+      "matchesExpectedReleaseBytes": false
+    },
+    "pagesCursorPeek": {
+      "url": "https://aj-comp.github.io/Compiler/images/token-cursor-peek.png",
+      "status": 404,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 9379,
+      "sha256": "b620507312c5e97566a3c6cfaf99144fefc18a0da7d941401dfa0f5f58fb0368",
+      "finalUrl": "https://aj-comp.github.io/Compiler/images/token-cursor-peek.png",
+      "matchesExpectedReleaseBytes": false
+    }
+  },
+  "sourceCommit": "21d3c6aba6280eeeb4aa12c9fa545556a5b932d9"
+}

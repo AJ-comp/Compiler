@@ -1,0 +1,21 @@
+Preparing script-nonstrict (web=True) ...
+Ready script-nonstrict at 00:00:18.6005433.
+250 cases, 250 passed, 0 mismatches/errors; 00:00:19.4627669.
+500 cases, 500 passed, 0 mismatches/errors; 00:00:20.0806944.
+750 cases, 750 passed, 0 mismatches/errors; 00:00:20.6552264.
+1000 cases, 1000 passed, 0 mismatches/errors; 00:00:21.2624743.
+1250 cases, 1250 passed, 0 mismatches/errors; 00:00:21.8903672.
+1500 cases, 1500 passed, 0 mismatches/errors; 00:00:22.4290113.
+Preparing module (web=False) ...
+Ready module at 00:00:27.6025603.
+1750 cases, 1750 passed, 0 mismatches/errors; 00:00:27.6283598.
+{
+  "input": "artifacts/ecmascript-audit/static/probes.jsonl",
+  "skip": 0,
+  "processed": 1895,
+  "outcomes": {
+    "pass": 1895
+  },
+  "elapsedSeconds": 27.8413638,
+  "syntaxOnly": true
+}

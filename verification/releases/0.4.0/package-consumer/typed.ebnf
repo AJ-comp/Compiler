@@ -1,0 +1,7 @@
+Value : id | text | ch | number ;
+id    := Identifier "[a-zA-Z_][a-zA-Z_0-9]*" ;
+text  := StringLiteral """[^""\r\n]*""" ;
+ch    := CharLiteral "'[^'\r\n]'" ;
+number := NumberLiteral "[0-9]+(?:\.[0-9]+)?" ;
+comment := Comment "//[^\r\n]*|/\*[\s\S]*?\*/" ;
+invalid_comment := Reject "/\*(?:(?!\*/)[\s\S])*\z" ;

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="3f153ad0-2262-4964-8a74-d817db94aa7d" name="AhjLv@JJW-PC 2026-10-23 05:30:24" runUser="JJW-PC\AhjLv" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-23T05:30:24.4071705+09:00" queuing="2026-10-23T05:30:24.4071710+09:00" start="2026-10-23T05:30:22.1304058+09:00" finish="2026-10-23T05:30:24.4156817+09:00" />
+  <TestSettings name="default" id="39fdcaa0-55b1-4de3-a072-4ea990ab9970">
+    <Deployment runDeploymentRoot="AhjLv_JJW-PC_2026-10-23_05_30_24" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="d1646f47-ef7a-493c-9614-0ba92e3edee9" testId="06e2cd81-8286-a6fb-6208-71f601a128f2" testName="Janglim.FrontEnd.Parsers.Tests.LalrTableTests.Parsing_table_matches_snapshot" computerName="JJW-PC" duration="00:00:00.0058756" startTime="2026-10-23T05:30:24.3004832+09:00" endTime="2026-10-23T05:30:24.3004834+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d1646f47-ef7a-493c-9614-0ba92e3edee9" />
+    <UnitTestResult executionId="9364c0b4-21c0-4745-826c-f3f9f717a7ad" testId="631f924c-c477-f101-d345-789e4e225a61" testName="Janglim.FrontEnd.Parsers.Tests.LalrTableTests.Parse_trace_string_matches_snapshot" computerName="JJW-PC" duration="00:00:00.0646517" startTime="2026-10-23T05:30:24.2949294+09:00" endTime="2026-10-23T05:30:24.2949414+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9364c0b4-21c0-4745-826c-f3f9f717a7ad" />
+    <UnitTestResult executionId="03a33504-5e57-4013-aba4-60eeab6b7ab8" testId="9b247825-2de5-8878-991e-8848c5a73452" testName="Janglim.FrontEnd.Parsers.Tests.LalrTableTests.Canonical_matches_snapshot" computerName="JJW-PC" duration="00:00:00.0243971" startTime="2026-10-23T05:30:24.3249421+09:00" endTime="2026-10-23T05:30:24.3249426+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="03a33504-5e57-4013-aba4-60eeab6b7ab8" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrTableTests.Canonical_matches_snapshot" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\test-bin\parse.frontend.parsers.tests.dll" id="9b247825-2de5-8878-991e-8848c5a73452">
+      <Execution id="03a33504-5e57-4013-aba4-60eeab6b7ab8" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\test-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrTableTests" name="Canonical_matches_snapshot" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrTableTests.Parse_trace_string_matches_snapshot" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\test-bin\parse.frontend.parsers.tests.dll" id="631f924c-c477-f101-d345-789e4e225a61">
+      <Execution id="9364c0b4-21c0-4745-826c-f3f9f717a7ad" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\test-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrTableTests" name="Parse_trace_string_matches_snapshot" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrTableTests.Parsing_table_matches_snapshot" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\test-bin\parse.frontend.parsers.tests.dll" id="06e2cd81-8286-a6fb-6208-71f601a128f2">
+      <Execution id="d1646f47-ef7a-493c-9614-0ba92e3edee9" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\test-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrTableTests" name="Parsing_table_matches_snapshot" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="06e2cd81-8286-a6fb-6208-71f601a128f2" executionId="d1646f47-ef7a-493c-9614-0ba92e3edee9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="631f924c-c477-f101-d345-789e4e225a61" executionId="9364c0b4-21c0-4745-826c-f3f9f717a7ad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9b247825-2de5-8878-991e-8848c5a73452" executionId="03a33504-5e57-4013-aba4-60eeab6b7ab8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="목록에 없는 결과" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="로드된 모든 결과" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)&#xD;
+[xUnit.net 00:00:00.08]   Discovering: Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:01.45]   Discovered:  Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:01.46]   Starting:    Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:01.58]   Finished:    Parse.FrontEnd.Parsers.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

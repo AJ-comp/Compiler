@@ -1,0 +1,28 @@
+test_baseline_source_checksum_is_validated (test_compare_test262.ComparisonTests.test_baseline_source_checksum_is_validated) ... ok
+test_boolean_fields_require_booleans_instead_of_truthy_values (test_compare_test262.ComparisonTests.test_boolean_fields_require_booleans_instead_of_truthy_values) ... ok
+test_delta_is_reproducible (test_compare_test262.ComparisonTests.test_delta_is_reproducible) ... ok
+test_delta_retains_latest_order_and_entire_case_payload (test_compare_test262.ComparisonTests.test_delta_retains_latest_order_and_entire_case_payload) ... ok
+test_duplicate_baseline_ids_are_rejected (test_compare_test262.ComparisonTests.test_duplicate_baseline_ids_are_rejected) ... ok
+test_duplicate_latest_ids_are_rejected (test_compare_test262.ComparisonTests.test_duplicate_latest_ids_are_rejected) ... ok
+test_each_execution_signature_field_prevents_reuse (test_compare_test262.ComparisonTests.test_each_execution_signature_field_prevents_reuse) ... ok
+test_empty_inputs_are_reported_with_zero_counts (test_compare_test262.ComparisonTests.test_empty_inputs_are_reported_with_zero_counts) ... ok
+test_identical_cases_are_reusable_and_delta_is_empty (test_compare_test262.ComparisonTests.test_identical_cases_are_reusable_and_delta_is_empty) ... ok
+test_json_errors_include_file_and_line (test_compare_test262.ComparisonTests.test_json_errors_include_file_and_line) ... ok
+test_latest_order_changes_do_not_invalidate_matching_cases (test_compare_test262.ComparisonTests.test_latest_order_changes_do_not_invalidate_matching_cases) ... ok
+test_latest_validation_failure_preserves_previous_complete_output (test_compare_test262.ComparisonTests.test_latest_validation_failure_preserves_previous_complete_output) ... ok
+test_line_ending_change_requires_delta (test_compare_test262.ComparisonTests.test_line_ending_change_requires_delta) ... ok
+test_missing_signature_fields_are_rejected (test_compare_test262.ComparisonTests.test_missing_signature_fields_are_rejected) ... ok
+test_new_id_is_added_and_old_id_is_reported_as_removed (test_compare_test262.ComparisonTests.test_new_id_is_added_and_old_id_is_reported_as_removed) ... ok
+test_non_signature_metadata_alone_does_not_force_reparse (test_compare_test262.ComparisonTests.test_non_signature_metadata_alone_does_not_force_reparse) ... ok
+test_output_cannot_replace_either_input_or_input_manifest (test_compare_test262.ComparisonTests.test_output_cannot_replace_either_input_or_input_manifest) ... ok
+test_preparation_manifests_are_checked_and_provenance_retained (test_compare_test262.ComparisonTests.test_preparation_manifests_are_checked_and_provenance_retained) ... ok
+test_profile_counts_distinguish_reuse_from_required_delta (test_compare_test262.ComparisonTests.test_profile_counts_distinguish_reuse_from_required_delta) ... ok
+test_source_change_requires_delta_even_for_comment_only_change (test_compare_test262.ComparisonTests.test_source_change_requires_delta_even_for_comment_only_change) ... ok
+test_stale_preparation_manifest_is_rejected (test_compare_test262.ComparisonTests.test_stale_preparation_manifest_is_rejected) ... ok
+test_unknown_mode_and_input_kind_are_rejected (test_compare_test262.ComparisonTests.test_unknown_mode_and_input_kind_are_rejected) ... ok
+test_utf8_bom_in_jsonl_is_supported (test_compare_test262.ComparisonTests.test_utf8_bom_in_jsonl_is_supported) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 1.662s
+
+OK

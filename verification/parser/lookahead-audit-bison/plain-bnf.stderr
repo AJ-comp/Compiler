@@ -1,0 +1,2 @@
+plain-bnf.y: warning: 1 shift/reduce conflict [-Wconflicts-sr]
+plain-bnf.y: note: rerun with option '-Wcounterexamples' to generate conflict counterexamples

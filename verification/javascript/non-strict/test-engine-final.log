@@ -1,0 +1,7 @@
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:01:04.53]     Janglim.FrontEnd.Parsers.Tests.SlrKnownIssueTests.Slr_should_parse_valid_Ex1 [SKIP]
+  건너뜀 Janglim.FrontEnd.Parsers.Tests.SlrKnownIssueTests.Slr_should_parse_valid_Ex1 [1 ms]
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\non-strict\TestResults\engine-final.trx
+
+통과!  - 실패:     0, 통과:  5561, 건너뜀:     1, 전체:  5562, 기간: 4 m - Parse.FrontEnd.Parsers.Tests.dll (net8.0)

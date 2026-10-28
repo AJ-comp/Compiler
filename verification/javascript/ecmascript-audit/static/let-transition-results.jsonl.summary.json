@@ -1,0 +1,11 @@
+{
+  "input": "artifacts/ecmascript-audit/static/let-transition-probes.jsonl",
+  "skip": 0,
+  "processed": 14,
+  "outcomes": {
+    "unexpected-reject": 2,
+    "pass": 12
+  },
+  "elapsedSeconds": 34.4162122,
+  "syntaxOnly": true
+}

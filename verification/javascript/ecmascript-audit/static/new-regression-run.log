@@ -1,0 +1,16 @@
+Preparing script-strict (web=False) ...
+Ready script-strict at 00:00:12.2099621.
+Preparing script-nonstrict (web=True) ...
+Ready script-nonstrict at 00:00:55.2162557.
+Preparing module (web=False) ...
+Ready module at 00:01:05.5603961.
+{
+  "input": "artifacts/ecmascript-audit/static/new-regressions.jsonl",
+  "skip": 0,
+  "processed": 16,
+  "outcomes": {
+    "pass": 16
+  },
+  "elapsedSeconds": 65.5925713,
+  "syntaxOnly": true
+}

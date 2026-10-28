@@ -1,0 +1,20 @@
+[
+  {
+    "file": "grammars/javascript/ecmascript-2026-expressions.ebnf",
+    "tokens": "E=element,R=binding rest,comma=elision/separator",
+    "boundedTokenLength": 12,
+    "oldWords": 984,
+    "newWords": 984,
+    "newOnly": [],
+    "oldOnly": []
+  },
+  {
+    "file": "grammars/javascript/ecmascript-2026-bindings.ebnf",
+    "tokens": "E=element,R=binding rest,comma=elision/separator",
+    "boundedTokenLength": 12,
+    "oldWords": 1360,
+    "newWords": 1360,
+    "newOnly": [],
+    "oldOnly": []
+  }
+]

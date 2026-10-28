@@ -1,0 +1,15 @@
+
+COMMAND ["C:\\Users\\AhjLv\\.dotnet\\dotnet.exe", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\tools\\Janglim.Test262\\bin\\Release\\net8.0\\Janglim.Test262.dll", "--input", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-audit\\static\\coordinator-smoke.jsonl", "--output", "artifacts\\ecmascript-audit\\static\\coordinator-smoke\\script-strict.jsonl", "--profile", "script-strict", "--skip", "0", "--timeout-ms", "30000"]
+Preparing script-strict (web=False) ...
+Ready script-strict at 00:00:08.5469332.
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-audit\\static\\coordinator-smoke.jsonl",
+  "profile": "script-strict",
+  "skip": 0,
+  "processed": 3,
+  "outcomes": {
+    "pass": 3
+  },
+  "elapsedSeconds": 8.6631003,
+  "syntaxOnly": true
+}

@@ -1,0 +1,10 @@
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-arity-cases.ts(1,40): error TS1054: A 'get' accessor cannot have parameters.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-arity-cases.ts(2,39): error TS1049: A 'set' accessor must have exactly one parameter.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-arity-cases.ts(2,39): error TS7032: Property 'x' implicitly has type 'any', because its set accessor lacks a parameter type annotation.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-arity-cases.ts(3,41): error TS1053: A 'set' accessor cannot have rest parameter.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-arity-cases.ts(4,38): error TS1049: A 'set' accessor must have exactly one parameter.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-arity-cases.ts(6,37): error TS1054: A 'get' accessor cannot have parameters.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-arity-cases.ts(7,36): error TS1049: A 'set' accessor must have exactly one parameter.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-arity-cases.ts(7,36): error TS7032: Property 'x' implicitly has type 'any', because its set accessor lacks a parameter type annotation.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-arity-cases.ts(8,38): error TS1053: A 'set' accessor cannot have rest parameter.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-arity-cases.ts(9,35): error TS1049: A 'set' accessor must have exactly one parameter.

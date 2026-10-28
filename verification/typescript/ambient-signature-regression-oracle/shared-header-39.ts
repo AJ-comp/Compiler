@@ -1,0 +1,1 @@
+function run(value: number = 1): void; function run(value: number = 1): void {} export { run };

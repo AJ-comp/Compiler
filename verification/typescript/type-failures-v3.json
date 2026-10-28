@@ -1,0 +1,174 @@
+[
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"<T extends Entity = User>(value: T) => T\")",
+    "message": "<T extends Entity = User>(value: T) => T\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"T[keyof T][number][]\")",
+    "message": "T[keyof T][number][]\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"[first: A, B, ...C[]]\")",
+    "message": "[first: A, B, ...C[]]\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"& A & B\")",
+    "message": "& A & B\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"{readonly [K in keyof T]?: T[K]}\")",
+    "message": "{readonly [K in keyof T]?: T[K]}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => value is string\")",
+    "message": "(value: unknown) => value is string\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"{[K in keyof T as `get${K}`]: T[K]}\")",
+    "message": "{[K in keyof T as `get${K}`]: T[K]}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"T extends infer U extends string ? U : never\")",
+    "message": "T extends infer U extends string ? U : never\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value\")",
+    "message": "(value: unknown) => asserts value\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {&, |, extends, [, ?, is} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"T extends infer U ? U : never\")",
+    "message": "T extends infer U ? U : never\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Concrete_tree_keeps_type_roles_and_original_source_positions",
+    "message": "Outer<Middle<Inner<User>>>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"any.Qualified\")",
+    "message": "any.Qualified\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"T extends U ? X extends Y ? A : B : C\")",
+    "message": "T extends U ? X extends Y ? A : B : C\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"keyof T\")",
+    "message": "keyof T\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"this\")",
+    "message": "this\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {&, |, extends, [, ?, is} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(this: Receiver, input?: string) => void\")",
+    "message": "(this: Receiver, input?: string) => void\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"Map<string, Array<User>>\")",
+    "message": "Map<string, Array<User>>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"Array<string>\")",
+    "message": "Array<string>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"{check(): this is Derived}\")",
+    "message": "{check(): this is Derived}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"Tuple<string, number,>\")",
+    "message": "Tuple<string, number,>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"{[Symbol.iterator](): Iterator<User>}\")",
+    "message": "{[Symbol.iterator](): Iterator<User>}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"new (input: string) => Result\")",
+    "message": "new (input: string) => Result\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"[A,]\")",
+    "message": "[A,]\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"{[K in keyof T]: T[K]}\")",
+    "message": "{[K in keyof T]: T[K]}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"(A | B)[]\")",
+    "message": "(A | B)[]\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"{+readonly [K in keyof T]+?: T[K];}\")",
+    "message": "{+readonly [K in keyof T]+?: T[K];}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"[...Head, Last]\")",
+    "message": "[...Head, Last]\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"| A | B\")",
+    "message": "| A | B\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"`prefix${T}suffix`\")",
+    "message": "`prefix${T}suffix`\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"import('library').Factory<User>\")",
+    "message": "import('library').Factory<User>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"Outer<Middle<Inner<User>>>\")",
+    "message": "Outer<Middle<Inner<User>>>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"{transform<T>(input: T): T; optional?(input: strin\"···)",
+    "message": "{transform<T>(input: T): T; optional?(input: string): void}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"abstract new <T>(value: T) => Container<T>\")",
+    "message": "abstract new <T>(value: T) => Container<T>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"{(input: string): number; <T>(value: T): T; new ()\"···)",
+    "message": "{(input: string): number; <T>(value: T): T; new (): Result}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"{-readonly [K in keyof T]-?: T[K]}\")",
+    "message": "{-readonly [K in keyof T]-?: T[K]}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"({name}: User, [value]: [number]) => string\")",
+    "message": "({name}: User, [value]: [number]) => string\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"T[K]\")",
+    "message": "T[K]\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value is string\")",
+    "message": "(value: unknown) => asserts value is string\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"T extends U ? X : Y\")",
+    "message": "T extends U ? X : Y\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"A | B & C\")",
+    "message": "A | B & C\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"User\")",
+    "message": "User\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"`${A}-${B}-${C}`\")",
+    "message": "`${A}-${B}-${C}`\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"Domain.User\")",
+    "message": "Domain.User\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+  }
+]

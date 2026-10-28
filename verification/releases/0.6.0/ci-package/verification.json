@@ -1,0 +1,11 @@
+{
+  "runId": 40664356048,
+  "artifactId": 12806541046,
+  "artifactName": "janglim-package-40664356048-1",
+  "artifactSha256": "997531afc186f7c024414c45cea1e8fe814a12af39e5305f5c07ac0f990c2ae7",
+  "expectedArtifactSha256": "997531afc186f7c024414c45cea1e8fe814a12af39e5305f5c07ac0f990c2ae7",
+  "packageSha256": "3d5bdf2c5dec80381020f242fae48bc9efaac8c20ec20f7aa432b95d1f73e5ba",
+  "expectedPackageSha256": "3d5bdf2c5dec80381020f242fae48bc9efaac8c20ec20f7aa432b95d1f73e5ba",
+  "repositoryCommit": "efe182f49d3ff265e42e93a33bc144a1811c4c9c",
+  "passed": true
+}

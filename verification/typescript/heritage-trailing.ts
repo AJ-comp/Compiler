@@ -1,0 +1,1 @@
+interface A {} interface I extends A, {}

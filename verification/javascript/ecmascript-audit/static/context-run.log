@@ -1,0 +1,21 @@
+Preparing script-nonstrict (web=True) ...
+Ready script-nonstrict at 00:00:19.2583041.
+Preparing script-strict (web=True) ...
+Ready script-strict at 00:00:24.1974375.
+Preparing module (web=True) ...
+Ready module at 00:00:29.6611536.
+250 cases, 250 passed, 0 mismatches/errors; 00:00:30.2766747.
+500 cases, 500 passed, 0 mismatches/errors; 00:00:30.7787512.
+750 cases, 740 passed, 10 mismatches/errors; 00:00:31.2574925.
+1000 cases, 990 passed, 10 mismatches/errors; 00:00:31.8024146.
+{
+  "input": "artifacts/ecmascript-audit/static/context-probes.jsonl",
+  "skip": 0,
+  "processed": 1008,
+  "outcomes": {
+    "pass": 998,
+    "unexpected-reject": 10
+  },
+  "elapsedSeconds": 31.8225023,
+  "syntaxOnly": true
+}

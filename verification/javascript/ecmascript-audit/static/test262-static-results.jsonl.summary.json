@@ -1,0 +1,10 @@
+{
+  "input": "artifacts/ecmascript-audit/static/test262-static-2500.jsonl",
+  "skip": 0,
+  "processed": 2500,
+  "outcomes": {
+    "pass": 2500
+  },
+  "elapsedSeconds": 63.664914,
+  "syntaxOnly": true
+}

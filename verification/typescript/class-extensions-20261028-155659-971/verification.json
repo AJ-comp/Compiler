@@ -1,0 +1,158 @@
+{
+  "CompletedAt": "2026-10-28T17:19:29.6448893+09:00",
+  "Feature": "TypeScript class extensions",
+  "ImplementationLayer": "TypeScript grammar composition, lexical policy and validation/projection only",
+  "SupportedSyntax": [
+    "accessibility, readonly, override, abstract, declare and accessor modifiers",
+    "optional and definite-assignment properties",
+    "generic classes, generic extends and implements clauses",
+    "method signatures and overload declarations",
+    "constructor parameter properties",
+    "class index signatures",
+    "abstract/ambient accessors and private signature bindings"
+  ],
+  "NativeReference": {
+    "Commit": "2bd066d87f5bafd315be9f40889d0a60b9e58e0b",
+    "Evidence": [
+      "class-extension-native-parser.jsonl",
+      "class-extension-native-classification.json",
+      "class-extension-native-checker.txt",
+      "class-lexical-native.jsonl",
+      "class-index-binding-parser.jsonl",
+      "class-index-binding-checker.txt"
+    ],
+    "Version": "7.0.2",
+    "Repository": "microsoft/typescript-go"
+  },
+  "TypeScriptSuite": {
+    "Total": 975,
+    "Passed": 975,
+    "BaselineCasesPreserved": 647,
+    "Failed": 0,
+    "MissingBaselineCases": 0,
+    "NewCases": 328,
+    "Reports": [
+      "typescript-group-0.trx",
+      "typescript-group-1.trx",
+      "typescript-group-2.trx"
+    ]
+  },
+  "OtherParserSuite": {
+    "Total": 6410,
+    "Passed": 6409,
+    "Report": "remaining-parser.trx",
+    "Failed": 0,
+    "Skipped": 1,
+    "Note": "Common engine and JavaScript source hashes are unchanged from this run; subsequent fixes were confined to TypeScript."
+  },
+  "CombinedParserCoverage": {
+    "Total": 7385,
+    "Passed": 7384,
+    "SkippedTests": [
+      "Janglim.FrontEnd.Parsers.Tests.SlrKnownIssueTests.Slr_should_parse_valid_Ex1"
+    ],
+    "DuplicateCases": 0,
+    "Failed": 0,
+    "Skipped": 1
+  },
+  "McpSuite": {
+    "Report": "mcp-verified.trx",
+    "Failed": 0,
+    "Total": 69,
+    "Passed": 69
+  },
+  "Build": {
+    "Configuration": "Release",
+    "ExitCode": 0,
+    "Warnings": 0,
+    "Log": "solution-build-verified.log",
+    "Errors": 0,
+    "Solution": "AJPGS.sln"
+  },
+  "SourceBoundary": {
+    "Compared": 651,
+    "Modified": [
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptValidation.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptProjection.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptLexicalPolicy.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptDialect.cs"
+    ],
+    "New": [
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptClasses.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptClassProjection.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptClassSignatureProjection.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptClassValidation.cs",
+      "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassAccessorTests.cs",
+      "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassEntryPointTests.cs",
+      "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassExtensionTests.cs",
+      "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassIndexSignatureTests.cs",
+      "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassLexicalTests.cs",
+      "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassPrivateSignatureTests.cs"
+    ],
+    "Unexpected": []
+  },
+  "FinalSourceHashes": [
+    {
+      "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptValidation.cs",
+      "Sha256": "0E3DDFE4230C79F03D26CFBE33D22C7C5CC2400D11FC36DE5E87009C06F87193"
+    },
+    {
+      "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptProjection.cs",
+      "Sha256": "8576316CF4A8A84564323A632A531B1A3CCE5474E74AC4FD29F15A2C61E06F21"
+    },
+    {
+      "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptLexicalPolicy.cs",
+      "Sha256": "A789D0C814FD1EAA33E6EFBF6084DF5C8ECE340E1FF894275445A03E97DE4A99"
+    },
+    {
+      "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptDialect.cs",
+      "Sha256": "A84D7A738E6F347FDEC3A5C0F3CCFD0B8EB08723CBC4B4D5BF34925A5BFDE513"
+    },
+    {
+      "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptClasses.cs",
+      "Sha256": "41EFFCCB39E4C26669B02A115A605BFEC4088C177312DB2285556400C8E0638D"
+    },
+    {
+      "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptClassProjection.cs",
+      "Sha256": "27930E6A9391A019A21CD142B1FD604C75A99953EDCEDC5C6A9EA9B1767756AE"
+    },
+    {
+      "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptClassSignatureProjection.cs",
+      "Sha256": "498A06BE7733F26ADD9707F52B414FCA988CABAB0922B43765C59F3EFFEE54B7"
+    },
+    {
+      "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptClassValidation.cs",
+      "Sha256": "8E2A8A2651FE30BC4BF71EEE354DA81AFEE08CB01B756033C44ABF428A918859"
+    },
+    {
+      "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassAccessorTests.cs",
+      "Sha256": "4591CB584923157D48C19E67ACE845F6CF7C69663BCCB82409CF5BFABC7E8E1D"
+    },
+    {
+      "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassEntryPointTests.cs",
+      "Sha256": "16928B5CC1AEE7637015B293952159A653CB828A6FBF883D4FBA414B46CAC088"
+    },
+    {
+      "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassExtensionTests.cs",
+      "Sha256": "E56C5DFBE2F0D278173E7A1DDA0094B262A15F168ACDC077C4D9288ED5966074"
+    },
+    {
+      "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassIndexSignatureTests.cs",
+      "Sha256": "7C58653840916722CD394258AF6B3B5CF081AEA25166D6E22DDEC0398CD4EF60"
+    },
+    {
+      "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassLexicalTests.cs",
+      "Sha256": "D5BA16085C647A4751F44AE6FA1D2ECC7873EF1BE9904F871902AB72CF389D50"
+    },
+    {
+      "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassPrivateSignatureTests.cs",
+      "Sha256": "55BB8563D0BF391C54A8AB00784D57EF784631857379DCB8967A355D27C9237C"
+    }
+  ],
+  "ValidationNotes": [
+    "Earlier failing runs are retained alongside final reports.",
+    "The final MCP run was performed alone after a worker with a 2-second deadline timed out under concurrent parser/build load. No MCP source or test was changed.",
+    "The final solution build ran after test processes exited; a concurrent build had failed to copy their locked test DLL.",
+    "This implements class syntax and grammar restrictions, not type compatibility or overload implementation resolution."
+  ]
+}

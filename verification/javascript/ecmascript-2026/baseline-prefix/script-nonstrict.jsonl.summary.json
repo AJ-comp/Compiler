@@ -1,0 +1,11 @@
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-2026\\baseline-prefix.jsonl",
+  "profile": "script-nonstrict",
+  "skip": 1698,
+  "processed": 3890,
+  "outcomes": {
+    "pass": 3890
+  },
+  "elapsedSeconds": 178.0809703,
+  "syntaxOnly": true
+}

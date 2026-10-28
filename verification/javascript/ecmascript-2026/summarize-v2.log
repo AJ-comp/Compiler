@@ -1,0 +1,37 @@
+{
+  "output": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\v2-checkpoint-report.json",
+  "complete": true,
+  "passed": true,
+  "counts": {
+    "variants": 48375,
+    "sourceFiles": 25982,
+    "expectedAccept": 40296,
+    "expectedReject": 8079,
+    "classifications": {
+      "parse-negative": 8079,
+      "positive": 40201,
+      "resolution-negative-source-only": 33,
+      "runtime-negative-source-only": 62
+    },
+    "outcomes": {
+      "pass": 48375
+    },
+    "stages": {
+      "accepted": 40296,
+      "early-error": 4410,
+      "parse": 3669
+    }
+  },
+  "checks": {
+    "duplicateInputIds": 0,
+    "duplicateResultIds": 0,
+    "missingResults": 0,
+    "evidenceChangedDuringVerification": 0,
+    "unexpectedAccept": 0,
+    "unexpectedReject": 0,
+    "unexpectedExceptions": 0,
+    "timeouts": 0,
+    "crashes": 0,
+    "syntaxExceptionRejections": 3669
+  }
+}

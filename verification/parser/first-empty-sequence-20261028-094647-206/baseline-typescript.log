@@ -1,0 +1,40 @@
+VSTest 버전 18.7.0 (x64)
+
+테스트 실행을 시작하는 중입니다. 잠시 기다려 주세요...
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:02:25.22]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "(value: unknown) => asserts value") [FAIL]
+[xUnit.net 00:02:25.24]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "(value: unknown) => asserts value is string") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "(value: unknown) => asserts value") [16 ms]
+  오류 메시지:
+   (value: unknown) => asserts value
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate TSNoTypeReferenceSuffix evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at InvokeStub_TypeScriptTypeTests.Function_construct_call_and_predicate_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "(value: unknown) => asserts value is string") [10 ms]
+  오류 메시지:
+   (value: unknown) => asserts value is string
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate TSNoTypeReferenceSuffix evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at InvokeStub_TypeScriptTypeTests.Function_construct_call_and_predicate_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:03:17.60]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: "export declare namespace Tools { function run(): v"···) [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: "export declare namespace Tools { function run(): v"···) [52 s]
+  오류 메시지:
+   export declare namespace Tools { function run(): void; }
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {{} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.ModuleFixture.Accept(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs:line 166
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs:line 149
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-typescript.trx
+
+실패!  - 실패:     3, 통과:    26, 건너뜀:     0, 전체:    29, 기간: 3 m 13 s - Parse.FrontEnd.Parsers.Tests.dll (net8.0)

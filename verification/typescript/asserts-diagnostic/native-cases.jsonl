@@ -1,0 +1,15 @@
+{"id":"(value: unknown) => asserts value","source":"type Check = ((value: unknown) => asserts value);","kind":"ts"}
+{"id":"(value: unknown) => asserts value is string","source":"type Check = ((value: unknown) => asserts value is string);","kind":"ts"}
+{"id":"asserts","source":"type Check = (asserts);","kind":"ts"}
+{"id":"asserts.X","source":"type Check = (asserts.X);","kind":"ts"}
+{"id":"asserts<A>","source":"type Check = (asserts<A>);","kind":"ts"}
+{"id":"asserts this","source":"type Check = (asserts this);","kind":"ts"}
+{"id":"asserts is","source":"type Check = (asserts is);","kind":"ts"}
+{"id":"asserts is string","source":"type Check = (asserts is string);","kind":"ts"}
+{"id":"asserts unknown","source":"type Check = (asserts unknown);","kind":"ts"}
+{"id":"asserts string","source":"type Check = (asserts string);","kind":"ts"}
+{"id":"asserts function","source":"type Check = (asserts function);","kind":"ts"}
+{"id":"asserts\nvalue","source":"type Check = (asserts\nvalue);","kind":"ts"}
+{"id":"asserts value\nis string","source":"type Check = (asserts value\nis string);","kind":"ts"}
+{"id":"asserts/*\n*/value","source":"type Check = (asserts/*\n*/value);","kind":"ts"}
+{"id":"asserts/**/value","source":"type Check = (asserts/**/value);","kind":"ts"}

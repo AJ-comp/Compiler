@@ -1,0 +1,122 @@
+{
+  "RowsPreserved": 46,
+  "ChangedCells": 19,
+  "OnlyNoncompletedLookaheadCellsChanged": true,
+  "CompletedValuesUnchanged": true,
+  "Changes": [
+    {
+      "Line": 2,
+      "Item": "Accept ->•A",
+      "PreviousLookahead": "{This is EndMarker! char : щ}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 3,
+      "Item": "A ->•a B = e",
+      "PreviousLookahead": "{This is EndMarker! char : щ}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 7,
+      "Item": "A -> a•B = e",
+      "PreviousLookahead": "{This is EndMarker! char : щ}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 8,
+      "Item": "B ->•C B",
+      "PreviousLookahead": "{=}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 9,
+      "Item": "C ->•[ e D ]",
+      "PreviousLookahead": "{[, ., =}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 10,
+      "Item": "C ->•. a",
+      "PreviousLookahead": "{[, ., =}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 13,
+      "Item": "A -> a B•= e",
+      "PreviousLookahead": "{This is EndMarker! char : щ}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 15,
+      "Item": "B -> C•B",
+      "PreviousLookahead": "{=}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 16,
+      "Item": "B ->•C B",
+      "PreviousLookahead": "{=}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 17,
+      "Item": "C ->•[ e D ]",
+      "PreviousLookahead": "{[, ., =}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 18,
+      "Item": "C ->•. a",
+      "PreviousLookahead": "{[, ., =}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 21,
+      "Item": "C -> [•e D ]",
+      "PreviousLookahead": "{[, ., =}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 23,
+      "Item": "C -> .•a",
+      "PreviousLookahead": "{[, ., =}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 25,
+      "Item": "A -> a B =•e",
+      "PreviousLookahead": "{This is EndMarker! char : щ}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 29,
+      "Item": "C -> [ e•D ]",
+      "PreviousLookahead": "{[, ., =}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 30,
+      "Item": "D ->•e D",
+      "PreviousLookahead": "{]}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 37,
+      "Item": "C -> [ e D•]",
+      "PreviousLookahead": "{[, ., =}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 39,
+      "Item": "D -> e•D",
+      "PreviousLookahead": "{]}",
+      "NewLookahead": "[not checked]"
+    },
+    {
+      "Line": 40,
+      "Item": "D ->•e D",
+      "PreviousLookahead": "{]}",
+      "NewLookahead": "[not checked]"
+    }
+  ]
+}

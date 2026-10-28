@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings></PropertyGroup>
+  <ItemGroup><Reference Include="C:/Users/AhjLv/OneDrive/바탕 화면/개인 프로젝트/AJPGS/Tests/Parse.FrontEnd.Parsers.Tests/bin/Release/net8.0/*.dll" /></ItemGroup>
+</Project>

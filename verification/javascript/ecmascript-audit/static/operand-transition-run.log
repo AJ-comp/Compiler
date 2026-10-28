@@ -1,0 +1,12 @@
+Preparing script-nonstrict (web=True) ...
+Ready script-nonstrict at 00:00:37.9038051.
+{
+  "input": "artifacts/ecmascript-audit/static/operand-transition-probes.jsonl",
+  "skip": 0,
+  "processed": 7,
+  "outcomes": {
+    "unexpected-reject": 7
+  },
+  "elapsedSeconds": 38.0509214,
+  "syntaxOnly": true
+}

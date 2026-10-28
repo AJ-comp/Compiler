@@ -1,0 +1,20 @@
+{
+  "verifiedAtUtc": "2026-10-21T01:58:45.914390+00:00",
+  "verification": "Dockerfile COPY-only isolated source publish, not Docker image execution",
+  "sourceFileCount": 371,
+  "copiedSourceBytesMatchOriginal": true,
+  "projectCountEvaluated": 9,
+  "sourceItemsEvaluated": 363,
+  "outsideContextSourceReferences": [],
+  "javaScriptEbnfCount": 6,
+  "publishExitCode": 0,
+  "warnings": 5,
+  "errors": 0,
+  "unicodeNoticePublished": true,
+  "unicodeNoticeMatchesOriginal": true,
+  "unicodeNoticeSha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+  "publishedMcpDll": true,
+  "publishDirectory": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\release-0.5.0\\mcp-container-publish",
+  "sourceControlQueriesDisabled": "Prevent parent checkout metadata discovery; Docker COPY context contains no .git",
+  "dockerDaemonBuild": false
+}

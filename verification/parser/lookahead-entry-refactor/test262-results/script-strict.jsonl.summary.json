@@ -1,0 +1,11 @@
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-latest-es2026.jsonl",
+  "profile": "script-strict",
+  "skip": 0,
+  "processed": 22963,
+  "outcomes": {
+    "pass": 22963
+  },
+  "elapsedSeconds": 727.8681703,
+  "syntaxOnly": true
+}

@@ -1,0 +1,813 @@
+{
+  "checkedUtc": "2026-10-28T09:46:30.574241+00:00",
+  "baseUrl": "https://janglim.mythosia.net/",
+  "releaseVersion": "0.6.0",
+  "playgroundVersion": "1.1.0",
+  "commit": "efe182f49d3ff265e42e93a33bc144a1811c4c9c",
+  "workflow": {
+    "conclusion": "success",
+    "headSha": "efe182f49d3ff265e42e93a33bc144a1811c4c9c",
+    "jobs": [
+      {
+        "completedAt": "2026-10-28T09:44:18Z",
+        "conclusion": "success",
+        "databaseId": 122734978636,
+        "name": "Test and build / Test and build release artifacts",
+        "startedAt": "2026-10-28T09:27:21Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-28T09:27:23Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-28T09:27:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:27:27Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v4",
+            "number": 2,
+            "startedAt": "2026-10-28T09:27:23Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:27:27Z",
+            "conclusion": "success",
+            "name": "Detect playground frontend",
+            "number": 3,
+            "startedAt": "2026-10-28T09:27:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:27:28Z",
+            "conclusion": "success",
+            "name": "Set up .NET",
+            "number": 4,
+            "startedAt": "2026-10-28T09:27:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:27:36Z",
+            "conclusion": "success",
+            "name": "Read and validate release versions",
+            "number": 5,
+            "startedAt": "2026-10-28T09:27:28Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:27:37Z",
+            "conclusion": "success",
+            "name": "Test release infrastructure helpers",
+            "number": 6,
+            "startedAt": "2026-10-28T09:27:36Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:27:38Z",
+            "conclusion": "success",
+            "name": "Test language verification helpers",
+            "number": 7,
+            "startedAt": "2026-10-28T09:27:37Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:27:41Z",
+            "conclusion": "success",
+            "name": "Set up Node.js",
+            "number": 8,
+            "startedAt": "2026-10-28T09:27:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:27:45Z",
+            "conclusion": "success",
+            "name": "Install UI dependencies",
+            "number": 9,
+            "startedAt": "2026-10-28T09:27:41Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:27:45Z",
+            "conclusion": "success",
+            "name": "Verify web version metadata",
+            "number": 10,
+            "startedAt": "2026-10-28T09:27:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:28:18Z",
+            "conclusion": "success",
+            "name": "Build default solution (Debug)",
+            "number": 11,
+            "startedAt": "2026-10-28T09:27:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:28:26Z",
+            "conclusion": "success",
+            "name": "Build default solution (Release)",
+            "number": 12,
+            "startedAt": "2026-10-28T09:28:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:42:48Z",
+            "conclusion": "success",
+            "name": "Test parser engine",
+            "number": 13,
+            "startedAt": "2026-10-28T09:28:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:43:11Z",
+            "conclusion": "success",
+            "name": "Test MCP protocol and isolated parser workers",
+            "number": 14,
+            "startedAt": "2026-10-28T09:42:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:43:11Z",
+            "conclusion": "success",
+            "name": "Test interface",
+            "number": 15,
+            "startedAt": "2026-10-28T09:43:11Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:43:41Z",
+            "conclusion": "success",
+            "name": "Build public playground",
+            "number": 16,
+            "startedAt": "2026-10-28T09:43:11Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:43:42Z",
+            "conclusion": "success",
+            "name": "Pack engine",
+            "number": 17,
+            "startedAt": "2026-10-28T09:43:41Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:43:44Z",
+            "conclusion": "success",
+            "name": "Publish MCP server",
+            "number": 18,
+            "startedAt": "2026-10-28T09:43:42Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:05Z",
+            "conclusion": "success",
+            "name": "Verify MCP container",
+            "number": 19,
+            "startedAt": "2026-10-28T09:43:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:07Z",
+            "conclusion": "success",
+            "name": "Upload tested MCP server",
+            "number": 20,
+            "startedAt": "2026-10-28T09:44:05Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:07Z",
+            "conclusion": "success",
+            "name": "Hash NuGet packages",
+            "number": 21,
+            "startedAt": "2026-10-28T09:44:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:08Z",
+            "conclusion": "success",
+            "name": "Upload tested NuGet packages",
+            "number": 22,
+            "startedAt": "2026-10-28T09:44:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:11Z",
+            "conclusion": "success",
+            "name": "Upload tested playground",
+            "number": 23,
+            "startedAt": "2026-10-28T09:44:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:13Z",
+            "conclusion": "success",
+            "name": "Upload engine and MCP test results",
+            "number": 24,
+            "startedAt": "2026-10-28T09:44:11Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:13Z",
+            "conclusion": "skipped",
+            "name": "Upload failed snapshot comparisons",
+            "number": 25,
+            "startedAt": "2026-10-28T09:44:13Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:13Z",
+            "conclusion": "success",
+            "name": "Build summary",
+            "number": 26,
+            "startedAt": "2026-10-28T09:44:13Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:15Z",
+            "conclusion": "success",
+            "name": "Post Set up Node.js",
+            "number": 50,
+            "startedAt": "2026-10-28T09:44:13Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:16Z",
+            "conclusion": "success",
+            "name": "Post Set up .NET",
+            "number": 51,
+            "startedAt": "2026-10-28T09:44:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:16Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v4",
+            "number": 52,
+            "startedAt": "2026-10-28T09:44:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:16Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 53,
+            "startedAt": "2026-10-28T09:44:16Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/AJ-comp/Compiler/actions/runs/40664356048/job/122734978636"
+      },
+      {
+        "completedAt": "2026-10-28T09:44:41Z",
+        "conclusion": "success",
+        "databaseId": 122742487045,
+        "name": "Publish engine to NuGet",
+        "startedAt": "2026-10-28T09:44:21Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-28T09:44:24Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-28T09:44:22Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:26Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v4",
+            "number": 2,
+            "startedAt": "2026-10-28T09:44:24Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:28Z",
+            "conclusion": "success",
+            "name": "Download the verified package",
+            "number": 3,
+            "startedAt": "2026-10-28T09:44:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:28Z",
+            "conclusion": "success",
+            "name": "Verify package checksum",
+            "number": 4,
+            "startedAt": "2026-10-28T09:44:28Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:28Z",
+            "conclusion": "success",
+            "name": "Check whether nuget.org already has this version",
+            "number": 5,
+            "startedAt": "2026-10-28T09:44:28Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:29Z",
+            "conclusion": "success",
+            "name": "Set up .NET",
+            "number": 6,
+            "startedAt": "2026-10-28T09:44:28Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:32Z",
+            "conclusion": "success",
+            "name": "NuGet login (Trusted Publishing)",
+            "number": 7,
+            "startedAt": "2026-10-28T09:44:29Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:38Z",
+            "conclusion": "success",
+            "name": "Push the verified package to nuget.org",
+            "number": 8,
+            "startedAt": "2026-10-28T09:44:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:38Z",
+            "conclusion": "success",
+            "name": "Record NuGet result",
+            "number": 9,
+            "startedAt": "2026-10-28T09:44:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:38Z",
+            "conclusion": "success",
+            "name": "Post Set up .NET",
+            "number": 17,
+            "startedAt": "2026-10-28T09:44:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:38Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v4",
+            "number": 18,
+            "startedAt": "2026-10-28T09:44:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:38Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 19,
+            "startedAt": "2026-10-28T09:44:38Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/AJ-comp/Compiler/actions/runs/40664356048/job/122742487045"
+      },
+      {
+        "completedAt": "2026-10-28T09:45:46Z",
+        "conclusion": "success",
+        "databaseId": 122742656913,
+        "name": "Deploy playground / Deploy verified static files",
+        "startedAt": "2026-10-28T09:44:44Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-28T09:44:46Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-28T09:44:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:44:59Z",
+            "conclusion": "success",
+            "name": "Build Azure/static-web-apps-deploy@v1",
+            "number": 2,
+            "startedAt": "2026-10-28T09:44:46Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:45:01Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v4",
+            "number": 3,
+            "startedAt": "2026-10-28T09:44:59Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:45:01Z",
+            "conclusion": "success",
+            "name": "Require the current master commit",
+            "number": 4,
+            "startedAt": "2026-10-28T09:45:01Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:45:04Z",
+            "conclusion": "success",
+            "name": "Download the verified playground",
+            "number": 5,
+            "startedAt": "2026-10-28T09:45:01Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:45:04Z",
+            "conclusion": "success",
+            "name": "Check deployment inputs",
+            "number": 6,
+            "startedAt": "2026-10-28T09:45:04Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:45:43Z",
+            "conclusion": "success",
+            "name": "Deploy to Azure Static Web Apps",
+            "number": 7,
+            "startedAt": "2026-10-28T09:45:04Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:45:43Z",
+            "conclusion": "success",
+            "name": "Record deployment result",
+            "number": 8,
+            "startedAt": "2026-10-28T09:45:43Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:45:43Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v4",
+            "number": 16,
+            "startedAt": "2026-10-28T09:45:43Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:45:43Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 17,
+            "startedAt": "2026-10-28T09:45:43Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/AJ-comp/Compiler/actions/runs/40664356048/job/122742656913"
+      },
+      {
+        "completedAt": "2026-10-28T09:45:51Z",
+        "conclusion": "success",
+        "databaseId": 122743136194,
+        "name": "Release result",
+        "startedAt": "2026-10-28T09:45:48Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-28T09:45:49Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-28T09:45:49Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:45:49Z",
+            "conclusion": "success",
+            "name": "Summarize verification and destinations",
+            "number": 2,
+            "startedAt": "2026-10-28T09:45:49Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-28T09:45:49Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 3,
+            "startedAt": "2026-10-28T09:45:49Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/AJ-comp/Compiler/actions/runs/40664356048/job/122743136194"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/AJ-comp/Compiler/actions/runs/40664356048"
+  },
+  "artifactName": "playground-site-40664356048-1",
+  "bootResourcesHash": "sha256-QWD7rbEL5+2xnxx7xyZ3Ge9enhr3eaNxOFe/SmjPuho=",
+  "engineResources": [
+    {
+      "virtualPath": "AJ.Common.wasm",
+      "path": "_framework/AJ.Common.gkb1lctinl.wasm",
+      "integrity": "sha256-MNpke5GJK/Pmnoi2JZ6QSxEgxeHQuyWFloAKg/QOfcE="
+    },
+    {
+      "virtualPath": "Janglim.Playground.wasm",
+      "path": "_framework/Janglim.Playground.jyva40wsik.wasm",
+      "integrity": "sha256-S0ShFXyHOC4RCDIMfWKnbS6mO8hGs1OWCIvjYDWWzEc="
+    },
+    {
+      "virtualPath": "Parse.wasm",
+      "path": "_framework/Parse.155flopywv.wasm",
+      "integrity": "sha256-xWyNdR66OMl+DNtouBUaSd4jrLpe0ocMkQ6wvQWVUDQ="
+    },
+    {
+      "virtualPath": "Parse.FrontEnd.Grammars.Ebnf.wasm",
+      "path": "_framework/Parse.FrontEnd.Grammars.Ebnf.kl7j2y03h1.wasm",
+      "integrity": "sha256-yIiluMlp7ceEBct4Q2Mn4ummUOACnvlAcDjr6xeai6o="
+    },
+    {
+      "virtualPath": "Parse.FrontEnd.Grammars.wasm",
+      "path": "_framework/Parse.FrontEnd.Grammars.pxwtq1p9hg.wasm",
+      "integrity": "sha256-/RnU8HDnncwrkw6ZM+fMvFa5vFFS0h8KAELZA3znZSQ="
+    },
+    {
+      "virtualPath": "Parse.FrontEnd.Parsers.wasm",
+      "path": "_framework/Parse.FrontEnd.Parsers.kvbfvflbm0.wasm",
+      "integrity": "sha256-4BT0F8/9MPEyP2CNWL4ZWjjtdNXQtwo5ILSV4rWk5pw="
+    },
+    {
+      "virtualPath": "Parse.FrontEnd.wasm",
+      "path": "_framework/Parse.FrontEnd.py4c0im5jc.wasm",
+      "integrity": "sha256-3zPCVvGHlneRhZg+l49V/qvErGyw3HE/uodRayj2LEE="
+    }
+  ],
+  "checks": [
+    {
+      "path": "_framework/AJ.Common.gkb1lctinl.wasm",
+      "url": "https://janglim.mythosia.net/_framework/AJ.Common.gkb1lctinl.wasm",
+      "status": 200,
+      "artifactSha256": "30da647b91892bf3e69e88b6259e904b1120c5e1d0bb258596800a83f40e7dc1",
+      "servedSha256": "30da647b91892bf3e69e88b6259e904b1120c5e1d0bb258596800a83f40e7dc1",
+      "bytes": 12053,
+      "match": true,
+      "headers": {
+        "Content-Type": "application/wasm",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "_framework/Janglim.Playground.jyva40wsik.wasm",
+      "url": "https://janglim.mythosia.net/_framework/Janglim.Playground.jyva40wsik.wasm",
+      "status": 200,
+      "artifactSha256": "4b44a1157c87382e1108320c7d62a76d2ea63bc846b35396088be3603596cc47",
+      "servedSha256": "4b44a1157c87382e1108320c7d62a76d2ea63bc846b35396088be3603596cc47",
+      "bytes": 95509,
+      "match": true,
+      "headers": {
+        "Content-Type": "application/wasm",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "_framework/Parse.155flopywv.wasm",
+      "url": "https://janglim.mythosia.net/_framework/Parse.155flopywv.wasm",
+      "status": 200,
+      "artifactSha256": "c56c8d751eba38c97e0cdb68b8151a49de23acba5ed2870c910eb0bd05955034",
+      "servedSha256": "c56c8d751eba38c97e0cdb68b8151a49de23acba5ed2870c910eb0bd05955034",
+      "bytes": 69397,
+      "match": true,
+      "headers": {
+        "Content-Type": "application/wasm",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "_framework/Parse.FrontEnd.Grammars.Ebnf.kl7j2y03h1.wasm",
+      "url": "https://janglim.mythosia.net/_framework/Parse.FrontEnd.Grammars.Ebnf.kl7j2y03h1.wasm",
+      "status": 200,
+      "artifactSha256": "c888a5b8c969edc78405cb78436327e2e9a650e0029ef9407038ebeb179a8baa",
+      "servedSha256": "c888a5b8c969edc78405cb78436327e2e9a650e0029ef9407038ebeb179a8baa",
+      "bytes": 325909,
+      "match": true,
+      "headers": {
+        "Content-Type": "application/wasm",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "_framework/Parse.FrontEnd.Grammars.pxwtq1p9hg.wasm",
+      "url": "https://janglim.mythosia.net/_framework/Parse.FrontEnd.Grammars.pxwtq1p9hg.wasm",
+      "status": 200,
+      "artifactSha256": "fd19d4f070e79dcc2b930e9933e7ccbc56b9bc5152d21f0a0042d9037ce76524",
+      "servedSha256": "fd19d4f070e79dcc2b930e9933e7ccbc56b9bc5152d21f0a0042d9037ce76524",
+      "bytes": 33557,
+      "match": true,
+      "headers": {
+        "Content-Type": "application/wasm",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "_framework/Parse.FrontEnd.Parsers.kvbfvflbm0.wasm",
+      "url": "https://janglim.mythosia.net/_framework/Parse.FrontEnd.Parsers.kvbfvflbm0.wasm",
+      "status": 200,
+      "artifactSha256": "e014f417cffd30f1323f608d58be195a38ed74d5d0b70a3920b495e2b5a4e69c",
+      "servedSha256": "e014f417cffd30f1323f608d58be195a38ed74d5d0b70a3920b495e2b5a4e69c",
+      "bytes": 115989,
+      "match": true,
+      "headers": {
+        "Content-Type": "application/wasm",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "_framework/Parse.FrontEnd.py4c0im5jc.wasm",
+      "url": "https://janglim.mythosia.net/_framework/Parse.FrontEnd.py4c0im5jc.wasm",
+      "status": 200,
+      "artifactSha256": "df33c256f18796779185983e978f55feabc4ac6cb0dc713fba87516b28f62c41",
+      "servedSha256": "df33c256f18796779185983e978f55feabc4ac6cb0dc713fba87516b28f62c41",
+      "bytes": 102165,
+      "match": true,
+      "headers": {
+        "Content-Type": "application/wasm",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "_framework/blazor.webassembly.958z1vx7fr.js",
+      "url": "https://janglim.mythosia.net/_framework/blazor.webassembly.958z1vx7fr.js",
+      "status": 200,
+      "artifactSha256": "039f53afd1ea1211ccbbc914ee4aee2c8f5acb0e4c452e8bbdceb3ee309b8219",
+      "servedSha256": "039f53afd1ea1211ccbbc914ee4aee2c8f5acb0e4c452e8bbdceb3ee309b8219",
+      "bytes": 60576,
+      "match": true,
+      "headers": {
+        "Content-Type": "text/javascript",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "_framework/dotnet.jxmvskg3nm.js",
+      "url": "https://janglim.mythosia.net/_framework/dotnet.jxmvskg3nm.js",
+      "status": 200,
+      "artifactSha256": "294e5c1b7762d47be660d198f1ce27b38746182d017aea7bc1f675571a10b9ff",
+      "servedSha256": "294e5c1b7762d47be660d198f1ce27b38746182d017aea7bc1f675571a10b9ff",
+      "bytes": 63173,
+      "match": true,
+      "headers": {
+        "Content-Type": "text/javascript",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "_framework/dotnet.native.bjoj0wmylw.js",
+      "url": "https://janglim.mythosia.net/_framework/dotnet.native.bjoj0wmylw.js",
+      "status": 200,
+      "artifactSha256": "099d0855990b4c8bde7bb9f5c95bce8ad94958d763fd88da160a4c82588833ae",
+      "servedSha256": "099d0855990b4c8bde7bb9f5c95bce8ad94958d763fd88da160a4c82588833ae",
+      "bytes": 145050,
+      "match": true,
+      "headers": {
+        "Content-Type": "text/javascript",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "_framework/dotnet.runtime.5nc8i5dl74.js",
+      "url": "https://janglim.mythosia.net/_framework/dotnet.runtime.5nc8i5dl74.js",
+      "status": 200,
+      "artifactSha256": "ff774183db23d722c3de1d0f0cc1e73545d6b3fdb35b020c133a26d57cf7438d",
+      "servedSha256": "ff774183db23d722c3de1d0f0cc1e73545d6b3fdb35b020c133a26d57cf7438d",
+      "bytes": 198480,
+      "match": true,
+      "headers": {
+        "Content-Type": "text/javascript",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "css/app.css",
+      "url": "https://janglim.mythosia.net/css/app.css",
+      "status": 200,
+      "artifactSha256": "82adadcf1e87830dda818df88436c8020b4ebd8a3f0a8127275f29c100193a0b",
+      "servedSha256": "82adadcf1e87830dda818df88436c8020b4ebd8a3f0a8127275f29c100193a0b",
+      "bytes": 1217,
+      "match": true,
+      "headers": {
+        "Content-Type": "text/css",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "index.html",
+      "url": "https://janglim.mythosia.net/",
+      "status": 200,
+      "artifactSha256": "0ae558e83fe6a204279822c66315cbfcd6f3943019f59984225ac0f3c872e85f",
+      "servedSha256": "0ae558e83fe6a204279822c66315cbfcd6f3943019f59984225ac0f3c872e85f",
+      "bytes": 3537,
+      "match": true,
+      "headers": {
+        "Content-Type": "text/html",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "ui/locale.js",
+      "url": "https://janglim.mythosia.net/ui/locale.js",
+      "status": 200,
+      "artifactSha256": "f2859ad5b01399c5de1d969508a310b24fe28a79dd64d48db597872f21bd2f13",
+      "servedSha256": "f2859ad5b01399c5de1d969508a310b24fe28a79dd64d48db597872f21bd2f13",
+      "bytes": 219952,
+      "match": true,
+      "headers": {
+        "Content-Type": "text/javascript",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "ui/playground.js",
+      "url": "https://janglim.mythosia.net/ui/playground.js",
+      "status": 200,
+      "artifactSha256": "9944c14528902dca67d0ef0eea595db8890c0be92702b764c9db82090fcf5e92",
+      "servedSha256": "9944c14528902dca67d0ef0eea595db8890c0be92702b764c9db82090fcf5e92",
+      "bytes": 872871,
+      "match": true,
+      "headers": {
+        "Content-Type": "text/javascript",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    },
+    {
+      "path": "ui/style.css",
+      "url": "https://janglim.mythosia.net/ui/style.css",
+      "status": 200,
+      "artifactSha256": "00c44837a1ff6f03083ae288545950a44954de6a425250e1baac988cc08c402a",
+      "servedSha256": "00c44837a1ff6f03083ae288545950a44954de6a425250e1baac988cc08c402a",
+      "bytes": 55822,
+      "match": true,
+      "headers": {
+        "Content-Type": "text/css",
+        "Content-Encoding": null,
+        "ETag": "\"79026914\"",
+        "Last-Modified": "Wed, 28 Oct 2026 09:45:32 GMT",
+        "Cache-Control": "public, must-revalidate, max-age=30",
+        "Age": null
+      }
+    }
+  ],
+  "allMatch": true
+}

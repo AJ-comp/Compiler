@@ -1,0 +1,10 @@
+{
+  "version": "0.5.0",
+  "readmeMatchesSource": true,
+  "unicodeLicenseMatchesSource": true,
+  "description": "Janglim is an embeddable LALR parser-generator engine for .NET with C# and EBNF grammars, longest-match lexing, parser-driven token sources, and registered C# predicates. Includes ECMAScript 2026 strict Script and Module profiles with static syntax validation. Inspect parsing tables, FIRST/FOLLOW sets, traces, syntax trees, and diagnostics, with incremental reparsing and pluggable error recovery.",
+  "releaseNotes": "Janglim 0.5.0 adds longest-match registered-rule lexing with stable equal-length priority and no automatic word boundaries. Parser-driven token sources use lexical policies and independent cursors for contextual reads and prediction. ECMAScript 2026 strict Script/Module profiles cover expressions, templates, destructuring, functions, async/generators, object methods, classes, modules, and regular-expression body checks. Check both Parsing and Validate results. Review regex behavior when upgrading from 0.4.0. LALRParser remains supported; the public API retains its 0.x policy. Full release notes: https://github.com/AJ-comp/Compiler/blob/master/RELEASE_NOTES.md",
+  "tags": "parser parser-generator parsing lalr lalr1 lr dotnet csharp grammar ebnf lexer lexical-policy contextual-lexing maximal-munch javascript ecmascript semantic-predicates lookahead token-trivia grammar-validation parse-tree ast first-follow introspection incremental error-recovery compiler dsl language-tooling janglim",
+  "rootDllCount": 9,
+  "satelliteDllCount": 40
+}

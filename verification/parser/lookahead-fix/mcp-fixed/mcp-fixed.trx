@@ -1,0 +1,882 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="4b83228a-3b4d-4eb7-bd45-15a1138a6eae" name="AhjLv@JJW-PC 2026-10-23 05:30:29" runUser="JJW-PC\AhjLv" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-23T05:30:30.0047931+09:00" queuing="2026-10-23T05:30:30.0047937+09:00" start="2026-10-23T05:30:22.7885831+09:00" finish="2026-10-23T05:30:58.8324101+09:00" />
+  <TestSettings name="default" id="6760478b-b64e-4399-b174-bebbbf2de1db">
+    <Deployment runDeploymentRoot="AhjLv_JJW-PC_2026-10-23_05_30_29" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="d3a60b8f-0725-4b79-a4f1-a304bcf32290" testId="b4a4892b-00cb-4e5b-333e-779d31285bfc" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;if value;&quot;, firstSymbol: &quot;if&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;value&quot;, identifierStart: 3)" computerName="JJW-PC" duration="00:00:00.0006330" startTime="2026-10-23T05:30:29.9967268+09:00" endTime="2026-10-23T05:30:29.9967269+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d3a60b8f-0725-4b79-a4f1-a304bcf32290" />
+    <UnitTestResult executionId="76cbb7fa-59fa-4eec-b63d-a4e882594f4f" testId="69435b51-6e08-c808-2c2a-2b59d200784a" testName="Janglim.Mcp.Tests.TypedTokenHttpTests.Typed_quoted_tokens_compile_through_the_mcp_worker" computerName="JJW-PC" duration="00:00:00.3924821" startTime="2026-10-23T05:30:57.9743305+09:00" endTime="2026-10-23T05:30:57.9743307+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="76cbb7fa-59fa-4eec-b63d-a4e882594f4f" />
+    <UnitTestResult executionId="3756b562-26dd-49c2-93e6-1cb9b29323f2" testId="37f0c9f2-0736-af9e-2313-d3d4d76d9fae" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Zero_length_token_matches_keep_the_invalid_grammar_diagnostic_contract(grammar: &quot;Start : id ; id := \&quot;(?=x)\&quot; ;&quot;, input: &quot;x&quot;)" computerName="JJW-PC" duration="00:00:00.0006369" startTime="2026-10-23T05:30:31.0037439+09:00" endTime="2026-10-23T05:30:31.0037442+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3756b562-26dd-49c2-93e6-1cb9b29323f2" />
+    <UnitTestResult executionId="3dc53eee-4538-4887-84a4-3e2965b071ac" testId="982a7531-af1e-4072-67fb-80d024de8f01" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Editing_a_fetched_copy_changes_only_that_request_and_other_clients_get_the_unchanged_baseline" computerName="JJW-PC" duration="00:00:02.3361066" startTime="2026-10-23T05:30:48.5902940+09:00" endTime="2026-10-23T05:30:48.5902942+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3dc53eee-4538-4887-84a4-3e2965b071ac" />
+    <UnitTestResult executionId="d83a19ce-d07f-447c-8c15-00293bd270ec" testId="2b002aa8-9216-452b-b946-28f359b7bb56" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;if name$;&quot;, firstSymbol: &quot;if&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;name$&quot;, identifierStart: 3)" computerName="JJW-PC" duration="00:00:00.0005902" startTime="2026-10-23T05:30:29.9986260+09:00" endTime="2026-10-23T05:30:29.9986261+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d83a19ce-d07f-447c-8c15-00293bd270ec" />
+    <UnitTestResult executionId="42f26b1e-62cd-4834-a3b8-1231e4b44244" testId="23401290-b359-0c94-cd6f-ebabdd9b4fd0" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: &quot;Start : 'a' ;&quot;, input: &quot;&quot;, expected: False)" computerName="JJW-PC" duration="00:00:00.0006127" startTime="2026-10-23T05:30:29.9867051+09:00" endTime="2026-10-23T05:30:29.9867053+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="42f26b1e-62cd-4834-a3b8-1231e4b44244" />
+    <UnitTestResult executionId="f3f343f2-0af8-451f-943d-7699714283ff" testId="38ee9188-6223-3dac-0d77-0a8766fe8777" testName="Janglim.Mcp.Tests.TypedTokenHttpTests.Escaped_quotes_and_backslashes_remain_in_the_returned_token_text" computerName="JJW-PC" duration="00:00:00.4150961" startTime="2026-10-23T05:30:58.3898676+09:00" endTime="2026-10-23T05:30:58.3898678+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f3f343f2-0af8-451f-943d-7699714283ff" />
+    <UnitTestResult executionId="84e6ce21-05c2-4ff1-8fb8-75a62ce6db4d" testId="3045bde4-7a78-b541-a858-3405ffb3ad50" testName="Janglim.Mcp.Tests.McpHttpTests.Parse_returns_tokens_without_a_tree_by_default" computerName="JJW-PC" duration="00:00:00.4482013" startTime="2026-10-23T05:30:53.0480779+09:00" endTime="2026-10-23T05:30:53.0480799+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="84e6ce21-05c2-4ff1-8fb8-75a62ce6db4d" />
+    <UnitTestResult executionId="e513b404-a9c4-44f6-962d-9fec27aa8f28" testId="f7ecb7d4-eba2-33b1-0451-440dc10860a4" testName="Janglim.Mcp.Tests.C11CoreHttpTests.C_tree_binds_else_to_the_nearest_unbraced_if" computerName="JJW-PC" duration="00:00:01.1353852" startTime="2026-10-23T05:30:46.2050754+09:00" endTime="2026-10-23T05:30:46.2050758+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e513b404-a9c4-44f6-962d-9fec27aa8f28" />
+    <UnitTestResult executionId="7bd63540-ee08-4629-9fb1-c88b7e70ad26" testId="a9a0941a-259f-f094-b9dd-fe973c04e26f" testName="Janglim.Mcp.Tests.C11CoreHttpTests.Unterminated_block_comments_are_positioned_lexical_errors_instead_of_operators(input: &quot;int f(void) { return 1/*x; }&quot;)" computerName="JJW-PC" duration="00:00:01.3742709" startTime="2026-10-23T05:30:33.2148161+09:00" endTime="2026-10-23T05:30:33.2148164+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7bd63540-ee08-4629-9fb1-c88b7e70ad26" />
+    <UnitTestResult executionId="44b0f4b2-3b0d-422e-9603-d12e6ded2ee8" testId="9abf342c-e7e0-c31e-277b-678f7847364f" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot; &quot;)" computerName="JJW-PC" duration="00:00:00.0056112" startTime="2026-10-23T05:30:46.2250182+09:00" endTime="2026-10-23T05:30:46.2250191+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="44b0f4b2-3b0d-422e-9603-d12e6ded2ee8" />
+    <UnitTestResult executionId="01da58c3-6ad7-45fe-822c-fea43cfceb7c" testId="3b02c9de-6348-6bb4-ddbd-6c31e6be6a7a" testName="Janglim.Mcp.Tests.WorkerLifecycleTests.Cancellation_stops_the_worker_and_releases_its_slot" computerName="JJW-PC" duration="00:00:01.1610526" startTime="2026-10-23T05:30:33.1320213+09:00" endTime="2026-10-23T05:30:33.1320215+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="01da58c3-6ad7-45fe-822c-fea43cfceb7c" />
+    <UnitTestResult executionId="e9bc1ec8-b982-4329-9c48-d3e87721ba16" testId="668c7525-3a07-68a4-ef72-df2280eba5a3" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;../../grammars/c/c11-core.ebnf&quot;)" computerName="JJW-PC" duration="00:00:00.0024002" startTime="2026-10-23T05:30:46.2310360+09:00" endTime="2026-10-23T05:30:46.2310361+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e9bc1ec8-b982-4329-9c48-d3e87721ba16" />
+    <UnitTestResult executionId="0ba49b44-d376-4c70-9fef-e1b7c6847dd0" testId="33457fb3-f93d-c29a-ec7b-3ecaeeea9b97" testName="Janglim.Mcp.Tests.McpHttpTests.Tools_require_authentication_but_health_remains_available(key: &quot;unknown-key&quot;)" computerName="JJW-PC" duration="00:00:00.0082836" startTime="2026-10-23T05:30:52.2656526+09:00" endTime="2026-10-23T05:30:52.2656527+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0ba49b44-d376-4c70-9fef-e1b7c6847dd0" />
+    <UnitTestResult executionId="4f0f2f59-65f9-4e88-a9b7-58fd6b2dbb54" testId="1448ef46-0582-b6ef-cd7a-67b753cde95e" testName="Janglim.Mcp.Tests.TypedTokenHttpTests.Explicit_and_default_identifier_kinds_keep_named_token_output(grammar: &quot;Start : id ; id := \&quot;[a-z]+\&quot; ;&quot;)" computerName="JJW-PC" duration="00:00:00.3969301" startTime="2026-10-23T05:30:55.2676067+09:00" endTime="2026-10-23T05:30:55.2676068+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4f0f2f59-65f9-4e88-a9b7-58fd6b2dbb54" />
+    <UnitTestResult executionId="4a61dbbc-0af6-4f2e-8697-44f5ed635458" testId="94e96bcc-d12a-a6f8-6b93-ada365b461de" testName="Janglim.Mcp.Tests.TypedTokenHttpTests.Unsupported_token_kind_is_a_grammar_error_for_every_tool(tool: &quot;validate_grammar&quot;)" computerName="JJW-PC" duration="00:00:00.3271933" startTime="2026-10-23T05:30:57.1259232+09:00" endTime="2026-10-23T05:30:57.1259236+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4a61dbbc-0af6-4f2e-8697-44f5ed635458" />
+    <UnitTestResult executionId="23af4dcc-e0d9-49f5-a03f-d10a855cb5fa" testId="74886f66-1f79-bf9b-ebde-aa0fa1a574bb" testName="Janglim.Mcp.Tests.McpHttpTests.Missing_test_expectation_is_an_error_not_an_implicit_negative_test" computerName="JJW-PC" duration="00:00:00.0233431" startTime="2026-10-23T05:30:49.7107889+09:00" endTime="2026-10-23T05:30:49.7107891+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="23af4dcc-e0d9-49f5-a03f-d10a855cb5fa" />
+    <UnitTestResult executionId="a9f39515-e1c9-42bd-8917-f06069ed8011" testId="1879d45b-ea73-6442-096b-8680de64c77d" testName="Janglim.Mcp.Tests.TypedTokenHttpTests.Quoted_tokens_preserve_text_and_utf16_spans_in_tokens_and_tree" computerName="JJW-PC" duration="00:00:00.4193039" startTime="2026-10-23T05:30:56.0893734+09:00" endTime="2026-10-23T05:30:56.0893735+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a9f39515-e1c9-42bd-8917-f06069ed8011" />
+    <UnitTestResult executionId="1f7ef9bb-2cfd-4c37-8b13-e4d14a6fa6a5" testId="5af449cf-c2c2-933e-117a-3567ed9a1d5a" testName="Janglim.Mcp.Tests.C11CoreHttpTests.Unterminated_block_comments_are_positioned_lexical_errors_instead_of_operators(input: &quot;int value; /* unterminated&quot;)" computerName="JJW-PC" duration="00:00:01.3840941" startTime="2026-10-23T05:30:31.8390355+09:00" endTime="2026-10-23T05:30:31.8390358+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1f7ef9bb-2cfd-4c37-8b13-e4d14a6fa6a5" />
+    <UnitTestResult executionId="1f95ef26-f00d-42a9-867f-6c3a9e7a91ee" testId="4197f57e-f263-9ba9-e765-311846bd7e38" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;C:\\Windows\\win.ini&quot;)" computerName="JJW-PC" duration="00:00:00.0027738" startTime="2026-10-23T05:30:46.2482825+09:00" endTime="2026-10-23T05:30:46.2482827+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1f95ef26-f00d-42a9-867f-6c3a9e7a91ee" />
+    <UnitTestResult executionId="0554c235-8343-40d1-965f-bfcc7cbee0a7" testId="54e31ffa-e440-af67-9757-29019a7467c5" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;c11-core &quot;)" computerName="JJW-PC" duration="00:00:00.0020772" startTime="2026-10-23T05:30:46.2360747+09:00" endTime="2026-10-23T05:30:46.2360747+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0554c235-8343-40d1-965f-bfcc7cbee0a7" />
+    <UnitTestResult executionId="745e45e5-667c-4ee6-821c-a06041bf1d3f" testId="5c738e86-7a3d-ff81-6b93-5e9e8e3c91ff" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: &quot;Start : 'a'? ;&quot;, input: &quot; \t\r\n&quot;, expected: True)" computerName="JJW-PC" duration="00:00:00.0015219" startTime="2026-10-23T05:30:29.9860231+09:00" endTime="2026-10-23T05:30:29.9860232+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="745e45e5-667c-4ee6-821c-a06041bf1d3f" />
+    <UnitTestResult executionId="a6d96349-1eaa-4af0-a496-d31700104292" testId="0e0629e3-97f3-328b-d53f-7d709a9fd82e" testName="Janglim.Mcp.Tests.WorkerLifecycleTests.Deadline_terminates_synchronous_regex_work_and_allows_the_next_job" computerName="JJW-PC" duration="00:00:06.3649999" startTime="2026-10-23T05:30:31.9696685+09:00" endTime="2026-10-23T05:30:31.9696688+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a6d96349-1eaa-4af0-a496-d31700104292" />
+    <UnitTestResult executionId="182eb626-e57d-4874-a950-e0474f7a45dc" testId="49cd1cdd-45e2-1288-5fe2-0363f4917fc2" testName="Janglim.Mcp.Tests.McpHttpTests.Oversized_input_is_rejected_before_compilation" computerName="JJW-PC" duration="00:00:00.0026947" startTime="2026-10-23T05:30:51.4302865+09:00" endTime="2026-10-23T05:30:51.4302865+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="182eb626-e57d-4874-a950-e0474f7a45dc" />
+    <UnitTestResult executionId="3eba7d3a-55c3-4e8d-ae5b-5826314a1d2f" testId="683720f0-fe0e-6176-3a76-ce6d6047f9a1" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: &quot;Start : 'a' ;&quot;, input: &quot; \t\r\n&quot;, expected: False)" computerName="JJW-PC" duration="00:00:00.0004273" startTime="2026-10-23T05:30:29.9872045+09:00" endTime="2026-10-23T05:30:29.9872046+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3eba7d3a-55c3-4e8d-ae5b-5826314a1d2f" />
+    <UnitTestResult executionId="cd2ed0c0-2c00-4786-b904-b106e4143b20" testId="dbc1da6e-86dd-fcdc-3bc0-6bc50876de09" testName="Janglim.Mcp.Tests.TypedTokenHttpTests.Invalid_typed_regex_preserves_the_invalid_regex_diagnostic_contract" computerName="JJW-PC" duration="00:00:00.3755418" startTime="2026-10-23T05:30:58.7657825+09:00" endTime="2026-10-23T05:30:58.7657826+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cd2ed0c0-2c00-4786-b904-b106e4143b20" />
+    <UnitTestResult executionId="7b5ea52d-cb9e-4376-8b1d-5fcb54aaa445" testId="a0d327e2-f8f1-2ad3-d06a-3fc0c2bb995c" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;/etc/passwd&quot;)" computerName="JJW-PC" duration="00:00:00.0022123" startTime="2026-10-23T05:30:46.2536665+09:00" endTime="2026-10-23T05:30:46.2536666+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7b5ea52d-cb9e-4376-8b1d-5fcb54aaa445" />
+    <UnitTestResult executionId="5fdd7e2d-2a57-4d98-a7b3-ac24851e43f1" testId="ae8c2c06-e451-d151-4043-e2535e79f644" testName="Janglim.Mcp.Tests.TypedTokenHttpTests.Typed_token_regressions_distinguish_complete_quotes_from_malformed_input" computerName="JJW-PC" duration="00:00:00.4549687" startTime="2026-10-23T05:30:57.5812219+09:00" endTime="2026-10-23T05:30:57.5812220+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5fdd7e2d-2a57-4d98-a7b3-ac24851e43f1" />
+    <UnitTestResult executionId="cd60d0bb-438d-4415-9470-8e6486d0ed2e" testId="b37adb0d-707f-4d57-a7c0-58b9de24a716" testName="Janglim.Mcp.Tests.C11CoreHttpTests.C_literals_remain_whole_positioned_tokens_and_comments_are_skipped" computerName="JJW-PC" duration="00:00:01.1548681" startTime="2026-10-23T05:30:45.0692273+09:00" endTime="2026-10-23T05:30:45.0692276+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cd60d0bb-438d-4415-9470-8e6486d0ed2e" />
+    <UnitTestResult executionId="3a82dd87-af17-4a30-8fd3-1c580622c064" testId="3da1fdce-6225-5012-0063-a74ae2e7d839" testName="Janglim.Mcp.Tests.McpHttpTests.Invalid_input_including_unknown_characters_is_rejected(input: &quot;a +&quot;)" computerName="JJW-PC" duration="00:00:00.4986946" startTime="2026-10-23T05:30:53.9590419+09:00" endTime="2026-10-23T05:30:53.9590420+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3a82dd87-af17-4a30-8fd3-1c580622c064" />
+    <UnitTestResult executionId="902e74a5-52e4-4ae0-b57d-e31b8e920c1a" testId="73890c5f-35c5-41ae-6cbd-be67524ece02" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;name$;&quot;, firstSymbol: &quot;id&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;name$&quot;, identifierStart: 0)" computerName="JJW-PC" duration="00:00:00.0006328" startTime="2026-10-23T05:30:29.9981391+09:00" endTime="2026-10-23T05:30:29.9981392+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="902e74a5-52e4-4ae0-b57d-e31b8e920c1a" />
+    <UnitTestResult executionId="8e7500cd-1c10-4c63-ab6d-46c113a2bf09" testId="b57665ef-d4c3-1452-1906-705cb0d847c3" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;../c11-core&quot;)" computerName="JJW-PC" duration="00:00:00.0020588" startTime="2026-10-23T05:30:46.2384848+09:00" endTime="2026-10-23T05:30:46.2384849+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8e7500cd-1c10-4c63-ab6d-46c113a2bf09" />
+    <UnitTestResult executionId="cee5aadc-9ddb-4705-a476-e9c01ada8555" testId="c7e3d509-b62f-ec32-3ae0-edb055bea6d1" testName="Janglim.Mcp.Tests.McpHttpTests.Empty_input_is_decided_by_the_grammar(grammar: &quot;Start : 'a'? ;&quot;, expected: True)" computerName="JJW-PC" duration="00:00:00.4148433" startTime="2026-10-23T05:30:51.0114124+09:00" endTime="2026-10-23T05:30:51.0114125+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cee5aadc-9ddb-4705-a476-e9c01ada8555" />
+    <UnitTestResult executionId="f19905be-b4b8-42e0-be63-c19951d7790e" testId="3b4086f2-c2f0-1a42-0eba-2b140e0c4de2" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;missing-preset&quot;)" computerName="JJW-PC" duration="00:00:00.0023696" startTime="2026-10-23T05:30:46.2416593+09:00" endTime="2026-10-23T05:30:46.2416594+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f19905be-b4b8-42e0-be63-c19951d7790e" />
+    <UnitTestResult executionId="ff6d0470-5715-4b21-91a1-78f8a8abaf7e" testId="42e04300-7328-93cd-4afd-404ab7a75a0f" testName="Janglim.Mcp.Tests.McpHttpTests.Untrusted_browser_origin_is_rejected_even_with_valid_credentials" computerName="JJW-PC" duration="00:00:00.0045322" startTime="2026-10-23T05:30:49.7159278+09:00" endTime="2026-10-23T05:30:49.7159280+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ff6d0470-5715-4b21-91a1-78f8a8abaf7e" />
+    <UnitTestResult executionId="51b7387d-17b9-4a1b-8d5b-8c1492f45309" testId="0da1a683-9cfc-3dc1-ad8c-4f84a7e563dd" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;\t\r\n&quot;)" computerName="JJW-PC" duration="00:00:00.0027916" startTime="2026-10-23T05:30:46.2280955+09:00" endTime="2026-10-23T05:30:46.2280957+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="51b7387d-17b9-4a1b-8d5b-8c1492f45309" />
+    <UnitTestResult executionId="0684fb31-bb75-4b9a-9082-c7d95bbebe97" testId="abcb29a3-4550-efbc-d277-a30a12b327a3" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;&quot;)" computerName="JJW-PC" duration="00:00:00.0023680" startTime="2026-10-23T05:30:46.2511367+09:00" endTime="2026-10-23T05:30:46.2511369+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0684fb31-bb75-4b9a-9082-c7d95bbebe97" />
+    <UnitTestResult executionId="63657b04-1600-46ff-b4e6-a396775dbb00" testId="3cde646d-ef03-bcd7-1f2e-4d418e463e8b" testName="Janglim.Mcp.Tests.McpHttpTests.Resource_failure_does_not_pass_a_negative_test" computerName="JJW-PC" duration="00:00:00.4112379" startTime="2026-10-23T05:30:53.4597642+09:00" endTime="2026-10-23T05:30:53.4597644+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="63657b04-1600-46ff-b4e6-a396775dbb00" />
+    <UnitTestResult executionId="8496a98a-816e-4511-b0b8-17833e1a794f" testId="334a592b-5075-64f8-68bc-72f14bc51467" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Physical_end_marker_in_user_input_still_reports_the_reserved_marker_diagnostic" computerName="JJW-PC" duration="00:00:00.0007699" startTime="2026-10-23T05:30:31.0045467+09:00" endTime="2026-10-23T05:30:31.0045468+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8496a98a-816e-4511-b0b8-17833e1a794f" />
+    <UnitTestResult executionId="20ad6d0e-4f8d-491f-9ade-907aabbcd626" testId="d1f6db68-2a88-b501-d7f7-604d79452053" testName="Janglim.Mcp.Tests.McpHttpTests.Table_conflicts_are_reported_and_prevent_parsing" computerName="JJW-PC" duration="00:00:00.4154008" startTime="2026-10-23T05:30:51.4272639+09:00" endTime="2026-10-23T05:30:51.4272641+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="20ad6d0e-4f8d-491f-9ade-907aabbcd626" />
+    <UnitTestResult executionId="761b0ad6-dd82-4f1d-8489-7b1cbefc5b9d" testId="3c6eb861-b661-1bfd-481b-2245e85f312a" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;ifx;&quot;, firstSymbol: &quot;id&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;ifx&quot;, identifierStart: 0)" computerName="JJW-PC" duration="00:00:00.0011714" startTime="2026-10-23T05:30:29.9954145+09:00" endTime="2026-10-23T05:30:29.9954147+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="761b0ad6-dd82-4f1d-8489-7b1cbefc5b9d" />
+    <UnitTestResult executionId="7bd42c7c-3239-4496-8aa2-1b802fef9dac" testId="5371ad8e-e5ce-ae9d-e0c1-a9bdcdf2b788" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;$name;&quot;, firstSymbol: &quot;id&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;$name&quot;, identifierStart: 0)" computerName="JJW-PC" duration="00:00:00.0005834" startTime="2026-10-23T05:30:29.9981142+09:00" endTime="2026-10-23T05:30:29.9981143+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7bd42c7c-3239-4496-8aa2-1b802fef9dac" />
+    <UnitTestResult executionId="79cb9808-b4bc-4812-9a82-bdf96e3a1c1b" testId="384340cc-52d5-9b29-0478-0ca38cb57802" testName="Janglim.Mcp.Tests.McpHttpTests.Requested_tree_has_connected_nodes_and_input_spans" computerName="JJW-PC" duration="00:00:00.4285606" startTime="2026-10-23T05:30:50.1449457+09:00" endTime="2026-10-23T05:30:50.1449459+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="79cb9808-b4bc-4812-9a82-bdf96e3a1c1b" />
+    <UnitTestResult executionId="f4c8fc6e-317d-4612-a5cd-5e2512b20431" testId="44b29ae7-fc27-134e-02ad-95a83eb9e972" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Regex_execution_timeout_cannot_pass_a_negative_grammar_test" computerName="JJW-PC" duration="00:00:01.0032471" startTime="2026-10-23T05:30:31.0019753+09:00" endTime="2026-10-23T05:30:31.0019757+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f4c8fc6e-317d-4612-a5cd-5e2512b20431" />
+    <UnitTestResult executionId="bd3a54a4-84d9-4ef1-841f-460ddeb91bee" testId="825741b9-d559-7652-ed23-a55227f7946d" testName="Janglim.Mcp.Tests.McpHttpTests.Oversized_http_body_is_rejected_before_mcp_dispatch" computerName="JJW-PC" duration="00:00:00.0058663" startTime="2026-10-23T05:30:54.8700637+09:00" endTime="2026-10-23T05:30:54.8700638+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bd3a54a4-84d9-4ef1-841f-460ddeb91bee" />
+    <UnitTestResult executionId="efa7946c-5346-45cc-ae70-5ad318ef41e9" testId="497c9aa5-2d05-17a0-6b57-882209cf5bca" testName="Janglim.Mcp.Tests.TypedTokenHttpTests.Unsupported_token_kind_is_a_grammar_error_for_every_tool(tool: &quot;run_tests&quot;)" computerName="JJW-PC" duration="00:00:00.3481156" startTime="2026-10-23T05:30:56.7983693+09:00" endTime="2026-10-23T05:30:56.7983695+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="efa7946c-5346-45cc-ae70-5ad318ef41e9" />
+    <UnitTestResult executionId="833514c0-6a7a-4bb6-852c-e8c9e77764fd" testId="6930185f-bc53-51b1-e689-d8175799d9bb" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;if $name;&quot;, firstSymbol: &quot;if&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;$name&quot;, identifierStart: 3)" computerName="JJW-PC" duration="00:00:00.0066136" startTime="2026-10-23T05:30:29.9942041+09:00" endTime="2026-10-23T05:30:29.9942045+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="833514c0-6a7a-4bb6-852c-e8c9e77764fd" />
+    <UnitTestResult executionId="243dff5a-b716-4a4c-af4d-bb197ad0b78d" testId="5688a83d-a1bc-9ecb-85b7-1c4d1795fb48" testName="Janglim.Mcp.Tests.McpHttpTests.Tools_discoverable_with_read_only_metadata_and_required_schemas" computerName="JJW-PC" duration="00:00:00.0082855" startTime="2026-10-23T05:30:54.3718432+09:00" endTime="2026-10-23T05:30:54.3718434+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="243dff5a-b716-4a4c-af4d-bb197ad0b78d" />
+    <UnitTestResult executionId="068e0c32-0154-4654-84ca-c49086dc6d8e" testId="69ad2588-95e6-8a3a-8307-5e5504684019" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: &quot;Start : 'a'? ;&quot;, input: &quot;&quot;, expected: True)" computerName="JJW-PC" duration="00:00:04.3704791" startTime="2026-10-23T05:30:29.9774012+09:00" endTime="2026-10-23T05:30:29.9774459+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="068e0c32-0154-4654-84ca-c49086dc6d8e" />
+    <UnitTestResult executionId="e333a982-39d0-4497-9245-144f4a267f56" testId="c69d541d-4cde-b347-0201-3165e71c01d8" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;C11-CORE&quot;)" computerName="JJW-PC" duration="00:00:00.0023436" startTime="2026-10-23T05:30:46.2336533+09:00" endTime="2026-10-23T05:30:46.2336534+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e333a982-39d0-4497-9245-144f4a267f56" />
+    <UnitTestResult executionId="266fc3f1-8968-4b14-8bae-ab09c411793b" testId="fda0754a-1df1-aa1c-d3ef-9a8092914f14" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Zero_length_token_matches_keep_the_invalid_grammar_diagnostic_contract(grammar: &quot;Start : id ; id := \&quot;x*\&quot; ;&quot;, input: &quot;y&quot;)" computerName="JJW-PC" duration="00:00:00.0009967" startTime="2026-10-23T05:30:31.0030597+09:00" endTime="2026-10-23T05:30:31.0030598+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="266fc3f1-8968-4b14-8bae-ab09c411793b" />
+    <UnitTestResult executionId="1f522b78-08d9-4095-b44d-39245e3a0a1d" testId="b7d3bfe9-edcd-3bfb-0040-3030af5503f8" testName="Janglim.Mcp.Tests.McpHttpTests.Tools_require_authentication_but_health_remains_available(key: null)" computerName="JJW-PC" duration="00:00:00.0030993" startTime="2026-10-23T05:30:52.2693046+09:00" endTime="2026-10-23T05:30:52.2693046+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1f522b78-08d9-4095-b44d-39245e3a0a1d" />
+    <UnitTestResult executionId="7464f680-8c6f-4ed4-b953-9e913f2b7815" testId="d108698b-c7ac-cc8a-39d9-3b395ebd7c1e" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: &quot;Start : 'a' ; comment := Comment \&quot;/\\*[\\s\\S]*?\&quot;···, input: &quot; /* only a comment */ &quot;, expected: False)" computerName="JJW-PC" duration="00:00:00.0065804" startTime="2026-10-23T05:30:29.9864462+09:00" endTime="2026-10-23T05:30:29.9864462+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7464f680-8c6f-4ed4-b953-9e913f2b7815" />
+    <UnitTestResult executionId="ed1a3c1c-1e62-4274-b142-ccf811f6af07" testId="2b3d10f8-203b-eaf6-13c5-cddfe1b3257f" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: null)" computerName="JJW-PC" duration="00:00:00.0030699" startTime="2026-10-23T05:30:46.2452125+09:00" endTime="2026-10-23T05:30:46.2452126+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ed1a3c1c-1e62-4274-b142-ccf811f6af07" />
+    <UnitTestResult executionId="7d9cd3a9-db81-4f16-b6c2-a07ef9c36f23" testId="c3f3735a-d094-5136-0ce7-407047492900" testName="Janglim.Mcp.Tests.McpHttpTests.Concurrent_different_grammars_have_isolated_parser_state" computerName="JJW-PC" duration="00:00:00.4912057" startTime="2026-10-23T05:30:54.8636721+09:00" endTime="2026-10-23T05:30:54.8636724+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7d9cd3a9-db81-4f16-b6c2-a07ef9c36f23" />
+    <UnitTestResult executionId="1fb05839-3d8d-4d88-a35f-8f0b39e860dc" testId="d353b65f-70fd-3124-4f2c-3e27512478c8" testName="Janglim.Mcp.Tests.McpHttpTests.Undefined_symbol_returns_actionable_grammar_diagnostics" computerName="JJW-PC" duration="00:00:00.3296103" startTime="2026-10-23T05:30:52.5994916+09:00" endTime="2026-10-23T05:30:52.5994917+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1fb05839-3d8d-4d88-a35f-8f0b39e860dc" />
+    <UnitTestResult executionId="86a95082-bef9-422b-a85d-9217e0b8ae15" testId="8ea5afc5-4d0c-90c4-efe1-727d02df0e73" testName="Janglim.Mcp.Tests.McpHttpTests.Empty_input_is_decided_by_the_grammar(grammar: &quot;Start : 'a' ;&quot;, expected: False)" computerName="JJW-PC" duration="00:00:00.4507477" startTime="2026-10-23T05:30:50.5962649+09:00" endTime="2026-10-23T05:30:50.5962652+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="86a95082-bef9-422b-a85d-9217e0b8ae15" />
+    <UnitTestResult executionId="f984f9b0-0f11-4f0b-87ec-13e3d23136ec" testId="a6b4f4ae-3351-db81-e0fa-842d756bfb34" testName="Janglim.Mcp.Tests.C11CoreHttpTests.Canonical_C_profile_compiles_without_conflicts_within_service_limits" computerName="JJW-PC" duration="00:00:01.1514884" startTime="2026-10-23T05:30:34.3667250+09:00" endTime="2026-10-23T05:30:34.3667253+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f984f9b0-0f11-4f0b-87ec-13e3d23136ec" />
+    <UnitTestResult executionId="e57ccccc-da91-47cb-a0dd-21737ab8c6fb" testId="b317d0dd-09ba-15ec-fe37-dced62b17b56" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Regex_execution_timeout_is_a_runtime_limit_and_does_not_break_the_next_request" computerName="JJW-PC" duration="00:00:00.9949217" startTime="2026-10-23T05:30:31.9995587+09:00" endTime="2026-10-23T05:30:31.9995594+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e57ccccc-da91-47cb-a0dd-21737ab8c6fb" />
+    <UnitTestResult executionId="4988f3c6-256b-4c6e-a47c-d6d828c958f9" testId="ede1b2cb-d2dc-ccad-5b59-c6836ba4e6ef" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: &quot;Start : 'a'? ; comment := Comment \&quot;/\\*[\\s\\S]*?&quot;···, input: &quot; /* only a comment */ &quot;, expected: True)" computerName="JJW-PC" duration="00:00:00.0013420" startTime="2026-10-23T05:30:29.9863815+09:00" endTime="2026-10-23T05:30:29.9863815+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4988f3c6-256b-4c6e-a47c-d6d828c958f9" />
+    <UnitTestResult executionId="d3a10e2f-df6d-442e-8ed0-8bcfbb67fb62" testId="eac7a760-917c-92b3-c85c-3e3a946ee30a" testName="Janglim.Mcp.Tests.C11CoreHttpTests.Entire_canonical_C_corpus_passes_in_bounded_real_worker_batches" computerName="JJW-PC" duration="00:00:09.5467437" startTime="2026-10-23T05:30:43.9139408+09:00" endTime="2026-10-23T05:30:43.9139411+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d3a10e2f-df6d-442e-8ed0-8bcfbb67fb62" />
+    <UnitTestResult executionId="addea512-d810-4d91-aab0-b6fbb4094721" testId="99ff1409-b5fa-2671-3c75-26f06e5756bd" testName="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;if$;&quot;, firstSymbol: &quot;id&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;if$&quot;, identifierStart: 0)" computerName="JJW-PC" duration="00:00:00.0006259" startTime="2026-10-23T05:30:29.9960538+09:00" endTime="2026-10-23T05:30:29.9960540+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="addea512-d810-4d91-aab0-b6fbb4094721" />
+    <UnitTestResult executionId="a1fdfc8f-2a74-4c57-b1ef-1c6b807cd3ef" testId="a49c561f-d9fd-7b37-ea81-57497dbacd97" testName="Janglim.Mcp.Tests.TypedTokenHttpTests.Unsupported_token_kind_is_a_grammar_error_for_every_tool(tool: &quot;parse_input&quot;)" computerName="JJW-PC" duration="00:00:00.3601053" startTime="2026-10-23T05:30:56.4499069+09:00" endTime="2026-10-23T05:30:56.4499072+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a1fdfc8f-2a74-4c57-b1ef-1c6b807cd3ef" />
+    <UnitTestResult executionId="78c5a08b-b071-4a24-ba3c-e8cfc8028cee" testId="adcfda2c-b09b-faed-84fe-0ac87fcbc72f" testName="Janglim.Mcp.Tests.McpHttpTests.Regression_cases_distinguish_expected_rejection_from_failed_expectations" computerName="JJW-PC" duration="00:00:00.4250904" startTime="2026-10-23T05:30:52.2569238+09:00" endTime="2026-10-23T05:30:52.2569240+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="78c5a08b-b071-4a24-ba3c-e8cfc8028cee" />
+    <UnitTestResult executionId="11e4025d-a3a4-409c-bd90-3f82d178e0c8" testId="4696ec63-f867-3ba7-0bcf-79f0e0ec956b" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Listing_and_fetching_return_the_canonical_versioned_scoped_grammar_with_matching_hash" computerName="JJW-PC" duration="00:00:01.0958314" startTime="2026-10-23T05:30:49.6867409+09:00" endTime="2026-10-23T05:30:49.6867411+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="11e4025d-a3a4-409c-bd90-3f82d178e0c8" />
+    <UnitTestResult executionId="bcac8c32-f8fa-4e45-a9bf-a85e05995fc7" testId="b2bf55b4-aa7b-d474-651e-6c23c5e0212b" testName="Janglim.Mcp.Tests.TypedTokenHttpTests.Explicit_and_default_identifier_kinds_keep_named_token_output(grammar: &quot;Start : id ; id := Identifier \&quot;[a-z]+\&quot; ;&quot;)" computerName="JJW-PC" duration="00:00:00.4017688" startTime="2026-10-23T05:30:55.6696342+09:00" endTime="2026-10-23T05:30:55.6696343+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bcac8c32-f8fa-4e45-a9bf-a85e05995fc7" />
+    <UnitTestResult executionId="4ed8d054-eff3-463d-9105-a09aa43dd3e0" testId="dcff63fa-29bc-f8f7-cf98-daee35fe4658" testName="Janglim.Mcp.Tests.GrammarPresetHttpTests.Preset_tools_are_discoverable_read_only_closed_world_and_idempotent" computerName="JJW-PC" duration="00:00:00.0131234" startTime="2026-10-23T05:30:46.2188271+09:00" endTime="2026-10-23T05:30:46.2188273+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4ed8d054-eff3-463d-9105-a09aa43dd3e0" />
+    <UnitTestResult executionId="040b3d56-96d0-4287-bd84-30733e1b01ae" testId="1a8b23cd-659a-95bd-ca71-f11c0543094f" testName="Janglim.Mcp.Tests.McpHttpTests.Valid_grammar_returns_a_compiled_conflict_free_report" computerName="JJW-PC" duration="00:00:00.4006726" startTime="2026-10-23T05:30:51.8314877+09:00" endTime="2026-10-23T05:30:51.8314878+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="040b3d56-96d0-4287-bd84-30733e1b01ae" />
+    <UnitTestResult executionId="8b13aabd-115a-4b8e-b6bf-e074470b3521" testId="6a858616-b08c-f1c8-020e-a18c9b52e01a" testName="Janglim.Mcp.Tests.McpHttpTests.Invalid_input_including_unknown_characters_is_rejected(input: &quot;a @&quot;)" computerName="JJW-PC" duration="00:00:00.4034583" startTime="2026-10-23T05:30:54.3631760+09:00" endTime="2026-10-23T05:30:54.3631764+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8b13aabd-115a-4b8e-b6bf-e074470b3521" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: &quot;Start : 'a'? ; comment := Comment \&quot;/\\*[\\s\\S]*?&quot;···, input: &quot; /* only a comment */ &quot;, expected: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="ede1b2cb-d2dc-ccad-5b59-c6836ba4e6ef">
+      <Execution id="4988f3c6-256b-4c6e-a47c-d6d828c958f9" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Tools_discoverable_with_read_only_metadata_and_required_schemas" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="5688a83d-a1bc-9ecb-85b7-1c4d1795fb48">
+      <Execution id="243dff5a-b716-4a4c-af4d-bb197ad0b78d" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Tools_discoverable_with_read_only_metadata_and_required_schemas" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;c11-core &quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="54e31ffa-e440-af67-9757-29019a7467c5">
+      <Execution id="0554c235-8343-40d1-965f-bfcc7cbee0a7" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Invalid_input_including_unknown_characters_is_rejected(input: &quot;a +&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="3da1fdce-6225-5012-0063-a74ae2e7d839">
+      <Execution id="3a82dd87-af17-4a30-8fd3-1c580622c064" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Invalid_input_including_unknown_characters_is_rejected" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Preset_tools_are_discoverable_read_only_closed_world_and_idempotent" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="dcff63fa-29bc-f8f7-cf98-daee35fe4658">
+      <Execution id="4ed8d054-eff3-463d-9105-a09aa43dd3e0" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Preset_tools_are_discoverable_read_only_closed_world_and_idempotent" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.C11CoreHttpTests.Unterminated_block_comments_are_positioned_lexical_errors_instead_of_operators(input: &quot;int f(void) { return 1/*x; }&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="a9a0941a-259f-f094-b9dd-fe973c04e26f">
+      <Execution id="7bd63540-ee08-4629-9fb1-c88b7e70ad26" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.C11CoreHttpTests" name="Unterminated_block_comments_are_positioned_lexical_errors_instead_of_operators" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;if$;&quot;, firstSymbol: &quot;id&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;if$&quot;, identifierStart: 0)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="99ff1409-b5fa-2671-3c75-26f06e5756bd">
+      <Execution id="addea512-d810-4d91-aab0-b6fbb4094721" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Resource_failure_does_not_pass_a_negative_test" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="3cde646d-ef03-bcd7-1f2e-4d418e463e8b">
+      <Execution id="63657b04-1600-46ff-b4e6-a396775dbb00" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Resource_failure_does_not_pass_a_negative_test" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;../c11-core&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="b57665ef-d4c3-1452-1906-705cb0d847c3">
+      <Execution id="8e7500cd-1c10-4c63-ab6d-46c113a2bf09" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;C11-CORE&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="c69d541d-4cde-b347-0201-3165e71c01d8">
+      <Execution id="e333a982-39d0-4497-9245-144f4a267f56" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.TypedTokenHttpTests.Unsupported_token_kind_is_a_grammar_error_for_every_tool(tool: &quot;parse_input&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="a49c561f-d9fd-7b37-ea81-57497dbacd97">
+      <Execution id="a1fdfc8f-2a74-4c57-b1ef-1c6b807cd3ef" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.TypedTokenHttpTests" name="Unsupported_token_kind_is_a_grammar_error_for_every_tool" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;/etc/passwd&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="a0d327e2-f8f1-2ad3-d06a-3fc0c2bb995c">
+      <Execution id="7b5ea52d-cb9e-4376-8b1d-5fcb54aaa445" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: &quot;Start : 'a'? ;&quot;, input: &quot; \t\r\n&quot;, expected: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="5c738e86-7a3d-ff81-6b93-5e9e8e3c91ff">
+      <Execution id="745e45e5-667c-4ee6-821c-a06041bf1d3f" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;missing-preset&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="3b4086f2-c2f0-1a42-0eba-2b140e0c4de2">
+      <Execution id="f19905be-b4b8-42e0-be63-c19951d7790e" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: &quot;Start : 'a' ;&quot;, input: &quot; \t\r\n&quot;, expected: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="683720f0-fe0e-6176-3a76-ce6d6047f9a1">
+      <Execution id="3eba7d3a-55c3-4e8d-ae5b-5826314a1d2f" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Zero_length_token_matches_keep_the_invalid_grammar_diagnostic_contract(grammar: &quot;Start : id ; id := \&quot;(?=x)\&quot; ;&quot;, input: &quot;x&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="37f0c9f2-0736-af9e-2313-d3d4d76d9fae">
+      <Execution id="3756b562-26dd-49c2-93e6-1cb9b29323f2" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Zero_length_token_matches_keep_the_invalid_grammar_diagnostic_contract" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Listing_and_fetching_return_the_canonical_versioned_scoped_grammar_with_matching_hash" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="4696ec63-f867-3ba7-0bcf-79f0e0ec956b">
+      <Execution id="11e4025d-a3a4-409c-bd90-3f82d178e0c8" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Listing_and_fetching_return_the_canonical_versioned_scoped_grammar_with_matching_hash" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;if $name;&quot;, firstSymbol: &quot;if&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;$name&quot;, identifierStart: 3)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="6930185f-bc53-51b1-e689-d8175799d9bb">
+      <Execution id="833514c0-6a7a-4bb6-852c-e8c9e77764fd" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.TypedTokenHttpTests.Unsupported_token_kind_is_a_grammar_error_for_every_tool(tool: &quot;validate_grammar&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="94e96bcc-d12a-a6f8-6b93-ada365b461de">
+      <Execution id="4a61dbbc-0af6-4f2e-8697-44f5ed635458" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.TypedTokenHttpTests" name="Unsupported_token_kind_is_a_grammar_error_for_every_tool" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Zero_length_token_matches_keep_the_invalid_grammar_diagnostic_contract(grammar: &quot;Start : id ; id := \&quot;x*\&quot; ;&quot;, input: &quot;y&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="fda0754a-1df1-aa1c-d3ef-9a8092914f14">
+      <Execution id="266fc3f1-8968-4b14-8bae-ab09c411793b" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Zero_length_token_matches_keep_the_invalid_grammar_diagnostic_contract" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Oversized_input_is_rejected_before_compilation" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="49cd1cdd-45e2-1288-5fe2-0363f4917fc2">
+      <Execution id="182eb626-e57d-4874-a950-e0474f7a45dc" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Oversized_input_is_rejected_before_compilation" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;if value;&quot;, firstSymbol: &quot;if&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;value&quot;, identifierStart: 3)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="b4a4892b-00cb-4e5b-333e-779d31285bfc">
+      <Execution id="d3a60b8f-0725-4b79-a4f1-a304bcf32290" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.WorkerLifecycleTests.Deadline_terminates_synchronous_regex_work_and_allows_the_next_job" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="0e0629e3-97f3-328b-d53f-7d709a9fd82e">
+      <Execution id="a6d96349-1eaa-4af0-a496-d31700104292" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.WorkerLifecycleTests" name="Deadline_terminates_synchronous_regex_work_and_allows_the_next_job" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Concurrent_different_grammars_have_isolated_parser_state" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="c3f3735a-d094-5136-0ce7-407047492900">
+      <Execution id="7d9cd3a9-db81-4f16-b6c2-a07ef9c36f23" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Concurrent_different_grammars_have_isolated_parser_state" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: &quot;Start : 'a'? ;&quot;, input: &quot;&quot;, expected: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="69ad2588-95e6-8a3a-8307-5e5504684019">
+      <Execution id="068e0c32-0154-4654-84ca-c49086dc6d8e" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Untrusted_browser_origin_is_rejected_even_with_valid_credentials" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="42e04300-7328-93cd-4afd-404ab7a75a0f">
+      <Execution id="ff6d0470-5715-4b21-91a1-78f8a8abaf7e" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Untrusted_browser_origin_is_rejected_even_with_valid_credentials" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Table_conflicts_are_reported_and_prevent_parsing" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="d1f6db68-2a88-b501-d7f7-604d79452053">
+      <Execution id="20ad6d0e-4f8d-491f-9ade-907aabbcd626" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Table_conflicts_are_reported_and_prevent_parsing" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.C11CoreHttpTests.Entire_canonical_C_corpus_passes_in_bounded_real_worker_batches" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="eac7a760-917c-92b3-c85c-3e3a946ee30a">
+      <Execution id="d3a10e2f-df6d-442e-8ed0-8bcfbb67fb62" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.C11CoreHttpTests" name="Entire_canonical_C_corpus_passes_in_bounded_real_worker_batches" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.C11CoreHttpTests.C_literals_remain_whole_positioned_tokens_and_comments_are_skipped" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="b37adb0d-707f-4d57-a7c0-58b9de24a716">
+      <Execution id="cd60d0bb-438d-4415-9470-8e6486d0ed2e" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.C11CoreHttpTests" name="C_literals_remain_whole_positioned_tokens_and_comments_are_skipped" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;../../grammars/c/c11-core.ebnf&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="668c7525-3a07-68a4-ef72-df2280eba5a3">
+      <Execution id="e9bc1ec8-b982-4329-9c48-d3e87721ba16" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Tools_require_authentication_but_health_remains_available(key: null)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="b7d3bfe9-edcd-3bfb-0040-3030af5503f8">
+      <Execution id="1f522b78-08d9-4095-b44d-39245e3a0a1d" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Tools_require_authentication_but_health_remains_available" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.TypedTokenHttpTests.Explicit_and_default_identifier_kinds_keep_named_token_output(grammar: &quot;Start : id ; id := Identifier \&quot;[a-z]+\&quot; ;&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="b2bf55b4-aa7b-d474-651e-6c23c5e0212b">
+      <Execution id="bcac8c32-f8fa-4e45-a9bf-a85e05995fc7" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.TypedTokenHttpTests" name="Explicit_and_default_identifier_kinds_keep_named_token_output" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: null)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="2b3d10f8-203b-eaf6-13c5-cddfe1b3257f">
+      <Execution id="ed1a3c1c-1e62-4274-b142-ccf811f6af07" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;name$;&quot;, firstSymbol: &quot;id&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;name$&quot;, identifierStart: 0)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="73890c5f-35c5-41ae-6cbd-be67524ece02">
+      <Execution id="902e74a5-52e4-4ae0-b57d-e31b8e920c1a" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Regex_execution_timeout_cannot_pass_a_negative_grammar_test" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="44b29ae7-fc27-134e-02ad-95a83eb9e972">
+      <Execution id="f4c8fc6e-317d-4612-a5cd-5e2512b20431" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Regex_execution_timeout_cannot_pass_a_negative_grammar_test" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.TypedTokenHttpTests.Quoted_tokens_preserve_text_and_utf16_spans_in_tokens_and_tree" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="1879d45b-ea73-6442-096b-8680de64c77d">
+      <Execution id="a9f39515-e1c9-42bd-8917-f06069ed8011" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.TypedTokenHttpTests" name="Quoted_tokens_preserve_text_and_utf16_spans_in_tokens_and_tree" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Parse_returns_tokens_without_a_tree_by_default" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="3045bde4-7a78-b541-a858-3405ffb3ad50">
+      <Execution id="84e6ce21-05c2-4ff1-8fb8-75a62ce6db4d" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Parse_returns_tokens_without_a_tree_by_default" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Empty_input_is_decided_by_the_grammar(grammar: &quot;Start : 'a' ;&quot;, expected: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="8ea5afc5-4d0c-90c4-efe1-727d02df0e73">
+      <Execution id="86a95082-bef9-422b-a85d-9217e0b8ae15" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Empty_input_is_decided_by_the_grammar" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.WorkerLifecycleTests.Cancellation_stops_the_worker_and_releases_its_slot" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="3b02c9de-6348-6bb4-ddbd-6c31e6be6a7a">
+      <Execution id="01da58c3-6ad7-45fe-822c-fea43cfceb7c" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.WorkerLifecycleTests" name="Cancellation_stops_the_worker_and_releases_its_slot" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Regex_execution_timeout_is_a_runtime_limit_and_does_not_break_the_next_request" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="b317d0dd-09ba-15ec-fe37-dced62b17b56">
+      <Execution id="e57ccccc-da91-47cb-a0dd-21737ab8c6fb" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Regex_execution_timeout_is_a_runtime_limit_and_does_not_break_the_next_request" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Missing_test_expectation_is_an_error_not_an_implicit_negative_test" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="74886f66-1f79-bf9b-ebde-aa0fa1a574bb">
+      <Execution id="23af4dcc-e0d9-49f5-a03f-d10a855cb5fa" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Missing_test_expectation_is_an_error_not_an_implicit_negative_test" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.TypedTokenHttpTests.Typed_quoted_tokens_compile_through_the_mcp_worker" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="69435b51-6e08-c808-2c2a-2b59d200784a">
+      <Execution id="76cbb7fa-59fa-4eec-b63d-a4e882594f4f" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.TypedTokenHttpTests" name="Typed_quoted_tokens_compile_through_the_mcp_worker" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;\t\r\n&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="0da1a683-9cfc-3dc1-ad8c-4f84a7e563dd">
+      <Execution id="51b7387d-17b9-4a1b-8d5b-8c1492f45309" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.TypedTokenHttpTests.Invalid_typed_regex_preserves_the_invalid_regex_diagnostic_contract" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="dbc1da6e-86dd-fcdc-3bc0-6bc50876de09">
+      <Execution id="cd2ed0c0-2c00-4786-b904-b106e4143b20" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.TypedTokenHttpTests" name="Invalid_typed_regex_preserves_the_invalid_regex_diagnostic_contract" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;if name$;&quot;, firstSymbol: &quot;if&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;name$&quot;, identifierStart: 3)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="2b002aa8-9216-452b-b946-28f359b7bb56">
+      <Execution id="d83a19ce-d07f-447c-8c15-00293bd270ec" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.TypedTokenHttpTests.Typed_token_regressions_distinguish_complete_quotes_from_malformed_input" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="ae8c2c06-e451-d151-4043-e2535e79f644">
+      <Execution id="5fdd7e2d-2a57-4d98-a7b3-ac24851e43f1" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.TypedTokenHttpTests" name="Typed_token_regressions_distinguish_complete_quotes_from_malformed_input" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.TypedTokenHttpTests.Unsupported_token_kind_is_a_grammar_error_for_every_tool(tool: &quot;run_tests&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="497c9aa5-2d05-17a0-6b57-882209cf5bca">
+      <Execution id="efa7946c-5346-45cc-ae70-5ad318ef41e9" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.TypedTokenHttpTests" name="Unsupported_token_kind_is_a_grammar_error_for_every_tool" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: &quot;Start : 'a' ;&quot;, input: &quot;&quot;, expected: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="23401290-b359-0c94-cd6f-ebabdd9b4fd0">
+      <Execution id="42f26b1e-62cd-4834-a3b8-1231e4b44244" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Tools_require_authentication_but_health_remains_available(key: &quot;unknown-key&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="33457fb3-f93d-c29a-ec7b-3ecaeeea9b97">
+      <Execution id="0ba49b44-d376-4c70-9fef-e1b7c6847dd0" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Tools_require_authentication_but_health_remains_available" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot; &quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="9abf342c-e7e0-c31e-277b-678f7847364f">
+      <Execution id="44b0f4b2-3b0d-422e-9603-d12e6ded2ee8" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Oversized_http_body_is_rejected_before_mcp_dispatch" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="825741b9-d559-7652-ed23-a55227f7946d">
+      <Execution id="bd3a54a4-84d9-4ef1-841f-460ddeb91bee" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Oversized_http_body_is_rejected_before_mcp_dispatch" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;ifx;&quot;, firstSymbol: &quot;id&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;ifx&quot;, identifierStart: 0)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="3c6eb861-b661-1bfd-481b-2245e85f312a">
+      <Execution id="761b0ad6-dd82-4f1d-8489-7b1cbefc5b9d" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Regression_cases_distinguish_expected_rejection_from_failed_expectations" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="adcfda2c-b09b-faed-84fe-0ac87fcbc72f">
+      <Execution id="78c5a08b-b071-4a24-ba3c-e8cfc8028cee" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Regression_cases_distinguish_expected_rejection_from_failed_expectations" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: &quot;$name;&quot;, firstSymbol: &quot;id&quot;, identifierSymbol: &quot;id&quot;, identifierText: &quot;$name&quot;, identifierStart: 0)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="5371ad8e-e5ce-ae9d-e0c1-a9bdcdf2b788">
+      <Execution id="7bd42c7c-3239-4496-8aa2-1b802fef9dac" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Undefined_symbol_returns_actionable_grammar_diagnostics" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="d353b65f-70fd-3124-4f2c-3e27512478c8">
+      <Execution id="1fb05839-3d8d-4d88-a35f-8f0b39e860dc" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Undefined_symbol_returns_actionable_grammar_diagnostics" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Editing_a_fetched_copy_changes_only_that_request_and_other_clients_get_the_unchanged_baseline" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="982a7531-af1e-4072-67fb-80d024de8f01">
+      <Execution id="3dc53eee-4538-4887-84a4-3e2965b071ac" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Editing_a_fetched_copy_changes_only_that_request_and_other_clients_get_the_unchanged_baseline" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Empty_input_is_decided_by_the_grammar(grammar: &quot;Start : 'a'? ;&quot;, expected: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="c7e3d509-b62f-ec32-3ae0-edb055bea6d1">
+      <Execution id="cee5aadc-9ddb-4705-a476-e9c01ada8555" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Empty_input_is_decided_by_the_grammar" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.TypedTokenHttpTests.Explicit_and_default_identifier_kinds_keep_named_token_output(grammar: &quot;Start : id ; id := \&quot;[a-z]+\&quot; ;&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="1448ef46-0582-b6ef-cd7a-67b753cde95e">
+      <Execution id="4f0f2f59-65f9-4e88-a9b7-58fd6b2dbb54" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.TypedTokenHttpTests" name="Explicit_and_default_identifier_kinds_keep_named_token_output" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Valid_grammar_returns_a_compiled_conflict_free_report" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="1a8b23cd-659a-95bd-ca71-f11c0543094f">
+      <Execution id="040b3d56-96d0-4287-bd84-30733e1b01ae" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Valid_grammar_returns_a_compiled_conflict_free_report" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Physical_end_marker_in_user_input_still_reports_the_reserved_marker_diagnostic" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="334a592b-5075-64f8-68bc-72f14bc51467">
+      <Execution id="8496a98a-816e-4511-b0b8-17833e1a794f" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Physical_end_marker_in_user_input_still_reports_the_reserved_marker_diagnostic" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: &quot;Start : 'a' ; comment := Comment \&quot;/\\*[\\s\\S]*?\&quot;···, input: &quot; /* only a comment */ &quot;, expected: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="d108698b-c7ac-cc8a-39d9-3b395ebd7c1e">
+      <Execution id="7464f680-8c6f-4ed4-b953-9e913f2b7815" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.MaximalMunchEngineTests" name="Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="abcb29a3-4550-efbc-d277-a30a12b327a3">
+      <Execution id="0684fb31-bb75-4b9a-9082-c7d95bbebe97" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.C11CoreHttpTests.C_tree_binds_else_to_the_nearest_unbraced_if" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="f7ecb7d4-eba2-33b1-0451-440dc10860a4">
+      <Execution id="e513b404-a9c4-44f6-962d-9fec27aa8f28" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.C11CoreHttpTests" name="C_tree_binds_else_to_the_nearest_unbraced_if" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Invalid_input_including_unknown_characters_is_rejected(input: &quot;a @&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="6a858616-b08c-f1c8-020e-a18c9b52e01a">
+      <Execution id="8b13aabd-115a-4b8e-b6bf-e074470b3521" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Invalid_input_including_unknown_characters_is_rejected" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.TypedTokenHttpTests.Escaped_quotes_and_backslashes_remain_in_the_returned_token_text" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="38ee9188-6223-3dac-0d77-0a8766fe8777">
+      <Execution id="f3f343f2-0af8-451f-943d-7699714283ff" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.TypedTokenHttpTests" name="Escaped_quotes_and_backslashes_remain_in_the_returned_token_text" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.C11CoreHttpTests.Canonical_C_profile_compiles_without_conflicts_within_service_limits" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="a6b4f4ae-3351-db81-e0fa-842d756bfb34">
+      <Execution id="f984f9b0-0f11-4f0b-87ec-13e3d23136ec" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.C11CoreHttpTests" name="Canonical_C_profile_compiles_without_conflicts_within_service_limits" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.C11CoreHttpTests.Unterminated_block_comments_are_positioned_lexical_errors_instead_of_operators(input: &quot;int value; /* unterminated&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="5af449cf-c2c2-933e-117a-3567ed9a1d5a">
+      <Execution id="1f7ef9bb-2cfd-4c37-8b13-e4d14a6fa6a5" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.C11CoreHttpTests" name="Unterminated_block_comments_are_positioned_lexical_errors_instead_of_operators" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.McpHttpTests.Requested_tree_has_connected_nodes_and_input_spans" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="384340cc-52d5-9b29-0478-0ca38cb57802">
+      <Execution id="79cb9808-b4bc-4812-9a82-bdf96e3a1c1b" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.McpHttpTests" name="Requested_tree_has_connected_nodes_and_input_spans" />
+    </UnitTest>
+    <UnitTest name="Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: &quot;C:\\Windows\\win.ini&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-fix\solution-build\bin\janglim.mcp.tests\release\janglim.mcp.tests.dll" id="4197f57e-f263-9ba9-e765-311846bd7e38">
+      <Execution id="1f95ef26-f00d-42a9-867f-6c3a9e7a91ee" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-fix\solution-build\bin\Janglim.Mcp.Tests\release\Janglim.Mcp.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.Mcp.Tests.GrammarPresetHttpTests" name="Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="b4a4892b-00cb-4e5b-333e-779d31285bfc" executionId="d3a60b8f-0725-4b79-a4f1-a304bcf32290" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="69435b51-6e08-c808-2c2a-2b59d200784a" executionId="76cbb7fa-59fa-4eec-b63d-a4e882594f4f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="37f0c9f2-0736-af9e-2313-d3d4d76d9fae" executionId="3756b562-26dd-49c2-93e6-1cb9b29323f2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="982a7531-af1e-4072-67fb-80d024de8f01" executionId="3dc53eee-4538-4887-84a4-3e2965b071ac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2b002aa8-9216-452b-b946-28f359b7bb56" executionId="d83a19ce-d07f-447c-8c15-00293bd270ec" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="23401290-b359-0c94-cd6f-ebabdd9b4fd0" executionId="42f26b1e-62cd-4834-a3b8-1231e4b44244" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="38ee9188-6223-3dac-0d77-0a8766fe8777" executionId="f3f343f2-0af8-451f-943d-7699714283ff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3045bde4-7a78-b541-a858-3405ffb3ad50" executionId="84e6ce21-05c2-4ff1-8fb8-75a62ce6db4d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f7ecb7d4-eba2-33b1-0451-440dc10860a4" executionId="e513b404-a9c4-44f6-962d-9fec27aa8f28" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a9a0941a-259f-f094-b9dd-fe973c04e26f" executionId="7bd63540-ee08-4629-9fb1-c88b7e70ad26" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9abf342c-e7e0-c31e-277b-678f7847364f" executionId="44b0f4b2-3b0d-422e-9603-d12e6ded2ee8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3b02c9de-6348-6bb4-ddbd-6c31e6be6a7a" executionId="01da58c3-6ad7-45fe-822c-fea43cfceb7c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="668c7525-3a07-68a4-ef72-df2280eba5a3" executionId="e9bc1ec8-b982-4329-9c48-d3e87721ba16" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="33457fb3-f93d-c29a-ec7b-3ecaeeea9b97" executionId="0ba49b44-d376-4c70-9fef-e1b7c6847dd0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1448ef46-0582-b6ef-cd7a-67b753cde95e" executionId="4f0f2f59-65f9-4e88-a9b7-58fd6b2dbb54" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="94e96bcc-d12a-a6f8-6b93-ada365b461de" executionId="4a61dbbc-0af6-4f2e-8697-44f5ed635458" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="74886f66-1f79-bf9b-ebde-aa0fa1a574bb" executionId="23af4dcc-e0d9-49f5-a03f-d10a855cb5fa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1879d45b-ea73-6442-096b-8680de64c77d" executionId="a9f39515-e1c9-42bd-8917-f06069ed8011" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5af449cf-c2c2-933e-117a-3567ed9a1d5a" executionId="1f7ef9bb-2cfd-4c37-8b13-e4d14a6fa6a5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4197f57e-f263-9ba9-e765-311846bd7e38" executionId="1f95ef26-f00d-42a9-867f-6c3a9e7a91ee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="54e31ffa-e440-af67-9757-29019a7467c5" executionId="0554c235-8343-40d1-965f-bfcc7cbee0a7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5c738e86-7a3d-ff81-6b93-5e9e8e3c91ff" executionId="745e45e5-667c-4ee6-821c-a06041bf1d3f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0e0629e3-97f3-328b-d53f-7d709a9fd82e" executionId="a6d96349-1eaa-4af0-a496-d31700104292" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="49cd1cdd-45e2-1288-5fe2-0363f4917fc2" executionId="182eb626-e57d-4874-a950-e0474f7a45dc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="683720f0-fe0e-6176-3a76-ce6d6047f9a1" executionId="3eba7d3a-55c3-4e8d-ae5b-5826314a1d2f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dbc1da6e-86dd-fcdc-3bc0-6bc50876de09" executionId="cd2ed0c0-2c00-4786-b904-b106e4143b20" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a0d327e2-f8f1-2ad3-d06a-3fc0c2bb995c" executionId="7b5ea52d-cb9e-4376-8b1d-5fcb54aaa445" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ae8c2c06-e451-d151-4043-e2535e79f644" executionId="5fdd7e2d-2a57-4d98-a7b3-ac24851e43f1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b37adb0d-707f-4d57-a7c0-58b9de24a716" executionId="cd60d0bb-438d-4415-9470-8e6486d0ed2e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3da1fdce-6225-5012-0063-a74ae2e7d839" executionId="3a82dd87-af17-4a30-8fd3-1c580622c064" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="73890c5f-35c5-41ae-6cbd-be67524ece02" executionId="902e74a5-52e4-4ae0-b57d-e31b8e920c1a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b57665ef-d4c3-1452-1906-705cb0d847c3" executionId="8e7500cd-1c10-4c63-ab6d-46c113a2bf09" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c7e3d509-b62f-ec32-3ae0-edb055bea6d1" executionId="cee5aadc-9ddb-4705-a476-e9c01ada8555" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3b4086f2-c2f0-1a42-0eba-2b140e0c4de2" executionId="f19905be-b4b8-42e0-be63-c19951d7790e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="42e04300-7328-93cd-4afd-404ab7a75a0f" executionId="ff6d0470-5715-4b21-91a1-78f8a8abaf7e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0da1a683-9cfc-3dc1-ad8c-4f84a7e563dd" executionId="51b7387d-17b9-4a1b-8d5b-8c1492f45309" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="abcb29a3-4550-efbc-d277-a30a12b327a3" executionId="0684fb31-bb75-4b9a-9082-c7d95bbebe97" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3cde646d-ef03-bcd7-1f2e-4d418e463e8b" executionId="63657b04-1600-46ff-b4e6-a396775dbb00" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="334a592b-5075-64f8-68bc-72f14bc51467" executionId="8496a98a-816e-4511-b0b8-17833e1a794f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d1f6db68-2a88-b501-d7f7-604d79452053" executionId="20ad6d0e-4f8d-491f-9ade-907aabbcd626" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3c6eb861-b661-1bfd-481b-2245e85f312a" executionId="761b0ad6-dd82-4f1d-8489-7b1cbefc5b9d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5371ad8e-e5ce-ae9d-e0c1-a9bdcdf2b788" executionId="7bd42c7c-3239-4496-8aa2-1b802fef9dac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="384340cc-52d5-9b29-0478-0ca38cb57802" executionId="79cb9808-b4bc-4812-9a82-bdf96e3a1c1b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="44b29ae7-fc27-134e-02ad-95a83eb9e972" executionId="f4c8fc6e-317d-4612-a5cd-5e2512b20431" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="825741b9-d559-7652-ed23-a55227f7946d" executionId="bd3a54a4-84d9-4ef1-841f-460ddeb91bee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="497c9aa5-2d05-17a0-6b57-882209cf5bca" executionId="efa7946c-5346-45cc-ae70-5ad318ef41e9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6930185f-bc53-51b1-e689-d8175799d9bb" executionId="833514c0-6a7a-4bb6-852c-e8c9e77764fd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5688a83d-a1bc-9ecb-85b7-1c4d1795fb48" executionId="243dff5a-b716-4a4c-af4d-bb197ad0b78d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="69ad2588-95e6-8a3a-8307-5e5504684019" executionId="068e0c32-0154-4654-84ca-c49086dc6d8e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c69d541d-4cde-b347-0201-3165e71c01d8" executionId="e333a982-39d0-4497-9245-144f4a267f56" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fda0754a-1df1-aa1c-d3ef-9a8092914f14" executionId="266fc3f1-8968-4b14-8bae-ab09c411793b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b7d3bfe9-edcd-3bfb-0040-3030af5503f8" executionId="1f522b78-08d9-4095-b44d-39245e3a0a1d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d108698b-c7ac-cc8a-39d9-3b395ebd7c1e" executionId="7464f680-8c6f-4ed4-b953-9e913f2b7815" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2b3d10f8-203b-eaf6-13c5-cddfe1b3257f" executionId="ed1a3c1c-1e62-4274-b142-ccf811f6af07" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c3f3735a-d094-5136-0ce7-407047492900" executionId="7d9cd3a9-db81-4f16-b6c2-a07ef9c36f23" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d353b65f-70fd-3124-4f2c-3e27512478c8" executionId="1fb05839-3d8d-4d88-a35f-8f0b39e860dc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8ea5afc5-4d0c-90c4-efe1-727d02df0e73" executionId="86a95082-bef9-422b-a85d-9217e0b8ae15" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a6b4f4ae-3351-db81-e0fa-842d756bfb34" executionId="f984f9b0-0f11-4f0b-87ec-13e3d23136ec" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b317d0dd-09ba-15ec-fe37-dced62b17b56" executionId="e57ccccc-da91-47cb-a0dd-21737ab8c6fb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ede1b2cb-d2dc-ccad-5b59-c6836ba4e6ef" executionId="4988f3c6-256b-4c6e-a47c-d6d828c958f9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="eac7a760-917c-92b3-c85c-3e3a946ee30a" executionId="d3a10e2f-df6d-442e-8ed0-8bcfbb67fb62" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="99ff1409-b5fa-2671-3c75-26f06e5756bd" executionId="addea512-d810-4d91-aab0-b6fbb4094721" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a49c561f-d9fd-7b37-ea81-57497dbacd97" executionId="a1fdfc8f-2a74-4c57-b1ef-1c6b807cd3ef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="adcfda2c-b09b-faed-84fe-0ac87fcbc72f" executionId="78c5a08b-b071-4a24-ba3c-e8cfc8028cee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4696ec63-f867-3ba7-0bcf-79f0e0ec956b" executionId="11e4025d-a3a4-409c-bd90-3f82d178e0c8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b2bf55b4-aa7b-d474-651e-6c23c5e0212b" executionId="bcac8c32-f8fa-4e45-a9bf-a85e05995fc7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dcff63fa-29bc-f8f7-cf98-daee35fe4658" executionId="4ed8d054-eff3-463d-9105-a09aa43dd3e0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a8b23cd-659a-95bd-ca71-f11c0543094f" executionId="040b3d56-96d0-4287-bd84-30733e1b01ae" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6a858616-b08c-f1c8-020e-a18c9b52e01a" executionId="8b13aabd-115a-4b8e-b6bf-e074470b3521" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="목록에 없는 결과" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="로드된 모든 결과" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="69" executed="69" passed="69" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 10.0.13)&#xD;
+[xUnit.net 00:00:01.32]   Discovering: Janglim.Mcp.Tests&#xD;
+[xUnit.net 00:00:01.39]   Discovered:  Janglim.Mcp.Tests&#xD;
+[xUnit.net 00:00:01.39]   Starting:    Janglim.Mcp.Tests&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Production&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\AhjLv\OneDrive\���� ȭ��\���� ������Ʈ\AJPGS\services\Janglim.Mcp&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'initialize' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0), Client (janglim-integration-tests 1.0) method 'initialize' request handler completed in 13.9411ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1365.1755ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1368.9778ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "validate_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1144.417ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1218.321ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1204.4834ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1203.9246ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1131.0093ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1132.2479ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1117.9659ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1256.5895ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1213.4839ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1141.3426ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1126.8214ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/list' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/list' request handler completed in 7.857ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.884ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.3583ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1571ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1553ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1188ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.0991ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1185ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1085ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1029ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.0935ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1009ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1323ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.154ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1132ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1203ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2351ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1764ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1748ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1186ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.105ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.128ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.0983ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 3.5024ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1202.7683ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.3872ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.3559ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1109.685ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "list_grammars" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1.1052ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "get_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.3572ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "validate_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1086.6261ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+fail: ModelContextProtocol.Server.McpServer[1433779783]&#xD;
+      "run_tests" threw an unhandled exception.&#xD;
+      System.Text.Json.JsonException: JSON deserialization for type 'Janglim.Mcp.GrammarTestCase' was missing required properties including: 'expectSuccess'.&#xD;
+         at System.Text.Json.ThrowHelper.ThrowJsonException_JsonRequiredPropertyMissing(JsonTypeInfo parent, BitArray assignedOrNotRequiredPropertiesSet)&#xD;
+         at System.Text.Json.Serialization.Converters.ObjectWithParameterizedConstructorConverter`1.OnTryRead(Utf8JsonReader&amp; reader, Type typeToConvert, JsonSerializerOptions options, ReadStack&amp; state, T&amp; value)&#xD;
+         at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryRead(Utf8JsonReader&amp; reader, Type typeToConvert, JsonSerializerOptions options, ReadStack&amp; state, TCollection&amp; value)&#xD;
+         at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader&amp; reader, T&amp; value, JsonSerializerOptions options, ReadStack&amp; state)&#xD;
+         at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.DeserializeAsObject(Utf8JsonReader&amp; reader, ReadStack&amp; state)&#xD;
+         at System.Text.Json.JsonSerializer.Deserialize(JsonElement element, JsonTypeInfo jsonTypeInfo)&#xD;
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunctionDescriptor.&lt;&gt;c__DisplayClass40_0.&lt;GetParameterMarshaller&gt;b__3(AIFunctionArguments arguments, CancellationToken _)&#xD;
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunction.InvokeCoreAsync(AIFunctionArguments arguments, CancellationToken cancellationToken)&#xD;
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunction.InvokeCoreAsync(AIFunctionArguments arguments, CancellationToken cancellationToken)&#xD;
+         at ModelContextProtocol.Server.AIFunctionMcpServerTool.InvokeAsync(RequestContext`1 request, CancellationToken cancellationToken)&#xD;
+         at ModelContextProtocol.Server.McpServerImpl.&lt;&gt;c__DisplayClass85_1.&lt;&lt;BuildComposedCallToolHandler&gt;g__InvokeOrdinaryPipelineAsync|1&gt;d.MoveNext()&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 18.9541ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 423.7908ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 447.2175ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 412.7734ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 412.7723ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2303ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "validate_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 397.9295ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 422.0398ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "validate_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 326.3369ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 444.6154ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 408.1522ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 495.4941ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 401.4931ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/list' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/list' request handler completed in 0.2616ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 451.8898ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 486.8701ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 393.8287ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 399.4759ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 415.2035ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 357.1911ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 346.1168ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "validate_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 325.5821ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "run_tests" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 451.6304ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "validate_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 389.5993ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "parse_input" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 410.9627ms.&#xD;
+info: ModelContextProtocol.Server.McpServer[570385771]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler called.&#xD;
+info: ModelContextProtocol.Server.McpServer[2065726448]&#xD;
+      "validate_grammar" completed. IsError = False.&#xD;
+info: ModelContextProtocol.Server.McpServer[1867955179]&#xD;
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 373.1167ms.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+[xUnit.net 00:00:34.59]   Finished:    Janglim.Mcp.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

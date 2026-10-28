@@ -1,0 +1,40 @@
+{
+  "kind": "test262-regexp-static-constructor-arguments",
+  "cases": 746,
+  "files": 203,
+  "mismatches": 0,
+  "mismatchCases": [],
+  "skippedCalls": [
+    {
+      "path": "built-ins/RegExp/named-groups/non-unicode-property-names-invalid.js",
+      "offset": 745,
+      "reason": "requires-raw-UTF16-transport"
+    },
+    {
+      "path": "built-ins/RegExp/named-groups/non-unicode-property-names-invalid.js",
+      "offset": 1007,
+      "reason": "requires-raw-UTF16-transport"
+    },
+    {
+      "path": "built-ins/RegExp/named-groups/non-unicode-property-names-invalid.js",
+      "offset": 1276,
+      "reason": "requires-raw-UTF16-transport"
+    },
+    {
+      "path": "built-ins/RegExp/named-groups/unicode-property-names-invalid.js",
+      "offset": 751,
+      "reason": "requires-raw-UTF16-transport"
+    },
+    {
+      "path": "built-ins/RegExp/named-groups/unicode-property-names-invalid.js",
+      "offset": 1028,
+      "reason": "requires-raw-UTF16-transport"
+    },
+    {
+      "path": "built-ins/RegExp/named-groups/unicode-property-names-invalid.js",
+      "offset": 1312,
+      "reason": "requires-raw-UTF16-transport"
+    }
+  ],
+  "scope": "Static string literal pattern/flags arguments only; no computed strings, flags errors, RegExp matches, assertions, eval, or JS runtime programs executed."
+}

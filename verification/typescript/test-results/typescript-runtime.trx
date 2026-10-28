@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="35e340ae-81d6-4b9a-b81a-ee0a69e18bb6" name="AhjLv@JJW-PC 2026-10-21 20:52:16" runUser="JJW-PC\AhjLv" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-21T20:52:16.4349772+09:00" queuing="2026-10-21T20:52:16.4349777+09:00" start="2026-10-21T20:51:44.2530919+09:00" finish="2026-10-21T20:52:16.8198144+09:00" />
+  <TestSettings name="default" id="c045378d-0521-4a27-9c4a-849e481a4ee7">
+    <Deployment runDeploymentRoot="AhjLv_JJW-PC_2026-10-21_20_52_16" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="531198de-7da6-4637-9158-13391255bf8d" testId="f05f8580-d0b4-01ca-1201-fb94a97032df" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;function f(value?: string): void {}&quot;)" computerName="JJW-PC" duration="00:00:00.0140010" startTime="2026-10-21T20:52:16.5913913+09:00" endTime="2026-10-21T20:52:16.5913915+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="531198de-7da6-4637-9158-13391255bf8d" />
+    <UnitTestResult executionId="43204eb6-eea0-4eae-bfbe-6558d8961e93" testId="852d3a59-1bdf-38cc-b298-5da3c2c597af" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Rejects_syntax_and_grammar_errors(source: &quot;const value: number = ;&quot;)" computerName="JJW-PC" duration="00:00:00.0116271" startTime="2026-10-21T20:52:16.5163136+09:00" endTime="2026-10-21T20:52:16.5163141+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="43204eb6-eea0-4eae-bfbe-6558d8961e93" />
+    <UnitTestResult executionId="f53fb308-3d1c-456b-a8fa-341e77cb1b9b" testId="70e49137-eef2-5c9f-e526-8138e5f99f91" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Rejects_syntax_and_grammar_errors(source: &quot;function f(a?: number = 1) {}&quot;)" computerName="JJW-PC" duration="00:00:00.0129476" startTime="2026-10-21T20:52:16.5046175+09:00" endTime="2026-10-21T20:52:16.5046178+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f53fb308-3d1c-456b-a8fa-341e77cb1b9b" />
+    <UnitTestResult executionId="ce7c09cf-5e26-4227-8deb-dcabbcc5a46e" testId="83a62151-eed6-0232-4e4e-3a0ea5dd6628" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;async function f(value: Promise&lt;number&gt;): Promise&lt;&quot;···)" computerName="JJW-PC" duration="00:00:00.0126593" startTime="2026-10-21T20:52:16.6184118+09:00" endTime="2026-10-21T20:52:16.6184120+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ce7c09cf-5e26-4227-8deb-dcabbcc5a46e">
+      <Output>
+        <ErrorInfo>
+          <Message>async function f(value: Promise&lt;number&gt;): Promise&lt;number&gt; { return await value; }&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+(shift 할 수 없습니다 {&amp;, |, extends, [, ?} 와야 합니다)</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 60&#xD;
+   at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9f809ed9-6c45-4be1-b6ee-f0f7a2155669" testId="a11f9262-8728-ad82-3983-0846c08731cd" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Rejects_syntax_and_grammar_errors(source: &quot;let value: = 1;&quot;)" computerName="JJW-PC" duration="00:00:00.0782931" startTime="2026-10-21T20:52:16.4785081+09:00" endTime="2026-10-21T20:52:16.4785084+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9f809ed9-6c45-4be1-b6ee-f0f7a2155669" />
+    <UnitTestResult executionId="40246b51-3e76-48cf-9790-566c0ea943ee" testId="aed31a3e-f3d9-4b1a-2ae7-f799d9ca695a" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;let value: number = 1; value / 2;&quot;)" computerName="JJW-PC" duration="00:00:00.0136410" startTime="2026-10-21T20:52:16.6050974+09:00" endTime="2026-10-21T20:52:16.6050978+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="40246b51-3e76-48cf-9790-566c0ea943ee" />
+    <UnitTestResult executionId="cdb3f94a-1de1-4ee3-8097-7a87f9064db7" testId="551689a2-55b9-9b00-579e-bc37dd74eb55" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;const name: string = 'test';&quot;)" computerName="JJW-PC" duration="00:00:00.0120997" startTime="2026-10-21T20:52:16.6563081+09:00" endTime="2026-10-21T20:52:16.6563084+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cdb3f94a-1de1-4ee3-8097-7a87f9064db7" />
+    <UnitTestResult executionId="2a6c6213-a711-4d55-87b3-943c9cf643f7" testId="7c452fa7-79b6-02e8-a27f-eda1eb42a60e" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;let value: Array&lt;Map&lt;string, number&gt;&gt;;&quot;)" computerName="JJW-PC" duration="00:00:00.0133255" startTime="2026-10-21T20:52:16.7345592+09:00" endTime="2026-10-21T20:52:16.7345594+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2a6c6213-a711-4d55-87b3-943c9cf643f7">
+      <Output>
+        <ErrorInfo>
+          <Message>let value: Array&lt;Map&lt;string, number&gt;&gt;;&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+(shift 할 수 없습니다 {&amp;, |, extends, [, ?} 와야 합니다)</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 60&#xD;
+   at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c4a02d8b-ad1d-4732-a5a1-8ba3d0fbfe14" testId="829a039d-c63f-e667-557e-b364f17983b9" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;const value: number = 'text';&quot;)" computerName="JJW-PC" duration="00:00:00.0117906" startTime="2026-10-21T20:52:16.7091173+09:00" endTime="2026-10-21T20:52:16.7091175+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c4a02d8b-ad1d-4732-a5a1-8ba3d0fbfe14" />
+    <UnitTestResult executionId="9b28b842-f4ac-4ccb-874a-80a406461757" testId="ea4438c4-97f0-5070-f68b-e9bcd5694d04" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;function identity&lt;T&gt;(value: T): T { return value; &quot;···)" computerName="JJW-PC" duration="00:00:00.0113414" startTime="2026-10-21T20:52:16.7213666+09:00" endTime="2026-10-21T20:52:16.7213668+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9b28b842-f4ac-4ccb-874a-80a406461757">
+      <Output>
+        <ErrorInfo>
+          <Message>function identity&lt;T&gt;(value: T): T { return value; }&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+(shift 할 수 없습니다 {., &lt;, is, &amp;, |, extends, [, {, ,, ?} 와야 합니다)</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 60&#xD;
+   at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="df2ebb25-3396-4dda-8afe-07b81091f00a" testId="136f2383-2276-80a6-5e3c-20fe3dcf833a" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Rejects_syntax_and_grammar_errors(source: &quot;for (const item: string of list) {}&quot;)" computerName="JJW-PC" duration="00:00:00.0134306" startTime="2026-10-21T20:52:16.5298749+09:00" endTime="2026-10-21T20:52:16.5298754+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="df2ebb25-3396-4dda-8afe-07b81091f00a" />
+    <UnitTestResult executionId="59ded6ec-ed02-48a8-94c4-8b81c718d9cf" testId="81e3c8e7-6f20-94bb-4877-cd434549dde0" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;function add(a: number, b: number): number { retur&quot;···)" computerName="JJW-PC" duration="00:00:00.0150613" startTime="2026-10-21T20:52:16.6331465+09:00" endTime="2026-10-21T20:52:16.6331468+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="59ded6ec-ed02-48a8-94c4-8b81c718d9cf" />
+    <UnitTestResult executionId="6a7aaf74-5201-49bc-bf1b-014fab7d8d62" testId="5b502b92-e05d-d8a3-32b1-568a35562003" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;function f(this: Context, value: string): void {}&quot;)" computerName="JJW-PC" duration="00:00:00.0117584" startTime="2026-10-21T20:52:16.5808767+09:00" endTime="2026-10-21T20:52:16.5808769+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6a7aaf74-5201-49bc-bf1b-014fab7d8d62">
+      <Output>
+        <ErrorInfo>
+          <Message>function f(this: Context, value: string): void {}&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+(shift 할 수 없습니다 {., &amp;, |, extends, [, ?, &lt;, is} 와야 합니다)</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 60&#xD;
+   at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d29d9c92-3426-442f-80a2-f9ecff11047f" testId="ff6ffa1d-f0a7-0ac5-9969-04b2d64c2071" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;let value: UnknownType;&quot;)" computerName="JJW-PC" duration="00:00:00.0107542" startTime="2026-10-21T20:52:16.6444337+09:00" endTime="2026-10-21T20:52:16.6444339+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d29d9c92-3426-442f-80a2-f9ecff11047f">
+      <Output>
+        <ErrorInfo>
+          <Message>let value: UnknownType;&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+(shift 할 수 없습니다 {., &lt;, is, &amp;, |, extends, [, {, ,, ?} 와야 합니다)</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 60&#xD;
+   at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4c8e0824-3f95-400a-baf7-8bbc00d3e820" testId="baa1208e-a3d8-1df9-f3c5-7b4aeebe13f0" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Rejects_syntax_and_grammar_errors(source: &quot;function f(a: number, a: string) {}&quot;)" computerName="JJW-PC" duration="00:00:00.0129243" startTime="2026-10-21T20:52:16.4915305+09:00" endTime="2026-10-21T20:52:16.4915310+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4c8e0824-3f95-400a-baf7-8bbc00d3e820" />
+    <UnitTestResult executionId="eb9fcab0-2654-44a0-ab84-a66b0ba0201b" testId="4e87e367-fecd-aead-071f-bb6883fd2a46" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;const { name }: {name: string} = user;&quot;)" computerName="JJW-PC" duration="00:00:00.0168423" startTime="2026-10-21T20:52:16.5469169+09:00" endTime="2026-10-21T20:52:16.5469176+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eb9fcab0-2654-44a0-ab84-a66b0ba0201b" />
+    <UnitTestResult executionId="8204317e-92ce-43a5-841d-9cfb45fbdf96" testId="510de359-2048-00e9-b4f2-ca5f70815e88" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;function f(value: string = 'a', ...rest: string[])&quot;···)" computerName="JJW-PC" duration="00:00:00.0149270" startTime="2026-10-21T20:52:16.6972162+09:00" endTime="2026-10-21T20:52:16.6972165+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8204317e-92ce-43a5-841d-9cfb45fbdf96" />
+    <UnitTestResult executionId="e65858b1-e1fb-48a6-9d55-c3827186fbad" testId="b54cfbea-e910-ff72-fc6f-d847d03fdf6e" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Rejects_syntax_and_grammar_errors(source: &quot;function f(a?: number, b: number) {}&quot;)" computerName="JJW-PC" duration="00:00:29.7758485" startTime="2026-10-21T20:52:16.4005985+09:00" endTime="2026-10-21T20:52:16.4006112+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e65858b1-e1fb-48a6-9d55-c3827186fbad" />
+    <UnitTestResult executionId="cb08ceef-dd38-4748-a873-19597e7c9500" testId="1a8ce588-6ab7-2722-4363-7f8f74e4bdae" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;class Counter { value: number = 0; next(step: numb&quot;···)" computerName="JJW-PC" duration="00:00:00.0258646" startTime="2026-10-21T20:52:16.6821955+09:00" endTime="2026-10-21T20:52:16.6821958+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cb08ceef-dd38-4748-a873-19597e7c9500" />
+    <UnitTestResult executionId="5f861b7f-0540-485e-8d06-98b339afb7de" testId="0483dfeb-3a8e-9123-6679-6feddd8e4489" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;let type = 1; let string = 2; type + string;&quot;)" computerName="JJW-PC" duration="00:00:00.0150555" startTime="2026-10-21T20:52:16.7493317+09:00" endTime="2026-10-21T20:52:16.7493320+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5f861b7f-0540-485e-8d06-98b339afb7de" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;const name: string = 'test';&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="551689a2-55b9-9b00-579e-bc37dd74eb55">
+      <Execution id="cdb3f94a-1de1-4ee3-8097-7a87f9064db7" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;let type = 1; let string = 2; type + string;&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="0483dfeb-3a8e-9123-6679-6feddd8e4489">
+      <Execution id="5f861b7f-0540-485e-8d06-98b339afb7de" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;function f(this: Context, value: string): void {}&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="5b502b92-e05d-d8a3-32b1-568a35562003">
+      <Execution id="6a7aaf74-5201-49bc-bf1b-014fab7d8d62" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;const value: number = 'text';&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="829a039d-c63f-e667-557e-b364f17983b9">
+      <Execution id="c4a02d8b-ad1d-4732-a5a1-8ba3d0fbfe14" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;class Counter { value: number = 0; next(step: numb&quot;···)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="1a8ce588-6ab7-2722-4363-7f8f74e4bdae">
+      <Execution id="cb08ceef-dd38-4748-a873-19597e7c9500" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Rejects_syntax_and_grammar_errors(source: &quot;function f(a?: number, b: number) {}&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="b54cfbea-e910-ff72-fc6f-d847d03fdf6e">
+      <Execution id="e65858b1-e1fb-48a6-9d55-c3827186fbad" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Rejects_syntax_and_grammar_errors" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;async function f(value: Promise&lt;number&gt;): Promise&lt;&quot;···)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="83a62151-eed6-0232-4e4e-3a0ea5dd6628">
+      <Execution id="ce7c09cf-5e26-4227-8deb-dcabbcc5a46e" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;let value: UnknownType;&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="ff6ffa1d-f0a7-0ac5-9969-04b2d64c2071">
+      <Execution id="d29d9c92-3426-442f-80a2-f9ecff11047f" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;function add(a: number, b: number): number { retur&quot;···)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="81e3c8e7-6f20-94bb-4877-cd434549dde0">
+      <Execution id="59ded6ec-ed02-48a8-94c4-8b81c718d9cf" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;const { name }: {name: string} = user;&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="4e87e367-fecd-aead-071f-bb6883fd2a46">
+      <Execution id="eb9fcab0-2654-44a0-ab84-a66b0ba0201b" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;function f(value?: string): void {}&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="f05f8580-d0b4-01ca-1201-fb94a97032df">
+      <Execution id="531198de-7da6-4637-9158-13391255bf8d" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;function identity&lt;T&gt;(value: T): T { return value; &quot;···)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="ea4438c4-97f0-5070-f68b-e9bcd5694d04">
+      <Execution id="9b28b842-f4ac-4ccb-874a-80a406461757" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Rejects_syntax_and_grammar_errors(source: &quot;function f(a?: number = 1) {}&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="70e49137-eef2-5c9f-e526-8138e5f99f91">
+      <Execution id="f53fb308-3d1c-456b-a8fa-341e77cb1b9b" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Rejects_syntax_and_grammar_errors" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Rejects_syntax_and_grammar_errors(source: &quot;function f(a: number, a: string) {}&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="baa1208e-a3d8-1df9-f3c5-7b4aeebe13f0">
+      <Execution id="4c8e0824-3f95-400a-baf7-8bbc00d3e820" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Rejects_syntax_and_grammar_errors" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Rejects_syntax_and_grammar_errors(source: &quot;for (const item: string of list) {}&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="136f2383-2276-80a6-5e3c-20fe3dcf833a">
+      <Execution id="df2ebb25-3396-4dda-8afe-07b81091f00a" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Rejects_syntax_and_grammar_errors" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;let value: Array&lt;Map&lt;string, number&gt;&gt;;&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="7c452fa7-79b6-02e8-a27f-eda1eb42a60e">
+      <Execution id="2a6c6213-a711-4d55-87b3-943c9cf643f7" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Rejects_syntax_and_grammar_errors(source: &quot;const value: number = ;&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="852d3a59-1bdf-38cc-b298-5da3c2c597af">
+      <Execution id="43204eb6-eea0-4eae-bfbe-6558d8961e93" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Rejects_syntax_and_grammar_errors" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;function f(value: string = 'a', ...rest: string[])&quot;···)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="510de359-2048-00e9-b4f2-ca5f70815e88">
+      <Execution id="8204317e-92ce-43a5-841d-9cfb45fbdf96" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Rejects_syntax_and_grammar_errors(source: &quot;let value: = 1;&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="a11f9262-8728-ad82-3983-0846c08731cd">
+      <Execution id="9f809ed9-6c45-4be1-b6ee-f0f7a2155669" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Rejects_syntax_and_grammar_errors" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: &quot;let value: number = 1; value / 2;&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\runtime-tests-bin\parse.frontend.parsers.tests.dll" id="aed31a3e-f3d9-4b1a-2ae7-f799d9ca695a">
+      <Execution id="40246b51-3e76-48cf-9790-566c0ea943ee" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests" name="Accepts_types_without_losing_JavaScript_runtime_validation" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="f05f8580-d0b4-01ca-1201-fb94a97032df" executionId="531198de-7da6-4637-9158-13391255bf8d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="852d3a59-1bdf-38cc-b298-5da3c2c597af" executionId="43204eb6-eea0-4eae-bfbe-6558d8961e93" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="70e49137-eef2-5c9f-e526-8138e5f99f91" executionId="f53fb308-3d1c-456b-a8fa-341e77cb1b9b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="83a62151-eed6-0232-4e4e-3a0ea5dd6628" executionId="ce7c09cf-5e26-4227-8deb-dcabbcc5a46e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a11f9262-8728-ad82-3983-0846c08731cd" executionId="9f809ed9-6c45-4be1-b6ee-f0f7a2155669" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="aed31a3e-f3d9-4b1a-2ae7-f799d9ca695a" executionId="40246b51-3e76-48cf-9790-566c0ea943ee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="551689a2-55b9-9b00-579e-bc37dd74eb55" executionId="cdb3f94a-1de1-4ee3-8097-7a87f9064db7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7c452fa7-79b6-02e8-a27f-eda1eb42a60e" executionId="2a6c6213-a711-4d55-87b3-943c9cf643f7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="829a039d-c63f-e667-557e-b364f17983b9" executionId="c4a02d8b-ad1d-4732-a5a1-8ba3d0fbfe14" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ea4438c4-97f0-5070-f68b-e9bcd5694d04" executionId="9b28b842-f4ac-4ccb-874a-80a406461757" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="136f2383-2276-80a6-5e3c-20fe3dcf833a" executionId="df2ebb25-3396-4dda-8afe-07b81091f00a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="81e3c8e7-6f20-94bb-4877-cd434549dde0" executionId="59ded6ec-ed02-48a8-94c4-8b81c718d9cf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5b502b92-e05d-d8a3-32b1-568a35562003" executionId="6a7aaf74-5201-49bc-bf1b-014fab7d8d62" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ff6ffa1d-f0a7-0ac5-9969-04b2d64c2071" executionId="d29d9c92-3426-442f-80a2-f9ecff11047f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="baa1208e-a3d8-1df9-f3c5-7b4aeebe13f0" executionId="4c8e0824-3f95-400a-baf7-8bbc00d3e820" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4e87e367-fecd-aead-071f-bb6883fd2a46" executionId="eb9fcab0-2654-44a0-ab84-a66b0ba0201b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="510de359-2048-00e9-b4f2-ca5f70815e88" executionId="8204317e-92ce-43a5-841d-9cfb45fbdf96" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b54cfbea-e910-ff72-fc6f-d847d03fdf6e" executionId="e65858b1-e1fb-48a6-9d55-c3827186fbad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a8ce588-6ab7-2722-4363-7f8f74e4bdae" executionId="cb08ceef-dd38-4748-a873-19597e7c9500" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0483dfeb-3a8e-9123-6679-6feddd8e4489" executionId="5f861b7f-0540-485e-8d06-98b339afb7de" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="목록에 없는 결과" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="로드된 모든 결과" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="20" executed="20" passed="15" failed="5" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)&#xD;
+[xUnit.net 00:00:00.12]   Discovering: Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:01.62]   Discovered:  Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:01.64]   Starting:    Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:31.64]       function f(this: Context, value: string): void {}&#xD;
+[xUnit.net 00:00:31.64]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:31.64]       (shift 할 수 없습니다 {., &amp;, |, extends, [, ?, &lt;, is} 와야 합니다)&#xD;
+[xUnit.net 00:00:31.64]       Stack Trace:&#xD;
+[xUnit.net 00:00:31.64]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)&#xD;
+[xUnit.net 00:00:31.64]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(60,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source)&#xD;
+[xUnit.net 00:00:31.64]            at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)&#xD;
+[xUnit.net 00:00:31.64]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:31.68]       async function f(value: Promise&lt;number&gt;): Promise&lt;number&gt; { return await value; }&#xD;
+[xUnit.net 00:00:31.68]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:31.68]       (shift 할 수 없습니다 {&amp;, |, extends, [, ?} 와야 합니다)&#xD;
+[xUnit.net 00:00:31.68]       Stack Trace:&#xD;
+[xUnit.net 00:00:31.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)&#xD;
+[xUnit.net 00:00:31.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(60,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source)&#xD;
+[xUnit.net 00:00:31.68]            at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)&#xD;
+[xUnit.net 00:00:31.68]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:31.71]       let value: UnknownType;&#xD;
+[xUnit.net 00:00:31.71]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:31.71]       (shift 할 수 없습니다 {., &lt;, is, &amp;, |, extends, [, {, ,, ?} 와야 합니다)&#xD;
+[xUnit.net 00:00:31.71]       Stack Trace:&#xD;
+[xUnit.net 00:00:31.71]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)&#xD;
+[xUnit.net 00:00:31.71]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(60,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source)&#xD;
+[xUnit.net 00:00:31.71]            at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)&#xD;
+[xUnit.net 00:00:31.71]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:31.78]       function identity&lt;T&gt;(value: T): T { return value; }&#xD;
+[xUnit.net 00:00:31.78]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:31.78]       (shift 할 수 없습니다 {., &lt;, is, &amp;, |, extends, [, {, ,, ?} 와야 합니다)&#xD;
+[xUnit.net 00:00:31.78]       Stack Trace:&#xD;
+[xUnit.net 00:00:31.78]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)&#xD;
+[xUnit.net 00:00:31.78]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(60,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source)&#xD;
+[xUnit.net 00:00:31.78]            at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)&#xD;
+[xUnit.net 00:00:31.78]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:31.80]       let value: Array&lt;Map&lt;string, number&gt;&gt;;&#xD;
+[xUnit.net 00:00:31.80]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:31.80]       (shift 할 수 없습니다 {&amp;, |, extends, [, ?} 와야 합니다)&#xD;
+[xUnit.net 00:00:31.80]       Stack Trace:&#xD;
+[xUnit.net 00:00:31.80]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)&#xD;
+[xUnit.net 00:00:31.80]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(60,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source)&#xD;
+[xUnit.net 00:00:31.80]            at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)&#xD;
+[xUnit.net 00:00:31.80]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:31.81]   Finished:    Parse.FrontEnd.Parsers.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-21T20:52:16.5797862+09:00">
+        <Text>[xUnit.net 00:00:31.64]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "function f(this: Context, value: string): void {}") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-21T20:52:16.6184897+09:00">
+        <Text>[xUnit.net 00:00:31.68]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "async function f(value: Promise&lt;number&gt;): Promise&lt;"···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-21T20:52:16.6445294+09:00">
+        <Text>[xUnit.net 00:00:31.71]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "let value: UnknownType;") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-21T20:52:16.7211356+09:00">
+        <Text>[xUnit.net 00:00:31.78]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "function identity&lt;T&gt;(value: T): T { return value; "···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-21T20:52:16.7346487+09:00">
+        <Text>[xUnit.net 00:00:31.80]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "let value: Array&lt;Map&lt;string, number&gt;&gt;;") [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

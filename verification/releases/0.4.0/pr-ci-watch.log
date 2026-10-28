@@ -1,0 +1,432 @@
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* codex/janglim-mcp Verify release AJ-comp/Compiler#7 · 39196609310
+Triggered via pull_request less than a minute ago
+
+JOBS
+* Test and build release artifacts (ID 117880642070)
+  ✓ Set up job
+  ✓ Run actions/checkout@v4
+  ✓ Detect playground frontend
+  ✓ Set up .NET
+  ✓ Read and validate release versions
+  ✓ Test release infrastructure helpers
+  ✓ Set up Node.js
+  * Install UI dependencies
+  * Verify web version metadata
+  * Build default solution (Debug)
+  * Build default solution (Release)
+  * Test parser engine
+  * Test MCP protocol and isolated parser workers
+  * Test interface
+  * Build public playground
+  * Pack engine
+  * Publish MCP server
+  * Verify MCP container
+  * Upload tested MCP server
+  * Hash NuGet packages
+  * Upload tested NuGet packages
+  * Upload tested playground
+  * Upload engine and MCP test results
+  * Upload failed snapshot comparisons
+  * Build summary
+  * Post Set up Node.js
+  * Post Set up .NET
+  * Post Run actions/checkout@v4
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* codex/janglim-mcp Verify release AJ-comp/Compiler#7 · 39196609310
+Triggered via pull_request less than a minute ago
+
+JOBS
+* Test and build release artifacts (ID 117880642070)
+  ✓ Set up job
+  ✓ Run actions/checkout@v4
+  ✓ Detect playground frontend
+  ✓ Set up .NET
+  ✓ Read and validate release versions
+  ✓ Test release infrastructure helpers
+  ✓ Set up Node.js
+  ✓ Install UI dependencies
+  ✓ Verify web version metadata
+  * Build default solution (Debug)
+  * Build default solution (Release)
+  * Test parser engine
+  * Test MCP protocol and isolated parser workers
+  * Test interface
+  * Build public playground
+  * Pack engine
+  * Publish MCP server
+  * Verify MCP container
+  * Upload tested MCP server
+  * Hash NuGet packages
+  * Upload tested NuGet packages
+  * Upload tested playground
+  * Upload engine and MCP test results
+  * Upload failed snapshot comparisons
+  * Build summary
+  * Post Set up Node.js
+  * Post Set up .NET
+  * Post Run actions/checkout@v4
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* codex/janglim-mcp Verify release AJ-comp/Compiler#7 · 39196609310
+Triggered via pull_request about 1 minute ago
+
+JOBS
+* Test and build release artifacts (ID 117880642070)
+  ✓ Set up job
+  ✓ Run actions/checkout@v4
+  ✓ Detect playground frontend
+  ✓ Set up .NET
+  ✓ Read and validate release versions
+  ✓ Test release infrastructure helpers
+  ✓ Set up Node.js
+  ✓ Install UI dependencies
+  ✓ Verify web version metadata
+  ✓ Build default solution (Debug)
+  * Build default solution (Release)
+  * Test parser engine
+  * Test MCP protocol and isolated parser workers
+  * Test interface
+  * Build public playground
+  * Pack engine
+  * Publish MCP server
+  * Verify MCP container
+  * Upload tested MCP server
+  * Hash NuGet packages
+  * Upload tested NuGet packages
+  * Upload tested playground
+  * Upload engine and MCP test results
+  * Upload failed snapshot comparisons
+  * Build summary
+  * Post Set up Node.js
+  * Post Set up .NET
+  * Post Run actions/checkout@v4
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* codex/janglim-mcp Verify release AJ-comp/Compiler#7 · 39196609310
+Triggered via pull_request about 1 minute ago
+
+JOBS
+* Test and build release artifacts (ID 117880642070)
+  ✓ Set up job
+  ✓ Run actions/checkout@v4
+  ✓ Detect playground frontend
+  ✓ Set up .NET
+  ✓ Read and validate release versions
+  ✓ Test release infrastructure helpers
+  ✓ Set up Node.js
+  ✓ Install UI dependencies
+  ✓ Verify web version metadata
+  ✓ Build default solution (Debug)
+  ✓ Build default solution (Release)
+  ✓ Test parser engine
+  * Test MCP protocol and isolated parser workers
+  * Test interface
+  * Build public playground
+  * Pack engine
+  * Publish MCP server
+  * Verify MCP container
+  * Upload tested MCP server
+  * Hash NuGet packages
+  * Upload tested NuGet packages
+  * Upload tested playground
+  * Upload engine and MCP test results
+  * Upload failed snapshot comparisons
+  * Build summary
+  * Post Set up Node.js
+  * Post Set up .NET
+  * Post Run actions/checkout@v4
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* codex/janglim-mcp Verify release AJ-comp/Compiler#7 · 39196609310
+Triggered via pull_request about 1 minute ago
+
+JOBS
+* Test and build release artifacts (ID 117880642070)
+  ✓ Set up job
+  ✓ Run actions/checkout@v4
+  ✓ Detect playground frontend
+  ✓ Set up .NET
+  ✓ Read and validate release versions
+  ✓ Test release infrastructure helpers
+  ✓ Set up Node.js
+  ✓ Install UI dependencies
+  ✓ Verify web version metadata
+  ✓ Build default solution (Debug)
+  ✓ Build default solution (Release)
+  ✓ Test parser engine
+  * Test MCP protocol and isolated parser workers
+  * Test interface
+  * Build public playground
+  * Pack engine
+  * Publish MCP server
+  * Verify MCP container
+  * Upload tested MCP server
+  * Hash NuGet packages
+  * Upload tested NuGet packages
+  * Upload tested playground
+  * Upload engine and MCP test results
+  * Upload failed snapshot comparisons
+  * Build summary
+  * Post Set up Node.js
+  * Post Set up .NET
+  * Post Run actions/checkout@v4
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* codex/janglim-mcp Verify release AJ-comp/Compiler#7 · 39196609310
+Triggered via pull_request about 1 minute ago
+
+JOBS
+* Test and build release artifacts (ID 117880642070)
+  ✓ Set up job
+  ✓ Run actions/checkout@v4
+  ✓ Detect playground frontend
+  ✓ Set up .NET
+  ✓ Read and validate release versions
+  ✓ Test release infrastructure helpers
+  ✓ Set up Node.js
+  ✓ Install UI dependencies
+  ✓ Verify web version metadata
+  ✓ Build default solution (Debug)
+  ✓ Build default solution (Release)
+  ✓ Test parser engine
+  ✓ Test MCP protocol and isolated parser workers
+  ✓ Test interface
+  * Build public playground
+  * Pack engine
+  * Publish MCP server
+  * Verify MCP container
+  * Upload tested MCP server
+  * Hash NuGet packages
+  * Upload tested NuGet packages
+  * Upload tested playground
+  * Upload engine and MCP test results
+  * Upload failed snapshot comparisons
+  * Build summary
+  * Post Set up Node.js
+  * Post Set up .NET
+  * Post Run actions/checkout@v4
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* codex/janglim-mcp Verify release AJ-comp/Compiler#7 · 39196609310
+Triggered via pull_request about 2 minutes ago
+
+JOBS
+* Test and build release artifacts (ID 117880642070)
+  ✓ Set up job
+  ✓ Run actions/checkout@v4
+  ✓ Detect playground frontend
+  ✓ Set up .NET
+  ✓ Read and validate release versions
+  ✓ Test release infrastructure helpers
+  ✓ Set up Node.js
+  ✓ Install UI dependencies
+  ✓ Verify web version metadata
+  ✓ Build default solution (Debug)
+  ✓ Build default solution (Release)
+  ✓ Test parser engine
+  ✓ Test MCP protocol and isolated parser workers
+  ✓ Test interface
+  * Build public playground
+  * Pack engine
+  * Publish MCP server
+  * Verify MCP container
+  * Upload tested MCP server
+  * Hash NuGet packages
+  * Upload tested NuGet packages
+  * Upload tested playground
+  * Upload engine and MCP test results
+  * Upload failed snapshot comparisons
+  * Build summary
+  * Post Set up Node.js
+  * Post Set up .NET
+  * Post Run actions/checkout@v4
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* codex/janglim-mcp Verify release AJ-comp/Compiler#7 · 39196609310
+Triggered via pull_request about 2 minutes ago
+
+JOBS
+* Test and build release artifacts (ID 117880642070)
+  ✓ Set up job
+  ✓ Run actions/checkout@v4
+  ✓ Detect playground frontend
+  ✓ Set up .NET
+  ✓ Read and validate release versions
+  ✓ Test release infrastructure helpers
+  ✓ Set up Node.js
+  ✓ Install UI dependencies
+  ✓ Verify web version metadata
+  ✓ Build default solution (Debug)
+  ✓ Build default solution (Release)
+  ✓ Test parser engine
+  ✓ Test MCP protocol and isolated parser workers
+  ✓ Test interface
+  ✓ Build public playground
+  ✓ Pack engine
+  ✓ Publish MCP server
+  * Verify MCP container
+  * Upload tested MCP server
+  * Hash NuGet packages
+  * Upload tested NuGet packages
+  * Upload tested playground
+  * Upload engine and MCP test results
+  * Upload failed snapshot comparisons
+  * Build summary
+  * Post Set up Node.js
+  * Post Set up .NET
+  * Post Run actions/checkout@v4
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* codex/janglim-mcp Verify release AJ-comp/Compiler#7 · 39196609310
+Triggered via pull_request about 2 minutes ago
+
+JOBS
+* Test and build release artifacts (ID 117880642070)
+  ✓ Set up job
+  ✓ Run actions/checkout@v4
+  ✓ Detect playground frontend
+  ✓ Set up .NET
+  ✓ Read and validate release versions
+  ✓ Test release infrastructure helpers
+  ✓ Set up Node.js
+  ✓ Install UI dependencies
+  ✓ Verify web version metadata
+  ✓ Build default solution (Debug)
+  ✓ Build default solution (Release)
+  ✓ Test parser engine
+  ✓ Test MCP protocol and isolated parser workers
+  ✓ Test interface
+  ✓ Build public playground
+  ✓ Pack engine
+  ✓ Publish MCP server
+  * Verify MCP container
+  * Upload tested MCP server
+  * Hash NuGet packages
+  * Upload tested NuGet packages
+  * Upload tested playground
+  * Upload engine and MCP test results
+  * Upload failed snapshot comparisons
+  * Build summary
+  * Post Set up Node.js
+  * Post Set up .NET
+  * Post Run actions/checkout@v4
+✓ codex/janglim-mcp Verify release AJ-comp/Compiler#7 · 39196609310
+Triggered via pull_request about 2 minutes ago
+
+JOBS
+✓ Test and build release artifacts in 2m50s (ID 117880642070)
+  ✓ Set up job
+  ✓ Run actions/checkout@v4
+  ✓ Detect playground frontend
+  ✓ Set up .NET
+  ✓ Read and validate release versions
+  ✓ Test release infrastructure helpers
+  ✓ Set up Node.js
+  ✓ Install UI dependencies
+  ✓ Verify web version metadata
+  ✓ Build default solution (Debug)
+  ✓ Build default solution (Release)
+  ✓ Test parser engine
+  ✓ Test MCP protocol and isolated parser workers
+  ✓ Test interface
+  ✓ Build public playground
+  ✓ Pack engine
+  ✓ Publish MCP server
+  ✓ Verify MCP container
+  ✓ Upload tested MCP server
+  ✓ Hash NuGet packages
+  ✓ Upload tested NuGet packages
+  ✓ Upload tested playground
+  ✓ Upload engine and MCP test results
+  - Upload failed snapshot comparisons
+  ✓ Build summary
+  ✓ Post Set up Node.js
+  ✓ Post Set up .NET
+  ✓ Post Run actions/checkout@v4
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-dotnet@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Test and build release artifacts: .github#12
+
+! The event 'LRParser.ShiftAction' is never used
+Test and build release artifacts: .github#45
+
+! The event 'LLParser.ASTCreated' is never used
+Test and build release artifacts: .github#21
+
+! The event 'LLParser.ParseTreeCreated' is never used
+Test and build release artifacts: .github#20
+
+! The event 'LRParser.ReduceAction' is never used
+Test and build release artifacts: .github#43
+
+! The field 'KeyManager.meaningUnitKey' is assigned but its value is never used
+Test and build release artifacts: .github#17
+
+! The event 'LLParser.ASTCreated' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs#21
+
+! The event 'LLParser.ParseTreeCreated' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs#20
+
+! The event 'LRParser.ShiftAction' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs#45
+
+! The event 'LRParser.ReduceAction' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs#43
+
+! The field 'KeyManager.meaningUnitKey' is assigned but its value is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd/KeyManager.cs#17
+
+! The event 'LLParser.ASTCreated' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs#21
+
+! The event 'LLParser.ParseTreeCreated' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs#20
+
+! The event 'LRParser.ShiftAction' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs#45
+
+! The event 'LRParser.ReduceAction' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs#43
+
+! The field 'KeyManager.meaningUnitKey' is assigned but its value is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd/KeyManager.cs#17
+
+! The event 'LRParser.ShiftAction' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs#45
+
+! The event 'LLParser.ParseTreeCreated' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs#20
+
+! The event 'LLParser.ASTCreated' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs#21
+
+! The event 'LRParser.ReduceAction' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs#43
+
+! The field 'KeyManager.meaningUnitKey' is assigned but its value is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd/KeyManager.cs#17
+
+! The event 'LRParser.ShiftAction' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs#45
+
+! The event 'LLParser.ParseTreeCreated' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs#20
+
+! The event 'LLParser.ASTCreated' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs#21
+
+! The event 'LRParser.ReduceAction' is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs#43
+
+! The field 'KeyManager.meaningUnitKey' is assigned but its value is never used
+Test and build release artifacts: src/FrontEnd/Parse.FrontEnd/KeyManager.cs#17
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+Test and build release artifacts: .github#1
+

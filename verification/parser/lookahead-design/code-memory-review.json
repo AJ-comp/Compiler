@@ -1,0 +1,4748 @@
+[
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 1,
+    "errors": [],
+    "overflow": false,
+    "height": 637,
+    "viewportHeight": 637,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 항목의 계산 시작: 저장소에 S 항목이 있는지 확인합니다.",
+    "code": [
+      {
+        "line": 248,
+        "code": "if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "아직 미생성",
+      "집합 객체 없음",
+      "공용 저장소의 값",
+      "아직 미등록",
+      "집합 객체 없음"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 2,
+    "errors": [],
+    "overflow": false,
+    "height": 611,
+    "viewportHeight": 611,
+    "outside": [],
+    "overlaps": [],
+    "title": "공용 저장소에 S 항목의 임시 빈 집합을 넣습니다.",
+    "code": [
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "아직 미생성",
+      "집합 객체 없음",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 3,
+    "errors": [],
+    "overflow": false,
+    "height": 611,
+    "viewportHeight": 611,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 호출 안에 별도의 result 집합을 만듭니다.",
+    "code": [
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{}",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 4,
+    "errors": [],
+    "overflow": false,
+    "height": 847,
+    "viewportHeight": 847,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 항목은 시작 항목의 룩어헤드를 요청합니다.",
+    "code": [
+      {
+        "line": 267,
+        "code": "var predStates = PredEx(state, item);"
+      },
+      {
+        "line": 275,
+        "code": "var alpha2 = _ffAnalyzer.First(newLRItem.SymbolListAfterMarkSymbol);"
+      },
+      {
+        "line": 276,
+        "code": "if (alpha2.Contains(new Epsilon()) || alpha2.Count == 0)"
+      },
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{}",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 5,
+    "errors": [],
+    "overflow": false,
+    "height": 959,
+    "viewportHeight": 959,
+    "outside": [],
+    "overlaps": [],
+    "title": "시작 항목의 새 호출: 빈 저장소와 result를 준비합니다.",
+    "code": [
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      },
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      },
+      {
+        "line": 252,
+        "code": "var newMarkSymbol = item.SingleNT.ToNonTerminal();"
+      },
+      {
+        "line": 254,
+        "code": "if (newMarkSymbol == virtualStartSymbol)"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{}",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "시작 항목 · I0",
+      "Accept → • S",
+      "함수 안의 result",
+      "{}",
+      "집합: A₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: A₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 6,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "시작 항목의 result에 EOF를 넣습니다.",
+    "code": [
+      {
+        "line": 256,
+        "code": "result.Add(new EndMarker());"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{}",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "시작 항목 · I0",
+      "Accept → • S",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: A₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: A₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 7,
+    "errors": [],
+    "overflow": false,
+    "height": 875,
+    "viewportHeight": 875,
+    "outside": [],
+    "overlaps": [],
+    "title": "시작 항목의 결과를 저장하고 S 호출에 반환합니다.",
+    "code": [
+      {
+        "line": 257,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 258,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{}",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "시작 항목 · I0",
+      "Accept → • S",
+      "반환한 result",
+      "{ EOF }",
+      "집합: A₂",
+      "공용 저장소의 값",
+      "{ EOF }",
+      "집합: A₂",
+      "저장"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 8,
+    "errors": [],
+    "overflow": false,
+    "height": 611,
+    "viewportHeight": 611,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 호출이 반환받은 EOF를 자신의 result에 합칩니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 9,
+    "errors": [],
+    "overflow": false,
+    "height": 943,
+    "viewportHeight": 943,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 계산은 R 재귀 항목을 거쳐 C 항목의 계산으로 이어집니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "R 재귀 항목 · I6",
+      "R → b • S",
+      "함수 안의 result",
+      "{}",
+      "집합: D₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: D₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 10,
+    "errors": [],
+    "overflow": false,
+    "height": 859,
+    "viewportHeight": 859,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출 시작: 저장소에 C 항목이 있는지 확인합니다.",
+    "code": [
+      {
+        "line": 248,
+        "code": "if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "아직 미생성",
+      "집합 객체 없음",
+      "공용 저장소의 값",
+      "아직 미등록",
+      "집합 객체 없음"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 11,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "공용 저장소에 C 항목의 임시 빈 집합을 넣습니다.",
+    "code": [
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "아직 미생성",
+      "집합 객체 없음",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 12,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출에도 별도의 result 집합을 만듭니다.",
+    "code": [
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 13,
+    "errors": [],
+    "overflow": false,
+    "height": 875,
+    "viewportHeight": 875,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출은 생성 규칙의 좌변 C를 검사합니다.",
+    "code": [
+      {
+        "line": 252,
+        "code": "var newMarkSymbol = item.SingleNT.ToNonTerminal();"
+      },
+      {
+        "line": 254,
+        "code": "if (newMarkSymbol == virtualStartSymbol)"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 14,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 항목에 룩어헤드를 전달할 부모 항목을 찾습니다.",
+    "code": [
+      {
+        "line": 267,
+        "code": "var predStates = PredEx(state, item);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 15,
+    "errors": [],
+    "overflow": false,
+    "height": 917,
+    "viewportHeight": 917,
+    "outside": [],
+    "overlaps": [],
+    "title": "부모 항목의 점 뒤 기호 C가 현재 좌변 C와 일치합니다.",
+    "code": [
+      {
+        "line": 269,
+        "code": "foreach (var predState in predStates)"
+      },
+      {
+        "line": 271,
+        "code": "foreach (var newLRItem in predState)"
+      },
+      {
+        "line": 273,
+        "code": "if (newLRItem.MarkSymbol != newMarkSymbol) continue;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 16,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "부모 규칙에서 C 뒤에는 기호가 없으므로 FIRST 결과는 {}입니다.",
+    "code": [
+      {
+        "line": 275,
+        "code": "var alpha2 = _ffAnalyzer.First(newLRItem.SymbolListAfterMarkSymbol);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 17,
+    "errors": [],
+    "overflow": false,
+    "height": 875,
+    "viewportHeight": 875,
+    "outside": [],
+    "overlaps": [],
+    "title": "alpha2.Count가 0이므로 부모 항목의 룩어헤드를 사용합니다.",
+    "code": [
+      {
+        "line": 276,
+        "code": "if (alpha2.Contains(new Epsilon()) || alpha2.Count == 0)"
+      },
+      {
+        "line": 284,
+        "code": "else result.UnionWith(alpha2);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 18,
+    "errors": [],
+    "overflow": false,
+    "height": 1095,
+    "viewportHeight": 1095,
+    "outside": [],
+    "overlaps": [],
+    "title": "저장소에 S 항목이 있으므로, 저장된 {}를 직접 읽습니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁",
+      "C 호출 · laTerminalSet",
+      "{}",
+      "참조한 집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 19,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "읽어 온 빈 집합을 합쳐도 C 호출의 result는 {}입니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 20,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출은 빈 result를 자신의 최종 결과로 저장합니다.",
+    "code": [
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂",
+      "저장"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 21,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출이 {}를 반환하고 끝납니다.",
+    "code": [
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 22,
+    "errors": [],
+    "overflow": false,
+    "height": 1139,
+    "viewportHeight": 1139,
+    "outside": [],
+    "overlaps": [],
+    "title": "R 재귀 항목도 빈 결과를 저장하고 S 호출로 돌아갑니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      },
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "R 재귀 항목 · I6",
+      "R → b • S",
+      "반환한 result",
+      "{}",
+      "집합: D₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: D₂",
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 23,
+    "errors": [],
+    "overflow": false,
+    "height": 1129,
+    "viewportHeight": 1129,
+    "outside": [],
+    "overlaps": [],
+    "title": "남은 C 재귀 항목도 같은 S 저장소의 {}를 읽습니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 재귀 항목 · I7",
+      "C → e • S",
+      "함수 안의 result",
+      "{}",
+      "집합: E₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: E₁",
+      "E 호출 · laTerminalSet",
+      "{}",
+      "참조한 집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 24,
+    "errors": [],
+    "overflow": false,
+    "height": 917,
+    "viewportHeight": 917,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 재귀 항목도 {}로 끝나고, S의 부모 항목 계산이 마무리됩니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      },
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 재귀 항목 · I7",
+      "C → e • S",
+      "반환한 result",
+      "{}",
+      "집합: E₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: E₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 25,
+    "errors": [],
+    "overflow": false,
+    "height": 899,
+    "viewportHeight": 899,
+    "outside": [],
+    "overlaps": [],
+    "title": "이제 S 호출이 { EOF }를 저장합니다. 완료된 C는 {} 그대로입니다.",
+    "code": [
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "반환한 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{ EOF }",
+      "집합: S₂",
+      "저장",
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂",
+      "EOF 누락"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 26,
+    "errors": [],
+    "overflow": false,
+    "height": 967,
+    "viewportHeight": 967,
+    "outside": [],
+    "overlaps": [],
+    "title": "나중에 R 완성 항목의 룩어헤드 계산을 시작합니다.",
+    "code": [
+      {
+        "line": 248,
+        "code": "if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];"
+      },
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      },
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      }
+    ],
+    "labels": [
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "함수 안의 result",
+      "{}",
+      "집합: R₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: R₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 27,
+    "errors": [],
+    "overflow": false,
+    "height": 1119,
+    "viewportHeight": 1119,
+    "outside": [],
+    "overlaps": [],
+    "title": "R 완성 항목은 이미 계산된 C 항목의 {}를 읽습니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "함수 안의 result",
+      "{}",
+      "집합: R₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: R₁",
+      "R 호출 · laTerminalSet",
+      "{}",
+      "참조한 집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 28,
+    "errors": [],
+    "overflow": false,
+    "height": 1187,
+    "viewportHeight": 1187,
+    "outside": [],
+    "overlaps": [],
+    "title": "R 완성 항목도 {}로 끝나, 필요한 EOF가 누락됩니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      },
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "반환한 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{ EOF }",
+      "집합: S₂",
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "반환한 result",
+      "{}",
+      "집합: R₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: R₂",
+      "EOF 누락"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "step": 29,
+    "errors": [],
+    "overflow": false,
+    "height": 881,
+    "viewportHeight": 881,
+    "outside": [],
+    "overlaps": [],
+    "title": "생성된 테이블에서 EOF에 대한 Reduce 액션이 빠집니다.",
+    "code": [
+      {
+        "line": null,
+        "code": "ACTION[I5, EOF] = ∅"
+      }
+    ],
+    "labels": [
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "반환한 result",
+      "{}",
+      "집합: R₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: R₂",
+      "EOF 누락"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 1,
+    "errors": [],
+    "overflow": false,
+    "height": 637,
+    "viewportHeight": 637,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 항목의 계산 시작: 저장소에 S 항목이 있는지 확인합니다.",
+    "code": [
+      {
+        "line": 248,
+        "code": "if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "아직 미생성",
+      "집합 객체 없음",
+      "공용 저장소의 값",
+      "아직 미등록",
+      "집합 객체 없음"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 2,
+    "errors": [],
+    "overflow": false,
+    "height": 611,
+    "viewportHeight": 611,
+    "outside": [],
+    "overlaps": [],
+    "title": "공용 저장소에 S 항목의 임시 빈 집합을 넣습니다.",
+    "code": [
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "아직 미생성",
+      "집합 객체 없음",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 3,
+    "errors": [],
+    "overflow": false,
+    "height": 611,
+    "viewportHeight": 611,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 호출 안에 별도의 result 집합을 만듭니다.",
+    "code": [
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{}",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 4,
+    "errors": [],
+    "overflow": false,
+    "height": 847,
+    "viewportHeight": 847,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 항목은 시작 항목의 룩어헤드를 요청합니다.",
+    "code": [
+      {
+        "line": 267,
+        "code": "var predStates = PredEx(state, item);"
+      },
+      {
+        "line": 275,
+        "code": "var alpha2 = _ffAnalyzer.First(newLRItem.SymbolListAfterMarkSymbol);"
+      },
+      {
+        "line": 276,
+        "code": "if (alpha2.Contains(new Epsilon()) || alpha2.Count == 0)"
+      },
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{}",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 5,
+    "errors": [],
+    "overflow": false,
+    "height": 959,
+    "viewportHeight": 959,
+    "outside": [],
+    "overlaps": [],
+    "title": "시작 항목의 새 호출: 빈 저장소와 result를 준비합니다.",
+    "code": [
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      },
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      },
+      {
+        "line": 252,
+        "code": "var newMarkSymbol = item.SingleNT.ToNonTerminal();"
+      },
+      {
+        "line": 254,
+        "code": "if (newMarkSymbol == virtualStartSymbol)"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{}",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "시작 항목 · I0",
+      "Accept → • S",
+      "함수 안의 result",
+      "{}",
+      "집합: A₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: A₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 6,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "시작 항목의 result에 EOF를 넣습니다.",
+    "code": [
+      {
+        "line": 256,
+        "code": "result.Add(new EndMarker());"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{}",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "시작 항목 · I0",
+      "Accept → • S",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: A₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: A₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 7,
+    "errors": [],
+    "overflow": false,
+    "height": 875,
+    "viewportHeight": 875,
+    "outside": [],
+    "overlaps": [],
+    "title": "시작 항목의 결과를 저장하고 S 호출에 반환합니다.",
+    "code": [
+      {
+        "line": 257,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 258,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{}",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "시작 항목 · I0",
+      "Accept → • S",
+      "반환한 result",
+      "{ EOF }",
+      "집합: A₂",
+      "공용 저장소의 값",
+      "{ EOF }",
+      "집합: A₂",
+      "저장"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 8,
+    "errors": [],
+    "overflow": false,
+    "height": 611,
+    "viewportHeight": 611,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 호출이 반환받은 EOF를 자신의 result에 합칩니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 9,
+    "errors": [],
+    "overflow": false,
+    "height": 943,
+    "viewportHeight": 943,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 계산은 R 재귀 항목을 거쳐 C 항목의 계산으로 이어집니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "R 재귀 항목 · I6",
+      "R → b • S",
+      "함수 안의 result",
+      "{}",
+      "집합: D₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: D₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 10,
+    "errors": [],
+    "overflow": false,
+    "height": 859,
+    "viewportHeight": 859,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출 시작: 저장소에 C 항목이 있는지 확인합니다.",
+    "code": [
+      {
+        "line": 248,
+        "code": "if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "아직 미생성",
+      "집합 객체 없음",
+      "공용 저장소의 값",
+      "아직 미등록",
+      "집합 객체 없음"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 11,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "공용 저장소에 C 항목의 임시 빈 집합을 넣습니다.",
+    "code": [
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "아직 미생성",
+      "집합 객체 없음",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 12,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출에도 별도의 result 집합을 만듭니다.",
+    "code": [
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 13,
+    "errors": [],
+    "overflow": false,
+    "height": 875,
+    "viewportHeight": 875,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출은 생성 규칙의 좌변 C를 검사합니다.",
+    "code": [
+      {
+        "line": 252,
+        "code": "var newMarkSymbol = item.SingleNT.ToNonTerminal();"
+      },
+      {
+        "line": 254,
+        "code": "if (newMarkSymbol == virtualStartSymbol)"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 14,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 항목에 룩어헤드를 전달할 부모 항목을 찾습니다.",
+    "code": [
+      {
+        "line": 267,
+        "code": "var predStates = PredEx(state, item);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 15,
+    "errors": [],
+    "overflow": false,
+    "height": 917,
+    "viewportHeight": 917,
+    "outside": [],
+    "overlaps": [],
+    "title": "부모 항목의 점 뒤 기호 C가 현재 좌변 C와 일치합니다.",
+    "code": [
+      {
+        "line": 269,
+        "code": "foreach (var predState in predStates)"
+      },
+      {
+        "line": 271,
+        "code": "foreach (var newLRItem in predState)"
+      },
+      {
+        "line": 273,
+        "code": "if (newLRItem.MarkSymbol != newMarkSymbol) continue;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 16,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "부모 규칙에서 C 뒤에는 기호가 없으므로 FIRST 결과는 {}입니다.",
+    "code": [
+      {
+        "line": 275,
+        "code": "var alpha2 = _ffAnalyzer.First(newLRItem.SymbolListAfterMarkSymbol);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 17,
+    "errors": [],
+    "overflow": false,
+    "height": 875,
+    "viewportHeight": 875,
+    "outside": [],
+    "overlaps": [],
+    "title": "alpha2.Count가 0이므로 부모 항목의 룩어헤드를 사용합니다.",
+    "code": [
+      {
+        "line": 276,
+        "code": "if (alpha2.Contains(new Epsilon()) || alpha2.Count == 0)"
+      },
+      {
+        "line": 284,
+        "code": "else result.UnionWith(alpha2);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 18,
+    "errors": [],
+    "overflow": false,
+    "height": 1095,
+    "viewportHeight": 1095,
+    "outside": [],
+    "overlaps": [],
+    "title": "저장소에 S 항목이 있으므로, 저장된 {}를 직접 읽습니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁",
+      "C 호출 · laTerminalSet",
+      "{}",
+      "참조한 집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 19,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "읽어 온 빈 집합을 합쳐도 C 호출의 result는 {}입니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 20,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출은 빈 result를 자신의 최종 결과로 저장합니다.",
+    "code": [
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "함수 안의 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂",
+      "저장"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 21,
+    "errors": [],
+    "overflow": false,
+    "height": 833,
+    "viewportHeight": 833,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출이 {}를 반환하고 끝납니다.",
+    "code": [
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 22,
+    "errors": [],
+    "overflow": false,
+    "height": 1139,
+    "viewportHeight": 1139,
+    "outside": [],
+    "overlaps": [],
+    "title": "R 재귀 항목도 빈 결과를 저장하고 S 호출로 돌아갑니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      },
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "R 재귀 항목 · I6",
+      "R → b • S",
+      "반환한 result",
+      "{}",
+      "집합: D₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: D₂",
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 23,
+    "errors": [],
+    "overflow": false,
+    "height": 1129,
+    "viewportHeight": 1129,
+    "outside": [],
+    "overlaps": [],
+    "title": "남은 C 재귀 항목도 같은 S 저장소의 {}를 읽습니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 재귀 항목 · I7",
+      "C → e • S",
+      "함수 안의 result",
+      "{}",
+      "집합: E₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: E₁",
+      "E 호출 · laTerminalSet",
+      "{}",
+      "참조한 집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 24,
+    "errors": [],
+    "overflow": false,
+    "height": 917,
+    "viewportHeight": 917,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 재귀 항목도 {}로 끝나고, S의 부모 항목 계산이 마무리됩니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      },
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "함수 안의 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: S₁",
+      "C 재귀 항목 · I7",
+      "C → e • S",
+      "반환한 result",
+      "{}",
+      "집합: E₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: E₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 25,
+    "errors": [],
+    "overflow": false,
+    "height": 899,
+    "viewportHeight": 899,
+    "outside": [],
+    "overlaps": [],
+    "title": "이제 S 호출이 { EOF }를 저장합니다. 완료된 C는 {} 그대로입니다.",
+    "code": [
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "반환한 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{ EOF }",
+      "집합: S₂",
+      "저장",
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂",
+      "EOF 누락"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 26,
+    "errors": [],
+    "overflow": false,
+    "height": 967,
+    "viewportHeight": 967,
+    "outside": [],
+    "overlaps": [],
+    "title": "나중에 R 완성 항목의 룩어헤드 계산을 시작합니다.",
+    "code": [
+      {
+        "line": 248,
+        "code": "if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];"
+      },
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      },
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      }
+    ],
+    "labels": [
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "함수 안의 result",
+      "{}",
+      "집합: R₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: R₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 27,
+    "errors": [],
+    "overflow": false,
+    "height": 1119,
+    "viewportHeight": 1119,
+    "outside": [],
+    "overlaps": [],
+    "title": "R 완성 항목은 이미 계산된 C 항목의 {}를 읽습니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "함수 안의 result",
+      "{}",
+      "집합: R₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: R₁",
+      "R 호출 · laTerminalSet",
+      "{}",
+      "참조한 집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 28,
+    "errors": [],
+    "overflow": false,
+    "height": 1187,
+    "viewportHeight": 1187,
+    "outside": [],
+    "overlaps": [],
+    "title": "R 완성 항목도 {}로 끝나, 필요한 EOF가 누락됩니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      },
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "반환한 result",
+      "{ EOF }",
+      "집합: S₂",
+      "공용 저장소의 값",
+      "{ EOF }",
+      "집합: S₂",
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "반환한 result",
+      "{}",
+      "집합: R₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: R₂",
+      "EOF 누락"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "step": 29,
+    "errors": [],
+    "overflow": false,
+    "height": 881,
+    "viewportHeight": 881,
+    "outside": [],
+    "overlaps": [],
+    "title": "생성된 테이블에서 EOF에 대한 Reduce 액션이 빠집니다.",
+    "code": [
+      {
+        "line": null,
+        "code": "ACTION[I5, EOF] = ∅"
+      }
+    ],
+    "labels": [
+      "C 항목 · I2",
+      "C → • R",
+      "반환한 result",
+      "{}",
+      "집합: C₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "반환한 result",
+      "{}",
+      "집합: R₂",
+      "공용 저장소의 값",
+      "{}",
+      "집합: R₂",
+      "EOF 누락"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 1,
+    "errors": [],
+    "overflow": false,
+    "height": 824,
+    "viewportHeight": 824,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 항목의 계산 시작: 저장소에 S 항목이 있는지 확인합니다.",
+    "code": [
+      {
+        "line": 248,
+        "code": "if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "미생성",
+      "객체 없음",
+      "저장소",
+      "미등록",
+      "객체 없음"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 2,
+    "errors": [],
+    "overflow": false,
+    "height": 746,
+    "viewportHeight": 746,
+    "outside": [],
+    "overlaps": [],
+    "title": "공용 저장소에 S 항목의 임시 빈 집합을 넣습니다.",
+    "code": [
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "미생성",
+      "객체 없음",
+      "저장소",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 3,
+    "errors": [],
+    "overflow": false,
+    "height": 720,
+    "viewportHeight": 720,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 호출 안에 별도의 result 집합을 만듭니다.",
+    "code": [
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{}",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 4,
+    "errors": [],
+    "overflow": false,
+    "height": 1310,
+    "viewportHeight": 1310,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 항목은 시작 항목의 룩어헤드를 요청합니다.",
+    "code": [
+      {
+        "line": 267,
+        "code": "var predStates = PredEx(state, item);"
+      },
+      {
+        "line": 275,
+        "code": "var alpha2 = _ffAnalyzer.First(newLRItem.SymbolListAfterMarkSymbol);"
+      },
+      {
+        "line": 276,
+        "code": "if (alpha2.Contains(new Epsilon()) || alpha2.Count == 0)"
+      },
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{}",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 5,
+    "errors": [],
+    "overflow": false,
+    "height": 1232,
+    "viewportHeight": 1232,
+    "outside": [],
+    "overlaps": [],
+    "title": "시작 항목의 새 호출: 빈 저장소와 result를 준비합니다.",
+    "code": [
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      },
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      },
+      {
+        "line": 252,
+        "code": "var newMarkSymbol = item.SingleNT.ToNonTerminal();"
+      },
+      {
+        "line": 254,
+        "code": "if (newMarkSymbol == virtualStartSymbol)"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{}",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "시작 항목 · I0",
+      "Accept → • S",
+      "result",
+      "{}",
+      "집합: A₂",
+      "저장소",
+      "{}",
+      "집합: A₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 6,
+    "errors": [],
+    "overflow": false,
+    "height": 916,
+    "viewportHeight": 916,
+    "outside": [],
+    "overlaps": [],
+    "title": "시작 항목의 result에 EOF를 넣습니다.",
+    "code": [
+      {
+        "line": 256,
+        "code": "result.Add(new EndMarker());"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{}",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "시작 항목 · I0",
+      "Accept → • S",
+      "result",
+      "{ EOF }",
+      "집합: A₂",
+      "저장소",
+      "{}",
+      "집합: A₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 7,
+    "errors": [],
+    "overflow": false,
+    "height": 1010,
+    "viewportHeight": 1010,
+    "outside": [],
+    "overlaps": [],
+    "title": "시작 항목의 결과를 저장하고 S 호출에 반환합니다.",
+    "code": [
+      {
+        "line": 257,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 258,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{}",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "시작 항목 · I0",
+      "Accept → • S",
+      "반환값",
+      "{ EOF }",
+      "집합: A₂",
+      "저장소",
+      "{ EOF }",
+      "집합: A₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 8,
+    "errors": [],
+    "overflow": false,
+    "height": 754,
+    "viewportHeight": 754,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 호출이 반환받은 EOF를 자신의 result에 합칩니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 9,
+    "errors": [],
+    "overflow": false,
+    "height": 1216,
+    "viewportHeight": 1216,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 계산은 R 재귀 항목을 거쳐 C 항목의 계산으로 이어집니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "R 재귀 항목 · I6",
+      "R → b • S",
+      "result",
+      "{}",
+      "집합: D₂",
+      "저장소",
+      "{}",
+      "집합: D₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 10,
+    "errors": [],
+    "overflow": false,
+    "height": 1046,
+    "viewportHeight": 1046,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출 시작: 저장소에 C 항목이 있는지 확인합니다.",
+    "code": [
+      {
+        "line": 248,
+        "code": "if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "미생성",
+      "객체 없음",
+      "저장소",
+      "미등록",
+      "객체 없음"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 11,
+    "errors": [],
+    "overflow": false,
+    "height": 968,
+    "viewportHeight": 968,
+    "outside": [],
+    "overlaps": [],
+    "title": "공용 저장소에 C 항목의 임시 빈 집합을 넣습니다.",
+    "code": [
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "미생성",
+      "객체 없음",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 12,
+    "errors": [],
+    "overflow": false,
+    "height": 976,
+    "viewportHeight": 976,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출에도 별도의 result 집합을 만듭니다.",
+    "code": [
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 13,
+    "errors": [],
+    "overflow": false,
+    "height": 1070,
+    "viewportHeight": 1070,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출은 생성 규칙의 좌변 C를 검사합니다.",
+    "code": [
+      {
+        "line": 252,
+        "code": "var newMarkSymbol = item.SingleNT.ToNonTerminal();"
+      },
+      {
+        "line": 254,
+        "code": "if (newMarkSymbol == virtualStartSymbol)"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 14,
+    "errors": [],
+    "overflow": false,
+    "height": 976,
+    "viewportHeight": 976,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 항목에 룩어헤드를 전달할 부모 항목을 찾습니다.",
+    "code": [
+      {
+        "line": 267,
+        "code": "var predStates = PredEx(state, item);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 15,
+    "errors": [],
+    "overflow": false,
+    "height": 1172,
+    "viewportHeight": 1172,
+    "outside": [],
+    "overlaps": [],
+    "title": "부모 항목의 점 뒤 기호 C가 현재 좌변 C와 일치합니다.",
+    "code": [
+      {
+        "line": 269,
+        "code": "foreach (var predState in predStates)"
+      },
+      {
+        "line": 271,
+        "code": "foreach (var newLRItem in predState)"
+      },
+      {
+        "line": 273,
+        "code": "if (newLRItem.MarkSymbol != newMarkSymbol) continue;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 16,
+    "errors": [],
+    "overflow": false,
+    "height": 1028,
+    "viewportHeight": 1028,
+    "outside": [],
+    "overlaps": [],
+    "title": "부모 규칙에서 C 뒤에는 기호가 없으므로 FIRST 결과는 {}입니다.",
+    "code": [
+      {
+        "line": 275,
+        "code": "var alpha2 = _ffAnalyzer.First(newLRItem.SymbolListAfterMarkSymbol);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 17,
+    "errors": [],
+    "overflow": false,
+    "height": 1070,
+    "viewportHeight": 1070,
+    "outside": [],
+    "overlaps": [],
+    "title": "alpha2.Count가 0이므로 부모 항목의 룩어헤드를 사용합니다.",
+    "code": [
+      {
+        "line": 276,
+        "code": "if (alpha2.Contains(new Epsilon()) || alpha2.Count == 0)"
+      },
+      {
+        "line": 284,
+        "code": "else result.UnionWith(alpha2);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 18,
+    "errors": [],
+    "overflow": false,
+    "height": 1402,
+    "viewportHeight": 1402,
+    "outside": [],
+    "overlaps": [],
+    "title": "저장소에 S 항목이 있으므로, 저장된 {}를 직접 읽습니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁",
+      "C 호출 · laTerminalSet",
+      "{}",
+      "참조한 집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 19,
+    "errors": [],
+    "overflow": false,
+    "height": 976,
+    "viewportHeight": 976,
+    "outside": [],
+    "overlaps": [],
+    "title": "읽어 온 빈 집합을 합쳐도 C 호출의 result는 {}입니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 20,
+    "errors": [],
+    "overflow": false,
+    "height": 968,
+    "viewportHeight": 968,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출은 빈 result를 자신의 최종 결과로 저장합니다.",
+    "code": [
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 21,
+    "errors": [],
+    "overflow": false,
+    "height": 924,
+    "viewportHeight": 924,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출이 {}를 반환하고 끝납니다.",
+    "code": [
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 22,
+    "errors": [],
+    "overflow": false,
+    "height": 1334,
+    "viewportHeight": 1334,
+    "outside": [],
+    "overlaps": [],
+    "title": "R 재귀 항목도 빈 결과를 저장하고 S 호출로 돌아갑니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      },
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "R 재귀 항목 · I6",
+      "R → b • S",
+      "반환값",
+      "{}",
+      "집합: D₂",
+      "저장소",
+      "{}",
+      "집합: D₂",
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 23,
+    "errors": [],
+    "overflow": false,
+    "height": 1402,
+    "viewportHeight": 1402,
+    "outside": [],
+    "overlaps": [],
+    "title": "남은 C 재귀 항목도 같은 S 저장소의 {}를 읽습니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 재귀 항목 · I7",
+      "C → e • S",
+      "result",
+      "{}",
+      "집합: E₂",
+      "저장소",
+      "{}",
+      "집합: E₁",
+      "E 호출 · laTerminalSet",
+      "{}",
+      "참조한 집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 24,
+    "errors": [],
+    "overflow": false,
+    "height": 1112,
+    "viewportHeight": 1112,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 재귀 항목도 {}로 끝나고, S의 부모 항목 계산이 마무리됩니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      },
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 재귀 항목 · I7",
+      "C → e • S",
+      "반환값",
+      "{}",
+      "집합: E₂",
+      "저장소",
+      "{}",
+      "집합: E₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 25,
+    "errors": [],
+    "overflow": false,
+    "height": 1068,
+    "viewportHeight": 1068,
+    "outside": [],
+    "overlaps": [],
+    "title": "이제 S 호출이 { EOF }를 저장합니다. 완료된 C는 {} 그대로입니다.",
+    "code": [
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "반환값",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{ EOF }",
+      "집합: S₂",
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂",
+      "EOF 누락"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 26,
+    "errors": [],
+    "overflow": false,
+    "height": 1266,
+    "viewportHeight": 1266,
+    "outside": [],
+    "overlaps": [],
+    "title": "나중에 R 완성 항목의 룩어헤드 계산을 시작합니다.",
+    "code": [
+      {
+        "line": 248,
+        "code": "if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];"
+      },
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      },
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      }
+    ],
+    "labels": [
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "result",
+      "{}",
+      "집합: R₂",
+      "저장소",
+      "{}",
+      "집합: R₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 27,
+    "errors": [],
+    "overflow": false,
+    "height": 1392,
+    "viewportHeight": 1392,
+    "outside": [],
+    "overlaps": [],
+    "title": "R 완성 항목은 이미 계산된 C 항목의 {}를 읽습니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "result",
+      "{}",
+      "집합: R₂",
+      "저장소",
+      "{}",
+      "집합: R₁",
+      "R 호출 · laTerminalSet",
+      "{}",
+      "참조한 집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 28,
+    "errors": [],
+    "overflow": false,
+    "height": 1382,
+    "viewportHeight": 1382,
+    "outside": [],
+    "overlaps": [],
+    "title": "R 완성 항목도 {}로 끝나, 필요한 EOF가 누락됩니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      },
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "반환값",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{ EOF }",
+      "집합: S₂",
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "반환값",
+      "{}",
+      "집합: R₂",
+      "저장소",
+      "{}",
+      "집합: R₂",
+      "EOF 누락"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "step": 29,
+    "errors": [],
+    "overflow": false,
+    "height": 1032,
+    "viewportHeight": 1032,
+    "outside": [],
+    "overlaps": [],
+    "title": "생성된 테이블에서 EOF에 대한 Reduce 액션이 빠집니다.",
+    "code": [
+      {
+        "line": null,
+        "code": "ACTION[I5, EOF] = ∅"
+      }
+    ],
+    "labels": [
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "반환값",
+      "{}",
+      "집합: R₂",
+      "저장소",
+      "{}",
+      "집합: R₂",
+      "EOF 누락"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 1,
+    "errors": [],
+    "overflow": false,
+    "height": 824,
+    "viewportHeight": 824,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 항목의 계산 시작: 저장소에 S 항목이 있는지 확인합니다.",
+    "code": [
+      {
+        "line": 248,
+        "code": "if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "미생성",
+      "객체 없음",
+      "저장소",
+      "미등록",
+      "객체 없음"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 2,
+    "errors": [],
+    "overflow": false,
+    "height": 746,
+    "viewportHeight": 746,
+    "outside": [],
+    "overlaps": [],
+    "title": "공용 저장소에 S 항목의 임시 빈 집합을 넣습니다.",
+    "code": [
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "미생성",
+      "객체 없음",
+      "저장소",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 3,
+    "errors": [],
+    "overflow": false,
+    "height": 720,
+    "viewportHeight": 720,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 호출 안에 별도의 result 집합을 만듭니다.",
+    "code": [
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{}",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 4,
+    "errors": [],
+    "overflow": false,
+    "height": 1310,
+    "viewportHeight": 1310,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 항목은 시작 항목의 룩어헤드를 요청합니다.",
+    "code": [
+      {
+        "line": 267,
+        "code": "var predStates = PredEx(state, item);"
+      },
+      {
+        "line": 275,
+        "code": "var alpha2 = _ffAnalyzer.First(newLRItem.SymbolListAfterMarkSymbol);"
+      },
+      {
+        "line": 276,
+        "code": "if (alpha2.Contains(new Epsilon()) || alpha2.Count == 0)"
+      },
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{}",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 5,
+    "errors": [],
+    "overflow": false,
+    "height": 1232,
+    "viewportHeight": 1232,
+    "outside": [],
+    "overlaps": [],
+    "title": "시작 항목의 새 호출: 빈 저장소와 result를 준비합니다.",
+    "code": [
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      },
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      },
+      {
+        "line": 252,
+        "code": "var newMarkSymbol = item.SingleNT.ToNonTerminal();"
+      },
+      {
+        "line": 254,
+        "code": "if (newMarkSymbol == virtualStartSymbol)"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{}",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "시작 항목 · I0",
+      "Accept → • S",
+      "result",
+      "{}",
+      "집합: A₂",
+      "저장소",
+      "{}",
+      "집합: A₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 6,
+    "errors": [],
+    "overflow": false,
+    "height": 916,
+    "viewportHeight": 916,
+    "outside": [],
+    "overlaps": [],
+    "title": "시작 항목의 result에 EOF를 넣습니다.",
+    "code": [
+      {
+        "line": 256,
+        "code": "result.Add(new EndMarker());"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{}",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "시작 항목 · I0",
+      "Accept → • S",
+      "result",
+      "{ EOF }",
+      "집합: A₂",
+      "저장소",
+      "{}",
+      "집합: A₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 7,
+    "errors": [],
+    "overflow": false,
+    "height": 1010,
+    "viewportHeight": 1010,
+    "outside": [],
+    "overlaps": [],
+    "title": "시작 항목의 결과를 저장하고 S 호출에 반환합니다.",
+    "code": [
+      {
+        "line": 257,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 258,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{}",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "시작 항목 · I0",
+      "Accept → • S",
+      "반환값",
+      "{ EOF }",
+      "집합: A₂",
+      "저장소",
+      "{ EOF }",
+      "집합: A₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 8,
+    "errors": [],
+    "overflow": false,
+    "height": 754,
+    "viewportHeight": 754,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 호출이 반환받은 EOF를 자신의 result에 합칩니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 9,
+    "errors": [],
+    "overflow": false,
+    "height": 1216,
+    "viewportHeight": 1216,
+    "outside": [],
+    "overlaps": [],
+    "title": "S 계산은 R 재귀 항목을 거쳐 C 항목의 계산으로 이어집니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "R 재귀 항목 · I6",
+      "R → b • S",
+      "result",
+      "{}",
+      "집합: D₂",
+      "저장소",
+      "{}",
+      "집합: D₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 10,
+    "errors": [],
+    "overflow": false,
+    "height": 1046,
+    "viewportHeight": 1046,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출 시작: 저장소에 C 항목이 있는지 확인합니다.",
+    "code": [
+      {
+        "line": 248,
+        "code": "if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "미생성",
+      "객체 없음",
+      "저장소",
+      "미등록",
+      "객체 없음"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 11,
+    "errors": [],
+    "overflow": false,
+    "height": 968,
+    "viewportHeight": 968,
+    "outside": [],
+    "overlaps": [],
+    "title": "공용 저장소에 C 항목의 임시 빈 집합을 넣습니다.",
+    "code": [
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "미생성",
+      "객체 없음",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 12,
+    "errors": [],
+    "overflow": false,
+    "height": 976,
+    "viewportHeight": 976,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출에도 별도의 result 집합을 만듭니다.",
+    "code": [
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 13,
+    "errors": [],
+    "overflow": false,
+    "height": 1070,
+    "viewportHeight": 1070,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출은 생성 규칙의 좌변 C를 검사합니다.",
+    "code": [
+      {
+        "line": 252,
+        "code": "var newMarkSymbol = item.SingleNT.ToNonTerminal();"
+      },
+      {
+        "line": 254,
+        "code": "if (newMarkSymbol == virtualStartSymbol)"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 14,
+    "errors": [],
+    "overflow": false,
+    "height": 976,
+    "viewportHeight": 976,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 항목에 룩어헤드를 전달할 부모 항목을 찾습니다.",
+    "code": [
+      {
+        "line": 267,
+        "code": "var predStates = PredEx(state, item);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 15,
+    "errors": [],
+    "overflow": false,
+    "height": 1172,
+    "viewportHeight": 1172,
+    "outside": [],
+    "overlaps": [],
+    "title": "부모 항목의 점 뒤 기호 C가 현재 좌변 C와 일치합니다.",
+    "code": [
+      {
+        "line": 269,
+        "code": "foreach (var predState in predStates)"
+      },
+      {
+        "line": 271,
+        "code": "foreach (var newLRItem in predState)"
+      },
+      {
+        "line": 273,
+        "code": "if (newLRItem.MarkSymbol != newMarkSymbol) continue;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 16,
+    "errors": [],
+    "overflow": false,
+    "height": 1028,
+    "viewportHeight": 1028,
+    "outside": [],
+    "overlaps": [],
+    "title": "부모 규칙에서 C 뒤에는 기호가 없으므로 FIRST 결과는 {}입니다.",
+    "code": [
+      {
+        "line": 275,
+        "code": "var alpha2 = _ffAnalyzer.First(newLRItem.SymbolListAfterMarkSymbol);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 17,
+    "errors": [],
+    "overflow": false,
+    "height": 1070,
+    "viewportHeight": 1070,
+    "outside": [],
+    "overlaps": [],
+    "title": "alpha2.Count가 0이므로 부모 항목의 룩어헤드를 사용합니다.",
+    "code": [
+      {
+        "line": 276,
+        "code": "if (alpha2.Contains(new Epsilon()) || alpha2.Count == 0)"
+      },
+      {
+        "line": 284,
+        "code": "else result.UnionWith(alpha2);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 18,
+    "errors": [],
+    "overflow": false,
+    "height": 1402,
+    "viewportHeight": 1402,
+    "outside": [],
+    "overlaps": [],
+    "title": "저장소에 S 항목이 있으므로, 저장된 {}를 직접 읽습니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁",
+      "C 호출 · laTerminalSet",
+      "{}",
+      "참조한 집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 19,
+    "errors": [],
+    "overflow": false,
+    "height": 976,
+    "viewportHeight": 976,
+    "outside": [],
+    "overlaps": [],
+    "title": "읽어 온 빈 집합을 합쳐도 C 호출의 result는 {}입니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 20,
+    "errors": [],
+    "overflow": false,
+    "height": 968,
+    "viewportHeight": 968,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출은 빈 result를 자신의 최종 결과로 저장합니다.",
+    "code": [
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "result",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 21,
+    "errors": [],
+    "overflow": false,
+    "height": 924,
+    "viewportHeight": 924,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 호출이 {}를 반환하고 끝납니다.",
+    "code": [
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 22,
+    "errors": [],
+    "overflow": false,
+    "height": 1334,
+    "viewportHeight": 1334,
+    "outside": [],
+    "overlaps": [],
+    "title": "R 재귀 항목도 빈 결과를 저장하고 S 호출로 돌아갑니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      },
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "R 재귀 항목 · I6",
+      "R → b • S",
+      "반환값",
+      "{}",
+      "집합: D₂",
+      "저장소",
+      "{}",
+      "집합: D₂",
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 23,
+    "errors": [],
+    "overflow": false,
+    "height": 1402,
+    "viewportHeight": 1402,
+    "outside": [],
+    "overlaps": [],
+    "title": "남은 C 재귀 항목도 같은 S 저장소의 {}를 읽습니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 재귀 항목 · I7",
+      "C → e • S",
+      "result",
+      "{}",
+      "집합: E₂",
+      "저장소",
+      "{}",
+      "집합: E₁",
+      "E 호출 · laTerminalSet",
+      "{}",
+      "참조한 집합: S₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 24,
+    "errors": [],
+    "overflow": false,
+    "height": 1112,
+    "viewportHeight": 1112,
+    "outside": [],
+    "overlaps": [],
+    "title": "C 재귀 항목도 {}로 끝나고, S의 부모 항목 계산이 마무리됩니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      },
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "result",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{}",
+      "집합: S₁",
+      "C 재귀 항목 · I7",
+      "C → e • S",
+      "반환값",
+      "{}",
+      "집합: E₂",
+      "저장소",
+      "{}",
+      "집합: E₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 25,
+    "errors": [],
+    "overflow": false,
+    "height": 1068,
+    "viewportHeight": 1068,
+    "outside": [],
+    "overlaps": [],
+    "title": "이제 S 호출이 { EOF }를 저장합니다. 완료된 C는 {} 그대로입니다.",
+    "code": [
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "반환값",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{ EOF }",
+      "집합: S₂",
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂",
+      "EOF 누락"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 26,
+    "errors": [],
+    "overflow": false,
+    "height": 1266,
+    "viewportHeight": 1266,
+    "outside": [],
+    "overlaps": [],
+    "title": "나중에 R 완성 항목의 룩어헤드 계산을 시작합니다.",
+    "code": [
+      {
+        "line": 248,
+        "code": "if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];"
+      },
+      {
+        "line": 249,
+        "code": "LookAheadTable.Add((state.StateNumber, item), new TerminalSet());"
+      },
+      {
+        "line": 251,
+        "code": "var result = new TerminalSet();"
+      }
+    ],
+    "labels": [
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "result",
+      "{}",
+      "집합: R₂",
+      "저장소",
+      "{}",
+      "집합: R₁"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 27,
+    "errors": [],
+    "overflow": false,
+    "height": 1392,
+    "viewportHeight": 1392,
+    "outside": [],
+    "overlaps": [],
+    "title": "R 완성 항목은 이미 계산된 C 항목의 {}를 읽습니다.",
+    "code": [
+      {
+        "line": 278,
+        "code": "var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))"
+      },
+      {
+        "line": 279,
+        "code": "    ? LookAheadTable[(predState.StateNumber, newLRItem)]"
+      },
+      {
+        "line": 280,
+        "code": "    : LookAhead(predState, newLRItem);"
+      }
+    ],
+    "labels": [
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "result",
+      "{}",
+      "집합: R₂",
+      "저장소",
+      "{}",
+      "집합: R₁",
+      "R 호출 · laTerminalSet",
+      "{}",
+      "참조한 집합: C₂"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 28,
+    "errors": [],
+    "overflow": false,
+    "height": 1382,
+    "viewportHeight": 1382,
+    "outside": [],
+    "overlaps": [],
+    "title": "R 완성 항목도 {}로 끝나, 필요한 EOF가 누락됩니다.",
+    "code": [
+      {
+        "line": 282,
+        "code": "result.UnionWith(alpha2.RingSum(laTerminalSet));"
+      },
+      {
+        "line": 288,
+        "code": "LookAheadTable[(state.StateNumber, item)] = result;"
+      },
+      {
+        "line": 290,
+        "code": "return result;"
+      }
+    ],
+    "labels": [
+      "S 항목 · I2",
+      "S → G • C",
+      "반환값",
+      "{ EOF }",
+      "집합: S₂",
+      "저장소",
+      "{ EOF }",
+      "집합: S₂",
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "반환값",
+      "{}",
+      "집합: R₂",
+      "저장소",
+      "{}",
+      "집합: R₂",
+      "EOF 누락"
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "step": 29,
+    "errors": [],
+    "overflow": false,
+    "height": 1032,
+    "viewportHeight": 1032,
+    "outside": [],
+    "overlaps": [],
+    "title": "생성된 테이블에서 EOF에 대한 Reduce 액션이 빠집니다.",
+    "code": [
+      {
+        "line": null,
+        "code": "ACTION[I5, EOF] = ∅"
+      }
+    ],
+    "labels": [
+      "C 항목 · I2",
+      "C → • R",
+      "반환값",
+      "{}",
+      "집합: C₂",
+      "저장소",
+      "{}",
+      "집합: C₂",
+      "EOF 누락",
+      "R 완성 항목 · I5",
+      "R → a •",
+      "반환값",
+      "{}",
+      "집합: R₂",
+      "저장소",
+      "{}",
+      "집합: R₂",
+      "EOF 누락"
+    ],
+    "codeDifferences": []
+  }
+]

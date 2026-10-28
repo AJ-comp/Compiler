@@ -1,0 +1,519 @@
+=== GRAMMAR ===
+FormalParameters : (FormalParameterList
+
+FormalParameters__Await : (FormalParameterList__Await
+
+FunctionDeclaration : 'function' BindingIdentifier TSOptionalTypeParameters '(' FormalParameters ')' TSOptionalReturnType FunctionBody ;
+
+FunctionDeclaration__Await : 'function' BindingIdentifier__Await TSOptionalTypeParameters__Await '(' FormalParameters ')' TSOptionalReturnType__Await FunctionBody ;
+
+TSFunctionOverload : {TSFunctionOverloadStart()}? 'function' BindingIdentifier TSOptionalTypeParameters '(' FormalParameters ')' TSOptionalReturnType StatementEnd ;
+
+TSFunctionOverload__Await : {TSFunctionOverloadStart()}? 'function' BindingIdentifier__Await TSOptionalTypeParameters__Await '(' FormalParameters__Await ')' TSOptionalReturnType__Await StatementEnd ;
+
+SUCCESS False
+TOKEN=export ACTION=shift 7 ERROR=
+STATE=0
+CANDIDATES=shift 7
+TOKEN=declare ACTION=epsilon reduce __predicate36 -> epsilon ERROR=
+STATE=7
+CANDIDATES=epsilon reduce __predicate36 -> epsilon
+TOKEN=declare ACTION=goto 64 ERROR=
+STATE=7
+CANDIDATES=epsilon reduce __predicate36 -> epsilon
+TOKEN=declare ACTION=shift 300 ERROR=
+STATE=64
+CANDIDATES=shift 300
+TOKEN=namespace ACTION=epsilon reduce __predicate3 -> epsilon ERROR=
+STATE=300
+CANDIDATES=epsilon reduce __predicate3 -> epsilon
+TOKEN=namespace ACTION=goto 261 ERROR=
+STATE=300
+CANDIDATES=epsilon reduce __predicate3 -> epsilon
+TOKEN=namespace ACTION=reduce NoLineTerminator -> __predicate3 ERROR=
+STATE=261
+CANDIDATES=reduce NoLineTerminator -> __predicate3
+TOKEN=namespace ACTION=goto 804 ERROR=
+STATE=300
+CANDIDATES=epsilon reduce __predicate3 -> epsilon
+TOKEN=namespace ACTION=shift 294 ERROR=
+STATE=804
+CANDIDATES=shift 294
+TOKEN=Tools ACTION=reduce TSNamespaceKeyword -> namespace ERROR=
+STATE=294
+CANDIDATES=reduce TSNamespaceKeyword -> namespace
+TOKEN=Tools ACTION=goto 293 ERROR=
+STATE=804
+TOKEN=Tools ACTION=epsilon reduce __predicate3 -> epsilon ERROR=
+STATE=293
+CANDIDATES=epsilon reduce __predicate3 -> epsilon
+TOKEN=Tools ACTION=goto 261 ERROR=
+STATE=293
+CANDIDATES=epsilon reduce __predicate3 -> epsilon
+TOKEN=Tools ACTION=reduce NoLineTerminator -> __predicate3 ERROR=
+STATE=261
+CANDIDATES=reduce NoLineTerminator -> __predicate3
+TOKEN=Tools ACTION=goto 801 ERROR=
+STATE=293
+CANDIDATES=epsilon reduce __predicate3 -> epsilon
+TOKEN=Tools ACTION=shift 71 ERROR=
+STATE=801
+CANDIDATES=shift 71
+TOKEN={ ACTION=reduce BindingIdentifier__Await -> IdentifierName ERROR=
+STATE=71
+CANDIDATES=reduce BindingIdentifier__Await -> IdentifierName
+TOKEN={ ACTION=goto 1053 ERROR=
+STATE=801
+TOKEN={ ACTION=shift 1056 ERROR=
+STATE=1053
+CANDIDATES=shift 1056
+TOKEN=function ACTION=shift 51 ERROR=
+STATE=1056
+CANDIDATES=shift 51 | epsilon reduce __predicate4 -> epsilon | epsilon reduce __predicate38 -> epsilon
+  TSNamespaceBody__Await -> {•}
+  TSNamespaceBody__Await -> {•ModuleItemList__Await }
+  ModuleItemList__Await ->•ModuleItem__Await
+  ModuleItem__Await ->•ImportDeclaration__Await
+  ImportDeclaration__Await ->•import ImportClause__Await FromClause ImportAttributes ModuleEnd
+  ImportDeclaration__Await ->•import ImportClause__Await FromClause ModuleEnd
+  ImportDeclaration__Await ->•import ModuleSpecifier ImportAttributes ModuleEnd
+  ImportDeclaration__Await ->•import ModuleSpecifier ModuleEnd
+  ModuleItem__Await ->•ExportDeclaration__Await
+  ExportDeclaration__Await ->•export NamedExports ExportNamedEnd
+  ExportDeclaration__Await ->•export NamedExports FromClause ImportAttributes ModuleEnd
+  ExportDeclaration__Await ->•export NamedExports FromClause ModuleEnd
+  ExportDeclaration__Await ->•export * FromClause ImportAttributes ModuleEnd
+  ExportDeclaration__Await ->•export * FromClause ModuleEnd
+  ExportDeclaration__Await ->•export * ModuleAs ModuleExportName FromClause ImportAttributes ModuleEnd
+  ExportDeclaration__Await ->•export * ModuleAs ModuleExportName FromClause ModuleEnd
+  ExportDeclaration__Await ->•export Declaration__Await
+  ExportDeclaration__Await ->•export VariableStatement__Await
+  ExportDeclaration__Await ->•DefaultExportFunction__Await
+  DefaultExportFunction__Await ->•export default FunctionExpression__Await
+  DefaultExportFunction__Await ->•export default AsyncFunctionExpression__Await
+  DefaultExportFunction__Await ->•export default GeneratorExpression__Await
+  DefaultExportFunction__Await ->•export default AsyncGeneratorExpression__Await
+  ExportDeclaration__Await ->•DefaultExportClass__Await
+  DefaultExportClass__Await ->•export default ClassExpression__Await
+  ExportDeclaration__Await ->•ExportDefaultExpression__Await
+  ExportDefaultExpression__Await ->•export default __predicate21 AssignmentExpression__Await ExpressionEnd
+  ExportDeclaration__Await ->•export default TSInterfaceDeclaration__Await
+  ExportDeclaration__Await ->•TSNamespaceExportDeclaration__Await
+  TSNamespaceExportDeclaration__Await ->•export as namespace BindingIdentifier__Await StatementEnd
+  ModuleItem__Await ->•StatementListItem__Await
+  StatementListItem__Await ->•Statement__Await
+  Statement__Await ->•Block__Await
+  Block__Await ->•{ }
+  Block__Await ->•{ StatementList__Await }
+  Statement__Await ->•VariableStatement__Await
+  VariableStatement__Await ->•var VariableDeclarationList__Await
+  Statement__Await ->•EmptyStatement
+  EmptyStatement ->•;
+  Statement__Await ->•ExpressionStatement__Await
+  ExpressionStatement__Await ->•StatementExpressionStart Expression__Await ExpressionEnd
+  StatementExpressionStart ->•__predicate4
+  __predicate4 ->•
+  Statement__Await ->•IfStatement__Await
+  IfStatement__Await ->•if ( Expression__Await ) Statement__Await
+  IfStatement__Await ->•if ( Expression__Await ) Statement__Await else Statement__Await
+  Statement__Await ->•WhileStatement__Await
+  WhileStatement__Await ->•while ( Expression__Await ) Statement__Await
+  Statement__Await ->•DoWhileStatement__Await
+  DoWhileStatement__Await ->•do Statement__Await while ( Expression__Await ) DoWhileEnd
+  Statement__Await ->•ForStatement__Await
+  ForStatement__Await ->•for ( ForInitializer__Await ; Expression__Await ; Expression__Await ) Statement__Await
+  ForStatement__Await ->•for ( ForInitializer__Await ; Expression__Await ; ) Statement__Await
+  ForStatement__Await ->•for ( ForInitializer__Await ; ; Expression__Await ) Statement__Await
+  ForStatement__Await ->•for ( ForInitializer__Await ; ; ) Statement__Await
+  ForStatement__Await ->•for ( ; Expression__Await ; Expression__Await ) Statement__Await
+  ForStatement__Await ->•for ( ; Expression__Await ; ) Statement__Await
+  ForStatement__Await ->•for ( ; ; Expression__Await ) Statement__Await
+  ForStatement__Await ->•for ( ; ; ) Statement__Await
+  Statement__Await ->•ForInStatement__Await
+  ForInStatement__Await ->•for ( LeftHandSideExpression__Await in Expression__Await ) Statement__Await
+  ForInStatement__Await ->•for ( ForDeclaration__Await in Expression__Await ) Statement__Await
+  Statement__Await ->•ForOfStatement__Await
+  ForOfStatement__Await ->•for ( LeftHandSideExpression__Await of AssignmentExpression__Await ) Statement__Await
+  ForOfStatement__Await ->•for ( ForDeclaration__Await of AssignmentExpression__Await ) Statement__Await
+  Statement__Await ->•ContinueStatement__Await
+  ContinueStatement__Await ->•continue RestrictedEnd
+  ContinueStatement__Await ->•continue NoLineTerminator LabelIdentifier__Await StatementEnd
+  Statement__Await ->•BreakStatement__Await
+  BreakStatement__Await ->•break RestrictedEnd
+  BreakStatement__Await ->•break NoLineTerminator LabelIdentifier__Await StatementEnd
+  Statement__Await ->•ReturnStatement__Await
+  ReturnStatement__Await ->•return RestrictedEnd
+  ReturnStatement__Await ->•return NoLineTerminator Expression__Await ExpressionEnd
+  Statement__Await ->•ThrowStatement__Await
+  ThrowStatement__Await ->•throw NoLineTerminator Expression__Await ExpressionEnd
+  Statement__Await ->•SwitchStatement__Await
+  SwitchStatement__Await ->•switch ( Expression__Await ) CaseBlock__Await
+  Statement__Await ->•TryStatement__Await
+  TryStatement__Await ->•try Block__Await CatchClause__Await
+  TryStatement__Await ->•try Block__Await FinallyClause__Await
+  TryStatement__Await ->•try Block__Await CatchClause__Await FinallyClause__Await
+  Statement__Await ->•LabelledStatement__Await
+  LabelledStatement__Await ->•StatementExpressionStart IdentifierReference__Await : Statement__Await
+  Statement__Await ->•DebuggerStatement
+  DebuggerStatement ->•debugger StatementEnd
+  Statement__Await ->•ForAwaitOfStatement__Await
+  ForAwaitOfStatement__Await ->•for await ( LeftHandSideExpression__Await of AssignmentExpression__Await ) Statement__Await
+  ForAwaitOfStatement__Await ->•for await ( ForDeclaration__Await of AssignmentExpression__Await ) Statement__Await
+  StatementListItem__Await ->•Declaration__Await
+  Declaration__Await ->•FunctionDeclaration__Await
+  FunctionDeclaration__Await ->•function BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters ) TSOptionalReturnType__Await FunctionBody
+  Declaration__Await ->•LexicalDeclaration__Await
+  LexicalDeclaration__Await ->•LetOrConst LexicalBindingList__Await
+  LetOrConst ->•let
+  LetOrConst ->•const
+  Declaration__Await ->•ClassDeclaration__Await
+  ClassDeclaration__Await ->•class BindingIdentifier__Await TSOptionalTypeParameters__Await ClassTail__Await
+  Declaration__Await ->•AsyncFunctionDeclaration__Await
+  AsyncFunctionDeclaration__Await ->•AsyncFunctionStart BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await FunctionBody__Await
+  AsyncFunctionStart ->•__predicate24 async NoLineTerminator function
+  __predicate24 ->•
+  Declaration__Await ->•GeneratorDeclaration__Await
+  GeneratorDeclaration__Await ->•function * BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters ) TSOptionalReturnType__Await FunctionBody
+  Declaration__Await ->•AsyncGeneratorDeclaration__Await
+  AsyncGeneratorDeclaration__Await ->•AsyncFunctionStart * BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await FunctionBody__Await
+  Declaration__Await ->•TSDeclaration__Await
+  TSDeclaration__Await ->•__predicate36 TSActualDeclaration__Await
+  __predicate36 ->•
+  Declaration__Await ->•TSFunctionOverload__Await
+  TSFunctionOverload__Await ->•__predicate38 function BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await StatementEnd
+  __predicate38 ->•
+  ModuleItemList__Await ->•ModuleItemList__Await ModuleItem__Await
+TOKEN=run ACTION=shift 71 ERROR=
+STATE=51
+CANDIDATES=shift 71
+TOKEN=( ACTION=reduce BindingIdentifier__Await -> IdentifierName ERROR=
+STATE=71
+CANDIDATES=reduce BindingIdentifier__Await -> IdentifierName
+  BindingIdentifier__Await -> IdentifierName•
+TOKEN=( ACTION=goto 272 ERROR=
+STATE=51
+  FunctionDeclaration__Await -> function•BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters ) TSOptionalReturnType__Await FunctionBody
+  BindingIdentifier__Await ->•IdentifierName
+  BindingIdentifier__Await ->•of
+  BindingIdentifier__Await ->•async
+  BindingIdentifier__Await ->•any
+  BindingIdentifier__Await ->•unknown
+  BindingIdentifier__Await ->•string
+  BindingIdentifier__Await ->•number
+  BindingIdentifier__Await ->•bigint
+  BindingIdentifier__Await ->•symbol
+  BindingIdentifier__Await ->•boolean
+  BindingIdentifier__Await ->•undefined
+  BindingIdentifier__Await ->•never
+  BindingIdentifier__Await ->•object
+  BindingIdentifier__Await ->•intrinsic
+  BindingIdentifier__Await ->•keyof
+  BindingIdentifier__Await ->•unique
+  BindingIdentifier__Await ->•readonly
+  BindingIdentifier__Await ->•infer
+  BindingIdentifier__Await ->•abstract
+  BindingIdentifier__Await ->•accessor
+  BindingIdentifier__Await ->•as
+  BindingIdentifier__Await ->•assert
+  BindingIdentifier__Await ->•asserts
+  BindingIdentifier__Await ->•constructor
+  BindingIdentifier__Await ->•declare
+  BindingIdentifier__Await ->•from
+  BindingIdentifier__Await ->•get
+  BindingIdentifier__Await ->•global
+  BindingIdentifier__Await ->•is
+  BindingIdentifier__Await ->•module
+  BindingIdentifier__Await ->•namespace
+  BindingIdentifier__Await ->•out
+  BindingIdentifier__Await ->•override
+  BindingIdentifier__Await ->•require
+  BindingIdentifier__Await ->•satisfies
+  BindingIdentifier__Await ->•set
+  BindingIdentifier__Await ->•type
+  BindingIdentifier__Await ->•using
+  GeneratorDeclaration__Await -> function•* BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters ) TSOptionalReturnType__Await FunctionBody
+TOKEN=( ACTION=epsilon reduce TSOptionalTypeParameters__Await -> epsilon ERROR=
+STATE=272
+CANDIDATES=epsilon reduce TSOptionalTypeParameters__Await -> epsilon
+  FunctionDeclaration__Await -> function BindingIdentifier__Await•TSOptionalTypeParameters__Await ( FormalParameters ) TSOptionalReturnType__Await FunctionBody
+  TSOptionalTypeParameters__Await ->•TSTypeParameters__Await
+  TSTypeParameters__Await ->•< TSTypeParameterList__Await TSTypeClose
+  TSTypeParameters__Await ->•< TSTypeParameterList__Await , TSTypeClose
+  TSOptionalTypeParameters__Await ->•
+TOKEN=( ACTION=goto 784 ERROR=
+STATE=272
+CANDIDATES=epsilon reduce TSOptionalTypeParameters__Await -> epsilon
+  FunctionDeclaration__Await -> function BindingIdentifier__Await•TSOptionalTypeParameters__Await ( FormalParameters ) TSOptionalReturnType__Await FunctionBody
+  TSOptionalTypeParameters__Await ->•TSTypeParameters__Await
+  TSTypeParameters__Await ->•< TSTypeParameterList__Await TSTypeClose
+  TSTypeParameters__Await ->•< TSTypeParameterList__Await , TSTypeClose
+  TSOptionalTypeParameters__Await ->•
+TOKEN=( ACTION=shift 1039 ERROR=
+STATE=784
+CANDIDATES=shift 1039
+  FunctionDeclaration__Await -> function BindingIdentifier__Await TSOptionalTypeParameters__Await•( FormalParameters ) TSOptionalReturnType__Await FunctionBody
+TOKEN=) ACTION=epsilon reduce FormalParameters -> epsilon ERROR=
+STATE=1039
+CANDIDATES=epsilon reduce FormalParameters -> epsilon
+  FunctionDeclaration__Await -> function BindingIdentifier__Await TSOptionalTypeParameters__Await (•FormalParameters ) TSOptionalReturnType__Await FunctionBody
+  FormalParameters ->•__grp1
+  __grp1 ->•FormalParameterList
+  FormalParameterList ->•FormalParameter
+  FormalParameter ->•BindingIdentifier TSOptional TSAnnotation Initializer
+  BindingIdentifier ->•IdentifierName
+  BindingIdentifier ->•await
+  BindingIdentifier ->•of
+  BindingIdentifier ->•async
+  BindingIdentifier ->•any
+  BindingIdentifier ->•unknown
+  BindingIdentifier ->•string
+  BindingIdentifier ->•number
+  BindingIdentifier ->•bigint
+  BindingIdentifier ->•symbol
+  BindingIdentifier ->•boolean
+  BindingIdentifier ->•undefined
+  BindingIdentifier ->•never
+  BindingIdentifier ->•object
+  BindingIdentifier ->•intrinsic
+  BindingIdentifier ->•keyof
+  BindingIdentifier ->•unique
+  BindingIdentifier ->•readonly
+  BindingIdentifier ->•infer
+  BindingIdentifier ->•abstract
+  BindingIdentifier ->•accessor
+  BindingIdentifier ->•as
+  BindingIdentifier ->•assert
+  BindingIdentifier ->•asserts
+  BindingIdentifier ->•constructor
+  BindingIdentifier ->•declare
+  BindingIdentifier ->•from
+  BindingIdentifier ->•get
+  BindingIdentifier ->•global
+  BindingIdentifier ->•is
+  BindingIdentifier ->•module
+  BindingIdentifier ->•namespace
+  BindingIdentifier ->•out
+  BindingIdentifier ->•override
+  BindingIdentifier ->•require
+  BindingIdentifier ->•satisfies
+  BindingIdentifier ->•set
+  BindingIdentifier ->•type
+  BindingIdentifier ->•using
+  FormalParameter ->•BindingIdentifier TSOptional TSAnnotation
+  FormalParameter ->•BindingIdentifier TSOptional Initializer
+  FormalParameter ->•BindingIdentifier TSOptional
+  FormalParameter ->•BindingIdentifier TSAnnotation Initializer
+  FormalParameter ->•BindingIdentifier TSAnnotation
+  FormalParameter ->•BindingIdentifier Initializer
+  FormalParameter ->•BindingIdentifier
+  FormalParameter ->•BindingPattern TSOptional TSAnnotation Initializer
+  BindingPattern ->•ObjectBindingPattern
+  ObjectBindingPattern ->•{ }
+  ObjectBindingPattern ->•{ BindingPropertyList }
+  ObjectBindingPattern ->•{ BindingPropertyList , }
+  ObjectBindingPattern ->•{ BindingRestProperty }
+  ObjectBindingPattern ->•{ BindingPropertyList , BindingRestProperty }
+  BindingPattern ->•ArrayBindingPattern
+  ArrayBindingPattern ->•[ ]
+  ArrayBindingPattern ->•[ ArrayBindingElements ]
+  FormalParameter ->•BindingPattern TSOptional TSAnnotation
+  FormalParameter ->•BindingPattern TSOptional Initializer
+  FormalParameter ->•BindingPattern TSOptional
+  FormalParameter ->•BindingPattern TSAnnotation Initializer
+  FormalParameter ->•BindingPattern TSAnnotation
+  FormalParameter ->•BindingPattern Initializer
+  FormalParameter ->•BindingPattern
+  FormalParameter ->•TSThisParameter
+  TSThisParameter ->•this TSAnnotation
+  FormalParameterList ->•FormalParameterList , FormalParameter
+  __grp1 ->•FormalParameterList ,
+  __grp1 ->•FunctionRestParameter
+  FunctionRestParameter ->•BindingRestElement TSAnnotation
+  BindingRestElement ->•... BindingIdentifier
+  BindingRestElement ->•... BindingPattern
+  FunctionRestParameter ->•BindingRestElement
+  __grp1 ->•FormalParameterList , FunctionRestParameter
+  FormalParameters ->•
+TOKEN=) ACTION=goto 1262 ERROR=
+STATE=1039
+CANDIDATES=epsilon reduce FormalParameters -> epsilon
+  FunctionDeclaration__Await -> function BindingIdentifier__Await TSOptionalTypeParameters__Await (•FormalParameters ) TSOptionalReturnType__Await FunctionBody
+  FormalParameters ->•__grp1
+  __grp1 ->•FormalParameterList
+  FormalParameterList ->•FormalParameter
+  FormalParameter ->•BindingIdentifier TSOptional TSAnnotation Initializer
+  BindingIdentifier ->•IdentifierName
+  BindingIdentifier ->•await
+  BindingIdentifier ->•of
+  BindingIdentifier ->•async
+  BindingIdentifier ->•any
+  BindingIdentifier ->•unknown
+  BindingIdentifier ->•string
+  BindingIdentifier ->•number
+  BindingIdentifier ->•bigint
+  BindingIdentifier ->•symbol
+  BindingIdentifier ->•boolean
+  BindingIdentifier ->•undefined
+  BindingIdentifier ->•never
+  BindingIdentifier ->•object
+  BindingIdentifier ->•intrinsic
+  BindingIdentifier ->•keyof
+  BindingIdentifier ->•unique
+  BindingIdentifier ->•readonly
+  BindingIdentifier ->•infer
+  BindingIdentifier ->•abstract
+  BindingIdentifier ->•accessor
+  BindingIdentifier ->•as
+  BindingIdentifier ->•assert
+  BindingIdentifier ->•asserts
+  BindingIdentifier ->•constructor
+  BindingIdentifier ->•declare
+  BindingIdentifier ->•from
+  BindingIdentifier ->•get
+  BindingIdentifier ->•global
+  BindingIdentifier ->•is
+  BindingIdentifier ->•module
+  BindingIdentifier ->•namespace
+  BindingIdentifier ->•out
+  BindingIdentifier ->•override
+  BindingIdentifier ->•require
+  BindingIdentifier ->•satisfies
+  BindingIdentifier ->•set
+  BindingIdentifier ->•type
+  BindingIdentifier ->•using
+  FormalParameter ->•BindingIdentifier TSOptional TSAnnotation
+  FormalParameter ->•BindingIdentifier TSOptional Initializer
+  FormalParameter ->•BindingIdentifier TSOptional
+  FormalParameter ->•BindingIdentifier TSAnnotation Initializer
+  FormalParameter ->•BindingIdentifier TSAnnotation
+  FormalParameter ->•BindingIdentifier Initializer
+  FormalParameter ->•BindingIdentifier
+  FormalParameter ->•BindingPattern TSOptional TSAnnotation Initializer
+  BindingPattern ->•ObjectBindingPattern
+  ObjectBindingPattern ->•{ }
+  ObjectBindingPattern ->•{ BindingPropertyList }
+  ObjectBindingPattern ->•{ BindingPropertyList , }
+  ObjectBindingPattern ->•{ BindingRestProperty }
+  ObjectBindingPattern ->•{ BindingPropertyList , BindingRestProperty }
+  BindingPattern ->•ArrayBindingPattern
+  ArrayBindingPattern ->•[ ]
+  ArrayBindingPattern ->•[ ArrayBindingElements ]
+  FormalParameter ->•BindingPattern TSOptional TSAnnotation
+  FormalParameter ->•BindingPattern TSOptional Initializer
+  FormalParameter ->•BindingPattern TSOptional
+  FormalParameter ->•BindingPattern TSAnnotation Initializer
+  FormalParameter ->•BindingPattern TSAnnotation
+  FormalParameter ->•BindingPattern Initializer
+  FormalParameter ->•BindingPattern
+  FormalParameter ->•TSThisParameter
+  TSThisParameter ->•this TSAnnotation
+  FormalParameterList ->•FormalParameterList , FormalParameter
+  __grp1 ->•FormalParameterList ,
+  __grp1 ->•FunctionRestParameter
+  FunctionRestParameter ->•BindingRestElement TSAnnotation
+  BindingRestElement ->•... BindingIdentifier
+  BindingRestElement ->•... BindingPattern
+  FunctionRestParameter ->•BindingRestElement
+  __grp1 ->•FormalParameterList , FunctionRestParameter
+  FormalParameters ->•
+TOKEN=) ACTION=shift 1694 ERROR=
+STATE=1262
+CANDIDATES=shift 1694
+  FunctionDeclaration__Await -> function BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters•) TSOptionalReturnType__Await FunctionBody
+TOKEN=: ACTION=shift 1977 ERROR=
+STATE=1694
+CANDIDATES=shift 1977
+TOKEN=void ACTION=epsilon reduce __predicate42 -> epsilon ERROR=
+STATE=1977
+CANDIDATES=epsilon reduce __predicate42 -> epsilon
+TOKEN=void ACTION=goto 836 ERROR=
+STATE=1977
+CANDIDATES=epsilon reduce __predicate42 -> epsilon
+TOKEN=void ACTION=epsilon reduce __predicate58 -> epsilon ERROR=
+STATE=836
+CANDIDATES=epsilon reduce __predicate58 -> epsilon
+TOKEN=void ACTION=goto 1102 ERROR=
+STATE=836
+CANDIDATES=epsilon reduce __predicate58 -> epsilon
+TOKEN=void ACTION=shift 1326 ERROR=
+STATE=1102
+CANDIDATES=shift 1326
+TOKEN=; ACTION=reduce TSPrimitiveType -> void ERROR=
+STATE=1326
+CANDIDATES=reduce TSPrimitiveType -> void
+TOKEN=; ACTION=goto 1315 ERROR=
+STATE=1102
+TOKEN=; ACTION=reduce TSNonAssertsPrimaryType__Await -> TSPrimitiveType ERROR=
+STATE=1315
+CANDIDATES=reduce TSNonAssertsPrimaryType__Await -> TSPrimitiveType
+TOKEN=; ACTION=goto 1314 ERROR=
+STATE=1102
+TOKEN=; ACTION=reduce TSPrimaryType__Await -> __predicate58 TSNonAssertsPrimaryType__Await ERROR=
+STATE=1314
+CANDIDATES=reduce TSPrimaryType__Await -> __predicate58 TSNonAssertsPrimaryType__Await
+TOKEN=; ACTION=goto 1100 ERROR=
+STATE=836
+TOKEN=; ACTION=reduce TSPostfixCore__Await -> TSPrimaryType__Await ERROR=
+STATE=1100
+CANDIDATES=reduce TSPostfixCore__Await -> TSPrimaryType__Await
+TOKEN=; ACTION=goto 1099 ERROR=
+STATE=836
+TOKEN=; ACTION=epsilon reduce __predicate52 -> epsilon ERROR=
+STATE=1099
+CANDIDATES=epsilon reduce __predicate52 -> epsilon
+TOKEN=; ACTION=goto 1309 ERROR=
+STATE=1099
+CANDIDATES=epsilon reduce __predicate52 -> epsilon
+TOKEN=; ACTION=reduce TSPostfixType__Await -> TSPostfixCore__Await __predicate52 ERROR=
+STATE=1309
+CANDIDATES=reduce TSPostfixType__Await -> TSPostfixCore__Await __predicate52
+TOKEN=; ACTION=goto 1098 ERROR=
+STATE=836
+TOKEN=; ACTION=reduce TSTypeOperator__Await -> TSPostfixType__Await ERROR=
+STATE=1098
+CANDIDATES=reduce TSTypeOperator__Await -> TSPostfixType__Await
+TOKEN=; ACTION=goto 1097 ERROR=
+STATE=836
+TOKEN=; ACTION=reduce TSIntersectionType__Await -> TSTypeOperator__Await ERROR=
+STATE=1097
+CANDIDATES=reduce TSIntersectionType__Await -> TSTypeOperator__Await
+TOKEN=; ACTION=goto 1096 ERROR=
+STATE=836
+TOKEN=; ACTION=reduce TSUnionType__Await -> TSIntersectionType__Await ERROR=
+STATE=1096
+CANDIDATES=reduce TSUnionType__Await -> TSIntersectionType__Await
+TOKEN=; ACTION=goto 1095 ERROR=
+STATE=836
+TOKEN=; ACTION=epsilon reduce __predicate49 -> epsilon ERROR=
+STATE=1095
+CANDIDATES=epsilon reduce __predicate49 -> epsilon
+TOKEN=; ACTION=goto 1305 ERROR=
+STATE=1095
+CANDIDATES=epsilon reduce __predicate49 -> epsilon
+TOKEN=; ACTION=reduce TSConditionalType__Await -> TSUnionType__Await __predicate49 ERROR=
+STATE=1305
+CANDIDATES=reduce TSConditionalType__Await -> TSUnionType__Await __predicate49
+TOKEN=; ACTION=goto 1094 ERROR=
+STATE=836
+TOKEN=; ACTION=reduce TSType__Await -> __predicate42 TSConditionalType__Await ERROR=
+STATE=1094
+CANDIDATES=reduce TSType__Await -> __predicate42 TSConditionalType__Await
+TOKEN=; ACTION=goto 1715 ERROR=
+STATE=1977
+TOKEN=; ACTION=reduce TSReturnType__Await -> TSType__Await ERROR=
+STATE=1715
+CANDIDATES=reduce TSReturnType__Await -> TSType__Await
+TOKEN=; ACTION=goto 2375 ERROR=
+STATE=1977
+TOKEN=; ACTION=reduce TSReturnTypeAnnotation__Await -> : TSReturnType__Await ERROR=
+STATE=2375
+CANDIDATES=reduce TSReturnTypeAnnotation__Await -> : TSReturnType__Await
+TOKEN=; ACTION=goto 1976 ERROR=
+STATE=1694
+TOKEN=; ACTION=reduce TSOptionalReturnType__Await -> TSReturnTypeAnnotation__Await ERROR=
+STATE=1976
+CANDIDATES=reduce TSOptionalReturnType__Await -> TSReturnTypeAnnotation__Await
+TOKEN=; ACTION=goto 2084 ERROR=
+STATE=1694
+TOKEN=; ACTION=failed null ERROR=(can't shift {{} must come here)
+STATE=2084

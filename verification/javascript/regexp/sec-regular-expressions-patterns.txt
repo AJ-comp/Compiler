@@ -1,0 +1,314 @@
+B.1.2 Regular Expressions Patterns
+The syntax of 22.2.1 is modified and extended as follows. These changes introduce ambiguities that are broken by the ordering of grammar productions and by contextual information. When parsing using the following grammar, each alternative is considered only if previous production alternatives do not match.
+This alternative pattern grammar and semantics only changes the syntax and semantics of BMP patterns. The following grammar extensions include productions parameterized with the [UnicodeMode] parameter. However, none of these extensions change the syntax of Unicode patterns recognized when parsing with the [UnicodeMode] parameter present on the goal symbol.
+Syntax
+Term[UnicodeMode, UnicodeSetsMode, NamedCaptureGroups] :: [+UnicodeMode]
+Assertion[+UnicodeMode, ?UnicodeSetsMode, ?NamedCaptureGroups]
+[+UnicodeMode]
+Atom[+UnicodeMode, ?UnicodeSetsMode, ?NamedCaptureGroups]
+Quantifier
+[+UnicodeMode]
+Atom[+UnicodeMode, ?UnicodeSetsMode, ?NamedCaptureGroups]
+[~UnicodeMode]
+QuantifiableAssertion[?NamedCaptureGroups]
+Quantifier
+[~UnicodeMode]
+Assertion[~UnicodeMode, ~UnicodeSetsMode, ?NamedCaptureGroups]
+[~UnicodeMode]
+ExtendedAtom[?NamedCaptureGroups]
+Quantifier
+[~UnicodeMode]
+ExtendedAtom[?NamedCaptureGroups]
+Assertion[UnicodeMode, UnicodeSetsMode, NamedCaptureGroups] ::
+^
+$
+\b
+\B
+[+UnicodeMode]
+(?=
+Disjunction[+UnicodeMode, ?UnicodeSetsMode, ?NamedCaptureGroups]
+)
+[+UnicodeMode]
+(?!
+Disjunction[+UnicodeMode, ?UnicodeSetsMode, ?NamedCaptureGroups]
+)
+[~UnicodeMode]
+QuantifiableAssertion[?NamedCaptureGroups]
+(?<=
+Disjunction[?UnicodeMode, ?UnicodeSetsMode, ?NamedCaptureGroups]
+)
+(?<!
+Disjunction[?UnicodeMode, ?UnicodeSetsMode, ?NamedCaptureGroups]
+)
+QuantifiableAssertion[NamedCaptureGroups] ::
+(?=
+Disjunction[~UnicodeMode, ~UnicodeSetsMode, ?NamedCaptureGroups]
+)
+(?!
+Disjunction[~UnicodeMode, ~UnicodeSetsMode, ?NamedCaptureGroups]
+)
+ExtendedAtom[NamedCaptureGroups] ::
+.
+\
+AtomEscape[~UnicodeMode, ?NamedCaptureGroups]
+\
+[lookahead = c]
+CharacterClass[~UnicodeMode, ~UnicodeSetsMode]
+(
+GroupSpecifier[~UnicodeMode]opt
+Disjunction[~UnicodeMode, ~UnicodeSetsMode, ?NamedCaptureGroups]
+)
+(?
+RegularExpressionModifiers
+:
+Disjunction[~UnicodeMode, ~UnicodeSetsMode, ?NamedCaptureGroups]
+)
+(?
+RegularExpressionModifiers
+-
+RegularExpressionModifiers
+:
+Disjunction[~UnicodeMode, ~UnicodeSetsMode, ?NamedCaptureGroups]
+)
+InvalidBracedQuantifier
+ExtendedPatternCharacter
+InvalidBracedQuantifier ::
+{
+DecimalDigits[~Sep]
+}
+{
+DecimalDigits[~Sep]
+,}
+{
+DecimalDigits[~Sep]
+,
+DecimalDigits[~Sep]
+}
+ExtendedPatternCharacter ::
+SourceCharacter but not one of ^
+$
+\
+.
+*
++
+?
+(
+)
+[
+|
+AtomEscape[UnicodeMode, NamedCaptureGroups] :: [+UnicodeMode]
+DecimalEscape
+[~UnicodeMode]
+DecimalEscape
+but only if the CapturingGroupNumber of DecimalEscape is ≤ CountLeftCapturingParensWithin(the Pattern containing DecimalEscape)
+CharacterClassEscape[?UnicodeMode]
+CharacterEscape[?UnicodeMode, ?NamedCaptureGroups]
+[+NamedCaptureGroups]
+k
+GroupName[?UnicodeMode]
+CharacterEscape[UnicodeMode, NamedCaptureGroups] ::
+ControlEscape
+c
+AsciiLetter
+0
+[lookahead ∉ DecimalDigit]
+HexEscapeSequence
+RegExpUnicodeEscapeSequence[?UnicodeMode]
+[~UnicodeMode]
+LegacyOctalEscapeSequence
+IdentityEscape[?UnicodeMode, ?NamedCaptureGroups]
+IdentityEscape[UnicodeMode, NamedCaptureGroups] :: [+UnicodeMode]
+SyntaxCharacter
+[+UnicodeMode]
+/
+[~UnicodeMode]
+SourceCharacterIdentityEscape[?NamedCaptureGroups]
+SourceCharacterIdentityEscape[NamedCaptureGroups] :: [~NamedCaptureGroups]
+SourceCharacter but not c
+[+NamedCaptureGroups]
+SourceCharacter but not one of c or k
+ClassAtomNoDash[UnicodeMode, NamedCaptureGroups] ::
+SourceCharacter but not one of \ or ] or -
+\
+ClassEscape[?UnicodeMode, ?NamedCaptureGroups]
+\
+[lookahead = c]
+ClassEscape[UnicodeMode, NamedCaptureGroups] ::
+b
+[+UnicodeMode]
+-
+[~UnicodeMode]
+c
+ClassControlLetter
+CharacterClassEscape[?UnicodeMode]
+CharacterEscape[?UnicodeMode, ?NamedCaptureGroups]
+ClassControlLetter ::
+DecimalDigit
+_
+Note
+When the same left-hand sides occurs with both [+UnicodeMode] and [~UnicodeMode] guards it is to control the disambiguation priority.
+B.1.2.1 Static Semantics: Early Errors
+The semantics of 22.2.1.1 is extended as follows:
+ExtendedAtom :: InvalidBracedQuantifier
+It is a Syntax Error if any source text is matched by this production.
+Additionally, the rules for the following productions are modified with the addition of the highlighted text:
+NonemptyClassRanges ::
+ClassAtom
+-
+ClassAtom
+ClassContents
+It is a Syntax Error if IsCharacterClass of the first ClassAtom is true or IsCharacterClass of the second ClassAtom is true and this production has a [UnicodeMode] parameter.
+It is a Syntax Error if IsCharacterClass of the first ClassAtom is false, IsCharacterClass of the second ClassAtom is false, and the CharacterValue of the first ClassAtom is strictly greater than the CharacterValue of the second ClassAtom.
+NonemptyClassRangesNoDash ::
+ClassAtomNoDash
+-
+ClassAtom
+ClassContents
+It is a Syntax Error if IsCharacterClass of ClassAtomNoDash is true or IsCharacterClass of ClassAtom is true and this production has a [UnicodeMode] parameter.
+It is a Syntax Error if IsCharacterClass of ClassAtomNoDash is false, IsCharacterClass of ClassAtom is false, and the CharacterValue of ClassAtomNoDash is strictly greater than the CharacterValue of ClassAtom.
+B.1.2.2 Static Semantics: CountLeftCapturingParensWithin and CountLeftCapturingParensBefore
+In the definitions of CountLeftCapturingParensWithin and CountLeftCapturingParensBefore, references to “
+Atom ::
+(
+GroupSpecifieropt
+Disjunction
+)
+” are to be interpreted as meaning “
+Atom ::
+(
+GroupSpecifieropt
+Disjunction
+)
+” or “
+ExtendedAtom ::
+(
+GroupSpecifieropt
+Disjunction
+)
+”.
+B.1.2.3 Static Semantics: IsCharacterClass
+The semantics of 22.2.1.6 is extended as follows:
+ClassAtomNoDash ::
+\
+[lookahead = c]
+Return false.
+B.1.2.4 Static Semantics: CharacterValue
+The semantics of 22.2.1.7 is extended as follows:
+ClassAtomNoDash ::
+\
+[lookahead = c]
+Return the numeric value of U+005C (REVERSE SOLIDUS).
+ClassEscape ::
+c
+ClassControlLetter
+Let ch be the code point matched by ClassControlLetter.
+Let i be the numeric value of ch.
+Return the remainder of dividing i by 32.
+CharacterEscape :: LegacyOctalEscapeSequence
+Return the MV of LegacyOctalEscapeSequence (see 12.9.4.3).
+B.1.2.5 Runtime Semantics: CompileSubpattern
+The semantics of CompileSubpattern is extended as follows:
+The rule for
+Term ::
+QuantifiableAssertion
+Quantifier
+is the same as for
+Term ::
+Atom
+Quantifier
+but with QuantifiableAssertion substituted for Atom.
+The rule for
+Term ::
+ExtendedAtom
+Quantifier
+is the same as for
+Term ::
+Atom
+Quantifier
+but with ExtendedAtom substituted for Atom.
+The rule for
+Term :: ExtendedAtom
+is the same as for
+Term :: Atom
+but with ExtendedAtom substituted for Atom.
+B.1.2.6 Runtime Semantics: CompileAssertion
+CompileAssertion rules for the
+Assertion ::
+(?=
+Disjunction
+)
+and
+Assertion ::
+(?!
+Disjunction
+)
+productions are also used for the QuantifiableAssertion productions, but with QuantifiableAssertion substituted for Assertion.
+B.1.2.7 Runtime Semantics: CompileAtom
+CompileAtom rules for the Atom productions except for
+Atom :: PatternCharacter
+are also used for the ExtendedAtom productions, but with ExtendedAtom substituted for Atom. The following rules, with parameter direction, are also added:
+ExtendedAtom ::
+\
+[lookahead = c]
+Let A be the CharSet containing the single character \ U+005C (REVERSE SOLIDUS).
+Return CharacterSetMatcher(rer, A, false, direction).
+ExtendedAtom :: ExtendedPatternCharacter
+Let ch be the character represented by ExtendedPatternCharacter.
+Let A be a one-element CharSet containing the character ch.
+Return CharacterSetMatcher(rer, A, false, direction).
+B.1.2.8 Runtime Semantics: CompileToCharSet
+The semantics of 22.2.2.9 is extended as follows:
+The following two rules replace the corresponding rules of CompileToCharSet.
+NonemptyClassRanges ::
+ClassAtom
+-
+ClassAtom
+ClassContents
+Let A be CompileToCharSet of the first ClassAtom with argument rer.
+Let B be CompileToCharSet of the second ClassAtom with argument rer.
+Let C be CompileToCharSet of ClassContents with argument rer.
+Let D be CharacterRangeOrUnion(rer, A, B).
+Return the union of D and C.
+NonemptyClassRangesNoDash ::
+ClassAtomNoDash
+-
+ClassAtom
+ClassContents
+Let A be CompileToCharSet of ClassAtomNoDash with argument rer.
+Let B be CompileToCharSet of ClassAtom with argument rer.
+Let C be CompileToCharSet of ClassContents with argument rer.
+Let D be CharacterRangeOrUnion(rer, A, B).
+Return the union of D and C.
+In addition, the following rules are added to CompileToCharSet.
+ClassEscape ::
+c
+ClassControlLetter
+Let cv be the CharacterValue of this ClassEscape.
+Let c be the character whose character value is cv.
+Return the CharSet containing the single character c.
+ClassAtomNoDash ::
+\
+[lookahead = c]
+Return the CharSet containing the single character \ U+005C (REVERSE SOLIDUS).
+NoteThis production can only be reached from the sequence \c within a character class where it is not followed by an acceptable control character.
+B.1.2.8.1 CharacterRangeOrUnion ( rer, A, B )
+The abstract operation CharacterRangeOrUnion takes arguments rer (a RegExp Record), A (a CharSet), and B (a CharSet) and returns a CharSet. It performs the following steps when called:
+If HasEitherUnicodeFlag(rer) is false, then
+If A does not contain exactly one character or B does not contain exactly one character, then
+Let C be the CharSet containing the single character - U+002D (HYPHEN-MINUS).
+Return the union of CharSets A, B and C.
+Return CharacterRange(A, B).
+B.1.2.9 Static Semantics: ParsePattern ( patternText, u, v )
+The semantics of 22.2.3.4 is extended as follows:
+The abstract operation ParsePattern takes arguments patternText (a sequence of Unicode code points), u (a Boolean), and v (a Boolean). It performs the following steps when called:
+If v is true and u is true, then
+Let parseResult be a List containing one or more SyntaxError objects.
+Else if v is true, then
+Let parseResult be ParseText(patternText, Pattern[+UnicodeMode, +UnicodeSetsMode, +NamedCaptureGroups]).
+Else if u is true, then
+Let parseResult be ParseText(patternText, Pattern[+UnicodeMode, ~UnicodeSetsMode, +NamedCaptureGroups]).
+Else,
+Let parseResult be ParseText(patternText, Pattern[~UnicodeMode, ~UnicodeSetsMode, ~NamedCaptureGroups]).
+If parseResult is a Parse Node and parseResult contains a GroupName, then
+Set parseResult to ParseText(patternText, Pattern[~UnicodeMode, ~UnicodeSetsMode, +NamedCaptureGroups]).
+Return parseResult.

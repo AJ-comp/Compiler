@@ -1,0 +1,557 @@
+{"input":"a\n(b);","success":true,"errors":[],"error":null}
+{"input":"a\n[b];","success":true,"errors":[],"error":null}
+{"input":"a\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"a\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"a\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"a\n-b;","success":true,"errors":[],"error":null}
+{"input":"a\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"a\n--b;","success":true,"errors":[],"error":null}
+{"input":"a\nother;","success":true,"errors":[],"error":null}
+{"input":"a\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"a\n{}","success":true,"errors":[],"error":null}
+{"input":"a\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"a\u002B\u002B\n(b);","success":true,"errors":[],"error":null}
+{"input":"a\u002B\u002B\n[b];","success":true,"errors":[],"error":null}
+{"input":"a\u002B\u002B\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"a\u002B\u002B\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"a\u002B\u002B\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"a\u002B\u002B\n-b;","success":true,"errors":[],"error":null}
+{"input":"a\u002B\u002B\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"a\u002B\u002B\n--b;","success":true,"errors":[],"error":null}
+{"input":"a\u002B\u002B\nother;","success":true,"errors":[],"error":null}
+{"input":"a\u002B\u002B\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"a\u002B\u002B\n{}","success":true,"errors":[],"error":null}
+{"input":"a\u002B\u002B\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"a--\n(b);","success":true,"errors":[],"error":null}
+{"input":"a--\n[b];","success":true,"errors":[],"error":null}
+{"input":"a--\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"a--\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"a--\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"a--\n-b;","success":true,"errors":[],"error":null}
+{"input":"a--\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"a--\n--b;","success":true,"errors":[],"error":null}
+{"input":"a--\nother;","success":true,"errors":[],"error":null}
+{"input":"a--\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"a--\n{}","success":true,"errors":[],"error":null}
+{"input":"a--\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"a\u002Bb\n(b);","success":true,"errors":[],"error":null}
+{"input":"a\u002Bb\n[b];","success":true,"errors":[],"error":null}
+{"input":"a\u002Bb\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"a\u002Bb\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"a\u002Bb\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"a\u002Bb\n-b;","success":true,"errors":[],"error":null}
+{"input":"a\u002Bb\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"a\u002Bb\n--b;","success":true,"errors":[],"error":null}
+{"input":"a\u002Bb\nother;","success":true,"errors":[],"error":null}
+{"input":"a\u002Bb\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"a\u002Bb\n{}","success":true,"errors":[],"error":null}
+{"input":"a\u002Bb\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"flag ? a : b\n(b);","success":true,"errors":[],"error":null}
+{"input":"flag ? a : b\n[b];","success":true,"errors":[],"error":null}
+{"input":"flag ? a : b\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"flag ? a : b\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"flag ? a : b\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"flag ? a : b\n-b;","success":true,"errors":[],"error":null}
+{"input":"flag ? a : b\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"flag ? a : b\n--b;","success":true,"errors":[],"error":null}
+{"input":"flag ? a : b\nother;","success":true,"errors":[],"error":null}
+{"input":"flag ? a : b\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"flag ? a : b\n{}","success":true,"errors":[],"error":null}
+{"input":"flag ? a : b\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"f(a)\n(b);","success":true,"errors":[],"error":null}
+{"input":"f(a)\n[b];","success":true,"errors":[],"error":null}
+{"input":"f(a)\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"f(a)\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"f(a)\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"f(a)\n-b;","success":true,"errors":[],"error":null}
+{"input":"f(a)\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"f(a)\n--b;","success":true,"errors":[],"error":null}
+{"input":"f(a)\nother;","success":true,"errors":[],"error":null}
+{"input":"f(a)\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"f(a)\n{}","success":true,"errors":[],"error":null}
+{"input":"f(a)\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"(a)\n(b);","success":true,"errors":[],"error":null}
+{"input":"(a)\n[b];","success":true,"errors":[],"error":null}
+{"input":"(a)\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"(a)\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"(a)\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"(a)\n-b;","success":true,"errors":[],"error":null}
+{"input":"(a)\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"(a)\n--b;","success":true,"errors":[],"error":null}
+{"input":"(a)\nother;","success":true,"errors":[],"error":null}
+{"input":"(a)\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"(a)\n{}","success":true,"errors":[],"error":null}
+{"input":"(a)\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"({a:1})\n(b);","success":true,"errors":[],"error":null}
+{"input":"({a:1})\n[b];","success":true,"errors":[],"error":null}
+{"input":"({a:1})\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"({a:1})\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"({a:1})\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"({a:1})\n-b;","success":true,"errors":[],"error":null}
+{"input":"({a:1})\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"({a:1})\n--b;","success":true,"errors":[],"error":null}
+{"input":"({a:1})\nother;","success":true,"errors":[],"error":null}
+{"input":"({a:1})\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"({a:1})\n{}","success":true,"errors":[],"error":null}
+{"input":"({a:1})\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"[a]\n(b);","success":true,"errors":[],"error":null}
+{"input":"[a]\n[b];","success":true,"errors":[],"error":null}
+{"input":"[a]\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"[a]\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"[a]\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"[a]\n-b;","success":true,"errors":[],"error":null}
+{"input":"[a]\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"[a]\n--b;","success":true,"errors":[],"error":null}
+{"input":"[a]\nother;","success":true,"errors":[],"error":null}
+{"input":"[a]\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"[a]\n{}","success":true,"errors":[],"error":null}
+{"input":"[a]\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"(function(){})\n(b);","success":true,"errors":[],"error":null}
+{"input":"(function(){})\n[b];","success":true,"errors":[],"error":null}
+{"input":"(function(){})\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"(function(){})\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"(function(){})\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"(function(){})\n-b;","success":true,"errors":[],"error":null}
+{"input":"(function(){})\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"(function(){})\n--b;","success":true,"errors":[],"error":null}
+{"input":"(function(){})\nother;","success":true,"errors":[],"error":null}
+{"input":"(function(){})\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"(function(){})\n{}","success":true,"errors":[],"error":null}
+{"input":"(function(){})\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"(function named(){return 1;})\n(b);","success":true,"errors":[],"error":null}
+{"input":"(function named(){return 1;})\n[b];","success":true,"errors":[],"error":null}
+{"input":"(function named(){return 1;})\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"(function named(){return 1;})\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"(function named(){return 1;})\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"(function named(){return 1;})\n-b;","success":true,"errors":[],"error":null}
+{"input":"(function named(){return 1;})\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"(function named(){return 1;})\n--b;","success":true,"errors":[],"error":null}
+{"input":"(function named(){return 1;})\nother;","success":true,"errors":[],"error":null}
+{"input":"(function named(){return 1;})\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"(function named(){return 1;})\n{}","success":true,"errors":[],"error":null}
+{"input":"(function named(){return 1;})\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"\u0060text\u0060\n(b);","success":true,"errors":[],"error":null}
+{"input":"\u0060text\u0060\n[b];","success":true,"errors":[],"error":null}
+{"input":"\u0060text\u0060\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"\u0060text\u0060\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"\u0060text\u0060\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"\u0060text\u0060\n-b;","success":true,"errors":[],"error":null}
+{"input":"\u0060text\u0060\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"\u0060text\u0060\n--b;","success":true,"errors":[],"error":null}
+{"input":"\u0060text\u0060\nother;","success":true,"errors":[],"error":null}
+{"input":"\u0060text\u0060\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"\u0060text\u0060\n{}","success":true,"errors":[],"error":null}
+{"input":"\u0060text\u0060\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"tag\u0060text\u0060\n(b);","success":true,"errors":[],"error":null}
+{"input":"tag\u0060text\u0060\n[b];","success":true,"errors":[],"error":null}
+{"input":"tag\u0060text\u0060\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"tag\u0060text\u0060\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"tag\u0060text\u0060\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"tag\u0060text\u0060\n-b;","success":true,"errors":[],"error":null}
+{"input":"tag\u0060text\u0060\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"tag\u0060text\u0060\n--b;","success":true,"errors":[],"error":null}
+{"input":"tag\u0060text\u0060\nother;","success":true,"errors":[],"error":null}
+{"input":"tag\u0060text\u0060\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"tag\u0060text\u0060\n{}","success":true,"errors":[],"error":null}
+{"input":"tag\u0060text\u0060\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"a?.b\n(b);","success":true,"errors":[],"error":null}
+{"input":"a?.b\n[b];","success":true,"errors":[],"error":null}
+{"input":"a?.b\n\u0060text\u0060;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"a?.b\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"a?.b\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"a?.b\n-b;","success":true,"errors":[],"error":null}
+{"input":"a?.b\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"a?.b\n--b;","success":true,"errors":[],"error":null}
+{"input":"a?.b\nother;","success":true,"errors":[],"error":null}
+{"input":"a?.b\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"a?.b\n{}","success":true,"errors":[],"error":null}
+{"input":"a?.b\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"new C()\n(b);","success":true,"errors":[],"error":null}
+{"input":"new C()\n[b];","success":true,"errors":[],"error":null}
+{"input":"new C()\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"new C()\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"new C()\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"new C()\n-b;","success":true,"errors":[],"error":null}
+{"input":"new C()\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"new C()\n--b;","success":true,"errors":[],"error":null}
+{"input":"new C()\nother;","success":true,"errors":[],"error":null}
+{"input":"new C()\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"new C()\n{}","success":true,"errors":[],"error":null}
+{"input":"new C()\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"function f(){a\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){a\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002B\u002B\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002B\u002B\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002B\u002B\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002B\u002B\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){a\u002B\u002B\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002B\u002B\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002B\u002B\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002B\u002B\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002B\u002B\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002B\u002B\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002B\u002B\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002B\u002B\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a--\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){a--\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){a--\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a--\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){a--\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a--\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a--\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a--\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a--\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a--\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){a--\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){a--\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002Bb\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002Bb\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002Bb\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002Bb\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){a\u002Bb\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002Bb\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002Bb\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002Bb\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002Bb\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002Bb\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002Bb\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){a\u002Bb\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){flag ? a : b\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){flag ? a : b\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){flag ? a : b\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){flag ? a : b\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){flag ? a : b\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){flag ? a : b\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){flag ? a : b\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){flag ? a : b\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){flag ? a : b\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){flag ? a : b\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){flag ? a : b\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){flag ? a : b\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){f(a)\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){f(a)\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){f(a)\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){f(a)\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){f(a)\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){f(a)\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){f(a)\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){f(a)\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){f(a)\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){f(a)\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){f(a)\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){f(a)\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(a)\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){(a)\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){(a)\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(a)\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){(a)\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(a)\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(a)\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(a)\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(a)\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(a)\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){(a)\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){(a)\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){({a:1})\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){({a:1})\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){({a:1})\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){({a:1})\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){({a:1})\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){({a:1})\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){({a:1})\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){({a:1})\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){({a:1})\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){({a:1})\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){({a:1})\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){({a:1})\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){[a]\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){[a]\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){[a]\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){[a]\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){[a]\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){[a]\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){[a]\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){[a]\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){[a]\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){[a]\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){[a]\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){[a]\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function(){})\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function(){})\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function(){})\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function(){})\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){(function(){})\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function(){})\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function(){})\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function(){})\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function(){})\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function(){})\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function(){})\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function(){})\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function named(){return 1;})\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function named(){return 1;})\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function named(){return 1;})\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function named(){return 1;})\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){(function named(){return 1;})\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function named(){return 1;})\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function named(){return 1;})\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function named(){return 1;})\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function named(){return 1;})\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function named(){return 1;})\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function named(){return 1;})\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){(function named(){return 1;})\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){\u0060text\u0060\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){\u0060text\u0060\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){\u0060text\u0060\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){\u0060text\u0060\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){\u0060text\u0060\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){\u0060text\u0060\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){\u0060text\u0060\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){\u0060text\u0060\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){\u0060text\u0060\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){\u0060text\u0060\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){\u0060text\u0060\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){\u0060text\u0060\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){tag\u0060text\u0060\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){tag\u0060text\u0060\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){tag\u0060text\u0060\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){tag\u0060text\u0060\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){tag\u0060text\u0060\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){tag\u0060text\u0060\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){tag\u0060text\u0060\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){tag\u0060text\u0060\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){tag\u0060text\u0060\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){tag\u0060text\u0060\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){tag\u0060text\u0060\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){tag\u0060text\u0060\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a?.b\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){a?.b\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){a?.b\n\u0060text\u0060;}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){a?.b\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){a?.b\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a?.b\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a?.b\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a?.b\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a?.b\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){a?.b\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){a?.b\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){a?.b\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"function f(){new C()\n(b);}","success":true,"errors":[],"error":null}
+{"input":"function f(){new C()\n[b];}","success":true,"errors":[],"error":null}
+{"input":"function f(){new C()\n\u0060text\u0060;}","success":true,"errors":[],"error":null}
+{"input":"function f(){new C()\n/a/.test(x);}","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"function f(){new C()\n\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){new C()\n-b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){new C()\n\u002B\u002Bb;}","success":true,"errors":[],"error":null}
+{"input":"function f(){new C()\n--b;}","success":true,"errors":[],"error":null}
+{"input":"function f(){new C()\nother;}","success":true,"errors":[],"error":null}
+{"input":"function f(){new C()\nfunction next(){}}","success":true,"errors":[],"error":null}
+{"input":"function f(){new C()\n{}}","success":true,"errors":[],"error":null}
+{"input":"function f(){new C()\nlet next=1;}","success":true,"errors":[],"error":null}
+{"input":"let value=a\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=a\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=a\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=a\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=a\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=a\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=a\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=a\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=a\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=a\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=a\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=a\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002B\u002B\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002B\u002B\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002B\u002B\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002B\u002B\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=a\u002B\u002B\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002B\u002B\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002B\u002B\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002B\u002B\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002B\u002B\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002B\u002B\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002B\u002B\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002B\u002B\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=a--\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=a--\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=a--\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=a--\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=a--\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=a--\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=a--\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=a--\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=a--\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=a--\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=a--\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=a--\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002Bb\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002Bb\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002Bb\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002Bb\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=a\u002Bb\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002Bb\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002Bb\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002Bb\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002Bb\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002Bb\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002Bb\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=a\u002Bb\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=flag ? a : b\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=flag ? a : b\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=flag ? a : b\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=flag ? a : b\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=flag ? a : b\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=flag ? a : b\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=flag ? a : b\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=flag ? a : b\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=flag ? a : b\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=flag ? a : b\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=flag ? a : b\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=flag ? a : b\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=f(a)\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=f(a)\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=f(a)\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=f(a)\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=f(a)\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=f(a)\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=f(a)\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=f(a)\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=f(a)\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=f(a)\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=f(a)\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=f(a)\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=(a)\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=(a)\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=(a)\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=(a)\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=(a)\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=(a)\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=(a)\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=(a)\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=(a)\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=(a)\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=(a)\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=(a)\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=({a:1})\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=({a:1})\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=({a:1})\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=({a:1})\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=({a:1})\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=({a:1})\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=({a:1})\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=({a:1})\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=({a:1})\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=({a:1})\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=({a:1})\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=({a:1})\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=[a]\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=[a]\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=[a]\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=[a]\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=[a]\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=[a]\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=[a]\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=[a]\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=[a]\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=[a]\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=[a]\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=[a]\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=(function(){})\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=(function(){})\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=(function(){})\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=(function(){})\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=(function(){})\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=(function(){})\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=(function(){})\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=(function(){})\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=(function(){})\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=(function(){})\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=(function(){})\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=(function(){})\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=(function named(){return 1;})\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=(function named(){return 1;})\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=(function named(){return 1;})\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=(function named(){return 1;})\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=(function named(){return 1;})\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=(function named(){return 1;})\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=(function named(){return 1;})\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=(function named(){return 1;})\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=(function named(){return 1;})\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=(function named(){return 1;})\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=(function named(){return 1;})\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=(function named(){return 1;})\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=\u0060text\u0060\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=\u0060text\u0060\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=\u0060text\u0060\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=\u0060text\u0060\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=\u0060text\u0060\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=\u0060text\u0060\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=\u0060text\u0060\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=\u0060text\u0060\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=\u0060text\u0060\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=\u0060text\u0060\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=\u0060text\u0060\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=\u0060text\u0060\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=tag\u0060text\u0060\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=tag\u0060text\u0060\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=tag\u0060text\u0060\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=tag\u0060text\u0060\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=tag\u0060text\u0060\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=tag\u0060text\u0060\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=tag\u0060text\u0060\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=tag\u0060text\u0060\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=tag\u0060text\u0060\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=tag\u0060text\u0060\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=tag\u0060text\u0060\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=tag\u0060text\u0060\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=a?.b\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=a?.b\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=a?.b\n\u0060text\u0060;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=a?.b\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=a?.b\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=a?.b\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=a?.b\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=a?.b\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=a?.b\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=a?.b\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=a?.b\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=a?.b\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"let value=new C()\n(b);","success":true,"errors":[],"error":null}
+{"input":"let value=new C()\n[b];","success":true,"errors":[],"error":null}
+{"input":"let value=new C()\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"let value=new C()\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"let value=new C()\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=new C()\n-b;","success":true,"errors":[],"error":null}
+{"input":"let value=new C()\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"let value=new C()\n--b;","success":true,"errors":[],"error":null}
+{"input":"let value=new C()\nother;","success":true,"errors":[],"error":null}
+{"input":"let value=new C()\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"let value=new C()\n{}","success":true,"errors":[],"error":null}
+{"input":"let value=new C()\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"const x = flag ? { if: f(x) / 2 } : function(){} / 2;","success":true,"errors":[],"error":null}
+{"input":"if(x) ({a:1}); /a/.test(x);","success":true,"errors":[],"error":null}
+{"input":"function f(){ return\n{} /a/.test(x); }","success":true,"errors":[],"error":null}
+{"input":"function f(){ return\nfunction g(){} /a/.test(x); }","success":true,"errors":[],"error":null}
+{"input":"outer: while(x){break outer\n/a/.test(x);}","success":true,"errors":[],"error":null}
+{"input":"outer: while(x){continue outer\n/a/.test(x);}","success":true,"errors":[],"error":null}
+{"input":"try{}catch{f(x)/2;}","success":true,"errors":[],"error":null}
+{"input":"for(let [a=b in c]=values;;);","success":true,"errors":[],"error":null}
+{"input":"for(let a=flag?b in c: d;;);","success":true,"errors":[],"error":null}
+{"input":"for(let a=flag?b:c in d;;);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"for(let a=(b in c);;);","success":true,"errors":[],"error":null}
+{"input":"for(let a=function(){return b in c;};;);","success":true,"errors":[],"error":null}
+{"input":"const result=flag?\u0060text${ {key:1}.key }\u0060:function(){} /2;","success":true,"errors":[],"error":null}
+{"input":"const result=flag?(other?1:2):function(){} /2;","success":true,"errors":[],"error":null}
+{"input":"const result=flag?[other?1:2]:function(){} /2;","success":true,"errors":[],"error":null}
+{"input":"function f(a=0){\u0022before\u0022\n\u0022use strict\u0022}","success":false,"errors":["non_simple_strict_directive"],"error":null}
+{"input":"function f(a=0){\u0022before\u0022\n( \u0022use strict\u0022 )}","success":true,"errors":[],"error":null}

@@ -1,0 +1,148 @@
+{
+  "checkedAtUtc": "2026-10-28T10:32:33.760243+00:00",
+  "result": "PASS",
+  "archiveBaseCommit": "efe182f49d3ff265e42e93a33bc144a1811c4c9c",
+  "recordsChecked": 1830,
+  "gzipRoundtripsChecked": 107,
+  "originalBytesChecked": 728419675,
+  "storedBytesChecked": 137571287,
+  "originalAndArchiveBytesIdentical": true,
+  "unexpectedFiles": [],
+  "missingFiles": [],
+  "readmeLinks": [
+    {
+      "target": "releases/",
+      "exists": true
+    },
+    {
+      "target": "javascript/",
+      "exists": true
+    },
+    {
+      "target": "typescript/",
+      "exists": true
+    },
+    {
+      "target": "parser/",
+      "exists": true
+    },
+    {
+      "target": "maintenance/",
+      "exists": true
+    },
+    {
+      "target": "documentation/",
+      "exists": true
+    },
+    {
+      "target": "releases/0.6.0/verification.json",
+      "exists": true
+    },
+    {
+      "target": "releases/0.6.0/public-nuget/verification.json",
+      "exists": true
+    },
+    {
+      "target": "releases/0.6.0/playground-deployment-verification.json",
+      "exists": true
+    },
+    {
+      "target": "typescript/class-extensions-20261028-155659-971/verification.json",
+      "exists": true
+    },
+    {
+      "target": "javascript/ecmascript-2026/final-latest/summary.json",
+      "exists": true
+    },
+    {
+      "target": "manifest.json",
+      "exists": true
+    },
+    {
+      "target": "licenses/Test262-LICENSE.txt",
+      "exists": true
+    }
+  ],
+  "authorAttributionFiles": [
+    {
+      "path": "javascript/classes/docs-authorship-before.json",
+      "terms": {
+        "저자": 11,
+        "저자의 설계": 5
+      },
+      "byteIdentical": true
+    },
+    {
+      "path": "javascript/functions/docs-authorship-before.json",
+      "terms": {
+        "저자": 25,
+        "저자의 설계": 11
+      },
+      "byteIdentical": true
+    },
+    {
+      "path": "javascript/modules/docs-authorship-before.json",
+      "terms": {
+        "저자": 13,
+        "저자의 설계": 7
+      },
+      "byteIdentical": true
+    },
+    {
+      "path": "javascript/non-strict/readme-authorship-before.txt",
+      "terms": {
+        "저자": 3,
+        "저자의 설계": 1
+      },
+      "byteIdentical": true
+    },
+    {
+      "path": "parser/parser-driven-lexing/verify.py",
+      "terms": {
+        "저자": 1
+      },
+      "byteIdentical": true
+    },
+    {
+      "path": "javascript/regexp/docs-authorship-before.json",
+      "terms": {
+        "저자": 15,
+        "저자의 설계": 9
+      },
+      "byteIdentical": true
+    },
+    {
+      "path": "javascript/regexp/regexp-document-body.html",
+      "terms": {
+        "저자": 5,
+        "저자의 설계": 2
+      },
+      "byteIdentical": true
+    },
+    {
+      "path": "documentation/responsibility-audit/before.json",
+      "terms": {
+        "저자": 2,
+        "저자의 설계": 1
+      },
+      "byteIdentical": true
+    },
+    {
+      "path": "documentation/responsibility-audit/current-reader.txt",
+      "terms": {
+        "저자": 2,
+        "저자의 설계": 1
+      },
+      "byteIdentical": true
+    },
+    {
+      "path": "documentation/responsibility-audit/editorial-before.html",
+      "terms": {
+        "저자": 2,
+        "저자의 설계": 1
+      },
+      "byteIdentical": true
+    }
+  ],
+  "errors": []
+}

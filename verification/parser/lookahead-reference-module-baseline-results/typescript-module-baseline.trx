@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="0a30a40f-586c-476e-bf02-12ac8dc4e3be" name="AhjLv@JJW-PC 2026-10-23 05:37:25" runUser="JJW-PC\AhjLv" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-23T05:37:25.2153113+09:00" queuing="2026-10-23T05:37:25.2153117+09:00" start="2026-10-23T05:36:58.8419247+09:00" finish="2026-10-23T05:37:25.4325518+09:00" />
+  <TestSettings name="default" id="a7e90a6e-f724-4c55-b800-ede23b82b356">
+    <Deployment runDeploymentRoot="AhjLv_JJW-PC_2026-10-23_05_37_25" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="bf37b680-8030-4ed2-8a65-2472f7f3e353" testId="17a12d71-2d60-47bb-88bd-77433889908a" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export namespace Tools { export type Name = string&quot;···)" computerName="JJW-PC" duration="00:00:00.0265496" startTime="2026-10-23T05:37:25.2158958+09:00" endTime="2026-10-23T05:37:25.2158961+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bf37b680-8030-4ed2-8a65-2472f7f3e353" />
+    <UnitTestResult executionId="542a33fa-accc-46e5-be5b-16b95e06343a" testId="f7c54958-0b91-f7bc-4ede-283e1b53b3e8" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export type Pair&lt;T&gt; = [T, T];&quot;)" computerName="JJW-PC" duration="00:00:00.0116483" startTime="2026-10-23T05:37:25.3016644+09:00" endTime="2026-10-23T05:37:25.3016646+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="542a33fa-accc-46e5-be5b-16b95e06343a">
+      <Output>
+        <ErrorInfo>
+          <Message>export type Pair&lt;T&gt; = [T, T];&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+(shift 할 수 없습니다 {., &amp;, |, extends, [, ?, &lt;, is} 와야 합니다)</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.ModuleFixture.Accept(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs:line 166&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs:line 149&#xD;
+   at InvokeStub_TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="95bdcc4d-416e-41d9-bb48-6b5f32d3bd41" testId="c70ad07a-e18d-afc6-8fea-b345fa8214a7" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export const enum Direction { Up, Down }&quot;)" computerName="JJW-PC" duration="00:00:00.0118704" startTime="2026-10-23T05:37:25.3406222+09:00" endTime="2026-10-23T05:37:25.3406226+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="95bdcc4d-416e-41d9-bb48-6b5f32d3bd41" />
+    <UnitTestResult executionId="b2148d74-555b-47d6-8845-ea029959286f" testId="c50a6de4-de90-0f86-416a-5bce6fc6a128" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export enum Direction { Up, Down }&quot;)" computerName="JJW-PC" duration="00:00:00.0146804" startTime="2026-10-23T05:37:25.2893453+09:00" endTime="2026-10-23T05:37:25.2893463+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b2148d74-555b-47d6-8845-ea029959286f" />
+    <UnitTestResult executionId="31ddeae0-242d-4bff-b0c9-21f23a34bb0b" testId="92c25a02-6cf0-b1cb-414a-1ddbce05f87e" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export declare const version: string;&quot;)" computerName="JJW-PC" duration="00:00:00.0119725" startTime="2026-10-23T05:37:25.3525736+09:00" endTime="2026-10-23T05:37:25.3525740+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="31ddeae0-242d-4bff-b0c9-21f23a34bb0b" />
+    <UnitTestResult executionId="d90f88e1-95aa-49ca-8ef6-8060915c0824" testId="63ccdb4f-dd26-6707-a96d-52df67e0bcea" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export namespace N {} /ab/.test(value);&quot;)" computerName="JJW-PC" duration="00:00:00.0154623" startTime="2026-10-23T05:37:25.3167429+09:00" endTime="2026-10-23T05:37:25.3167431+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d90f88e1-95aa-49ca-8ef6-8060915c0824" />
+    <UnitTestResult executionId="aa38d9c5-2e56-45ae-95f8-4a557dcee714" testId="619fbd11-4467-9953-3e01-bba9036bc4e7" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export declare namespace Tools { function run(): v&quot;···)" computerName="JJW-PC" duration="00:00:24.6259096" startTime="2026-10-23T05:37:25.1923261+09:00" endTime="2026-10-23T05:37:25.1923375+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aa38d9c5-2e56-45ae-95f8-4a557dcee714">
+      <Output>
+        <ErrorInfo>
+          <Message>export declare namespace Tools { function run(): void; }&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+(shift 할 수 없습니다 {{} 와야 합니다)</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.ModuleFixture.Accept(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs:line 166&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs:line 149&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="75c1bfe4-b0fe-4c1f-b9c0-384e0836f1bb" testId="07e24be6-4762-579e-c3b6-473a7fce3213" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export interface I {} /ab/.test(value);&quot;)" computerName="JJW-PC" duration="00:00:00.0132326" startTime="2026-10-23T05:37:25.3659253+09:00" endTime="2026-10-23T05:37:25.3659257+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="75c1bfe4-b0fe-4c1f-b9c0-384e0836f1bb" />
+    <UnitTestResult executionId="d0ed453c-7627-4e41-a866-804dbec06433" testId="de14df58-8da7-4257-90ba-83f7d66c6a7b" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;import { value } from 'lib'; export interface Resu&quot;···)" computerName="JJW-PC" duration="00:00:00.0179240" startTime="2026-10-23T05:37:25.2474353+09:00" endTime="2026-10-23T05:37:25.2474355+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d0ed453c-7627-4e41-a866-804dbec06433" />
+    <UnitTestResult executionId="7b830c98-07aa-4540-8931-b16e4da986de" testId="eef41c4b-8807-7a97-9f18-6d0ae2c78047" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export default interface Box&lt;T&gt; { value: T; }&quot;)" computerName="JJW-PC" duration="00:00:00.0116709" startTime="2026-10-23T05:37:25.3289495+09:00" endTime="2026-10-23T05:37:25.3289496+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7b830c98-07aa-4540-8931-b16e4da986de">
+      <Output>
+        <ErrorInfo>
+          <Message>export default interface Box&lt;T&gt; { value: T; }&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+(shift 할 수 없습니다 {., &lt;, is, &amp;, |, extends, [, {, ,, ?} 와야 합니다)</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.ModuleFixture.Accept(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs:line 166&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs:line 149&#xD;
+   at InvokeStub_TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a6a7c4eb-0a32-4fcb-bd27-f45f30eb4407" testId="4995a9af-3862-f447-cb09-1ee0589954ba" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;namespace Outer { export interface Options { debug&quot;···)" computerName="JJW-PC" duration="00:00:00.0135103" startTime="2026-10-23T05:37:25.2298820+09:00" endTime="2026-10-23T05:37:25.2298823+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a6a7c4eb-0a32-4fcb-bd27-f45f30eb4407">
+      <Output>
+        <ErrorInfo>
+          <Message>namespace Outer { export interface Options { debug: boolean; } export const value: Options = { debug: true }; }&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+(shift 할 수 없습니다 {., &lt;, is, &amp;, |, extends, [, {, ,, ?} 와야 합니다)</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.ModuleFixture.Accept(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs:line 166&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs:line 149&#xD;
+   at InvokeStub_TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a4c610c3-fa70-4ac7-a263-2343123197ce" testId="6d495eb4-ec00-801a-351c-29d8b6031c51" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;declare global { interface Window { version: strin&quot;···)" computerName="JJW-PC" duration="00:00:00.0142499" startTime="2026-10-23T05:37:25.2617340+09:00" endTime="2026-10-23T05:37:25.2617343+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a4c610c3-fa70-4ac7-a263-2343123197ce" />
+    <UnitTestResult executionId="e6b0884b-0a36-4cd0-bdb7-3f7b8f0acd98" testId="480321af-1110-aba9-8192-04d275a9f4d5" testName="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export interface Box&lt;T&gt; { value: T; }&quot;)" computerName="JJW-PC" duration="00:00:00.0126256" startTime="2026-10-23T05:37:25.2750139+09:00" endTime="2026-10-23T05:37:25.2750141+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e6b0884b-0a36-4cd0-bdb7-3f7b8f0acd98">
+      <Output>
+        <ErrorInfo>
+          <Message>export interface Box&lt;T&gt; { value: T; }&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+(shift 할 수 없습니다 {., &lt;, is, &amp;, |, extends, [, {, ,, ?} 와야 합니다)</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.ModuleFixture.Accept(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs:line 166&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs:line 149&#xD;
+   at InvokeStub_TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export interface I {} /ab/.test(value);&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="07e24be6-4762-579e-c3b6-473a7fce3213">
+      <Execution id="75c1bfe4-b0fe-4c1f-b9c0-384e0836f1bb" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export namespace Tools { export type Name = string&quot;···)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="17a12d71-2d60-47bb-88bd-77433889908a">
+      <Execution id="bf37b680-8030-4ed2-8a65-2472f7f3e353" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export declare const version: string;&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="92c25a02-6cf0-b1cb-414a-1ddbce05f87e">
+      <Execution id="31ddeae0-242d-4bff-b0c9-21f23a34bb0b" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export type Pair&lt;T&gt; = [T, T];&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="f7c54958-0b91-f7bc-4ede-283e1b53b3e8">
+      <Execution id="542a33fa-accc-46e5-be5b-16b95e06343a" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;declare global { interface Window { version: strin&quot;···)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="6d495eb4-ec00-801a-351c-29d8b6031c51">
+      <Execution id="a4c610c3-fa70-4ac7-a263-2343123197ce" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export default interface Box&lt;T&gt; { value: T; }&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="eef41c4b-8807-7a97-9f18-6d0ae2c78047">
+      <Execution id="7b830c98-07aa-4540-8931-b16e4da986de" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export namespace N {} /ab/.test(value);&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="63ccdb4f-dd26-6707-a96d-52df67e0bcea">
+      <Execution id="d90f88e1-95aa-49ca-8ef6-8060915c0824" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export enum Direction { Up, Down }&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="c50a6de4-de90-0f86-416a-5bce6fc6a128">
+      <Execution id="b2148d74-555b-47d6-8845-ea029959286f" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export const enum Direction { Up, Down }&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="c70ad07a-e18d-afc6-8fea-b345fa8214a7">
+      <Execution id="95bdcc4d-416e-41d9-bb48-6b5f32d3bd41" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export interface Box&lt;T&gt; { value: T; }&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="480321af-1110-aba9-8192-04d275a9f4d5">
+      <Execution id="e6b0884b-0a36-4cd0-bdb7-3f7b8f0acd98" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;export declare namespace Tools { function run(): v&quot;···)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="619fbd11-4467-9953-3e01-bba9036bc4e7">
+      <Execution id="aa38d9c5-2e56-45ae-95f8-4a557dcee714" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;namespace Outer { export interface Options { debug&quot;···)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="4995a9af-3862-f447-cb09-1ee0589954ba">
+      <Execution id="a6a7c4eb-0a32-4fcb-bd27-f45f30eb4407" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: &quot;import { value } from 'lib'; export interface Resu&quot;···)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="de14df58-8da7-4257-90ba-83f7d66c6a7b">
+      <Execution id="d0ed453c-7627-4e41-a866-804dbec06433" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests" name="Module_exports_compose_with_TypeScript_declarations" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="17a12d71-2d60-47bb-88bd-77433889908a" executionId="bf37b680-8030-4ed2-8a65-2472f7f3e353" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f7c54958-0b91-f7bc-4ede-283e1b53b3e8" executionId="542a33fa-accc-46e5-be5b-16b95e06343a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c70ad07a-e18d-afc6-8fea-b345fa8214a7" executionId="95bdcc4d-416e-41d9-bb48-6b5f32d3bd41" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c50a6de4-de90-0f86-416a-5bce6fc6a128" executionId="b2148d74-555b-47d6-8845-ea029959286f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="92c25a02-6cf0-b1cb-414a-1ddbce05f87e" executionId="31ddeae0-242d-4bff-b0c9-21f23a34bb0b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="63ccdb4f-dd26-6707-a96d-52df67e0bcea" executionId="d90f88e1-95aa-49ca-8ef6-8060915c0824" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="619fbd11-4467-9953-3e01-bba9036bc4e7" executionId="aa38d9c5-2e56-45ae-95f8-4a557dcee714" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="07e24be6-4762-579e-c3b6-473a7fce3213" executionId="75c1bfe4-b0fe-4c1f-b9c0-384e0836f1bb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="de14df58-8da7-4257-90ba-83f7d66c6a7b" executionId="d0ed453c-7627-4e41-a866-804dbec06433" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="eef41c4b-8807-7a97-9f18-6d0ae2c78047" executionId="7b830c98-07aa-4540-8931-b16e4da986de" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4995a9af-3862-f447-cb09-1ee0589954ba" executionId="a6a7c4eb-0a32-4fcb-bd27-f45f30eb4407" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6d495eb4-ec00-801a-351c-29d8b6031c51" executionId="a4c610c3-fa70-4ac7-a263-2343123197ce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="480321af-1110-aba9-8192-04d275a9f4d5" executionId="e6b0884b-0a36-4cd0-bdb7-3f7b8f0acd98" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="목록에 없는 결과" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="로드된 모든 결과" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="13" executed="13" passed="8" failed="5" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)&#xD;
+[xUnit.net 00:00:00.06]   Discovering: Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:01.13]   Discovered:  Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:01.14]   Starting:    Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:25.80]       export declare namespace Tools { function run(): void; }&#xD;
+[xUnit.net 00:00:25.80]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:25.80]       (shift 할 수 없습니다 {{} 와야 합니다)&#xD;
+[xUnit.net 00:00:25.80]       Stack Trace:&#xD;
+[xUnit.net 00:00:25.80]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs(166,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.ModuleFixture.Accept(String source)&#xD;
+[xUnit.net 00:00:25.80]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs(149,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(String source)&#xD;
+[xUnit.net 00:00:25.80]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:25.80]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:25.84]       namespace Outer { export interface Options { debug: boolean; } export const value: Options = { debug: true }; }&#xD;
+[xUnit.net 00:00:25.84]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:25.84]       (shift 할 수 없습니다 {., &lt;, is, &amp;, |, extends, [, {, ,, ?} 와야 합니다)&#xD;
+[xUnit.net 00:00:25.84]       Stack Trace:&#xD;
+[xUnit.net 00:00:25.84]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs(166,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.ModuleFixture.Accept(String source)&#xD;
+[xUnit.net 00:00:25.84]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs(149,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(String source)&#xD;
+[xUnit.net 00:00:25.84]            at InvokeStub_TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(Object, Span`1)&#xD;
+[xUnit.net 00:00:25.84]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:25.88]       export interface Box&lt;T&gt; { value: T; }&#xD;
+[xUnit.net 00:00:25.88]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:25.88]       (shift 할 수 없습니다 {., &lt;, is, &amp;, |, extends, [, {, ,, ?} 와야 합니다)&#xD;
+[xUnit.net 00:00:25.88]       Stack Trace:&#xD;
+[xUnit.net 00:00:25.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs(166,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.ModuleFixture.Accept(String source)&#xD;
+[xUnit.net 00:00:25.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs(149,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(String source)&#xD;
+[xUnit.net 00:00:25.88]            at InvokeStub_TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(Object, Span`1)&#xD;
+[xUnit.net 00:00:25.88]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:25.91]       export type Pair&lt;T&gt; = [T, T];&#xD;
+[xUnit.net 00:00:25.91]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:25.91]       (shift 할 수 없습니다 {., &amp;, |, extends, [, ?, &lt;, is} 와야 합니다)&#xD;
+[xUnit.net 00:00:25.91]       Stack Trace:&#xD;
+[xUnit.net 00:00:25.91]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs(166,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.ModuleFixture.Accept(String source)&#xD;
+[xUnit.net 00:00:25.91]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs(149,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(String source)&#xD;
+[xUnit.net 00:00:25.91]            at InvokeStub_TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(Object, Span`1)&#xD;
+[xUnit.net 00:00:25.91]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:25.94]       export default interface Box&lt;T&gt; { value: T; }&#xD;
+[xUnit.net 00:00:25.94]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:25.94]       (shift 할 수 없습니다 {., &lt;, is, &amp;, |, extends, [, {, ,, ?} 와야 합니다)&#xD;
+[xUnit.net 00:00:25.94]       Stack Trace:&#xD;
+[xUnit.net 00:00:25.94]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs(166,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.ModuleFixture.Accept(String source)&#xD;
+[xUnit.net 00:00:25.94]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptDeclarationTests.cs(149,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(String source)&#xD;
+[xUnit.net 00:00:25.94]            at InvokeStub_TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(Object, Span`1)&#xD;
+[xUnit.net 00:00:25.94]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:25.98]   Finished:    Parse.FrontEnd.Parsers.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:37:25.1906813+09:00">
+        <Text>[xUnit.net 00:00:25.80]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: "export declare namespace Tools { function run(): v"···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:37:25.2300396+09:00">
+        <Text>[xUnit.net 00:00:25.84]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: "namespace Outer { export interface Options { debug"···) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:37:25.2751191+09:00">
+        <Text>[xUnit.net 00:00:25.88]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: "export interface Box&lt;T&gt; { value: T; }") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:37:25.3016405+09:00">
+        <Text>[xUnit.net 00:00:25.91]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: "export type Pair&lt;T&gt; = [T, T];") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:37:25.3291341+09:00">
+        <Text>[xUnit.net 00:00:25.94]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: "export default interface Box&lt;T&gt; { value: T; }") [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,461 @@
+[
+  {
+    "path": "language/expressions/assignment/dstr/obj-rest-before-comma-invalid.js",
+    "status": "added",
+    "features": [
+      "object-rest",
+      "destructuring-binding"
+    ],
+    "flags": [
+      "generated"
+    ],
+    "negativePhase": "parse",
+    "negativeType": "SyntaxError",
+    "esid": "sec-variable-statement-runtime-semantics-evaluation",
+    "expectAccept": false,
+    "description": "Object rest element cannot be followed by a comma in ObjectAssignmentPattern. (AssignmentExpression)",
+    "excludedFeatures": [],
+    "sha256": "7c8ca3b348aa65f2a7581ca594622cadf91670e6cdcdbc912c558b9dfe7e36f6",
+    "variants": 2
+  },
+  {
+    "path": "language/expressions/dynamic-import/import-fulfilled-member-of-errored-cycle.js",
+    "status": "added",
+    "features": [
+      "top-level-await",
+      "dynamic-import"
+    ],
+    "flags": [
+      "async"
+    ],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-moduleevaluation",
+    "expectAccept": true,
+    "description": "Dynamic import of a fulfilled member of an errored async cycle rejects with the recorded evaluation error\n",
+    "excludedFeatures": [],
+    "sha256": "f88cc90a6755753ff88bcff5312d4322eed5cf23b4407fcdbf7e80b591c51d33",
+    "variants": 2
+  },
+  {
+    "path": "language/import/import-defer/deferred-namespace-object/json-module.js",
+    "status": "added",
+    "features": [
+      "import-defer",
+      "import-attributes",
+      "json-modules"
+    ],
+    "flags": [
+      "module"
+    ],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-modulenamespacecreate",
+    "expectAccept": true,
+    "description": "Deferred namespaces of JSON modules have a \"Deferred Module\" @@toStringTag and expose the parsed JSON value as their \"default\" export\n",
+    "excludedFeatures": [
+      "import-defer"
+    ],
+    "sha256": "229249e61df45c0b3600f5a48f0030704b4f8cb7905968f7718e8442c1e9caea",
+    "variants": 1
+  },
+  {
+    "path": "language/import/import-defer/evaluation-top-level-await/async-cycle-dependency-of-deferred-module/main.js",
+    "status": "added",
+    "features": [
+      "import-defer",
+      "top-level-await",
+      "dynamic-import",
+      "promise-with-resolvers"
+    ],
+    "flags": [
+      "module",
+      "async"
+    ],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-IsModuleSCCEvaluated",
+    "expectAccept": true,
+    "description": "Deferred evaluation waits for an in-flight async cycle in the deferred graph\n",
+    "excludedFeatures": [
+      "import-defer"
+    ],
+    "sha256": "baebbfdf86a681e77cd8f07a83a698c0f67ea572c11dcc3e3fb6241e4e499375",
+    "variants": 1
+  },
+  {
+    "path": "language/literals/regexp/invalid-quantifier-out-of-order.js",
+    "status": "added",
+    "features": [],
+    "flags": [],
+    "negativePhase": "parse",
+    "negativeType": "SyntaxError",
+    "esid": "sec-patterns-static-semantics-early-errors",
+    "expectAccept": false,
+    "description": "Braced quantifier with a lower bound greater than its upper bound\n",
+    "excludedFeatures": [],
+    "sha256": "fd053da2d16d1cc1b8449bdc12eb7b5e811fcc79cc08d489106d739c656cd6e5",
+    "variants": 2
+  },
+  {
+    "path": "language/literals/regexp/u-invalid-quantifier-out-of-order.js",
+    "status": "added",
+    "features": [],
+    "flags": [],
+    "negativePhase": "parse",
+    "negativeType": "SyntaxError",
+    "esid": "sec-patterns-static-semantics-early-errors",
+    "expectAccept": false,
+    "description": "Braced quantifier with a lower bound greater than its upper bound (`u` flag)\n",
+    "excludedFeatures": [],
+    "sha256": "a95b80985f6ba820873dab6596554e1c4cec48603f125260a8743d7f4bd2ad84",
+    "variants": 2
+  },
+  {
+    "path": "language/statements/await-using/initializer-Symbol.asyncDispose-disposed-at-end-of-imported-module.js",
+    "status": "added",
+    "features": [
+      "explicit-resource-management",
+      "top-level-await"
+    ],
+    "flags": [
+      "module",
+      "async"
+    ],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-source-text-module-record-execute-module",
+    "expectAccept": true,
+    "description": "Initialized value is disposed at end of Module imported from other module (Symbol.asyncDispose)",
+    "excludedFeatures": [
+      "explicit-resource-management"
+    ],
+    "sha256": "433317130368c5ee1e3657ad8b91cc9648b032b4a18795ad4a086471cc80e6ca",
+    "variants": 1
+  },
+  {
+    "path": "language/statements/await-using/initializer-Symbol.asyncDispose-disposed-at-end-of-module.js",
+    "status": "added",
+    "features": [
+      "explicit-resource-management",
+      "top-level-await"
+    ],
+    "flags": [
+      "module",
+      "async"
+    ],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-source-text-module-record-execute-module",
+    "expectAccept": true,
+    "description": "Initialized value is disposed at end of Module (Symbol.asyncDispose)",
+    "excludedFeatures": [
+      "explicit-resource-management"
+    ],
+    "sha256": "64c70a10af7afaf2ad52c902ad264be8a9c29b58707ada75e0478d870dfccc34",
+    "variants": 1
+  },
+  {
+    "path": "language/statements/await-using/initializer-Symbol.dispose-disposed-at-end-of-imported-module.js",
+    "status": "added",
+    "features": [
+      "explicit-resource-management",
+      "top-level-await"
+    ],
+    "flags": [
+      "module",
+      "async"
+    ],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-source-text-module-record-execute-module",
+    "expectAccept": true,
+    "description": "Initialized value is disposed at end of Module imported from other module (Symbol.dispose)",
+    "excludedFeatures": [
+      "explicit-resource-management"
+    ],
+    "sha256": "0e7173c14634f7515d274c6dc64c2fd6e92402243fe3602521d4f7e38e0dc033",
+    "variants": 1
+  },
+  {
+    "path": "language/statements/await-using/initializer-Symbol.dispose-disposed-at-end-of-module.js",
+    "status": "added",
+    "features": [
+      "explicit-resource-management",
+      "top-level-await"
+    ],
+    "flags": [
+      "module",
+      "async"
+    ],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-source-text-module-record-execute-module",
+    "expectAccept": true,
+    "description": "Initialized value is disposed at end of Module (Symbol.dispose)",
+    "excludedFeatures": [
+      "explicit-resource-management"
+    ],
+    "sha256": "b4fa527eeefb7ffe4a275a6e92a1f80b96afdb9b78c8871f14ed7b0418a2998b",
+    "variants": 1
+  },
+  {
+    "path": "language/statements/for-in/dstr/obj-rest-before-comma-invalid.js",
+    "status": "added",
+    "features": [
+      "object-rest",
+      "destructuring-binding"
+    ],
+    "flags": [
+      "generated"
+    ],
+    "negativePhase": "parse",
+    "negativeType": "SyntaxError",
+    "esid": "sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation",
+    "expectAccept": false,
+    "description": "Object rest element cannot be followed by a comma in ObjectAssignmentPattern. (For..in statement)",
+    "excludedFeatures": [],
+    "sha256": "4264c3da77fa7038d421316116d934f73726c158c481f2f889bf8d2ef68c66c7",
+    "variants": 2
+  },
+  {
+    "path": "language/statements/for-in/return-from-catch.js",
+    "status": "added",
+    "features": [],
+    "flags": [],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-runtime-semantics-forinofloopevaluation",
+    "expectAccept": true,
+    "description": "Control flow during body evaluation should honor `return` statements within the `catch` block of `try` statements.\n",
+    "excludedFeatures": [],
+    "sha256": "8144bba59dfaee8f42ea989a5bfa9acd2bbb59267ab9915aec700fd7e5d3c15d",
+    "variants": 2
+  },
+  {
+    "path": "language/statements/for-in/return-from-finally.js",
+    "status": "added",
+    "features": [],
+    "flags": [],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-runtime-semantics-forinofloopevaluation",
+    "expectAccept": true,
+    "description": "Control flow during body evaluation should honor `return` statements within the `finally` block of `try` statements.\n",
+    "excludedFeatures": [],
+    "sha256": "6dd369bd02efe8077ed0a59040ce467c3841a525679e2667c4fcc3249ea4b78a",
+    "variants": 2
+  },
+  {
+    "path": "language/statements/for-in/return-from-try.js",
+    "status": "added",
+    "features": [],
+    "flags": [],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-runtime-semantics-forinofloopevaluation",
+    "expectAccept": true,
+    "description": "Control flow during body evaluation should honor `return` statements within `try` blocks.\n",
+    "excludedFeatures": [],
+    "sha256": "d4a0e3f06205f7486bd166b5a9b107e5392cfa227d93b2990474df7fa2b62ac6",
+    "variants": 2
+  },
+  {
+    "path": "language/statements/for-in/return.js",
+    "status": "added",
+    "features": [],
+    "flags": [],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-runtime-semantics-forinofloopevaluation",
+    "expectAccept": true,
+    "description": "Control flow during body evaluation should honor `return` statements.\n",
+    "excludedFeatures": [],
+    "sha256": "9e36aed2a07f1b3c867fa71f5b2f5a917fb499e572a541fcba2d9899ba4a4ded",
+    "variants": 2
+  },
+  {
+    "path": "language/statements/for-of/dstr/obj-rest-before-comma-invalid.js",
+    "status": "added",
+    "features": [
+      "object-rest",
+      "destructuring-binding"
+    ],
+    "flags": [
+      "generated"
+    ],
+    "negativePhase": "parse",
+    "negativeType": "SyntaxError",
+    "esid": "sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation",
+    "expectAccept": false,
+    "description": "Object rest element cannot be followed by a comma in ObjectAssignmentPattern. (For..of statement)",
+    "excludedFeatures": [],
+    "sha256": "f96f9af17c0a7924c4f020b39a347837949dc525701ec4936462db207e4bb5e1",
+    "variants": 2
+  },
+  {
+    "path": "language/statements/using/initializer-disposed-at-end-of-imported-module.js",
+    "status": "added",
+    "features": [
+      "explicit-resource-management"
+    ],
+    "flags": [
+      "module",
+      "async"
+    ],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-source-text-module-record-execute-module",
+    "expectAccept": true,
+    "description": "Initialized value is disposed at end of Module imported from other module",
+    "excludedFeatures": [
+      "explicit-resource-management"
+    ],
+    "sha256": "607eb1e3782f92907c8b978c806e1c7a492ad0459498d0d0aa2a9ee6f327f743",
+    "variants": 1
+  },
+  {
+    "path": "language/statements/using/initializer-disposed-at-end-of-module.js",
+    "status": "added",
+    "features": [
+      "explicit-resource-management"
+    ],
+    "flags": [
+      "module",
+      "async"
+    ],
+    "negativePhase": null,
+    "negativeType": null,
+    "esid": "sec-source-text-module-record-execute-module",
+    "expectAccept": true,
+    "description": "Initialized value is disposed at end of Module",
+    "excludedFeatures": [
+      "explicit-resource-management"
+    ],
+    "sha256": "a288f529cffe1c27ed7d604b45d6b85c4a45d8c9d9cb09092fc4ecbf2f1a9fb8",
+    "variants": 1
+  },
+  {
+    "path": "language/expressions/assignment/dstr/obj-rest-not-last-element-invalid.js",
+    "status": "modified",
+    "features": [
+      "object-rest",
+      "destructuring-binding"
+    ],
+    "flags": [
+      "generated"
+    ],
+    "negativePhase": "parse",
+    "negativeType": "SyntaxError",
+    "esid": "sec-variable-statement-runtime-semantics-evaluation",
+    "expectAccept": false,
+    "description": "Object rest element needs to be the last AssignmentProperty in ObjectAssignmentPattern. (AssignmentExpression)",
+    "excludedFeatures": [],
+    "sha256": "478d226da6e18c3e3f747c93f8379f0b76445ecc4ea5649411dd0d39fa0ac9d5",
+    "variants": 2,
+    "bodyChanged": false,
+    "flagsChanged": false,
+    "expectationChanged": false,
+    "featuresChanged": false
+  },
+  {
+    "path": "language/statements/for-in/dstr/obj-rest-not-last-element-invalid.js",
+    "status": "modified",
+    "features": [
+      "object-rest",
+      "destructuring-binding"
+    ],
+    "flags": [
+      "generated"
+    ],
+    "negativePhase": "parse",
+    "negativeType": "SyntaxError",
+    "esid": "sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation",
+    "expectAccept": false,
+    "description": "Object rest element needs to be the last AssignmentProperty in ObjectAssignmentPattern. (For..in statement)",
+    "excludedFeatures": [],
+    "sha256": "caec56bd3c4c02d2fca14bde9188c1aca83d0216123f03b332ff4352ae172dc9",
+    "variants": 2,
+    "bodyChanged": false,
+    "flagsChanged": false,
+    "expectationChanged": false,
+    "featuresChanged": false
+  },
+  {
+    "path": "language/statements/for-of/dstr/obj-rest-not-last-element-invalid.js",
+    "status": "modified",
+    "features": [
+      "object-rest",
+      "destructuring-binding"
+    ],
+    "flags": [
+      "generated"
+    ],
+    "negativePhase": "parse",
+    "negativeType": "SyntaxError",
+    "esid": "sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation",
+    "expectAccept": false,
+    "description": "Object rest element needs to be the last AssignmentProperty in ObjectAssignmentPattern. (For..of statement)",
+    "excludedFeatures": [],
+    "sha256": "c0ae16cbda2d759980d9372392c49eb7af96c48fabee0b743ac095cb6e3dedc4",
+    "variants": 2,
+    "bodyChanged": false,
+    "flagsChanged": false,
+    "expectationChanged": false,
+    "featuresChanged": false
+  },
+  {
+    "path": "language/expressions/assignment/dstr/array-rest-elision-invalid.js",
+    "status": "removed",
+    "features": [
+      "destructuring-binding"
+    ],
+    "flags": [
+      "generated"
+    ],
+    "negativePhase": "parse",
+    "negativeType": "SyntaxError",
+    "esid": "sec-variable-statement-runtime-semantics-evaluation",
+    "expectAccept": false,
+    "description": "ArrayAssignmentPattern may not include elisions following an AssignmentRestElement in a AssignmentElementList. (AssignmentExpression)",
+    "excludedFeatures": [],
+    "sha256": "43ae4088fdc4bdf4335b629a148f6e00cd1d2069d19f87aabe7602475167f156",
+    "variants": 2
+  },
+  {
+    "path": "language/statements/for-in/dstr/array-rest-elision-invalid.js",
+    "status": "removed",
+    "features": [
+      "destructuring-binding"
+    ],
+    "flags": [
+      "generated"
+    ],
+    "negativePhase": "parse",
+    "negativeType": "SyntaxError",
+    "esid": "sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation",
+    "expectAccept": false,
+    "description": "ArrayAssignmentPattern may not include elisions following an AssignmentRestElement in a AssignmentElementList. (For..in statement)",
+    "excludedFeatures": [],
+    "sha256": "4522a56d23e88b013533abdd07c1fb879a94b247c319f1187f8ec7fb895c5d22",
+    "variants": 2
+  },
+  {
+    "path": "language/statements/for-of/dstr/array-rest-elision-invalid.js",
+    "status": "removed",
+    "features": [
+      "destructuring-binding"
+    ],
+    "flags": [
+      "generated"
+    ],
+    "negativePhase": "parse",
+    "negativeType": "SyntaxError",
+    "esid": "sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation",
+    "expectAccept": false,
+    "description": "ArrayAssignmentPattern may not include elisions following an AssignmentRestElement in a AssignmentElementList. (For..of statement)",
+    "excludedFeatures": [],
+    "sha256": "38d88d3a83d93eeedcbcabb58e096c68c0e9041570cdf92df67de071c5da500d",
+    "variants": 2
+  }
+]

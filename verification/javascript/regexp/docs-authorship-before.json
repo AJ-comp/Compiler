@@ -1,0 +1,37 @@
+{
+  "docs\\ko\\javascript-expressions.html": {
+    "paragraphs": [
+      "<p><strong>저자의 설계와 이번 언어 지원의 관계</strong></p>",
+      "<p>Janglim의 핵심 LR 구조는 저자가 설계하고 작성했습니다. 이번 JavaScript 표현식 문법·토큰 규칙·정적 검사와 문서는 그 기존 구조 위에 대화에서 합의한 범위를 AI 보조로 추가한 언어 지원 계층입니다. 기존 엔진에 담긴 저자의 설계·구현과 새로 추가한 언어 지원을 구분합니다.</p>"
+    ],
+    "sha256": "3c7039063340cd4f26cd65283d074a3f9004de19b0528de6a6cd43586d9e2a4d"
+  },
+  "docs\\ko\\javascript-statements.html": {
+    "paragraphs": [
+      "<p><strong>저자의 설계와 이번 언어 지원의 관계</strong></p>",
+      "<p>Janglim의 핵심 LR 구조는 저자가 설계하고 작성했습니다. 이번 JavaScript 함수·문장·선언 문법, 토큰 정책·정적 검사·테스트와 문서는 그 기존 구조 위에 대화에서 합의한 범위를 AI 보조로 추가한 언어 지원 계층입니다. 기존 엔진에 담긴 저자의 설계·구현과 새로 추가한 언어 지원을 구분합니다.</p>"
+    ],
+    "sha256": "69ce14f9c065497536a271f1f889958aceb2dcd35405d243371909501acf4c7c"
+  },
+  "docs\\ko\\javascript-classes.html": {
+    "paragraphs": [
+      "<p><strong>저자의 설계와 이번 언어 지원의 관계</strong></p>",
+      "<p>Janglim의 핵심 LR 구조는 저자가 설계하고 작성했습니다. 이번 JavaScript 클래스 문법·토큰 정책·정적 검사·테스트와 문서는 그 기존 구조 위에 대화에서 합의한 범위를 AI 보조로 추가한 언어 지원 계층입니다. 기존 엔진에 담긴 저자의 설계·구현과 새로 추가한 언어 지원을 구분합니다.</p>"
+    ],
+    "sha256": "83c96f3c8bbf486d62dbfb4e8a28f7518387f07b2f9f8f7c66ed9bf3a90981ad"
+  },
+  "docs\\ko\\javascript-modules.html": {
+    "paragraphs": [
+      "<p><strong>저자의 설계와 이번 언어 지원의 관계</strong></p>",
+      "<p>Janglim의 핵심 LR 구조는 저자가 설계하고 작성했습니다. 이번 JavaScript 모듈 문법·토큰 정책·정적 검사·테스트와 문서는 그 기존 구조 위에 대화에서 합의한 범위를 AI 보조로 추가한 언어 지원 계층입니다. 기존 엔진에 담긴 저자의 설계·구현과 새로 추가한 언어 지원을 구분합니다.</p>"
+    ],
+    "sha256": "d971e5923b5e234c05dfb1c6a1f6a7d86725dcaf8b7504b56ff9c92e901e0b62"
+  },
+  "grammars\\javascript\\README.md": {
+    "paragraphs": [
+      "## 기준과 저자 맥락",
+      "Janglim의 핵심 LR 구조는 저자가 설계하고 작성했습니다. 이번 JavaScript 표현식 문법·토큰 규칙·정적 검사·테스트와 문서는 그 기존 구조 위에 대화에서 합의한 범위를 AI 보조로 추가한 언어 지원 계층입니다. 기존 엔진에 담긴 저자의 설계·구현과 새로 추가한 언어 지원을 구분합니다.\n"
+    ],
+    "sha256": "45c2fb9d6bd760e89045e9dbe56577224def18e7a09d6265725c0c3d833b9485"
+  }
+}

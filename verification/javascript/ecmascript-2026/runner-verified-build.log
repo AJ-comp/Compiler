@@ -1,0 +1,26 @@
+  복원할 프로젝트를 확인하는 중...
+  복원할 모든 프로젝트가 최신 상태입니다.
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\ecmascript-2026\runner-verified\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\ecmascript-2026\runner-verified\Parse.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\KeyManager.cs(17,22): warning CS0414: 'KeyManager.meaningUnitKey' 필드가 할당되었지만 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\Parse.FrontEnd.csproj]
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\ecmascript-2026\runner-verified\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\ecmascript-2026\runner-verified\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\ecmascript-2026\runner-verified\Parse.FrontEnd.Grammars.Ebnf.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(51,48): warning CS0067: 'LRParser.ShiftAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(20,62): warning CS0067: 'LLParser.ParseTreeCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(49,48): warning CS0067: 'LRParser.ReduceAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(21,55): warning CS0067: 'LLParser.ASTCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\ecmascript-2026\runner-verified\Parse.FrontEnd.Parsers.dll
+  Janglim.Test262 -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\ecmascript-2026\runner-verified\Janglim.Test262.dll
+
+빌드했습니다.
+
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\KeyManager.cs(17,22): warning CS0414: 'KeyManager.meaningUnitKey' 필드가 할당되었지만 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\Parse.FrontEnd.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(51,48): warning CS0067: 'LRParser.ShiftAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(20,62): warning CS0067: 'LLParser.ParseTreeCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(49,48): warning CS0067: 'LRParser.ReduceAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(21,55): warning CS0067: 'LLParser.ASTCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+    경고 5개
+    오류 0개
+
+경과 시간: 00:00:37.12

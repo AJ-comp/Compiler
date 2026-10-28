@@ -1,0 +1,4658 @@
+{
+  "versions": {
+    "node": "24.12.0",
+    "acorn": "8.15.0",
+    "ada": "3.3.0",
+    "amaro": "1.1.5",
+    "ares": "1.34.5",
+    "brotli": "1.1.0",
+    "cjs_module_lexer": "2.1.0",
+    "cldr": "47.0",
+    "icu": "77.1",
+    "llhttp": "9.3.0",
+    "modules": "137",
+    "napi": "10",
+    "nbytes": "0.1.1",
+    "ncrypto": "0.0.1",
+    "nghttp2": "1.67.1",
+    "openssl": "3.5.4",
+    "simdjson": "4.1.0",
+    "simdutf": "6.4.0",
+    "sqlite": "3.50.4",
+    "tz": "2025b",
+    "undici": "7.16.0",
+    "unicode": "16.0",
+    "uv": "1.51.0",
+    "uvwasi": "0.0.23",
+    "v8": "13.6.233.17-node.37",
+    "zlib": "1.3.1-470d3a2",
+    "zstd": "1.5.7"
+  },
+  "compileOnly": true,
+  "cases": [
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { return await work(); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { await first; await second; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { return await await work(); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { return 1 + await value * 2; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { return typeof await value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { return (await value).field; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { return (await factory)(); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { await /a/.test(value); return value / divisor; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { return `${await first}:${await second}`; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { return tag`value ${await task}`; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { return await import('module'); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f({value}, [first] = list, ...rest) { return await value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f({[key]: value = fallback} = source) { return value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f(value = () => await) { return value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f(value = function(await) { return await; }) { return value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { function inner(await) { return await; } return inner; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { const inner = () => await; return inner; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { const inner = async () => await value; return inner; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { function* inner() { yield value; } return inner; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { async function inner() { await value; } return inner; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { return new.target; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "const f = async function(value) { return await value; };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "const f = async function named(value) { return await value; };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "const f = async /* same line */ function named() {};",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { try { return await work(); } catch ({message}) { throw message; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { for (let i = await first; i < await last; i++) await step(i); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { for (const value of await source) { await consume(value); } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { return\nvalue; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { throw await failure; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { await\nwork(); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_functions_accept_await_and_preserve_nested_function_boundaries",
+      "valid": true,
+      "text": "async function f() { await/*\n*/work(); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f(await) {}",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f(\\u0061wait) {}",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f({await}) {}",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f([await]) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f(...await) {}",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f(value = await task) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f(value = (await task)) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f({[await task]: value}) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f(value = `${await task}`) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f() { let await; }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f() { var await; }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f() { function await() {} }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f() { class await {} }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f() { try {} catch (await) {} }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f() { await: while (true) break await; }",
+      "actual": false,
+      "message": "Unexpected token ':'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f() { await; }",
+      "actual": false,
+      "message": "Unexpected token ';'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f() { await * values; }",
+      "actual": false,
+      "message": "Unexpected token '*'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f() { await value ** 2; }",
+      "actual": false,
+      "message": "Unary operator used immediately before exponentiation expression. Parenthesis must be used to disambiguate operator precedence"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f() { yield value; }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "function f() { await value; }",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f() { function inner() { await value; } }",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f() { const inner = () => await value; }",
+      "actual": false,
+      "message": "Unexpected identifier 'value'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async\nfunction f() { await value; }",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async/*\n*/function f() { await value; }",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f(first, first) {}",
+      "actual": false,
+      "message": "Duplicate parameter name not allowed in this context"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f({value}, value) {}",
+      "actual": false,
+      "message": "Duplicate parameter name not allowed in this context"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f(value = 1) { 'use strict'; }",
+      "actual": false,
+      "message": "Illegal 'use strict' directive in function with non-simple parameter list"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f(value) { let value; }",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f(eval) {}",
+      "actual": false,
+      "message": "Unexpected eval or arguments in strict mode"
+    },
+    {
+      "goal": "script",
+      "group": "Async_parameters_and_body_context_reject_reserved_await_and_illegal_suspension",
+      "valid": false,
+      "text": "async function f(arguments) {}",
+      "actual": false,
+      "message": "Unexpected eval or arguments in strict mode"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async value => await value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async () => await work();",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async (first, second,) => await first + await second;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async ({value}, [first] = list, ...rest) => await value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async (...[first, ...rest]) => first;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async ({value = fallback} = source) => value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async value => ({value: await value});",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async value => { return await value; };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async () => {};",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async () => async value => await value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async (value = async () => await task) => value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async (value = function(await) { return await; }) => value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async (value = () => await) => value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async /* same line */ value => await value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async /* same line */ (value) => await value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async (value\n) => await value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async value =>\nawait value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async () => /a/;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async () => await /a/.test(value);",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async () => await value / divisor;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async () => `${await value}`;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async () => { for await (const value of stream) await consume(value); };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "function outer() { return async () => new.target; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "class A extends Base { method() { return async () => super.value; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async async => async;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_accept_both_parameter_forms_and_concise_or_block_bodies",
+      "valid": true,
+      "text": "const f = async (of, get, set) => await of + get + set;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async (value = await => await) => value;",
+      "actual": false,
+      "message": "'await' is not a valid identifier name in an async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async await => await;",
+      "actual": false,
+      "message": "'await' is not a valid identifier name in an async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async (await) => await;",
+      "actual": false,
+      "message": "'await' is not a valid identifier name in an async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async ({await}) => 1;",
+      "actual": false,
+      "message": "'await' is not a valid identifier name in an async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async (value = await task) => value;",
+      "actual": false,
+      "message": "missing ) after argument list"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async ({[await task]: value}) => value;",
+      "actual": false,
+      "message": "Unexpected identifier 'task'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async (value = `${await task}`) => value;",
+      "actual": false,
+      "message": "Missing } in template expression"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async (first, first) => first;",
+      "actual": false,
+      "message": "Duplicate parameter name not allowed in this context"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async ({value}, value) => value;",
+      "actual": false,
+      "message": "Duplicate parameter name not allowed in this context"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async (value = 1) => { 'use strict'; };",
+      "actual": false,
+      "message": "Illegal 'use strict' directive in function with non-simple parameter list"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async (value) => { let value; };",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async (...rest,) => rest;",
+      "actual": false,
+      "message": "Rest parameter must be last formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async (first + second) => first;",
+      "actual": false,
+      "message": "Invalid destructuring assignment target"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async (first, (second)) => first;",
+      "actual": false,
+      "message": "Invalid destructuring assignment target"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async\nvalue => await value;",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async\n() => await value;",
+      "actual": false,
+      "message": "Malformed arrow function parameter list"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async/*\n*/(value) => await value;",
+      "actual": false,
+      "message": "Malformed arrow function parameter list"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async (value)\n=> await value;",
+      "actual": false,
+      "message": "Unexpected token '=>'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async value\n=> await value;",
+      "actual": false,
+      "message": "Unexpected token '=>'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async () => { yield value; };",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async () => { await; };",
+      "actual": false,
+      "message": "Unexpected token ';'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async () => { function inner() { await value; } };",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async () => super.value;",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async () => new.target;",
+      "actual": false,
+      "message": "new.target expression is not allowed here"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = new async value => value;",
+      "actual": false,
+      "message": "Malformed arrow function parameter list"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async * value => value;",
+      "actual": false,
+      "message": "Malformed arrow function parameter list"
+    },
+    {
+      "goal": "script",
+      "group": "Async_arrows_enforce_line_terminators_parameters_and_lexical_context",
+      "valid": false,
+      "text": "const f = async (eval) => eval;",
+      "actual": false,
+      "message": "Unexpected eval or arguments in strict mode"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function * f() { yield; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { yield* values; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { yield * values; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { yield*\nvalues; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { return yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { return (yield value) + (yield other); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { yield first = second; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { yield first ? second : third; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { yield first, second; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { yield yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { yield* yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { yield\nvalue; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { yield/*\n*/value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { yield /a/; yield value / divisor; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { return `${yield value}`; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { for (const value of values) yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { for (let value = yield first; value; value = yield next) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { for ((yield value) in source) {} }",
+      "actual": false,
+      "message": "Invalid left-hand side in for-loop"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { function inner(await) { return await; } yield inner; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { const inner = async () => await task; yield inner; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { async function inner() { await task; } yield inner; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { function* inner() { yield value; } yield* inner(); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f() { return new.target; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f({value}, [first] = list, ...rest) { yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f(value = function* () { yield task; }) { yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f(value = () => 1) { yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "const f = function* () { yield value; };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "const f = function* named() { yield value; };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_accept_yield_delegation_precedence_and_nested_function_boundaries",
+      "valid": true,
+      "text": "function* f(await) { yield await; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { yield** values; }",
+      "actual": false,
+      "message": "Unexpected token '**'"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f(yield) {}",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f(\\u0079ield) {}",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f({yield}) {}",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f([yield]) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f(value = yield task) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f(value = yield) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f({[yield task]: value}) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f(value = `${yield task}`) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { let yield; }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { yield: while (true) break yield; }",
+      "actual": false,
+      "message": "Unexpected token ':'"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { yield = value; }",
+      "actual": false,
+      "message": "Unexpected token '='"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { ++yield; }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { (yield value) = other; }",
+      "actual": false,
+      "message": "Invalid left-hand side in assignment"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { yield\n* values; }",
+      "actual": false,
+      "message": "Unexpected token '*'"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { yield/*\n*/*values; }",
+      "actual": false,
+      "message": "Unexpected token '*'"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { yield*; }",
+      "actual": false,
+      "message": "Unexpected token ';'"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { yield value **; }",
+      "actual": false,
+      "message": "Unexpected token ';'"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { await value; }",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function f() { yield value; }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { function inner() { yield value; } }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { const inner = () => yield value; }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f() { for await (const value of values) {} }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f(first, first) {}",
+      "actual": false,
+      "message": "Duplicate parameter name not allowed in this context"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f(value) { const value = 1; }",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f(value = 1) { 'use strict'; }",
+      "actual": false,
+      "message": "Illegal 'use strict' directive in function with non-simple parameter list"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f(eval) {}",
+      "actual": false,
+      "message": "Unexpected eval or arguments in strict mode"
+    },
+    {
+      "goal": "script",
+      "group": "Generators_reject_yield_in_parameters_wrong_function_kinds_and_illegal_targets",
+      "valid": false,
+      "text": "function* f(arguments) {}",
+      "actual": false,
+      "message": "Unexpected eval or arguments in strict mode"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function * f() { yield await work(); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() { await work(); yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() { yield* values; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() { yield* await values; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f() { yield await yield value; }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() { yield; return await done; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() { yield\nawait value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() { yield /a/; await /b/; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() { yield `${await value}:${yield other}`; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() { for await (const value of stream) { yield value; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f({value}, [first] = list, ...rest) { yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f(value = async function* () { yield await task; }) { yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() { function inner(await) { return await; } yield inner; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() { function* inner() { yield value; } yield* inner(); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() { async function inner() { await value; } yield inner; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async function* f() { return new.target; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "const f = async function* () { yield await work(); };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "const f = async function* named() { yield await work(); };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_combine_await_yield_delegation_and_for_await",
+      "valid": true,
+      "text": "async/* same line */function* f() { yield await work(); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f(await) {}",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f(yield) {}",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f(value = await task) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f(value = yield task) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f({[await task]: value}) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f({[yield task]: value}) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f() { let await; }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f() { let yield; }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async\nfunction* f() { yield await task; }",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f() { yield\n* values; }",
+      "actual": false,
+      "message": "Unexpected token '*'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f(first, first) {}",
+      "actual": false,
+      "message": "Duplicate parameter name not allowed in this context"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f(value) { let value; }",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f(value = 1) { 'use strict'; }",
+      "actual": false,
+      "message": "Illegal 'use strict' directive in function with non-simple parameter list"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f() { const nested = () => await value; }",
+      "actual": false,
+      "message": "Unexpected identifier 'value'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_generators_reject_both_suspension_keywords_in_parameters",
+      "valid": false,
+      "text": "async function* f() { const nested = () => yield value; }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { for await (const value of stream) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { for await (let value of stream) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { for await (var value of stream) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { for await (value of stream) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { for await (object.value of stream) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { for await ({value} of stream) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { for await ([value, ...rest] of stream) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { for await (const {value} of stream) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { for await (const [value] of await stream) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { for await (async of stream) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { for await (const of of stream) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { outer: for await (const value of stream) { continue outer; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_checks_its_function_context_and_binding_head",
+      "valid": true,
+      "text": "async function f() { for\nawait\n(const value of stream) {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "for await (const value of stream) {}",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "function f() { for await (const value of stream) {} }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "async function f() { function inner() { for await (const value of stream) {} } }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "async function f() { for await (const value in stream) {} }",
+      "actual": false,
+      "message": "Unexpected token 'in'"
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "async function f() { for await (value in stream) {} }",
+      "actual": false,
+      "message": "Unexpected token 'in'"
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "async function f() { for await (;;) {} }",
+      "actual": false,
+      "message": "Unexpected token ';'"
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "async function f() { for await (const first, second of stream) {} }",
+      "actual": false,
+      "message": "Invalid left-hand side in for-await-of loop: Must have a single binding."
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "async function f() { for await (const value = 1 of stream) {} }",
+      "actual": false,
+      "message": "for-await-of loop variable declaration may not have an initializer."
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "async function f() { for await (var value = 1 of stream) {} }",
+      "actual": false,
+      "message": "for-await-of loop variable declaration may not have an initializer."
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "async function f() { for await (first + second of stream) {} }",
+      "actual": false,
+      "message": "Unexpected token '+'"
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "async function f() { for await (value?.field of stream) {} }",
+      "actual": false,
+      "message": "Invalid left-hand side in for-loop"
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "async function f() { for await (const await of stream) {} }",
+      "actual": false,
+      "message": "Invalid left-hand side in for-await-of loop: Must have a single binding."
+    },
+    {
+      "goal": "script",
+      "group": "For_await_of_rejects_ordinary_functions_in_heads_and_invalid_binding_targets",
+      "valid": false,
+      "text": "async function f() { for await (const value of first, second) {} }",
+      "actual": false,
+      "message": "Unexpected token ','"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { run() {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { run(value) { return value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { run({value}, [first] = list, ...rest) { return value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { 'run'() {}, 1() {}, 1n() {}, [key]() {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { if() {}, await() {}, yield() {}, static() {}, get() {}, set() {}, async() {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { constructor() { return super.value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { __proto__() {}, __proto__: value };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { get value() { return 1; }, set value(next) { this.stored = next; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { get [key]() { return super.value; }, set [key]({value}) { super.value = value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { get 'value'() { return 1; }, set 1(next) {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { get value() { return new.target; }, set value(next = fallback) {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { set value([first, ...rest]) {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { get value() {}, get value() {}, set value(next) {}, set value(next) {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { run() {}, run() {}, value: 1, value: 2 };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { run() { return () => super.value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { run() { return new.target; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { run() { return this; }, ...other, tail() {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { run() { return /a/; } }; /b/.test(value);",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { run() { return `${this.value}`; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { get\nvalue() {}, set\nvalue(next) {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { ['__proto__']() {}, '__proto__'() {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { await(await) { return await; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { run(value) { var value; return value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "const object = { get value() { function nested() { return new.target; } return nested; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "({ run() {} }).run();",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_support_property_names_bindings_and_super",
+      "valid": true,
+      "text": "({ get value() { return 1; } }).value / divisor;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { get value(arg) {} };",
+      "actual": false,
+      "message": "Getter must not have any formal parameters."
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { get value(...rest) {} };",
+      "actual": false,
+      "message": "Getter must not have any formal parameters."
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { set value() {} };",
+      "actual": false,
+      "message": "Setter must have exactly one formal parameter."
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { set value(first, second) {} };",
+      "actual": false,
+      "message": "Setter must have exactly one formal parameter."
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { set value(...rest) {} };",
+      "actual": false,
+      "message": "Setter function argument must not be a rest parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { run(first, first) {} };",
+      "actual": false,
+      "message": "Duplicate parameter name not allowed in this context"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { run(eval) {} };",
+      "actual": false,
+      "message": "Unexpected eval or arguments in strict mode"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { run(value) { let value; } };",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { run(value = 1) { 'use strict'; } };",
+      "actual": false,
+      "message": "Illegal 'use strict' directive in function with non-simple parameter list"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { run() { super(); } };",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { constructor() { super(); } };",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { run() { function nested() { return super.value; } } };",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { get value() { super(); } };",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { run() { await value; } };",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { run() { yield value; } };",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { get value() { await task; } };",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { #value() {} };",
+      "actual": false,
+      "message": "Unexpected identifier '#value'"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { static run() {} };",
+      "actual": false,
+      "message": "Unexpected identifier 'run'"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { get value: 1 };",
+      "actual": false,
+      "message": "Unexpected token ':'"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { set value = 1 };",
+      "actual": false,
+      "message": "Unexpected token '='"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { get async value() {} };",
+      "actual": false,
+      "message": "Unexpected identifier 'value'"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { set * value(next) {} };",
+      "actual": false,
+      "message": "Unexpected token '*'"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { run() {} tail() {} };",
+      "actual": false,
+      "message": "Unexpected identifier 'tail'"
+    },
+    {
+      "goal": "script",
+      "group": "Object_methods_and_accessors_reject_invalid_arity_binding_and_super_calls",
+      "valid": false,
+      "text": "const object = { run() {}; tail() {} };",
+      "actual": false,
+      "message": "Unexpected token ';'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "const object = { async run() { await work(); } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "const object = { *run() { yield value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "const object = { async *run() { yield await value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "const object = { async [key]() { return await work(); }, *'run'() { yield value; }, async *1() {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "const object = { async async() {}, async get() {}, async set() {}, *async() {}, async *async() {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "const object = { async constructor() {}, *constructor() {}, async *constructor() {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "const object = { async run() { return super.value; }, *items() { yield super.value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "const object = { async *items() { for await (const value of super.values) yield value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "const object = { async run() { return () => super.value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "const object = { async run() { return new.target; }, *items() { yield new.target; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "const object = { *\nrun() { yield value; }, async *\nitems() { yield await value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { async run() { return await work(); } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { *items() { yield value; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { async *items() { yield await value; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { static async run() { await work(); } static *items() { yield value; } static async *all() {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { async #run() { await work(); } *#items() { yield value; } async *#all() {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { static async #run() {} static *#items() {} static async *#all() {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { async run({value}, ...rest) { return value; } *items([first] = list) { yield first; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A extends Base { async run() { return await super.run(); } *items() { yield* super.items(); } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A extends Base { async *items() { yield* await super.items(); } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { async ['constructor']() {} *['constructor']() {} async *['constructor']() {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { static async constructor() {} static *constructor() {} static async *constructor() {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { async static() {} *static() {} async *static() {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async #constructor() {} *#items() {} }",
+      "actual": false,
+      "message": "Class constructor may not be a private method"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { async() {} *async() {} async async() {} async *async() {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { static async() {} static *async() {} static async async() {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { async run() { return this.#value; } #value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { *items() { const f = () => this.#value; yield f; } #value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { async *items() { for await (const value of source) yield value; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { async run() { return /a/; } } /b/.test(value);",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_work_in_objects_and_classes",
+      "valid": true,
+      "text": "class A { async run() { return `${await value}`; } *items() { yield `${yield value}`; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { async\nrun() {} };",
+      "actual": false,
+      "message": "Unexpected identifier 'run'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { async/*\n*/run() {} };",
+      "actual": false,
+      "message": "Unexpected identifier 'run'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { async\n*run() {} };",
+      "actual": false,
+      "message": "Unexpected token '*'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { async run(await) {} };",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { *run(yield) {} };",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { async *run(await) {} };",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { async *run(yield) {} };",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { async run(value = await task) {} };",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { *run(value = yield task) {} };",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { async get value() {} };",
+      "actual": false,
+      "message": "Unexpected identifier 'value'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { async set value(next) {} };",
+      "actual": false,
+      "message": "Unexpected identifier 'value'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { *get value() {} };",
+      "actual": false,
+      "message": "Unexpected identifier 'value'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { *async run() {} };",
+      "actual": false,
+      "message": "Unexpected identifier 'run'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { async async run() {} };",
+      "actual": false,
+      "message": "Unexpected identifier 'run'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { async run() { super(); } };",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "const object = { *run() { super(); } };",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async constructor() {} }",
+      "actual": false,
+      "message": "Class constructor may not be an async method"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { *constructor() {} }",
+      "actual": false,
+      "message": "Class constructor may not be a generator"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async *constructor() {} }",
+      "actual": false,
+      "message": "Class constructor may not be a generator"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async 'constructor'() {} }",
+      "actual": false,
+      "message": "Class constructor may not be an async method"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { *'constructor'() {} }",
+      "actual": false,
+      "message": "Class constructor may not be a generator"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { static async prototype() {} }",
+      "actual": false,
+      "message": "Classes may not have a static property named 'prototype'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { static *prototype() {} }",
+      "actual": false,
+      "message": "Classes may not have a static property named 'prototype'"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async #constructor() {} }",
+      "actual": false,
+      "message": "Class constructor may not be a private method"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async #run() {} *#run() {} }",
+      "actual": false,
+      "message": "Identifier '#run' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async run(await) {} }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { *run(yield) {} }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async *run(value = await task) {} }",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async *run(value = yield task) {} }",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async run() { return this.#missing; } }",
+      "actual": false,
+      "message": "Private field '#missing' must be declared in an enclosing class"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A extends Base { async run() { super(); } }",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A extends Base { *run() { super(); } }",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async\nrun() { await task; } }",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { static async\nrun() { await task; } }",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async\n*run() { await task; } }",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async run() { function inner() { return super.value; } } }",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { *run(first, first) {} }",
+      "actual": false,
+      "message": "Duplicate parameter name not allowed in this context"
+    },
+    {
+      "goal": "script",
+      "group": "Async_and_generator_methods_reject_bad_modifiers_constructor_kinds_and_scope",
+      "valid": false,
+      "text": "class A { async run(value = 1) { 'use strict'; } }",
+      "actual": false,
+      "message": "Illegal 'use strict' directive in function with non-simple parameter list"
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "async function f() { class A { [await key]() {} } return A; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "function* f() { class A { [yield key]() {} } yield A; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "async function f() { return { [await key]() {} }; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "function* f() { yield { [yield key]() {} }; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "async function* f() { return { [await key]() {}, [yield value]() {} }; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "async function f() { return class extends (await Base) {}; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "function* f() { yield class extends (yield Base) {}; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "async function f() { return { get value() { return await; } }; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "async function f() { return class { method(await) { return await; } }; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "function* f() { return { async run() { await value; } }; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "async function f() { class A { field = await; } return A; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers",
+      "valid": false,
+      "text": "async function f() { class A { static field = await; } return A; }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "async function f() { return function(await) { return await; }; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "const async = value; async(value); async\nfunction f() {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "let await = value; await += 1; const f = await => await;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "async(value); async(value, other); async({value: 1});",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers",
+      "valid": false,
+      "text": "async function f() { class A { field = await value; } }",
+      "actual": false,
+      "message": "Unexpected identifier 'value'"
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers",
+      "valid": false,
+      "text": "async function f() { class A { static field = await value; } }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers",
+      "valid": false,
+      "text": "async function f() { class A { static { await value; } } }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers",
+      "valid": false,
+      "text": "function* f() { class A { field = yield value; } }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers",
+      "valid": false,
+      "text": "function* f() { class A { static { yield value; } } }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers",
+      "valid": false,
+      "text": "async function f() { return { get value() { await task; } }; }",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers",
+      "valid": false,
+      "text": "function* f() { return { run() { yield value; } }; }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers",
+      "valid": false,
+      "text": "async function f() { return class { method() { await value; } }; }",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers",
+      "valid": false,
+      "text": "async function f(value = class { [await task]() {} }) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers",
+      "valid": false,
+      "text": "function* f(value = class { [yield task]() {} }) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate",
+      "valid": true,
+      "text": "async function f() { await class { [await value]() {} }; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export async function f() { await task; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export function* f() { yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export async function* f() { yield await value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export default async function() { await task; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export default async function named() { await task; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export default function* () { yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export default function* named() { yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export default async function* () { yield await value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export default async function* named() { yield await value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export const f = async value => await value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export default async () => await task;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "async function f() {} export {f};",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "function* f() {} export {f};",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "async function* f() {} export {f};",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "import value from 'module'; export async function f() { return await value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export async function f() { return import.meta; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export function* f() { yield import.meta; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export default { async run() { await task; }, *items() { yield value; }, get value() {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export class A { async run() { await task; } *items() { yield value; } async *all() {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "await (async () => await task)();",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "for await (const value of stream) { await value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "const object = { [await key]() {}, async run() {}, *items() {} }; export {object};",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export async function f() { for await (const value of stream) await value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export default async function* () { for await (const value of stream) yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "const f = async () => import.meta.url; export default f;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export async function await() {}",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export function* await() {}",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export const f = async await => await;",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export function* f() { await value; }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export default function* (await) {}",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export default async function* (yield) {}",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export async function f() {} export {f};",
+      "actual": false,
+      "message": "Duplicate export of 'f'"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export default async function() {} export default function* () {}",
+      "actual": false,
+      "message": "Identifier '.default' has already been declared"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "import f from 'module'; async function f() {}",
+      "actual": false,
+      "message": "Identifier 'f' has already been declared"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "let f; function* f() {}",
+      "actual": false,
+      "message": "Identifier 'f' has already been declared"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export default async\nfunction() {}",
+      "actual": false,
+      "message": "Function statements require a function name"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_export_all_function_kinds_and_preserve_top_level_await",
+      "valid": true,
+      "text": "export default async *function() {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export const f = () => await value;",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export const object = { run(await) { return await; } };",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export const object = { get value() { return await; } };",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export async function f() { function inner(await) { return await; } }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export async function* f() { yield\n* values; }",
+      "actual": false,
+      "message": "Unexpected token '*'"
+    },
+    {
+      "goal": "module",
+      "group": "Modules_reject_reserved_await_duplicate_exports_and_function_scope_errors",
+      "valid": false,
+      "text": "export class A { async constructor() {} }",
+      "actual": false,
+      "message": "Class constructor may not be an async method"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_cross_computed_names_and_heritage_but_stop_at_nested_bodies",
+      "valid": true,
+      "text": "async function f(value = ({ run() { return await; } })) {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_cross_computed_names_and_heritage_but_stop_at_nested_bodies",
+      "valid": true,
+      "text": "async function f(value = ({ async run() { await task; } })) {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_cross_computed_names_and_heritage_but_stop_at_nested_bodies",
+      "valid": true,
+      "text": "async function f(value = ({ get value() { return await; } })) {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_cross_computed_names_and_heritage_but_stop_at_nested_bodies",
+      "valid": true,
+      "text": "async function f(value = class { field = await; }) {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_cross_computed_names_and_heritage_but_stop_at_nested_bodies",
+      "valid": true,
+      "text": "async function f(value = class { async run() { await task; } }) {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_cross_computed_names_and_heritage_but_stop_at_nested_bodies",
+      "valid": true,
+      "text": "function* f(value = ({ *run() { yield task; } })) {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_cross_computed_names_and_heritage_but_stop_at_nested_bodies",
+      "valid": true,
+      "text": "function* f(value = class { *run() { yield task; } }) {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_cross_computed_names_and_heritage_but_stop_at_nested_bodies",
+      "valid": true,
+      "text": "function* f(value = function* () { yield task; }) {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_cross_computed_names_and_heritage_but_stop_at_nested_bodies",
+      "valid": true,
+      "text": "async function* f(value = async function* () { yield await task; }) {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_cross_computed_names_and_heritage_but_stop_at_nested_bodies",
+      "valid": true,
+      "text": "async function f(value = async () => await task) {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_cross_computed_names_and_heritage_but_stop_at_nested_bodies",
+      "valid": true,
+      "text": "async function* f(value = async () => await task) {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "async function f(value = ({ [await task]() {} })) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "async function f(value = ({ async [await task]() {} })) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "async function f(value = ({ get [await task]() {} })) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "async function f(value = ({ [await task]: 1 })) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "async function f(value = class extends (await Base) {}) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "async function f(value = class { [await key]() {} }) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "async function f(value = class { [await key] = 1; }) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "function* f(value = ({ [yield task]() {} })) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "function* f(value = ({ *[yield task]() {} })) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "function* f(value = ({ get [yield task]() {} })) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "function* f(value = class extends (yield Base) {}) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "function* f(value = class { [yield key]() {} }) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "async function* f(value = ({ [await task]() {} })) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "async function* f(value = ({ [yield task]() {} })) {}",
+      "actual": false,
+      "message": "Yield expression not allowed in formal parameter"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "async function f(value = await => await) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "async function f(value = (await) => await) {}",
+      "actual": false,
+      "message": "Illegal await-expression in formal parameters of async function"
+    },
+    {
+      "goal": "script",
+      "group": "Parameter_contains_checks_reject_suspension_in_computed_names_and_heritage",
+      "valid": false,
+      "text": "async function f(value = ({await}) => await) {}",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "async function() { return await task; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "async function named(value) { return await value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "function* () { yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "function* named() { yield* values; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "async function* () { yield await value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "async function* named() { yield* await values; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "async value => await value",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "async () => await task",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "async ({value} = source, ...rest) => value",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "({ run() {}, get value() {}, set value(next) {} })",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "({ async run() { await task; }, *items() { yield value; }, async *all() {} })",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "({ async run() { return super.value; } })",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "({ get value() { return super.value; } })",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "({ async: value, get: other, set: third })",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "class { async run() { await task; } *items() { yield value; } async *all() {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "(async () => /a/) / divisor",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "async () => `${await value}`",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "function* () { yield /a/; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "async function() { return import('module'); }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "async(await)",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "await => await",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "({ await(await) { return await; } })",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_accepts_function_expressions_async_arrows_and_object_methods",
+      "valid": true,
+      "text": "async () => ({ [await key]() {} })",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async function() { yield value; }",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "function* () { await value; }",
+      "actual": false,
+      "message": "await is only valid in async functions and the top level bodies of modules"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async function* (await) {}",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async function* (yield) {}",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async await => await",
+      "actual": false,
+      "message": "'await' is not a valid identifier name in an async function"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async (value = await task) => value",
+      "actual": false,
+      "message": "missing ) after argument list"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async\n() => await task",
+      "actual": false,
+      "message": "Malformed arrow function parameter list"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async value\n=> value",
+      "actual": false,
+      "message": "Unexpected token '=>'"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async () => await",
+      "actual": false,
+      "message": "Unexpected token ')'"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async () => new.target",
+      "actual": false,
+      "message": "new.target expression is not allowed here"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async () => super.value",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "({ get value(arg) {} })",
+      "actual": false,
+      "message": "Getter must not have any formal parameters."
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "({ set value() {} })",
+      "actual": false,
+      "message": "Setter must have exactly one formal parameter."
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "({ async constructor() { super(); } })",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async function() { return import.meta; }",
+      "actual": false,
+      "message": "Cannot use 'import.meta' outside a module"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async () => import.meta",
+      "actual": false,
+      "message": "Cannot use 'import.meta' outside a module"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "function* () { yield import.meta; }",
+      "actual": false,
+      "message": "Cannot use 'import.meta' outside a module"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "class { async constructor() {} }",
+      "actual": false,
+      "message": "Class constructor may not be an async method"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "async function f() {} next()",
+      "actual": false,
+      "message": "Unexpected identifier 'next'"
+    },
+    {
+      "goal": "expression",
+      "group": "Expression_entry_rejects_statement_only_forms_and_invalid_function_contexts",
+      "valid": false,
+      "text": "for await (const value of source) {}",
+      "actual": false,
+      "message": "Unexpected token 'for'"
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "async function await() {}",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "async function f() { return { await: await task }; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "const f = async function async() {};",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "const object = { \\u0061sync() {}, \\u0067et() {}, \\u0073et() {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "const object = { async \\u0072un() { await task; }, *\\u0072un() { yield value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "const object = { get \\u0076alue() {}, set \\u0076alue(value) {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "class A { async \\u0072un() { await task; } *\\u0072un() { yield value; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "class A { \\u0061sync() {} \\u0067et() {} \\u0073et() {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "const object = { async await() {}, *yield() {}, async *await() {} };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "class A { async await() {} *yield() {} async *await() {} }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "const f = async function f({await: value}) { return value; };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "const f = function* f({yield: value}) { yield value; };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "const f = async ({await: value}) => value;",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names",
+      "valid": true,
+      "text": "async function f() { const object = { async: 1, await: 2, yield: 3 }; return object.await; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "\\u0061sync function f() {}",
+      "actual": false,
+      "message": "Keyword must not contain escaped characters"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "const f = \\u0061sync function() {};",
+      "actual": false,
+      "message": "Unexpected token 'function'"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "const f = \\u0061sync value => value;",
+      "actual": false,
+      "message": "Unexpected identifier 'value'"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "const object = { \\u0061sync run() {} };",
+      "actual": false,
+      "message": "Keyword must not contain escaped characters"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "const object = { \\u0067et value() {} };",
+      "actual": false,
+      "message": "Keyword must not contain escaped characters"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "const object = { \\u0073et value(value) {} };",
+      "actual": false,
+      "message": "Keyword must not contain escaped characters"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "class A { \\u0061sync run() {} }",
+      "actual": false,
+      "message": "Keyword must not contain escaped characters"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "async function f() { \\u0061wait value; }",
+      "actual": false,
+      "message": "Keyword must not contain escaped characters"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "function* f() { \\u0079ield value; }",
+      "actual": false,
+      "message": "Keyword must not contain escaped characters"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "const f = async function await() {};",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "async function f() { async function await() {} }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "async function f() { const await = value; }",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "const f = async \\u0061wait => value;",
+      "actual": false,
+      "message": "'await' is not a valid identifier name in an async function"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "const object = { async run(\\u0061wait) {} };",
+      "actual": false,
+      "message": "Unexpected reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Escaped_async_await_yield_get_and_set_do_not_become_syntactic_modifiers",
+      "valid": false,
+      "text": "const object = { *run(\\u0079ield) {} };",
+      "actual": false,
+      "message": "Unexpected strict mode reserved word"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "async function f(value) { var value; return value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "function* f(value) { var value; yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "async function* f(value) { var value; yield await value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "async function f(value) { function value() {} return value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "function* f(value) { function value() {} yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "async function* f(value) { function value() {} yield value; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "async function f() { let value; { let value; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "function* f() { let value; { let value; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "async function f() { outer: while (value) { await step(); continue outer; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "function* f() { outer: while (value) { yield step(); continue outer; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "const object = { run(value) { function value() {} return value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "class A { async run(value) { function value() {} return value; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "for (let f = (async () => key in source);;) { break; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "for (let object = { run() { return key in source; } };;) { break; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_preserve_parameter_body_scope_return_and_loop_boundaries",
+      "valid": true,
+      "text": "async function f() { for (let value = (await (key in source));;) { break; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "async function f(value) { class value {} }",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "function* f(value) { let value; }",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "async function* f(value) { const value = 1; }",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "const object = { run(value) { const value = 1; } };",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "const object = { get value() { let value; var value; } };",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "const object = { set value(value) { let value; } };",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "while (ready) { async function f() { break; } }",
+      "actual": false,
+      "message": "Illegal break statement"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "while (ready) { function* f() { continue; } }",
+      "actual": false,
+      "message": "Illegal continue statement: no surrounding iteration statement"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "outer: while (ready) { async function* f() { break outer; } }",
+      "actual": false,
+      "message": "Undefined label 'outer'"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "outer: while (ready) { const object = { run() { continue outer; } }; }",
+      "actual": false,
+      "message": "Undefined label 'outer'"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "const object = { get value() { break; } };",
+      "actual": false,
+      "message": "Illegal break statement"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "async function f() { let value; function* value() {} }",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "function* f() { const value = 1; async function value() {} }",
+      "actual": false,
+      "message": "Identifier 'value' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "let f; async function f() {}",
+      "actual": false,
+      "message": "Identifier 'f' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "let f; async function* f() {}",
+      "actual": false,
+      "message": "Identifier 'f' has already been declared"
+    },
+    {
+      "goal": "script",
+      "group": "Function_kinds_reset_flow_control_and_reject_lexical_declaration_conflicts",
+      "valid": false,
+      "text": "for (let f = async () => key in source;;) { break; }",
+      "actual": false,
+      "message": "for-in loop variable declaration may not have an initializer."
+    },
+    {
+      "goal": "script",
+      "group": "Method_super_and_new_target_context_is_inherited_only_by_arrows",
+      "valid": true,
+      "text": "const object = { async run(value = super.value) { return await value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Method_super_and_new_target_context_is_inherited_only_by_arrows",
+      "valid": true,
+      "text": "const object = { *run(value = super.value) { yield value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Method_super_and_new_target_context_is_inherited_only_by_arrows",
+      "valid": true,
+      "text": "const object = { async *run(value = super.value) { yield await value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Method_super_and_new_target_context_is_inherited_only_by_arrows",
+      "valid": true,
+      "text": "const object = { run() { return async () => super.value; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Method_super_and_new_target_context_is_inherited_only_by_arrows",
+      "valid": true,
+      "text": "const object = { run() { return async () => new.target; } };",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Method_super_and_new_target_context_is_inherited_only_by_arrows",
+      "valid": true,
+      "text": "class A extends Base { async run(value = super.value) { return await value; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Method_super_and_new_target_context_is_inherited_only_by_arrows",
+      "valid": true,
+      "text": "class A extends Base { *run(value = super.value) { yield value; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Method_super_and_new_target_context_is_inherited_only_by_arrows",
+      "valid": true,
+      "text": "class A extends Base { constructor() { const f = async () => super(); } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Method_super_and_new_target_context_is_inherited_only_by_arrows",
+      "valid": true,
+      "text": "class A extends Base { run() { return { [super.value]() {} }; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Method_super_and_new_target_context_is_inherited_only_by_arrows",
+      "valid": true,
+      "text": "class A { #value; async run() { function* inner() { yield object.#value; } return inner; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Method_super_and_new_target_context_is_inherited_only_by_arrows",
+      "valid": true,
+      "text": "class A { #value; *run() { const object = { async run() { return this.#value; } }; yield object; } }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Method_super_and_new_target_context_is_inherited_only_by_arrows",
+      "valid": true,
+      "text": "function f() { return { [new.target]() {} }; }",
+      "actual": true,
+      "message": ""
+    },
+    {
+      "goal": "script",
+      "group": "Nested_non_arrow_functions_do_not_inherit_super_from_methods",
+      "valid": false,
+      "text": "const object = { run() { return async function() { return super.value; }; } };",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Nested_non_arrow_functions_do_not_inherit_super_from_methods",
+      "valid": false,
+      "text": "const object = { run() { return function* () { yield super.value; }; } };",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Nested_non_arrow_functions_do_not_inherit_super_from_methods",
+      "valid": false,
+      "text": "const object = { run() { return async function* () { yield await super.value; }; } };",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Nested_non_arrow_functions_do_not_inherit_super_from_methods",
+      "valid": false,
+      "text": "class A extends Base { run() { return async function() { super(); }; } }",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Nested_non_arrow_functions_do_not_inherit_super_from_methods",
+      "valid": false,
+      "text": "class A extends Base { constructor() { async function nested() { super(); } } }",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Nested_non_arrow_functions_do_not_inherit_super_from_methods",
+      "valid": false,
+      "text": "class A { async run() { return async () => super(); } }",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Nested_non_arrow_functions_do_not_inherit_super_from_methods",
+      "valid": false,
+      "text": "const object = { [super.value]() {} };",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Nested_non_arrow_functions_do_not_inherit_super_from_methods",
+      "valid": false,
+      "text": "const object = { [new.target]() {} };",
+      "actual": false,
+      "message": "new.target expression is not allowed here"
+    },
+    {
+      "goal": "script",
+      "group": "Nested_non_arrow_functions_do_not_inherit_super_from_methods",
+      "valid": false,
+      "text": "async function f(value = super.value) {}",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Nested_non_arrow_functions_do_not_inherit_super_from_methods",
+      "valid": false,
+      "text": "function* f(value = super.value) {}",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    },
+    {
+      "goal": "script",
+      "group": "Nested_non_arrow_functions_do_not_inherit_super_from_methods",
+      "valid": false,
+      "text": "async function* f(value = super.value) {}",
+      "actual": false,
+      "message": "'super' keyword unexpected here"
+    }
+  ]
+}

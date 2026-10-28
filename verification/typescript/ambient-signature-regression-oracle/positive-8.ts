@@ -1,0 +1,2 @@
+export declare namespace Tools { export function run(): void; }
+export {};

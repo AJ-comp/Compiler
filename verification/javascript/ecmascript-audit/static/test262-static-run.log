@@ -1,0 +1,26 @@
+Preparing script-nonstrict (web=True) ...
+Ready script-nonstrict at 00:00:24.1799819.
+Preparing script-strict (web=True) ...
+Ready script-strict at 00:00:30.8875374.
+250 cases, 250 passed, 0 mismatches/errors; 00:00:32.7429065.
+500 cases, 500 passed, 0 mismatches/errors; 00:00:34.2088372.
+750 cases, 750 passed, 0 mismatches/errors; 00:00:35.1865304.
+Preparing module (web=True) ...
+Ready module at 00:00:44.8418034.
+1000 cases, 1000 passed, 0 mismatches/errors; 00:00:45.8658176.
+1250 cases, 1250 passed, 0 mismatches/errors; 00:00:47.5292981.
+1500 cases, 1500 passed, 0 mismatches/errors; 00:00:49.5368139.
+1750 cases, 1750 passed, 0 mismatches/errors; 00:00:51.4896365.
+2000 cases, 2000 passed, 0 mismatches/errors; 00:00:56.1157858.
+2250 cases, 2250 passed, 0 mismatches/errors; 00:00:59.6803853.
+2500 cases, 2500 passed, 0 mismatches/errors; 00:01:03.6645815.
+{
+  "input": "artifacts/ecmascript-audit/static/test262-static-2500.jsonl",
+  "skip": 0,
+  "processed": 2500,
+  "outcomes": {
+    "pass": 2500
+  },
+  "elapsedSeconds": 63.664914,
+  "syntaxOnly": true
+}

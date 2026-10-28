@@ -1,0 +1,29 @@
+{
+  "Source": "src/FrontEnd/Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs",
+  "RestoredFrom": "artifacts/typescript/lookahead-fix/CanonicalRelation.before-worklist.cs.txt",
+  "ExactMatchWithSnapshot": true,
+  "MatchesGitHead": true,
+  "QueueBackup": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\lookahead-rollback\\20261027-073937-851\\CanonicalRelation.queue-before-rollback.cs.txt",
+  "QueueSha256": "2496A17A04A30B5AB9DC28AD9B9DDCA10D564D3A3AF006219ED58755AA86CF26",
+  "RestoredSha256": "7BF3508A485DC9D401250A0C69FC77D9F45449CEFC7A68E55F3F46935D81145C",
+  "Scope": "Only CanonicalRelation.cs restored. Existing tests, docs, and unrelated changes preserved.",
+  "Verification": {
+    "Rebuild": {
+      "Command": "dotnet build Tests/Parse.FrontEnd.Parsers.Tests/Parse.FrontEnd.Parsers.Tests.csproj -c Release --no-restore --no-incremental",
+      "ExitCode": 0,
+      "Errors": 0,
+      "ExistingWarnings": 5
+    },
+    "RegressionTests": {
+      "Filter": "FullyQualifiedName~LalrLookaheadRegressionTests",
+      "Total": 36,
+      "Passed": 19,
+      "Failed": 17,
+      "Trx": "artifacts\\typescript\\lookahead-rollback\\20261027-073937-851\\tests\\restored-recursive-rebuilt-regressions.trx",
+      "Interpretation": "Old lookahead defects reproduced after intentional restoration."
+    },
+    "IncrementalBuildNote": "Initial incremental test passes reused a pre-rollback DLL because Copy-Item preserved the snapshot timestamp. Only forced-rebuild results above verify the restored recursive implementation.",
+    "SourceSha256": "7BF3508A485DC9D401250A0C69FC77D9F45449CEFC7A68E55F3F46935D81145C",
+    "QueueSymbolsRemaining": 0
+  }
+}

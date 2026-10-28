@@ -1,0 +1,10 @@
+{
+  "input": "artifacts/ecmascript-2026/timeout-smoke.jsonl",
+  "skip": 0,
+  "processed": 1,
+  "outcomes": {
+    "timeout": 1
+  },
+  "elapsedSeconds": 6.5493291,
+  "syntaxOnly": true
+}

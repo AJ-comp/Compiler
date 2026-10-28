@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "createdUtc": "2026-10-21T10:41:56.832645+00:00",
+  "snapshot": {
+    "repository": "https://github.com/tc39/test262",
+    "commit": "d53ebc8b1931d9f1541e43d59650776e4b766248",
+    "commitDate": "2026-10-13T22:44:04Z",
+    "selectionCutoff": null,
+    "archiveUrl": "https://codeload.github.com/tc39/test262/zip/d53ebc8b1931d9f1541e43d59650776e4b766248",
+    "archiveSha256": "8fbdcb0afe5d5c24168123dd6c7d410f70f03babdab3154231fb9339bf6b85f0",
+    "commitMetadataUrl": "https://api.github.com/repos/tc39/test262/commits/d53ebc8b1931d9f1541e43d59650776e4b766248"
+  },
+  "archive": {
+    "path": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-d53ebc8b1931d9f1541e43d59650776e4b766248.zip",
+    "sha256": "8fbdcb0afe5d5c24168123dd6c7d410f70f03babdab3154231fb9339bf6b85f0"
+  },
+  "mainSelectionPrefixes": [
+    "language",
+    "annexB",
+    "built-ins/RegExp"
+  ],
+  "featureFilter": {
+    "path": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\tools\\Test262\\ecmascript-2026-features.json",
+    "sha256": "665b7b77324267ca3e332d708155d8dbf58f4ff98824922c84dba98db8fa36c6"
+  },
+  "sourcePolicy": "Archive UTF-8 bytes decoded without newline conversion; all source comments and metadata retained; only strict variants prepend the official directive; JavaScript is not executed",
+  "scopePolicy": "Non-staging parse negatives are additional standard-path coverage; staging parse negatives are explicitly supplementary and are not included in the main Test262 success total",
+  "counts": {
+    "allJavaScriptFiles": 53910,
+    "alreadyWithinMainSelectionPaths": 26974,
+    "emittedVariants": 7,
+    "outsideFilesWithoutParseSyntaxErrorExpectation": 26918,
+    "outsideMainSelectionPaths": 26936,
+    "outsideParseSyntaxErrorFiles": 7
+  },
+  "scopeFileCounts": {
+    "supplementary-staging": 7
+  },
+  "featureFileCounts": {},
+  "variantCounts": {
+    "module": 7
+  },
+  "selectedFiles": [
+    {
+      "path": "staging/sm/async-functions/async-contains-unicode-escape-module.js",
+      "originalSha256": "1e867c1b31b5c1d2de9bbc9602ccda4d0b1ccda97a891e67f370e4fde2c2bb9a",
+      "byteLength": 335,
+      "scope": "supplementary-staging",
+      "variantCount": 1
+    },
+    {
+      "path": "staging/sm/fields/await-identifier-module-1.js",
+      "originalSha256": "f1e499ee086e8aad54d60df9bdee33f7e5e272d18773c014bc611b696867e80d",
+      "byteLength": 304,
+      "scope": "supplementary-staging",
+      "variantCount": 1
+    },
+    {
+      "path": "staging/sm/fields/await-identifier-module-2.js",
+      "originalSha256": "141a03470fbb0faeb21bb06f386d20618ff698145c5506a0096e5492d038a802",
+      "byteLength": 302,
+      "scope": "supplementary-staging",
+      "variantCount": 1
+    },
+    {
+      "path": "staging/sm/fields/await-identifier-module-3.js",
+      "originalSha256": "c53782f32159445d24f3e136feaa2e100d1db2e3c0e69f7baa6db25902dbc673",
+      "byteLength": 304,
+      "scope": "supplementary-staging",
+      "variantCount": 1
+    },
+    {
+      "path": "staging/sm/module/await-restricted-nested.js",
+      "originalSha256": "7c18e2a04b04deeed814b78b7103f19889be6c95a55562f4851a9d88f151848d",
+      "byteLength": 350,
+      "scope": "supplementary-staging",
+      "variantCount": 1
+    },
+    {
+      "path": "staging/sm/module/duplicate-exported-names-in-single-export-declaration.js",
+      "originalSha256": "f29db520cc3ef595bf2d581992c3bf8a353ef2069a3e4181f6ecb548fddc48a8",
+      "byteLength": 300,
+      "scope": "supplementary-staging",
+      "variantCount": 1
+    },
+    {
+      "path": "staging/sm/module/duplicate-exported-names-in-single-export-var-declaration.js",
+      "originalSha256": "153b0bfe37c6f8f38f82f8f6a2138f4cd455de1c3aaf48b7e05c4c2ea2386ec3",
+      "byteLength": 286,
+      "scope": "supplementary-staging",
+      "variantCount": 1
+    }
+  ],
+  "excludedParseNegativeFiles": [],
+  "metadataErrors": [
+    {
+      "path": "built-ins/ShadowRealm/prototype/importValue/import-value_FIXTURE.js",
+      "reason": "missing_frontmatter",
+      "fixture": true
+    },
+    {
+      "path": "built-ins/ShadowRealm/prototype/importValue/import-value_syntax_error_FIXTURE.js",
+      "reason": "missing_frontmatter",
+      "fixture": true
+    },
+    {
+      "path": "built-ins/ShadowRealm/prototype/importValue/import-value_throws_FIXTURE.js",
+      "reason": "missing_frontmatter",
+      "fixture": true
+    },
+    {
+      "path": "staging/sm/expressions/optional-chain-first-expression-module_FIXTURE.js",
+      "reason": "missing_frontmatter",
+      "fixture": true
+    },
+    {
+      "path": "staging/sm/module/bug1488117-empty_FIXTURE.js",
+      "reason": "missing_frontmatter",
+      "fixture": true
+    },
+    {
+      "path": "staging/sm/module/bug1488117-import-namespace_FIXTURE.js",
+      "reason": "missing_frontmatter",
+      "fixture": true
+    },
+    {
+      "path": "staging/source-phase-imports/modules-import-source_FIXTURE.js",
+      "reason": "missing_frontmatter",
+      "fixture": true
+    },
+    {
+      "path": "staging/source-phase-imports/modules-simple_FIXTURE.js",
+      "reason": "missing_frontmatter",
+      "fixture": true
+    },
+    {
+      "path": "staging/top-level-await/grandparent-tla_FIXTURE.js",
+      "reason": "missing_frontmatter",
+      "fixture": true
+    },
+    {
+      "path": "staging/top-level-await/parent-tla_FIXTURE.js",
+      "reason": "missing_frontmatter",
+      "fixture": true
+    },
+    {
+      "path": "staging/top-level-await/tla_FIXTURE.js",
+      "reason": "missing_frontmatter",
+      "fixture": true
+    }
+  ],
+  "unexpectedMetadataErrorCount": 0,
+  "output": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\additional-parse-negatives.jsonl",
+  "casesSha256": "d7aa574719ff1f6a1e4d8a92aeee88b09176473070b91afdab94e87457f29e06"
+}

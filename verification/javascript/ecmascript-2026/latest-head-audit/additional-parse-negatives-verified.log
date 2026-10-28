@@ -1,0 +1,18 @@
+{
+  "counts": {
+    "allJavaScriptFiles": 53910,
+    "alreadyWithinMainSelectionPaths": 26974,
+    "emittedVariants": 7,
+    "outsideFilesWithoutParseSyntaxErrorExpectation": 26918,
+    "outsideMainSelectionPaths": 26936,
+    "outsideParseSyntaxErrorFiles": 7
+  },
+  "scopeFileCounts": {
+    "supplementary-staging": 7
+  },
+  "variantCounts": {
+    "module": 7
+  },
+  "unexpectedMetadataErrorCount": 0,
+  "casesSha256": "d7aa574719ff1f6a1e4d8a92aeee88b09176473070b91afdab94e87457f29e06"
+}

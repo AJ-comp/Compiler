@@ -1,0 +1,26 @@
+{
+  "package": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\release-0.6.0\\packages\\Janglim.0.6.0.nupkg",
+  "sha256": "624936a5634f2665c3c0853c2f8379205777156f215e0ad03e52ea6f5b18e57c",
+  "dllCount": 9,
+  "dlls": [
+    "lib/netstandard2.1/AJ.Common.dll",
+    "lib/netstandard2.1/Janglim.dll",
+    "lib/netstandard2.1/Parse.FrontEnd.ErrorHandler.dll",
+    "lib/netstandard2.1/Parse.FrontEnd.Grammars.Ebnf.dll",
+    "lib/netstandard2.1/Parse.FrontEnd.Grammars.dll",
+    "lib/netstandard2.1/Parse.FrontEnd.Parsers.dll",
+    "lib/netstandard2.1/Parse.FrontEnd.Support.dll",
+    "lib/netstandard2.1/Parse.FrontEnd.dll",
+    "lib/netstandard2.1/Parse.dll"
+  ],
+  "id": "Janglim",
+  "version": "0.6.0",
+  "description": "Janglim is an embeddable LALR parser-generator engine for .NET with C# and EBNF grammars, longest-match lexing, parser-driven token sources, and registered C# predicates. Includes ECMAScript 2026 Script, Module and expression parsing with strict/non-strict validation and optional browser compatibility, plus initial TypeScript type, declaration, assertion and class syntax support. Inspect parsing tables, FIRST/FOLLOW sets, traces, syntax trees and diagnostics, with incremental reparsing and pluggable error recovery.",
+  "releaseNotes": "Janglim 0.6.0 unifies JavaScript APIs as JavaScriptGrammar and adds non-strict mode, optional Annex B compatibility and reproducible ECMAScript syntax audits. Adds initial TypeScript types, declarations, as/satisfies/non-null assertions and class extensions. Fixes late LALR lookahead propagation, returns epsilon for FIRST of an empty sequence, and rejects nonproductive grammars. Migration: use JavaScriptGrammar with inputKind; CanonicalRelation.LookAheadTable values are now LookAheadEntry, with the token set in .LookAhead. Check Parsing and Validate together. TypeScript support is partial and does not perform type checking. Full release notes: https://github.com/AJ-comp/Compiler/blob/master/RELEASE_NOTES.md",
+  "readme": "README.md",
+  "license": "MIT",
+  "tags": "parser parser-generator parsing lalr lalr1 lr dotnet csharp grammar ebnf lexer lexical-policy contextual-lexing maximal-munch javascript ecmascript typescript annex-b semantic-predicates lookahead token-trivia grammar-validation parse-tree ast first-follow introspection incremental error-recovery compiler dsl language-tooling janglim",
+  "readmeMatchesSource": true,
+  "unicodeLicenseMatchesSource": true,
+  "passed": true
+}

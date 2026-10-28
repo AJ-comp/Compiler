@@ -1,0 +1,1 @@
+FullyQualifiedName~Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionRegressionTests.|FullyQualifiedName~Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAmbientFunctionRegressionTests.|FullyQualifiedName~Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.|FullyQualifiedName~Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptProjectionTests.

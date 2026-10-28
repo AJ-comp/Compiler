@@ -1,0 +1,72 @@
+[
+  {
+    "id": 30,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-30.ts(1,49): error TS1183: An implementation cannot be declared in ambient contexts."
+  },
+  {
+    "id": 31,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-31.ts(1,55): error TS1183: An implementation cannot be declared in ambient contexts."
+  },
+  {
+    "id": 32,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-32.ts(2,1): error TS1183: An implementation cannot be declared in ambient contexts."
+  },
+  {
+    "id": 33,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-33.ts(2,1): error TS1183: An implementation cannot be declared in ambient contexts."
+  },
+  {
+    "id": 34,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-34.ts(1,63): error TS1183: An implementation cannot be declared in ambient contexts."
+  },
+  {
+    "id": 35,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-35.ts(1,63): error TS1016: A required parameter cannot follow an optional parameter."
+  },
+  {
+    "id": 36,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-36.ts(1,47): error TS1014: A rest parameter must be last in a parameter list."
+  },
+  {
+    "id": 37,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-37.ts(1,47): error TS2371: A parameter initializer is only allowed in a function or constructor implementation."
+  },
+  {
+    "id": 38,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-38.ts(1,22): error TS2371: A parameter initializer is only allowed in a function or constructor implementation."
+  },
+  {
+    "id": 39,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-39.ts(1,14): error TS2371: A parameter initializer is only allowed in a function or constructor implementation."
+  },
+  {
+    "id": 40,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-40.ts(1,54): error TS1110: Type expected."
+  },
+  {
+    "id": 41,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-41.ts(1,50): error TS1110: Type expected."
+  },
+  {
+    "id": 42,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-42.ts(1,24): error TS1308: 'await' expressions are only allowed within async functions and at the top levels of modules."
+  },
+  {
+    "id": 43,
+    "exitCode": 1,
+    "diagnostics": "artifacts/typescript/ambient-signature-regression-oracle/shared-header-43.ts(1,82): error TS2451: Cannot redeclare block-scoped variable 'value'.\r\nartifacts/typescript/ambient-signature-regression-oracle/shared-header-43.ts(1,99): error TS2451: Cannot redeclare block-scoped variable 'value'."
+  }
+]

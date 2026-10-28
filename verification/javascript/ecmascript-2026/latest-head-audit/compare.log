@@ -1,0 +1,13 @@
+{
+  "output": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-latest-delta.jsonl",
+  "counts": {
+    "addedVariants": 20,
+    "baselineVariants": 48361,
+    "changedVariants": 6,
+    "deltaVariants": 26,
+    "latestVariants": 48375,
+    "removedVariants": 6,
+    "reusableVariants": 48349
+  },
+  "casesSha256": "8cb410ef30f80984c8fe75c10a2f0397149d2dce0423dade42274cf46b5238ce"
+}

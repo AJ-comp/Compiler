@@ -1,0 +1,11 @@
+{
+  "input": "artifacts/ecmascript-audit/static/asi-matrix.jsonl",
+  "skip": 0,
+  "processed": 980,
+  "outcomes": {
+    "pass": 705,
+    "unexpected-reject": 275
+  },
+  "elapsedSeconds": 55.8053689,
+  "syntaxOnly": true
+}

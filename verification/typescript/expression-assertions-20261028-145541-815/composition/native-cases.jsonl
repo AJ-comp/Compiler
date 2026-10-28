@@ -1,0 +1,18 @@
+{"source":"value! as number;","id":"0","kind":"ts"}
+{"source":"value! satisfies number;","id":"1","kind":"ts"}
+{"source":"(value as { property: number })!.property;","id":"2","kind":"ts"}
+{"source":"(value satisfies { property: number })!.property;","id":"3","kind":"ts"}
+{"source":"(value as any)!();","id":"4","kind":"ts"}
+{"source":"(value as any)!`text`;","id":"5","kind":"ts"}
+{"source":"new (value as any)!();","id":"6","kind":"ts"}
+{"source":"(base?.property! as any)!.next = other;","id":"7","kind":"ts"}
+{"source":"const result = [value! as number, other! satisfies number];","id":"8","kind":"ts"}
+{"source":"function unwrap(value: number | null): number { return value! as number; }","id":"9","kind":"ts"}
+{"source":"!(value as any)!;","id":"10","kind":"ts"}
+{"source":"const result = (value as any)!.property! satisfies number;","id":"11","kind":"ts"}
+{"source":"value as number!;","id":"12","kind":"ts"}
+{"source":"value satisfies number!;","id":"13","kind":"ts"}
+{"source":"const result = value! as ;","id":"14","kind":"ts"}
+{"source":"const result = value! satisfies ;","id":"15","kind":"ts"}
+{"source":"((value as any) + other)! = next;","id":"16","kind":"ts"}
+{"source":"(base?.property as any)! = next;","id":"17","kind":"ts"}

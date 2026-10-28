@@ -1,0 +1,115 @@
+--- docs/ko/parser-driven-lexing.html (before)
++++ docs/ko/parser-driven-lexing.html (after)
+@@ -141,8 +141,9 @@
+           <div class="code-block"><p class="code-label">원문과 정책으로 source를 만듭니다.</p><pre><code>var input = "result = a / b;";
+ var source = lexer.CreateTokenSource(input, policy);</code></pre></div>
+           <p><code>source</code>는 원문 <code>"result = a / b;"</code>를 보관하고, 전달받은 정책을 <code>source.Policy</code>로 제공합니다. 정책의 <code>Goals</code>에는 앞에서 등록한 두 규칙 묶음이 있습니다. 실제 토큰 생성은 이후 <code>source.Peek</code> 요청을 받았을 때 수행합니다.</p>
+-          <p>다음은 동작을 설명하기 위해 파서 내부의 저수준 <code>Peek</code> 호출을 펼친 예시입니다. 같은 원문의 시작 위치에서 토큰을 요청하면 <code>result</code>가 나오고, 반환된 다음 위치에서는 <code>=</code>가 나옵니다.</p>
+-          <div class="code-block"><pre><code>// 원문의 시작 위치에서 토큰 하나를 요청합니다.
++          <p>먼저 <code>Peek</code>가 위치를 어떻게 사용하는지 확인하겠습니다. 아래 예제 코드에서는 동작을 살펴보기 위해 <code>div</code> 묶음을 직접 지정합니다. 원문의 시작 위치에서 토큰을 요청하면 <code>result</code>가 나오고, 반환된 다음 위치에서는 <code>=</code>가 나옵니다.</p>
++          <div class="code-block"><p class="code-label">Peek의 동작을 확인하는 예제 코드</p><pre><code>// 이 예제에서는 div 묶음을 지정해 토큰을 확인합니다.
++// 원문의 시작 위치에서 토큰 하나를 요청합니다.
+ var first = source.Peek(source.Start, div);
+ // 반환된 토큰: "result"
+ 
+@@ -151,12 +152,12 @@
+ // 반환된 토큰: "="</code></pre></div>
+           <p><code>Peek</code>에는 원문 문자열을 다시 전달할 필요가 없습니다. <code>source</code>가 이미 그 원문을 보관하므로, 요청할 때는 읽을 위치와 사용할 규칙 묶음을 전달합니다. 건너뛰도록 등록한 공백·주석 규칙도 <code>source</code>가 두 묶음에서 함께 사용합니다.</p>
+           <p>이렇게 토큰을 확인해도 <code>source.Start</code>는 원문의 시작 위치를 그대로 가리킵니다. 다음 절의 <code>Parsing</code> 호출은 이 시작 커서에서 원문 처음부터 파싱합니다.</p>
+-          <p>실제 파싱에서는 파서가 이 <code>Peek</code> 호출을 수행합니다. 파서에 <code>source</code>를 전달하기 전에, 같은 원문 위치에 여러 토큰 규칙이 일치하면 <code>source</code>가 어떤 규칙을 고르는지 살펴보겠습니다.</p>
++          <p>실제 파싱에서는 정책이 사용할 묶음을 선택하고, 파서는 정책이 반환한 묶음으로 <code>Peek</code>를 호출합니다. 이 호출 순서는 다음 절에서 살펴보겠습니다. 그전에, 묶음 하나를 전달받은 <code>source</code>가 여러 토큰 규칙 중 어느 규칙을 적용하는지 먼저 확인하겠습니다.</p>
+         </div>
+         <div id="token-selection" class="subsection">
+           <h3>묶음 안에서는 실제 입력을 가장 길게 읽는 토큰 규칙을 고릅니다.</h3>
+           <p>규칙 묶음을 하나 선택해도, 그 묶음 안의 여러 정규식이 같은 원문 위치에 일치할 수 있습니다. 예를 들어 키워드 규칙 <code>if</code>와 식별자 규칙 <code>[$A-Za-z_][$0-9A-Za-z_]*</code>가 있다고 가정하겠습니다. 입력이 <code>ifx</code>이면 키워드 규칙은 앞의 두 글자 <code>if</code>에 일치하고, 식별자 규칙은 세 글자 <code>ifx</code> 전체에 일치합니다.</p>
+-          <p><span class="core">렉서는 일치한 규칙들 중 실제 원문을 가장 길게 읽은 규칙을 선택합니다. 읽은 길이가 같을 때만 규칙 우선순위를 비교합니다.</span> 따라서 <code>ifx</code>에서는 세 글자를 읽은 식별자 규칙을 선택합니다. 반면 <code>if</code>에서는 두 규칙이 모두 두 글자를 읽으므로, 식별자 정규식보다 우선하는 리터럴 키워드 규칙을 선택합니다.</p>
++          <p><span class="core">묶음을 전달받은 <code>source</code>는 그 묶음의 규칙들 중 실제 원문을 가장 길게 읽은 규칙을 선택합니다. 읽은 길이가 같을 때만 미리 정해진 규칙 우선순위를 사용합니다.</span> 따라서 <code>ifx</code>에서는 세 글자를 읽은 식별자 규칙을 선택합니다. 반면 <code>if</code>에서는 두 규칙이 모두 두 글자를 읽으므로, 식별자 정규식보다 우선하는 리터럴 키워드 규칙을 선택합니다.</p>
+           <div class="table-wrap"><table>
+             <caption>키워드 if와 $를 허용하는 식별자 규칙을 함께 사용한 결과</caption>
+             <thead><tr><th scope="col">입력</th><th scope="col">각 규칙이 읽는 길이</th><th scope="col">선택한 토큰</th></tr></thead>
+@@ -168,11 +169,11 @@
+               <tr><td><code>name$</code></td><td>키워드 불일치 / 식별자 5글자</td><td>식별자 <code>name$</code></td></tr>
+             </tbody>
+           </table></div>
+-          <p>이 방식에서는 렉서가 식별자나 키워드 규칙의 앞뒤에 단어 경계 <code>\b</code>를 자동으로 붙이지 않습니다. 작성한 정규식이 <code>$</code>를 식별자의 일부로 허용하면, 렉서는 그 정규식대로 <code>$</code>까지 읽습니다. 문법 개발자가 정규식 안에 직접 작성한 <code>\b</code>는 그대로 적용합니다.</p>
++          <p>토큰 규칙의 정규식에는 단어 경계 <code>\b</code>가 자동으로 붙지 않습니다. 작성한 정규식이 <code>$</code>를 식별자의 일부로 허용하면, <code>source</code>는 그 정규식대로 <code>$</code>까지 읽습니다. 문법 개발자가 정규식 안에 직접 작성한 <code>\b</code>는 그대로 적용합니다.</p>
+           <p>기호도 같은 기준으로 선택합니다. <code>=</code> 규칙과 <code>==</code> 규칙을 함께 사용할 때 입력이 <code>==</code>이면, 두 글자를 읽는 <code>==</code> 규칙이 한 글자를 읽는 <code>=</code> 규칙보다 우선합니다. <span class="core">비교하는 길이는 정규식 코드의 글자 수가 아니라, 각 정규식이 실제 원문에서 읽은 글자 수입니다.</span> 예를 들어 입력 <code>aaaa</code>에 <code>a+</code>와 <code>[a-z]</code>가 모두 일치하면, 정규식 표기는 더 짧아도 네 글자를 읽는 <code>a+</code>를 선택합니다.</p>
+-          <p>같은 길이를 읽은 규칙끼리는 기존 토큰 분류의 우선순위를 사용합니다. 예를 들어 리터럴 키워드는 정규식 식별자보다 우선합니다. 같은 분류의 규칙까지 길이가 같으면 <code>Lexer.AddTokenRule</code>에 먼저 등록한 규칙을 선택합니다.</p>
++          <p>이때 사용할 우선순위는 <code>Lexer</code>가 토큰 규칙을 등록할 때 정합니다. 리터럴 키워드와 정규식 식별자처럼 분류가 다르면 분류별 우선순위를 적용하고, 같은 분류이면 먼저 등록한 규칙을 앞에 둡니다. <code>source</code>는 생성될 때 이 순서를 보관합니다. 이후 읽은 길이가 같은 규칙이 여러 개이면, <code>source</code>는 이 순서에서 앞선 규칙을 선택합니다.</p>
+           <p><code>source.Peek</code>는 이번에 선택한 <code>LexicalGoal</code> 안의 토큰 규칙들과, 모든 묶음에 공통으로 적용하는 공백·주석 규칙을 비교합니다. 선택하지 않은 묶음의 토큰 규칙은 비교에 참여하지 않습니다. 공백·주석 규칙이 선택되면 그 원문을 건너뛴 뒤, 다음 위치에서 같은 기준으로 규칙들을 다시 비교합니다.</p>
+-          <p>이 최장 일치 기준은 <code>source.Peek</code>와 기존 <code>Lexer.Lexing</code>에 공통으로 적용됩니다. 다만 각각의 정규식 내부에서는 .NET 정규식의 동작을 유지합니다. 예를 들어 주석 규칙의 <code>.*?</code>는 첫 번째 닫는 기호에서 멈춥니다. 렉서는 각 정규식이 반환한 일치 결과의 길이를 비교하므로, 이 주석 규칙을 마지막 닫는 기호까지 늘려 읽지 않습니다.</p>
++          <p>실제 일치 결과의 길이를 비교하는 코드는 <code>LexicalRuleMatcher</code>에 있습니다. <code>source.Peek</code>와 기존 <code>Lexer.Lexing</code>이 이 비교기를 함께 사용하므로, 두 경로에 같은 최장 일치 기준이 적용됩니다. 각각의 정규식 내부에서는 .NET 정규식의 동작을 유지합니다. 예를 들어 주석 규칙의 <code>.*?</code>는 첫 번째 닫는 기호에서 멈춥니다. 비교기는 각 정규식이 반환한 일치 결과의 길이를 비교하므로, 이 주석 규칙을 마지막 닫는 기호까지 늘려 읽지 않습니다.</p>
+           <p>지금까지 <code>source</code>를 준비하고, 그 객체가 요청받은 위치에서 토큰 하나를 고르는 기준까지 확인했습니다. 이제 준비한 <code>source</code>를 파서에 전달하고, 파서가 토큰을 받아 파싱하는 순서로 이어가겠습니다.</p>
+         </div>
+       </section>
+@@ -298,7 +299,8 @@
+         <p><code>source.Start</code>는 원문의 시작 커서를 제공합니다. 파싱 중의 현재 커서는 파싱 호출마다 만드는 <code>ContextualInput</code> 객체의 <code>Cursor</code> 프로퍼티에 보관합니다. 파서는 이 커서를 <code>source.Peek</code>에 전달하고, 토큰을 Shift하면 반환값의 <code>TokenRead.Next</code>로 현재 커서를 교체합니다.</p>
+         <p>커서에는 어느 입력 공급자에 속하는지 확인하는 <code>SourceIdentity</code>와 렉서 상태를 담는 <code>LexicalState</code>도 있습니다. 따라서 현재 입력 위치의 확정은 파서가 맡고, <code>source</code>는 요청받은 위치에서 토큰과 다음 커서를 계산합니다.</p>
+         <p>반환되는 <code>TokenData</code>에는 토큰의 내용·종류·원문 위치와 함께 <code>LeadingTrivia</code>가 담깁니다. 이 정보는 현재 커서부터 토큰 시작 위치까지의 공백·주석 원문이며, 줄바꿈 포함 여부도 제공합니다. 따라서 C# 프레디케이트는 요청형 경로에서도 토큰 앞의 줄바꿈을 검사할 수 있습니다.</p>
+-        <p>원문 끝에 도달하면 <code>Peek</code>는 폭이 0인 EOF 토큰을 반환합니다. 마지막 토큰 뒤의 공백·주석은 EOF의 <code>LeadingTrivia</code>에 담깁니다. EOF의 <code>Next</code>는 토큰 수와 이전 토큰을 그대로 보존하며, 파서는 Accept로 입력 전체의 파싱을 완료합니다.</p>
++        <p>원문 끝에 도달하면 <code>source</code>는 폭이 0인 EOF 토큰을 만들어 반환합니다. 마지막 토큰 뒤의 공백·주석은 EOF의 <code>LeadingTrivia</code>에 담깁니다. EOF의 <code>Next</code>는 토큰 수와 이전 토큰을 그대로 보존합니다.</p>
++        <p><code>source</code>가 EOF로 원문의 끝을 알리면, 파서는 그 EOF로 ACTION을 조회합니다. 파서는 필요한 Reduce·Goto를 처리하고 Accept 액션을 확인했을 때 입력 전체의 파싱 성공을 확정합니다.</p>
+         <p>여기서 <code>Next</code>를 반환하는 이유를 더 살펴보겠습니다. <code>source</code>가 다음 위치를 계산했더라도, 파서가 바로 그 위치로 이동하면 안 되는 경우가 있기 때문입니다.</p>
+       </section>
+ 
+@@ -375,7 +377,8 @@
+         <div id="lexer-role" class="subsection">
+           <h3>Lexer.CreateTokenSource는 원문과 정책을 연결한 source를 만듭니다.</h3>
+           <p><code>Lexer</code>에 등록한 <code>Terminal</code> 객체들을 <code>LexicalGoal</code>로 묶고, 이 묶음들을 <code>LexicalPolicy</code>에 등록합니다. 이후 <code>CreateTokenSource(input, policy)</code>를 호출하면 원문과 정책이 연결됩니다.</p>
+-          <p>이 메서드가 만드는 실제 객체는 <code>ContextualTokenSource</code>이며, 반환된 <code>source</code>는 <code>ITokenSource</code> 인터페이스로 사용합니다. 이 객체는 원문과 토큰 규칙의 순서를 보관하고, <code>Policy</code>로 선택 정책을 제공합니다. <code>Peek</code>는 지정된 위치에서부터 선택된 묶음의 정규식 규칙을 적용하고, 앞의 공백·주석과 토큰 하나를 반환합니다. 해당 위치에서 인식할 토큰 규칙이 없으면 원문 한 UTF-16 단위를 <code>NotDefined</code> 토큰으로 반환해 파서가 오류 위치를 알 수 있게 합니다.</p>
++          <p>이 메서드가 만드는 실제 객체는 <code>ContextualTokenSource</code>이며, 반환된 <code>source</code>는 <code>ITokenSource</code> 인터페이스로 사용합니다. 이 객체는 원문과 <code>Lexer</code>가 정한 토큰 규칙의 순서를 보관하고, <code>Policy</code>로 선택 정책을 제공합니다. <code>source</code>는 각 묶음에서 사용할 토큰 규칙에 등록된 공백·주석 스킵 규칙을 함께 준비합니다.</p>
++          <p><code>Peek</code>는 전달받은 위치에서부터 전달받은 묶음의 규칙을 적용합니다. 건너뛴 공백·주석 원문을 다음 토큰의 <code>LeadingTrivia</code>에 담고, 토큰과 다음 커서를 반환합니다. 해당 위치에서 인식할 토큰 규칙이 없으면 원문 한 UTF-16 단위를 <code>NotDefined</code> 토큰으로 반환해 파서가 오류 위치를 알 수 있게 합니다.</p>
+         </div>
+         <div id="parser-role" class="subsection">
+           <h3>LRParser.Parsing은 source를 받아 그 정책으로 요청형 파싱을 수행합니다.</h3>
+@@ -392,7 +395,9 @@
+         <div id="prediction-role" class="subsection">
+           <h3>ContextualConflictPredictor는 후보마다 별도의 커서와 소비 이력을 사용합니다.</h3>
+           <p>요청형 파싱에서 파싱 테이블의 원래 ACTION 셀에 Shift 하나와 프레디케이트 ε Reduce 하나가 충돌하면, 두 액션이 모두 허용되는 경우 <code>ContextualConflictPredictor</code>가 다음 입력을 살펴봅니다. 예측기는 각 후보에서 같은 <code>LexicalPolicy</code>와 입력 공급자를 사용합니다.</p>
+-          <p>예측기는 후보별 파싱 문맥을 정책에 전달하고, 정책이 각 문맥에 대해 반환한 묶음으로 토큰을 요청합니다. 따라서 같은 원문에서도 후보에 따라 토큰의 길이와 개수가 달라질 수 있습니다. 충돌 이후의 원문이 <code>/a/g</code>이고, 정책이 한 후보에는 RegExp 묶음을, 다른 후보에는 Div 묶음을 반환한다고 가정하겠습니다. RegExp 묶음을 받은 후보는 <code>/a/g</code>를 토큰 하나로 읽고, Div 묶음을 받은 후보는 <code>/</code>, 식별자 <code>a</code>, <code>/</code>, 식별자 <code>g</code>를 차례로 읽을 수 있습니다.</p>
++          <p>충돌을 확인한 시점에는 파서가 이미 룩어헤드 토큰 하나를 받은 상태입니다. 예측기는 이 토큰을 포함한 입력 상태를 각 후보에 복사합니다. <span class="core">각 후보는 충돌 당시의 같은 토큰을 유지하며 ε Reduce·Goto를 처리합니다. 각 후보가 그 토큰을 Shift한 뒤, 다음 토큰이 필요할 때 정책을 다시 호출합니다.</span></p>
++          <p>예를 들어 충돌 당시 받은 토큰이 <code>y</code>이고, 그 뒤의 원문이 <code>/a/g</code>라고 가정하겠습니다. 두 후보는 먼저 같은 <code>y</code> 토큰으로 각각 진행합니다. 각 후보가 <code>y</code>를 Shift한 뒤에는, 예측기가 해당 후보의 갱신된 파싱 문맥을 정책에 전달하고 반환받은 묶음으로 다음 토큰을 요청합니다.</p>
++          <p>이때 정책이 한 후보에는 RegExp 묶음을, 다른 후보에는 계속 Div 묶음을 반환한다고 가정하겠습니다. <code>source</code>는 첫 번째 후보의 요청에 <code>/a/g</code> 토큰 하나를 반환합니다. 두 번째 후보의 요청에는 <code>/</code>, 식별자 <code>a</code>, <code>/</code>, 식별자 <code>g</code>를 차례로 반환합니다. 이처럼 후보별 파싱 문맥에 대해 정책이 반환하는 묶음이 달라지면, 이후 토큰의 길이와 개수도 달라질 수 있습니다.</p>
+           <p>이때 예측기는 후보마다 원문 위치, 렉서 상태, 이전 토큰, 토큰 순번, 소비 이력과 아직 소비하지 않은 토큰을 보관합니다. 한 후보가 토큰을 읽거나 Shift해도 다른 후보의 입력 위치는 바뀌지 않습니다. 각 후보의 프레디케이트도 그 후보의 이전 토큰과 다음 토큰을 받습니다.</p>
+           <p>토큰 하나로 읽는 후보는 더 적은 예측 단계만 거쳐 먼저 EOF에서 Accept할 수 있습니다. <span class="core">예측기는 먼저 Accept한 결과를 보존한 채, 다른 최초 액션에서 나온 후보가 어떻게 끝나는지 계속 확인합니다.</span> 다른 후보가 모두 실패하면 Accept한 경로를 선택하고, 서로 다른 최초 액션의 후보가 모두 Accept하면 모호성 진단을 반환합니다.</p>
+           <p>예측은 후보가 구별될 때까지 진행하며, 후보가 하나의 최초 액션으로 좁혀지면 그 액션을 실제 파서에 반환합니다. 실제 파서는 원래 충돌 위치에서 선택한 액션을 실행합니다. 예측용 커서·스택으로 실제 입력 위치를 덮어쓰지 않고, 실제 Shift·Reduce 과정에서 트리와 파싱 기록을 만듭니다. 예측 중 진행 가능한 후보가 없어지거나 순환·자원 제한에 도달하면 해당 원인과 위치를 진단합니다.</p>
+@@ -408,12 +413,12 @@
+               <tr><td><code>TokenCursor</code></td><td>원문 위치·토큰 순번·이전 토큰·렉서 상태를 보관합니다.</td></tr>
+               <tr><td><code>TokenRead</code></td><td>이번에 확인한 <code>Token</code>과 Shift 후 사용할 <code>Next</code> 커서를 묶습니다.</td></tr>
+               <tr><td><code>LexicalGoal</code></td><td>사용할 정규식 규칙 묶음입니다. 포함할 토큰 규칙을 가리키는 <code>Terminal</code> 객체들을 보관합니다.</td></tr>
+-              <tr><td><code>LexicalContext</code></td><td>선택 함수에 현재 상태·전체 상태 스택·기대 단말·소비 이력·커서·규칙 묶음 목록을 전달합니다.</td></tr>
++              <tr><td><code>LexicalContext</code></td><td>파서가 정책에 전달하는 읽기 전용 문맥입니다. 현재 상태·전체 상태 스택·기대 단말·소비 이력·커서·규칙 묶음 목록을 담습니다.</td></tr>
+               <tr><td><code>LexicalPolicy</code></td><td>불변인 <code>Goals</code> 목록과 묶음 선택 로직을 보관합니다. 기본 로직은 기대 단말을 비교하고, C# 선택 함수를 지정하면 그 함수를 호출합니다.</td></tr>
+             </tbody>
+           </table></div>
+           <p>표의 여섯 연결 타입은 <code>Janglim.FrontEnd.Tokenize</code> 네임스페이스에서 사용합니다. 선택 오류를 나타내는 <code>ContextualLexingException</code>도 같은 네임스페이스에 있습니다.</p>
+-          <p>사용자가 직접 <code>ITokenSource</code>를 구현할 수도 있습니다. 입력 공급자는 <code>Policy</code>로 사용할 정책을 제공하고, 같은 커서와 규칙 묶음에 같은 내용의 토큰을 반환해야 합니다. 실제 토큰의 <code>Next</code>는 원문 위치와 토큰 순번을 앞으로 옮기고, <code>PreviousToken</code>에 방금 만든 토큰 객체를 넣습니다. 다음 커서의 <code>SourceIdentity</code>는 시작 커서와 같은 객체를 유지합니다. 공백·주석 원문은 커서부터 토큰 시작 위치까지 정확하게 담습니다.</p>
++          <p>사용자가 직접 <code>ITokenSource</code>를 구현할 수도 있습니다. 입력 공급자는 <code>Policy</code>로 사용할 정책을 제공하고, 같은 커서와 규칙 묶음에 같은 내용의 토큰을 반환해야 합니다. 실제 토큰을 반환할 때 입력 공급자는 그 토큰 뒤의 원문 위치와 토큰 순번을 담은 새 커서를 만들고, <code>TokenRead.Next</code>로 반환합니다. 새 커서의 <code>PreviousToken</code>에는 방금 만든 토큰 객체를 넣고, <code>SourceIdentity</code>에는 시작 커서와 같은 객체를 넣습니다. 파서는 Shift할 때 이 새 커서를 현재 커서로 채택합니다. 공백·주석 원문은 요청받은 커서부터 토큰 시작 위치까지 정확하게 담습니다.</p>
+           <p>직접 만든 토큰의 공백·주석은 <code>TokenCell</code>의 여섯 번째 생성자 인자 <code>leadingTriviaText</code>로 전달할 수 있습니다. EOF 토큰은 원문 끝의 빈 문자열로 만들고, 다음 커서의 토큰 순번과 이전 토큰을 유지합니다. 이 계약을 통해 일반 파싱과 예측 후보가 같은 입력 공급자를 안전하게 공유합니다.</p>
+         </div>
+       </section>
+--- src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser[TokenSource].cs (before)
++++ src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser[TokenSource].cs (after)
+@@ -14,8 +14,9 @@
+     {
+         /// <summary>
+         /// 필요한 시점에 토큰 하나를 요청하여 파싱합니다. Reduce·Goto 동안 같은 룩어헤드를
+-        /// 보관하고, 실제 토큰을 Shift했을 때 입력 커서를 확정합니다. source에 연결된 정책으로
+-        /// 규칙 묶음을 선택하며, EOF에서 Accept를 확인합니다.
++        /// 보관하고, 실제 토큰을 Shift했을 때 입력 커서를 확정합니다. 현재 문맥을 source의 정책에
++        /// 전달하고, 정책이 반환한 규칙 묶음으로 source에 다음 토큰을 요청합니다.
++        /// EOF에서는 파싱 테이블의 Accept 액션을 확인합니다.
+         /// 첫 오류에서 위치 진단을 반환하며, 기존 목록 입력의 사용자 정의 복구는 별도 경로입니다.
+         /// <para><see href="../../../../docs/ko/parser-driven-lexing.html#parser-role">파서 주도 렉싱의 호출 순서와 이유</see></para>
+         /// </summary>
+--- src/FrontEnd/Parse.FrontEnd/Tokenize/LexicalGoal.cs (before)
++++ src/FrontEnd/Parse.FrontEnd/Tokenize/LexicalGoal.cs (after)
+@@ -8,7 +8,7 @@
+     /// <summary>
+     /// An immutable selection of lexical terminals, registered when constructing a LexicalPolicy.
+     /// The policy then supplies the goals used by a token source and parser.
+-    /// Skipped trivia remains available in every goal.
++    /// The token source applies registered skipped-trivia rules alongside every lexical goal.
+     /// Terminals must be the same object instances registered with the lexer and grammar;
+     /// matching captions or symbol keys do not substitute for reference identity.
+     /// <para><see href="../../../../docs/ko/parser-driven-lexing.html#exchange">Parser-driven lexing: token exchange</see></para>

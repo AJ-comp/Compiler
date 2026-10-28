@@ -1,0 +1,10 @@
+artifacts/typescript/expression-assertions-20261028-145541-815/non-null/case-50.ts(2,1): error TS2364: The left-hand side of an assignment expression must be a variable or a property access.
+artifacts/typescript/expression-assertions-20261028-145541-815/non-null/case-51.ts(2,1): error TS2364: The left-hand side of an assignment expression must be a variable or a property access.
+artifacts/typescript/expression-assertions-20261028-145541-815/non-null/case-52.ts(2,1): error TS2364: The left-hand side of an assignment expression must be a variable or a property access.
+artifacts/typescript/expression-assertions-20261028-145541-815/non-null/case-53.ts(2,1): error TS2357: The operand of an increment or decrement operator must be a variable or a property access.
+artifacts/typescript/expression-assertions-20261028-145541-815/non-null/case-54.ts(2,1): error TS2357: The operand of an increment or decrement operator must be a variable or a property access.
+artifacts/typescript/expression-assertions-20261028-145541-815/non-null/case-55.ts(2,1): error TS2779: The left-hand side of an assignment expression may not be an optional property access.
+artifacts/typescript/expression-assertions-20261028-145541-815/non-null/case-56.ts(2,1): error TS2779: The left-hand side of an assignment expression may not be an optional property access.
+artifacts/typescript/expression-assertions-20261028-145541-815/non-null/case-57.ts(2,3): error TS2777: The operand of an increment or decrement operator may not be an optional property access.
+artifacts/typescript/expression-assertions-20261028-145541-815/non-null/case-58.ts(2,1): error TS2777: The operand of an increment or decrement operator may not be an optional property access.
+artifacts/typescript/expression-assertions-20261028-145541-815/non-null/case-62.ts(2,8): error TS2703: The operand of a 'delete' operator must be a property reference.

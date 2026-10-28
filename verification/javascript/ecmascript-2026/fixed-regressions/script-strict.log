@@ -1,0 +1,15 @@
+
+COMMAND ["C:\\Users\\AhjLv\\.dotnet\\dotnet.exe", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\runner-fixed\\Janglim.Test262.dll", "--input", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\regressions-first.jsonl", "--output", "artifacts\\ecmascript-2026\\fixed-regressions\\script-strict.jsonl", "--profile", "script-strict", "--skip", "0", "--timeout-ms", "120000"]
+Preparing script-strict (web=True) ...
+Ready script-strict at 00:00:08.2584769.
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-2026\\regressions-first.jsonl",
+  "profile": "script-strict",
+  "skip": 0,
+  "processed": 3,
+  "outcomes": {
+    "pass": 3
+  },
+  "elapsedSeconds": 12.0504472,
+  "syntaxOnly": true
+}

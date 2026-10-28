@@ -1,0 +1,221 @@
+{
+  "states": 11,
+  "nodes": [
+    {
+      "key": "accept0",
+      "state": 0,
+      "item": "Accept → • S",
+      "x": 50,
+      "y": 190
+    },
+    {
+      "key": "s0a",
+      "state": 0,
+      "item": "S → • A 'e'",
+      "x": 50,
+      "y": 340
+    },
+    {
+      "key": "a0",
+      "state": 0,
+      "item": "A → • 'a' 'z'",
+      "x": 50,
+      "y": 490
+    },
+    {
+      "key": "s0b",
+      "state": 0,
+      "item": "S → • 'b' 'c' 'd' A 'f'",
+      "x": 50,
+      "y": 740
+    },
+    {
+      "key": "accept1",
+      "state": 1,
+      "item": "Accept → S •",
+      "x": 550,
+      "y": 190
+    },
+    {
+      "key": "s2",
+      "state": 2,
+      "item": "S → A • 'e'",
+      "x": 550,
+      "y": 340
+    },
+    {
+      "key": "s5",
+      "state": 5,
+      "item": "S → A 'e' •",
+      "x": 1050,
+      "y": 340
+    },
+    {
+      "key": "a3",
+      "state": 3,
+      "item": "A → 'a' • 'z'",
+      "x": 550,
+      "y": 490
+    },
+    {
+      "key": "a6",
+      "state": 6,
+      "item": "A → 'a' 'z' •",
+      "x": 1050,
+      "y": 490
+    },
+    {
+      "key": "s4",
+      "state": 4,
+      "item": "S → 'b' • 'c' 'd' A 'f'",
+      "x": 300,
+      "y": 740
+    },
+    {
+      "key": "s7",
+      "state": 7,
+      "item": "S → 'b' 'c' • 'd' A 'f'",
+      "x": 550,
+      "y": 740
+    },
+    {
+      "key": "s8",
+      "state": 8,
+      "item": "S → 'b' 'c' 'd' • A 'f'",
+      "x": 800,
+      "y": 740
+    },
+    {
+      "key": "a8",
+      "state": 8,
+      "item": "A → • 'a' 'z'",
+      "x": 800,
+      "y": 610
+    },
+    {
+      "key": "s9",
+      "state": 9,
+      "item": "S → 'b' 'c' 'd' A • 'f'",
+      "x": 1050,
+      "y": 740
+    },
+    {
+      "key": "s10",
+      "state": 10,
+      "item": "S → 'b' 'c' 'd' A 'f' •",
+      "x": 1300,
+      "y": 740
+    }
+  ],
+  "dependencies": [
+    {
+      "source": "accept0",
+      "target": "accept1",
+      "first": null,
+      "inherit": true,
+      "kind": "goto"
+    },
+    {
+      "source": "accept0",
+      "target": "s0a",
+      "first": "{}",
+      "inherit": true,
+      "kind": "closure"
+    },
+    {
+      "source": "accept0",
+      "target": "s0b",
+      "first": "{}",
+      "inherit": true,
+      "kind": "closure"
+    },
+    {
+      "source": "s0a",
+      "target": "s2",
+      "first": null,
+      "inherit": true,
+      "kind": "goto"
+    },
+    {
+      "source": "s0a",
+      "target": "a0",
+      "first": "{'e'}",
+      "inherit": false,
+      "kind": "closure"
+    },
+    {
+      "source": "s0b",
+      "target": "s4",
+      "first": null,
+      "inherit": true,
+      "kind": "goto"
+    },
+    {
+      "source": "s2",
+      "target": "s5",
+      "first": null,
+      "inherit": true,
+      "kind": "goto"
+    },
+    {
+      "source": "a0",
+      "target": "a3",
+      "first": null,
+      "inherit": true,
+      "kind": "goto"
+    },
+    {
+      "source": "s4",
+      "target": "s7",
+      "first": null,
+      "inherit": true,
+      "kind": "goto"
+    },
+    {
+      "source": "a3",
+      "target": "a6",
+      "first": null,
+      "inherit": true,
+      "kind": "goto"
+    },
+    {
+      "source": "s7",
+      "target": "s8",
+      "first": null,
+      "inherit": true,
+      "kind": "goto"
+    },
+    {
+      "source": "s8",
+      "target": "s9",
+      "first": null,
+      "inherit": true,
+      "kind": "goto"
+    },
+    {
+      "source": "s8",
+      "target": "a8",
+      "first": "{'f'}",
+      "inherit": false,
+      "kind": "closure"
+    },
+    {
+      "source": "s9",
+      "target": "s10",
+      "first": null,
+      "inherit": true,
+      "kind": "goto"
+    },
+    {
+      "source": "a8",
+      "target": "a3",
+      "first": null,
+      "inherit": true,
+      "kind": "goto"
+    }
+  ],
+  "seed": [
+    "accept0"
+  ],
+  "snapshot": "BuildLookAheadEntries return, before queue"
+}

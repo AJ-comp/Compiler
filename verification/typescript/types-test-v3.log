@@ -1,0 +1,493 @@
+  복원할 프로젝트를 확인하는 중...
+  C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Parse.FrontEnd.Parsers.Tests.csproj을(를) 278밀리초 동안 복원했습니다.
+  복원할 7 프로젝트의 6이(가) 최신 상태입니다.
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\type-tests-bin-v3\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\type-tests-bin-v3\Parse.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\KeyManager.cs(17,22): warning CS0414: 'KeyManager.meaningUnitKey' 필드가 할당되었지만 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\Parse.FrontEnd.csproj]
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\type-tests-bin-v3\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\type-tests-bin-v3\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\type-tests-bin-v3\Parse.FrontEnd.Grammars.Ebnf.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(21,55): warning CS0067: 'LLParser.ASTCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(49,48): warning CS0067: 'LRParser.ReduceAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(51,48): warning CS0067: 'LRParser.ShiftAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(20,62): warning CS0067: 'LLParser.ParseTreeCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\type-tests-bin-v3\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\type-tests-bin-v3\Parse.FrontEnd.Parsers.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\type-tests-bin-v3\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:01:09.06]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "Map<string, Array<User>>") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "Map<string, Array<User>>") [11 ms]
+  오류 메시지:
+   Map<string, Array<User>>
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 86
+   at InvokeStub_TypeScriptTypeTests.Primitive_literal_and_reference_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:01:09.12]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "Domain.User") [FAIL]
+[xUnit.net 00:01:09.14]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "this") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "Domain.User") [8 ms]
+  오류 메시지:
+   Domain.User
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 86
+   at InvokeStub_TypeScriptTypeTests.Primitive_literal_and_reference_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "this") [8 ms]
+  오류 메시지:
+   this
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {&, |, extends, [, ?, is} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 86
+   at InvokeStub_TypeScriptTypeTests.Primitive_literal_and_reference_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:01:09.20]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "any.Qualified") [FAIL]
+[xUnit.net 00:01:09.21]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "Tuple<string, number,>") [FAIL]
+[xUnit.net 00:01:09.22]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "Array<string>") [FAIL]
+[xUnit.net 00:01:09.24]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "User") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "any.Qualified") [7 ms]
+  오류 메시지:
+   any.Qualified
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 86
+   at InvokeStub_TypeScriptTypeTests.Primitive_literal_and_reference_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "Tuple<string, number,>") [8 ms]
+  오류 메시지:
+   Tuple<string, number,>
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 86
+   at InvokeStub_TypeScriptTypeTests.Primitive_literal_and_reference_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "Array<string>") [7 ms]
+  오류 메시지:
+   Array<string>
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 86
+   at InvokeStub_TypeScriptTypeTests.Primitive_literal_and_reference_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "User") [8 ms]
+  오류 메시지:
+   User
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 86
+   at InvokeStub_TypeScriptTypeTests.Primitive_literal_and_reference_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:01:09.28]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "Outer<Middle<Inner<User>>>") [FAIL]
+[xUnit.net 00:01:09.29]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "{[K in keyof T]: T[K]}") [FAIL]
+[xUnit.net 00:01:09.31]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "{[K in keyof T as `get${K}`]: T[K]}") [FAIL]
+[xUnit.net 00:01:09.34]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "{+readonly [K in keyof T]+?: T[K];}") [FAIL]
+[xUnit.net 00:01:09.34]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "{readonly [K in keyof T]?: T[K]}") [FAIL]
+[xUnit.net 00:01:09.35]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "import('library').Factory<User>") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: "Outer<Middle<Inner<User>>>") [14 ms]
+  오류 메시지:
+   Outer<Middle<Inner<User>>>
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 86
+   at InvokeStub_TypeScriptTypeTests.Primitive_literal_and_reference_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "{[K in keyof T]: T[K]}") [8 ms]
+  오류 메시지:
+   {[K in keyof T]: T[K]}
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 159
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "{[K in keyof T as `get${K}`]: T[K]}") [8 ms]
+  오류 메시지:
+   {[K in keyof T as `get${K}`]: T[K]}
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 159
+   at InvokeStub_TypeScriptTypeTests.Mapped_template_and_import_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "{+readonly [K in keyof T]+?: T[K];}") [11 ms]
+  오류 메시지:
+   {+readonly [K in keyof T]+?: T[K];}
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 159
+   at InvokeStub_TypeScriptTypeTests.Mapped_template_and_import_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "{readonly [K in keyof T]?: T[K]}") [7 ms]
+  오류 메시지:
+   {readonly [K in keyof T]?: T[K]}
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 159
+   at InvokeStub_TypeScriptTypeTests.Mapped_template_and_import_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "import('library').Factory<User>") [8 ms]
+  오류 메시지:
+   import('library').Factory<User>
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+[xUnit.net 00:01:09.36]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "{-readonly [K in keyof T]-?: T[K]}") [FAIL]
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 159
+   at InvokeStub_TypeScriptTypeTests.Mapped_template_and_import_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:01:09.37]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "`${A}-${B}-${C}`") [FAIL]
+[xUnit.net 00:01:09.39]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "`prefix${T}suffix`") [FAIL]
+[xUnit.net 00:01:09.39]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "& A & B") [FAIL]
+[xUnit.net 00:01:09.40]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "(A | B)[]") [FAIL]
+[xUnit.net 00:01:09.41]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "T[keyof T][number][]") [FAIL]
+[xUnit.net 00:01:09.42]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "T[K]") [FAIL]
+[xUnit.net 00:01:09.42]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "A | B & C") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "{-readonly [K in keyof T]-?: T[K]}") [7 ms]
+  오류 메시지:
+   {-readonly [K in keyof T]-?: T[K]}
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 159
+   at InvokeStub_TypeScriptTypeTests.Mapped_template_and_import_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "`${A}-${B}-${C}`") [9 ms]
+  오류 메시지:
+   `${A}-${B}-${C}`
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 159
+   at InvokeStub_TypeScriptTypeTests.Mapped_template_and_import_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: "`prefix${T}suffix`") [6 ms]
+  오류 메시지:
+   `prefix${T}suffix`
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 159
+   at InvokeStub_TypeScriptTypeTests.Mapped_template_and_import_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "& A & B") [7 ms]
+  오류 메시지:
+   & A & B
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 106
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "(A | B)[]") [7 ms]
+  오류 메시지:
+   (A | B)[]
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 106
+   at InvokeStub_TypeScriptTypeTests.Operators_precedence_conditional_and_queries(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "T[keyof T][number][]") [8 ms]
+  오류 메시지:
+   T[keyof T][number][]
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 106
+   at InvokeStub_TypeScriptTypeTests.Operators_precedence_conditional_and_queries(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "T[K]") [6 ms]
+  오류 메시지:
+   T[K]
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 106
+   at InvokeStub_TypeScriptTypeTests.Operators_precedence_conditional_and_queries(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "A | B & C") [7 ms]
+  오류 메시지:
+   A | B & C
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 106
+   at InvokeStub_TypeScriptTypeTests.Operators_precedence_conditional_and_queries(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:01:09.43]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "| A | B") [FAIL]
+[xUnit.net 00:01:09.44]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "T extends infer U extends string ? U : never") [FAIL]
+[xUnit.net 00:01:09.46]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "T extends U ? X extends Y ? A : B : C") [FAIL]
+[xUnit.net 00:01:09.50]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "keyof T") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "| A | B") [6 ms]
+  오류 메시지:
+   | A | B
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 106
+   at InvokeStub_TypeScriptTypeTests.Operators_precedence_conditional_and_queries(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "T extends infer U extends string ? U : never") [13 ms]
+  오류 메시지:
+   T extends infer U extends string ? U : never
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 106
+   at InvokeStub_TypeScriptTypeTests.Operators_precedence_conditional_and_queries(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "T extends U ? X extends Y ? A : B : C") [10 ms]
+  오류 메시지:
+   T extends U ? X extends Y ? A : B : C
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 106
+   at InvokeStub_TypeScriptTypeTests.Operators_precedence_conditional_and_queries(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "keyof T") [6 ms]
+  오류 메시지:
+   keyof T
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 106
+   at InvokeStub_TypeScriptTypeTests.Operators_precedence_conditional_and_queries(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:01:09.51]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "T extends infer U ? U : never") [FAIL]
+[xUnit.net 00:01:09.52]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "T extends U ? X : Y") [FAIL]
+[xUnit.net 00:01:09.54]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: "[...Head, Last]") [FAIL]
+[xUnit.net 00:01:09.55]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: "[A,]") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "T extends infer U ? U : never") [8 ms]
+  오류 메시지:
+   T extends infer U ? U : never
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 106
+   at InvokeStub_TypeScriptTypeTests.Operators_precedence_conditional_and_queries(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: "T extends U ? X : Y") [9 ms]
+  오류 메시지:
+   T extends U ? X : Y
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 106
+   at InvokeStub_TypeScriptTypeTests.Operators_precedence_conditional_and_queries(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: "[...Head, Last]") [8 ms]
+  오류 메시지:
+   [...Head, Last]
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 126
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: "[A,]") [8 ms]
+  오류 메시지:
+   [A,]
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 126
+   at InvokeStub_TypeScriptTypeTests.Tuple_and_object_members(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:01:09.64]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: "[first: A, B, ...C[]]") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: "[first: A, B, ...C[]]") [9 ms]
+  오류 메시지:
+   [first: A, B, ...C[]]
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 126
+   at InvokeStub_TypeScriptTypeTests.Tuple_and_object_members(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:01:09.71]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: "{[Symbol.iterator](): Iterator<User>}") [FAIL]
+[xUnit.net 00:01:09.72]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "abstract new <T>(value: T) => Container<T>") [FAIL]
+[xUnit.net 00:01:09.73]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "(value: unknown) => value is string") [FAIL]
+[xUnit.net 00:01:09.75]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "({name}: User, [value]: [number]) => string") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: "{[Symbol.iterator](): Iterator<User>}") [12 ms]
+  오류 메시지:
+   {[Symbol.iterator](): Iterator<User>}
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 126
+   at InvokeStub_TypeScriptTypeTests.Tuple_and_object_members(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "abstract new <T>(value: T) => Container<T>") [9 ms]
+  오류 메시지:
+   abstract new <T>(value: T) => Container<T>
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "(value: unknown) => value is string") [10 ms]
+  오류 메시지:
+   (value: unknown) => value is string
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at InvokeStub_TypeScriptTypeTests.Function_construct_call_and_predicate_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "({name}: User, [value]: [number]) => string") [8 ms]
+  오류 메시지:
+   ({name}: User, [value]: [number]) => string
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at InvokeStub_TypeScriptTypeTests.Function_construct_call_and_predicate_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:01:09.80]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "(this: Receiver, input?: string) => void") [FAIL]
+[xUnit.net 00:01:09.81]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "{(input: string): number; <T>(value: T): T; new ()"···) [FAIL]
+[xUnit.net 00:01:09.82]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "{check(): this is Derived}") [FAIL]
+[xUnit.net 00:01:09.83]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "{transform<T>(input: T): T; optional?(input: strin"···) [FAIL]
+[xUnit.net 00:01:09.84]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "(value: unknown) => asserts value") [FAIL]
+[xUnit.net 00:01:09.85]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "new (input: string) => Result") [FAIL]
+[xUnit.net 00:01:09.86]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "(value: unknown) => asserts value is string") [FAIL]
+[xUnit.net 00:01:09.87]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "<T extends Entity = User>(value: T) => T") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "(this: Receiver, input?: string) => void") [8 ms]
+  오류 메시지:
+   (this: Receiver, input?: string) => void
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at InvokeStub_TypeScriptTypeTests.Function_construct_call_and_predicate_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "{(input: string): number; <T>(value: T): T; new ()"···) [10 ms]
+  오류 메시지:
+   {(input: string): number; <T>(value: T): T; new (): Result}
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at InvokeStub_TypeScriptTypeTests.Function_construct_call_and_predicate_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "{check(): this is Derived}") [8 ms]
+  오류 메시지:
+   {check(): this is Derived}
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at InvokeStub_TypeScriptTypeTests.Function_construct_call_and_predicate_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "{transform<T>(input: T): T; optional?(input: strin"···) [10 ms]
+  오류 메시지:
+   {transform<T>(input: T): T; optional?(input: string): void}
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at InvokeStub_TypeScriptTypeTests.Function_construct_call_and_predicate_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "(value: unknown) => asserts value") [9 ms]
+  오류 메시지:
+   (value: unknown) => asserts value
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {&, |, extends, [, ?, is} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at InvokeStub_TypeScriptTypeTests.Function_construct_call_and_predicate_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "new (input: string) => Result") [10 ms]
+  오류 메시지:
+   new (input: string) => Result
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at InvokeStub_TypeScriptTypeTests.Function_construct_call_and_predicate_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "(value: unknown) => asserts value is string") [10 ms]
+  오류 메시지:
+   (value: unknown) => asserts value is string
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at InvokeStub_TypeScriptTypeTests.Function_construct_call_and_predicate_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: "<T extends Entity = User>(value: T) => T") [9 ms]
+  오류 메시지:
+   <T extends Entity = User>(value: T) => T
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 145
+   at InvokeStub_TypeScriptTypeTests.Function_construct_call_and_predicate_types(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:01:09.88]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Concrete_tree_keeps_type_roles_and_original_source_positions [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Concrete_tree_keeps_type_roles_and_original_source_positions [12 ms]
+  오류 메시지:
+   Outer<Middle<Inner<User>>>
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 29
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Concrete_tree_keeps_type_roles_and_original_source_positions() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptTypeTests.cs:line 188
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\unit-tests\typescript-types-v3.trx
+
+실패!  - 실패:    43, 통과:    67, 건너뜀:     0, 전체:   110, 기간: 1 m 6 s - Parse.FrontEnd.Parsers.Tests.dll (net8.0)

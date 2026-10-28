@@ -1,0 +1,76 @@
+{"id":"let result = value as User;","kind":"ts","source":"let result = value as User;"}
+{"id":"let result = value satisfies User;","kind":"ts","source":"let result = value satisfies User;"}
+{"id":"let result = value as unknown as User;","kind":"ts","source":"let result = value as unknown as User;"}
+{"id":"let result = value as User satisfies Named;","kind":"ts","source":"let result = value as User satisfies Named;"}
+{"id":"let result = value satisfies User as Named;","kind":"ts","source":"let result = value satisfies User as Named;"}
+{"id":"let result = value satisfies User satisfies Named;","kind":"ts","source":"let result = value satisfies User satisfies Named;"}
+{"id":"let result = [1, 2] as const;","kind":"ts","source":"let result = [1, 2] as const;"}
+{"id":"let result = ({name: 'test'} as const);","kind":"ts","source":"let result = ({name: 'test'} as const);"}
+{"id":"let result = value satisfies const;","kind":"ts","source":"let result = value satisfies const;"}
+{"id":"let result = value as readonly string[];","kind":"ts","source":"let result = value as readonly string[];"}
+{"id":"let result = value satisfies readonly string[];","kind":"ts","source":"let result = value satisfies readonly string[];"}
+{"id":"let result = value as User | undefined;","kind":"ts","source":"let result = value as User | undefined;"}
+{"id":"let result = value satisfies User & Named;","kind":"ts","source":"let result = value satisfies User & Named;"}
+{"id":"let result = value as T extends U ? X : Y;","kind":"ts","source":"let result = value as T extends U ? X : Y;"}
+{"id":"let result = value as (() => number);","kind":"ts","source":"let result = value as (() => number);"}
+{"id":"let result = value as {name: string};","kind":"ts","source":"let result = value as {name: string};"}
+{"id":"let result = value satisfies {name: string};","kind":"ts","source":"let result = value satisfies {name: string};"}
+{"id":"let result = value as Map<string, Array<User>>;","kind":"ts","source":"let result = value as Map<string, Array<User>>;"}
+{"id":"let result = value as Box<User> > other;","kind":"ts","source":"let result = value as Box<User> > other;"}
+{"id":"let result = value as Box<User> >> shift;","kind":"ts","source":"let result = value as Box<User> >> shift;"}
+{"id":"let result = value satisfies Box<User> >>> shift;","kind":"ts","source":"let result = value satisfies Box<User> >>> shift;"}
+{"id":"let result = value as number + other;","kind":"ts","source":"let result = value as number + other;"}
+{"id":"let result = left + right as number;","kind":"ts","source":"let result = left + right as number;"}
+{"id":"let result = flag ? value as User : fallback;","kind":"ts","source":"let result = flag ? value as User : fallback;"}
+{"id":"let result = value as number == other;","kind":"ts","source":"let result = value as number == other;"}
+{"id":"let result = left == value as number;","kind":"ts","source":"let result = left == value as number;"}
+{"id":"let result = flag && value as User;","kind":"ts","source":"let result = flag && value as User;"}
+{"id":"let result = value as boolean || fallback;","kind":"ts","source":"let result = value as boolean || fallback;"}
+{"id":"let result = value satisfies User ? yes : no;","kind":"ts","source":"let result = value satisfies User ? yes : no;"}
+{"id":"let result = typeof value as string;","kind":"ts","source":"let result = typeof value as string;"}
+{"id":"let result = (value as User).name;","kind":"ts","source":"let result = (value as User).name;"}
+{"id":"let result = (value as Handler)(argument);","kind":"ts","source":"let result = (value as Handler)(argument);"}
+{"id":"let result = (value satisfies User).name;","kind":"ts","source":"let result = (value satisfies User).name;"}
+{"id":"let result = [input as User, other satisfies Named];","kind":"ts","source":"let result = [input as User, other satisfies Named];"}
+{"id":"let result = {value: input as User};","kind":"ts","source":"let result = {value: input as User};"}
+{"id":"function f(value: unknown) { return value as User; }","kind":"ts","source":"function f(value: unknown) { return value as User; }"}
+{"id":"let value = input\nas(User);","kind":"ts","source":"let value = input\nas(User);"}
+{"id":"let value = input\nsatisfies(User);","kind":"ts","source":"let value = input\nsatisfies(User);"}
+{"id":"let value = input as\nUser;","kind":"ts","source":"let value = input as\nUser;"}
+{"id":"let value = input satisfies\nUser;","kind":"ts","source":"let value = input satisfies\nUser;"}
+{"id":"let value = input /*\n*/ as(User);","kind":"ts","source":"let value = input /*\n*/ as(User);"}
+{"id":"let value = input as /*\n*/ User;","kind":"ts","source":"let value = input as /*\n*/ User;"}
+{"id":"let as = 1; let satisfies = 2; as + satisfies;","kind":"ts","source":"let as = 1; let satisfies = 2; as + satisfies;"}
+{"id":"let result = object.as + object.satisfies;","kind":"ts","source":"let result = object.as + object.satisfies;"}
+{"id":"for (let item = value as Item; check; step) {}","kind":"ts","source":"for (let item = value as Item; check; step) {}"}
+{"id":"for (let item = value satisfies Item; check; step) {}","kind":"ts","source":"for (let item = value satisfies Item; check; step) {}"}
+{"id":"let result = (value as number) / divisor;","kind":"ts","source":"let result = (value as number) / divisor;"}
+{"id":"let result = value as `prefix${Name}`;","kind":"ts","source":"let result = value as `prefix${Name}`;"}
+{"id":"let result = object[key as string];","kind":"ts","source":"let result = object[key as string];"}
+{"id":"let result = (value => value) satisfies Handler;","kind":"ts","source":"let result = (value => value) satisfies Handler;"}
+{"id":"let result = value as;","kind":"ts","source":"let result = value as;"}
+{"id":"let result = value satisfies;","kind":"ts","source":"let result = value satisfies;"}
+{"id":"let result = as User;","kind":"ts","source":"let result = as User;"}
+{"id":"let result = satisfies User;","kind":"ts","source":"let result = satisfies User;"}
+{"id":"let result = value as <User>;","kind":"ts","source":"let result = value as <User>;"}
+{"id":"let result = value satisfies <User>;","kind":"ts","source":"let result = value satisfies <User>;"}
+{"id":"let result = value as Array<>;","kind":"ts","source":"let result = value as Array<>;"}
+{"id":"let result = value satisfies Array<>;","kind":"ts","source":"let result = value satisfies Array<>;"}
+{"id":"let result = value as Box<User;","kind":"ts","source":"let result = value as Box<User;"}
+{"id":"let result = value as T |;","kind":"ts","source":"let result = value as T |;"}
+{"id":"let result = value satisfies T &;","kind":"ts","source":"let result = value satisfies T &;"}
+{"id":"let result = value as const Type;","kind":"ts","source":"let result = value as const Type;"}
+{"id":"let result = left + right as T * third;","kind":"ts","source":"let result = left + right as T * third;"}
+{"id":"let result = left < right as T + third;","kind":"ts","source":"let result = left < right as T + third;"}
+{"id":"let result = left + right satisfies T * third;","kind":"ts","source":"let result = left + right satisfies T * third;"}
+{"id":"let result = left < right satisfies T + third;","kind":"ts","source":"let result = left < right satisfies T + third;"}
+{"id":"left + right as T;","kind":"ts","source":"left + right as T;"}
+{"id":"left as T + right;","kind":"ts","source":"left as T + right;"}
+{"id":"left == right as T;","kind":"ts","source":"left == right as T;"}
+{"id":"left < right as T;","kind":"ts","source":"left < right as T;"}
+{"id":"left as T > right;","kind":"ts","source":"left as T > right;"}
+{"id":"left + right satisfies T;","kind":"ts","source":"left + right satisfies T;"}
+{"id":"left satisfies T && right;","kind":"ts","source":"left satisfies T && right;"}
+{"id":"value as A as B;","kind":"ts","source":"value as A as B;"}
+{"id":"value as A satisfies B;","kind":"ts","source":"value as A satisfies B;"}
+{"id":"value satisfies A as B;","kind":"ts","source":"value satisfies A as B;"}

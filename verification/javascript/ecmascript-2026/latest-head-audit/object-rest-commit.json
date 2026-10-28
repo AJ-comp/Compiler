@@ -1,0 +1,200 @@
+{
+  "sha": "be13516fb6441b950ba8a3df97eb34062c186972",
+  "node_id": "C_kwDOAPZl3doAKGJlMTM1MTZmYjY0NDFiOTUwYmE4YTNkZjk3ZWIzNDA2MmMxODY5NzI",
+  "commit": {
+    "author": {
+      "name": "Richard Gibson",
+      "email": "richard.gibson@gmail.com",
+      "date": "2026-08-07T06:18:20Z"
+    },
+    "committer": {
+      "name": "GitHub",
+      "email": "noreply@github.com",
+      "date": "2026-08-07T06:18:20Z"
+    },
+    "message": "[object-rest] Add coverage for comma-after-rest-property (#5102)",
+    "tree": {
+      "sha": "e68a5c15a290b98d7b6b43b874d981df5d152d23",
+      "url": "https://api.github.com/repos/tc39/test262/git/trees/e68a5c15a290b98d7b6b43b874d981df5d152d23"
+    },
+    "url": "https://api.github.com/repos/tc39/test262/git/commits/be13516fb6441b950ba8a3df97eb34062c186972",
+    "comment_count": 0,
+    "verification": {
+      "verified": true,
+      "reason": "valid",
+      "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqdXisCRC1aQ7uu5UhlAAAbFcQAKBwLnXH3CLxKvvBr2+1NMNZ\nsb6VhegWimISTSmSdeSzDqW+CM9lzKyK6FxuZE7n9CAXGiiHfm3s0pvqBSuBE1Ex\nIvlaWHQTuqgyumyiAwS6kqqdQjowb4Kqflx9nDgS3WVMZ2Jy3j8ta7mUjxNKds8o\no7WWzfJXL93SSjqeqpSClOyMezZtQVCPZNbifYJodFWO6i7umGo/rMqNEKY9A++z\nrF2yuTgyC7hXOnxJVzFnoxO8dDxoz1GHkxX/fs9AgOBoApl82ULwjV6JKTIiktqz\nVGc5lFbC+vC6Bja4W9VtgOt+TsOC2b+JSoi6viYZ2r8pNu2ZHL560t7xUzBumo0C\n3YJjwKC0QFzrsNzv3bOJD6Qi0feo5iR9H/7YHS3YEvfL9+TQw0oelLfFXAqG71HV\ngopdurreGRfzfmZBfvHtVmuU7clA09ZcnczsTCZjjDdTerw9ej7BQO/jqvjO4xYu\nXMh1KZ5GzsJx0F/hluisPyexQv46E81isseG7cwlDSt6MgoArpP7G5c2+VfLY64+\nVdxYgXJ52Daf/L5U/Jinf6jbGzWSLRPkX6A5ZmWOh2nWwp0safJNpImc1ZSQHC4N\nfUNMyziNZq6pfApF796Mjxp4+1DK2Xc8PIgnszA5A884u2moR3l8N6rkNk6fq+jM\n4VEyf22uRfWKVI7+9xyY\n=yab7\n-----END PGP SIGNATURE-----\n",
+      "payload": "tree e68a5c15a290b98d7b6b43b874d981df5d152d23\nparent b363f29d3c43c626dc852744ad64a0b48a003693\nauthor Richard Gibson <richard.gibson@gmail.com> 1786083500 -0400\ncommitter GitHub <noreply@github.com> 1786083500 -0400\n\n[object-rest] Add coverage for comma-after-rest-property (#5102)",
+      "verified_at": "2026-08-07T06:18:25Z"
+    }
+  },
+  "url": "https://api.github.com/repos/tc39/test262/commits/be13516fb6441b950ba8a3df97eb34062c186972",
+  "html_url": "https://github.com/tc39/test262/commit/be13516fb6441b950ba8a3df97eb34062c186972",
+  "comments_url": "https://api.github.com/repos/tc39/test262/commits/be13516fb6441b950ba8a3df97eb34062c186972/comments",
+  "author": {
+    "login": "gibson042",
+    "id": 1199584,
+    "node_id": "MDQ6VXNlcjExOTk1ODQ=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/1199584?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/gibson042",
+    "html_url": "https://github.com/gibson042",
+    "followers_url": "https://api.github.com/users/gibson042/followers",
+    "following_url": "https://api.github.com/users/gibson042/following{/other_user}",
+    "gists_url": "https://api.github.com/users/gibson042/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/gibson042/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/gibson042/subscriptions",
+    "organizations_url": "https://api.github.com/users/gibson042/orgs",
+    "repos_url": "https://api.github.com/users/gibson042/repos",
+    "events_url": "https://api.github.com/users/gibson042/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/gibson042/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "web-flow",
+    "id": 19864447,
+    "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+    "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/web-flow",
+    "html_url": "https://github.com/web-flow",
+    "followers_url": "https://api.github.com/users/web-flow/followers",
+    "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+    "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+    "organizations_url": "https://api.github.com/users/web-flow/orgs",
+    "repos_url": "https://api.github.com/users/web-flow/repos",
+    "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/web-flow/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "b363f29d3c43c626dc852744ad64a0b48a003693",
+      "url": "https://api.github.com/repos/tc39/test262/commits/b363f29d3c43c626dc852744ad64a0b48a003693",
+      "html_url": "https://github.com/tc39/test262/commit/b363f29d3c43c626dc852744ad64a0b48a003693"
+    }
+  ],
+  "stats": {
+    "total": 80,
+    "additions": 44,
+    "deletions": 36
+  },
+  "files": [
+    {
+      "sha": "6044036315250f6459828165d05c49adf5d52475",
+      "filename": "src/dstr-assignment/array-rest-elision-invalid.case",
+      "status": "removed",
+      "additions": 0,
+      "deletions": 20,
+      "changes": 20,
+      "blob_url": "https://github.com/tc39/test262/blob/b363f29d3c43c626dc852744ad64a0b48a003693/src%2Fdstr-assignment%2Farray-rest-elision-invalid.case",
+      "raw_url": "https://github.com/tc39/test262/raw/b363f29d3c43c626dc852744ad64a0b48a003693/src%2Fdstr-assignment%2Farray-rest-elision-invalid.case",
+      "contents_url": "https://api.github.com/repos/tc39/test262/contents/src%2Fdstr-assignment%2Farray-rest-elision-invalid.case?ref=b363f29d3c43c626dc852744ad64a0b48a003693",
+      "patch": "@@ -1,20 +0,0 @@\n-// Copyright (C) 2015 the V8 project authors. All rights reserved.\n-// This code is governed by the BSD license found in the LICENSE file.\n-\n-/*---\n-desc: >\n-    ArrayAssignmentPattern may not include elisions following an\n-    AssignmentRestElement in a AssignmentElementList.\n-template: syntax\n-es6id: 12.14.5\n-negative:\n-  phase: parse\n-  type: SyntaxError\n----*/\n-\n-//- setup\n-$DONOTEVALUATE();\n-//- elems\n-[...x,]\n-//- vals\n-[]"
+    },
+    {
+      "sha": "94be43f3fe4e5f590da1c5e8fd8ee2e43d85f572",
+      "filename": "src/dstr-assignment/obj-rest-before-comma-invalid.case",
+      "status": "added",
+      "additions": 22,
+      "deletions": 0,
+      "changes": 22,
+      "blob_url": "https://github.com/tc39/test262/blob/be13516fb6441b950ba8a3df97eb34062c186972/src%2Fdstr-assignment%2Fobj-rest-before-comma-invalid.case",
+      "raw_url": "https://github.com/tc39/test262/raw/be13516fb6441b950ba8a3df97eb34062c186972/src%2Fdstr-assignment%2Fobj-rest-before-comma-invalid.case",
+      "contents_url": "https://api.github.com/repos/tc39/test262/contents/src%2Fdstr-assignment%2Fobj-rest-before-comma-invalid.case?ref=be13516fb6441b950ba8a3df97eb34062c186972",
+      "patch": "@@ -0,0 +1,22 @@\n+// Copyright (C) 2017 Richard Gibson. All rights reserved.\n+// This code is governed by the BSD license found in the LICENSE file.\n+\n+/*---\n+desc: >\n+  Object rest element cannot be followed by a comma in ObjectAssignmentPattern.\n+template: syntax\n+esid: prod-ObjectAssignmentPattern\n+negative:\n+  phase: parse\n+  type: SyntaxError\n+features: [object-rest]\n+---*/\n+\n+//- setup\n+$DONOTEVALUATE();\n+var rest;\n+//- elems\n+{...rest,}\n+//- vals\n+{}\n+"
+    },
+    {
+      "sha": "aa972d243c1853deced34691e4d04071f47cb22e",
+      "filename": "src/dstr-assignment/obj-rest-not-last-element-invalid.case",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/tc39/test262/blob/be13516fb6441b950ba8a3df97eb34062c186972/src%2Fdstr-assignment%2Fobj-rest-not-last-element-invalid.case",
+      "raw_url": "https://github.com/tc39/test262/raw/be13516fb6441b950ba8a3df97eb34062c186972/src%2Fdstr-assignment%2Fobj-rest-not-last-element-invalid.case",
+      "contents_url": "https://api.github.com/repos/tc39/test262/contents/src%2Fdstr-assignment%2Fobj-rest-not-last-element-invalid.case?ref=be13516fb6441b950ba8a3df97eb34062c186972",
+      "patch": "@@ -3,7 +3,7 @@\n \n /*---\n desc: >\n-    Object rest element needs to be the last AssignmenProperty\n+    Object rest element needs to be the last AssignmentProperty\n     in ObjectAssignmentPattern.\n template: syntax\n esid: pending"
+    },
+    {
+      "sha": "aa175e17f740ef9d2620f1c3f7695454c3a44f1e",
+      "filename": "test/language/expressions/assignment/dstr/obj-rest-before-comma-invalid.js",
+      "status": "renamed",
+      "additions": 6,
+      "deletions": 4,
+      "changes": 10,
+      "blob_url": "https://github.com/tc39/test262/blob/be13516fb6441b950ba8a3df97eb34062c186972/test%2Flanguage%2Fexpressions%2Fassignment%2Fdstr%2Fobj-rest-before-comma-invalid.js",
+      "raw_url": "https://github.com/tc39/test262/raw/be13516fb6441b950ba8a3df97eb34062c186972/test%2Flanguage%2Fexpressions%2Fassignment%2Fdstr%2Fobj-rest-before-comma-invalid.js",
+      "contents_url": "https://api.github.com/repos/tc39/test262/contents/test%2Flanguage%2Fexpressions%2Fassignment%2Fdstr%2Fobj-rest-before-comma-invalid.js?ref=be13516fb6441b950ba8a3df97eb34062c186972",
+      "patch": "@@ -1,10 +1,10 @@\n // This file was procedurally generated from the following sources:\n-// - src/dstr-assignment/array-rest-elision-invalid.case\n+// - src/dstr-assignment/obj-rest-before-comma-invalid.case\n // - src/dstr-assignment/syntax/assignment-expr.template\n /*---\n-description: ArrayAssignmentPattern may not include elisions following an AssignmentRestElement in a AssignmentElementList. (AssignmentExpression)\n+description: Object rest element cannot be followed by a comma in ObjectAssignmentPattern. (AssignmentExpression)\n esid: sec-variable-statement-runtime-semantics-evaluation\n-features: [destructuring-binding]\n+features: [object-rest, destructuring-binding]\n flags: [generated]\n negative:\n   phase: parse\n@@ -19,5 +19,7 @@ info: |\n        BindingPattern passing rval and undefined as arguments.\n ---*/\n $DONOTEVALUATE();\n+var rest;\n \n-0, [...x,] = [];\n+0, {...rest,} = {}\n+;",
+      "previous_filename": "test/language/expressions/assignment/dstr/array-rest-elision-invalid.js"
+    },
+    {
+      "sha": "45325c42d5f5b1c5de971003fea002306d48699a",
+      "filename": "test/language/expressions/assignment/dstr/obj-rest-not-last-element-invalid.js",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/tc39/test262/blob/be13516fb6441b950ba8a3df97eb34062c186972/test%2Flanguage%2Fexpressions%2Fassignment%2Fdstr%2Fobj-rest-not-last-element-invalid.js",
+      "raw_url": "https://github.com/tc39/test262/raw/be13516fb6441b950ba8a3df97eb34062c186972/test%2Flanguage%2Fexpressions%2Fassignment%2Fdstr%2Fobj-rest-not-last-element-invalid.js",
+      "contents_url": "https://api.github.com/repos/tc39/test262/contents/test%2Flanguage%2Fexpressions%2Fassignment%2Fdstr%2Fobj-rest-not-last-element-invalid.js?ref=be13516fb6441b950ba8a3df97eb34062c186972",
+      "patch": "@@ -2,7 +2,7 @@\n // - src/dstr-assignment/obj-rest-not-last-element-invalid.case\n // - src/dstr-assignment/syntax/assignment-expr.template\n /*---\n-description: Object rest element needs to be the last AssignmenProperty in ObjectAssignmentPattern. (AssignmentExpression)\n+description: Object rest element needs to be the last AssignmentProperty in ObjectAssignmentPattern. (AssignmentExpression)\n esid: sec-variable-statement-runtime-semantics-evaluation\n features: [object-rest, destructuring-binding]\n flags: [generated]"
+    },
+    {
+      "sha": "1ad00c6852d0e62d67488970d5c35476aa831e6a",
+      "filename": "test/language/statements/for-in/dstr/obj-rest-before-comma-invalid.js",
+      "status": "renamed",
+      "additions": 6,
+      "deletions": 4,
+      "changes": 10,
+      "blob_url": "https://github.com/tc39/test262/blob/be13516fb6441b950ba8a3df97eb34062c186972/test%2Flanguage%2Fstatements%2Ffor-in%2Fdstr%2Fobj-rest-before-comma-invalid.js",
+      "raw_url": "https://github.com/tc39/test262/raw/be13516fb6441b950ba8a3df97eb34062c186972/test%2Flanguage%2Fstatements%2Ffor-in%2Fdstr%2Fobj-rest-before-comma-invalid.js",
+      "contents_url": "https://api.github.com/repos/tc39/test262/contents/test%2Flanguage%2Fstatements%2Ffor-in%2Fdstr%2Fobj-rest-before-comma-invalid.js?ref=be13516fb6441b950ba8a3df97eb34062c186972",
+      "patch": "@@ -1,10 +1,10 @@\n // This file was procedurally generated from the following sources:\n-// - src/dstr-assignment/array-rest-elision-invalid.case\n+// - src/dstr-assignment/obj-rest-before-comma-invalid.case\n // - src/dstr-assignment/syntax/for-in.template\n /*---\n-description: ArrayAssignmentPattern may not include elisions following an AssignmentRestElement in a AssignmentElementList. (For..in statement)\n+description: Object rest element cannot be followed by a comma in ObjectAssignmentPattern. (For..in statement)\n esid: sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation\n-features: [destructuring-binding]\n+features: [object-rest, destructuring-binding]\n flags: [generated]\n negative:\n   phase: parse\n@@ -28,5 +28,7 @@ info: |\n     [...]\n ---*/\n $DONOTEVALUATE();\n+var rest;\n \n-for ([...x,] in [[]]) ;\n+for ({...rest,} in [{}\n+]) ;",
+      "previous_filename": "test/language/statements/for-in/dstr/array-rest-elision-invalid.js"
+    },
+    {
+      "sha": "79be68ede988b47d063abdddb8deb75616a5bf01",
+      "filename": "test/language/statements/for-in/dstr/obj-rest-not-last-element-invalid.js",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/tc39/test262/blob/be13516fb6441b950ba8a3df97eb34062c186972/test%2Flanguage%2Fstatements%2Ffor-in%2Fdstr%2Fobj-rest-not-last-element-invalid.js",
+      "raw_url": "https://github.com/tc39/test262/raw/be13516fb6441b950ba8a3df97eb34062c186972/test%2Flanguage%2Fstatements%2Ffor-in%2Fdstr%2Fobj-rest-not-last-element-invalid.js",
+      "contents_url": "https://api.github.com/repos/tc39/test262/contents/test%2Flanguage%2Fstatements%2Ffor-in%2Fdstr%2Fobj-rest-not-last-element-invalid.js?ref=be13516fb6441b950ba8a3df97eb34062c186972",
+      "patch": "@@ -2,7 +2,7 @@\n // - src/dstr-assignment/obj-rest-not-last-element-invalid.case\n // - src/dstr-assignment/syntax/for-in.template\n /*---\n-description: Object rest element needs to be the last AssignmenProperty in ObjectAssignmentPattern. (For..in statement)\n+description: Object rest element needs to be the last AssignmentProperty in ObjectAssignmentPattern. (For..in statement)\n esid: sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation\n features: [object-rest, destructuring-binding]\n flags: [generated]"
+    },
+    {
+      "sha": "b661507912d69b2accea6749ff9e3e3fb3992b7c",
+      "filename": "test/language/statements/for-of/dstr/obj-rest-before-comma-invalid.js",
+      "status": "renamed",
+      "additions": 6,
+      "deletions": 4,
+      "changes": 10,
+      "blob_url": "https://github.com/tc39/test262/blob/be13516fb6441b950ba8a3df97eb34062c186972/test%2Flanguage%2Fstatements%2Ffor-of%2Fdstr%2Fobj-rest-before-comma-invalid.js",
+      "raw_url": "https://github.com/tc39/test262/raw/be13516fb6441b950ba8a3df97eb34062c186972/test%2Flanguage%2Fstatements%2Ffor-of%2Fdstr%2Fobj-rest-before-comma-invalid.js",
+      "contents_url": "https://api.github.com/repos/tc39/test262/contents/test%2Flanguage%2Fstatements%2Ffor-of%2Fdstr%2Fobj-rest-before-comma-invalid.js?ref=be13516fb6441b950ba8a3df97eb34062c186972",
+      "patch": "@@ -1,10 +1,10 @@\n // This file was procedurally generated from the following sources:\n-// - src/dstr-assignment/array-rest-elision-invalid.case\n+// - src/dstr-assignment/obj-rest-before-comma-invalid.case\n // - src/dstr-assignment/syntax/for-of.template\n /*---\n-description: ArrayAssignmentPattern may not include elisions following an AssignmentRestElement in a AssignmentElementList. (For..of statement)\n+description: Object rest element cannot be followed by a comma in ObjectAssignmentPattern. (For..of statement)\n esid: sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation\n-features: [destructuring-binding]\n+features: [object-rest, destructuring-binding]\n flags: [generated]\n negative:\n   phase: parse\n@@ -28,5 +28,7 @@ info: |\n     [...]\n ---*/\n $DONOTEVALUATE();\n+var rest;\n \n-for ([...x,] of [[]]) ;\n+for ({...rest,} of [{}\n+]) ;",
+      "previous_filename": "test/language/statements/for-of/dstr/array-rest-elision-invalid.js"
+    },
+    {
+      "sha": "86451aca3e97003f3fa8374b164a342d5001539a",
+      "filename": "test/language/statements/for-of/dstr/obj-rest-not-last-element-invalid.js",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/tc39/test262/blob/be13516fb6441b950ba8a3df97eb34062c186972/test%2Flanguage%2Fstatements%2Ffor-of%2Fdstr%2Fobj-rest-not-last-element-invalid.js",
+      "raw_url": "https://github.com/tc39/test262/raw/be13516fb6441b950ba8a3df97eb34062c186972/test%2Flanguage%2Fstatements%2Ffor-of%2Fdstr%2Fobj-rest-not-last-element-invalid.js",
+      "contents_url": "https://api.github.com/repos/tc39/test262/contents/test%2Flanguage%2Fstatements%2Ffor-of%2Fdstr%2Fobj-rest-not-last-element-invalid.js?ref=be13516fb6441b950ba8a3df97eb34062c186972",
+      "patch": "@@ -2,7 +2,7 @@\n // - src/dstr-assignment/obj-rest-not-last-element-invalid.case\n // - src/dstr-assignment/syntax/for-of.template\n /*---\n-description: Object rest element needs to be the last AssignmenProperty in ObjectAssignmentPattern. (For..of statement)\n+description: Object rest element needs to be the last AssignmentProperty in ObjectAssignmentPattern. (For..of statement)\n esid: sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation\n features: [object-rest, destructuring-binding]\n flags: [generated]"
+    }
+  ]
+}

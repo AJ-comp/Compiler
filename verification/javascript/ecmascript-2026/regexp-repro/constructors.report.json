@@ -1,0 +1,12 @@
+{
+  "kind": "constructors",
+  "cases": 752,
+  "mismatches": 0,
+  "casesSha256": "0b8d76fe2ef480f9132e30df7d5d56b82c2bcc44e5facff7b5230b18a78829df",
+  "transportSha256": "125f1bb5a159648089e96046811d7feee8a0847eda6e9c6141dc8de0d9efe329",
+  "verifiedOriginalUtf16Hashes": 752,
+  "mismatchCases": [],
+  "unexpectedExceptionCount": 0,
+  "unexpectedExceptions": [],
+  "scope": "Pattern compilation probes, not Test262 assertions or matching/runtime results. Review every mismatch against the frozen specification."
+}

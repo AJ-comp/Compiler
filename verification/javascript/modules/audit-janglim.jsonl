@@ -1,0 +1,341 @@
+{"source":"import \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import \u0022m\u0022\n","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import \u0022m\u0022 with {bad:\u0022unknown\u0022,} ;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import \u0022m\u0022 with {type:\u0022json\u0022, \u0022\\u0074ype\u0022:\u0022other\u0022};","mode":"module","valid":false,"errors":["duplicate_import_attribute"],"error":null}
+{"source":"import d from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d from \u0022m\u0022\n","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d from \u0022m\u0022 with {bad:\u0022unknown\u0022,} ;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d from \u0022m\u0022 with {type:\u0022json\u0022, \u0022\\u0074ype\u0022:\u0022other\u0022};","mode":"module","valid":false,"errors":["duplicate_import_attribute"],"error":null}
+{"source":"import * as ns from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import * as ns from \u0022m\u0022\n","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import * as ns from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import * as ns from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import * as ns from \u0022m\u0022 with {bad:\u0022unknown\u0022,} ;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import * as ns from \u0022m\u0022 with {type:\u0022json\u0022, \u0022\\u0074ype\u0022:\u0022other\u0022};","mode":"module","valid":false,"errors":["duplicate_import_attribute"],"error":null}
+{"source":"import {} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {} from \u0022m\u0022\n","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {} from \u0022m\u0022 with {bad:\u0022unknown\u0022,} ;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {} from \u0022m\u0022 with {type:\u0022json\u0022, \u0022\\u0074ype\u0022:\u0022other\u0022};","mode":"module","valid":false,"errors":["duplicate_import_attribute"],"error":null}
+{"source":"import {x} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x} from \u0022m\u0022\n","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x} from \u0022m\u0022 with {bad:\u0022unknown\u0022,} ;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x} from \u0022m\u0022 with {type:\u0022json\u0022, \u0022\\u0074ype\u0022:\u0022other\u0022};","mode":"module","valid":false,"errors":["duplicate_import_attribute"],"error":null}
+{"source":"import {x,} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x,} from \u0022m\u0022\n","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x,} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x,} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x,} from \u0022m\u0022 with {bad:\u0022unknown\u0022,} ;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x,} from \u0022m\u0022 with {type:\u0022json\u0022, \u0022\\u0074ype\u0022:\u0022other\u0022};","mode":"module","valid":false,"errors":["duplicate_import_attribute"],"error":null}
+{"source":"import {x as y} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x as y} from \u0022m\u0022\n","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x as y} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x as y} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x as y} from \u0022m\u0022 with {bad:\u0022unknown\u0022,} ;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x as y} from \u0022m\u0022 with {type:\u0022json\u0022, \u0022\\u0074ype\u0022:\u0022other\u0022};","mode":"module","valid":false,"errors":["duplicate_import_attribute"],"error":null}
+{"source":"import {default as d} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {default as d} from \u0022m\u0022\n","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {default as d} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {default as d} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {default as d} from \u0022m\u0022 with {bad:\u0022unknown\u0022,} ;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {default as d} from \u0022m\u0022 with {type:\u0022json\u0022, \u0022\\u0074ype\u0022:\u0022other\u0022};","mode":"module","valid":false,"errors":["duplicate_import_attribute"],"error":null}
+{"source":"import {await as a} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {await as a} from \u0022m\u0022\n","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {await as a} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {await as a} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {await as a} from \u0022m\u0022 with {bad:\u0022unknown\u0022,} ;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {await as a} from \u0022m\u0022 with {type:\u0022json\u0022, \u0022\\u0074ype\u0022:\u0022other\u0022};","mode":"module","valid":false,"errors":["duplicate_import_attribute"],"error":null}
+{"source":"import {\u0022x-y\u0022 as xy} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {\u0022x-y\u0022 as xy} from \u0022m\u0022\n","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {\u0022x-y\u0022 as xy} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {\u0022x-y\u0022 as xy} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {\u0022x-y\u0022 as xy} from \u0022m\u0022 with {bad:\u0022unknown\u0022,} ;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {\u0022x-y\u0022 as xy} from \u0022m\u0022 with {type:\u0022json\u0022, \u0022\\u0074ype\u0022:\u0022other\u0022};","mode":"module","valid":false,"errors":["duplicate_import_attribute"],"error":null}
+{"source":"import d, * as ns from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d, * as ns from \u0022m\u0022\n","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d, * as ns from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d, * as ns from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d, * as ns from \u0022m\u0022 with {bad:\u0022unknown\u0022,} ;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d, * as ns from \u0022m\u0022 with {type:\u0022json\u0022, \u0022\\u0074ype\u0022:\u0022other\u0022};","mode":"module","valid":false,"errors":["duplicate_import_attribute"],"error":null}
+{"source":"import d, {x as y, z} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d, {x as y, z} from \u0022m\u0022\n","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d, {x as y, z} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d, {x as y, z} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d, {x as y, z} from \u0022m\u0022 with {bad:\u0022unknown\u0022,} ;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import d, {x as y, z} from \u0022m\u0022 with {type:\u0022json\u0022, \u0022\\u0074ype\u0022:\u0022other\u0022};","mode":"module","valid":false,"errors":["duplicate_import_attribute"],"error":null}
+{"source":"import d, from \u0022m\u0022;","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import * ns from \u0022m\u0022;","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import {default} from \u0022m\u0022;","mode":"module","valid":false,"errors":["invalid_import_binding"],"error":null}
+{"source":"import {await} from \u0022m\u0022;","mode":"module","valid":false,"errors":["invalid_import_binding"],"error":null}
+{"source":"import {\u0022x\u0022} from \u0022m\u0022;","mode":"module","valid":false,"errors":["invalid_import_binding"],"error":null}
+{"source":"import {x as await} from \u0022m\u0022;","mode":"module","valid":false,"errors":["reserved_module_await"],"error":null}
+{"source":"import {x as eval} from \u0022m\u0022;","mode":"module","valid":false,"errors":["invalid_binding_identifier"],"error":null}
+{"source":"import {x as arguments} from \u0022m\u0022;","mode":"module","valid":false,"errors":["invalid_binding_identifier"],"error":null}
+{"source":"import d from \u0060m\u0060;","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import d from \u0022m\u0022 with {type:1};","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import d from \u0022m\u0022 with {...attrs};","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import d from \u0022m\u0022 assert {type:\u0022json\u0022};","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import d from \u0022m\u0022 with {type};","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import d from \u0022m\u0022 with {type:\u0022json\u0022,,};","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import a, {x as a} from \u0022m\u0022;","mode":"module","valid":false,"errors":["duplicate_binding"],"error":null}
+{"source":"import {x as a} from \u0022m\u0022; var a;","mode":"module","valid":false,"errors":["conflicting_declaration"],"error":null}
+{"source":"import a from \u0022m\u0022; function a(){}","mode":"module","valid":false,"errors":["duplicate_binding"],"error":null}
+{"source":"import a from \u0022m\u0022; {let a;}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {x as a} from \u0022m\u0022; {var a;}","mode":"module","valid":false,"errors":["conflicting_declaration"],"error":null}
+{"source":"import \u0022\\ud800\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import {\u0022\\ud800\u0022 as a} from \u0022m\u0022;","mode":"module","valid":false,"errors":["invalid_module_export_name"],"error":null}
+{"source":"import {\u0022\\ud800\\udc00\u0022 as a} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import \u0022m\u0022 with {\u0022\\ud800\u0022:\u0022\\ud800\u0022};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"const x=1; export {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"const x=1; export {x};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"const x=1; export {x as y};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x as y} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x as y} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x as y} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"const x=1; export {x as \u0022\u0022};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x as \u0022\u0022} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x as \u0022\u0022} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x as \u0022\u0022} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"const x=1; export {x as \u0022x-y\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x as \u0022x-y\u0022,} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x as \u0022x-y\u0022,} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x as \u0022x-y\u0022,} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"const x=1; export {\u0022x-y\u0022 as x};","mode":"module","valid":false,"errors":["invalid_local_export"],"error":null}
+{"source":"export {\u0022x-y\u0022 as x} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {\u0022x-y\u0022 as x} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {\u0022x-y\u0022 as x} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"const x=1; export {await as x};","mode":"module","valid":false,"errors":["invalid_local_export"],"error":null}
+{"source":"export {await as x} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {await as x} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {await as x} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"const x=1; export {default as x};","mode":"module","valid":false,"errors":["invalid_local_export"],"error":null}
+{"source":"export {default as x} from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {default as x} from \u0022m\u0022 with {};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {default as x} from \u0022m\u0022 with {type:\u0022json\u0022,};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export * from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export * as x from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export * as \u0022x-y\u0022 from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export * as default from \u0022m\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export * from \u0022a\u0022; export * from \u0022b\u0022;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export * from \u0022a\u0022; export const x=1;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export const {x,y:z}=obj;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export var [a,...b]=arr;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export let a,b;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export function f(){}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export class C{}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export default function(){}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export default function f(){}; export {f};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export default class {}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export default class C{}; export {C};","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export default function(){}(1)","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export default class {}(1)","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export default function(){} /re/;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export default class {} /re/;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export default {} / 2;","mode":"module","valid":false,"errors":[],"error":"Token source failed: Unrecognized or malformed JavaScript token (source offset 18). (state 379, source offset 17, token index 4)."}
+{"source":"export default async\nfunction f(){}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export default 1,2;","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"export default (1,2);","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x}; var x;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x}; {var x;}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x}; {let x;}","mode":"module","valid":false,"errors":["undefined_export"],"error":null}
+{"source":"export {x}; for(var x of a){}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"export {x}; for(let x of a){}","mode":"module","valid":false,"errors":["undefined_export"],"error":null}
+{"source":"export {x}; try{}catch(x){}","mode":"module","valid":false,"errors":["undefined_export"],"error":null}
+{"source":"export {x}; function f(){var x;}","mode":"module","valid":false,"errors":["undefined_export"],"error":null}
+{"source":"export {x}; class C {static {var x;}}","mode":"module","valid":false,"errors":["undefined_export"],"error":null}
+{"source":"function f(){} var f;","mode":"module","valid":false,"errors":["conflicting_declaration"],"error":null}
+{"source":"function f(){} function f(){}","mode":"module","valid":false,"errors":["duplicate_binding"],"error":null}
+{"source":"export default function f(){} var f;","mode":"module","valid":false,"errors":["conflicting_declaration"],"error":null}
+{"source":"export default function f(){}; export function f(){}","mode":"module","valid":false,"errors":["duplicate_binding"],"error":null}
+{"source":"export default 1; export {x as default} from \u0022m\u0022;","mode":"module","valid":false,"errors":["duplicate_export"],"error":null}
+{"source":"export {x} from \u0022a\u0022; export {y as x} from \u0022b\u0022;","mode":"module","valid":false,"errors":["duplicate_export"],"error":null}
+{"source":"export {x} from \u0022a\u0022; var x;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"const x=1; export {x as \u0022a\u0022,x as \u0022\\u0061\u0022};","mode":"module","valid":false,"errors":["duplicate_export"],"error":null}
+{"source":"const x=1; export {x as \u0022\\ud800\u0022};","mode":"module","valid":false,"errors":["invalid_module_export_name"],"error":null}
+{"source":"export {\u0022\\ud800\u0022 as x} from \u0022m\u0022;","mode":"module","valid":false,"errors":["invalid_module_export_name"],"error":null}
+{"source":"export * as \u0022\\ud800\u0022 from \u0022m\u0022;","mode":"module","valid":false,"errors":["invalid_module_export_name"],"error":null}
+{"source":"export default function(){}; export {default};","mode":"module","valid":false,"errors":["duplicate_export","invalid_local_export"],"error":null}
+{"source":"{ import \u0022m\u0022; }","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"if (true) import \u0022m\u0022;","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"function f(){ import \u0022m\u0022; }","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"const f=()=\u003E{ import \u0022m\u0022; };","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"class C{m(){ import \u0022m\u0022; }}","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"class C{static{ import \u0022m\u0022; }}","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"while(true){ import \u0022m\u0022; }","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"{ export {}; }","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"if (true) export {};","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"function f(){ export {}; }","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"const f=()=\u003E{ export {}; };","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"class C{m(){ export {}; }}","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"class C{static{ export {}; }}","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"while(true){ export {}; }","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"{ export const x=1; }","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"if (true) export const x=1;","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"function f(){ export const x=1; }","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"const f=()=\u003E{ export const x=1; };","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"class C{m(){ export const x=1; }}","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"class C{static{ export const x=1; }}","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"while(true){ export const x=1; }","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(\u0022m\u0022);","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022);","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022)","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,);","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,);","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,)","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{});","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{});","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{})","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{},);","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{},);","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{},)","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import((\u0022a\u0022,\u0022b\u0022));","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import((\u0022a\u0022,\u0022b\u0022));","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"import((\u0022a\u0022,\u0022b\u0022))","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{with:{type:\u0022json\u0022,type:\u0022other\u0022}});","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{with:{type:\u0022json\u0022,type:\u0022other\u0022}});","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{with:{type:\u0022json\u0022,type:\u0022other\u0022}})","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{with:42});","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{with:42});","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{with:42})","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{with:{\u0022\\ud800\u0022:\u0022x\u0022}});","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{with:{\u0022\\ud800\u0022:\u0022x\u0022}});","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022,{with:{\u0022\\ud800\u0022:\u0022x\u0022}})","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import();","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import();","mode":"script","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import()","mode":"expression","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(\u0022m\u0022,{},1);","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(\u0022m\u0022,{},1);","mode":"script","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(\u0022m\u0022,{},1)","mode":"expression","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(...x);","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(...x);","mode":"script","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(...x)","mode":"expression","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(\u0022m\u0022,...x);","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(\u0022m\u0022,...x);","mode":"script","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(\u0022m\u0022,...x)","mode":"expression","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(\u0022m\u0022,,);","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(\u0022m\u0022,,);","mode":"script","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import(\u0022m\u0022,,)","mode":"expression","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import?.(\u0022m\u0022);","mode":"module","valid":false,"errors":[],"error":"No candidate can continue through the predicate conflict (state 0, token index 1). Source offset 6."}
+{"source":"import?.(\u0022m\u0022);","mode":"script","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"import?.(\u0022m\u0022)","mode":"expression","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"new import(\u0022m\u0022);","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"new import(\u0022m\u0022);","mode":"script","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"new import(\u0022m\u0022)","mode":"expression","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"new (import(\u0022m\u0022));","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"new (import(\u0022m\u0022));","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"new (import(\u0022m\u0022))","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022).x;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022).x;","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022).x","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022)?.x;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022)?.x;","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022)?.x","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022)\u0060t\u0060;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022)\u0060t\u0060;","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022)\u0060t\u0060","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022)(x);","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022)(x);","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"import(\u0022m\u0022)(x)","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"import.meta;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import.meta;","mode":"script","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.meta","mode":"expression","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.meta.url;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import.meta.url;","mode":"script","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.meta.url","mode":"expression","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.meta[\u0022url\u0022];","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import.meta[\u0022url\u0022];","mode":"script","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.meta[\u0022url\u0022]","mode":"expression","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.meta?.url;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import.meta?.url;","mode":"script","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.meta?.url","mode":"expression","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.meta\u0060x\u0060;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"import.meta\u0060x\u0060;","mode":"script","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.meta\u0060x\u0060","mode":"expression","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"new import.meta;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"new import.meta;","mode":"script","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"new import.meta","mode":"expression","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.meta=1;","mode":"module","valid":false,"errors":["invalid_assignment_target"],"error":null}
+{"source":"import.meta=1;","mode":"script","valid":false,"errors":["invalid_assignment_target","invalid_import_meta"],"error":null}
+{"source":"import.meta=1","mode":"expression","valid":false,"errors":["invalid_assignment_target","invalid_import_meta"],"error":null}
+{"source":"import.metax;","mode":"module","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.metax;","mode":"script","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.metax","mode":"expression","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.me\\u0074a;","mode":"module","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.me\\u0074a;","mode":"script","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.me\\u0074a","mode":"expression","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.\\u006deta;","mode":"module","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.\\u006deta;","mode":"script","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"import.\\u006deta","mode":"expression","valid":false,"errors":["invalid_import_meta"],"error":null}
+{"source":"impor\\u0074(\u0022m\u0022);","mode":"module","valid":false,"errors":["reserved_identifier"],"error":null}
+{"source":"impor\\u0074(\u0022m\u0022);","mode":"script","valid":false,"errors":["reserved_identifier"],"error":null}
+{"source":"impor\\u0074(\u0022m\u0022)","mode":"expression","valid":false,"errors":["reserved_identifier"],"error":null}
+{"source":"typeof import;","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"typeof import;","mode":"script","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"typeof import","mode":"expression","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"(import);","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"(import);","mode":"script","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"(import)","mode":"expression","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"({import:1,meta:2,as:3,from:4});","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"({import:1,meta:2,as:3,from:4});","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"({import:1,meta:2,as:3,from:4})","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"as\u002Bfrom\u002Bmeta;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"as\u002Bfrom\u002Bmeta;","mode":"script","valid":true,"errors":[],"error":null}
+{"source":"as\u002Bfrom\u002Bmeta","mode":"expression","valid":true,"errors":[],"error":null}
+{"source":"await x;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"await\nx;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"await /x/;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"await await x;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"await x ** 2;","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"(await x) ** 2;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"await (x ** 2);","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"await;","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"await\n;","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"let await=1;","mode":"module","valid":false,"errors":["reserved_module_await"],"error":null}
+{"source":"function f(){return await;}","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"function await(){}","mode":"module","valid":false,"errors":["reserved_module_await"],"error":null}
+{"source":"const f=function await(){};","mode":"module","valid":false,"errors":["reserved_module_await"],"error":null}
+{"source":"const f=()=\u003Eawait x;","mode":"module","valid":false,"errors":["invalid_await"],"error":null}
+{"source":"const f=()=\u003E{await x;};","mode":"module","valid":false,"errors":["invalid_await"],"error":null}
+{"source":"const f=(x=await f())=\u003Ex;","mode":"module","valid":false,"errors":["invalid_await"],"error":null}
+{"source":"const f=(x=class {[await key](){}})=\u003Ex;","mode":"module","valid":false,"errors":["invalid_await"],"error":null}
+{"source":"const f=(x=function(){return 1;})=\u003Ex;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"class C extends (await load()){}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"class C {[await key](){}}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"class C {[await key]=1;}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"class C {x=await x;}","mode":"module","valid":false,"errors":["invalid_await"],"error":null}
+{"source":"class C {static x=await x;}","mode":"module","valid":false,"errors":["invalid_await"],"error":null}
+{"source":"class C {static {await x;}}","mode":"module","valid":false,"errors":["invalid_await"],"error":null}
+{"source":"class C {m(){await x;}}","mode":"module","valid":false,"errors":["invalid_await"],"error":null}
+{"source":"class C {await(){return 1;}}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"class C {await=1;}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"({await:1});","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"obj.await;","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"await: while(true) break await;","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"for await (const x of xs) {}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"for await (var {x} of xs) {}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"for await ([x] of xs) {}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"for await (async of xs) {}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"for await (let.x of xs) {}","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"for await (x in xs) {}","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"for await (let x=1; x\u003C2; x\u002B\u002B) {}","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"for\nawait(x of xs){}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"function f(){for await(x of xs){}}","mode":"module","valid":false,"errors":["invalid_await"],"error":null}
+{"source":"const f=()=\u003E{for await(x of xs){}}","mode":"module","valid":false,"errors":["invalid_await"],"error":null}
+{"source":"class C{static{for await(x of xs){}}}","mode":"module","valid":false,"errors":["invalid_await"],"error":null}
+{"source":"{await x;}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"for(let i=await f();i\u003C2;i\u002B\u002B){}","mode":"module","valid":true,"errors":[],"error":null}
+{"source":"for(x=await f() in obj){}","mode":"module","valid":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"source":"for(x=await (f() in obj);;){break;}","mode":"module","valid":true,"errors":[],"error":null}

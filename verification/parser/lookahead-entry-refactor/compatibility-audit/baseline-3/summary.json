@@ -1,0 +1,16 @@
+{
+  "utc": "2026-10-22T21:30:06.8450141Z",
+  "parserAssemblySha256": "622babd10e17fc5d87778aa7736331a59e3e41ec2725053cb69c8dc4137f82e8",
+  "grammarAssemblySha256": "dffd93f703e62927438175eb9dd1f415f67f015b185cab02e944c253a67ab8df",
+  "apiLines": 751,
+  "apiSha256": "ea40c6098f9c4c269e801f304eb0102369db7c1a87c92f38bf7f798ec4e181e8",
+  "states": 1700,
+  "lrItems": 32837,
+  "lookaheadEntries": 32837,
+  "lookaheadSha256": "316638e1cca8800e75af748e3d832cfde45acc3741efd1e531e80f7b563bb9ab",
+  "tableEntries": 80145,
+  "tableSha256": "962dcc7f326ef3d2b86353858d49aa97f1a3bd014e9ec26295c0ce2bb1eb040d",
+  "grammarMs": 166.6527,
+  "parserMs": 6726.593,
+  "parserAllocatedBytes": 7913418992
+}

@@ -1,0 +1,56 @@
+{
+  "checkedAtUtc": "2026-10-19T04:06:45.525793+00:00",
+  "pullRequest": "https://github.com/AJ-comp/Compiler/pull/7",
+  "targetBranch": "master",
+  "masterCommit": "c0c3c5084a78c10b736dff3fac699df40c2887ca",
+  "workingTreeClean": true,
+  "releaseWorkflow": {
+    "url": "https://github.com/AJ-comp/Compiler/actions/runs/39196851125",
+    "conclusion": "success"
+  },
+  "nuget": {
+    "version": "0.4.0",
+    "publicPage": {
+      "url": "https://www.nuget.org/packages/Janglim/0.4.0",
+      "status": 200,
+      "title": "NuGet Gallery | Janglim 0.4.0"
+    },
+    "source": "https://api.nuget.org/v3/index.json",
+    "freshRestore": "passed",
+    "consumerExecution": "passed",
+    "checks": [
+      "README arithmetic quick start",
+      "registered C# predicate true/false",
+      "exact comment and line-break trivia",
+      "five typed-token inputs",
+      "Reject invalid comment",
+      "parser assembly 0.4.0.0"
+    ],
+    "payloadMatchesCI": true,
+    "matchedPayloadFiles": 55
+  },
+  "playground": {
+    "url": "https://janglim.mythosia.net/",
+    "assetsMatchedCI": 10,
+    "allAssetHashesMatched": true,
+    "browserChecks": {
+      "arithmetic": "accepted, 5 tokens, 12 states, 22 steps",
+      "newStringLiteralToken": "accepted, 1 token, 3 states, 4 steps"
+    },
+    "screenshot": "playground-public-smoke.png"
+  },
+  "linuxCI": {
+    "parserPassed": 692,
+    "parserSkipped": 1,
+    "mcpPassed": 51,
+    "uiPassed": 22,
+    "infrastructurePassed": 12,
+    "debugBuild": "passed",
+    "releaseBuild": "passed",
+    "dockerBuild": "passed"
+  },
+  "docsWorkflow": {
+    "url": "https://github.com/AJ-comp/Compiler/actions/runs/39196850991",
+    "conclusion": "success"
+  }
+}

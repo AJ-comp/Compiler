@@ -1,0 +1,4 @@
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/extra-1.ts(2,22): error TS1005: '(' expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/extra-1.ts(2,23): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/extra-1.ts(2,26): error TS1005: '=>' expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/extra-1.ts(2,29): error TS1128: Declaration or statement expected.

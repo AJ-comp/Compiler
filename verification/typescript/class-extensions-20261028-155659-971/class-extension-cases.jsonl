@@ -1,0 +1,183 @@
+{"id": "fields-001", "group": "fields", "expected": true, "source": "class C { public value: number; }", "kind": "ts"}
+{"id": "fields-002", "group": "fields", "expected": true, "source": "class C { private value = 1; }", "kind": "ts"}
+{"id": "fields-003", "group": "fields", "expected": true, "source": "class C { protected value?: string; }", "kind": "ts"}
+{"id": "fields-004", "group": "fields", "expected": true, "source": "class C { readonly value: number = 1; }", "kind": "ts"}
+{"id": "fields-005", "group": "fields", "expected": true, "source": "class C { public readonly value: number = 1; }", "kind": "ts"}
+{"id": "fields-006", "group": "fields", "expected": true, "source": "class C { protected static readonly value: number = 1; }", "kind": "ts"}
+{"id": "fields-007", "group": "fields", "expected": true, "source": "class C { value!: number; }", "kind": "ts"}
+{"id": "fields-008", "group": "fields", "expected": true, "source": "class C { private value!: Box<User>; }", "kind": "ts"}
+{"id": "fields-009", "group": "fields", "expected": true, "source": "class C { private readonly [\"value\"]: number = 1; }", "kind": "ts"}
+{"id": "fields-010", "group": "fields", "expected": true, "source": "class C { readonly #value: number = 1; }", "kind": "ts"}
+{"id": "fields-011", "group": "fields", "expected": true, "source": "class C { declare value: number; }", "kind": "ts"}
+{"id": "fields-012", "group": "fields", "expected": true, "source": "class C { declare readonly value: number; }", "kind": "ts"}
+{"id": "fields-013", "group": "fields", "expected": true, "source": "class C { accessor value: number = 1; }", "kind": "ts"}
+{"id": "fields-014", "group": "fields", "expected": true, "source": "class C { public static accessor value = 1; }", "kind": "ts"}
+{"id": "fields-015", "group": "fields", "expected": true, "source": "class C { accessor #value = 1; }", "kind": "ts"}
+{"id": "fields-016", "group": "fields", "expected": true, "source": "class C { [key: string]: unknown; }", "kind": "ts"}
+{"id": "fields-017", "group": "fields", "expected": true, "source": "class C { static readonly [key: string]: unknown; }", "kind": "ts"}
+{"id": "fields-018", "group": "fields", "expected": true, "source": "class C { value?: number = 1; }", "kind": "ts"}
+{"id": "methods-019", "group": "methods", "expected": true, "source": "class C { public run(value: number): number { return value; } }", "kind": "ts"}
+{"id": "methods-020", "group": "methods", "expected": true, "source": "class C { private run<T>(value: T): T { return value; } }", "kind": "ts"}
+{"id": "methods-021", "group": "methods", "expected": true, "source": "class C { protected static run(): void {} }", "kind": "ts"}
+{"id": "methods-022", "group": "methods", "expected": true, "source": "class C extends B { override run(): void {} }", "kind": "ts"}
+{"id": "methods-023", "group": "methods", "expected": true, "source": "class C extends B { public override run(): void {} }", "kind": "ts"}
+{"id": "methods-024", "group": "methods", "expected": true, "source": "class C extends B { public static override run(): void {} }", "kind": "ts"}
+{"id": "methods-025", "group": "methods", "expected": true, "source": "class C { public async run(): Promise<void> { await work(); } }", "kind": "ts"}
+{"id": "methods-026", "group": "methods", "expected": true, "source": "class C { protected *run(): Iterable<number> { yield 1; } }", "kind": "ts"}
+{"id": "methods-027", "group": "methods", "expected": true, "source": "class C { private async *run(): AsyncIterable<number> { yield await work(); } }", "kind": "ts"}
+{"id": "methods-028", "group": "methods", "expected": true, "source": "class C { public get value(): number { return 1; } public set value(next: number) {} }", "kind": "ts"}
+{"id": "methods-029", "group": "methods", "expected": true, "source": "class C { protected static get value(): number { return 1; } }", "kind": "ts"}
+{"id": "methods-030", "group": "methods", "expected": true, "source": "class C { run?(): void {} }", "kind": "ts"}
+{"id": "methods-031", "group": "methods", "expected": true, "source": "class C { public run?(): void {} }", "kind": "ts"}
+{"id": "methods-032", "group": "methods", "expected": true, "source": "class C { public constructor() {} }", "kind": "ts"}
+{"id": "methods-033", "group": "methods", "expected": true, "source": "class C { protected constructor() {} }", "kind": "ts"}
+{"id": "methods-034", "group": "methods", "expected": true, "source": "class C { private constructor(value: number) {} }", "kind": "ts"}
+{"id": "heritage-035", "group": "heritage", "expected": true, "source": "abstract class C {}", "kind": "ts"}
+{"id": "heritage-036", "group": "heritage", "expected": true, "source": "abstract class C<T> {}", "kind": "ts"}
+{"id": "heritage-037", "group": "heritage", "expected": true, "source": "abstract class C { abstract value: number; abstract run(): void; }", "kind": "ts"}
+{"id": "heritage-038", "group": "heritage", "expected": true, "source": "abstract class C { public abstract run<T>(value: T): T; }", "kind": "ts"}
+{"id": "heritage-039", "group": "heritage", "expected": true, "source": "abstract class C { protected abstract readonly value: number; }", "kind": "ts"}
+{"id": "heritage-040", "group": "heritage", "expected": true, "source": "abstract class C { abstract get value(): number; abstract set value(next: number); }", "kind": "ts"}
+{"id": "heritage-041", "group": "heritage", "expected": true, "source": "abstract class C extends B { abstract override run(): void; }", "kind": "ts"}
+{"id": "heritage-042", "group": "heritage", "expected": true, "source": "class C implements Named {}", "kind": "ts"}
+{"id": "heritage-043", "group": "heritage", "expected": true, "source": "class C implements Named, Printable<number> {}", "kind": "ts"}
+{"id": "heritage-044", "group": "heritage", "expected": true, "source": "class C<T extends Named = Named> extends Base<T> implements Named, Printable<T> {}", "kind": "ts"}
+{"id": "heritage-045", "group": "heritage", "expected": true, "source": "const C = class<T> extends Base<T> implements Named {};", "kind": "ts"}
+{"id": "heritage-046", "group": "heritage", "expected": true, "source": "const C = class Local<T> implements Named {};", "kind": "ts"}
+{"id": "heritage-047", "group": "heritage", "expected": true, "source": "class C extends Base<T> {}", "kind": "ts"}
+{"id": "heritage-048", "group": "heritage", "expected": true, "source": "class C extends ns.Base<Box<T>> {}", "kind": "ts"}
+{"id": "heritage-049", "group": "heritage", "expected": true, "source": "class C extends (factory()) implements Named {}", "kind": "ts"}
+{"id": "heritage-050", "group": "heritage", "expected": true, "source": "class C<T> { run<U extends T>(value: U): U { return value; } }", "kind": "ts"}
+{"id": "parameters-051", "group": "parameters", "expected": true, "source": "class C { constructor(public value: number) {} }", "kind": "ts"}
+{"id": "parameters-052", "group": "parameters", "expected": true, "source": "class C { constructor(private value: number) {} }", "kind": "ts"}
+{"id": "parameters-053", "group": "parameters", "expected": true, "source": "class C { constructor(protected value: number) {} }", "kind": "ts"}
+{"id": "parameters-054", "group": "parameters", "expected": true, "source": "class C { constructor(readonly value: number) {} }", "kind": "ts"}
+{"id": "parameters-055", "group": "parameters", "expected": true, "source": "class C { constructor(public readonly value: number) {} }", "kind": "ts"}
+{"id": "parameters-056", "group": "parameters", "expected": true, "source": "class C { constructor(private readonly value = 1) {} }", "kind": "ts"}
+{"id": "parameters-057", "group": "parameters", "expected": true, "source": "class C { constructor(protected readonly value?: string) {} }", "kind": "ts"}
+{"id": "parameters-058", "group": "parameters", "expected": true, "source": "class C { constructor(public value: number = 1, private name?: string) {} }", "kind": "ts"}
+{"id": "parameters-059", "group": "parameters", "expected": true, "source": "class C { constructor(public value: Box<User>) { this.value = value; } }", "kind": "ts"}
+{"id": "parameters-060", "group": "parameters", "expected": true, "source": "class C extends B { constructor(public override value: number) { super(); } }", "kind": "ts"}
+{"id": "parameters-061", "group": "parameters", "expected": true, "source": "class C extends B { constructor(public override readonly value: number) { super(); } }", "kind": "ts"}
+{"id": "parameters-062", "group": "parameters", "expected": true, "source": "class C { constructor(public value = /ab/.test(text)) {} }", "kind": "ts"}
+{"id": "parameters-063", "group": "parameters", "expected": true, "source": "class C { constructor(public value = () => 1) {} }", "kind": "ts"}
+{"id": "parameters-064", "group": "parameters", "expected": true, "source": "class C { constructor(readonly value = function() { return 1; }) {} }", "kind": "ts"}
+{"id": "signatures-065", "group": "signatures", "expected": true, "source": "class C { run(value: string): string; run(value: number): number; run(value: unknown): unknown { return value; } }", "kind": "ts"}
+{"id": "signatures-066", "group": "signatures", "expected": true, "source": "class C { constructor(value: string); constructor(value: number); constructor(value: unknown) {} }", "kind": "ts"}
+{"id": "signatures-067", "group": "signatures", "expected": true, "source": "class C { constructor(value: number); constructor(public value: number) {} }", "kind": "ts"}
+{"id": "signatures-068", "group": "signatures", "expected": true, "source": "class C { public run(value: string): string; public run(value: unknown): unknown { return value; } }", "kind": "ts"}
+{"id": "signatures-069", "group": "signatures", "expected": true, "source": "class C { static run(value: string): string; static run(value: unknown): unknown { return value; } }", "kind": "ts"}
+{"id": "signatures-070", "group": "signatures", "expected": true, "source": "declare class C { value: number; readonly name: string; run(value: number): void; constructor(value: number); }", "kind": "ts"}
+{"id": "signatures-071", "group": "signatures", "expected": true, "source": "declare abstract class C { abstract run(): void; }", "kind": "ts"}
+{"id": "signatures-072", "group": "signatures", "expected": true, "source": "declare class C<T> extends Base<T> implements Named { protected value: T; }", "kind": "ts"}
+{"id": "signatures-073", "group": "signatures", "expected": true, "source": "declare class C { get value(): number; set value(next: number); }", "kind": "ts"}
+{"id": "signatures-074", "group": "signatures", "expected": true, "source": "declare class C { readonly value = 1; }", "kind": "ts"}
+{"id": "signatures-075", "group": "signatures", "expected": true, "source": "declare class C { private readonly value = \"ready\"; }", "kind": "ts"}
+{"id": "signatures-076", "group": "signatures", "expected": true, "source": "declare class C { private constructor(); }", "kind": "ts"}
+{"id": "contextual-077", "group": "contextual", "expected": true, "source": "class C { public() {} private() {} protected() {} }", "kind": "ts"}
+{"id": "contextual-078", "group": "contextual", "expected": true, "source": "class C { readonly() {} abstract() {} override() {} }", "kind": "ts"}
+{"id": "contextual-079", "group": "contextual", "expected": true, "source": "class C { declare() {} accessor() {} }", "kind": "ts"}
+{"id": "contextual-080", "group": "contextual", "expected": true, "source": "class C { public: number; private: number; protected: number; }", "kind": "ts"}
+{"id": "contextual-081", "group": "contextual", "expected": true, "source": "class C { readonly = 1; abstract = 2; override = 3; }", "kind": "ts"}
+{"id": "contextual-082", "group": "contextual", "expected": true, "source": "class C { declare = 1; accessor = 2; }", "kind": "ts"}
+{"id": "contextual-083", "group": "contextual", "expected": true, "source": "class C { readonly; value: number; }", "kind": "ts"}
+{"id": "contextual-084", "group": "contextual", "expected": true, "source": "class C { public\nvalue: number; }", "kind": "ts"}
+{"id": "contextual-085", "group": "contextual", "expected": true, "source": "class C { readonly\nvalue: number; }", "kind": "ts"}
+{"id": "contextual-086", "group": "contextual", "expected": true, "source": "class C { static public() {} }", "kind": "ts"}
+{"id": "contextual-087", "group": "contextual", "expected": true, "source": "class C { public static() {} }", "kind": "ts"}
+{"id": "contextual-088", "group": "contextual", "expected": true, "source": "class C { get public(): number { return 1; } }", "kind": "ts"}
+{"id": "contextual-089", "group": "contextual", "expected": true, "source": "class C { public /* comment */ readonly value: number; }", "kind": "ts"}
+{"id": "contextual-090", "group": "contextual", "expected": true, "source": "abstract\nclass C {}", "kind": "ts"}
+{"id": "runtime-091", "group": "runtime", "expected": true, "source": "class C { public run() { return /ab/.test(text); } } const result = value / 2;", "kind": "ts"}
+{"id": "runtime-092", "group": "runtime", "expected": true, "source": "class C { public value: Box<T> = left > right; }", "kind": "ts"}
+{"id": "runtime-093", "group": "runtime", "expected": true, "source": "class C { public value = { count: 1 }; } /ab/.test(text);", "kind": "ts"}
+{"id": "runtime-094", "group": "runtime", "expected": false, "source": "class C { public #method() {} }", "kind": "ts"}
+{"id": "runtime-095", "group": "runtime", "expected": true, "source": "class C { #value = 1; readonly other = this.#value; public get() { return this.#value; } }", "kind": "ts"}
+{"id": "modifier-errors-096", "group": "modifier-errors", "expected": false, "source": "class C { public private value: number; }", "kind": "ts"}
+{"id": "modifier-errors-097", "group": "modifier-errors", "expected": false, "source": "class C { public public value: number; }", "kind": "ts"}
+{"id": "modifier-errors-098", "group": "modifier-errors", "expected": false, "source": "class C { static static value: number; }", "kind": "ts"}
+{"id": "modifier-errors-099", "group": "modifier-errors", "expected": false, "source": "class C { readonly readonly value: number; }", "kind": "ts"}
+{"id": "modifier-errors-100", "group": "modifier-errors", "expected": false, "source": "class C extends B { override override value: number; }", "kind": "ts"}
+{"id": "modifier-errors-101", "group": "modifier-errors", "expected": false, "source": "class C { static public value: number; }", "kind": "ts"}
+{"id": "modifier-errors-102", "group": "modifier-errors", "expected": false, "source": "class C { readonly public value: number; }", "kind": "ts"}
+{"id": "modifier-errors-103", "group": "modifier-errors", "expected": false, "source": "class C { readonly static value: number; }", "kind": "ts"}
+{"id": "modifier-errors-104", "group": "modifier-errors", "expected": false, "source": "class C extends B { override public value: number; }", "kind": "ts"}
+{"id": "modifier-errors-105", "group": "modifier-errors", "expected": false, "source": "class C extends B { readonly override value: number; }", "kind": "ts"}
+{"id": "modifier-errors-106", "group": "modifier-errors", "expected": false, "source": "class C extends B { override static value: number; }", "kind": "ts"}
+{"id": "modifier-errors-107", "group": "modifier-errors", "expected": false, "source": "class C extends B { async override run() {} }", "kind": "ts"}
+{"id": "modifier-errors-108", "group": "modifier-errors", "expected": false, "source": "class C { readonly run(): void {} }", "kind": "ts"}
+{"id": "modifier-errors-109", "group": "modifier-errors", "expected": false, "source": "class C { readonly get value(): number { return 1; } }", "kind": "ts"}
+{"id": "modifier-errors-110", "group": "modifier-errors", "expected": false, "source": "class C { public #value: number; }", "kind": "ts"}
+{"id": "modifier-errors-111", "group": "modifier-errors", "expected": false, "source": "class C { private #run() {} }", "kind": "ts"}
+{"id": "modifier-errors-112", "group": "modifier-errors", "expected": false, "source": "class C { declare #value: number; }", "kind": "ts"}
+{"id": "modifier-errors-113", "group": "modifier-errors", "expected": false, "source": "class C extends B { declare override value: number; }", "kind": "ts"}
+{"id": "modifier-errors-114", "group": "modifier-errors", "expected": false, "source": "class C { readonly accessor value = 1; }", "kind": "ts"}
+{"id": "modifier-errors-115", "group": "modifier-errors", "expected": false, "source": "class C { declare accessor value: number; }", "kind": "ts"}
+{"id": "modifier-errors-116", "group": "modifier-errors", "expected": false, "source": "class C { accessor run() {} }", "kind": "ts"}
+{"id": "modifier-errors-117", "group": "modifier-errors", "expected": false, "source": "class C { accessor value?: number; }", "kind": "ts"}
+{"id": "abstract-errors-118", "group": "abstract-errors", "expected": false, "source": "class C { abstract value: number; }", "kind": "ts"}
+{"id": "abstract-errors-119", "group": "abstract-errors", "expected": false, "source": "class C { abstract run(): void; }", "kind": "ts"}
+{"id": "abstract-errors-120", "group": "abstract-errors", "expected": false, "source": "abstract class C { abstract abstract run(): void; }", "kind": "ts"}
+{"id": "abstract-errors-121", "group": "abstract-errors", "expected": false, "source": "abstract class C { private abstract run(): void; }", "kind": "ts"}
+{"id": "abstract-errors-122", "group": "abstract-errors", "expected": false, "source": "abstract class C { abstract private value: number; }", "kind": "ts"}
+{"id": "abstract-errors-123", "group": "abstract-errors", "expected": false, "source": "abstract class C { static abstract run(): void; }", "kind": "ts"}
+{"id": "abstract-errors-124", "group": "abstract-errors", "expected": false, "source": "abstract class C { abstract static value: number; }", "kind": "ts"}
+{"id": "abstract-errors-125", "group": "abstract-errors", "expected": false, "source": "abstract class C { async abstract run(): void; }", "kind": "ts"}
+{"id": "abstract-errors-126", "group": "abstract-errors", "expected": false, "source": "abstract class C { abstract run(): void {} }", "kind": "ts"}
+{"id": "abstract-errors-127", "group": "abstract-errors", "expected": false, "source": "abstract class C { abstract value: number = 1; }", "kind": "ts"}
+{"id": "abstract-errors-128", "group": "abstract-errors", "expected": false, "source": "abstract class C { abstract #value: number; }", "kind": "ts"}
+{"id": "abstract-errors-129", "group": "abstract-errors", "expected": false, "source": "const C = abstract class {};", "kind": "ts"}
+{"id": "field-errors-130", "group": "field-errors", "expected": false, "source": "class C { value!; }", "kind": "ts"}
+{"id": "field-errors-131", "group": "field-errors", "expected": false, "source": "class C { value!: number = 1; }", "kind": "ts"}
+{"id": "field-errors-132", "group": "field-errors", "expected": false, "source": "class C { static value!: number; }", "kind": "ts"}
+{"id": "field-errors-133", "group": "field-errors", "expected": false, "source": "abstract class C { abstract value!: number; }", "kind": "ts"}
+{"id": "field-errors-134", "group": "field-errors", "expected": false, "source": "declare class C { value!: number; }", "kind": "ts"}
+{"id": "field-errors-135", "group": "field-errors", "expected": false, "source": "class C { declare value!: number; }", "kind": "ts"}
+{"id": "field-errors-136", "group": "field-errors", "expected": false, "source": "class C { value?!: number; }", "kind": "ts"}
+{"id": "field-errors-137", "group": "field-errors", "expected": false, "source": "class C { value!?: number; }", "kind": "ts"}
+{"id": "field-errors-138", "group": "field-errors", "expected": false, "source": "class C { [key: string]; }", "kind": "ts"}
+{"id": "field-errors-139", "group": "field-errors", "expected": false, "source": "class C { public [key: string]: unknown; }", "kind": "ts"}
+{"id": "field-errors-140", "group": "field-errors", "expected": false, "source": "class C { [key?: string]: unknown; }", "kind": "ts"}
+{"id": "field-errors-141", "group": "field-errors", "expected": false, "source": "class C { constructor: number; }", "kind": "ts"}
+{"id": "parameter-errors-142", "group": "parameter-errors", "expected": false, "source": "class C { constructor(public private value: number) {} }", "kind": "ts"}
+{"id": "parameter-errors-143", "group": "parameter-errors", "expected": false, "source": "class C { constructor(readonly public value: number) {} }", "kind": "ts"}
+{"id": "parameter-errors-144", "group": "parameter-errors", "expected": false, "source": "class C { constructor(public ...values: number[]) {} }", "kind": "ts"}
+{"id": "parameter-errors-145", "group": "parameter-errors", "expected": false, "source": "class C { constructor(readonly { value }: { value: number }) {} }", "kind": "ts"}
+{"id": "parameter-errors-146", "group": "parameter-errors", "expected": false, "source": "class C { constructor(public [value]: number[]) {} }", "kind": "ts"}
+{"id": "parameter-errors-147", "group": "parameter-errors", "expected": false, "source": "class C { constructor(public constructor: number) {} }", "kind": "ts"}
+{"id": "parameter-errors-148", "group": "parameter-errors", "expected": false, "source": "class C { run(public value: number) {} }", "kind": "ts"}
+{"id": "parameter-errors-149", "group": "parameter-errors", "expected": false, "source": "function f(readonly value: number) {}", "kind": "ts"}
+{"id": "parameter-errors-150", "group": "parameter-errors", "expected": false, "source": "class C { constructor(public this: C) {} }", "kind": "ts"}
+{"id": "parameter-errors-151", "group": "parameter-errors", "expected": false, "source": "class C { constructor(static value: number) {} }", "kind": "ts"}
+{"id": "parameter-errors-152", "group": "parameter-errors", "expected": false, "source": "class C { constructor(abstract value: number) {} }", "kind": "ts"}
+{"id": "parameter-errors-153", "group": "parameter-errors", "expected": false, "source": "class C { constructor(public value?: number, next: number) {} }", "kind": "ts"}
+{"id": "parameter-errors-154", "group": "parameter-errors", "expected": false, "source": "declare class C { constructor(public value: number); }", "kind": "ts"}
+{"id": "parameter-errors-155", "group": "parameter-errors", "expected": false, "source": "class C { constructor(public value: number); constructor(value: number) {} }", "kind": "ts"}
+{"id": "signature-errors-156", "group": "signature-errors", "expected": false, "source": "class C { constructor<T>() {} }", "kind": "ts"}
+{"id": "signature-errors-157", "group": "signature-errors", "expected": false, "source": "class C { constructor(): void {} }", "kind": "ts"}
+{"id": "signature-errors-158", "group": "signature-errors", "expected": false, "source": "class C { readonly constructor() {} }", "kind": "ts"}
+{"id": "signature-errors-159", "group": "signature-errors", "expected": false, "source": "class C { override constructor() {} }", "kind": "ts"}
+{"id": "signature-errors-160", "group": "signature-errors", "expected": false, "source": "class C { declare run(): void; }", "kind": "ts"}
+{"id": "signature-errors-161", "group": "signature-errors", "expected": false, "source": "declare class C { run(): void {} }", "kind": "ts"}
+{"id": "signature-errors-162", "group": "signature-errors", "expected": false, "source": "declare class C { value: number = 1; }", "kind": "ts"}
+{"id": "signature-errors-163", "group": "signature-errors", "expected": false, "source": "declare class C { readonly value: number = 1; }", "kind": "ts"}
+{"id": "signature-errors-164", "group": "signature-errors", "expected": false, "source": "declare class C { async run(): Promise<void>; }", "kind": "ts"}
+{"id": "signature-errors-165", "group": "signature-errors", "expected": false, "source": "class C { get value?(): number { return 1; } }", "kind": "ts"}
+{"id": "signature-errors-166", "group": "signature-errors", "expected": false, "source": "class C { set value(next?: number) {} }", "kind": "ts"}
+{"id": "heritage-errors-167", "group": "heritage-errors", "expected": false, "source": "class C implements {}", "kind": "ts"}
+{"id": "heritage-errors-168", "group": "heritage-errors", "expected": false, "source": "class C implements A, {}", "kind": "ts"}
+{"id": "heritage-errors-169", "group": "heritage-errors", "expected": false, "source": "class C extends A, B {}", "kind": "ts"}
+{"id": "heritage-errors-170", "group": "heritage-errors", "expected": false, "source": "class C extends A extends B {}", "kind": "ts"}
+{"id": "heritage-errors-171", "group": "heritage-errors", "expected": false, "source": "class C implements A implements B {}", "kind": "ts"}
+{"id": "heritage-errors-172", "group": "heritage-errors", "expected": false, "source": "class C implements A extends B {}", "kind": "ts"}
+{"id": "heritage-errors-173", "group": "heritage-errors", "expected": false, "source": "class C extends Base<> {}", "kind": "ts"}
+{"id": "heritage-errors-174", "group": "heritage-errors", "expected": false, "source": "class C implements Named<> {}", "kind": "ts"}
+{"id": "runtime-errors-175", "group": "runtime-errors", "expected": false, "source": "class C { public run() { return missing; } private #value = 1; }", "kind": "ts"}
+{"id": "runtime-errors-176", "group": "runtime-errors", "expected": false, "source": "class C { public run() { super(); } }", "kind": "ts"}
+{"id": "runtime-errors-177", "group": "runtime-errors", "expected": false, "source": "class C { public value = arguments; }", "kind": "ts"}
+{"id": "runtime-errors-178", "group": "runtime-errors", "expected": false, "source": "class C { public run() { return this.#missing; } }", "kind": "ts"}
+{"id": "runtime-errors-179", "group": "runtime-errors", "expected": false, "source": "class C { public run() { let name; let name; } }", "kind": "ts"}
+{"id": "runtime-errors-180", "group": "runtime-errors", "expected": false, "source": "class C { public run(value: number, value: number) {} }", "kind": "ts"}
+{"id": "private-optional-181", "group": "private-optional", "expected": true, "source": "class C { #x?: number }", "kind": "ts"}
+{"id": "private-optional-182", "group": "private-optional", "expected": true, "source": "class C { #m?(): void; }", "kind": "ts"}
+{"id": "constructor-optional-183", "group": "constructor-optional", "expected": false, "source": "class C { constructor?() {} }", "kind": "ts"}

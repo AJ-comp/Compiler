@@ -1,0 +1,102 @@
+{
+  "docs\\ko\\javascript-regexp.html": {
+    "tags": [],
+    "duplicateIDs": [],
+    "badLocalLinks": [],
+    "anchors": [
+      "main",
+      "purpose",
+      "validation",
+      "legacy",
+      "groups",
+      "quantifiers",
+      "properties",
+      "unicode-sets",
+      "api",
+      "early-errors",
+      "implementation",
+      "validation-notes",
+      "sources"
+    ]
+  },
+  "docs\\ko\\javascript-expressions.html": {
+    "tags": [],
+    "duplicateIDs": [],
+    "badLocalLinks": [],
+    "anchors": [
+      "main",
+      "purpose",
+      "context",
+      "usage",
+      "early-errors",
+      "slash",
+      "templates",
+      "template-escapes",
+      "destructuring",
+      "grammar-source",
+      "next-stages",
+      "sources"
+    ]
+  },
+  "docs\\ko\\javascript-statements.html": {
+    "tags": [],
+    "duplicateIDs": [],
+    "badLocalLinks": [],
+    "anchors": [
+      "main",
+      "purpose",
+      "context",
+      "usage",
+      "binding-patterns",
+      "functions",
+      "arrows",
+      "statements",
+      "semicolon",
+      "early-errors",
+      "slash",
+      "implementation",
+      "next-stages",
+      "sources"
+    ]
+  },
+  "docs\\ko\\javascript-classes.html": {
+    "tags": [],
+    "duplicateIDs": [],
+    "badLocalLinks": [],
+    "anchors": [
+      "main",
+      "purpose",
+      "scope",
+      "api",
+      "definitions",
+      "methods",
+      "fields",
+      "private-names",
+      "context",
+      "static-blocks",
+      "early-errors",
+      "implementation",
+      "validation-notes",
+      "sources"
+    ]
+  },
+  "docs\\ko\\javascript-modules.html": {
+    "tags": [],
+    "duplicateIDs": [],
+    "badLocalLinks": [],
+    "anchors": [
+      "main",
+      "purpose",
+      "api",
+      "imports",
+      "exports",
+      "import-attributes",
+      "dynamic-import",
+      "import-meta",
+      "context",
+      "early-errors",
+      "implementation",
+      "sources"
+    ]
+  }
+}

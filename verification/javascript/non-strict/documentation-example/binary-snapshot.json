@@ -1,0 +1,34 @@
+[
+  {
+    "name": "AJ.Common.dll",
+    "snapshotSha256": "e96c8b2e6d70f250a8a0bb013f4506e20847935f013581c32e4b0cce2b53b83d"
+  },
+  {
+    "name": "Parse.dll",
+    "snapshotSha256": "b11be828a9164cf853b571c418e826369f38ccb8bd2e8674e48d3b3e13ffc1ff"
+  },
+  {
+    "name": "Parse.FrontEnd.dll",
+    "snapshotSha256": "1b75231381e370543b85818155572ea0bed28091e76f7c37c18e4dd4692fbd33"
+  },
+  {
+    "name": "Parse.FrontEnd.Grammars.dll",
+    "snapshotSha256": "92341b00cd576fdb6dabb008aa20bef6858f81256e406155b0529a426736e746"
+  },
+  {
+    "name": "Parse.FrontEnd.Grammars.Ebnf.dll",
+    "snapshotSha256": "e46694f83fdc76cbdf503993326b4552a06d84bb4b87635d023ccb42f1edb35c"
+  },
+  {
+    "name": "Parse.FrontEnd.Parsers.dll",
+    "snapshotSha256": "fb389b9756053ac05436a8265e3a022b733b8be901d8088bc406148f100cc205"
+  },
+  {
+    "name": "ConsoleTables.dll",
+    "snapshotSha256": "b207430ea9ec19bc7886e1f4318b976317b076851b5ca0f910d73142eb23917b"
+  },
+  {
+    "name": "Wcwidth.dll",
+    "snapshotSha256": "82f544b478368fe184a66693444ce37c046ed476b96ba7918a20239285ff6803"
+  }
+]

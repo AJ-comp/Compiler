@@ -1,0 +1,175 @@
+{
+  "createdUtc": "2026-10-22T21:47:11.000788+00:00",
+  "change": "Private LookAheadEntry groups the shared TerminalSet, outgoing dependencies and IsQueued; queue-based fixed-point propagation and public API are preserved.",
+  "status": "verified_no_new_regressions_existing_three_TypeScript_failures_and_one_SLR_skip_remain",
+  "productSource": {
+    "path": "src/FrontEnd/Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs",
+    "sha256": "2496a17a04a30b5ab9dc28ad9b9ddca10d564d3a3af006219ed58755aa86cf26",
+    "beforeRefactorSha256": "ff4dd7fbc19e7cfa5f22403587092d91ef26525aedd92f9a7c54aa035359138f"
+  },
+  "newTests": {
+    "path": "Tests/Parse.FrontEnd.Parsers.Tests/LalrLookaheadContractTests.cs",
+    "cases": 17
+  },
+  "solutionBuild": {
+    "configuration": "Release",
+    "errors": 0,
+    "existingWarnings": 5,
+    "log": "artifacts/typescript/lookahead-entry-refactor/solution-build.log"
+  },
+  "focusedTests": {
+    "path": "artifacts/typescript/lookahead-entry-refactor/targeted/entry-targeted.trx",
+    "counts": {
+      "total": 136,
+      "executed": 136,
+      "passed": 136,
+      "failed": 0,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0
+    }
+  },
+  "fullTests": {
+    "path": "artifacts/typescript/lookahead-entry-refactor/full/entry-full.trx",
+    "counts": {
+      "total": 6542,
+      "executed": 6541,
+      "passed": 6538,
+      "failed": 3,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0
+    }
+  },
+  "fullOutcomeComparison": {
+    "comparison": "every existing test-name/outcome multiset is unchanged after applying the already-verified pre-refactor snapshot rerun",
+    "baselineFullTrx": "artifacts\\typescript\\lookahead-fix\\full-fixed\\lookahead-full-fixed.trx",
+    "baselineSnapshotRerunTrx": "artifacts\\typescript\\lookahead-fix\\snapshot-fixed\\lookahead-snapshots-fixed.trx",
+    "newFullTrx": "artifacts\\typescript\\lookahead-entry-refactor\\full\\entry-full.trx",
+    "existingCasesCompared": 6525,
+    "newContractCases": 17,
+    "newContractOutcomes": {
+      "Passed": 17
+    },
+    "existingOutcomeChanges": 0,
+    "counts": {
+      "total": 6542,
+      "executed": 6541,
+      "passed": 6538,
+      "failed": 3,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0
+    },
+    "unchangedFailures": [
+      "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value\")",
+      "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: \"export declare namespace Tools { function run(): v\"···)",
+      "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value is string\")"
+    ],
+    "unchangedSkipped": [
+      "Janglim.FrontEnd.Parsers.Tests.SlrKnownIssueTests.Slr_should_parse_valid_Ex1"
+    ]
+  },
+  "mcpTests": {
+    "path": "artifacts/typescript/lookahead-entry-refactor/mcp/entry-mcp.trx",
+    "counts": {
+      "total": 69,
+      "executed": 69,
+      "passed": 69,
+      "failed": 0,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0
+    }
+  },
+  "apiAndTableComparison": {
+    "report": "artifacts/typescript/lookahead-entry-refactor/compatibility-audit/comparison-report.json",
+    "status": "all_api_and_table_comparisons_match",
+    "measurements": {
+      "grammarAssemblySha256": "dffd93f703e62927438175eb9dd1f415f67f015b185cab02e944c253a67ab8df",
+      "apiLines": 751,
+      "apiSha256": "ea40c6098f9c4c269e801f304eb0102369db7c1a87c92f38bf7f798ec4e181e8",
+      "states": 1700,
+      "lrItems": 32837,
+      "lookaheadEntries": 32837,
+      "lookaheadSha256": "316638e1cca8800e75af748e3d832cfde45acc3741efd1e531e80f7b563bb9ab",
+      "tableEntries": 80145,
+      "tableSha256": "962dcc7f326ef3d2b86353858d49aa97f1a3bd014e9ec26295c0ce2bb1eb040d"
+    }
+  },
+  "parserDllSha256": "380725f7b4bb290d42a384c2cd84f5efcb827f12087e6ebaa23344eeb950e24c",
+  "Test262": {
+    "report": "artifacts/typescript/lookahead-entry-refactor/test262-report.json",
+    "scope": "source-only syntax and static early errors; no JavaScript evaluation, module resolution, or dynamic-string compilation",
+    "complete": true,
+    "passed": true,
+    "counts": {
+      "variants": 48375,
+      "sourceFiles": 25982,
+      "expectedAccept": 40296,
+      "expectedReject": 8079,
+      "classifications": {
+        "parse-negative": 8079,
+        "positive": 40201,
+        "resolution-negative-source-only": 33,
+        "runtime-negative-source-only": 62
+      },
+      "outcomes": {
+        "pass": 48375
+      },
+      "stages": {
+        "accepted": 40296,
+        "early-error": 4410,
+        "parse": 3669
+      }
+    },
+    "checks": {
+      "duplicateInputIds": 0,
+      "duplicateResultIds": 0,
+      "missingResults": 0,
+      "evidenceChangedDuringVerification": 0,
+      "unexpectedAccept": 0,
+      "unexpectedReject": 0,
+      "unexpectedExceptions": 0,
+      "timeouts": 0,
+      "crashes": 0,
+      "syntaxExceptionRejections": 3669
+    }
+  }
+}

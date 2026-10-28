@@ -1,0 +1,35 @@
+<main>
+  <header>
+    <h1>룩어헤드 전파 구현</h1>
+    <p class="lead">이 구현은 <strong>전달 관계를 먼저 만들고, 룩어헤드 집합이 커진 항목만 큐로 다시 처리</strong>합니다.</p>
+  </header>
+
+  <section id="dependencies">
+    <h2>전달 관계를 한 번 만들어 둡니다.</h2>
+    <p><code>BuildLookAheadEntries()</code>는 각 <code>(상태, LR 항목)</code>에 <code>LookAheadEntry</code>를 하나씩 만듭니다. 이 객체에는 <strong>룩어헤드 집합, 전달할 간선 목록, 큐 대기 여부</strong>를 함께 보관합니다.</p>
+    <p>간선 하나는 <code>LookAheadDependency</code>입니다. <code>Target</code>은 도착 객체, <code>First</code>는 직접 합칠 토큰, <code>Inherit</code>는 출발 집합도 합칠지 여부입니다.</p>
+    <table>
+      <thead><tr><th>연결</th><th>First</th><th>Inherit</th></tr></thead>
+      <tbody>
+        <tr><td>Goto의 전후 항목</td><td><code>null</code></td><td><code>true</code></td></tr>
+        <tr><td>Closure의 참조 항목 → 시작 항목</td><td><code>FIRST(β) − {ε}</code></td><td><code>β가 nullable</code></td></tr>
+      </tbody>
+    </table>
+    <p>여기서는 <strong>누구에게 무엇을 전달할지만 기록</strong>합니다. 실제 집합의 갱신은 아래 큐 루프에서 수행합니다.</p>
+  </section>
+
+  <section id="propagation">
+    <h2>집합이 커진 항목을 큐로 재처리합니다.</h2>
+    <p><code>CalculateLookAhead()</code>는 EOF를 가진 확장 시작 항목부터 큐에 넣습니다. 큐에서 꺼낸 객체가 <code>source</code>, 간선의 도착 객체가 <code>target</code>입니다.</p>
+    <p><code>source.IsQueued = false</code>로 대기 표시를 지운 뒤, 각 간선의 <code>First</code>와 상속할 룩어헤드를 대상 집합에 합칩니다. 합치기 전 크기를 <code>before</code>에 기록해 두고, 다음 조건으로 재등록합니다.</p>
+    <figure class="code-block">
+      <figcaption>현재 코드의 핵심 부분</figcaption>
+      <pre><code data-core-source></code></pre>
+    </figure>
+    <p class="core">핵심은 “이미 처리했는가”가 아니라, “마지막 처리 뒤에 집합이 더 커졌는가”입니다.</p>
+    <p>이미 <code>{!}</code>를 전달한 항목에 나중에 <code>?</code>가 추가되면, 그 항목을 다시 큐에 넣습니다. 다시 꺼냈을 때 <code>{!, ?}</code>를 전달해야 뒤쪽 항목에도 <code>?</code>가 반영됩니다.</p>
+    <p>아직 큐에서 대기 중이라면 중복 등록은 생략합니다. 나중에 같은 객체를 꺼낼 때 갱신된 집합을 읽기 때문입니다. <code>IsQueued</code>가 관리하는 것은 이 중복 등록 여부입니다.</p>
+    <p>이미 가진 토큰만 다시 받으면 집합 크기가 그대로라 재등록하지 않습니다. 더 전달할 새 정보가 없어져 큐가 비면 계산을 마칩니다.</p>
+  </section>
+  <footer><p><a href="../../src/FrontEnd/Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs">CanonicalRelation.cs</a> · <code>BuildLookAheadEntries</code> / <code>CalculateLookAhead</code></p></footer>
+</main>

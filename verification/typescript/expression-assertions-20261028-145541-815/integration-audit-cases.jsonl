@@ -1,0 +1,46 @@
+{"id":"atomic-as-plus","source":"x as T + y;"}
+{"id":"add-as-times","source":"a + b as T * c;"}
+{"id":"add-as-plus","source":"a + b as T + c;"}
+{"id":"mul-as-plus","source":"a * b as T + c;"}
+{"id":"rel-as-plus","source":"a < b as T + c;"}
+{"id":"rel-as-rel","source":"a < b as T > c;"}
+{"id":"parenadd-as-times","source":"(a + b) as T * c;"}
+{"id":"as-plus-times","source":"a as T + b * c;"}
+{"id":"as-prefix","source":"-a as T * b;"}
+{"id":"as-chain-times","source":"a + b as T as U * c;"}
+{"id":"satisfies-plus","source":"a satisfies T + b;"}
+{"id":"satisfies-compare","source":"a satisfies T > b;"}
+{"id":"type-runtime-shift","source":"a as T >> b;"}
+{"id":"type-runtime-ge","source":"a as T >= b;"}
+{"id":"type-runtime-shifteq","source":"a as T >>= b;"}
+{"id":"type-runtime-eq","source":"a as T = b;"}
+{"id":"generic-runtime-ge","source":"a as Box<T>>= b;"}
+{"id":"generic-runtime-shift","source":"a as Box<T>>> b;"}
+{"id":"generic-runtime-shifteq","source":"a as Box<T>>>>= b;"}
+{"id":"const-as","source":"x as const;"}
+{"id":"const-satisfies","source":"x satisfies const;"}
+{"id":"const-namespace","source":"x as const.member;"}
+{"id":"const-generic","source":"x as const<T>;"}
+{"id":"nonnull-id-assignment","source":"x! = y;"}
+{"id":"as-parenthesized-assignment","source":"(x as T) = y;"}
+{"id":"satisfies-parenthesized-assignment","source":"(x satisfies T) = y;"}
+{"id":"as-unparenthesized-assignment","source":"x as T = y;"}
+{"id":"as-parenthesized-update","source":"(x as T)++;"}
+{"id":"nonnull-update","source":"x!++;"}
+{"id":"nonnull-call-target","source":"f()! = y;"}
+{"id":"nonnull-optional-target","source":"obj?.x! = y;"}
+{"id":"nonnull-optional-update","source":"obj?.x!++;"}
+{"id":"nonnull-optional-tag","source":"obj?.x!`tag`;"}
+{"id":"optional-tag","source":"obj?.x`tag`;"}
+{"id":"nonnull-optional-new","source":"new obj?.x!();"}
+{"id":"nonnull-call-tag","source":"f()!`tag`;"}
+{"id":"nonnull-optional-prop","source":"obj?.x!.y;"}
+{"id":"nonnull-new-member","source":"new C!();"}
+{"id":"nonnull-new-call","source":"new f()!();"}
+{"id":"nonnull-new-expression","source":"new C!;"}
+{"id":"nonnull-this","source":"this!;"}
+{"id":"nonnull-super","source":"super!;"}
+{"id":"nonnull-importmeta","source":"import.meta!;","kind":"mts"}
+{"id":"nonnull-newline","source":"const y = x\n!a;"}
+{"id":"nonnull-newline-member","source":"x\n!.y;"}
+{"id":"nonnull-doublebang","source":"x!!;"}

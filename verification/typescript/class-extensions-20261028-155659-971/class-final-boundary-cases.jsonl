@@ -1,0 +1,10 @@
+{"id":"index-public","kind":"ts","source":"class C { [public: string]: number; }"}
+{"id":"index-private","kind":"ts","source":"class C { [private: string]: number; }"}
+{"id":"index-class","kind":"ts","source":"class C { [class: string]: number; }"}
+{"id":"index-readonly","kind":"ts","source":"class C { [readonly: string]: number; }"}
+{"id":"index-let","kind":"ts","source":"class C { [let: string]: number; }"}
+{"id":"index-implements","kind":"ts","source":"class C { [implements: string]: number; }"}
+{"id":"ambient-readonly-literal","kind":"ts","source":"declare class C { readonly value = 1; }"}
+{"id":"ambient-readonly-typed","kind":"ts","source":"declare class C { readonly value: number = 1; }"}
+{"id":"ambient-readonly-nonliteral","kind":"ts","source":"declare class C { readonly value = f(); }"}
+{"id":"declare-readonly-literal","kind":"ts","source":"class C { declare readonly value = 1; }"}

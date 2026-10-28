@@ -1,0 +1,1 @@
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-binding-default.ts(2,36): error TS2371: A parameter initializer is only allowed in a function or constructor implementation.

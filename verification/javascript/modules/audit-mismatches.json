@@ -1,0 +1,14 @@
+[
+  {
+    "source": "export default {} / 2;",
+    "mode": "module",
+    "expected": true,
+    "actual": {
+      "source": "export default {} / 2;",
+      "mode": "module",
+      "valid": false,
+      "errors": [],
+      "error": "Token source failed: Unrecognized or malformed JavaScript token (source offset 18). (state 379, source offset 17, token index 4)."
+    }
+  }
+]

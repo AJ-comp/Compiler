@@ -1,0 +1,13 @@
+const fs=require('fs'),vm=require('vm');const cases=[];let index=0;
+function add(source,kind='Script',mode='NonStrict',web=true){let valid,error;try{if(kind==='Module')new vm.SourceTextModule(source);else new vm.Script((mode==='Strict'?'"use strict";\n':'')+source);valid=true}catch(e){valid=false;error=e.message}cases.push({id:'static-'+(++index),source,kind,mode,web,expected:valid,nodeError:error});}
+const declarations=['let a;','const a=0;','var a;','function a(){}','async function a(){}','function* a(){}','async function* a(){}','class a{}','label:function a(){}','if(x)function a(){}','{var a;}','{let a;}'];
+for(const left of declarations)for(const right of declarations){const body=left+right;add(body);add('function outer(){'+body+'}');add('{'+body+'}');add('switch(x){case 0:'+left+';case 1:'+right+'}');}
+for(const binding of ['a','[a]','{a}','[a,a]','{x:a,y:a}'])for(const decl of declarations){add(`try{}catch(${binding}){${decl}}`);add(`for(let ${binding} of values){${decl}}`);}
+const params=['','a','a,a','a,\\u0061','a=0','a=0,a','{a}','[a]','...a','a,...a','[...a]','{a,...b}','a,'];
+const bodies=['','let a;','var a;','function a(){}','{let a;}','"use strict";','"anything";"use strict";','("use strict");','"use\\x20strict";','return a;'];
+for(const p of params)for(const b of bodies){for(const prefix of ['function','async function','function*','async function*']) add(`${prefix} f(${p}){${b}}`);add(`(${p})=>{${b}}`);add(`async(${p})=>{${b}}`);add(`({m(${p}){${b}}});`);}
+const labels=['L:','L:M:','L:L:',''];const statements=['break;','continue;','break L;','continue L;','break M;','continue M;','function inner(){break L;}','class C{static{break L;}}'];
+for(const label of labels)for(const s of statements){for(const wrapper of [b=>b,b=>`while(x){${b}}`,b=>`switch(x){case 0:${b}}`,b=>`{${b}}`])add(label+wrapper(s));}
+const imports=[`import a from 'm';`,`import * as a from 'm';`,`import {a} from 'm';`,`import {x as a} from 'm';`,`import {a as b} from 'm';`,`import {'a' as a} from 'm';`,`export default function a(){}`,`export default class a{}`];for(const a of imports)for(const b of declarations.filter(s=>!s.includes('label')&&!s.includes('if(')))add(a+b,'Module','Strict',false);
+for(const s of ['export {a};','export {a as a};','export {"a" as a};','export {await};','export {eval};','export {arguments};','export {\\u0061};','export {a as "\\uD800"};','export {a as "\\uD83D\\uDE00"};'])for(const decl of ['',...declarations.slice(0,8)])add(decl+s,'Module','Strict',false);
+fs.writeFileSync('artifacts/ecmascript-audit/static/candidates.jsonl',cases.map(x=>JSON.stringify(x)).join('\n')+'\n');console.log(cases.length);

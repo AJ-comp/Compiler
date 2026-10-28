@@ -1,0 +1,3006 @@
+[
+  {
+    "input": "class C { value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static value(){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set value(value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { value=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static value=()=>/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\nvalue(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\nvalue(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static static(){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get static(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set static(value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static static=()=>/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\nstatic(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\nstatic(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static get(){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get get(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set get(value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static get=()=>/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\nget(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\nget(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static set(){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get set(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set set(value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static set=()=>/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\nset(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\nset(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { async(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static async(){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get async(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set async(value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { async=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static async=()=>/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\nasync(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\nasync(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { function(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static function(){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get function(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set function(value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { function=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static function=()=>/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\nfunction(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\nfunction(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { if(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static if(){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get if(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set if(value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { if=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static if=()=>/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\nif(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\nif(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { class(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static class(){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get class(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set class(value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { class=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static class=()=>/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\nclass(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\nclass(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { 'name'(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static 'name'(){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get 'name'(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set 'name'(value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { 'name'=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static 'name'=()=>/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\n'name'(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\n'name'(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { 'constructor'(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static 'constructor'(){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get 'constructor'(){return /a/;} }",
+    "success": false,
+    "error": "Class constructor may not be an accessor"
+  },
+  {
+    "input": "class C { set 'constructor'(value){value / divisor;} }",
+    "success": false,
+    "error": "Class constructor may not be an accessor"
+  },
+  {
+    "input": "class C { 'constructor'=/a/; }",
+    "success": false,
+    "error": "Classes may not have a field named 'constructor'"
+  },
+  {
+    "input": "class C { static 'constructor'=()=>/a/; }",
+    "success": false,
+    "error": "Classes may not have a field named 'constructor'"
+  },
+  {
+    "input": "class C { static\n'constructor'(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\n'constructor'(){return /a/;} }",
+    "success": false,
+    "error": "Class constructor may not be an accessor"
+  },
+  {
+    "input": "class C { 'prototype'(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static 'prototype'(){return value / divisor;} }",
+    "success": false,
+    "error": "Classes may not have a static property named 'prototype'"
+  },
+  {
+    "input": "class C { get 'prototype'(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set 'prototype'(value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { 'prototype'=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static 'prototype'=()=>/a/; }",
+    "success": false,
+    "error": "Classes may not have a static property named 'prototype'"
+  },
+  {
+    "input": "class C { static\n'prototype'(){return /a/;} }",
+    "success": false,
+    "error": "Classes may not have a static property named 'prototype'"
+  },
+  {
+    "input": "class C { get\n'prototype'(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { ['name'](){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static ['name'](){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get ['name'](){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set ['name'](value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { ['name']=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static ['name']=()=>/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\n['name'](){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\n['name'](){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { [value / divisor](){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static [value / divisor](){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get [value / divisor](){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set [value / divisor](value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { [value / divisor]=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static [value / divisor]=()=>/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\n[value / divisor](){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\n[value / divisor](){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static #value(){return value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set #value(value){value / divisor;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #value=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static #value=()=>/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\n#value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get\n#value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static\nvalue; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\nvalue=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\n{} }",
+    "success": true
+  },
+  {
+    "input": "class C { static\nstatic value=/a/; }",
+    "success": false,
+    "error": "Unexpected identifier 'value'"
+  },
+  {
+    "input": "class C { static\nget value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static\n[key]=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { static\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '/'"
+  },
+  {
+    "input": "class C { get\nvalue; }",
+    "success": false,
+    "error": "Unexpected token ';'"
+  },
+  {
+    "input": "class C { get\nvalue=/a/; }",
+    "success": false,
+    "error": "Unexpected token '='"
+  },
+  {
+    "input": "class C { get\n{} }",
+    "success": false,
+    "error": "Unexpected token '{'"
+  },
+  {
+    "input": "class C { get\nstatic value=/a/; }",
+    "success": false,
+    "error": "Unexpected identifier 'value'"
+  },
+  {
+    "input": "class C { get\nget value(){return /a/;} }",
+    "success": false,
+    "error": "Unexpected identifier 'value'"
+  },
+  {
+    "input": "class C { get\n[key]=/a/; }",
+    "success": false,
+    "error": "Unexpected token '='"
+  },
+  {
+    "input": "class C { get\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '/'"
+  },
+  {
+    "input": "class C { set\nvalue; }",
+    "success": false,
+    "error": "Unexpected token ';'"
+  },
+  {
+    "input": "class C { set\nvalue=/a/; }",
+    "success": false,
+    "error": "Unexpected token '='"
+  },
+  {
+    "input": "class C { set\nvalue(){return /a/;} }",
+    "success": false,
+    "error": "Setter must have exactly one formal parameter."
+  },
+  {
+    "input": "class C { set\n{} }",
+    "success": false,
+    "error": "Unexpected token '{'"
+  },
+  {
+    "input": "class C { set\nstatic value=/a/; }",
+    "success": false,
+    "error": "Unexpected identifier 'value'"
+  },
+  {
+    "input": "class C { set\nget value(){return /a/;} }",
+    "success": false,
+    "error": "Unexpected identifier 'value'"
+  },
+  {
+    "input": "class C { set\n[key]=/a/; }",
+    "success": false,
+    "error": "Unexpected token '='"
+  },
+  {
+    "input": "class C { set\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '/'"
+  },
+  {
+    "input": "class C { async\nvalue; }",
+    "success": true
+  },
+  {
+    "input": "class C { async\nvalue=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { async\nvalue(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { async\n{} }",
+    "success": false,
+    "error": "Unexpected token '{'"
+  },
+  {
+    "input": "class C { async\nstatic value=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { async\nget value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { async\n[key]=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { async\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '/'"
+  },
+  {
+    "input": "class C { function\nvalue; }",
+    "success": true
+  },
+  {
+    "input": "class C { function\nvalue=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { function\nvalue(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { function\n{} }",
+    "success": false,
+    "error": "Unexpected token '{'"
+  },
+  {
+    "input": "class C { function\nstatic value=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { function\nget value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { function\n[key]=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { function\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '/'"
+  },
+  {
+    "input": "class C { if\nvalue; }",
+    "success": true
+  },
+  {
+    "input": "class C { if\nvalue=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { if\nvalue(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { if\n{} }",
+    "success": false,
+    "error": "Unexpected token '{'"
+  },
+  {
+    "input": "class C { if\nstatic value=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { if\nget value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { if\n[key]=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { if\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '/'"
+  },
+  {
+    "input": "class C { class\nvalue; }",
+    "success": true
+  },
+  {
+    "input": "class C { class\nvalue=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { class\nvalue(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { class\n{} }",
+    "success": false,
+    "error": "Unexpected token '{'"
+  },
+  {
+    "input": "class C { class\nstatic value=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { class\nget value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { class\n[key]=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { class\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '/'"
+  },
+  {
+    "input": "class C { [key]\nvalue; }",
+    "success": true
+  },
+  {
+    "input": "class C { [key]\nvalue=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { [key]\nvalue(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { [key]\n{} }",
+    "success": false,
+    "error": "Unexpected token '{'"
+  },
+  {
+    "input": "class C { [key]\nstatic value=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { [key]\nget value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { [key]\n[key]=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { [key]\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '/'"
+  },
+  {
+    "input": "class C { #value\nvalue; }",
+    "success": true
+  },
+  {
+    "input": "class C { #value\nvalue=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { #value\nvalue(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #value\n{} }",
+    "success": false,
+    "error": "Unexpected token '{'"
+  },
+  {
+    "input": "class C { #value\nstatic value=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { #value\nget value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #value\n[key]=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { #value\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '/'"
+  },
+  {
+    "input": "class C { 'name'\nvalue; }",
+    "success": true
+  },
+  {
+    "input": "class C { 'name'\nvalue=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { 'name'\nvalue(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { 'name'\n{} }",
+    "success": false,
+    "error": "Unexpected token '{'"
+  },
+  {
+    "input": "class C { 'name'\nstatic value=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { 'name'\nget value(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { 'name'\n[key]=/a/; }",
+    "success": true
+  },
+  {
+    "input": "class C { 'name'\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '/'"
+  },
+  {
+    "input": "class C extends Base {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends Base { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends Base { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends Base { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends object.Base {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends object.Base {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends object.Base { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends object.Base { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends object.Base { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends object.Base { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends object.Base { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends object.Base { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends factory() {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends factory() {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends factory() { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends factory() { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends factory() { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends factory() { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends factory() { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends factory() { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (ready?First:Second) {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (ready?First:Second) {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (ready?First:Second) { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (ready?First:Second) { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (ready?First:Second) { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (ready?First:Second) { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (ready?First:Second) { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (ready?First:Second) { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (function(){return Base;})() {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (function(){return Base;})() {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (function(){return Base;})() { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (function(){return Base;})() { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (function(){return Base;})() { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (function(){return Base;})() { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (function(){return Base;})() { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (function(){return Base;})() { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends class {} {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends class {} {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends class {} { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends class {} { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends class {} { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends class {} { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends class {} { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends class {} { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (class {}) {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (class {}) {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (class {}) { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (class {}) { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (class {}) { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (class {}) { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (class {}) { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (class {}) { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends ({Base}).Base {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends ({Base}).Base {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends ({Base}).Base { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends ({Base}).Base { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends ({Base}).Base { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends ({Base}).Base { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends ({Base}).Base { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends ({Base}).Base { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (class {static get Base(){return /a/;}}).Base {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (class {static get Base(){return /a/;}}).Base {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (class {static get Base(){return /a/;}}).Base { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (class {static get Base(){return /a/;}}).Base { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (class {static get Base(){return /a/;}}).Base { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (class {static get Base(){return /a/;}}).Base { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (class {static get Base(){return /a/;}}).Base { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (class {static get Base(){return /a/;}}).Base { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends new Factory() {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends new Factory() {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends new Factory() { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends new Factory() { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends new Factory() { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends new Factory() { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends new Factory() { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends new Factory() { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends object?.Base {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends object?.Base {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends object?.Base { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends object?.Base { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends object?.Base { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends object?.Base { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends object?.Base { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends object?.Base { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (value / divisor) {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (value / divisor) {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (value / divisor) { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (value / divisor) { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (value / divisor) { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (value / divisor) { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (value / divisor) { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (value / divisor) { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends tag`base` {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends tag`base` {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends tag`base` { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends tag`base` { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends tag`base` { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends tag`base` { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends tag`base` { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends tag`base` { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (()=>Base)() {  } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (()=>Base)() {  } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (()=>Base)() { method(){return /a/;} } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (()=>Base)() { method(){return /a/;} } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (()=>Base)() { field=/a/; } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (()=>Base)() { field=/a/; } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C extends (()=>Base)() { static { /a/.test(value); } } /z/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends (()=>Base)() { static { /a/.test(value); } } / divisor;",
+    "success": true
+  },
+  {
+    "input": "class C {}\n(argument);",
+    "success": true
+  },
+  {
+    "input": "class C {}\n[key];",
+    "success": true
+  },
+  {
+    "input": "class C {}\n.name;",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C {}\n?.name;",
+    "success": false,
+    "error": "Unexpected token '?.'"
+  },
+  {
+    "input": "class C {}\n`text`;",
+    "success": true
+  },
+  {
+    "input": "class C {}\n/a/.test(value);",
+    "success": true
+  },
+  {
+    "input": "class C {}\n/ divisor;",
+    "success": false,
+    "error": "Invalid regular expression: missing /"
+  },
+  {
+    "input": "class C {}\n+value;",
+    "success": true
+  },
+  {
+    "input": "class C {}\nother();",
+    "success": true
+  },
+  {
+    "input": "class C {}\n; /a/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class {}\n(argument);",
+    "success": true
+  },
+  {
+    "input": "const C=class {}\n[key];",
+    "success": true
+  },
+  {
+    "input": "const C=class {}\n.name;",
+    "success": true
+  },
+  {
+    "input": "const C=class {}\n?.name;",
+    "success": true
+  },
+  {
+    "input": "const C=class {}\n`text`;",
+    "success": true
+  },
+  {
+    "input": "const C=class {}\n/a/.test(value);",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "const C=class {}\n/ divisor;",
+    "success": true
+  },
+  {
+    "input": "const C=class {}\n+value;",
+    "success": true
+  },
+  {
+    "input": "const C=class {}\nother();",
+    "success": true
+  },
+  {
+    "input": "const C=class {}\n; /a/.test(value);",
+    "success": true
+  },
+  {
+    "input": "(class {})\n(argument);",
+    "success": true
+  },
+  {
+    "input": "(class {})\n[key];",
+    "success": true
+  },
+  {
+    "input": "(class {})\n.name;",
+    "success": true
+  },
+  {
+    "input": "(class {})\n?.name;",
+    "success": true
+  },
+  {
+    "input": "(class {})\n`text`;",
+    "success": true
+  },
+  {
+    "input": "(class {})\n/a/.test(value);",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "(class {})\n/ divisor;",
+    "success": true
+  },
+  {
+    "input": "(class {})\n+value;",
+    "success": true
+  },
+  {
+    "input": "(class {})\nother();",
+    "success": true
+  },
+  {
+    "input": "(class {})\n; /a/.test(value);",
+    "success": true
+  },
+  {
+    "input": "new class {}\n(argument);",
+    "success": true
+  },
+  {
+    "input": "new class {}\n[key];",
+    "success": true
+  },
+  {
+    "input": "new class {}\n.name;",
+    "success": true
+  },
+  {
+    "input": "new class {}\n?.name;",
+    "success": false,
+    "error": "Invalid optional chain from new expression"
+  },
+  {
+    "input": "new class {}\n`text`;",
+    "success": true
+  },
+  {
+    "input": "new class {}\n/a/.test(value);",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "new class {}\n/ divisor;",
+    "success": true
+  },
+  {
+    "input": "new class {}\n+value;",
+    "success": true
+  },
+  {
+    "input": "new class {}\nother();",
+    "success": true
+  },
+  {
+    "input": "new class {}\n; /a/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=()=>class {}\n(argument);",
+    "success": true
+  },
+  {
+    "input": "const C=()=>class {}\n[key];",
+    "success": true
+  },
+  {
+    "input": "const C=()=>class {}\n.name;",
+    "success": true
+  },
+  {
+    "input": "const C=()=>class {}\n?.name;",
+    "success": true
+  },
+  {
+    "input": "const C=()=>class {}\n`text`;",
+    "success": true
+  },
+  {
+    "input": "const C=()=>class {}\n/a/.test(value);",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "const C=()=>class {}\n/ divisor;",
+    "success": true
+  },
+  {
+    "input": "const C=()=>class {}\n+value;",
+    "success": true
+  },
+  {
+    "input": "const C=()=>class {}\nother();",
+    "success": true
+  },
+  {
+    "input": "const C=()=>class {}\n; /a/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base {method(){}}\n(argument);",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base {method(){}}\n[key];",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base {method(){}}\n.name;",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base {method(){}}\n?.name;",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base {method(){}}\n`text`;",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base {method(){}}\n/a/.test(value);",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "const C=class extends Base {method(){}}\n/ divisor;",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base {method(){}}\n+value;",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base {method(){}}\nother();",
+    "success": true
+  },
+  {
+    "input": "const C=class extends Base {method(){}}\n; /a/.test(value);",
+    "success": true
+  },
+  {
+    "input": "class C extends Base {static {}}\n(argument);",
+    "success": true
+  },
+  {
+    "input": "class C extends Base {static {}}\n[key];",
+    "success": true
+  },
+  {
+    "input": "class C extends Base {static {}}\n.name;",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C extends Base {static {}}\n?.name;",
+    "success": false,
+    "error": "Unexpected token '?.'"
+  },
+  {
+    "input": "class C extends Base {static {}}\n`text`;",
+    "success": true
+  },
+  {
+    "input": "class C extends Base {static {}}\n/a/.test(value);",
+    "success": true
+  },
+  {
+    "input": "class C extends Base {static {}}\n/ divisor;",
+    "success": false,
+    "error": "Invalid regular expression: missing /"
+  },
+  {
+    "input": "class C extends Base {static {}}\n+value;",
+    "success": true
+  },
+  {
+    "input": "class C extends Base {static {}}\nother();",
+    "success": true
+  },
+  {
+    "input": "class C extends Base {static {}}\n; /a/.test(value);",
+    "success": true
+  },
+  {
+    "input": "const C=function(){return class {}; }\n(argument);",
+    "success": true
+  },
+  {
+    "input": "const C=function(){return class {}; }\n[key];",
+    "success": true
+  },
+  {
+    "input": "const C=function(){return class {}; }\n.name;",
+    "success": true
+  },
+  {
+    "input": "const C=function(){return class {}; }\n?.name;",
+    "success": true
+  },
+  {
+    "input": "const C=function(){return class {}; }\n`text`;",
+    "success": true
+  },
+  {
+    "input": "const C=function(){return class {}; }\n/a/.test(value);",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "const C=function(){return class {}; }\n/ divisor;",
+    "success": true
+  },
+  {
+    "input": "const C=function(){return class {}; }\n+value;",
+    "success": true
+  },
+  {
+    "input": "const C=function(){return class {}; }\nother();",
+    "success": true
+  },
+  {
+    "input": "const C=function(){return class {}; }\n; /a/.test(value);",
+    "success": true
+  },
+  {
+    "input": "class C { field=/a/\n(argument); }",
+    "success": true
+  },
+  {
+    "input": "class C { field=/a/\n[key]; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=/a/\n[key]=1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=/a/\n`text`; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=/a/\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C { field=/a/\n+1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=/a/\nmethod(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { field=/a/\nstatic { /a/.test(value); } }",
+    "success": true
+  },
+  {
+    "input": "class C { field=/a/\nother=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=/a/\n;other=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value / divisor\n(argument); }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value / divisor\n[key]; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value / divisor\n[key]=1; }",
+    "success": false,
+    "error": "Invalid left-hand side in assignment"
+  },
+  {
+    "input": "class C { field=value / divisor\n`text`; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value / divisor\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C { field=value / divisor\n+1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value / divisor\nmethod(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value / divisor\nstatic { /a/.test(value); } }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value / divisor\nother=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value / divisor\n;other=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>{}\n(argument); }",
+    "success": false,
+    "error": "Unexpected token '('"
+  },
+  {
+    "input": "class C { field=()=>{}\n[key]; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>{}\n[key]=1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>{}\n`text`; }",
+    "success": false,
+    "error": "Unexpected template string"
+  },
+  {
+    "input": "class C { field=()=>{}\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '/'"
+  },
+  {
+    "input": "class C { field=()=>{}\n+1; }",
+    "success": false,
+    "error": "Unexpected token '+'"
+  },
+  {
+    "input": "class C { field=()=>{}\nmethod(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>{}\nstatic { /a/.test(value); } }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>{}\nother=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>{}\n;other=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value=>value\n(argument); }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value=>value\n[key]; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value=>value\n[key]=1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value=>value\n`text`; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value=>value\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C { field=value=>value\n+1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value=>value\nmethod(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value=>value\nstatic { /a/.test(value); } }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value=>value\nother=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=value=>value\n;other=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=function(){}\n(argument); }",
+    "success": true
+  },
+  {
+    "input": "class C { field=function(){}\n[key]; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=function(){}\n[key]=1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=function(){}\n`text`; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=function(){}\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C { field=function(){}\n+1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=function(){}\nmethod(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { field=function(){}\nstatic { /a/.test(value); } }",
+    "success": true
+  },
+  {
+    "input": "class C { field=function(){}\nother=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=function(){}\n;other=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class {}\n(argument); }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class {}\n[key]; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class {}\n[key]=1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class {}\n`text`; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class {}\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C { field=class {}\n+1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class {}\nmethod(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class {}\nstatic { /a/.test(value); } }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class {}\nother=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class {}\n;other=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class Named {}\n(argument); }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class Named {}\n[key]; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class Named {}\n[key]=1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class Named {}\n`text`; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class Named {}\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C { field=class Named {}\n+1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class Named {}\nmethod(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class Named {}\nstatic { /a/.test(value); } }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class Named {}\nother=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=class Named {}\n;other=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=(class {})\n(argument); }",
+    "success": true
+  },
+  {
+    "input": "class C { field=(class {})\n[key]; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=(class {})\n[key]=1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=(class {})\n`text`; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=(class {})\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C { field=(class {})\n+1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=(class {})\nmethod(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { field=(class {})\nstatic { /a/.test(value); } }",
+    "success": true
+  },
+  {
+    "input": "class C { field=(class {})\nother=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=(class {})\n;other=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=({value:1})\n(argument); }",
+    "success": true
+  },
+  {
+    "input": "class C { field=({value:1})\n[key]; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=({value:1})\n[key]=1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=({value:1})\n`text`; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=({value:1})\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C { field=({value:1})\n+1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=({value:1})\nmethod(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { field=({value:1})\nstatic { /a/.test(value); } }",
+    "success": true
+  },
+  {
+    "input": "class C { field=({value:1})\nother=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=({value:1})\n;other=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=tag`raw\\xZ`\n(argument); }",
+    "success": true
+  },
+  {
+    "input": "class C { field=tag`raw\\xZ`\n[key]; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=tag`raw\\xZ`\n[key]=1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=tag`raw\\xZ`\n`text`; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=tag`raw\\xZ`\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C { field=tag`raw\\xZ`\n+1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=tag`raw\\xZ`\nmethod(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { field=tag`raw\\xZ`\nstatic { /a/.test(value); } }",
+    "success": true
+  },
+  {
+    "input": "class C { field=tag`raw\\xZ`\nother=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=tag`raw\\xZ`\n;other=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=`text ${/a/.source}`\n(argument); }",
+    "success": true
+  },
+  {
+    "input": "class C { field=`text ${/a/.source}`\n[key]; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=`text ${/a/.source}`\n[key]=1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=`text ${/a/.source}`\n`text`; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=`text ${/a/.source}`\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C { field=`text ${/a/.source}`\n+1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=`text ${/a/.source}`\nmethod(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { field=`text ${/a/.source}`\nstatic { /a/.test(value); } }",
+    "success": true
+  },
+  {
+    "input": "class C { field=`text ${/a/.source}`\nother=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=`text ${/a/.source}`\n;other=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>class {}\n(argument); }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>class {}\n[key]; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>class {}\n[key]=1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>class {}\n`text`; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>class {}\n/a/.test(value); }",
+    "success": false,
+    "error": "Unexpected token '.'"
+  },
+  {
+    "input": "class C { field=()=>class {}\n+1; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>class {}\nmethod(){return /a/;} }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>class {}\nstatic { /a/.test(value); } }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>class {}\nother=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { field=()=>class {}\n;other=/b/; }",
+    "success": true
+  },
+  {
+    "input": "class C { #x; method(){return this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x; method(){return object?.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x; method(){return #x in object;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x; method(){delete this.#x;} }",
+    "success": false,
+    "error": "Private fields can not be deleted"
+  },
+  {
+    "input": "class C { #x; method(){return ()=>this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x; method(){return function(object){return object.#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x; method(){return class {method(object){return object.#x;}};} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x; field=object.#x; }",
+    "success": true
+  },
+  {
+    "input": "class C { #x; static {object.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x; method(){return class extends object.#x {#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x(){} method(){return this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x(){} method(){return object?.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x(){} method(){return #x in object;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x(){} method(){delete this.#x;} }",
+    "success": false,
+    "error": "Private fields can not be deleted"
+  },
+  {
+    "input": "class C { #x(){} method(){return ()=>this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x(){} method(){return function(object){return object.#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x(){} method(){return class {method(object){return object.#x;}};} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x(){} field=object.#x; }",
+    "success": true
+  },
+  {
+    "input": "class C { #x(){} static {object.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x(){} method(){return class extends object.#x {#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){return 1;} method(){return this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){return 1;} method(){return object?.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){return 1;} method(){return #x in object;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){return 1;} method(){delete this.#x;} }",
+    "success": false,
+    "error": "Private fields can not be deleted"
+  },
+  {
+    "input": "class C { get #x(){return 1;} method(){return ()=>this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){return 1;} method(){return function(object){return object.#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){return 1;} method(){return class {method(object){return object.#x;}};} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){return 1;} field=object.#x; }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){return 1;} static {object.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){return 1;} method(){return class extends object.#x {#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { set #x(value){} method(){return this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set #x(value){} method(){return object?.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set #x(value){} method(){return #x in object;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set #x(value){} method(){delete this.#x;} }",
+    "success": false,
+    "error": "Private fields can not be deleted"
+  },
+  {
+    "input": "class C { set #x(value){} method(){return ()=>this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set #x(value){} method(){return function(object){return object.#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { set #x(value){} method(){return class {method(object){return object.#x;}};} }",
+    "success": true
+  },
+  {
+    "input": "class C { set #x(value){} field=object.#x; }",
+    "success": true
+  },
+  {
+    "input": "class C { set #x(value){} static {object.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { set #x(value){} method(){return class extends object.#x {#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){} set #x(value){} method(){return this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){} set #x(value){} method(){return object?.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){} set #x(value){} method(){return #x in object;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){} set #x(value){} method(){delete this.#x;} }",
+    "success": false,
+    "error": "Private fields can not be deleted"
+  },
+  {
+    "input": "class C { get #x(){} set #x(value){} method(){return ()=>this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){} set #x(value){} method(){return function(object){return object.#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){} set #x(value){} method(){return class {method(object){return object.#x;}};} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){} set #x(value){} field=object.#x; }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){} set #x(value){} static {object.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { get #x(){} set #x(value){} method(){return class extends object.#x {#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { static #x; method(){return this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static #x; method(){return object?.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static #x; method(){return #x in object;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static #x; method(){delete this.#x;} }",
+    "success": false,
+    "error": "Private fields can not be deleted"
+  },
+  {
+    "input": "class C { static #x; method(){return ()=>this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static #x; method(){return function(object){return object.#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { static #x; method(){return class {method(object){return object.#x;}};} }",
+    "success": true
+  },
+  {
+    "input": "class C { static #x; field=object.#x; }",
+    "success": true
+  },
+  {
+    "input": "class C { static #x; static {object.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { static #x; method(){return class extends object.#x {#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { #x;#x; method(){return this.#x;} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x;#x; method(){return object?.#x;} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x;#x; method(){return #x in object;} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x;#x; method(){delete this.#x;} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x;#x; method(){return ()=>this.#x;} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x;#x; method(){return function(object){return object.#x;};} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x;#x; method(){return class {method(object){return object.#x;}};} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x;#x; field=object.#x; }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x;#x; static {object.#x;} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x;#x; method(){return class extends object.#x {#x;};} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #\\u0078; method(){return this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #\\u0078; method(){return object?.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #\\u0078; method(){return #x in object;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #\\u0078; method(){delete this.#x;} }",
+    "success": false,
+    "error": "Private fields can not be deleted"
+  },
+  {
+    "input": "class C { #\\u0078; method(){return ()=>this.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #\\u0078; method(){return function(object){return object.#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { #\\u0078; method(){return class {method(object){return object.#x;}};} }",
+    "success": true
+  },
+  {
+    "input": "class C { #\\u0078; field=object.#x; }",
+    "success": true
+  },
+  {
+    "input": "class C { #\\u0078; static {object.#x;} }",
+    "success": true
+  },
+  {
+    "input": "class C { #\\u0078; method(){return class extends object.#x {#x;};} }",
+    "success": true
+  },
+  {
+    "input": "class C { #y; method(){return this.#x;} }",
+    "success": false,
+    "error": "Private field '#x' must be declared in an enclosing class"
+  },
+  {
+    "input": "class C { #y; method(){return object?.#x;} }",
+    "success": false,
+    "error": "Private field '#x' must be declared in an enclosing class"
+  },
+  {
+    "input": "class C { #y; method(){return #x in object;} }",
+    "success": false,
+    "error": "Private field '#x' must be declared in an enclosing class"
+  },
+  {
+    "input": "class C { #y; method(){delete this.#x;} }",
+    "success": false,
+    "error": "Private fields can not be deleted"
+  },
+  {
+    "input": "class C { #y; method(){return ()=>this.#x;} }",
+    "success": false,
+    "error": "Private field '#x' must be declared in an enclosing class"
+  },
+  {
+    "input": "class C { #y; method(){return function(object){return object.#x;};} }",
+    "success": false,
+    "error": "Private field '#x' must be declared in an enclosing class"
+  },
+  {
+    "input": "class C { #y; method(){return class {method(object){return object.#x;}};} }",
+    "success": false,
+    "error": "Private field '#x' must be declared in an enclosing class"
+  },
+  {
+    "input": "class C { #y; field=object.#x; }",
+    "success": false,
+    "error": "Private field '#x' must be declared in an enclosing class"
+  },
+  {
+    "input": "class C { #y; static {object.#x;} }",
+    "success": false,
+    "error": "Private field '#x' must be declared in an enclosing class"
+  },
+  {
+    "input": "class C { #y; method(){return class extends object.#x {#x;};} }",
+    "success": false,
+    "error": "Private field '#x' must be declared in an enclosing class"
+  },
+  {
+    "input": "class C { #x; static #x; method(){return this.#x;} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x; static #x; method(){return object?.#x;} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x; static #x; method(){return #x in object;} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x; static #x; method(){delete this.#x;} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x; static #x; method(){return ()=>this.#x;} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x; static #x; method(){return function(object){return object.#x;};} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x; static #x; method(){return class {method(object){return object.#x;}};} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x; static #x; field=object.#x; }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x; static #x; static {object.#x;} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class C { #x; static #x; method(){return class extends object.#x {#x;};} }",
+    "success": false,
+    "error": "Identifier '#x' has already been declared"
+  },
+  {
+    "input": "class Inner {[new.target]=1;}",
+    "success": false,
+    "error": "new.target expression is not allowed here"
+  },
+  {
+    "input": "function outer(){class Inner {[new.target]=1;}}",
+    "success": true
+  },
+  {
+    "input": "const outer=()=>{class Inner {[new.target]=1;}};",
+    "success": false,
+    "error": "new.target expression is not allowed here"
+  },
+  {
+    "input": "class Outer {method(){class Inner {[new.target]=1;}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer extends Base {constructor(){class Inner {[new.target]=1;}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer {static {class Inner {[new.target]=1;}}}",
+    "success": true
+  },
+  {
+    "input": "while(ready){class Inner {[new.target]=1;}}",
+    "success": false,
+    "error": "new.target expression is not allowed here"
+  },
+  {
+    "input": "class Outer {field=()=>{class Inner {[new.target]=1;}};}",
+    "success": true
+  },
+  {
+    "input": "class Inner {[arguments]=1;}",
+    "success": true
+  },
+  {
+    "input": "function outer(){class Inner {[arguments]=1;}}",
+    "success": true
+  },
+  {
+    "input": "const outer=()=>{class Inner {[arguments]=1;}};",
+    "success": true
+  },
+  {
+    "input": "class Outer {method(){class Inner {[arguments]=1;}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer extends Base {constructor(){class Inner {[arguments]=1;}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer {static {class Inner {[arguments]=1;}}}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "while(ready){class Inner {[arguments]=1;}}",
+    "success": true
+  },
+  {
+    "input": "class Outer {field=()=>{class Inner {[arguments]=1;}};}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "class Inner {[super.value](){}}",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "function outer(){class Inner {[super.value](){}}}",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "const outer=()=>{class Inner {[super.value](){}}};",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "class Outer {method(){class Inner {[super.value](){}}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer extends Base {constructor(){class Inner {[super.value](){}}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer {static {class Inner {[super.value](){}}}}",
+    "success": true
+  },
+  {
+    "input": "while(ready){class Inner {[super.value](){}}}",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "class Outer {field=()=>{class Inner {[super.value](){}}};}",
+    "success": true
+  },
+  {
+    "input": "class Inner {field=arguments;}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "function outer(){class Inner {field=arguments;}}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "const outer=()=>{class Inner {field=arguments;}};",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "class Outer {method(){class Inner {field=arguments;}}}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "class Outer extends Base {constructor(){class Inner {field=arguments;}}}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "class Outer {static {class Inner {field=arguments;}}}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "while(ready){class Inner {field=arguments;}}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "class Outer {field=()=>{class Inner {field=arguments;}};}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "class Inner {field=()=>arguments;}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "function outer(){class Inner {field=()=>arguments;}}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "const outer=()=>{class Inner {field=()=>arguments;}};",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "class Outer {method(){class Inner {field=()=>arguments;}}}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "class Outer extends Base {constructor(){class Inner {field=()=>arguments;}}}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "class Outer {static {class Inner {field=()=>arguments;}}}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "while(ready){class Inner {field=()=>arguments;}}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "class Outer {field=()=>{class Inner {field=()=>arguments;}};}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "class Inner {field=function(){return arguments;};}",
+    "success": true
+  },
+  {
+    "input": "function outer(){class Inner {field=function(){return arguments;};}}",
+    "success": true
+  },
+  {
+    "input": "const outer=()=>{class Inner {field=function(){return arguments;};}};",
+    "success": true
+  },
+  {
+    "input": "class Outer {method(){class Inner {field=function(){return arguments;};}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer extends Base {constructor(){class Inner {field=function(){return arguments;};}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer {static {class Inner {field=function(){return arguments;};}}}",
+    "success": true
+  },
+  {
+    "input": "while(ready){class Inner {field=function(){return arguments;};}}",
+    "success": true
+  },
+  {
+    "input": "class Outer {field=()=>{class Inner {field=function(){return arguments;};}};}",
+    "success": true
+  },
+  {
+    "input": "class Inner {method(){return super.value;}}",
+    "success": true
+  },
+  {
+    "input": "function outer(){class Inner {method(){return super.value;}}}",
+    "success": true
+  },
+  {
+    "input": "const outer=()=>{class Inner {method(){return super.value;}}};",
+    "success": true
+  },
+  {
+    "input": "class Outer {method(){class Inner {method(){return super.value;}}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer extends Base {constructor(){class Inner {method(){return super.value;}}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer {static {class Inner {method(){return super.value;}}}}",
+    "success": true
+  },
+  {
+    "input": "while(ready){class Inner {method(){return super.value;}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer {field=()=>{class Inner {method(){return super.value;}}};}",
+    "success": true
+  },
+  {
+    "input": "class Inner {constructor(){super();}}",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "function outer(){class Inner {constructor(){super();}}}",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "const outer=()=>{class Inner {constructor(){super();}}};",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "class Outer {method(){class Inner {constructor(){super();}}}}",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "class Outer extends Base {constructor(){class Inner {constructor(){super();}}}}",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "class Outer {static {class Inner {constructor(){super();}}}}",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "while(ready){class Inner {constructor(){super();}}}",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "class Outer {field=()=>{class Inner {constructor(){super();}}};}",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "class Inner extends Base {constructor(){super();}}",
+    "success": true
+  },
+  {
+    "input": "function outer(){class Inner extends Base {constructor(){super();}}}",
+    "success": true
+  },
+  {
+    "input": "const outer=()=>{class Inner extends Base {constructor(){super();}}};",
+    "success": true
+  },
+  {
+    "input": "class Outer {method(){class Inner extends Base {constructor(){super();}}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer extends Base {constructor(){class Inner extends Base {constructor(){super();}}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer {static {class Inner extends Base {constructor(){super();}}}}",
+    "success": true
+  },
+  {
+    "input": "while(ready){class Inner extends Base {constructor(){super();}}}",
+    "success": true
+  },
+  {
+    "input": "class Outer {field=()=>{class Inner extends Base {constructor(){super();}}};}",
+    "success": true
+  },
+  {
+    "input": "class Inner {static {return;}}",
+    "success": false,
+    "error": "Illegal return statement"
+  },
+  {
+    "input": "function outer(){class Inner {static {return;}}}",
+    "success": false,
+    "error": "Illegal return statement"
+  },
+  {
+    "input": "const outer=()=>{class Inner {static {return;}}};",
+    "success": false,
+    "error": "Illegal return statement"
+  },
+  {
+    "input": "class Outer {method(){class Inner {static {return;}}}}",
+    "success": false,
+    "error": "Illegal return statement"
+  },
+  {
+    "input": "class Outer extends Base {constructor(){class Inner {static {return;}}}}",
+    "success": false,
+    "error": "Illegal return statement"
+  },
+  {
+    "input": "class Outer {static {class Inner {static {return;}}}}",
+    "success": false,
+    "error": "Illegal return statement"
+  },
+  {
+    "input": "while(ready){class Inner {static {return;}}}",
+    "success": false,
+    "error": "Illegal return statement"
+  },
+  {
+    "input": "class Outer {field=()=>{class Inner {static {return;}}};}",
+    "success": false,
+    "error": "Illegal return statement"
+  },
+  {
+    "input": "class C {get value;}",
+    "success": false,
+    "error": "Unexpected token ';'"
+  },
+  {
+    "input": "class C {set value;}",
+    "success": false,
+    "error": "Unexpected token ';'"
+  },
+  {
+    "input": "class C {get static value(){}}",
+    "success": false,
+    "error": "Unexpected identifier 'value'"
+  },
+  {
+    "input": "class C {static static value(){}}",
+    "success": false,
+    "error": "Unexpected identifier 'value'"
+  },
+  {
+    "input": "class C {get set value(){}}",
+    "success": false,
+    "error": "Unexpected identifier 'value'"
+  },
+  {
+    "input": "class C {set get value(){}}",
+    "success": false,
+    "error": "Unexpected identifier 'value'"
+  },
+  {
+    "input": "class C {get get(){}}",
+    "success": true
+  },
+  {
+    "input": "class C {get set(){}}",
+    "success": true
+  },
+  {
+    "input": "class C {static get get(){}}",
+    "success": true
+  },
+  {
+    "input": "class C {static set set(value){}}",
+    "success": true
+  },
+  {
+    "input": "class C {static get(){}}",
+    "success": true
+  },
+  {
+    "input": "class C {static set(){}}",
+    "success": true
+  },
+  {
+    "input": "class C {static static(){}}",
+    "success": true
+  },
+  {
+    "input": "class C {static get\nvalue(){return /a/;}}",
+    "success": true
+  },
+  {
+    "input": "class C {static set\nvalue(value){value / divisor;}}",
+    "success": true
+  },
+  {
+    "input": "class C {get\nstatic value(){return /a/;}}",
+    "success": false,
+    "error": "Unexpected identifier 'value'"
+  },
+  {
+    "input": "class C {field=class D extends (function(){return Base;})(){method(){return /a/;}}; other=/b/;}",
+    "success": true
+  },
+  {
+    "input": "class C {field=()=>{class D {} /a/.test(value);}; other=/b/;}",
+    "success": true
+  },
+  {
+    "input": "class C {field=()=>class D {}\n[other]=/b/;}",
+    "success": true
+  },
+  {
+    "input": "class C {method(value=class D {field=/a/;}){return value / divisor;}}",
+    "success": true
+  },
+  {
+    "input": "class C {method({value=class D {field=/a/;}}){return value / divisor;}}",
+    "success": true
+  },
+  {
+    "input": "class C {#x; method(){return class D {[object.#x]=1; #x;};}}",
+    "success": true
+  },
+  {
+    "input": "class C {#x; method(){return class D extends object.#x {#x; [object.#x]=1;};}}",
+    "success": true
+  },
+  {
+    "input": "class C {#x; method(){return class D {#y; field=object.#x+object.#y;};}}",
+    "success": true
+  },
+  {
+    "input": "class C {static {const f=()=>{return /a/;}; class D {} /b/.test(value);}}",
+    "success": true
+  },
+  {
+    "input": "class C {static {function f(){return new.target;} class D {field=new.target;}}}",
+    "success": true
+  },
+  {
+    "input": "class C {method(){function f(){class D {[new.target]=1;} return super.value;}}}",
+    "success": false,
+    "error": "'super' keyword unexpected here"
+  },
+  {
+    "input": "class C {method(){class D {static {return super.value;}}}}",
+    "success": false,
+    "error": "Illegal return statement"
+  },
+  {
+    "input": "class C {field=()=>{return class D {[arguments]=1;};};}",
+    "success": false,
+    "error": "'arguments' is not allowed in class field initializer or static initialization block"
+  },
+  {
+    "input": "class C {field=function(){return class D {[arguments]=1;};};}",
+    "success": true
+  }
+]

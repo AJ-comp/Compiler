@@ -1,0 +1,49 @@
+{
+  "packageVersion": "0.5.0",
+  "verifiedAtUtc": "2026-10-21T01:48:09.108326+00:00",
+  "consumerTarget": "net8.0",
+  "consumerRestore": "passed",
+  "consumerReleaseBuild": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "repositoryProjectReferences": 0,
+  "consumerChecksPassed": 80,
+  "consumerChecksFailed": 0,
+  "consumerCheckBreakdown": {
+    "readmeArithmetic": 3,
+    "maximalMunch": 3,
+    "publicContextualLexing": 10,
+    "javascriptParsingAndValidation": 40,
+    "resourcesLicenseAssembliesReadme": 24
+  },
+  "javascriptInputCases": 21,
+  "readmeJavaScriptExamples": [
+    {
+      "source": "README.md",
+      "codeCopiedVerbatim": true,
+      "restore": "passed",
+      "releaseBuild": "passed",
+      "run": "passed",
+      "parsing": "success",
+      "validateDiagnostics": 0
+    },
+    {
+      "source": "src/Janglim/README.md",
+      "codeCopiedVerbatim": true,
+      "restore": "passed",
+      "releaseBuild": "passed",
+      "run": "passed",
+      "parsing": "success",
+      "validateDiagnostics": 0
+    }
+  ],
+  "packageExtraChecks": [
+    "nuspec version 0.5.0",
+    "packaged README exactly matches src/Janglim/README.md",
+    "Unicode license exactly matches grammar source",
+    "40 localized resource DLLs"
+  ],
+  "packageContentReport": "consumer/package-content-verification.json",
+  "consumerReport": "consumer/consumer-verification.json"
+}

@@ -1,0 +1,31 @@
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Debug\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Debug\netstandard2.1\Parse.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\KeyManager.cs(17,22): warning CS0414: 'KeyManager.meaningUnitKey' 필드가 할당되었지만 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\Parse.FrontEnd.csproj]
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Debug\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Debug\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Debug\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(49,48): warning CS0067: 'LRParser.ReduceAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(21,55): warning CS0067: 'LLParser.ASTCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(20,62): warning CS0067: 'LLParser.ParseTreeCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(51,48): warning CS0067: 'LRParser.ShiftAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Debug\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.ErrorHandler -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.ErrorHandler\bin\Debug\netstandard2.1\Parse.FrontEnd.ErrorHandler.dll
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Debug\net8.0\Parse.FrontEnd.Parsers.Tests.dll
+  Janglim.Mcp -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\services\Janglim.Mcp\bin\Debug\net10.0\Janglim.Mcp.dll
+  Janglim.Mcp.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Janglim.Mcp.Tests\bin\Debug\net10.0\Janglim.Mcp.Tests.dll
+  Janglim.Playground -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\samples\Playground\bin\Debug\net10.0\Janglim.Playground.dll
+  Janglim.Playground (Blazor output) -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\samples\Playground\bin\Debug\net10.0\wwwroot
+  Parse.FrontEnd.Support -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Support\bin\Debug\netstandard2.1\Parse.FrontEnd.Support.dll
+  Janglim -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Janglim\bin\Debug\netstandard2.1\Janglim.dll
+
+빌드했습니다.
+
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\KeyManager.cs(17,22): warning CS0414: 'KeyManager.meaningUnitKey' 필드가 할당되었지만 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\Parse.FrontEnd.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(49,48): warning CS0067: 'LRParser.ReduceAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(21,55): warning CS0067: 'LLParser.ASTCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(20,62): warning CS0067: 'LLParser.ParseTreeCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(51,48): warning CS0067: 'LRParser.ShiftAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+    경고 5개
+    오류 0개
+
+경과 시간: 00:00:23.17

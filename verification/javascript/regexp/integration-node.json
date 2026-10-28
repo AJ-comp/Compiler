@@ -1,0 +1,533 @@
+[
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const pattern = /(?<name>a)\\k<name>/u;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "let value = /[\\p{ASCII}&&\\p{Letter}]/v;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "/a|b/; /[\\q{ab|cd}]/v;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "if (value) /(?i:a)/.test(value);",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "if (value) {} /(?<x>a)|(?<x>b)/u.test(value);",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "function f() { return /(?<=prefix)value/u; }",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const f = () => /(?:a{2})/;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const f = () => { return /\\p{RGI_Emoji}/v; };",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const f = () => {}; /(?i:a)/;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const f = ({value = /[a-z]/u} = {}) => value;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const [first = /a+/u] = values;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "let {value: local = /[a--b]/v} = object;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "class A { field = /[a-z]/u; static value = /(?-i:a)/i; }",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "class A { #value = /(?<name>a)/u; method() { return this.#value; } }",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "class A { static { /[\\q{ab}]/v; } }",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "class A extends Base { method() { return /a+/; } }",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const value = `${/(?<name>a)/u}`;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const value = tag`outer ${/[[a-z]--[aeiou]]/v} tail`;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "import(path, {with: {pattern: /[a-z]/u}});",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "for (const value of /a/.source) {}",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "for (let value = /(?:a)/; value; value = /b/) {}",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "switch (value) { case /[a-z]/u: break; default: /a/; }",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "try {} catch (error) { /a{1,2}/u; } finally { /b/; }",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "({[/a/.source]: /b/});",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "value / /(?<name>a)\\k<name>/u.source;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "value /= /a/.source;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "value\n/other/divisor;",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "function f() { return\n/[a-z]/u; }",
+    "actual": true
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const pattern = /(/;",
+    "actual": false,
+    "error": "Invalid regular expression: /(/: Unterminated group"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "let value = /\\q/u;",
+    "actual": false,
+    "error": "Invalid regular expression: /\\q/u: Invalid escape"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "/a/; /[z-a]/u;",
+    "actual": false,
+    "error": "Invalid regular expression: /[z-a]/u: Range out of order in character class"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "if (value) /a{3,2}/.test(value);",
+    "actual": false,
+    "error": "Invalid regular expression: /a{3,2}/: numbers out of order in {} quantifier"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "if (value) {} /(?<x>a)(?<x>b)/u.test(value);",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<x>a)(?<x>b)/u: Duplicate capture group name"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "function f() { return /(?g:a)/; }",
+    "actual": false,
+    "error": "Invalid regular expression: /(?g:a)/: Invalid group"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const f = () => /(?=a)*/u;",
+    "actual": false,
+    "error": "Invalid regular expression: /(?=a)*/u: Invalid quantifier"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const f = () => { return /\\P{RGI_Emoji}/v; };",
+    "actual": false,
+    "error": "Invalid regular expression: /\\P{RGI_Emoji}/v: Invalid property name"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const f = () => {}; /\\k<missing>/u;",
+    "actual": false,
+    "error": "Invalid regular expression: /\\k<missing>/u: Invalid named capture referenced"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const f = ({value = /[!!]/v} = {}) => value;",
+    "actual": false,
+    "error": "Invalid regular expression: /[!!]/v: Invalid set operation in character class"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const [first = /\\p{greek}/u] = values;",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{greek}/u: Invalid property name"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "let {value: local = /[a&&]/v} = object;",
+    "actual": false,
+    "error": "Invalid regular expression: /[a&&]/v: Invalid character in character class"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "class A { field = /\\8/u; }",
+    "actual": false,
+    "error": "Invalid regular expression: /\\8/u: Invalid escape"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "class A { #value = /(?<>a)/u; }",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<>a)/u: Invalid capture group name"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "class A { static { /[^\\q{ab}]/v; } }",
+    "actual": false,
+    "error": "Invalid regular expression: /[^\\q{ab}]/v: Negated character class may contain strings"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "class A extends Base { method() { return /a++/; } }",
+    "actual": false,
+    "error": "Invalid regular expression: /a++/: Nothing to repeat"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const value = `${/a{2,1}/u}`;",
+    "actual": false,
+    "error": "Invalid regular expression: /a{2,1}/u: numbers out of order in {} quantifier"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const value = tag`outer ${/[\\d-a]/u} tail`;",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\d-a]/u: Invalid character class"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "import(path, {with: {pattern: /\\p{Invalid}/u}});",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{Invalid}/u: Invalid property name"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "for (const value of /\\9/u.source) {}",
+    "actual": false,
+    "error": "Invalid regular expression: /\\9/u: Invalid escape"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "for (let value = /a}/u; value; value = /b/) {}",
+    "actual": false,
+    "error": "Invalid regular expression: /a}/u: Lone quantifier brackets"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "switch (value) { case /[a-\\d]/u: break; }",
+    "actual": false,
+    "error": "Invalid regular expression: /[a-\\d]/u: Invalid character class"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "try {} catch (error) { /(?-:a)/; }",
+    "actual": false,
+    "error": "Invalid regular expression: /(?-:a)/: Invalid flag group"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "({[/a/.source]: /(?<a>x)(?<a>y)/});",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<a>x)(?<a>y)/: Duplicate capture group name"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export const pattern = /(?<name>a)\\k<name>/u;",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export default /[\\q{ab|cd}]/v;",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export default class { field = /[a-z]/u; }",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export default function() { return /(?i:a)/; }",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export function f(value = /(?<=a)b/u) { return value; }",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "const pattern = /\\p{RGI_Emoji}/v; export {pattern};",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "import value from \"module\"; /(?<name>a)/u.test(value);",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "import \"module\"; /[a--b]/v;",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "await /(?<name>a)\\k<name>/u;",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "for await (const value of source) { /[a-z]/u; }",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "const value = import.meta.url + /a/.source;",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "import(/a/.source);",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export class A { static { /(?s:.)/; } }",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export const f = () => /(?<name>a)|(?<name>b)/v;",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "const value = `${/[\\p{Letter}&&\\p{ASCII}]/v}`; export {value};",
+    "actual": true
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export const pattern = /(/;",
+    "actual": false,
+    "error": "Invalid regular expression: /(/: Unterminated group"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export default /[z-a]/u;",
+    "actual": false,
+    "error": "Invalid regular expression: /[z-a]/u: Range out of order in character class"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export default class { field = /\\p{Unknown}/u; }",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{Unknown}/u: Invalid property name"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export default function() { return /\\q/u; }",
+    "actual": false,
+    "error": "Invalid regular expression: /\\q/u: Invalid escape"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export function f(value = /(?<=a)*/) { return value; }",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<=a)*/: Invalid quantifier"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "const pattern = /[^\\q{ab}]/v; export {pattern};",
+    "actual": false,
+    "error": "Invalid regular expression: /[^\\q{ab}]/v: Negated character class may contain strings"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "import value from \"module\"; /(?<name>a)(?<name>b)/u.test(value);",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<name>a)(?<name>b)/u: Duplicate capture group name"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "import \"module\"; /[a&&b--c]/v;",
+    "actual": false,
+    "error": "Invalid regular expression: /[a&&b--c]/v: Invalid set operation in character class"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "await /(?<name>a)\\k<missing>/u;",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<name>a)\\k<missing>/u: Invalid named capture referenced"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "for await (const value of source) { /[\\d-a]/u; }",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\d-a]/u: Invalid character class"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "const value = import.meta.url + /a{3,2}/.source;",
+    "actual": false,
+    "error": "Invalid regular expression: /a{3,2}/: numbers out of order in {} quantifier"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "import(/\\p{RGI_Emoji}/u.source);",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{RGI_Emoji}/u: Invalid property name"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export class A { static { /(?ii:.)/; } }",
+    "actual": false,
+    "error": "Invalid regular expression: /(?ii:.)/: Repeated flag in flag group"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export const f = () => /(?<name>a)(?<name>b)/v;",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<name>a)(?<name>b)/v: Duplicate capture group name"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "const value = `${/\\8/u}`; export {value};",
+    "actual": false,
+    "error": "Invalid regular expression: /\\8/u: Invalid escape"
+  }
+]

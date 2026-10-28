@@ -1,0 +1,303 @@
+STATES 4622; CONFLICTS 5951
+INPUT (value: unknown) => asserts value
+SUCCESS False; EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  I0 token=( [(] prev=<none> :: EpsilonReduce __predicate1 -> epsilon :: 
+    CANDIDATE EpsilonReduce __predicate1 -> epsilon guard=TSFunctionTypeStart value=True
+    CANDIDATE EpsilonReduce __predicate2 -> epsilon guard=TSNotFunctionTypeStart value=False
+  Igoto token=( [(] prev=<none> :: Goto 2 :: 
+  I2 token=( [(] prev=<none> :: Shift 6 :: 
+  I6 token=value [TSTypeIdentifierName] prev=( :: Shift 42 :: 
+  I42 token=: [:] prev=value :: Reduce TSBindingIdentifier -> TSTypeIdentifierName :: 
+  Igoto token=: [:] prev=value :: Goto 96 :: 
+  I96 token=: [:] prev=value :: Reduce TSParameterBinding -> TSBindingIdentifier :: 
+  Igoto token=: [:] prev=value :: Goto 95 :: 
+  I95 token=: [:] prev=value :: Shift 215 :: 
+  I215 token=unknown [unknown] prev=: :: EpsilonReduce __predicate2 -> epsilon :: 
+  Igoto token=unknown [unknown] prev=: :: Goto 3 :: 
+  I3 token=unknown [unknown] prev=: :: Shift 20 :: 
+  I20 token=) [)] prev=unknown :: Reduce TSPrimitiveType -> unknown :: 
+  Igoto token=) [)] prev=unknown :: Goto 18 :: 
+  I18 token=) [)] prev=unknown :: Reduce TSPrimaryType -> TSPrimitiveType :: 
+  Igoto token=) [)] prev=unknown :: Goto 17 :: 
+  I17 token=) [)] prev=unknown :: Reduce TSPostfixCore -> TSPrimaryType :: 
+  Igoto token=) [)] prev=unknown :: Goto 16 :: 
+  I16 token=) [)] prev=unknown :: EpsilonReduce __predicate76 -> epsilon :: 
+  Igoto token=) [)] prev=unknown :: Goto 120 :: 
+  I120 token=) [)] prev=unknown :: Reduce TSPostfixType -> TSPostfixCore __predicate76 :: 
+  Igoto token=) [)] prev=unknown :: Goto 15 :: 
+  I15 token=) [)] prev=unknown :: Reduce TSTypeOperator -> TSPostfixType :: 
+  Igoto token=) [)] prev=unknown :: Goto 14 :: 
+  I14 token=) [)] prev=unknown :: Reduce TSIntersectionType -> TSTypeOperator :: 
+  Igoto token=) [)] prev=unknown :: Goto 13 :: 
+  I13 token=) [)] prev=unknown :: Reduce TSUnionType -> TSIntersectionType :: 
+  Igoto token=) [)] prev=unknown :: Goto 12 :: 
+  I12 token=) [)] prev=unknown :: EpsilonReduce __predicate68 -> epsilon :: 
+  Igoto token=) [)] prev=unknown :: Goto 116 :: 
+  I116 token=) [)] prev=unknown :: Reduce TSConditionalType -> TSUnionType __predicate68 :: 
+  Igoto token=) [)] prev=unknown :: Goto 11 :: 
+  I11 token=) [)] prev=unknown :: Reduce TSType -> __predicate2 TSConditionalType :: 
+  Igoto token=) [)] prev=unknown :: Goto 309 :: 
+  I309 token=) [)] prev=unknown :: Reduce TSTypeAnnotation -> : TSType :: 
+  Igoto token=) [)] prev=unknown :: Goto 214 :: 
+  I214 token=) [)] prev=unknown :: Reduce TSParameter -> TSParameterBinding TSTypeAnnotation :: 
+  Igoto token=) [)] prev=unknown :: Goto 94 :: 
+  I94 token=) [)] prev=unknown :: Reduce TSParameterList -> TSParameter :: 
+  Igoto token=) [)] prev=unknown :: Goto 93 :: 
+  I93 token=) [)] prev=unknown :: Shift 210 :: 
+  I210 token==> [=>] prev=) :: Reduce TSFunctionParameters -> ( TSParameterList ) :: 
+  Igoto token==> [=>] prev=) :: Goto 5 :: 
+  I5 token==> [=>] prev=) :: Shift 91 :: 
+  I91 token=asserts [asserts] prev==> :: EpsilonReduce __predicate2 -> epsilon :: 
+  Igoto token=asserts [asserts] prev==> :: Goto 3 :: 
+  I3 token=asserts [asserts] prev==> :: Shift 48 :: 
+  I48 token=value [TSTypeIdentifierName] prev=asserts :: Reduce TSContextualIdentifier -> asserts :: 
+    CANDIDATE Reduce TSContextualIdentifier -> asserts
+    CANDIDATE EpsilonReduce __predicate7 -> epsilon guard=NoLineBreak value=True
+  Igoto token=value [TSTypeIdentifierName] prev=asserts :: Goto 43 :: 
+  I43 token=value [TSTypeIdentifierName] prev=asserts :: Reduce TSBindingIdentifier -> TSContextualIdentifier :: 
+  Igoto token=value [TSTypeIdentifierName] prev=asserts :: Goto 41 :: 
+  I41 token=value [TSTypeIdentifierName] prev=asserts :: Reduce TSQualifiedName -> TSBindingIdentifier :: 
+  Igoto token=value [TSTypeIdentifierName] prev=asserts :: Goto 40 :: 
+  I40 token=value [TSTypeIdentifierName] prev=asserts :: Failed  :: Grammar predicate TSNoTypeReferenceSuffix evaluated to false.
+    CANDIDATE EpsilonReduce __predicate100 -> epsilon guard=TSNoTypeReferenceSuffix value=False
+INPUT (value: unknown) => asserts value is string
+SUCCESS False; EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  I0 token=( [(] prev=<none> :: EpsilonReduce __predicate1 -> epsilon :: 
+    CANDIDATE EpsilonReduce __predicate1 -> epsilon guard=TSFunctionTypeStart value=True
+    CANDIDATE EpsilonReduce __predicate2 -> epsilon guard=TSNotFunctionTypeStart value=False
+  Igoto token=( [(] prev=<none> :: Goto 2 :: 
+  I2 token=( [(] prev=<none> :: Shift 6 :: 
+  I6 token=value [TSTypeIdentifierName] prev=( :: Shift 42 :: 
+  I42 token=: [:] prev=value :: Reduce TSBindingIdentifier -> TSTypeIdentifierName :: 
+  Igoto token=: [:] prev=value :: Goto 96 :: 
+  I96 token=: [:] prev=value :: Reduce TSParameterBinding -> TSBindingIdentifier :: 
+  Igoto token=: [:] prev=value :: Goto 95 :: 
+  I95 token=: [:] prev=value :: Shift 215 :: 
+  I215 token=unknown [unknown] prev=: :: EpsilonReduce __predicate2 -> epsilon :: 
+  Igoto token=unknown [unknown] prev=: :: Goto 3 :: 
+  I3 token=unknown [unknown] prev=: :: Shift 20 :: 
+  I20 token=) [)] prev=unknown :: Reduce TSPrimitiveType -> unknown :: 
+  Igoto token=) [)] prev=unknown :: Goto 18 :: 
+  I18 token=) [)] prev=unknown :: Reduce TSPrimaryType -> TSPrimitiveType :: 
+  Igoto token=) [)] prev=unknown :: Goto 17 :: 
+  I17 token=) [)] prev=unknown :: Reduce TSPostfixCore -> TSPrimaryType :: 
+  Igoto token=) [)] prev=unknown :: Goto 16 :: 
+  I16 token=) [)] prev=unknown :: EpsilonReduce __predicate76 -> epsilon :: 
+  Igoto token=) [)] prev=unknown :: Goto 120 :: 
+  I120 token=) [)] prev=unknown :: Reduce TSPostfixType -> TSPostfixCore __predicate76 :: 
+  Igoto token=) [)] prev=unknown :: Goto 15 :: 
+  I15 token=) [)] prev=unknown :: Reduce TSTypeOperator -> TSPostfixType :: 
+  Igoto token=) [)] prev=unknown :: Goto 14 :: 
+  I14 token=) [)] prev=unknown :: Reduce TSIntersectionType -> TSTypeOperator :: 
+  Igoto token=) [)] prev=unknown :: Goto 13 :: 
+  I13 token=) [)] prev=unknown :: Reduce TSUnionType -> TSIntersectionType :: 
+  Igoto token=) [)] prev=unknown :: Goto 12 :: 
+  I12 token=) [)] prev=unknown :: EpsilonReduce __predicate68 -> epsilon :: 
+  Igoto token=) [)] prev=unknown :: Goto 116 :: 
+  I116 token=) [)] prev=unknown :: Reduce TSConditionalType -> TSUnionType __predicate68 :: 
+  Igoto token=) [)] prev=unknown :: Goto 11 :: 
+  I11 token=) [)] prev=unknown :: Reduce TSType -> __predicate2 TSConditionalType :: 
+  Igoto token=) [)] prev=unknown :: Goto 309 :: 
+  I309 token=) [)] prev=unknown :: Reduce TSTypeAnnotation -> : TSType :: 
+  Igoto token=) [)] prev=unknown :: Goto 214 :: 
+  I214 token=) [)] prev=unknown :: Reduce TSParameter -> TSParameterBinding TSTypeAnnotation :: 
+  Igoto token=) [)] prev=unknown :: Goto 94 :: 
+  I94 token=) [)] prev=unknown :: Reduce TSParameterList -> TSParameter :: 
+  Igoto token=) [)] prev=unknown :: Goto 93 :: 
+  I93 token=) [)] prev=unknown :: Shift 210 :: 
+  I210 token==> [=>] prev=) :: Reduce TSFunctionParameters -> ( TSParameterList ) :: 
+  Igoto token==> [=>] prev=) :: Goto 5 :: 
+  I5 token==> [=>] prev=) :: Shift 91 :: 
+  I91 token=asserts [asserts] prev==> :: EpsilonReduce __predicate2 -> epsilon :: 
+  Igoto token=asserts [asserts] prev==> :: Goto 3 :: 
+  I3 token=asserts [asserts] prev==> :: Shift 48 :: 
+  I48 token=value [TSTypeIdentifierName] prev=asserts :: Reduce TSContextualIdentifier -> asserts :: 
+    CANDIDATE Reduce TSContextualIdentifier -> asserts
+    CANDIDATE EpsilonReduce __predicate7 -> epsilon guard=NoLineBreak value=True
+  Igoto token=value [TSTypeIdentifierName] prev=asserts :: Goto 43 :: 
+  I43 token=value [TSTypeIdentifierName] prev=asserts :: Reduce TSBindingIdentifier -> TSContextualIdentifier :: 
+  Igoto token=value [TSTypeIdentifierName] prev=asserts :: Goto 41 :: 
+  I41 token=value [TSTypeIdentifierName] prev=asserts :: Reduce TSQualifiedName -> TSBindingIdentifier :: 
+  Igoto token=value [TSTypeIdentifierName] prev=asserts :: Goto 40 :: 
+  I40 token=value [TSTypeIdentifierName] prev=asserts :: Failed  :: Grammar predicate TSNoTypeReferenceSuffix evaluated to false.
+    CANDIDATE EpsilonReduce __predicate100 -> epsilon guard=TSNoTypeReferenceSuffix value=False
+INPUT (value: unknown) => value is string
+SUCCESS True; EXCEPTION 
+  I0 token=( [(] prev=<none> :: EpsilonReduce __predicate1 -> epsilon :: 
+    CANDIDATE EpsilonReduce __predicate1 -> epsilon guard=TSFunctionTypeStart value=True
+    CANDIDATE EpsilonReduce __predicate2 -> epsilon guard=TSNotFunctionTypeStart value=False
+  Igoto token=( [(] prev=<none> :: Goto 2 :: 
+  I2 token=( [(] prev=<none> :: Shift 6 :: 
+  I6 token=value [TSTypeIdentifierName] prev=( :: Shift 42 :: 
+  I42 token=: [:] prev=value :: Reduce TSBindingIdentifier -> TSTypeIdentifierName :: 
+  Igoto token=: [:] prev=value :: Goto 96 :: 
+  I96 token=: [:] prev=value :: Reduce TSParameterBinding -> TSBindingIdentifier :: 
+  Igoto token=: [:] prev=value :: Goto 95 :: 
+  I95 token=: [:] prev=value :: Shift 215 :: 
+  I215 token=unknown [unknown] prev=: :: EpsilonReduce __predicate2 -> epsilon :: 
+  Igoto token=unknown [unknown] prev=: :: Goto 3 :: 
+  I3 token=unknown [unknown] prev=: :: Shift 20 :: 
+  I20 token=) [)] prev=unknown :: Reduce TSPrimitiveType -> unknown :: 
+  Igoto token=) [)] prev=unknown :: Goto 18 :: 
+  I18 token=) [)] prev=unknown :: Reduce TSPrimaryType -> TSPrimitiveType :: 
+  Igoto token=) [)] prev=unknown :: Goto 17 :: 
+  I17 token=) [)] prev=unknown :: Reduce TSPostfixCore -> TSPrimaryType :: 
+  Igoto token=) [)] prev=unknown :: Goto 16 :: 
+  I16 token=) [)] prev=unknown :: EpsilonReduce __predicate76 -> epsilon :: 
+  Igoto token=) [)] prev=unknown :: Goto 120 :: 
+  I120 token=) [)] prev=unknown :: Reduce TSPostfixType -> TSPostfixCore __predicate76 :: 
+  Igoto token=) [)] prev=unknown :: Goto 15 :: 
+  I15 token=) [)] prev=unknown :: Reduce TSTypeOperator -> TSPostfixType :: 
+  Igoto token=) [)] prev=unknown :: Goto 14 :: 
+  I14 token=) [)] prev=unknown :: Reduce TSIntersectionType -> TSTypeOperator :: 
+  Igoto token=) [)] prev=unknown :: Goto 13 :: 
+  I13 token=) [)] prev=unknown :: Reduce TSUnionType -> TSIntersectionType :: 
+  Igoto token=) [)] prev=unknown :: Goto 12 :: 
+  I12 token=) [)] prev=unknown :: EpsilonReduce __predicate68 -> epsilon :: 
+  Igoto token=) [)] prev=unknown :: Goto 116 :: 
+  I116 token=) [)] prev=unknown :: Reduce TSConditionalType -> TSUnionType __predicate68 :: 
+  Igoto token=) [)] prev=unknown :: Goto 11 :: 
+  I11 token=) [)] prev=unknown :: Reduce TSType -> __predicate2 TSConditionalType :: 
+  Igoto token=) [)] prev=unknown :: Goto 309 :: 
+  I309 token=) [)] prev=unknown :: Reduce TSTypeAnnotation -> : TSType :: 
+  Igoto token=) [)] prev=unknown :: Goto 214 :: 
+  I214 token=) [)] prev=unknown :: Reduce TSParameter -> TSParameterBinding TSTypeAnnotation :: 
+  Igoto token=) [)] prev=unknown :: Goto 94 :: 
+  I94 token=) [)] prev=unknown :: Reduce TSParameterList -> TSParameter :: 
+  Igoto token=) [)] prev=unknown :: Goto 93 :: 
+  I93 token=) [)] prev=unknown :: Shift 210 :: 
+  I210 token==> [=>] prev=) :: Reduce TSFunctionParameters -> ( TSParameterList ) :: 
+  Igoto token==> [=>] prev=) :: Goto 5 :: 
+  I5 token==> [=>] prev=) :: Shift 91 :: 
+  I91 token=value [TSTypeIdentifierName] prev==> :: EpsilonReduce __predicate2 -> epsilon :: 
+  Igoto token=value [TSTypeIdentifierName] prev==> :: Goto 3 :: 
+  I3 token=value [TSTypeIdentifierName] prev==> :: Shift 42 :: 
+  I42 token=is [is] prev=value :: Reduce TSBindingIdentifier -> TSTypeIdentifierName :: 
+  Igoto token=is [is] prev=value :: Goto 41 :: 
+  I41 token=is [is] prev=value :: Reduce TSQualifiedName -> TSBindingIdentifier :: 
+  Igoto token=is [is] prev=value :: Goto 40 :: 
+  I40 token=is [is] prev=value :: EpsilonReduce __predicate102 -> epsilon :: 
+    CANDIDATE EpsilonReduce __predicate100 -> epsilon guard=TSNoTypeReferenceSuffix value=False
+    CANDIDATE EpsilonReduce __predicate102 -> epsilon guard=TSTypePredicateStart value=True
+  Igoto token=is [is] prev=value :: Goto 128 :: 
+  I128 token=is [is] prev=value :: Shift 257 :: 
+  I257 token=string [string] prev=is :: EpsilonReduce __predicate2 -> epsilon :: 
+  Igoto token=string [string] prev=is :: Goto 3 :: 
+  I3 token=string [string] prev=is :: Shift 21 :: 
+  I21 token= [щ] prev=string :: Reduce TSPrimitiveType -> string :: 
+  Igoto token= [щ] prev=string :: Goto 18 :: 
+  I18 token= [щ] prev=string :: Reduce TSPrimaryType -> TSPrimitiveType :: 
+  Igoto token= [щ] prev=string :: Goto 17 :: 
+  I17 token= [щ] prev=string :: Reduce TSPostfixCore -> TSPrimaryType :: 
+  Igoto token= [щ] prev=string :: Goto 16 :: 
+  I16 token= [щ] prev=string :: EpsilonReduce __predicate76 -> epsilon :: 
+  Igoto token= [щ] prev=string :: Goto 120 :: 
+  I120 token= [щ] prev=string :: Reduce TSPostfixType -> TSPostfixCore __predicate76 :: 
+  Igoto token= [щ] prev=string :: Goto 15 :: 
+  I15 token= [щ] prev=string :: Reduce TSTypeOperator -> TSPostfixType :: 
+  Igoto token= [щ] prev=string :: Goto 14 :: 
+  I14 token= [щ] prev=string :: Reduce TSIntersectionType -> TSTypeOperator :: 
+  Igoto token= [щ] prev=string :: Goto 13 :: 
+  I13 token= [щ] prev=string :: Reduce TSUnionType -> TSIntersectionType :: 
+  Igoto token= [щ] prev=string :: Goto 12 :: 
+  I12 token= [щ] prev=string :: EpsilonReduce __predicate68 -> epsilon :: 
+  Igoto token= [щ] prev=string :: Goto 116 :: 
+  I116 token= [щ] prev=string :: Reduce TSConditionalType -> TSUnionType __predicate68 :: 
+  Igoto token= [щ] prev=string :: Goto 11 :: 
+  I11 token= [щ] prev=string :: Reduce TSType -> __predicate2 TSConditionalType :: 
+  Igoto token= [щ] prev=string :: Goto 466 :: 
+  I466 token= [щ] prev=string :: Reduce TSTypeReference -> TSQualifiedName __predicate102 is TSType :: 
+  Igoto token= [щ] prev=string :: Goto 39 :: 
+  I39 token= [щ] prev=string :: Reduce TSPrimaryType -> TSTypeReference :: 
+  Igoto token= [щ] prev=string :: Goto 17 :: 
+  I17 token= [щ] prev=string :: Reduce TSPostfixCore -> TSPrimaryType :: 
+  Igoto token= [щ] prev=string :: Goto 16 :: 
+  I16 token= [щ] prev=string :: EpsilonReduce __predicate76 -> epsilon :: 
+  Igoto token= [щ] prev=string :: Goto 120 :: 
+  I120 token= [щ] prev=string :: Reduce TSPostfixType -> TSPostfixCore __predicate76 :: 
+  Igoto token= [щ] prev=string :: Goto 15 :: 
+  I15 token= [щ] prev=string :: Reduce TSTypeOperator -> TSPostfixType :: 
+  Igoto token= [щ] prev=string :: Goto 14 :: 
+  I14 token= [щ] prev=string :: Reduce TSIntersectionType -> TSTypeOperator :: 
+  Igoto token= [щ] prev=string :: Goto 13 :: 
+  I13 token= [щ] prev=string :: Reduce TSUnionType -> TSIntersectionType :: 
+  Igoto token= [щ] prev=string :: Goto 12 :: 
+  I12 token= [щ] prev=string :: EpsilonReduce __predicate68 -> epsilon :: 
+  Igoto token= [щ] prev=string :: Goto 116 :: 
+  I116 token= [щ] prev=string :: Reduce TSConditionalType -> TSUnionType __predicate68 :: 
+  Igoto token= [щ] prev=string :: Goto 11 :: 
+  I11 token= [щ] prev=string :: Reduce TSType -> __predicate2 TSConditionalType :: 
+  Igoto token= [щ] prev=string :: Goto 209 :: 
+  I209 token= [щ] prev=string :: Reduce TSReturnType -> TSType :: 
+  Igoto token= [щ] prev=string :: Goto 208 :: 
+  I208 token= [щ] prev=string :: Reduce TSFunctionType -> TSFunctionParameters => TSReturnType :: 
+  Igoto token= [щ] prev=string :: Goto 4 :: 
+  I4 token= [щ] prev=string :: Reduce TSType -> __predicate1 TSFunctionType :: 
+  Igoto token= [щ] prev=string :: Goto 1 :: 
+  I1 token= [щ] prev=string :: Accept Accept -> TSType :: 
+INPUT asserts
+SUCCESS True; EXCEPTION 
+  I0 token=asserts [asserts] prev=<none> :: EpsilonReduce __predicate2 -> epsilon :: 
+  Igoto token=asserts [asserts] prev=<none> :: Goto 3 :: 
+  I3 token=asserts [asserts] prev=<none> :: Shift 48 :: 
+  I48 token= [щ] prev=asserts :: Reduce TSContextualIdentifier -> asserts :: 
+  Igoto token= [щ] prev=asserts :: Goto 43 :: 
+  I43 token= [щ] prev=asserts :: Reduce TSBindingIdentifier -> TSContextualIdentifier :: 
+  Igoto token= [щ] prev=asserts :: Goto 41 :: 
+  I41 token= [щ] prev=asserts :: Reduce TSQualifiedName -> TSBindingIdentifier :: 
+  Igoto token= [щ] prev=asserts :: Goto 40 :: 
+  I40 token= [щ] prev=asserts :: EpsilonReduce __predicate100 -> epsilon :: 
+  Igoto token= [щ] prev=asserts :: Goto 125 :: 
+  I125 token= [щ] prev=asserts :: Reduce TSTypeReference -> TSQualifiedName __predicate100 :: 
+  Igoto token= [щ] prev=asserts :: Goto 39 :: 
+  I39 token= [щ] prev=asserts :: Reduce TSPrimaryType -> TSTypeReference :: 
+  Igoto token= [щ] prev=asserts :: Goto 17 :: 
+  I17 token= [щ] prev=asserts :: Reduce TSPostfixCore -> TSPrimaryType :: 
+  Igoto token= [щ] prev=asserts :: Goto 16 :: 
+  I16 token= [щ] prev=asserts :: EpsilonReduce __predicate76 -> epsilon :: 
+  Igoto token= [щ] prev=asserts :: Goto 120 :: 
+  I120 token= [щ] prev=asserts :: Reduce TSPostfixType -> TSPostfixCore __predicate76 :: 
+  Igoto token= [щ] prev=asserts :: Goto 15 :: 
+  I15 token= [щ] prev=asserts :: Reduce TSTypeOperator -> TSPostfixType :: 
+  Igoto token= [щ] prev=asserts :: Goto 14 :: 
+  I14 token= [щ] prev=asserts :: Reduce TSIntersectionType -> TSTypeOperator :: 
+  Igoto token= [щ] prev=asserts :: Goto 13 :: 
+  I13 token= [щ] prev=asserts :: Reduce TSUnionType -> TSIntersectionType :: 
+  Igoto token= [щ] prev=asserts :: Goto 12 :: 
+  I12 token= [щ] prev=asserts :: EpsilonReduce __predicate68 -> epsilon :: 
+  Igoto token= [щ] prev=asserts :: Goto 116 :: 
+  I116 token= [щ] prev=asserts :: Reduce TSConditionalType -> TSUnionType __predicate68 :: 
+  Igoto token= [щ] prev=asserts :: Goto 11 :: 
+  I11 token= [щ] prev=asserts :: Reduce TSType -> __predicate2 TSConditionalType :: 
+  Igoto token= [щ] prev=asserts :: Goto 1 :: 
+  I1 token= [щ] prev=asserts :: Accept Accept -> TSType :: 
+INPUT asserts value
+SUCCESS False; EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  I0 token=asserts [asserts] prev=<none> :: EpsilonReduce __predicate2 -> epsilon :: 
+  Igoto token=asserts [asserts] prev=<none> :: Goto 3 :: 
+  I3 token=asserts [asserts] prev=<none> :: Shift 48 :: 
+  I48 token=value [TSTypeIdentifierName] prev=asserts :: Reduce TSContextualIdentifier -> asserts :: 
+    CANDIDATE Reduce TSContextualIdentifier -> asserts
+    CANDIDATE EpsilonReduce __predicate7 -> epsilon guard=NoLineBreak value=True
+  Igoto token=value [TSTypeIdentifierName] prev=asserts :: Goto 43 :: 
+  I43 token=value [TSTypeIdentifierName] prev=asserts :: Reduce TSBindingIdentifier -> TSContextualIdentifier :: 
+  Igoto token=value [TSTypeIdentifierName] prev=asserts :: Goto 41 :: 
+  I41 token=value [TSTypeIdentifierName] prev=asserts :: Reduce TSQualifiedName -> TSBindingIdentifier :: 
+  Igoto token=value [TSTypeIdentifierName] prev=asserts :: Goto 40 :: 
+  I40 token=value [TSTypeIdentifierName] prev=asserts :: Failed  :: Grammar predicate TSNoTypeReferenceSuffix evaluated to false.
+    CANDIDATE EpsilonReduce __predicate100 -> epsilon guard=TSNoTypeReferenceSuffix value=False
+INPUT asserts this
+SUCCESS False; EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  I0 token=asserts [asserts] prev=<none> :: EpsilonReduce __predicate2 -> epsilon :: 
+  Igoto token=asserts [asserts] prev=<none> :: Goto 3 :: 
+  I3 token=asserts [asserts] prev=<none> :: Shift 48 :: 
+  I48 token=this [this] prev=asserts :: Reduce TSContextualIdentifier -> asserts :: 
+    CANDIDATE Reduce TSContextualIdentifier -> asserts
+    CANDIDATE EpsilonReduce __predicate7 -> epsilon guard=NoLineBreak value=True
+  Igoto token=this [this] prev=asserts :: Goto 43 :: 
+  I43 token=this [this] prev=asserts :: Reduce TSBindingIdentifier -> TSContextualIdentifier :: 
+  Igoto token=this [this] prev=asserts :: Goto 41 :: 
+  I41 token=this [this] prev=asserts :: Reduce TSQualifiedName -> TSBindingIdentifier :: 
+  Igoto token=this [this] prev=asserts :: Goto 40 :: 
+  I40 token=this [this] prev=asserts :: Failed  :: Grammar predicate TSNoTypeReferenceSuffix evaluated to false.
+    CANDIDATE EpsilonReduce __predicate100 -> epsilon guard=TSNoTypeReferenceSuffix value=False

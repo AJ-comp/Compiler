@@ -1,0 +1,18 @@
+Preparing script-nonstrict (web=True) ...
+Ready script-nonstrict at 00:00:39.4028060.
+250 cases, 146 passed, 104 mismatches/errors; 00:00:41.2449622.
+500 cases, 350 passed, 150 mismatches/errors; 00:00:42.8713253.
+750 cases, 525 passed, 225 mismatches/errors; 00:00:44.4921960.
+Preparing script-strict (web=True) ...
+Ready script-strict at 00:00:55.7184280.
+{
+  "input": "artifacts/ecmascript-audit/static/asi-matrix.jsonl",
+  "skip": 0,
+  "processed": 980,
+  "outcomes": {
+    "pass": 705,
+    "unexpected-reject": 275
+  },
+  "elapsedSeconds": 55.8053689,
+  "syntaxOnly": true
+}

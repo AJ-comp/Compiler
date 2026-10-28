@@ -1,0 +1,152 @@
+{
+  "VerifiedAtUtc": "2026-10-21T02:13:28.3098331Z",
+  "Commit": "1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+  "WorkflowRun": 39531085294,
+  "CheckedFiles": 13,
+  "AllMatch": true,
+  "Results": [
+    {
+      "Path": "index.html",
+      "Url": "https://janglim.mythosia.net/index.html?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "text/html",
+      "ExpectedBytes": 3537,
+      "ActualBytes": 3537,
+      "ExpectedSha256": "36082ca49bc2fc7dec2513c0dd482381a6470827f1490d1747689517cfd483cc",
+      "ActualSha256": "36082ca49bc2fc7dec2513c0dd482381a6470827f1490d1747689517cfd483cc",
+      "MatchesVerifiedArtifact": true
+    },
+    {
+      "Path": "ui/playground.js",
+      "Url": "https://janglim.mythosia.net/ui/playground.js?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "text/javascript",
+      "ExpectedBytes": 872871,
+      "ActualBytes": 872871,
+      "ExpectedSha256": "9944c14528902dca67d0ef0eea595db8890c0be92702b764c9db82090fcf5e92",
+      "ActualSha256": "9944c14528902dca67d0ef0eea595db8890c0be92702b764c9db82090fcf5e92",
+      "MatchesVerifiedArtifact": true
+    },
+    {
+      "Path": "ui/style.css",
+      "Url": "https://janglim.mythosia.net/ui/style.css?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "text/css",
+      "ExpectedBytes": 55822,
+      "ActualBytes": 55822,
+      "ExpectedSha256": "00c44837a1ff6f03083ae288545950a44954de6a425250e1baac988cc08c402a",
+      "ActualSha256": "00c44837a1ff6f03083ae288545950a44954de6a425250e1baac988cc08c402a",
+      "MatchesVerifiedArtifact": true
+    },
+    {
+      "Path": "ui/locale.js",
+      "Url": "https://janglim.mythosia.net/ui/locale.js?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "text/javascript",
+      "ExpectedBytes": 219952,
+      "ActualBytes": 219952,
+      "ExpectedSha256": "f2859ad5b01399c5de1d969508a310b24fe28a79dd64d48db597872f21bd2f13",
+      "ActualSha256": "f2859ad5b01399c5de1d969508a310b24fe28a79dd64d48db597872f21bd2f13",
+      "MatchesVerifiedArtifact": true
+    },
+    {
+      "Path": "licenses/Unicode-LICENSE.txt",
+      "Url": "https://janglim.mythosia.net/licenses/Unicode-LICENSE.txt?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "text/plain",
+      "ExpectedBytes": 1995,
+      "ActualBytes": 1995,
+      "ExpectedSha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+      "ActualSha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+      "MatchesVerifiedArtifact": true
+    },
+    {
+      "Path": "_framework/AJ.Common.6cqys2muqe.wasm",
+      "Url": "https://janglim.mythosia.net/_framework/AJ.Common.6cqys2muqe.wasm?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "application/wasm",
+      "ExpectedBytes": 12053,
+      "ActualBytes": 12053,
+      "ExpectedSha256": "d67d74e522c6d4274e9d4f24bc4d06783432609fc97c3c55967d99c42ecb6d09",
+      "ActualSha256": "d67d74e522c6d4274e9d4f24bc4d06783432609fc97c3c55967d99c42ecb6d09",
+      "MatchesVerifiedArtifact": true
+    },
+    {
+      "Path": "_framework/blazor.webassembly.958z1vx7fr.js",
+      "Url": "https://janglim.mythosia.net/_framework/blazor.webassembly.958z1vx7fr.js?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "text/javascript",
+      "ExpectedBytes": 60576,
+      "ActualBytes": 60576,
+      "ExpectedSha256": "039f53afd1ea1211ccbbc914ee4aee2c8f5acb0e4c452e8bbdceb3ee309b8219",
+      "ActualSha256": "039f53afd1ea1211ccbbc914ee4aee2c8f5acb0e4c452e8bbdceb3ee309b8219",
+      "MatchesVerifiedArtifact": true
+    },
+    {
+      "Path": "_framework/Janglim.Playground.1gsrt0fceo.wasm",
+      "Url": "https://janglim.mythosia.net/_framework/Janglim.Playground.1gsrt0fceo.wasm?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "application/wasm",
+      "ExpectedBytes": 95509,
+      "ActualBytes": 95509,
+      "ExpectedSha256": "3f0a9a64cc3d1fbacd3f0175b1ed3555fff22e65805af4d6d0feca06a835a723",
+      "ActualSha256": "3f0a9a64cc3d1fbacd3f0175b1ed3555fff22e65805af4d6d0feca06a835a723",
+      "MatchesVerifiedArtifact": true
+    },
+    {
+      "Path": "_framework/Parse.FrontEnd.Grammars.Ebnf.mllqk5f7y2.wasm",
+      "Url": "https://janglim.mythosia.net/_framework/Parse.FrontEnd.Grammars.Ebnf.mllqk5f7y2.wasm?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "application/wasm",
+      "ExpectedBytes": 188181,
+      "ActualBytes": 188181,
+      "ExpectedSha256": "269847bc9796334e848a533d709d824c850778cc3a65ad118781705b77dd072d",
+      "ActualSha256": "269847bc9796334e848a533d709d824c850778cc3a65ad118781705b77dd072d",
+      "MatchesVerifiedArtifact": true
+    },
+    {
+      "Path": "_framework/Parse.FrontEnd.Grammars.rmh9fe90vm.wasm",
+      "Url": "https://janglim.mythosia.net/_framework/Parse.FrontEnd.Grammars.rmh9fe90vm.wasm?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "application/wasm",
+      "ExpectedBytes": 31509,
+      "ActualBytes": 31509,
+      "ExpectedSha256": "7d47b5e34057f931c193c890816ec95c9f797907cea2813150c78f0f04de83f8",
+      "ActualSha256": "7d47b5e34057f931c193c890816ec95c9f797907cea2813150c78f0f04de83f8",
+      "MatchesVerifiedArtifact": true
+    },
+    {
+      "Path": "_framework/Parse.FrontEnd.p7svx6b68z.wasm",
+      "Url": "https://janglim.mythosia.net/_framework/Parse.FrontEnd.p7svx6b68z.wasm?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "application/wasm",
+      "ExpectedBytes": 102165,
+      "ActualBytes": 102165,
+      "ExpectedSha256": "9569137bc0477edf229ad70c8caedc702d3d13a3b477f20ab4af5c5c2cf81229",
+      "ActualSha256": "9569137bc0477edf229ad70c8caedc702d3d13a3b477f20ab4af5c5c2cf81229",
+      "MatchesVerifiedArtifact": true
+    },
+    {
+      "Path": "_framework/Parse.FrontEnd.Parsers.a02cww6ngo.wasm",
+      "Url": "https://janglim.mythosia.net/_framework/Parse.FrontEnd.Parsers.a02cww6ngo.wasm?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "application/wasm",
+      "ExpectedBytes": 114965,
+      "ActualBytes": 114965,
+      "ExpectedSha256": "2a55d3ba2b0686a94ce0c9b458447341a6f23d72e7354f7ea888f9a7d09488b8",
+      "ActualSha256": "2a55d3ba2b0686a94ce0c9b458447341a6f23d72e7354f7ea888f9a7d09488b8",
+      "MatchesVerifiedArtifact": true
+    },
+    {
+      "Path": "_framework/Parse.rv4aspse9z.wasm",
+      "Url": "https://janglim.mythosia.net/_framework/Parse.rv4aspse9z.wasm?release=1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+      "Status": 200,
+      "ContentType": "application/wasm",
+      "ExpectedBytes": 69397,
+      "ActualBytes": 69397,
+      "ExpectedSha256": "c9e8eed3b96a12bbf625fd0f4114647c86de3e92a87cdf3a17883b781832803c",
+      "ActualSha256": "c9e8eed3b96a12bbf625fd0f4114647c86de3e92a87cdf3a17883b781832803c",
+      "MatchesVerifiedArtifact": true
+    }
+  ]
+}

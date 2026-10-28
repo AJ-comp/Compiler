@@ -1,0 +1,516 @@
+{
+  "package": "Janglim",
+  "version": "0.6.0",
+  "runtime": "8.0.31",
+  "checks": 46,
+  "failures": 0,
+  "passed": true,
+  "results": [
+    {
+      "id": "assembly/Janglim",
+      "pass": true,
+      "detail": {
+        "file": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\release-0.6.0\\consumer\\smoke\\bin\\Release\\net8.0\\Janglim.dll",
+        "version": "0.6.0.0"
+      }
+    },
+    {
+      "id": "assembly/AJ.Common",
+      "pass": true,
+      "detail": {
+        "file": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\release-0.6.0\\consumer\\smoke\\bin\\Release\\net8.0\\AJ.Common.dll",
+        "version": "0.6.0.0"
+      }
+    },
+    {
+      "id": "assembly/Parse",
+      "pass": true,
+      "detail": {
+        "file": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\release-0.6.0\\consumer\\smoke\\bin\\Release\\net8.0\\Parse.dll",
+        "version": "0.6.0.0"
+      }
+    },
+    {
+      "id": "assembly/Parse.FrontEnd",
+      "pass": true,
+      "detail": {
+        "file": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\release-0.6.0\\consumer\\smoke\\bin\\Release\\net8.0\\Parse.FrontEnd.dll",
+        "version": "0.6.0.0"
+      }
+    },
+    {
+      "id": "assembly/Parse.FrontEnd.Grammars",
+      "pass": true,
+      "detail": {
+        "file": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\release-0.6.0\\consumer\\smoke\\bin\\Release\\net8.0\\Parse.FrontEnd.Grammars.dll",
+        "version": "0.6.0.0"
+      }
+    },
+    {
+      "id": "assembly/Parse.FrontEnd.Parsers",
+      "pass": true,
+      "detail": {
+        "file": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\release-0.6.0\\consumer\\smoke\\bin\\Release\\net8.0\\Parse.FrontEnd.Parsers.dll",
+        "version": "0.6.0.0"
+      }
+    },
+    {
+      "id": "assembly/Parse.FrontEnd.Grammars.Ebnf",
+      "pass": true,
+      "detail": {
+        "file": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\release-0.6.0\\consumer\\smoke\\bin\\Release\\net8.0\\Parse.FrontEnd.Grammars.Ebnf.dll",
+        "version": "0.6.0.0"
+      }
+    },
+    {
+      "id": "assembly/Parse.FrontEnd.ErrorHandler",
+      "pass": true,
+      "detail": {
+        "file": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\release-0.6.0\\consumer\\smoke\\bin\\Release\\net8.0\\Parse.FrontEnd.ErrorHandler.dll",
+        "version": "0.6.0.0"
+      }
+    },
+    {
+      "id": "assembly/Parse.FrontEnd.Support",
+      "pass": true,
+      "detail": {
+        "file": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\release-0.6.0\\consumer\\smoke\\bin\\Release\\net8.0\\Parse.FrontEnd.Support.dll",
+        "version": "0.6.0.0"
+      }
+    },
+    {
+      "id": "embedded-ebnf-resources",
+      "pass": true,
+      "detail": {
+        "resources": [
+          "Janglim.JavaScript.Ecma2026.Bindings.ebnf",
+          "Janglim.JavaScript.Ecma2026.Classes.ebnf",
+          "Janglim.JavaScript.Ecma2026.Expressions.ebnf",
+          "Janglim.JavaScript.Ecma2026.Functions.ebnf",
+          "Janglim.JavaScript.Ecma2026.Modules.ebnf",
+          "Janglim.JavaScript.Ecma2026.Statements.ebnf",
+          "Janglim.TypeScript.Declarations.ebnf",
+          "Janglim.TypeScript.Types.ebnf"
+        ]
+      }
+    },
+    {
+      "id": "ebnf/read",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "ebnf/accept",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "ebnf/reject",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "ebnf/productivity-diagnostic",
+      "pass": true,
+      "detail": {
+        "errors": [
+          "Nonterminal rules cannot derive a finite token sequence: S, U. (Parameter \u0027grammar\u0027)"
+        ]
+      }
+    },
+    {
+      "id": "javascript-strict/function",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "async function load({path}) { return /ab/g.test(await read(path)); }"
+      }
+    },
+    {
+      "id": "javascript-strict/with-rejected",
+      "pass": true,
+      "detail": {
+        "expectedAccept": false,
+        "accepted": false,
+        "parseSuccess": false,
+        "diagnostics": [],
+        "exception": "ParsingException",
+        "input": "with (obj) { value; }"
+      }
+    },
+    {
+      "id": "javascript-strict/duplicate-parameter",
+      "pass": true,
+      "detail": {
+        "expectedAccept": false,
+        "accepted": false,
+        "parseSuccess": true,
+        "diagnostics": [
+          "duplicate_parameter"
+        ],
+        "exception": null,
+        "input": "function f(x, x) {}"
+      }
+    },
+    {
+      "id": "javascript-nonstrict/with",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "with (obj) { value; }"
+      }
+    },
+    {
+      "id": "javascript-nonstrict/duplicate-parameter",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "function f(x, x) {}"
+      }
+    },
+    {
+      "id": "javascript-nonstrict/strict-directive",
+      "pass": true,
+      "detail": {
+        "expectedAccept": false,
+        "accepted": false,
+        "parseSuccess": true,
+        "diagnostics": [
+          "strict_with"
+        ],
+        "exception": null,
+        "input": "\u0027use strict\u0027; with (obj) { value; }"
+      }
+    },
+    {
+      "id": "javascript-annexb/html-comment",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "\u003C!-- browser comment\nvar x = 1;"
+      }
+    },
+    {
+      "id": "javascript-annexb/if-function",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "if (ok) function f() {}"
+      }
+    },
+    {
+      "id": "javascript-module/import-export",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "import {value} from \u0027./x.js\u0027; export const result = value;"
+      }
+    },
+    {
+      "id": "javascript-module/duplicate-export",
+      "pass": true,
+      "detail": {
+        "expectedAccept": false,
+        "accepted": false,
+        "parseSuccess": true,
+        "diagnostics": [
+          "duplicate_export"
+        ],
+        "exception": null,
+        "input": "const value = 1; export {value}; export {value};"
+      }
+    },
+    {
+      "id": "javascript-module/module-with",
+      "pass": true,
+      "detail": {
+        "expectedAccept": false,
+        "accepted": false,
+        "parseSuccess": false,
+        "diagnostics": [],
+        "exception": "ParsingException",
+        "input": "with (obj) {}"
+      }
+    },
+    {
+      "id": "typescript-script/class-readme",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "class Box\u003CT\u003E { constructor(public value: T) {} }"
+      }
+    },
+    {
+      "id": "typescript-script/type-declarations",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "interface User { name: string; } type Maybe\u003CT\u003E = T | null; let user: Maybe\u003CUser\u003E;"
+      }
+    },
+    {
+      "id": "typescript-script/as",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "let result = value as User;"
+      }
+    },
+    {
+      "id": "typescript-script/satisfies",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "let result = value satisfies User;"
+      }
+    },
+    {
+      "id": "typescript-script/nonnull",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "value!.property;"
+      }
+    },
+    {
+      "id": "typescript-script/abstract-class",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "abstract class C\u003CT\u003E { abstract run(value: T): T; }"
+      }
+    },
+    {
+      "id": "typescript-script/nested-generics",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "let value: Array\u003CMap\u003Cstring, number\u003E\u003E;"
+      }
+    },
+    {
+      "id": "typescript-script/malformed-annotation",
+      "pass": true,
+      "detail": {
+        "expectedAccept": false,
+        "accepted": false,
+        "parseSuccess": false,
+        "diagnostics": [],
+        "exception": "ParsingException",
+        "input": "let value: = 1;"
+      }
+    },
+    {
+      "id": "typescript-script/parameter-order",
+      "pass": true,
+      "detail": {
+        "expectedAccept": false,
+        "accepted": false,
+        "parseSuccess": true,
+        "diagnostics": [
+          "typescript_required_after_optional"
+        ],
+        "exception": null,
+        "input": "function f(a?: number, b: number) {}"
+      }
+    },
+    {
+      "id": "typescript-script/getter-arity",
+      "pass": true,
+      "detail": {
+        "expectedAccept": false,
+        "accepted": false,
+        "parseSuccess": true,
+        "diagnostics": [
+          "typescript_accessor_parameters"
+        ],
+        "exception": null,
+        "input": "declare class C { get value(next: number): number; }"
+      }
+    },
+    {
+      "id": "typescript-type/union",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "User | null"
+      }
+    },
+    {
+      "id": "typescript-type/mapped",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "{ [K in keyof T]?: T[K] }"
+      }
+    },
+    {
+      "id": "typescript-type/conditional",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "T extends U ? X : Y"
+      }
+    },
+    {
+      "id": "typescript-type/invalid-union",
+      "pass": true,
+      "detail": {
+        "expectedAccept": false,
+        "accepted": false,
+        "parseSuccess": false,
+        "diagnostics": [],
+        "exception": "ParsingException",
+        "input": "string |"
+      }
+    },
+    {
+      "id": "typescript-module/type-export",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "export type Name = string;"
+      }
+    },
+    {
+      "id": "typescript-module/class-export",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "export class C { constructor(public value: number) {} }"
+      }
+    },
+    {
+      "id": "typescript-module/strict-with",
+      "pass": true,
+      "detail": {
+        "expectedAccept": false,
+        "accepted": false,
+        "parseSuccess": false,
+        "diagnostics": [],
+        "exception": "ParsingException",
+        "input": "with (obj) {}"
+      }
+    },
+    {
+      "id": "typescript-expression/as",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "value as User"
+      }
+    },
+    {
+      "id": "typescript-expression/satisfies",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "value satisfies User"
+      }
+    },
+    {
+      "id": "typescript-expression/nonnull",
+      "pass": true,
+      "detail": {
+        "expectedAccept": true,
+        "accepted": true,
+        "parseSuccess": true,
+        "diagnostics": [],
+        "exception": null,
+        "input": "value!.property"
+      }
+    },
+    {
+      "id": "typescript-expression/incomplete-assertion",
+      "pass": true,
+      "detail": {
+        "expectedAccept": false,
+        "accepted": false,
+        "parseSuccess": false,
+        "diagnostics": [],
+        "exception": "ParsingException",
+        "input": "value as"
+      }
+    }
+  ]
+}

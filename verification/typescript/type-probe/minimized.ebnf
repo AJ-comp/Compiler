@@ -1,0 +1,141 @@
+TSTypeEntry : TSType ;
+# TypeScript 7.0.2 type syntax.
+# Authoritative implementation: microsoft/typescript-go commit
+# 2bd066d87f5bafd315be9f40889d0a60b9e58e0b, internal/parser/parser.go:
+# parseType, parseTypeOperatorOrHigher, parseNonArrayType, parseTypeMember,
+# parseTupleType, parseMappedType, parseFunctionOrConstructorType, parseImportType.
+# This fragment composes with Janglim's ECMAScript 2026 grammar. It retains actual
+# type productions in the concrete tree. Runtime expressions inside computed names
+# and parameter defaults reuse JavaScript productions; type bindings stay TS-prefixed.
+# Host lookahead predicates resolve TypeScript's documented syntactic decisions.
+# '>' is a distinct terminal so nested A<B<C>> can read two closing tokens
+# without changing the JavaScript shift-operator tokens or the common lexer engine.
+
+
+TSType : {TSFunctionTypeStart()}? TSFunctionType
+       | {TSNotFunctionTypeStart()}? TSConditionalType ;
+
+TSTypeNoConditional : '!disabled_TSTypeNoConditional' ;
+TSConditionalType : TSUnionType {TSNotConditionalTypeStart()}?
+                  | TSUnionType {TSConditionalTypeStart()}? 'extends' TSTypeNoConditional '?' TSType ':' TSType ;
+
+TSUnionType : TSIntersectionType | '|' TSIntersectionType | TSUnionType '|' TSIntersectionType ;
+
+TSIntersectionType : TSTypeOperator | '&' TSTypeOperator | TSIntersectionType '&' TSTypeOperator ;
+
+TSTypeOperator : TSPostfixType | 'keyof' TSTypeOperator | 'unique' TSTypeOperator
+               | 'readonly' TSTypeOperator | TSInferType ;
+
+TSInferType : '!disabled_TSInferType' ;
+TSUnionTypeNoConditional : '!disabled_TSUnionTypeNoConditional' ;
+TSIntersectionTypeNoConditional : '!disabled_TSIntersectionTypeNoConditional' ;
+TSTypeOperatorNoConditional : '!disabled_TSTypeOperatorNoConditional' ;
+TSPostfixType : TSPostfixCore {TSNotPostfixTypeStart()}? ;
+
+TSPostfixCore : TSPrimaryType | TSPostfixCore TSPostfixSuffix ;
+
+TSPostfixSuffix : '!disabled_TSPostfixSuffix' ;
+TSIndexTypeTail : '!disabled_TSIndexTypeTail' ;
+TSPrimaryType : TSPrimitiveType | TSLiteralType | TSTypeReference | TSThisType
+              | TSTypeQuery | TSImportType | TSTupleType | TSParenthesizedType
+              | TSTemplateLiteralType | TSAssertsTypePredicate
+              | {TSMappedTypeStart()}? TSMappedType
+              | {TSNotMappedTypeStart()}? TSObjectType ;
+
+TSPrimitiveType : '!disabled_TSPrimitiveType' ;
+TSLiteralType : '!disabled_TSLiteralType' ;
+TSThisType : '!disabled_TSThisType' ;
+TSParenthesizedType : '!disabled_TSParenthesizedType' ;
+TSTypeReference : TSQualifiedName {TSNoTypeReferenceSuffix()}?
+                | TSQualifiedName {TSTypeArgumentsStart()}? TSTypeArguments
+                | TSQualifiedName {TSTypePredicateStart()}? 'is' TSType ;
+
+TSQualifiedName : TSBindingIdentifier | TSQualifiedName '.' TSPropertyIdentifierName
+                | TSPrimitiveType '.' TSPropertyIdentifierName ;
+
+TSTypeArguments : '!disabled_TSTypeArguments' ;
+TSTypeArgumentList : '!disabled_TSTypeArgumentList' ;
+TSTypeParameters : '!disabled_TSTypeParameters' ;
+TSTypeParameterList : '!disabled_TSTypeParameterList' ;
+TSTypeParameter : '!disabled_TSTypeParameter' ;
+TSTypeParameterModifiers : '!disabled_TSTypeParameterModifiers' ;
+TSTypeParameterModifier : '!disabled_TSTypeParameterModifier' ;
+TSTypeConstraint : '!disabled_TSTypeConstraint' ;
+TSTypeDefault : '!disabled_TSTypeDefault' ;
+TSTypeAnnotation : '!disabled_TSTypeAnnotation' ;
+TSReturnTypeAnnotation : '!disabled_TSReturnTypeAnnotation' ;
+TSReturnType : '!disabled_TSReturnType' ;
+TSAssertsTypePredicate : '!disabled_TSAssertsTypePredicate' ;
+TSAssertTarget : '!disabled_TSAssertTarget' ;
+TSFunctionType : '!disabled_TSFunctionType' ;
+TSFunctionParameters : '!disabled_TSFunctionParameters' ;
+TSParameterList : '!disabled_TSParameterList' ;
+TSParameter : '!disabled_TSParameter' ;
+TSParameterOptional : '!disabled_TSParameterOptional' ;
+TSParameterInitializer : '!disabled_TSParameterInitializer' ;
+TSParameterBinding : '!disabled_TSParameterBinding' ;
+TSObjectBindingPattern : '!disabled_TSObjectBindingPattern' ;
+TSBindingPropertyList : '!disabled_TSBindingPropertyList' ;
+TSBindingProperty : '!disabled_TSBindingProperty' ;
+TSArrayBindingPattern : '!disabled_TSArrayBindingPattern' ;
+TSArrayBindingElements : '!disabled_TSArrayBindingElements' ;
+TSArrayBindingElement : '!disabled_TSArrayBindingElement' ;
+TSTupleType : '!disabled_TSTupleType' ;
+TSTupleElements : '!disabled_TSTupleElements' ;
+TSTupleElement : '!disabled_TSTupleElement' ;
+TSNamedTupleMember : '!disabled_TSNamedTupleMember' ;
+TSUnnamedTupleMember : '!disabled_TSUnnamedTupleMember' ;
+TSObjectType : '!disabled_TSObjectType' ;
+TSTypeMembers : '!disabled_TSTypeMembers' ;
+TSTypeMember : '!disabled_TSTypeMember' ;
+TSTypeMemberEnd : '!disabled_TSTypeMemberEnd' ;
+TSPropertySignature : '!disabled_TSPropertySignature' ;
+TSMethodSignature : '!disabled_TSMethodSignature' ;
+TSCallSignature : '!disabled_TSCallSignature' ;
+TSConstructSignature : '!disabled_TSConstructSignature' ;
+TSGetterSignature : '!disabled_TSGetterSignature' ;
+TSSetterSignature : '!disabled_TSSetterSignature' ;
+TSIndexSignature : '!disabled_TSIndexSignature' ;
+TSIndexParameters : '!disabled_TSIndexParameters' ;
+TSIndexParameter : '!disabled_TSIndexParameter' ;
+TSPropertyName : '!disabled_TSPropertyName' ;
+TSMappedType : '!disabled_TSMappedType' ;
+TSMappedHeader : '!disabled_TSMappedHeader' ;
+TSMappedValue : '!disabled_TSMappedValue' ;
+TSMappedReadonly : '!disabled_TSMappedReadonly' ;
+TSMappedName : '!disabled_TSMappedName' ;
+TSMappedOptional : '!disabled_TSMappedOptional' ;
+TSMappedEnd : '!disabled_TSMappedEnd' ;
+TSTypeQuery : '!disabled_TSTypeQuery' ;
+TSQueryName : '!disabled_TSQueryName' ;
+TSImportType : '!disabled_TSImportType' ;
+TSImportTypeBase : '!disabled_TSImportTypeBase' ;
+TSImportQualifier : '!disabled_TSImportQualifier' ;
+TSImportTypeOptions : '!disabled_TSImportTypeOptions' ;
+TSImportAttributes : '!disabled_TSImportAttributes' ;
+TSImportAttributeList : '!disabled_TSImportAttributeList' ;
+TSImportAttribute : '!disabled_TSImportAttribute' ;
+TSTemplateLiteralType : '!disabled_TSTemplateLiteralType' ;
+TSTypeTemplateSpans : '!disabled_TSTypeTemplateSpans' ;
+TSTypeTemplateMiddleList : '!disabled_TSTypeTemplateMiddleList' ;
+TSBindingIdentifier : IdentifierName | TSContextualIdentifier ;
+
+TSContextualIdentifier : '!disabled_TSContextualIdentifier' ;
+TSPropertyIdentifierName : '!disabled_TSPropertyIdentifierName' ;
+AssignmentExpression : '!disabled_AssignmentExpression' ;
+IdentifierName := "[A-Za-z_][A-Za-z0-9_]*" ;
+
+ReservedWord : '!disabled_ReservedWord' ;
+StringLiteral := "'(?:[^'\\]|\\.)*'" ;
+
+NumericLiteral := "[0-9]+n?" ;
+
+NoSubstitutionTemplate := "`[^`$]*`" ;
+
+TemplateHead := "`[^`]*\$\{" ;
+
+TemplateMiddle := "\}[^`]*\$\{" ;
+
+TemplateTail := "\}[^`]*`" ;
+
+NoLineTerminator : '!disabled_NoLineTerminator' ;

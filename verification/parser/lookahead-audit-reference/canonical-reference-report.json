@@ -1,0 +1,400 @@
+{
+  "canonical_lr1_states": 60,
+  "merged_lalr_states": 20,
+  "original_lr0_states": 20,
+  "unmatched_lr0_cores": [],
+  "first_differences": [],
+  "follow_differences": [],
+  "hash_collisions": [],
+  "lookahead_differences": [
+    {
+      "original_state": 2,
+      "rule": 7,
+      "dot": 0,
+      "lhs": "N:C",
+      "rhs": [
+        "N:P",
+        "N:__predicate2"
+      ],
+      "actual": [],
+      "reference": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "missing": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 2,
+      "rule": 9,
+      "dot": 0,
+      "lhs": "N:P",
+      "rhs": [
+        "N:R",
+        "N:__predicate4"
+      ],
+      "actual": [
+        "T:e:e"
+      ],
+      "reference": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "missing": [
+        "$",
+        "T::::"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 5,
+      "rule": 3,
+      "dot": 0,
+      "lhs": "N:__predicate4",
+      "rhs": [],
+      "actual": [
+        "T:e:e"
+      ],
+      "reference": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "missing": [
+        "$",
+        "T::::"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 5,
+      "rule": 9,
+      "dot": 1,
+      "lhs": "N:P",
+      "rhs": [
+        "N:R",
+        "N:__predicate4"
+      ],
+      "actual": [
+        "T:e:e"
+      ],
+      "reference": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "missing": [
+        "$",
+        "T::::"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 6,
+      "rule": 4,
+      "dot": 0,
+      "lhs": "N:__predicate5",
+      "rhs": [],
+      "actual": [
+        "T:e:e"
+      ],
+      "reference": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "missing": [
+        "$",
+        "T::::"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 6,
+      "rule": 10,
+      "dot": 1,
+      "lhs": "N:R",
+      "rhs": [
+        "T:id:[a-z]+",
+        "N:__predicate5"
+      ],
+      "actual": [
+        "T:e:e"
+      ],
+      "reference": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "missing": [
+        "$",
+        "T::::"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 9,
+      "rule": 9,
+      "dot": 2,
+      "lhs": "N:P",
+      "rhs": [
+        "N:R",
+        "N:__predicate4"
+      ],
+      "actual": [
+        "T:e:e"
+      ],
+      "reference": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "missing": [
+        "$",
+        "T::::"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 10,
+      "rule": 10,
+      "dot": 2,
+      "lhs": "N:R",
+      "rhs": [
+        "T:id:[a-z]+",
+        "N:__predicate5"
+      ],
+      "actual": [
+        "T:e:e"
+      ],
+      "reference": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "missing": [
+        "$",
+        "T::::"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 13,
+      "rule": 11,
+      "dot": 3,
+      "lhs": "N:R",
+      "rhs": [
+        "T:id:[a-z]+",
+        "N:__predicate6",
+        "T:i:i",
+        "N:S"
+      ],
+      "actual": [
+        "T:e:e"
+      ],
+      "reference": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "missing": [
+        "$",
+        "T::::"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 15,
+      "rule": 11,
+      "dot": 4,
+      "lhs": "N:R",
+      "rhs": [
+        "T:id:[a-z]+",
+        "N:__predicate6",
+        "T:i:i",
+        "N:S"
+      ],
+      "actual": [
+        "T:e:e"
+      ],
+      "reference": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "missing": [
+        "$",
+        "T::::"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 18,
+      "rule": 8,
+      "dot": 7,
+      "lhs": "N:C",
+      "rhs": [
+        "N:P",
+        "N:__predicate3",
+        "T:e:e",
+        "T:x:x",
+        "T:?:?",
+        "N:S",
+        "T::::",
+        "N:S"
+      ],
+      "actual": [],
+      "reference": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "missing": [
+        "$",
+        "T::::",
+        "T:e:e"
+      ],
+      "extra": []
+    }
+  ],
+  "reference_accepts_a": true,
+  "original_accepts_a": false,
+  "reference_trace": [
+    {
+      "state": 0,
+      "token": "T:id:[a-z]+",
+      "action": "reduce",
+      "rule": {
+        "id": 0,
+        "lhs": "N:__predicate1",
+        "rhs": [],
+        "predicate": "Always",
+        "hash": 20000040
+      }
+    },
+    {
+      "state": 2,
+      "token": "T:id:[a-z]+",
+      "action": "shift",
+      "rule": null
+    },
+    {
+      "state": 6,
+      "token": "$",
+      "action": "reduce",
+      "rule": {
+        "id": 4,
+        "lhs": "N:__predicate5",
+        "rhs": [],
+        "predicate": "Always",
+        "hash": 20000080
+      }
+    },
+    {
+      "state": 10,
+      "token": "$",
+      "action": "reduce",
+      "rule": {
+        "id": 10,
+        "lhs": "N:R",
+        "rhs": [
+          "T:id:[a-z]+",
+          "N:__predicate5"
+        ],
+        "predicate": null,
+        "hash": 20000030
+      }
+    },
+    {
+      "state": 5,
+      "token": "$",
+      "action": "reduce",
+      "rule": {
+        "id": 3,
+        "lhs": "N:__predicate4",
+        "rhs": [],
+        "predicate": "Always",
+        "hash": 20000070
+      }
+    },
+    {
+      "state": 9,
+      "token": "$",
+      "action": "reduce",
+      "rule": {
+        "id": 9,
+        "lhs": "N:P",
+        "rhs": [
+          "N:R",
+          "N:__predicate4"
+        ],
+        "predicate": null,
+        "hash": 20000020
+      }
+    },
+    {
+      "state": 4,
+      "token": "$",
+      "action": "reduce",
+      "rule": {
+        "id": 1,
+        "lhs": "N:__predicate2",
+        "rhs": [],
+        "predicate": "Always",
+        "hash": 20000050
+      }
+    },
+    {
+      "state": 7,
+      "token": "$",
+      "action": "reduce",
+      "rule": {
+        "id": 7,
+        "lhs": "N:C",
+        "rhs": [
+          "N:P",
+          "N:__predicate2"
+        ],
+        "predicate": null,
+        "hash": 20000010
+      }
+    },
+    {
+      "state": 3,
+      "token": "$",
+      "action": "reduce",
+      "rule": {
+        "id": 12,
+        "lhs": "N:S",
+        "rhs": [
+          "N:__predicate1",
+          "N:C"
+        ],
+        "predicate": null,
+        "hash": 20000000
+      }
+    },
+    {
+      "state": 1,
+      "token": "$",
+      "action": "accept",
+      "rule": null
+    }
+  ],
+  "original_always_calls": 1,
+  "original_never_calls": 0,
+  "source_assembly": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\typescript\\lookahead-audit-reference\\bin\\Release\\net8.0\\Parse.FrontEnd.Parsers.dll",
+  "source_assembly_sha256": "fb389b9756053ac05436a8265e3a022b733b8be901d8088bc406148f100cc205",
+  "bison_crosscheck": {
+    "source": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\typescript\\lookahead-audit-bison\\explicit-epsilon.xml",
+    "lookahead_items_checked": 15,
+    "unmatched_nonaccept_state_cores": [],
+    "lookahead_differences": []
+  }
+}

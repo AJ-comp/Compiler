@@ -1,0 +1,200 @@
+[
+  {
+    "input": "export default {} / 2;",
+    "valid": true,
+    "division": 1,
+    "regex": 0
+  },
+  {
+    "input": "export default {}\n/2/g;",
+    "valid": true,
+    "division": 2,
+    "regex": 0
+  },
+  {
+    "input": "export default {}\n/a/g;",
+    "valid": true,
+    "division": 2,
+    "regex": 0
+  },
+  {
+    "input": "export default {} /* same line */ / 2;",
+    "valid": true,
+    "division": 1,
+    "regex": 0
+  },
+  {
+    "input": "export default {} // next line\n/a/g;",
+    "valid": true,
+    "division": 2,
+    "regex": 0
+  },
+  {
+    "input": "export default (class {}) / 2;",
+    "valid": true,
+    "division": 1,
+    "regex": 0
+  },
+  {
+    "input": "export default (class {})\n/a/g;",
+    "valid": true,
+    "division": 2,
+    "regex": 0
+  },
+  {
+    "input": "export default (function() {}) / 2;",
+    "valid": true,
+    "division": 1,
+    "regex": 0
+  },
+  {
+    "input": "export default (function() {})\n/a/g;",
+    "valid": true,
+    "division": 2,
+    "regex": 0
+  },
+  {
+    "input": "export default (() => {}) / 2;",
+    "valid": true,
+    "division": 1,
+    "regex": 0
+  },
+  {
+    "input": "export default {Constructor: class {}} / 2;",
+    "valid": true,
+    "division": 1,
+    "regex": 0
+  },
+  {
+    "input": "export default {callback: function() { return /a/; }} / 2;",
+    "valid": true,
+    "division": 1,
+    "regex": 1
+  },
+  {
+    "input": "export default {Constructor: class { value = /a/; method() { return /b/; } }} / 2;",
+    "valid": true,
+    "division": 1,
+    "regex": 2
+  },
+  {
+    "input": "export default {callback: () => { return /a/; }} / 2;",
+    "valid": true,
+    "division": 1,
+    "regex": 1
+  },
+  {
+    "input": "export default ({Constructor: class {}}) / 2;",
+    "valid": true,
+    "division": 1,
+    "regex": 0
+  },
+  {
+    "input": "export default class {} /a/g;",
+    "valid": true,
+    "division": 0,
+    "regex": 1
+  },
+  {
+    "input": "export default class Named {}\n/a/g;",
+    "valid": true,
+    "division": 0,
+    "regex": 1
+  },
+  {
+    "input": "export default function() {} /a/g;",
+    "valid": true,
+    "division": 0,
+    "regex": 1
+  },
+  {
+    "input": "export default function named() {}\n/a/g;",
+    "valid": true,
+    "division": 0,
+    "regex": 1
+  },
+  {
+    "input": "export default class { value = {}; } /a/g;",
+    "valid": true,
+    "division": 0,
+    "regex": 1
+  },
+  {
+    "input": "export default class { static value = class {}; } /a/g;",
+    "valid": true,
+    "division": 0,
+    "regex": 1
+  },
+  {
+    "input": "export default class { method() { return {value: class {}}; } } /a/g;",
+    "valid": true,
+    "division": 0,
+    "regex": 1
+  },
+  {
+    "input": "export default function() { return {}; } /a/g;",
+    "valid": true,
+    "division": 0,
+    "regex": 1
+  },
+  {
+    "input": "export default function() { return class {}; } /a/g;",
+    "valid": true,
+    "division": 0,
+    "regex": 1
+  },
+  {
+    "input": "export default class { value = /a/; } /b/g;",
+    "valid": true,
+    "division": 0,
+    "regex": 2
+  },
+  {
+    "input": "export default function() { return /a/; } /b/g;",
+    "valid": true,
+    "division": 0,
+    "regex": 2
+  },
+  {
+    "input": "export default {} /a/;",
+    "valid": false,
+    "division": 0,
+    "regex": 0
+  },
+  {
+    "input": "export default {}\n/a/;",
+    "valid": false,
+    "division": 0,
+    "regex": 0
+  },
+  {
+    "input": "export default (class {}) /a/;",
+    "valid": false,
+    "division": 0,
+    "regex": 0
+  },
+  {
+    "input": "export default (function() {}) /a/;",
+    "valid": false,
+    "division": 0,
+    "regex": 0
+  },
+  {
+    "input": "export default {Constructor: class {}}\n/a/;",
+    "valid": false,
+    "division": 0,
+    "regex": 0
+  },
+  {
+    "input": "export default class {} / 2;",
+    "valid": false,
+    "division": 0,
+    "regex": 0
+  },
+  {
+    "input": "export default function() {} / 2;",
+    "valid": false,
+    "division": 0,
+    "regex": 0
+  }
+]

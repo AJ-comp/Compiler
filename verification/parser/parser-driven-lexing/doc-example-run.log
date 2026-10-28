@@ -1,0 +1,17 @@
+INPUT: result = a / b;
+  0: Div -> 'result'
+  6: Div -> '='
+  8: RegExp -> 'a'
+  10: Div -> '/'
+  12: RegExp -> 'b'
+  14: Div -> ';'
+  15: Div -> ''
+result = a / b; -> result | = | a | / | b | ;
+INPUT: result = /ab/g;
+  0: Div -> 'result'
+  6: Div -> '='
+  8: RegExp -> '/ab/g'
+  14: Div -> ';'
+  15: Div -> ''
+result = /ab/g; -> result | = | /ab/g | ;
+Public constructor and source interface: OK

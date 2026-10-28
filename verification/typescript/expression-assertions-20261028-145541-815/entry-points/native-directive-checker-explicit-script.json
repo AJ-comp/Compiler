@@ -1,0 +1,22 @@
+[
+  {
+    "id": 15,
+    "diagnostic": "error TS5108: Option 'alwaysStrict=false' has been removed. Please remove it from your configuration."
+  },
+  {
+    "id": 16,
+    "diagnostic": "error TS5108: Option 'alwaysStrict=false' has been removed. Please remove it from your configuration."
+  },
+  {
+    "id": 17,
+    "diagnostic": "error TS5108: Option 'alwaysStrict=false' has been removed. Please remove it from your configuration."
+  },
+  {
+    "id": 18,
+    "diagnostic": "error TS5108: Option 'alwaysStrict=false' has been removed. Please remove it from your configuration."
+  },
+  {
+    "id": 19,
+    "diagnostic": "error TS5108: Option 'alwaysStrict=false' has been removed. Please remove it from your configuration."
+  }
+]

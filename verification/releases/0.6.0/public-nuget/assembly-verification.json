@@ -1,0 +1,62 @@
+{
+  "engineAssemblyCount": 9,
+  "assemblies": [
+    {
+      "name": "AJ.Common.dll",
+      "version": "0.6.0.0",
+      "passed": true
+    },
+    {
+      "name": "Janglim.dll",
+      "version": "0.6.0.0",
+      "passed": true
+    },
+    {
+      "name": "Parse.dll",
+      "version": "0.6.0.0",
+      "passed": true
+    },
+    {
+      "name": "Parse.FrontEnd.dll",
+      "version": "0.6.0.0",
+      "passed": true
+    },
+    {
+      "name": "Parse.FrontEnd.ErrorHandler.dll",
+      "version": "0.6.0.0",
+      "passed": true
+    },
+    {
+      "name": "Parse.FrontEnd.Grammars.dll",
+      "version": "0.6.0.0",
+      "passed": true
+    },
+    {
+      "name": "Parse.FrontEnd.Grammars.Ebnf.dll",
+      "version": "0.6.0.0",
+      "passed": true
+    },
+    {
+      "name": "Parse.FrontEnd.Parsers.dll",
+      "version": "0.6.0.0",
+      "passed": true
+    },
+    {
+      "name": "Parse.FrontEnd.Support.dll",
+      "version": "0.6.0.0",
+      "passed": true
+    }
+  ],
+  "ebnfResourceCount": 8,
+  "resources": [
+    "Janglim.JavaScript.Ecma2026.Bindings.ebnf",
+    "Janglim.JavaScript.Ecma2026.Classes.ebnf",
+    "Janglim.JavaScript.Ecma2026.Expressions.ebnf",
+    "Janglim.JavaScript.Ecma2026.Functions.ebnf",
+    "Janglim.JavaScript.Ecma2026.Modules.ebnf",
+    "Janglim.JavaScript.Ecma2026.Statements.ebnf",
+    "Janglim.TypeScript.Declarations.ebnf",
+    "Janglim.TypeScript.Types.ebnf"
+  ],
+  "passed": true
+}

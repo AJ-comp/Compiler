@@ -1,0 +1,14 @@
+B.1.2.9 Static Semantics: ParsePattern ( patternText, u, v )
+The semantics of 22.2.3.4 is extended as follows:
+The abstract operation ParsePattern takes arguments patternText (a sequence of Unicode code points), u (a Boolean), and v (a Boolean). It performs the following steps when called:
+If v is true and u is true, then
+Let parseResult be a List containing one or more SyntaxError objects.
+Else if v is true, then
+Let parseResult be ParseText(patternText, Pattern[+UnicodeMode, +UnicodeSetsMode, +NamedCaptureGroups]).
+Else if u is true, then
+Let parseResult be ParseText(patternText, Pattern[+UnicodeMode, ~UnicodeSetsMode, +NamedCaptureGroups]).
+Else,
+Let parseResult be ParseText(patternText, Pattern[~UnicodeMode, ~UnicodeSetsMode, ~NamedCaptureGroups]).
+If parseResult is a Parse Node and parseResult contains a GroupName, then
+Set parseResult to ParseText(patternText, Pattern[~UnicodeMode, ~UnicodeSetsMode, +NamedCaptureGroups]).
+Return parseResult.

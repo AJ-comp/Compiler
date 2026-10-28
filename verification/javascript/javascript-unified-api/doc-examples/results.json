@@ -1,0 +1,52 @@
+{
+  "scope": "JavaScriptGrammar documentation C# usage examples",
+  "sourceHtmlFiles": 7,
+  "sourceReadmeFiles": 3,
+  "uniqueCompiledExamples": 10,
+  "build": {
+    "project": "DocumentationExamples.csproj",
+    "configuration": "Release",
+    "targetFramework": "net8.0",
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "assemblyInput": "Copied DLL snapshots from Tests/Parse.FrontEnd.Parsers.Tests/bin/Release/net8.0",
+    "projectReferences": 0
+  },
+  "execution": {
+    "exitCode": 0,
+    "representativeExamples": [
+      {
+        "example": 5,
+        "source": "docs/ko/javascript-non-strict.html",
+        "inputKind": "Script",
+        "mode": "NonStrict",
+        "webCompatibility": true,
+        "parseSuccess": true,
+        "diagnosticCount": 0
+      },
+      {
+        "example": 4,
+        "source": "docs/ko/javascript-modules.html",
+        "inputKind": "Module",
+        "parseSuccess": true,
+        "diagnosticCount": 0
+      },
+      {
+        "example": 2,
+        "source": "docs/ko/javascript-expressions.html",
+        "inputKind": "Expression",
+        "parseSuccess": true,
+        "diagnosticCount": 0
+      }
+    ]
+  },
+  "evidence": ["manifest.json", "build.log", "run.log", "Example*.original.txt", "Example*.cs"],
+  "notes": [
+    "All complete JavaScriptGrammar examples beginning with using directives were compiled.",
+    "JavaScript source examples and explanatory C# fragments were excluded.",
+    "The staged Expression and Statement examples were joined within their original usage sections.",
+    "The regular-expression guide intentionally demonstrates invalid regex syntax and was compiled without requiring zero diagnostics at runtime.",
+    "No product source, tests, documentation or product outputs were modified by this documentation QA."
+  ]
+}

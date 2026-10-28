@@ -1,0 +1,2 @@
+# Preserve the original bytes used by manifest.json SHA-256 checks on every OS.
+** -text

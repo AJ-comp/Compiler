@@ -1,0 +1,2 @@
+{"group":"standard","body":"\\\nb","flags":"","expected":true,"valid":false,"error":"A regular-expression escape cannot contain a line terminator."}
+Compared 16514; mismatches 1; unexpected exceptions 0.

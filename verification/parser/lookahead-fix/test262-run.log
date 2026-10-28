@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "syntaxOnly": true,
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-latest-es2026.jsonl",
+  "inputSha256": "41d6a1e99cd7579240049aeb8ecdff190a56efd4c8f1b1131636a6ea2f5507cf",
+  "runnerSha256": "13206ef3a09ce529407384baaee7f29a504b90f5f3e22c275184314d5d55d8d4",
+  "binarySha256": {
+    "AJ.Common.deps.json": "63cd2bbf932a2c708e7a6ac6b78482f9a64f6d7a89225a4d2e9d846f77c3cc1c",
+    "AJ.Common.dll": "e96c8b2e6d70f250a8a0bb013f4506e20847935f013581c32e4b0cce2b53b83d",
+    "ConsoleTables.dll": "b207430ea9ec19bc7886e1f4318b976317b076851b5ca0f910d73142eb23917b",
+    "de-DE\\Parse.FrontEnd.Parsers.resources.dll": "b26bc5792fb7a2d20c6bb7bc7cb310bec373ab240e1147c6b4be6bf228134bea",
+    "de-DE\\Parse.FrontEnd.resources.dll": "ee1d8e37f0ceacc8d1ccdd3c7c980329c7297d7b0f67aa6c7654388d2a522ac7",
+    "en-US\\Parse.FrontEnd.Parsers.resources.dll": "a3fc5881902438d3cc0f3fc5e683d5ab7102dc918aa8f1a69df614cd7b13d4e7",
+    "en-US\\Parse.FrontEnd.resources.dll": "70d8e11a6114c5ee3c688458e9626103710f42fd3e1a94b93c4a3f96df887dd9",
+    "es-ES\\Parse.FrontEnd.Parsers.resources.dll": "c0a109327af9975f3c4aefc761d36d2123ab854789869e03b0dd613a9bab935b",
+    "es-ES\\Parse.FrontEnd.resources.dll": "86e5ec303014587c098e6ff16bcf6f624506d0b8445fa9576cbcbe084c747a3d",
+    "fr-FR\\Parse.FrontEnd.Parsers.resources.dll": "fbb7ccff1446abe57277dad5c79cbaef3d3e9a4db8a98fc296b0fd01aa189308",
+    "fr-FR\\Parse.FrontEnd.resources.dll": "303581866ea0c6b00946d3c62a1edd2e07ab324257a3076d4aebc181c6f0c272",
+    "ja-JP\\Parse.FrontEnd.Parsers.resources.dll": "62731ac640ca8395d401b8e0f3617530cde3506bc86851ea52f0c10efa1f47a0",
+    "ja-JP\\Parse.FrontEnd.resources.dll": "efb2844bf7ab2d393484e121a03a9f0e7febb96627b5d6904940d73f87f5c8b8",
+    "Janglim.Test262.deps.json": "c64b305727d2c15a814d325997809f8e5a144db0992e71a09d0c3b06210839bb",
+    "Janglim.Test262.dll": "13206ef3a09ce529407384baaee7f29a504b90f5f3e22c275184314d5d55d8d4",
+    "Janglim.Test262.runtimeconfig.json": "28329cf08f6505e73806b17558b187c02f0c1c516fe47ebfb7a013d082aaa306",
+    "ko-KR\\Parse.FrontEnd.Grammars.resources.dll": "bfb734c7243b4ad654c146eacc1066e6c42b304e12620ae100358b9a58d68d43",
+    "ko-KR\\Parse.FrontEnd.Parsers.resources.dll": "cb440e656a71fd546a446ce0db38984af8382ac6eeb70039fff7d94635aa632e",
+    "ko-KR\\Parse.FrontEnd.resources.dll": "f9006500390d98f4643c26838c27ef592d3c7e0b84882209e99dec169f3168d9",
+    "Parse.deps.json": "b8e03e9f7b11f47e89cb805af850d5b15750689d52d11e354bc9a8673c3adfdc",
+    "Parse.dll": "b11be828a9164cf853b571c418e826369f38ccb8bd2e8674e48d3b3e13ffc1ff",
+    "Parse.FrontEnd.deps.json": "96644dcc87d1610746ebbe420a33c3cfad3863e3b37a22d79bd556f541a09177",
+    "Parse.FrontEnd.dll": "1b75231381e370543b85818155572ea0bed28091e76f7c37c18e4dd4692fbd33",
+    "Parse.FrontEnd.Grammars.deps.json": "6e9df77f20a80b39c28c5587c2a1b47334abe41f95922c12ed8ea15374cabeea",
+    "Parse.FrontEnd.Grammars.dll": "92341b00cd576fdb6dabb008aa20bef6858f81256e406155b0529a426736e746",
+    "Parse.FrontEnd.Grammars.Ebnf.deps.json": "c1dc9996eb694a53b32cd5372fc01ef34fae3a3b54b80466dc1935c0ec274d3b",
+    "Parse.FrontEnd.Grammars.Ebnf.dll": "dffd93f703e62927438175eb9dd1f415f67f015b185cab02e944c253a67ab8df",
+    "Parse.FrontEnd.Parsers.deps.json": "773561120f7ef7d2dded4a19efb3e7f8c180900611c2a053cd468645f8f4ade0",
+    "Parse.FrontEnd.Parsers.dll": "622babd10e17fc5d87778aa7736331a59e3e41ec2725053cb69c8dc4137f82e8",
+    "pt-PT\\Parse.FrontEnd.Parsers.resources.dll": "3e027b87d0d02c32fcaafc364945ae13d1129b7597c380092eaaa20509da3880",
+    "pt-PT\\Parse.FrontEnd.resources.dll": "2ed5306c32290feb75843af093df4924b6541295785a8548e48397ca336596e3",
+    "ru-RU\\Parse.FrontEnd.Parsers.resources.dll": "7060054190a2ed7114898c97f1f4961cbe54dcaf85071210cbe52f8680c0cd32",
+    "ru-RU\\Parse.FrontEnd.resources.dll": "d19ee68c1329b05af77255e039f91d58a3d769239967fd6faf9444ca0433902c",
+    "th-TH\\Parse.FrontEnd.Parsers.resources.dll": "882443dfb7718656bf50621db1fb738673f838a2c625a1cdb1ff8b33ba5d2270",
+    "th-TH\\Parse.FrontEnd.resources.dll": "b613280dcbbc844473758b0160a5d8ca12ae9ac7f414e933242817f32ff71fd6",
+    "uk-UA\\Parse.FrontEnd.Parsers.resources.dll": "f9029f2aa70bceb3f7a72290c8a2e8424bf69084c877306e75dec9a229a2ff88",
+    "uk-UA\\Parse.FrontEnd.resources.dll": "a87268b716127113cd2f88a1cc84c9bc31c2ab8a17904676b2be1c6949963b5c",
+    "vi-VN\\Parse.FrontEnd.Parsers.resources.dll": "3120c609462e4ae9548d16d357439d5947ccb321e4ad0304a43a6be96eea8a55",
+    "vi-VN\\Parse.FrontEnd.resources.dll": "e6e0e4e8e671466072ba24d546f788eec919f14c0c586f36a3f7f22467741ab1",
+    "Wcwidth.dll": "82f544b478368fe184a66693444ce37c046ed476b96ba7918a20239285ff6803",
+    "zh-CN\\Parse.FrontEnd.Parsers.resources.dll": "5eb53b16a0f990a593f5ff88454694d65e42166f58c6362cc95b2a3ee3e9b043",
+    "zh-CN\\Parse.FrontEnd.resources.dll": "dd42ae66ce8d9b7c0211bac6d9c17db5f853f7e4726b1f312376a659087168d4",
+    "zh-TW\\Parse.FrontEnd.Parsers.resources.dll": "d5278414a77b4680a3c95f623bfa29e736ba2da9c46f4d9f8079fb2f2762a955",
+    "zh-TW\\Parse.FrontEnd.resources.dll": "99e9998c242186fbbdc338706337c54e27ce01ba9a2b0dfebcb023a56b5b78af"
+  },
+  "profiles": [
+    {
+      "profile": "script-strict",
+      "expected": 22963,
+      "processed": 22963,
+      "complete": true,
+      "status": "complete",
+      "outcomes": {
+        "pass": 22963
+      },
+      "restarts": 0
+    },
+    {
+      "profile": "script-nonstrict",
+      "expected": 24716,
+      "processed": 24716,
+      "complete": true,
+      "status": "complete",
+      "outcomes": {
+        "pass": 24716
+      },
+      "restarts": 0
+    },
+    {
+      "profile": "module",
+      "expected": 696,
+      "processed": 696,
+      "complete": true,
+      "status": "complete",
+      "outcomes": {
+        "pass": 696
+      },
+      "restarts": 0
+    }
+  ],
+  "processed": 48375,
+  "outcomes": {
+    "pass": 48375
+  },
+  "complete": true,
+  "elapsedSeconds": 715.546
+}

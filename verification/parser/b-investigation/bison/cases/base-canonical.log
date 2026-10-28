@@ -1,0 +1,14 @@
+base-canonical.y: warning: 3 nonterminals useless in grammar [-Wother]
+base-canonical.y: warning: 4 rules useless in grammar [-Wother]
+base-canonical.y:5.1: warning: nonterminal useless in grammar: A [-Wother]
+    5 | z' ;
+      | ^
+base-canonical.y:6.1: warning: nonterminal useless in grammar: B [-Wother]
+    6 | z' ;
+      | ^
+base-canonical.y:7.1: warning: nonterminal useless in grammar: U [-Wother]
+    7 | z' ;
+      | ^
+base-canonical.y:4.5-7: warning: rule useless in grammar [-Wother]
+    4 |  S
+      |     ^~~

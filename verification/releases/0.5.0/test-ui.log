@@ -1,0 +1,34 @@
+
+> janglim-playground-ui@1.1.0 test
+> node --test scripts/test-language.mjs scripts/test-workspace.mjs
+
+✔ browser language order takes precedence over the supported language order (1.6244ms)
+✔ regional, script, and case variants resolve to their supported base language (0.4385ms)
+✔ unsupported and malformed language lists safely fall back to English (0.2271ms)
+✔ Chinese scripts override regions and traditional regions select the Taiwan interface (0.2416ms)
+✔ an explicit supported preference overrides the browser list (0.2204ms)
+✔ saved preferences accept only exact supported values (0.2685ms)
+✔ all fourteen supported languages have selectable names and persistent overrides (0.7ms)
+✔ reading absent, invalid, or denied storage resumes automatic resolution (0.3018ms)
+✔ explicit choices persist, while automatic mode removes only the language override (0.2542ms)
+✔ denied writes and removals cannot invalidate a session preference (0.4104ms)
+✔ translations interpolate zero counts and reorder named values naturally (0.4029ms)
+✔ technical identifiers, diagnostics, and substitution metacharacters remain literal (0.189ms)
+✔ all thirteen translation catalogs cover every message and preserve its placeholders (7.8264ms)
+✔ every language interpolates symbols literally and retains raw engine diagnostics (0.33ms)
+✔ all authored UI keys, example captions, navigation labels, and boot labels are translated (237.5231ms)
+✔ workspace round trips preserve Unicode, whitespace, line endings, and empty input (2.3184ms)
+✔ a UTF-8 BOM from an external editor is accepted (0.3442ms)
+✔ malformed JSON, unrelated JSON, and non-string source fields are rejected (1.0861ms)
+✔ future and legacy schema versions are explicitly rejected (0.3154ms)
+✔ unknown metadata is ignored and cannot be exported as application state (0.2574ms)
+✔ the same UTF-8 byte limit protects both import and export (35.2835ms)
+✔ download names keep the workspace suffix and discard path and control characters (0.825ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 811.7304

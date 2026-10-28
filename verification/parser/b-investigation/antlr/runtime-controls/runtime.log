@@ -1,0 +1,8 @@
+Pruned	input=ax	accepted=true	errors=[]	tree=(start (s (c a) x) <EOF>)
+Pruned	input=a	accepted=false	errors=[ParseCancellationException]	tree=
+Pruned	input=axq	accepted=false	errors=[token recognition error at: 'q']	tree=(start (s (c a) x) <EOF>)
+Pruned	input=	accepted=false	errors=[ParseCancellationException]	tree=
+RightDead	input=ax	accepted=true	errors=[]	tree=(start (s (c a) x) <EOF>)
+RightDead	input=a	accepted=false	errors=[no viable alternative at input 'a', ParseCancellationException]	tree=
+RightDead	input=axq	accepted=false	errors=[ParseCancellationException]	tree=
+RightDead	input=	accepted=false	errors=[no viable alternative at input '<EOF>', ParseCancellationException]	tree=

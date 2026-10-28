@@ -1,0 +1,13 @@
+
+> janglim-playground-ui@1.1.0 build
+> tsc --noEmit && node scripts/build.mjs
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 2052 modules transformed.
+rendering chunks...
+computing gzip size...
+../../../../../../../AppData/Local/Temp/janglim-playground-build-FepuMa/style.css       55.82 kB │ gzip:  11.38 kB
+../../../../../../../AppData/Local/Temp/janglim-playground-build-FepuMa/playground.js  872.87 kB │ gzip: 200.50 kB
+✓ built in 5.17s
+Copied playground.js, style.css, and locale.js to wwwroot/ui.

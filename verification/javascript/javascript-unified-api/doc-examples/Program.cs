@@ -1,0 +1,10 @@
+using System;
+DocumentationExample05.Example.Run();
+if (!DocumentationExample05.Example.Completed) throw new InvalidOperationException("Example 5 exited before validation.");
+Console.WriteLine("VERIFIED Script Example05: parsing=true, diagnostics=0");
+DocumentationExample04.Example.Run();
+if (!DocumentationExample04.Example.Completed) throw new InvalidOperationException("Example 4 exited before validation.");
+Console.WriteLine("VERIFIED Module Example04: parsing=true, diagnostics=0");
+DocumentationExample02.Example.Run();
+if (!DocumentationExample02.Example.Completed) throw new InvalidOperationException("Example 2 exited before validation.");
+Console.WriteLine("VERIFIED Expression Example02: parsing=true, diagnostics=0");

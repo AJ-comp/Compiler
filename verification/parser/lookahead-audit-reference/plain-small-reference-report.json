@@ -1,0 +1,180 @@
+{
+  "canonical_lr1_states": 10,
+  "merged_lalr_states": 10,
+  "original_lr0_states": 10,
+  "unmatched_lr0_cores": [],
+  "first_differences": [],
+  "follow_differences": [],
+  "hash_collisions": [],
+  "lookahead_differences": [
+    {
+      "original_state": 2,
+      "rule": 1,
+      "dot": 0,
+      "lhs": "N:C",
+      "rhs": [
+        "N:R"
+      ],
+      "actual": [],
+      "reference": [
+        "$"
+      ],
+      "missing": [
+        "$"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 5,
+      "rule": 4,
+      "dot": 1,
+      "lhs": "N:R",
+      "rhs": [
+        "T:a:a"
+      ],
+      "actual": [],
+      "reference": [
+        "$"
+      ],
+      "missing": [
+        "$"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 6,
+      "rule": 5,
+      "dot": 1,
+      "lhs": "N:R",
+      "rhs": [
+        "T:b:b",
+        "N:S"
+      ],
+      "actual": [],
+      "reference": [
+        "$"
+      ],
+      "missing": [
+        "$"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 7,
+      "rule": 2,
+      "dot": 1,
+      "lhs": "N:C",
+      "rhs": [
+        "T:e:e",
+        "N:S"
+      ],
+      "actual": [],
+      "reference": [
+        "$"
+      ],
+      "missing": [
+        "$"
+      ],
+      "extra": []
+    },
+    {
+      "original_state": 8,
+      "rule": 5,
+      "dot": 2,
+      "lhs": "N:R",
+      "rhs": [
+        "T:b:b",
+        "N:S"
+      ],
+      "actual": [],
+      "reference": [
+        "$"
+      ],
+      "missing": [
+        "$"
+      ],
+      "extra": []
+    }
+  ],
+  "reference_accepts_a": true,
+  "original_accepts_a": false,
+  "reference_trace": [
+    {
+      "state": 0,
+      "token": "T:a:a",
+      "action": "reduce",
+      "rule": {
+        "id": 3,
+        "lhs": "N:G",
+        "rhs": [],
+        "predicate": null,
+        "hash": 20000030
+      }
+    },
+    {
+      "state": 1,
+      "token": "T:a:a",
+      "action": "shift",
+      "rule": null
+    },
+    {
+      "state": 5,
+      "token": "$",
+      "action": "reduce",
+      "rule": {
+        "id": 4,
+        "lhs": "N:R",
+        "rhs": [
+          "T:a:a"
+        ],
+        "predicate": null,
+        "hash": 20000020
+      }
+    },
+    {
+      "state": 4,
+      "token": "$",
+      "action": "reduce",
+      "rule": {
+        "id": 1,
+        "lhs": "N:C",
+        "rhs": [
+          "N:R"
+        ],
+        "predicate": null,
+        "hash": 20000010
+      }
+    },
+    {
+      "state": 3,
+      "token": "$",
+      "action": "reduce",
+      "rule": {
+        "id": 6,
+        "lhs": "N:S",
+        "rhs": [
+          "N:G",
+          "N:C"
+        ],
+        "predicate": null,
+        "hash": 20000000
+      }
+    },
+    {
+      "state": 2,
+      "token": "$",
+      "action": "accept",
+      "rule": null
+    }
+  ],
+  "original_always_calls": 0,
+  "original_never_calls": 0,
+  "source_assembly": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\typescript\\lookahead-audit-reference\\bin\\Release\\net8.0\\Parse.FrontEnd.Parsers.dll",
+  "source_assembly_sha256": "fb389b9756053ac05436a8265e3a022b733b8be901d8088bc406148f100cc205",
+  "bison_crosscheck": {
+    "source": "artifacts\\typescript\\lookahead-audit-bison\\tiny-bnf.xml",
+    "lookahead_items_checked": 8,
+    "unmatched_nonaccept_state_cores": [],
+    "lookahead_differences": []
+  }
+}

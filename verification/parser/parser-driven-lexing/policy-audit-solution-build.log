@@ -1,0 +1,20 @@
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Release\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Release\netstandard2.1\Parse.dll
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Release\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Release\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.ErrorHandler -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.ErrorHandler\bin\Release\netstandard2.1\Parse.FrontEnd.ErrorHandler.dll
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll
+  Parse.FrontEnd.Support -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Support\bin\Release\netstandard2.1\Parse.FrontEnd.Support.dll
+  Janglim.Mcp -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\services\Janglim.Mcp\bin\Release\net10.0\Janglim.Mcp.dll
+  Janglim -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Janglim\bin\Release\netstandard2.1\Janglim.dll
+  Janglim.Mcp.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Janglim.Mcp.Tests\bin\Release\net10.0\Janglim.Mcp.Tests.dll
+  Janglim.Playground -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\samples\Playground\bin\Release\net10.0\Janglim.Playground.dll
+  Janglim.Playground (Blazor output) -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\samples\Playground\bin\Release\net10.0\wwwroot
+
+빌드했습니다.
+    경고 0개
+    오류 0개
+
+경과 시간: 00:00:04.46

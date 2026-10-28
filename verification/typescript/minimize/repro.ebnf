@@ -1,0 +1,22 @@
+TSTypeEntry : TSType ;
+# TypeScript 7.0.2 type syntax.
+# Authoritative implementation: microsoft/typescript-go commit
+# 2bd066d87f5bafd315be9f40889d0a60b9e58e0b, internal/parser/parser.go:
+# parseType, parseTypeOperatorOrHigher, parseNonArrayType, parseTypeMember,
+# parseTupleType, parseMappedType, parseFunctionOrConstructorType, parseImportType.
+# This fragment composes with Janglim's ECMAScript 2026 grammar. It retains actual
+# type productions in the concrete tree. Runtime expressions inside computed names
+# and parameter defaults reuse JavaScript productions ;
+TSType : {TSNotFunctionTypeStart()}? TSConditionalType ;
+TSTypeNoConditional : '!disabled_TSTypeNoConditional' ;
+TSConditionalType : TSUnionType {TSNotConditionalTypeStart()}? | TSUnionType {TSConditionalTypeStart()}? 'extends' TSTypeNoConditional '?' TSType ':' TSType ;
+TSUnionType : TSIntersectionType ;
+TSIntersectionType : TSTypeOperator ;
+TSTypeOperator : TSPostfixType ;
+TSPostfixType : TSPostfixCore {TSNotPostfixTypeStart()}? ;
+TSPostfixCore : TSPrimaryType ;
+TSPrimaryType : TSTypeReference ;
+TSTypeReference : TSQualifiedName {TSNoTypeReferenceSuffix()}? | TSQualifiedName {TSTypePredicateStart()}? 'is' TSType ;
+TSQualifiedName : TSBindingIdentifier ;
+TSBindingIdentifier : IdentifierName ;
+IdentifierName := "[A-Za-z_][A-Za-z0-9_]*" ;

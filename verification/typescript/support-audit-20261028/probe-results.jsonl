@@ -1,0 +1,13 @@
+{"id":"class-control","source":"class C\u003CT\u003E { constructor(public value: T) {} }","parsed":true,"valid":true,"diagnostics":[],"exception":null}
+{"id":"generic-call","source":"const value = make\u003Cstring\u003E();","parsed":true,"valid":false,"diagnostics":["invalid_parenthesized_expression"],"exception":null}
+{"id":"generic-new","source":"const value = new Box\u003Cstring\u003E();","parsed":true,"valid":false,"diagnostics":["invalid_parenthesized_expression"],"exception":null}
+{"id":"instantiation","source":"const makeString = make\u003Cstring\u003E;","parsed":false,"valid":false,"diagnostics":[],"exception":"ParsingException"}
+{"id":"typed-arrow","source":"const id = (value: number): number =\u003E value;","parsed":false,"valid":false,"diagnostics":[],"exception":"ParsingException"}
+{"id":"generic-arrow","source":"const id = \u003CT\u003E(value: T): T =\u003E value;","parsed":false,"valid":false,"diagnostics":[],"exception":"ParsingException"}
+{"id":"angle-assertion","source":"const value = \u003Cstring\u003Einput;","parsed":false,"valid":false,"diagnostics":[],"exception":"ParsingException"}
+{"id":"type-import","source":"import type { User } from \u0027./user\u0027;","parsed":false,"valid":false,"diagnostics":[],"exception":"ParsingException"}
+{"id":"type-export","source":"type User = string; export type { User };","parsed":false,"valid":false,"diagnostics":[],"exception":"ParsingException"}
+{"id":"import-equals","source":"import fs = require(\u0027fs\u0027);","parsed":false,"valid":false,"diagnostics":[],"exception":"ParsingException"}
+{"id":"export-equals","source":"const value = 1; export = value;","parsed":false,"valid":false,"diagnostics":[],"exception":"ParsingException"}
+{"id":"decorator","source":"@sealed class C {}","parsed":false,"valid":false,"diagnostics":[],"exception":"ContextualLexingException"}
+{"id":"tsx","source":"const view = \u003CButton /\u003E;","parsed":false,"valid":false,"diagnostics":[],"exception":"ParsingException"}

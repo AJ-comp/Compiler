@@ -1,0 +1,38 @@
+<emu-clause id="sec-block-static-semantics-early-errors" oldids="sec-block-duplicates-allowed-static-semantics">
+ 14.2.1 Static Semantics: Early Errors Block : { StatementList } It is a Syntax Error if the LexicallyDeclaredNames of StatementList contains any duplicate entries , unless the host is a web browser or otherwise supports Block-Level Function Declarations Web Legacy Compatibility Semantics , and both of the following conditions are true: IsStrict (this production) is false . The duplicate entries are only bound by FunctionDeclarations. It is a Syntax Error if any element of the LexicallyDeclaredNames of StatementList also occurs in the VarDeclaredNames of StatementList . 
+
+<emu-clause id="sec-let-and-const-declarations-static-semantics-early-errors">
+ 14.3.1.1 Static Semantics: Early Errors LexicalDeclaration : LetOrConst BindingList ; It is a Syntax Error if the BoundNames of BindingList contains "let" . It is a Syntax Error if the BoundNames of BindingList contains any duplicate entries. LexicalBinding : BindingIdentifier Initializer opt It is a Syntax Error if Initializer is not present and IsConstantDeclaration of the LexicalDeclaration containing this LexicalBinding is true . 
+
+<emu-clause id="sec-if-statement-static-semantics-early-errors">
+ 14.6.1 Static Semantics: Early Errors IfStatement : if ( Expression ) Statement else Statement It is a Syntax Error if IsLabelledFunction (the first Statement ) is true . It is a Syntax Error if IsLabelledFunction (the second Statement ) is true . IfStatement : if ( Expression ) Statement It is a Syntax Error if IsLabelledFunction ( Statement ) is true . Note It is only necessary to apply this rule if the extension specified in B.3.1 is implemented. 
+
+<emu-clause id="sec-do-while-statement-static-semantics-early-errors">
+ 14.7.2.1 Static Semantics: Early Errors DoWhileStatement : do Statement while ( Expression ) ; It is a Syntax Error if IsLabelledFunction ( Statement ) is true . Note It is only necessary to apply this rule if the extension specified in B.3.1 is implemented. 
+
+<emu-clause id="sec-while-statement-static-semantics-early-errors">
+ 14.7.3.1 Static Semantics: Early Errors WhileStatement : while ( Expression ) Statement It is a Syntax Error if IsLabelledFunction ( Statement ) is true . Note It is only necessary to apply this rule if the extension specified in B.3.1 is implemented. 
+
+<emu-clause id="sec-for-statement-static-semantics-early-errors">
+ 14.7.4.1 Static Semantics: Early Errors ForStatement : for ( Expression opt ; Expression opt ; Expression opt ) Statement for ( var VariableDeclarationList ; Expression opt ; Expression opt ) Statement for ( LexicalDeclaration Expression opt ; Expression opt ) Statement It is a Syntax Error if IsLabelledFunction ( Statement ) is true . Note It is only necessary to apply this rule if the extension specified in B.3.1 is implemented. ForStatement : for ( LexicalDeclaration Expression opt ; Expression opt ) Statement It is a Syntax Error if any element of the BoundNames of LexicalDeclaration also occurs in the VarDeclaredNames of Statement . 
+
+<emu-clause id="sec-for-in-and-for-of-statements-static-semantics-early-errors">
+ 14.7.5.1 Static Semantics: Early Errors ForInOfStatement : for ( LeftHandSideExpression in Expression ) Statement for ( var ForBinding in Expression ) Statement for ( ForDeclaration in Expression ) Statement for ( LeftHandSideExpression of AssignmentExpression ) Statement for ( var ForBinding of AssignmentExpression ) Statement for ( ForDeclaration of AssignmentExpression ) Statement for await ( LeftHandSideExpression of AssignmentExpression ) Statement for await ( var ForBinding of AssignmentExpression ) Statement for await ( ForDeclaration of AssignmentExpression ) Statement It is a Syntax Error if IsLabelledFunction ( Statement ) is true . Note It is only necessary to apply this rule if the extension specified in B.3.1 is implemented. ForInOfStatement : for ( LeftHandSideExpression in Expression ) Statement for ( LeftHandSideExpression of AssignmentExpression ) Statement for await ( LeftHandSideExpression of AssignmentExpression ) Statement If LeftHandSideExpression is either an ObjectLiteral or an ArrayLiteral , LeftHandSideExpression must cover an AssignmentPattern . If LeftHandSideExpression is neither an ObjectLiteral nor an ArrayLiteral , it is a Syntax Error if the AssignmentTargetType of LeftHandSideExpression is invalid . ForInOfStatement : for ( ForDeclaration in Expression ) Statement for ( ForDeclaration of AssignmentExpression ) Statement for await ( ForDeclaration of AssignmentExpression ) Statement It is a Syntax Error if the BoundNames of ForDeclaration contains "let" . It is a Syntax Error if any element of the BoundNames of ForDeclaration also occurs in the VarDeclaredNames of Statement . It is a Syntax Error if the BoundNames of ForDeclaration contains any duplicate entries. 
+
+<emu-clause id="sec-continue-statement-static-semantics-early-errors">
+ 14.8.1 Static Semantics: Early Errors ContinueStatement : continue ; continue LabelIdentifier ; It is a Syntax Error if this ContinueStatement is not nested, directly or indirectly (but not crossing function or static initialization block boundaries), within an IterationStatement . 
+
+<emu-clause id="sec-break-statement-static-semantics-early-errors">
+ 14.9.1 Static Semantics: Early Errors BreakStatement : break ; It is a Syntax Error if this BreakStatement is not nested, directly or indirectly (but not crossing function or static initialization block boundaries), within an IterationStatement or a SwitchStatement . 
+
+<emu-clause id="sec-with-statement-static-semantics-early-errors">
+ 14.11.1 Static Semantics: Early Errors WithStatement : with ( Expression ) Statement It is a Syntax Error if IsStrict (this production) is true . It is a Syntax Error if IsLabelledFunction ( Statement ) is true . Note It is only necessary to apply the second rule if the extension specified in B.3.1 is implemented. 
+
+<emu-clause id="sec-switch-statement-static-semantics-early-errors" oldids="sec-switch-duplicates-allowed-static-semantics">
+ 14.12.1 Static Semantics: Early Errors SwitchStatement : switch ( Expression ) CaseBlock It is a Syntax Error if the LexicallyDeclaredNames of CaseBlock contains any duplicate entries , unless the host is a web browser or otherwise supports Block-Level Function Declarations Web Legacy Compatibility Semantics , and both of the following conditions are true: IsStrict (this production) is false . The duplicate entries are only bound by FunctionDeclarations. It is a Syntax Error if any element of the LexicallyDeclaredNames of CaseBlock also occurs in the VarDeclaredNames of CaseBlock . 
+
+<emu-clause id="sec-labelled-statements-static-semantics-early-errors">
+ 14.13.1 Static Semantics: Early Errors LabelledItem : FunctionDeclaration It is a Syntax Error if any source text is matched by this production , unless that source text is non-strict code and the host is a web browser or otherwise supports Labelled Function Declarations . 
+
+<emu-clause id="sec-try-statement-static-semantics-early-errors">
+ 14.15.1 Static Semantics: Early Errors Catch : catch ( CatchParameter ) Block It is a Syntax Error if the BoundNames of CatchParameter contains any duplicate elements. It is a Syntax Error if any element of the BoundNames of CatchParameter also occurs in the LexicallyDeclaredNames of Block . It is a Syntax Error if any element of the BoundNames of CatchParameter also occurs in the VarDeclaredNames of Block , unless CatchParameter is CatchParameter : BindingIdentifier and the host is a web browser or otherwise supports VariableStatements in Catch Blocks . 

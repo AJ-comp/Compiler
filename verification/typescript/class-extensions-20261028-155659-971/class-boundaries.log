@@ -1,0 +1,102 @@
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)
+[xUnit.net 00:00:00.09]   Discovering: Parse.FrontEnd.Parsers.Tests
+[xUnit.net 00:00:01.75]   Discovered:  Parse.FrontEnd.Parsers.Tests
+[xUnit.net 00:00:01.78]   Starting:    Parse.FrontEnd.Parsers.Tests
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "yield") [33 s]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "protected") [36 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "static") [23 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "arguments") [39 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "class") [24 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "void") [33 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "interface") [21 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "let") [22 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "enum") [21 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "eval") [23 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "pr\\u0069vate") [26 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "public") [24 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "v\\u006fid") [25 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "private") [25 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_parameters_keep_reserved_and_strict_binding_restrictions(name: "implements") [23 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Index_shape_and_await_context_restrictions_remain_in_force(source: "async function run() { class C { [await: string]: "···) [24 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Index_shape_and_await_context_restrictions_remain_in_force(source: "class C { [string: string]; }") [24 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Index_shape_and_await_context_restrictions_remain_in_force(source: "class C { [string: string, other: string]: number;"···) [27 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "unique") [26 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "abstract") [25 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "boolean") [24 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "readonly") [25 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "any") [26 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "string") [25 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "await") [25 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "intrinsic") [31 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "infer") [25 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "unknown") [30 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "keyof") [25 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "satisfies") [26 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "undefined") [28 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Contextual_and_type_keywords_can_name_an_index_parameter(name: "number") [11 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_bindings_keep_modifiers_escapes_and_computed_member_names_separate(source: "class C { [readonly]: number; [string](): void {} "···) [15 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_bindings_keep_modifiers_escapes_and_computed_member_names_separate(source: "class C { static [readonly: string]: number; }") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_bindings_keep_modifiers_escapes_and_computed_member_names_separate(source: "class C { static readonly [string: string]: number"···) [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_bindings_keep_modifiers_escapes_and_computed_member_names_separate(source: "class C { readonly [string: string]: number; }") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_bindings_keep_modifiers_escapes_and_computed_member_names_separate(source: "class C { [read\\u006fnly: string]: number; }") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_index_bindings_keep_modifiers_escapes_and_computed_member_names_separate(source: "class C { [str\\u0069ng: string]: number; }") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassIndexSignatureTests.Class_specific_parameter_nodes_keep_the_annotation_checks_and_original_source_positions [16 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "class C { constructor(public value = left < right)"···) [14 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "const value = function() {} < right;") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "const value = class C extends Base {} < right;") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "enum Bits { First = 1 << 0, Second = 1 << 1 }") [11 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "const value = obj.class < right;") [11 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "const value = ({extends: left < right});") [11 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "left < right as T;") [11 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "left < right;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "const result = left << right;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "class C extends (left < right ? First : Second) {}") [11 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "class C { public run() { return left < right; } }") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "class C { public value = left < right; }") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "class C extends registry[left < right] {}") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "const value = obj.extends < right;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "class C extends Base {} left < right;") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "class C extends Base { public value = obj.extends "···) [9 ms]
+[xUnit.net 00:00:36.60]       class C extends Base<T> implements Named<T> { public run<U>(x: U): U { return x; } }
+[xUnit.net 00:00:36.60]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.60]       (shift 할 수 없습니다 {:, TSTypeOpen, (, IdentifierName, await, break, case, catch, class, const, continue, debugger, default, delete, do, else, enum, export, extends, false, finally, for, function, if, import, in, instanceof, new, null, return, super, switch, this, throw, true, try, typeof, var, void, while, with, yield, let, static, implements, interface, package, private, protected, public, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, StringLiteral, NumericLiteral, [, *, ?, PrivateIdentifier, TSNonNullToken, ;, }, TSClassModifierToken, =, {, ,} 와야 합니다)
+[xUnit.net 00:00:36.60]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C extends Base<T> implements Named<T> { publ"···, typeAngles: 3, comparisons: 0) [FAIL]
+[xUnit.net 00:00:36.60]       Stack Trace:
+[xUnit.net 00:00:36.60]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptClassLexicalTests.cs(66,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Parse(String source)
+[xUnit.net 00:00:36.60]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptClassLexicalTests.cs(58,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(String source, Int32 typeAngles, Int32 comparisons)
+[xUnit.net 00:00:36.60]            at InvokeStub_TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(Object, Span`1)
+[xUnit.net 00:00:36.60]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "left < right satisfies T;") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "class C extends factory(left < right) {}") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Generic_class_heritage_does_not_reclassify_runtime_less_than_or_left_shift(source: "const value = ({class: left < right});") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C extends (Base)<T> {}", typeAngles: 1, comparisons: 0) [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C extends factory(left < right)<T> {}", typeAngles: 1, comparisons: 1) [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C extends Base<T> {}", typeAngles: 1, comparisons: 0) [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C extends class {}<T> {}", typeAngles: 1, comparisons: 0) [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C extends ns.Base<Box<T>> {}", typeAngles: 2, comparisons: 0) [8 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C extends Base<T> implements Named<T> { publ"···, typeAngles: 3, comparisons: 0) [10 ms]
+  오류 메시지:
+   class C extends Base<T> implements Named<T> { public run<U>(x: U): U { return x; } }
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {:, TSTypeOpen, (, IdentifierName, await, break, case, catch, class, const, continue, debugger, default, delete, do, else, enum, export, extends, false, finally, for, function, if, import, in, instanceof, new, null, return, super, switch, this, throw, true, try, typeof, var, void, while, with, yield, let, static, implements, interface, package, private, protected, public, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, StringLiteral, NumericLiteral, [, *, ?, PrivateIdentifier, TSNonNullToken, ;, }, TSClassModifierToken, =, {, ,} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Parse(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptClassLexicalTests.cs:line 66
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(String source, Int32 typeAngles, Int32 comparisons) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptClassLexicalTests.cs:line 58
+   at InvokeStub_TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.66]   Finished:    Parse.FrontEnd.Parsers.Tests
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C extends function() {}<T> {}", typeAngles: 1, comparisons: 0) [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C<T> extends Base<T> { public value = left <"···, typeAngles: 2, comparisons: 1) [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C extends Base<T> { public run() { class D e"···, typeAngles: 2, comparisons: 1) [11 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C extends factory(Base)<T> {}", typeAngles: 1, comparisons: 0) [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C extends {}<T> {}", typeAngles: 1, comparisons: 0) [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptClassLexicalTests.Actual_heritage_type_arguments_and_runtime_comparisons_keep_distinct_token_kinds(source: "class C<T> extends Base<T> {}", typeAngles: 2, comparisons: 0) [8 ms]
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\class-extensions-20261028-155659-971\class-boundaries.trx
+
+테스트 실행이 실패했습니다.
+총 테스트 수: 70
+     통과: 69
+     실패: 1
+ 총 시간: 37.4193 초

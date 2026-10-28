@@ -1,0 +1,6 @@
+문법 검사 통과
+VERIFIED Script Example05: parsing=true, diagnostics=0
+import{calculate}from './math.js';export const answer=calculate(6,7);
+VERIFIED Module Example04: parsing=true, diagnostics=0
+result=/ab/g.test(value)
+VERIFIED Expression Example02: parsing=true, diagnostics=0

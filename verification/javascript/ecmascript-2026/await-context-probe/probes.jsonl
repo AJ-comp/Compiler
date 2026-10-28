@@ -1,0 +1,44 @@
+{"id": "keyword-class", "source": "async function outer(){ await\nclass {} / divisor; }"}
+{"id": "keyword-function", "source": "async function outer(){ await\nfunction() {} / divisor; }"}
+{"id": "keyword-async-function", "source": "async function outer(){ await\nasync function() {} / divisor; }"}
+{"id": "keyword-arrow", "source": "async () => await\nclass {} / divisor;"}
+{"id": "keyword-method", "source": "({async outer(){await\nclass {} / divisor;}});"}
+{"id": "keyword-class-method", "source": "class Outer {async outer(){await\nclass {} / divisor;}}"}
+{"id": "keyword-async-generator", "source": "async function* outer(){yield await\nclass {} / divisor;}"}
+{"id": "identifier-var", "source": "var await\nclass C{}\n/a/.test(value);"}
+{"id": "identifier-let", "source": "let await\nclass C{}\n/a/.test(value);"}
+{"id": "identifier-const", "source": "const await = class {} / divisor;"}
+{"id": "identifier-var-default", "source": "var await = class {} / divisor;"}
+{"id": "identifier-param", "source": "function f(await){}"}
+{"id": "identifier-param-default", "source": "function f(await = class {} / divisor){}"}
+{"id": "identifier-rest-param", "source": "function f(...await){}"}
+{"id": "identifier-catch", "source": "try{}catch(await){}"}
+{"id": "identifier-destructuring-object", "source": "let {await} = source;"}
+{"id": "identifier-destructuring-object-default", "source": "let {await = class {} / divisor} = source;"}
+{"id": "identifier-destructuring-object-rename", "source": "let {name:await = class {} / divisor} = source;"}
+{"id": "identifier-destructuring-array-rest", "source": "let [...await] = source;"}
+{"id": "identifier-destructuring-array-default", "source": "let [await = class {} / divisor] = source;"}
+{"id": "identifier-arrow", "source": "await => class {} / divisor;"}
+{"id": "identifier-arrow-default", "source": "(await = class {} / divisor) => await;"}
+{"id": "identifier-arrow-rest", "source": "(...await) => await;"}
+{"id": "identifier-object-shorthand", "source": "({await});"}
+{"id": "identifier-object-pattern-default", "source": "({await = class {} / divisor} = source);"}
+{"id": "identifier-class-field", "source": "class C{await\nnext=1;}"}
+{"id": "identifier-class-method", "source": "class C{await(){}}"}
+{"id": "identifier-object-method", "source": "({await(){}});"}
+{"id": "identifier-break", "source": "await: while(false){break await\nclass C{}\n/a/.test(value);}"}
+{"id": "identifier-continue", "source": "await: while(false){continue await\nclass C{}\n/a/.test(value);}"}
+{"id": "identifier-function-name", "source": "function await(){}"}
+{"id": "identifier-function-expression-name", "source": "const f = function await(){};"}
+{"id": "identifier-class-name", "source": "class await {}"}
+{"id": "identifier-for-var", "source": "for(var await in source){}"}
+{"id": "identifier-for-let", "source": "for(let await of source){}"}
+{"id": "identifier-for-target", "source": "for(await of source){}"}
+{"id": "identifier-for-binding", "source": "for(var await;;){}"}
+{"id": "identifier-export-property", "source": "const x = {await: class {} / divisor};"}
+{"id": "identifier-return", "source": "function f(){return await\nclass C{}\n/a/.test(value);}"}
+{"id": "identifier-if", "source": "if(false)await\nclass C{}\n/a/.test(value);"}
+{"id": "identifier-return-break", "source": "function f(){await: while(false){break await\nclass C{}\n/a/.test(value);}}"}
+{"id": "identifier-return-continue", "source": "function f(){await: while(false){continue await\nclass C{}\n/a/.test(value);}}"}
+{"id": "identifier-class-name-extends", "source": "class await extends (class {} / divisor) {}"}
+{"id": "identifier-fun-name-newline", "source": "function await\n() {}\n/a/.test(value);"}

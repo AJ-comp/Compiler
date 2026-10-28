@@ -1,0 +1,17 @@
+INPUT: result = a / b;
+  0: goal[0] -> 'result'
+  6: goal[0] -> '='
+  8: goal[1] -> 'a'
+  10: goal[0] -> '/'
+  12: goal[1] -> 'b'
+  14: goal[0] -> ';'
+  15: goal[0] -> ''
+result = a / b; -> result | = | a | / | b | ;
+INPUT: result = /ab/g;
+  0: goal[0] -> 'result'
+  6: goal[0] -> '='
+  8: goal[1] -> '/ab/g'
+  14: goal[0] -> ';'
+  15: goal[0] -> ''
+result = /ab/g; -> result | = | /ab/g | ;
+Public constructor and source interface: OK

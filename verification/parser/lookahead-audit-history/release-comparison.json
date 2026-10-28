@@ -1,0 +1,8 @@
+{
+  "Method": "CanonicalRelation.LookAhead",
+  "CurrentNormalizedSha256": "7bf5b12791f49d85ce75e9d821e1120623aa20324471d4fde2a6ac99682e1618",
+  "ReleaseTag": "v0.3.0",
+  "ReleaseNormalizedSha256": "7bf5b12791f49d85ce75e9d821e1120623aa20324471d4fde2a6ac99682e1618",
+  "BodiesExactlyEqual": true,
+  "Normalization": "CRLF to LF only"
+}

@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup>
+  <ItemGroup><Reference Include="ProductAssemblies"><HintPath>../../../../Tests/Parse.FrontEnd.Parsers.Tests/bin/Release/net8.0/Parse.FrontEnd.Grammars.Ebnf.dll</HintPath></Reference></ItemGroup>
+  <ItemGroup><Reference Include="../../../../Tests/Parse.FrontEnd.Parsers.Tests/bin/Release/net8.0/*.dll" /></ItemGroup>
+</Project>

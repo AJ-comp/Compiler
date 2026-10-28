@@ -1,0 +1,170 @@
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-118.ts(2,11): error TS1253: Abstract properties can only appear within an abstract class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-119.ts(2,11): error TS1244: Abstract methods can only appear within an abstract class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-120.ts(2,29): error TS1030: 'abstract' modifier already seen.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-121.ts(2,28): error TS1243: 'private' modifier cannot be used with 'abstract' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-122.ts(2,29): error TS1243: 'private' modifier cannot be used with 'abstract' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-123.ts(2,27): error TS1243: 'static' modifier cannot be used with 'abstract' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-124.ts(2,29): error TS1243: 'static' modifier cannot be used with 'abstract' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-125.ts(2,20): error TS1243: 'async' modifier cannot be used with 'abstract' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-125.ts(2,42): error TS1064: The return type of an async function or method must be the global Promise<T> type. Did you mean to write 'Promise<void>'?
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-126.ts(2,29): error TS1245: Method 'run' cannot have an implementation because it is marked abstract.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-127.ts(2,29): error TS1267: Property 'value' cannot have an initializer because it is marked abstract.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-128.ts(2,20): error TS18019: 'abstract' modifier cannot be used with a private identifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/contextual-080.ts(2,11): error TS2564: Property 'public' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/contextual-080.ts(2,27): error TS2564: Property 'private' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/contextual-080.ts(2,44): error TS2564: Property 'protected' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/contextual-083.ts(2,11): error TS7008: Member 'readonly' implicitly has an 'any' type.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/contextual-083.ts(2,21): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/contextual-084.ts(2,11): error TS7008: Member 'public' implicitly has an 'any' type.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/contextual-084.ts(3,1): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/contextual-085.ts(2,11): error TS7008: Member 'readonly' implicitly has an 'any' type.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/contextual-085.ts(3,1): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/contextual-089.ts(2,41): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/contextual-090.ts(2,1): error TS2304: Cannot find name 'abstract'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-130.ts(2,11): error TS7008: Member 'value' implicitly has an 'any' type.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-130.ts(2,16): error TS1264: Declarations with definite assignment assertions must also have type annotations.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-131.ts(2,16): error TS1263: Declarations with initializers cannot also have definite assignment assertions.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-132.ts(2,23): error TS1255: A definite assignment assertion '!' is not permitted in this context.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-133.ts(2,34): error TS1255: A definite assignment assertion '!' is not permitted in this context.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-134.ts(2,24): error TS1255: A definite assignment assertion '!' is not permitted in this context.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-135.ts(2,24): error TS1255: A definite assignment assertion '!' is not permitted in this context.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-138.ts(2,11): error TS1021: An index signature must have a type annotation.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-139.ts(2,11): error TS1071: 'public' modifier cannot appear on an index signature.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-140.ts(2,15): error TS1019: An index signature parameter cannot have a question mark.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/fields-001.ts(2,18): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/fields-008.ts(2,27): error TS2304: Cannot find name 'Box'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/fields-008.ts(2,31): error TS2304: Cannot find name 'User'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-041.ts(2,26): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-041.ts(2,48): error TS4112: This member cannot have an 'override' modifier because its containing class 'C' does not extend another class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-042.ts(2,20): error TS2304: Cannot find name 'Named'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-043.ts(2,20): error TS2304: Cannot find name 'Named'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-043.ts(2,27): error TS2304: Cannot find name 'Printable'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-044.ts(2,19): error TS2304: Cannot find name 'Named'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-044.ts(2,27): error TS2304: Cannot find name 'Named'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-044.ts(2,42): error TS2304: Cannot find name 'Base'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-044.ts(2,61): error TS2304: Cannot find name 'Named'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-044.ts(2,68): error TS2304: Cannot find name 'Printable'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-045.ts(2,28): error TS2304: Cannot find name 'Base'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-045.ts(2,47): error TS2304: Cannot find name 'Named'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-046.ts(2,37): error TS2304: Cannot find name 'Named'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-047.ts(2,17): error TS2304: Cannot find name 'Base'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-047.ts(2,22): error TS2304: Cannot find name 'T'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-048.ts(2,17): error TS2304: Cannot find name 'ns'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-048.ts(2,25): error TS2304: Cannot find name 'Box'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-048.ts(2,29): error TS2304: Cannot find name 'T'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-049.ts(2,18): error TS2304: Cannot find name 'factory'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-049.ts(2,40): error TS2304: Cannot find name 'Named'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-167.ts(2,19): error TS1097: 'implements' list cannot be empty.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-168.ts(2,20): error TS2304: Cannot find name 'A'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-168.ts(2,21): error TS1009: Trailing comma not allowed.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-169.ts(2,17): error TS2304: Cannot find name 'A'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-169.ts(2,20): error TS1174: Classes can only extend a single class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-170.ts(2,17): error TS2304: Cannot find name 'A'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-170.ts(2,19): error TS1172: 'extends' clause already seen.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-171.ts(2,20): error TS2304: Cannot find name 'A'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-171.ts(2,22): error TS1175: 'implements' clause already seen.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-172.ts(2,20): error TS2304: Cannot find name 'A'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-172.ts(2,22): error TS1173: 'extends' clause must precede 'implements' clause.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-172.ts(2,30): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-173.ts(2,17): error TS2304: Cannot find name 'Base'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-173.ts(2,21): error TS1099: Type argument list cannot be empty.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-174.ts(2,20): error TS2304: Cannot find name 'Named'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/heritage-errors-174.ts(2,25): error TS1099: Type argument list cannot be empty.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/methods-022.ts(2,17): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/methods-022.ts(2,30): error TS4112: This member cannot have an 'override' modifier because its containing class 'C' does not extend another class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/methods-023.ts(2,17): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/methods-023.ts(2,37): error TS4112: This member cannot have an 'override' modifier because its containing class 'C' does not extend another class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/methods-024.ts(2,17): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/methods-024.ts(2,44): error TS4112: This member cannot have an 'override' modifier because its containing class 'C' does not extend another class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/methods-025.ts(2,53): error TS2304: Cannot find name 'work'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/methods-027.ts(2,69): error TS2304: Cannot find name 'work'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-096.ts(2,18): error TS1028: Accessibility modifier already seen.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-096.ts(2,26): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-097.ts(2,18): error TS1028: Accessibility modifier already seen.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-097.ts(2,25): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-099.ts(2,20): error TS1030: 'readonly' modifier already seen.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-099.ts(2,29): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-100.ts(2,17): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-100.ts(2,30): error TS1030: 'override' modifier already seen.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-100.ts(2,39): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-100.ts(2,39): error TS4112: This member cannot have an 'override' modifier because its containing class 'C' does not extend another class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-101.ts(2,18): error TS1029: 'public' modifier must precede 'static' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-102.ts(2,20): error TS1029: 'public' modifier must precede 'readonly' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-102.ts(2,27): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-103.ts(2,20): error TS1029: 'static' modifier must precede 'readonly' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-104.ts(2,17): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-104.ts(2,30): error TS1029: 'public' modifier must precede 'override' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-104.ts(2,37): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-104.ts(2,37): error TS4112: This member cannot have an 'override' modifier because its containing class 'C' does not extend another class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-105.ts(2,17): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-105.ts(2,30): error TS1029: 'override' modifier must precede 'readonly' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-105.ts(2,39): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-105.ts(2,39): error TS4112: This member cannot have an 'override' modifier because its containing class 'C' does not extend another class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-106.ts(2,17): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-106.ts(2,30): error TS1029: 'static' modifier must precede 'override' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-106.ts(2,37): error TS4112: This member cannot have an 'override' modifier because its containing class 'C' does not extend another class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-107.ts(2,17): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-107.ts(2,27): error TS1029: 'override' modifier must precede 'async' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-107.ts(2,36): error TS4112: This member cannot have an 'override' modifier because its containing class 'C' does not extend another class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-108.ts(2,11): error TS1024: 'readonly' modifier can only appear on a property declaration or index signature.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-109.ts(2,11): error TS1024: 'readonly' modifier can only appear on a property declaration or index signature.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-110.ts(2,11): error TS18010: An accessibility modifier cannot be used with a private identifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-110.ts(2,18): error TS2564: Property '#value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-111.ts(2,11): error TS18010: An accessibility modifier cannot be used with a private identifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-112.ts(2,11): error TS18019: 'declare' modifier cannot be used with a private identifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-113.ts(2,17): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-113.ts(2,29): error TS1243: 'override' modifier cannot be used with 'declare' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-114.ts(2,20): error TS1243: 'accessor' modifier cannot be used with 'readonly' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-115.ts(2,19): error TS1243: 'accessor' modifier cannot be used with 'declare' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-116.ts(2,11): error TS1275: 'accessor' modifier can only appear on a property declaration.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-117.ts(2,20): error TS2564: Property 'value' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-117.ts(2,25): error TS1276: An 'accessor' property cannot be declared optional.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-142.ts(2,30): error TS1028: Accessibility modifier already seen.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-143.ts(2,32): error TS1029: 'public' modifier must precede 'readonly' modifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-144.ts(2,23): error TS1317: A parameter property cannot be declared using a rest parameter.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-145.ts(2,23): error TS1187: A parameter property may not be declared using a binding pattern.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-146.ts(2,23): error TS1187: A parameter property may not be declared using a binding pattern.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-147.ts(2,30): error TS2398: 'constructor' cannot be used as a parameter property name.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-148.ts(2,15): error TS2369: A parameter property is only allowed in a constructor implementation.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-149.ts(2,12): error TS2369: A parameter property is only allowed in a constructor implementation.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-151.ts(2,23): error TS1090: 'static' modifier cannot appear on a parameter.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-152.ts(2,23): error TS1242: 'abstract' modifier can only appear on a class, method, or property declaration.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-153.ts(2,46): error TS1016: A required parameter cannot follow an optional parameter.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-154.ts(2,31): error TS2369: A parameter property is only allowed in a constructor implementation.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-155.ts(2,23): error TS2369: A parameter property is only allowed in a constructor implementation.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameters-059.ts(2,37): error TS2304: Cannot find name 'Box'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameters-059.ts(2,41): error TS2304: Cannot find name 'User'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameters-060.ts(2,17): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameters-060.ts(2,33): error TS4112: This member cannot have an 'override' modifier because its containing class 'C' does not extend another class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameters-061.ts(2,17): error TS2304: Cannot find name 'B'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameters-061.ts(2,33): error TS4112: This member cannot have an 'override' modifier because its containing class 'C' does not extend another class.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameters-062.ts(2,48): error TS2552: Cannot find name 'text'. Did you mean 'Text'?
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-091.ts(2,43): error TS2552: Cannot find name 'text'. Did you mean 'Text'?
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-091.ts(2,69): error TS2304: Cannot find name 'value'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-092.ts(2,25): error TS2304: Cannot find name 'Box'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-092.ts(2,29): error TS2304: Cannot find name 'T'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-092.ts(2,34): error TS2304: Cannot find name 'left'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-092.ts(2,41): error TS2304: Cannot find name 'right'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-093.ts(2,52): error TS2552: Cannot find name 'text'. Did you mean 'Text'?
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-094.ts(2,11): error TS18010: An accessibility modifier cannot be used with a private identifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-errors-175.ts(2,33): error TS2304: Cannot find name 'missing'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-errors-175.ts(2,44): error TS18010: An accessibility modifier cannot be used with a private identifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-errors-176.ts(2,26): error TS2337: Super calls are not permitted outside constructors or in nested functions inside constructors.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-errors-177.ts(2,26): error TS2662: Cannot find name 'arguments'. Did you mean the static member 'C.arguments'?
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-errors-178.ts(2,38): error TS2339: Property '#missing' does not exist on type 'C'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-errors-179.ts(2,30): error TS2451: Cannot redeclare block-scoped variable 'name'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-errors-179.ts(2,40): error TS2451: Cannot redeclare block-scoped variable 'name'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-errors-180.ts(2,22): error TS2300: Duplicate identifier 'value'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/runtime-errors-180.ts(2,37): error TS2300: Duplicate identifier 'value'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-156.ts(2,23): error TS1092: Type parameters cannot appear on a constructor declaration.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-157.ts(2,26): error TS1093: Type annotation cannot appear on a constructor declaration.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-158.ts(2,11): error TS1024: 'readonly' modifier can only appear on a property declaration or index signature.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-159.ts(2,11): error TS1089: 'override' modifier cannot appear on a constructor declaration.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-160.ts(2,11): error TS1031: 'declare' modifier cannot appear on class elements of this kind.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-161.ts(2,31): error TS1183: An implementation cannot be declared in ambient contexts.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-162.ts(2,35): error TS1039: Initializers are not allowed in ambient contexts.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-163.ts(2,44): error TS1039: Initializers are not allowed in ambient contexts.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-164.ts(2,19): error TS1040: 'async' modifier cannot be used in an ambient context.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-166.ts(2,25): error TS1051: A 'set' accessor cannot have an optional parameter.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signatures-072.ts(2,28): error TS2304: Cannot find name 'Base'.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signatures-072.ts(2,47): error TS2304: Cannot find name 'Named'.

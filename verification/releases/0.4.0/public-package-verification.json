@@ -1,0 +1,23 @@
+{
+  "downloadUrl": "https://api.nuget.org/v3-flatcontainer/janglim/0.4.0/janglim.0.4.0.nupkg?verify=1792382718",
+  "status": 200,
+  "bytes": 296705,
+  "sha256": "064c2f86c30f4a9bafdffbdcb9985ee4920fcad59f751ff8956829eb1c255e6b",
+  "metadata": {
+    "id": "Janglim",
+    "version": "0.4.0",
+    "description": "Janglim is an embeddable LALR parser-generator engine for .NET. Define grammars in C# or EBNF text with typed tokens and registered C# predicates. Preserve token trivia and line breaks, predict two-way Shift/predicate epsilon Reduce conflicts, and inspect tables, FIRST/FOLLOW sets, traces, syntax trees, and diagnostics. Includes grammar validation, incremental reparsing, and pluggable error recovery."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AJ-comp/Compiler",
+    "commit": "c0c3c5084a78c10b736dff3fac699df40c2887ca"
+  },
+  "payloadFiles": 55,
+  "missing": [],
+  "changed": [],
+  "addedByNuGet": [
+    ".signature.p7s"
+  ],
+  "payloadMatchesCI": true
+}

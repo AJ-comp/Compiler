@@ -1,0 +1,14 @@
+base.y: warning: 3 nonterminals useless in grammar [-Wother]
+base.y: warning: 4 rules useless in grammar [-Wother]
+base.y:5.1: warning: nonterminal useless in grammar: A [-Wother]
+    5 | ' ;
+      | ^
+base.y:6.1: warning: nonterminal useless in grammar: B [-Wother]
+    6 | ' ;
+      | ^
+base.y:7.1: warning: nonterminal useless in grammar: U [-Wother]
+    7 | ' ;
+      | ^
+base.y:4.5-7: warning: rule useless in grammar [-Wother]
+    4 | S
+      |     ^~~

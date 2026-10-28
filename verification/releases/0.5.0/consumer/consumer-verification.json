@@ -1,0 +1,328 @@
+{
+  "packageVersion": "0.5.0",
+  "packagePath": "../packages/Janglim.0.5.0.nupkg",
+  "verifiedAtUtc": "2026-10-21T01:47:13.2460203Z",
+  "total": 80,
+  "checks": [
+    {
+      "name": "README EBNF grammar construction",
+      "passed": true
+    },
+    {
+      "name": "README eager-lexer arithmetic example",
+      "passed": true
+    },
+    {
+      "name": "README arithmetic syntax error",
+      "passed": true
+    },
+    {
+      "name": "maximal munch preserves if/ifx/if$ boundaries",
+      "passed": true
+    },
+    {
+      "name": "maximal munch keyword priority with identifier registered first",
+      "passed": true
+    },
+    {
+      "name": "contextual source uses maximal munch too",
+      "passed": true
+    },
+    {
+      "name": "parser-driven EBNF grammar construction",
+      "passed": true
+    },
+    {
+      "name": "source retains the configured LexicalPolicy",
+      "passed": true
+    },
+    {
+      "name": "current cursor before Peek points to source offset 8",
+      "passed": true
+    },
+    {
+      "name": "Peek returns the regex token and exact source trivia",
+      "passed": true
+    },
+    {
+      "name": "Peek leaves the current cursor unchanged",
+      "passed": true
+    },
+    {
+      "name": "Peek returns a separate Next checkpoint at source offset 14",
+      "passed": true
+    },
+    {
+      "name": "the same cursor supports an independent Div read",
+      "passed": true
+    },
+    {
+      "name": "adopting Next advances to the semicolon",
+      "passed": true
+    },
+    {
+      "name": "parser-driven automatic RegExp selection",
+      "passed": true
+    },
+    {
+      "name": "parser-driven automatic Div selection",
+      "passed": true
+    },
+    {
+      "name": "Expression structural parse: a \u002B /ab/g.test(value)",
+      "passed": true
+    },
+    {
+      "name": "Expression accepted: a \u002B /ab/g.test(value)",
+      "passed": true
+    },
+    {
+      "name": "Expression rejected: a \u002B",
+      "passed": true
+    },
+    {
+      "name": "Expression structural parse: ({ get value(x) {} })",
+      "passed": true
+    },
+    {
+      "name": "Expression rejected: ({ get value(x) {} })",
+      "passed": true
+    },
+    {
+      "name": "Script structural parse: const {value} = source; function f([first], ...rest) { return first; }",
+      "passed": true
+    },
+    {
+      "name": "Script accepted: const {value} = source; function f([first], ...rest) { return first; }",
+      "passed": true
+    },
+    {
+      "name": "Script rejected: const value = ;",
+      "passed": true
+    },
+    {
+      "name": "Script structural parse: let value; let value;",
+      "passed": true
+    },
+    {
+      "name": "Script rejected: let value; let value;",
+      "passed": true
+    },
+    {
+      "name": "Module structural parse: import {value as item} from \u0027module\u0027; export const result = await import(\u0027other\u0027); export {item};",
+      "passed": true
+    },
+    {
+      "name": "Module accepted: import {value as item} from \u0027module\u0027; export const result = await import(\u0027other\u0027); export {item};",
+      "passed": true
+    },
+    {
+      "name": "Module rejected: export const value = ;",
+      "passed": true
+    },
+    {
+      "name": "Module structural parse: export {missing};",
+      "passed": true
+    },
+    {
+      "name": "Module rejected: export {missing};",
+      "passed": true
+    },
+    {
+      "name": "Script structural parse: async function f() { return await work(); }",
+      "passed": true
+    },
+    {
+      "name": "Script accepted: async function f() { return await work(); }",
+      "passed": true
+    },
+    {
+      "name": "Script structural parse: const f = async ({value}) =\u003E await value;",
+      "passed": true
+    },
+    {
+      "name": "Script accepted: const f = async ({value}) =\u003E await value;",
+      "passed": true
+    },
+    {
+      "name": "Script structural parse: function* f() { yield 1; yield* values; }",
+      "passed": true
+    },
+    {
+      "name": "Script accepted: function* f() { yield 1; yield* values; }",
+      "passed": true
+    },
+    {
+      "name": "Script structural parse: async function* f() { yield await work(); }",
+      "passed": true
+    },
+    {
+      "name": "Script accepted: async function* f() { yield await work(); }",
+      "passed": true
+    },
+    {
+      "name": "Expression structural parse: ({ run() {}, async work() { return await task; }, *items() { yield 1; }, async *stream() { yield await task; }, get value() { return 1; }, set value(v) { this._value = v; } })",
+      "passed": true
+    },
+    {
+      "name": "Expression accepted: ({ run() {}, async work() { return await task; }, *items() { yield 1; }, async *stream() { yield await task; }, get value() { return 1; }, set value(v) { this._value = v; } })",
+      "passed": true
+    },
+    {
+      "name": "Script rejected: async function f(await) {}",
+      "passed": true
+    },
+    {
+      "name": "Script rejected: function f() { yield 1; }",
+      "passed": true
+    },
+    {
+      "name": "Expression structural parse: /(?\u003Cname\u003Ea)\\k\u003Cname\u003E/u",
+      "passed": true
+    },
+    {
+      "name": "Expression accepted: /(?\u003Cname\u003Ea)\\k\u003Cname\u003E/u",
+      "passed": true
+    },
+    {
+      "name": "Expression structural parse: /[\\p{Letter}\u0026\u0026\\p{ASCII}]/v",
+      "passed": true
+    },
+    {
+      "name": "Expression accepted: /[\\p{Letter}\u0026\u0026\\p{ASCII}]/v",
+      "passed": true
+    },
+    {
+      "name": "Expression structural parse: /a{3,2}/u",
+      "passed": true
+    },
+    {
+      "name": "Expression rejected: /a{3,2}/u",
+      "passed": true
+    },
+    {
+      "name": "Expression diagnostic regexp_syntax: /a{3,2}/u",
+      "passed": true
+    },
+    {
+      "name": "Expression structural parse: /(?\u003Cname\u003Ea)\\k\u003Cmissing\u003E/u",
+      "passed": true
+    },
+    {
+      "name": "Expression rejected: /(?\u003Cname\u003Ea)\\k\u003Cmissing\u003E/u",
+      "passed": true
+    },
+    {
+      "name": "Expression diagnostic regexp_syntax: /(?\u003Cname\u003Ea)\\k\u003Cmissing\u003E/u",
+      "passed": true
+    },
+    {
+      "name": "Module structural parse: export const pattern = /[z-a]/u;",
+      "passed": true
+    },
+    {
+      "name": "Module rejected: export const pattern = /[z-a]/u;",
+      "passed": true
+    },
+    {
+      "name": "Module diagnostic regexp_syntax: export const pattern = /[z-a]/u;",
+      "passed": true
+    },
+    {
+      "name": "embedded grammar resource Expressions",
+      "passed": true
+    },
+    {
+      "name": "nonempty grammar resource Expressions",
+      "passed": true
+    },
+    {
+      "name": "embedded grammar resource Bindings",
+      "passed": true
+    },
+    {
+      "name": "nonempty grammar resource Bindings",
+      "passed": true
+    },
+    {
+      "name": "embedded grammar resource Statements",
+      "passed": true
+    },
+    {
+      "name": "nonempty grammar resource Statements",
+      "passed": true
+    },
+    {
+      "name": "embedded grammar resource Classes",
+      "passed": true
+    },
+    {
+      "name": "nonempty grammar resource Classes",
+      "passed": true
+    },
+    {
+      "name": "embedded grammar resource Modules",
+      "passed": true
+    },
+    {
+      "name": "nonempty grammar resource Modules",
+      "passed": true
+    },
+    {
+      "name": "embedded grammar resource Functions",
+      "passed": true
+    },
+    {
+      "name": "nonempty grammar resource Functions",
+      "passed": true
+    },
+    {
+      "name": "Unicode license is bundled in the NuGet package",
+      "passed": true
+    },
+    {
+      "name": "NuGet package contains the expected nine engine DLLs",
+      "passed": true
+    },
+    {
+      "name": "engine assembly version: AJ.Common.dll",
+      "passed": true
+    },
+    {
+      "name": "engine assembly version: Janglim.dll",
+      "passed": true
+    },
+    {
+      "name": "engine assembly version: Parse.dll",
+      "passed": true
+    },
+    {
+      "name": "engine assembly version: Parse.FrontEnd.dll",
+      "passed": true
+    },
+    {
+      "name": "engine assembly version: Parse.FrontEnd.ErrorHandler.dll",
+      "passed": true
+    },
+    {
+      "name": "engine assembly version: Parse.FrontEnd.Grammars.dll",
+      "passed": true
+    },
+    {
+      "name": "engine assembly version: Parse.FrontEnd.Grammars.Ebnf.dll",
+      "passed": true
+    },
+    {
+      "name": "engine assembly version: Parse.FrontEnd.Parsers.dll",
+      "passed": true
+    },
+    {
+      "name": "engine assembly version: Parse.FrontEnd.Support.dll",
+      "passed": true
+    },
+    {
+      "name": "NuGet package embeds README.md",
+      "passed": true
+    }
+  ]
+}

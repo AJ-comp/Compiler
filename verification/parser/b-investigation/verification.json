@@ -1,0 +1,175 @@
+{
+  "Status": "investigation_complete",
+  "RootCause": "Nonproductive grammar paths are passed into optimized LALR construction without productivity validation/pruning; active FIRST(x) computation is not the root cause.",
+  "EngineLayer": "Grammar preparation / validation / useless-rule elimination, before LR state and lookahead construction.",
+  "TestFinding": "Existing two tests pin empty lookaheads on retained LR0-only dead items. That is not the only correct handling contract; Bison removes them and ANTLR rejects these specific left-recursive forms. Tests must reflect the chosen preprocessing/validation contract.",
+  "ConflictProof": "Original U->U has an intrinsic oracle conflict, so order-sensitive failure there did not prove an algorithm defect. New U->U u variant has 0 canonical and merged oracle conflicts versus 1 Janglim conflict; ax is order-dependent. Pruning removes the difference. Productive U->U u|v control has 1 conflict in both reference and engine.",
+  "AntlrCaveat": "ANTLR rejects the original and clean left-recursive forms; right-recursive nonproductive U->q U is accepted by the generator, so no universal nonproductivity rejection claim is made.",
+  "SourceChecks": [
+    {
+      "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd\\FirstFollowAnalyzer [First].cs",
+      "Unchanged": true
+    },
+    {
+      "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\CanonicalRelation.cs",
+      "Unchanged": true
+    }
+  ],
+  "Cases": [
+    {
+      "Case": "original-unit-cycle",
+      "Reverse": false,
+      "CanonicalConflicts": 1,
+      "MergedLalrConflicts": 1,
+      "JanglimConflicts": 1,
+      "Input": "z",
+      "Accepted": true
+    },
+    {
+      "Case": "original-unit-cycle",
+      "Reverse": false,
+      "CanonicalConflicts": 1,
+      "MergedLalrConflicts": 1,
+      "JanglimConflicts": 1,
+      "Input": "ax",
+      "Accepted": false
+    },
+    {
+      "Case": "original-unit-cycle",
+      "Reverse": true,
+      "CanonicalConflicts": 1,
+      "MergedLalrConflicts": 1,
+      "JanglimConflicts": 1,
+      "Input": "z",
+      "Accepted": true
+    },
+    {
+      "Case": "original-unit-cycle",
+      "Reverse": true,
+      "CanonicalConflicts": 1,
+      "MergedLalrConflicts": 1,
+      "JanglimConflicts": 1,
+      "Input": "ax",
+      "Accepted": false
+    },
+    {
+      "Case": "overlapping-valid-path",
+      "Reverse": false,
+      "CanonicalConflicts": 1,
+      "MergedLalrConflicts": 1,
+      "JanglimConflicts": 2,
+      "Input": "ax",
+      "Accepted": false
+    },
+    {
+      "Case": "overlapping-valid-path",
+      "Reverse": true,
+      "CanonicalConflicts": 1,
+      "MergedLalrConflicts": 1,
+      "JanglimConflicts": 2,
+      "Input": "ax",
+      "Accepted": true
+    },
+    {
+      "Case": "overlap-nonproductive-left-tail",
+      "Reverse": false,
+      "CanonicalConflicts": 0,
+      "MergedLalrConflicts": 0,
+      "JanglimConflicts": 1,
+      "Input": "ax",
+      "Accepted": false
+    },
+    {
+      "Case": "overlap-nonproductive-left-tail",
+      "Reverse": true,
+      "CanonicalConflicts": 0,
+      "MergedLalrConflicts": 0,
+      "JanglimConflicts": 1,
+      "Input": "ax",
+      "Accepted": true
+    },
+    {
+      "Case": "productive-real-conflict-control",
+      "Reverse": false,
+      "CanonicalConflicts": 1,
+      "MergedLalrConflicts": 1,
+      "JanglimConflicts": 1,
+      "Input": "ax",
+      "Accepted": false
+    },
+    {
+      "Case": "productive-real-conflict-control",
+      "Reverse": false,
+      "CanonicalConflicts": 1,
+      "MergedLalrConflicts": 1,
+      "JanglimConflicts": 1,
+      "Input": "axv",
+      "Accepted": true
+    },
+    {
+      "Case": "productive-real-conflict-control",
+      "Reverse": false,
+      "CanonicalConflicts": 1,
+      "MergedLalrConflicts": 1,
+      "JanglimConflicts": 1,
+      "Input": "axvu",
+      "Accepted": true
+    },
+    {
+      "Case": "productive-real-conflict-control",
+      "Reverse": true,
+      "CanonicalConflicts": 1,
+      "MergedLalrConflicts": 1,
+      "JanglimConflicts": 1,
+      "Input": "ax",
+      "Accepted": true
+    },
+    {
+      "Case": "productive-real-conflict-control",
+      "Reverse": true,
+      "CanonicalConflicts": 1,
+      "MergedLalrConflicts": 1,
+      "JanglimConflicts": 1,
+      "Input": "axv",
+      "Accepted": false
+    },
+    {
+      "Case": "productive-real-conflict-control",
+      "Reverse": true,
+      "CanonicalConflicts": 1,
+      "MergedLalrConflicts": 1,
+      "JanglimConflicts": 1,
+      "Input": "axvu",
+      "Accepted": false
+    },
+    {
+      "Case": "pruned-valid-path",
+      "Reverse": false,
+      "CanonicalConflicts": 0,
+      "MergedLalrConflicts": 0,
+      "JanglimConflicts": 0,
+      "Input": "ax",
+      "Accepted": true
+    },
+    {
+      "Case": "pruned-valid-path",
+      "Reverse": true,
+      "CanonicalConflicts": 0,
+      "MergedLalrConflicts": 0,
+      "JanglimConflicts": 0,
+      "Input": "ax",
+      "Accepted": true
+    }
+  ],
+  "AntlrEvidence": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\verification.json",
+  "BisonEvidence": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\bison\\verification.json",
+  "IndependentOracleEvidence": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\theory-probe-20261028-105256-423\\results-with-control.json",
+  "PrimarySources": [
+    "https://www.gnu.org/software/bison/manual/html_node/Understanding.html",
+    "https://github.com/akimd/bison/blob/v3.8.2/src/main.c#L124-L144",
+    "https://github.com/akimd/bison/blob/v3.8.2/src/reduce.c",
+    "https://github.com/antlr/antlr4/blob/4.13.2/tool/src/org/antlr/v4/analysis/LeftRecursiveRuleTransformer.java#L63-L78",
+    "https://github.com/antlr/antlr4/blob/4.13.2/tool/src/org/antlr/v4/analysis/LeftRecursiveRuleTransformer.java#L145-L150",
+    "https://3e8.org/pub/scheme/doc/parsing/Efficient%20Computation%20of%20LALR%281%29%20Look-Ahead%20Sets.pdf"
+  ]
+}

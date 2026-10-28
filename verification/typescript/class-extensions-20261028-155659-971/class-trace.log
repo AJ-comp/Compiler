@@ -1,0 +1,411 @@
+INPUT class C { readonly value: number; }
+SUCCESS False EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+I0 TOKEN=class KIND=class ACTION=shift 48 ERROR=
+  CANDIDATE Shift 48
+  CANDIDATE EpsilonReduce __predicate6 -> epsilon PRED=ExpressionStatementStart
+I48 TOKEN=C KIND=IdentifierName ACTION=shift 62 ERROR=
+  CANDIDATE Shift 62
+I62 TOKEN={ KIND={ ACTION=reduce BindingIdentifier -> IdentifierName ERROR=
+  CANDIDATE Reduce BindingIdentifier -> IdentifierName PRED=
+I48 TOKEN={ KIND={ ACTION=goto 258 ERROR=
+I258 TOKEN={ KIND={ ACTION=epsilon reduce TSOptionalTypeParameters -> epsilon ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I258 TOKEN={ KIND={ ACTION=goto 711 ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I711 TOKEN={ KIND={ ACTION=shift 886 ERROR=
+  CANDIDATE Shift 886
+I886 TOKEN=readonly KIND=readonly ACTION=shift 786 ERROR=
+  CANDIDATE Shift 786
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+  CANDIDATE EpsilonReduce __predicate14 -> epsilon PRED=TSClassIndexSignatureStart
+I786 TOKEN=value KIND=IdentifierName ACTION=reduce PropertyIdentifierName -> readonly ERROR=
+  CANDIDATE Reduce PropertyIdentifierName -> readonly PRED=
+I886 TOKEN=value KIND=IdentifierName ACTION=goto 339 ERROR=
+  CANDIDATE Shift 769
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I339 TOKEN=value KIND=IdentifierName ACTION=reduce PropertyName -> PropertyIdentifierName ERROR=
+  CANDIDATE Reduce PropertyName -> PropertyIdentifierName PRED=
+I886 TOKEN=value KIND=IdentifierName ACTION=goto 1101 ERROR=
+  CANDIDATE Shift 769
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I1101 TOKEN=value KIND=IdentifierName ACTION=reduce ClassElementName -> PropertyName ERROR=
+  CANDIDATE Reduce ClassElementName -> PropertyName PRED=
+I886 TOKEN=value KIND=IdentifierName ACTION=goto 1100 ERROR=
+  CANDIDATE Shift 769
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I1100 TOKEN=value KIND=IdentifierName ACTION=failed null ERROR=Grammar predicate ClassModifierName evaluated to false.
+  CANDIDATE EpsilonReduce __predicate16 -> epsilon PRED=ClassModifierName
+  CANDIDATE EpsilonReduce __predicate18 -> epsilon PRED=ClassFieldEnd
+  CANDIDATE EpsilonReduce __predicate35 -> epsilon PRED=AsyncModifier
+  ITEM ClassMethod -> ClassElementName•TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM TSClassMethodOptional ->•TSOptional
+  ITEM TSOptional ->•?
+  ITEM TSClassMethodOptional ->•
+  ITEM ClassMethod -> ClassElementName•ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassModifierName ->•__predicate16 ClassElementName
+  ITEM __predicate16 ->•
+  ITEM ClassMethod -> ClassElementName•ClassModifierName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassMethod -> ClassElementName•TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassMethod -> ClassElementName•ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassMethod -> ClassElementName•ClassModifierName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassField -> ClassElementName•TSClassFieldMarker TSAnnotation ClassFieldEnd
+  ITEM TSClassFieldMarker ->•TSOptional
+  ITEM TSClassFieldMarker ->•TSDefinite
+  ITEM TSDefinite ->•NoLineTerminator !
+  ITEM NoLineTerminator ->•__predicate3
+  ITEM __predicate3 ->•
+  ITEM ClassField -> ClassElementName•TSClassFieldMarker ClassFieldEnd
+  ITEM ClassField -> ClassElementName•TSAnnotation ClassFieldEnd
+  ITEM TSAnnotation ->•: TSType
+  ITEM ClassField -> ClassElementName•ClassFieldEnd
+  ITEM ClassFieldEnd ->•;
+  ITEM ClassFieldEnd ->•__predicate18
+  ITEM __predicate18 ->•
+  ITEM ClassField -> ClassElementName•TSClassFieldMarker TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•TSClassFieldMarker Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•Initializer ClassFieldExpressionEnd
+  ITEM Initializer ->•= AssignmentExpression
+  ITEM ClassField -> ClassElementName•ClassModifierName TSClassFieldMarker TSAnnotation ClassFieldEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSClassFieldMarker ClassFieldEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSAnnotation ClassFieldEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName ClassFieldEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSClassFieldMarker TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSClassFieldMarker Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName Initializer ClassFieldExpressionEnd
+  ITEM ClassStaticBlock -> ClassElementName•__predicate20 ClassStaticBody
+  ITEM __predicate20 ->•
+  ITEM ClassAsyncMethod -> ClassElementName•AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM AsyncModifier ->•__predicate35
+  ITEM __predicate35 ->•
+  ITEM ClassAsyncMethod -> ClassElementName•AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod -> ClassElementName•ClassModifierName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod -> ClassElementName•ClassModifierName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod -> ClassElementName•AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod -> ClassElementName•AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod -> ClassElementName•ClassModifierName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod -> ClassElementName•ClassModifierName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassGeneratorMethod -> ClassElementName•StaticGeneratorModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM StaticGeneratorModifier ->•__predicate38
+  ITEM __predicate38 ->•
+  ITEM ClassGeneratorMethod -> ClassElementName•StaticGeneratorModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+INPUT class C { public get value(): number { return 1; } }
+SUCCESS False EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+I0 TOKEN=class KIND=class ACTION=shift 48 ERROR=
+  CANDIDATE Shift 48
+  CANDIDATE EpsilonReduce __predicate6 -> epsilon PRED=ExpressionStatementStart
+I48 TOKEN=C KIND=IdentifierName ACTION=shift 62 ERROR=
+  CANDIDATE Shift 62
+I62 TOKEN={ KIND={ ACTION=reduce BindingIdentifier -> IdentifierName ERROR=
+  CANDIDATE Reduce BindingIdentifier -> IdentifierName PRED=
+I48 TOKEN={ KIND={ ACTION=goto 258 ERROR=
+I258 TOKEN={ KIND={ ACTION=epsilon reduce TSOptionalTypeParameters -> epsilon ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I258 TOKEN={ KIND={ ACTION=goto 711 ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I711 TOKEN={ KIND={ ACTION=shift 886 ERROR=
+  CANDIDATE Shift 886
+I886 TOKEN=public KIND=public ACTION=epsilon reduce __predicate51 -> epsilon ERROR=
+  CANDIDATE Shift 385
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I886 TOKEN=public KIND=public ACTION=goto 1109 ERROR=
+  CANDIDATE Shift 385
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I1109 TOKEN=public KIND=public ACTION=epsilon reduce __predicate57 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1109 TOKEN=public KIND=public ACTION=goto 1380 ERROR=
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1380 TOKEN=public KIND=public ACTION=shift 385 ERROR=
+  CANDIDATE Shift 385
+I385 TOKEN=get KIND=get ACTION=reduce ReservedWord -> public ERROR=
+  CANDIDATE Reduce ReservedWord -> public PRED=
+I1380 TOKEN=get KIND=get ACTION=goto 340 ERROR=
+  CANDIDATE Shift 796
+I340 TOKEN=get KIND=get ACTION=reduce PropertyIdentifierName -> ReservedWord ERROR=
+  CANDIDATE Reduce PropertyIdentifierName -> ReservedWord PRED=
+I1380 TOKEN=get KIND=get ACTION=goto 339 ERROR=
+  CANDIDATE Shift 796
+I339 TOKEN=get KIND=get ACTION=reduce PropertyName -> PropertyIdentifierName ERROR=
+  CANDIDATE Reduce PropertyName -> PropertyIdentifierName PRED=
+I1380 TOKEN=get KIND=get ACTION=goto 1101 ERROR=
+  CANDIDATE Shift 796
+I1101 TOKEN=get KIND=get ACTION=reduce ClassElementName -> PropertyName ERROR=
+  CANDIDATE Reduce ClassElementName -> PropertyName PRED=
+I1380 TOKEN=get KIND=get ACTION=goto 1843 ERROR=
+  CANDIDATE Shift 796
+I1843 TOKEN=get KIND=get ACTION=reduce TSModifier -> __predicate57 ClassElementName ERROR=
+  CANDIDATE Reduce TSModifier -> __predicate57 ClassElementName PRED=
+I1109 TOKEN=get KIND=get ACTION=goto 1379 ERROR=
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1379 TOKEN=get KIND=get ACTION=reduce TSModifierList -> TSModifier ERROR=
+  CANDIDATE Reduce TSModifierList -> TSModifier PRED=
+I1109 TOKEN=get KIND=get ACTION=goto 1378 ERROR=
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1378 TOKEN=get KIND=get ACTION=epsilon reduce __predicate55 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate55 -> epsilon PRED=TSNoClassModifierStart
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1378 TOKEN=get KIND=get ACTION=goto 1841 ERROR=
+  CANDIDATE EpsilonReduce __predicate55 -> epsilon PRED=TSNoClassModifierStart
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1841 TOKEN=get KIND=get ACTION=reduce TSModifiers -> TSModifierList __predicate55 ERROR=
+  CANDIDATE Reduce TSModifiers -> TSModifierList __predicate55 PRED=
+I1109 TOKEN=get KIND=get ACTION=goto 1377 ERROR=
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1377 TOKEN=get KIND=get ACTION=shift 796 ERROR=
+  CANDIDATE Shift 796
+I796 TOKEN=value KIND=IdentifierName ACTION=reduce PropertyIdentifierName -> get ERROR=
+  CANDIDATE Reduce PropertyIdentifierName -> get PRED=
+I1377 TOKEN=value KIND=IdentifierName ACTION=goto 339 ERROR=
+  CANDIDATE Shift 769
+I339 TOKEN=value KIND=IdentifierName ACTION=reduce PropertyName -> PropertyIdentifierName ERROR=
+  CANDIDATE Reduce PropertyName -> PropertyIdentifierName PRED=
+I1377 TOKEN=value KIND=IdentifierName ACTION=goto 1101 ERROR=
+  CANDIDATE Shift 769
+I1101 TOKEN=value KIND=IdentifierName ACTION=reduce ClassElementName -> PropertyName ERROR=
+  CANDIDATE Reduce ClassElementName -> PropertyName PRED=
+I1377 TOKEN=value KIND=IdentifierName ACTION=goto 1100 ERROR=
+  CANDIDATE Shift 769
+I1100 TOKEN=value KIND=IdentifierName ACTION=failed null ERROR=Grammar predicate ClassModifierName evaluated to false.
+  CANDIDATE EpsilonReduce __predicate16 -> epsilon PRED=ClassModifierName
+  CANDIDATE EpsilonReduce __predicate18 -> epsilon PRED=ClassFieldEnd
+  CANDIDATE EpsilonReduce __predicate35 -> epsilon PRED=AsyncModifier
+  ITEM ClassMethod -> ClassElementName•TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM TSClassMethodOptional ->•TSOptional
+  ITEM TSOptional ->•?
+  ITEM TSClassMethodOptional ->•
+  ITEM ClassMethod -> ClassElementName•ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassModifierName ->•__predicate16 ClassElementName
+  ITEM __predicate16 ->•
+  ITEM ClassMethod -> ClassElementName•ClassModifierName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassMethod -> ClassElementName•TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassMethod -> ClassElementName•ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassMethod -> ClassElementName•ClassModifierName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassField -> ClassElementName•TSClassFieldMarker TSAnnotation ClassFieldEnd
+  ITEM TSClassFieldMarker ->•TSOptional
+  ITEM TSClassFieldMarker ->•TSDefinite
+  ITEM TSDefinite ->•NoLineTerminator !
+  ITEM NoLineTerminator ->•__predicate3
+  ITEM __predicate3 ->•
+  ITEM ClassField -> ClassElementName•TSClassFieldMarker ClassFieldEnd
+  ITEM ClassField -> ClassElementName•TSAnnotation ClassFieldEnd
+  ITEM TSAnnotation ->•: TSType
+  ITEM ClassField -> ClassElementName•ClassFieldEnd
+  ITEM ClassFieldEnd ->•;
+  ITEM ClassFieldEnd ->•__predicate18
+  ITEM __predicate18 ->•
+  ITEM ClassField -> ClassElementName•TSClassFieldMarker TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•TSClassFieldMarker Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•Initializer ClassFieldExpressionEnd
+  ITEM Initializer ->•= AssignmentExpression
+  ITEM ClassField -> ClassElementName•ClassModifierName TSClassFieldMarker TSAnnotation ClassFieldEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSClassFieldMarker ClassFieldEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSAnnotation ClassFieldEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName ClassFieldEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSClassFieldMarker TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSClassFieldMarker Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName Initializer ClassFieldExpressionEnd
+  ITEM ClassStaticBlock -> ClassElementName•__predicate20 ClassStaticBody
+  ITEM __predicate20 ->•
+  ITEM ClassAsyncMethod -> ClassElementName•AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM AsyncModifier ->•__predicate35
+  ITEM __predicate35 ->•
+  ITEM ClassAsyncMethod -> ClassElementName•AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod -> ClassElementName•ClassModifierName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod -> ClassElementName•ClassModifierName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod -> ClassElementName•AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod -> ClassElementName•AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod -> ClassElementName•ClassModifierName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod -> ClassElementName•ClassModifierName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassGeneratorMethod -> ClassElementName•StaticGeneratorModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM StaticGeneratorModifier ->•__predicate38
+  ITEM __predicate38 ->•
+  ITEM ClassGeneratorMethod -> ClassElementName•StaticGeneratorModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+INPUT class C { public value: number; }
+SUCCESS True EXCEPTION 
+I0 TOKEN=class KIND=class ACTION=shift 48 ERROR=
+  CANDIDATE Shift 48
+  CANDIDATE EpsilonReduce __predicate6 -> epsilon PRED=ExpressionStatementStart
+I48 TOKEN=C KIND=IdentifierName ACTION=shift 62 ERROR=
+  CANDIDATE Shift 62
+I62 TOKEN={ KIND={ ACTION=reduce BindingIdentifier -> IdentifierName ERROR=
+  CANDIDATE Reduce BindingIdentifier -> IdentifierName PRED=
+I48 TOKEN={ KIND={ ACTION=goto 258 ERROR=
+I258 TOKEN={ KIND={ ACTION=epsilon reduce TSOptionalTypeParameters -> epsilon ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I258 TOKEN={ KIND={ ACTION=goto 711 ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I711 TOKEN={ KIND={ ACTION=shift 886 ERROR=
+  CANDIDATE Shift 886
+I886 TOKEN=public KIND=public ACTION=epsilon reduce __predicate51 -> epsilon ERROR=
+  CANDIDATE Shift 385
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I886 TOKEN=public KIND=public ACTION=goto 1109 ERROR=
+  CANDIDATE Shift 385
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I1109 TOKEN=public KIND=public ACTION=epsilon reduce __predicate57 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1109 TOKEN=public KIND=public ACTION=goto 1380 ERROR=
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1380 TOKEN=public KIND=public ACTION=shift 385 ERROR=
+  CANDIDATE Shift 385
+I385 TOKEN=value KIND=IdentifierName ACTION=reduce ReservedWord -> public ERROR=
+  CANDIDATE Reduce ReservedWord -> public PRED=
+I1380 TOKEN=value KIND=IdentifierName ACTION=goto 340 ERROR=
+  CANDIDATE Shift 769
+I340 TOKEN=value KIND=IdentifierName ACTION=reduce PropertyIdentifierName -> ReservedWord ERROR=
+  CANDIDATE Reduce PropertyIdentifierName -> ReservedWord PRED=
+I1380 TOKEN=value KIND=IdentifierName ACTION=goto 339 ERROR=
+  CANDIDATE Shift 769
+I339 TOKEN=value KIND=IdentifierName ACTION=reduce PropertyName -> PropertyIdentifierName ERROR=
+  CANDIDATE Reduce PropertyName -> PropertyIdentifierName PRED=
+I1380 TOKEN=value KIND=IdentifierName ACTION=goto 1101 ERROR=
+  CANDIDATE Shift 769
+I1101 TOKEN=value KIND=IdentifierName ACTION=reduce ClassElementName -> PropertyName ERROR=
+  CANDIDATE Reduce ClassElementName -> PropertyName PRED=
+I1380 TOKEN=value KIND=IdentifierName ACTION=goto 1843 ERROR=
+  CANDIDATE Shift 769
+I1843 TOKEN=value KIND=IdentifierName ACTION=reduce TSModifier -> __predicate57 ClassElementName ERROR=
+  CANDIDATE Reduce TSModifier -> __predicate57 ClassElementName PRED=
+I1109 TOKEN=value KIND=IdentifierName ACTION=goto 1379 ERROR=
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1379 TOKEN=value KIND=IdentifierName ACTION=reduce TSModifierList -> TSModifier ERROR=
+  CANDIDATE Reduce TSModifierList -> TSModifier PRED=
+I1109 TOKEN=value KIND=IdentifierName ACTION=goto 1378 ERROR=
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1378 TOKEN=value KIND=IdentifierName ACTION=epsilon reduce __predicate55 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate55 -> epsilon PRED=TSNoClassModifierStart
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1378 TOKEN=value KIND=IdentifierName ACTION=goto 1841 ERROR=
+  CANDIDATE EpsilonReduce __predicate55 -> epsilon PRED=TSNoClassModifierStart
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1841 TOKEN=value KIND=IdentifierName ACTION=reduce TSModifiers -> TSModifierList __predicate55 ERROR=
+  CANDIDATE Reduce TSModifiers -> TSModifierList __predicate55 PRED=
+I1109 TOKEN=value KIND=IdentifierName ACTION=goto 1377 ERROR=
+  CANDIDATE EpsilonReduce __predicate57 -> epsilon PRED=TSClassModifierStart
+I1377 TOKEN=value KIND=IdentifierName ACTION=shift 769 ERROR=
+  CANDIDATE Shift 769
+I769 TOKEN=: KIND=: ACTION=reduce PropertyIdentifierName -> IdentifierName ERROR=
+  CANDIDATE Reduce PropertyIdentifierName -> IdentifierName PRED=
+I1377 TOKEN=: KIND=: ACTION=goto 339 ERROR=
+I339 TOKEN=: KIND=: ACTION=reduce PropertyName -> PropertyIdentifierName ERROR=
+  CANDIDATE Reduce PropertyName -> PropertyIdentifierName PRED=
+I1377 TOKEN=: KIND=: ACTION=goto 1101 ERROR=
+I1101 TOKEN=: KIND=: ACTION=reduce ClassElementName -> PropertyName ERROR=
+  CANDIDATE Reduce ClassElementName -> PropertyName PRED=
+I1377 TOKEN=: KIND=: ACTION=goto 1100 ERROR=
+I1100 TOKEN=: KIND=: ACTION=shift 286 ERROR=
+  CANDIDATE Shift 286
+I286 TOKEN=number KIND=number ACTION=epsilon reduce __predicate67 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate67 -> epsilon PRED=TSNotFunctionTypeStart
+I286 TOKEN=number KIND=number ACTION=goto 727 ERROR=
+  CANDIDATE EpsilonReduce __predicate67 -> epsilon PRED=TSNotFunctionTypeStart
+I727 TOKEN=number KIND=number ACTION=epsilon reduce __predicate83 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate83 -> epsilon PRED=TSNotAssertsTypePredicateStart
+I727 TOKEN=number KIND=number ACTION=goto 1026 ERROR=
+  CANDIDATE EpsilonReduce __predicate83 -> epsilon PRED=TSNotAssertsTypePredicateStart
+I1026 TOKEN=number KIND=number ACTION=shift 1124 ERROR=
+  CANDIDATE Shift 1124
+I1124 TOKEN=; KIND=; ACTION=reduce TSPrimitiveType -> number ERROR=
+  CANDIDATE Reduce TSPrimitiveType -> number PRED=
+I1026 TOKEN=; KIND=; ACTION=goto 1277 ERROR=
+I1277 TOKEN=; KIND=; ACTION=reduce TSNonAssertsPrimaryType -> TSPrimitiveType ERROR=
+  CANDIDATE Reduce TSNonAssertsPrimaryType -> TSPrimitiveType PRED=
+I1026 TOKEN=; KIND=; ACTION=goto 1276 ERROR=
+I1276 TOKEN=; KIND=; ACTION=reduce TSPrimaryType -> __predicate83 TSNonAssertsPrimaryType ERROR=
+  CANDIDATE Reduce TSPrimaryType -> __predicate83 TSNonAssertsPrimaryType PRED=
+I727 TOKEN=; KIND=; ACTION=goto 1024 ERROR=
+I1024 TOKEN=; KIND=; ACTION=reduce TSPostfixCore -> TSPrimaryType ERROR=
+  CANDIDATE Reduce TSPostfixCore -> TSPrimaryType PRED=
+I727 TOKEN=; KIND=; ACTION=goto 1023 ERROR=
+I1023 TOKEN=; KIND=; ACTION=epsilon reduce __predicate78 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate78 -> epsilon PRED=TSNotPostfixTypeStart
+I1023 TOKEN=; KIND=; ACTION=goto 1271 ERROR=
+  CANDIDATE EpsilonReduce __predicate78 -> epsilon PRED=TSNotPostfixTypeStart
+I1271 TOKEN=; KIND=; ACTION=reduce TSPostfixType -> TSPostfixCore __predicate78 ERROR=
+  CANDIDATE Reduce TSPostfixType -> TSPostfixCore __predicate78 PRED=
+I727 TOKEN=; KIND=; ACTION=goto 1022 ERROR=
+I1022 TOKEN=; KIND=; ACTION=reduce TSTypeOperator -> TSPostfixType ERROR=
+  CANDIDATE Reduce TSTypeOperator -> TSPostfixType PRED=
+I727 TOKEN=; KIND=; ACTION=goto 1021 ERROR=
+I1021 TOKEN=; KIND=; ACTION=reduce TSIntersectionType -> TSTypeOperator ERROR=
+  CANDIDATE Reduce TSIntersectionType -> TSTypeOperator PRED=
+I727 TOKEN=; KIND=; ACTION=goto 1020 ERROR=
+I1020 TOKEN=; KIND=; ACTION=reduce TSUnionType -> TSIntersectionType ERROR=
+  CANDIDATE Reduce TSUnionType -> TSIntersectionType PRED=
+I727 TOKEN=; KIND=; ACTION=goto 1019 ERROR=
+I1019 TOKEN=; KIND=; ACTION=epsilon reduce __predicate74 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate74 -> epsilon PRED=TSNotConditionalTypeStart
+I1019 TOKEN=; KIND=; ACTION=goto 1267 ERROR=
+  CANDIDATE EpsilonReduce __predicate74 -> epsilon PRED=TSNotConditionalTypeStart
+I1267 TOKEN=; KIND=; ACTION=reduce TSConditionalType -> TSUnionType __predicate74 ERROR=
+  CANDIDATE Reduce TSConditionalType -> TSUnionType __predicate74 PRED=
+I727 TOKEN=; KIND=; ACTION=goto 1018 ERROR=
+I1018 TOKEN=; KIND=; ACTION=reduce TSType -> __predicate67 TSConditionalType ERROR=
+  CANDIDATE Reduce TSType -> __predicate67 TSConditionalType PRED=
+I286 TOKEN=; KIND=; ACTION=goto 725 ERROR=
+I725 TOKEN=; KIND=; ACTION=reduce TSAnnotation -> : TSType ERROR=
+  CANDIDATE Reduce TSAnnotation -> : TSType PRED=
+I1100 TOKEN=; KIND=; ACTION=goto 1367 ERROR=
+  CANDIDATE Shift 1369
+  CANDIDATE EpsilonReduce __predicate18 -> epsilon PRED=ClassFieldEnd
+I1367 TOKEN=; KIND=; ACTION=shift 1369 ERROR=
+  CANDIDATE Shift 1369
+  CANDIDATE EpsilonReduce __predicate18 -> epsilon PRED=ClassFieldEnd
+I1369 TOKEN=} KIND=} ACTION=reduce ClassFieldEnd -> ; ERROR=
+  CANDIDATE Reduce ClassFieldEnd -> ; PRED=
+I1367 TOKEN=} KIND=} ACTION=goto 1821 ERROR=
+  CANDIDATE EpsilonReduce __predicate18 -> epsilon PRED=ClassFieldEnd
+I1821 TOKEN=} KIND=} ACTION=reduce ClassField -> ClassElementName TSAnnotation ClassFieldEnd ERROR=
+  CANDIDATE Reduce ClassField -> ClassElementName TSAnnotation ClassFieldEnd PRED=
+I1377 TOKEN=} KIND=} ACTION=goto 1836 ERROR=
+I1836 TOKEN=} KIND=} ACTION=reduce TSClassMember -> ClassField ERROR=
+  CANDIDATE Reduce TSClassMember -> ClassField PRED=
+I1377 TOKEN=} KIND=} ACTION=goto 1834 ERROR=
+I1834 TOKEN=} KIND=} ACTION=reduce TSClassModifiedMember -> TSClassMember ERROR=
+  CANDIDATE Reduce TSClassModifiedMember -> TSClassMember PRED=
+I1377 TOKEN=} KIND=} ACTION=goto 1833 ERROR=
+I1833 TOKEN=} KIND=} ACTION=reduce TSClassModifiedElement -> __predicate51 TSModifiers TSClassModifiedMember ERROR=
+  CANDIDATE Reduce TSClassModifiedElement -> __predicate51 TSModifiers TSClassModifiedMember PRED=
+I886 TOKEN=} KIND=} ACTION=goto 1108 ERROR=
+  CANDIDATE Shift 1095
+I1108 TOKEN=} KIND=} ACTION=reduce ClassElement -> TSClassModifiedElement ERROR=
+  CANDIDATE Reduce ClassElement -> TSClassModifiedElement PRED=
+I886 TOKEN=} KIND=} ACTION=goto 1097 ERROR=
+  CANDIDATE Shift 1095
+I1097 TOKEN=} KIND=} ACTION=reduce ClassElementList -> ClassElement ERROR=
+  CANDIDATE Reduce ClassElementList -> ClassElement PRED=
+I886 TOKEN=} KIND=} ACTION=goto 1096 ERROR=
+  CANDIDATE Shift 1095
+I1096 TOKEN=} KIND=} ACTION=shift 1358 ERROR=
+  CANDIDATE Shift 1358
+I1358 TOKEN= KIND=щ ACTION=reduce ClassBody -> { ClassElementList } ERROR=
+  CANDIDATE Reduce ClassBody -> { ClassElementList } PRED=
+I711 TOKEN= KIND=щ ACTION=goto 885 ERROR=
+I885 TOKEN= KIND=щ ACTION=reduce ClassTail -> ClassBody ERROR=
+  CANDIDATE Reduce ClassTail -> ClassBody PRED=
+I711 TOKEN= KIND=щ ACTION=goto 985 ERROR=
+I985 TOKEN= KIND=щ ACTION=reduce ClassDeclaration -> class BindingIdentifier TSOptionalTypeParameters ClassTail ERROR=
+  CANDIDATE Reduce ClassDeclaration -> class BindingIdentifier TSOptionalTypeParameters ClassTail PRED=
+I0 TOKEN= KIND=щ ACTION=goto 47 ERROR=
+  CANDIDATE EpsilonReduce Script -> epsilon PRED=
+I47 TOKEN= KIND=щ ACTION=reduce Declaration -> ClassDeclaration ERROR=
+  CANDIDATE Reduce Declaration -> ClassDeclaration PRED=
+I0 TOKEN= KIND=щ ACTION=goto 40 ERROR=
+  CANDIDATE EpsilonReduce Script -> epsilon PRED=
+I40 TOKEN= KIND=щ ACTION=reduce StatementListItem -> Declaration ERROR=
+  CANDIDATE Reduce StatementListItem -> Declaration PRED=
+I0 TOKEN= KIND=щ ACTION=goto 3 ERROR=
+  CANDIDATE EpsilonReduce Script -> epsilon PRED=
+I3 TOKEN= KIND=щ ACTION=reduce StatementList -> StatementListItem ERROR=
+  CANDIDATE Reduce StatementList -> StatementListItem PRED=
+I0 TOKEN= KIND=щ ACTION=goto 2 ERROR=
+  CANDIDATE EpsilonReduce Script -> epsilon PRED=
+I2 TOKEN= KIND=щ ACTION=reduce Script -> StatementList ERROR=
+  CANDIDATE Reduce Script -> StatementList PRED=
+I0 TOKEN= KIND=щ ACTION=goto 1 ERROR=
+  CANDIDATE EpsilonReduce Script -> epsilon PRED=
+I1 TOKEN= KIND=щ ACTION=accept Accept -> Script ERROR=
+  CANDIDATE Accept Accept -> Script PRED=

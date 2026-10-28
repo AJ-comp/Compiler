@@ -1,0 +1,14 @@
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Release\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Release\netstandard2.1\Parse.dll
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Release\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Release\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:14.81]     Janglim.FrontEnd.Parsers.Tests.SlrKnownIssueTests.Slr_should_parse_valid_Ex1 [SKIP]
+  건너뜀 Janglim.FrontEnd.Parsers.Tests.SlrKnownIssueTests.Slr_should_parse_valid_Ex1 [1 ms]
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\modules\tests\modules-engine.trx
+
+통과!  - 실패:     0, 통과:  3827, 건너뜀:     1, 전체:  3828, 기간: 19 s - Parse.FrontEnd.Parsers.Tests.dll (net8.0)

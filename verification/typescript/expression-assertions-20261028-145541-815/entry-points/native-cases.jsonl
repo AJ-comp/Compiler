@@ -1,0 +1,20 @@
+{"kind":"ts","id":"0","source":"value! as Box<T> satisfies Named"}
+{"kind":"ts","id":"1","source":"(value as { property: number })!.property"}
+{"kind":"ts","id":"2","source":"(value satisfies unknown)!()"}
+{"kind":"ts","id":"3","source":"value!!"}
+{"kind":"ts","id":"4","source":"base?.property!.next as Result"}
+{"kind":"ts","id":"5","source":"value as number!"}
+{"kind":"ts","id":"6","source":"value!; other"}
+{"kind":"ts","id":"7","source":"base?.property! = next"}
+{"kind":"ts","id":"8","source":"export const result = (value as T)!;"}
+{"kind":"ts","id":"9","source":"export const result = value! satisfies T;"}
+{"kind":"ts","id":"10","source":"export const result = (await task)! as Result;"}
+{"kind":"ts","id":"11","source":"export default (value as T)!;"}
+{"kind":"ts","id":"12","source":"export const result = (await)!;"}
+{"kind":"ts","id":"13","source":"export const result = value!; with (obj) {}"}
+{"kind":"ts","id":"14","source":"const result = value!; export { missing };"}
+{"kind":"ts","id":"15","source":"\"use strict\" as string; with (obj) { value!; }"}
+{"kind":"ts","id":"16","source":"\"use strict\" satisfies string; with (obj) { value!; }"}
+{"kind":"ts","id":"17","source":"\"use strict\"!; with (obj) { value!; }"}
+{"kind":"ts","id":"18","source":"\"use strict\"; with (obj) { value!; }"}
+{"kind":"ts","id":"19","source":"\"use strict\"; eval! = value;"}

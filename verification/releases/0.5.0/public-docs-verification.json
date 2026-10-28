@@ -1,0 +1,50 @@
+{
+  "verifiedAtUtc": "2026-10-21T02:06:42.961288+00:00",
+  "deploymentRun": 39531086380,
+  "deploymentRunStatus": "completed",
+  "deploymentRunConclusion": "success",
+  "deploymentHeadSha": "1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+  "assets": [
+    {
+      "url": "https://aj-comp.github.io/Compiler/ko/parser-driven-lexing.html",
+      "status": 200,
+      "bytes": 58909,
+      "sha256": "ba011f372314ba8e4f82d9f183f386b02d9346640d681b3d38845da4359c9f48",
+      "expectedBytes": 58909,
+      "expectedSha256": "ba011f372314ba8e4f82d9f183f386b02d9346640d681b3d38845da4359c9f48",
+      "matches": true,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://aj-comp.github.io/Compiler/images/token-cursor-fields.png",
+      "status": 200,
+      "bytes": 115173,
+      "sha256": "c0f6103d5c5b8edf3c1292e536696735eeaf8e48b2918818655b1ef6e1297417",
+      "expectedBytes": 115173,
+      "expectedSha256": "c0f6103d5c5b8edf3c1292e536696735eeaf8e48b2918818655b1ef6e1297417",
+      "matches": true,
+      "contentType": "image/png"
+    },
+    {
+      "url": "https://aj-comp.github.io/Compiler/images/token-cursor-storage.png",
+      "status": 200,
+      "bytes": 157531,
+      "sha256": "4fc6686a6b88a7d42500c7f2a3759c05258eab95c2694d12064675710b14ea13",
+      "expectedBytes": 157531,
+      "expectedSha256": "4fc6686a6b88a7d42500c7f2a3759c05258eab95c2694d12064675710b14ea13",
+      "matches": true,
+      "contentType": "image/png"
+    },
+    {
+      "url": "https://aj-comp.github.io/Compiler/images/token-cursor-peek.png",
+      "status": 200,
+      "bytes": 138988,
+      "sha256": "24801a5b717bd72a58a9a7715db82467c1d3ff9a4af4198d6fc1440bef2d818a",
+      "expectedBytes": 138988,
+      "expectedSha256": "24801a5b717bd72a58a9a7715db82467c1d3ff9a4af4198d6fc1440bef2d818a",
+      "matches": true,
+      "contentType": "image/png"
+    }
+  ],
+  "allMatched": true
+}

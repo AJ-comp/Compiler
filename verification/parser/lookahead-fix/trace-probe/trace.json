@@ -1,0 +1,502 @@
+{
+  "seed": [
+    "I0 \u00B7 Accept \u2192 \u2022 S"
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "source": "I0 \u00B7 Accept \u2192 \u2022 S",
+      "lookahead": "{EOF}",
+      "updates": [
+        {
+          "target": "I1 \u00B7 Accept \u2192 S \u2022",
+          "first": null,
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        },
+        {
+          "target": "I0 \u00B7 S \u2192 \u2022 G C",
+          "first": "{}",
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        }
+      ],
+      "queue": [
+        "I1 \u00B7 Accept \u2192 S \u2022",
+        "I0 \u00B7 S \u2192 \u2022 G C"
+      ]
+    },
+    {
+      "round": 2,
+      "source": "I1 \u00B7 Accept \u2192 S \u2022",
+      "lookahead": "{EOF}",
+      "updates": [],
+      "queue": [
+        "I0 \u00B7 S \u2192 \u2022 G C"
+      ]
+    },
+    {
+      "round": 3,
+      "source": "I0 \u00B7 S \u2192 \u2022 G C",
+      "lookahead": "{EOF}",
+      "updates": [
+        {
+          "target": "I2 \u00B7 S \u2192 G \u2022 C",
+          "first": null,
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        },
+        {
+          "target": "I0 \u00B7 G \u2192 \u2022",
+          "first": "{\u0027a\u0027, \u0027b\u0027, \u0027e\u0027}",
+          "inherit": false,
+          "before": "{}",
+          "after": "{\u0027a\u0027, \u0027b\u0027, \u0027e\u0027}",
+          "changed": true,
+          "enqueued": true
+        }
+      ],
+      "queue": [
+        "I2 \u00B7 S \u2192 G \u2022 C",
+        "I0 \u00B7 G \u2192 \u2022"
+      ]
+    },
+    {
+      "round": 4,
+      "source": "I2 \u00B7 S \u2192 G \u2022 C",
+      "lookahead": "{EOF}",
+      "updates": [
+        {
+          "target": "I3 \u00B7 S \u2192 G C \u2022",
+          "first": null,
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        },
+        {
+          "target": "I2 \u00B7 C \u2192 \u2022 R",
+          "first": "{}",
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        },
+        {
+          "target": "I2 \u00B7 C \u2192 \u2022 \u0027e\u0027 S",
+          "first": "{}",
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        }
+      ],
+      "queue": [
+        "I0 \u00B7 G \u2192 \u2022",
+        "I3 \u00B7 S \u2192 G C \u2022",
+        "I2 \u00B7 C \u2192 \u2022 R",
+        "I2 \u00B7 C \u2192 \u2022 \u0027e\u0027 S"
+      ]
+    },
+    {
+      "round": 5,
+      "source": "I0 \u00B7 G \u2192 \u2022",
+      "lookahead": "{\u0027a\u0027, \u0027b\u0027, \u0027e\u0027}",
+      "updates": [],
+      "queue": [
+        "I3 \u00B7 S \u2192 G C \u2022",
+        "I2 \u00B7 C \u2192 \u2022 R",
+        "I2 \u00B7 C \u2192 \u2022 \u0027e\u0027 S"
+      ]
+    },
+    {
+      "round": 6,
+      "source": "I3 \u00B7 S \u2192 G C \u2022",
+      "lookahead": "{EOF}",
+      "updates": [],
+      "queue": [
+        "I2 \u00B7 C \u2192 \u2022 R",
+        "I2 \u00B7 C \u2192 \u2022 \u0027e\u0027 S"
+      ]
+    },
+    {
+      "round": 7,
+      "source": "I2 \u00B7 C \u2192 \u2022 R",
+      "lookahead": "{EOF}",
+      "updates": [
+        {
+          "target": "I4 \u00B7 C \u2192 R \u2022",
+          "first": null,
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        },
+        {
+          "target": "I2 \u00B7 R \u2192 \u2022 \u0027a\u0027",
+          "first": "{}",
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        },
+        {
+          "target": "I2 \u00B7 R \u2192 \u2022 \u0027b\u0027 S",
+          "first": "{}",
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        }
+      ],
+      "queue": [
+        "I2 \u00B7 C \u2192 \u2022 \u0027e\u0027 S",
+        "I4 \u00B7 C \u2192 R \u2022",
+        "I2 \u00B7 R \u2192 \u2022 \u0027a\u0027",
+        "I2 \u00B7 R \u2192 \u2022 \u0027b\u0027 S"
+      ]
+    },
+    {
+      "round": 8,
+      "source": "I2 \u00B7 C \u2192 \u2022 \u0027e\u0027 S",
+      "lookahead": "{EOF}",
+      "updates": [
+        {
+          "target": "I7 \u00B7 C \u2192 \u0027e\u0027 \u2022 S",
+          "first": null,
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        }
+      ],
+      "queue": [
+        "I4 \u00B7 C \u2192 R \u2022",
+        "I2 \u00B7 R \u2192 \u2022 \u0027a\u0027",
+        "I2 \u00B7 R \u2192 \u2022 \u0027b\u0027 S",
+        "I7 \u00B7 C \u2192 \u0027e\u0027 \u2022 S"
+      ]
+    },
+    {
+      "round": 9,
+      "source": "I4 \u00B7 C \u2192 R \u2022",
+      "lookahead": "{EOF}",
+      "updates": [],
+      "queue": [
+        "I2 \u00B7 R \u2192 \u2022 \u0027a\u0027",
+        "I2 \u00B7 R \u2192 \u2022 \u0027b\u0027 S",
+        "I7 \u00B7 C \u2192 \u0027e\u0027 \u2022 S"
+      ]
+    },
+    {
+      "round": 10,
+      "source": "I2 \u00B7 R \u2192 \u2022 \u0027a\u0027",
+      "lookahead": "{EOF}",
+      "updates": [
+        {
+          "target": "I5 \u00B7 R \u2192 \u0027a\u0027 \u2022",
+          "first": null,
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        }
+      ],
+      "queue": [
+        "I2 \u00B7 R \u2192 \u2022 \u0027b\u0027 S",
+        "I7 \u00B7 C \u2192 \u0027e\u0027 \u2022 S",
+        "I5 \u00B7 R \u2192 \u0027a\u0027 \u2022"
+      ]
+    },
+    {
+      "round": 11,
+      "source": "I2 \u00B7 R \u2192 \u2022 \u0027b\u0027 S",
+      "lookahead": "{EOF}",
+      "updates": [
+        {
+          "target": "I6 \u00B7 R \u2192 \u0027b\u0027 \u2022 S",
+          "first": null,
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        }
+      ],
+      "queue": [
+        "I7 \u00B7 C \u2192 \u0027e\u0027 \u2022 S",
+        "I5 \u00B7 R \u2192 \u0027a\u0027 \u2022",
+        "I6 \u00B7 R \u2192 \u0027b\u0027 \u2022 S"
+      ]
+    },
+    {
+      "round": 12,
+      "source": "I7 \u00B7 C \u2192 \u0027e\u0027 \u2022 S",
+      "lookahead": "{EOF}",
+      "updates": [
+        {
+          "target": "I9 \u00B7 C \u2192 \u0027e\u0027 S \u2022",
+          "first": null,
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        },
+        {
+          "target": "I7 \u00B7 S \u2192 \u2022 G C",
+          "first": "{}",
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        }
+      ],
+      "queue": [
+        "I5 \u00B7 R \u2192 \u0027a\u0027 \u2022",
+        "I6 \u00B7 R \u2192 \u0027b\u0027 \u2022 S",
+        "I9 \u00B7 C \u2192 \u0027e\u0027 S \u2022",
+        "I7 \u00B7 S \u2192 \u2022 G C"
+      ]
+    },
+    {
+      "round": 13,
+      "source": "I5 \u00B7 R \u2192 \u0027a\u0027 \u2022",
+      "lookahead": "{EOF}",
+      "updates": [],
+      "queue": [
+        "I6 \u00B7 R \u2192 \u0027b\u0027 \u2022 S",
+        "I9 \u00B7 C \u2192 \u0027e\u0027 S \u2022",
+        "I7 \u00B7 S \u2192 \u2022 G C"
+      ]
+    },
+    {
+      "round": 14,
+      "source": "I6 \u00B7 R \u2192 \u0027b\u0027 \u2022 S",
+      "lookahead": "{EOF}",
+      "updates": [
+        {
+          "target": "I8 \u00B7 R \u2192 \u0027b\u0027 S \u2022",
+          "first": null,
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        },
+        {
+          "target": "I6 \u00B7 S \u2192 \u2022 G C",
+          "first": "{}",
+          "inherit": true,
+          "before": "{}",
+          "after": "{EOF}",
+          "changed": true,
+          "enqueued": true
+        }
+      ],
+      "queue": [
+        "I9 \u00B7 C \u2192 \u0027e\u0027 S \u2022",
+        "I7 \u00B7 S \u2192 \u2022 G C",
+        "I8 \u00B7 R \u2192 \u0027b\u0027 S \u2022",
+        "I6 \u00B7 S \u2192 \u2022 G C"
+      ]
+    },
+    {
+      "round": 15,
+      "source": "I9 \u00B7 C \u2192 \u0027e\u0027 S \u2022",
+      "lookahead": "{EOF}",
+      "updates": [],
+      "queue": [
+        "I7 \u00B7 S \u2192 \u2022 G C",
+        "I8 \u00B7 R \u2192 \u0027b\u0027 S \u2022",
+        "I6 \u00B7 S \u2192 \u2022 G C"
+      ]
+    },
+    {
+      "round": 16,
+      "source": "I7 \u00B7 S \u2192 \u2022 G C",
+      "lookahead": "{EOF}",
+      "updates": [
+        {
+          "target": "I2 \u00B7 S \u2192 G \u2022 C",
+          "first": null,
+          "inherit": true,
+          "before": "{EOF}",
+          "after": "{EOF}",
+          "changed": false,
+          "enqueued": false
+        },
+        {
+          "target": "I7 \u00B7 G \u2192 \u2022",
+          "first": "{\u0027a\u0027, \u0027b\u0027, \u0027e\u0027}",
+          "inherit": false,
+          "before": "{}",
+          "after": "{\u0027a\u0027, \u0027b\u0027, \u0027e\u0027}",
+          "changed": true,
+          "enqueued": true
+        }
+      ],
+      "queue": [
+        "I8 \u00B7 R \u2192 \u0027b\u0027 S \u2022",
+        "I6 \u00B7 S \u2192 \u2022 G C",
+        "I7 \u00B7 G \u2192 \u2022"
+      ]
+    },
+    {
+      "round": 17,
+      "source": "I8 \u00B7 R \u2192 \u0027b\u0027 S \u2022",
+      "lookahead": "{EOF}",
+      "updates": [],
+      "queue": [
+        "I6 \u00B7 S \u2192 \u2022 G C",
+        "I7 \u00B7 G \u2192 \u2022"
+      ]
+    },
+    {
+      "round": 18,
+      "source": "I6 \u00B7 S \u2192 \u2022 G C",
+      "lookahead": "{EOF}",
+      "updates": [
+        {
+          "target": "I2 \u00B7 S \u2192 G \u2022 C",
+          "first": null,
+          "inherit": true,
+          "before": "{EOF}",
+          "after": "{EOF}",
+          "changed": false,
+          "enqueued": false
+        },
+        {
+          "target": "I6 \u00B7 G \u2192 \u2022",
+          "first": "{\u0027a\u0027, \u0027b\u0027, \u0027e\u0027}",
+          "inherit": false,
+          "before": "{}",
+          "after": "{\u0027a\u0027, \u0027b\u0027, \u0027e\u0027}",
+          "changed": true,
+          "enqueued": true
+        }
+      ],
+      "queue": [
+        "I7 \u00B7 G \u2192 \u2022",
+        "I6 \u00B7 G \u2192 \u2022"
+      ]
+    },
+    {
+      "round": 19,
+      "source": "I7 \u00B7 G \u2192 \u2022",
+      "lookahead": "{\u0027a\u0027, \u0027b\u0027, \u0027e\u0027}",
+      "updates": [],
+      "queue": [
+        "I6 \u00B7 G \u2192 \u2022"
+      ]
+    },
+    {
+      "round": 20,
+      "source": "I6 \u00B7 G \u2192 \u2022",
+      "lookahead": "{\u0027a\u0027, \u0027b\u0027, \u0027e\u0027}",
+      "updates": [],
+      "queue": []
+    }
+  ],
+  "accepted": true,
+  "final": [
+    {
+      "item": "I0 \u00B7 Accept \u2192 \u2022 S",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I0 \u00B7 S \u2192 \u2022 G C",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I0 \u00B7 G \u2192 \u2022",
+      "lookahead": "{\u0027a\u0027, \u0027b\u0027, \u0027e\u0027}"
+    },
+    {
+      "item": "I1 \u00B7 Accept \u2192 S \u2022",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I2 \u00B7 S \u2192 G \u2022 C",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I2 \u00B7 C \u2192 \u2022 R",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I2 \u00B7 R \u2192 \u2022 \u0027a\u0027",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I2 \u00B7 R \u2192 \u2022 \u0027b\u0027 S",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I2 \u00B7 C \u2192 \u2022 \u0027e\u0027 S",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I3 \u00B7 S \u2192 G C \u2022",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I4 \u00B7 C \u2192 R \u2022",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I5 \u00B7 R \u2192 \u0027a\u0027 \u2022",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I6 \u00B7 R \u2192 \u0027b\u0027 \u2022 S",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I6 \u00B7 S \u2192 \u2022 G C",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I6 \u00B7 G \u2192 \u2022",
+      "lookahead": "{\u0027a\u0027, \u0027b\u0027, \u0027e\u0027}"
+    },
+    {
+      "item": "I7 \u00B7 C \u2192 \u0027e\u0027 \u2022 S",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I7 \u00B7 S \u2192 \u2022 G C",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I7 \u00B7 G \u2192 \u2022",
+      "lookahead": "{\u0027a\u0027, \u0027b\u0027, \u0027e\u0027}"
+    },
+    {
+      "item": "I8 \u00B7 R \u2192 \u0027b\u0027 S \u2022",
+      "lookahead": "{EOF}"
+    },
+    {
+      "item": "I9 \u00B7 C \u2192 \u0027e\u0027 S \u2022",
+      "lookahead": "{EOF}"
+    }
+  ]
+}

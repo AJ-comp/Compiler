@@ -1,0 +1,391 @@
+{
+  "grammarText": "S : G C ; C : R | \u0027e\u0027 S ; R : \u0027a\u0027 | \u0027b\u0027 S ; G : epsilon ;",
+  "sourceAssembly": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\typescript\\lookahead-audit-reference\\bin\\Release\\net8.0\\Parse.FrontEnd.Parsers.dll",
+  "grammarAssembly": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\typescript\\lookahead-audit-reference\\bin\\Release\\net8.0\\Parse.FrontEnd.Grammars.Ebnf.dll",
+  "rules": [
+    {
+      "id": 0,
+      "lhs": "N:Accept",
+      "rhs": [
+        "N:S"
+      ],
+      "predicate": null,
+      "hash": 20000040
+    },
+    {
+      "id": 1,
+      "lhs": "N:C",
+      "rhs": [
+        "N:R"
+      ],
+      "predicate": null,
+      "hash": 20000010
+    },
+    {
+      "id": 2,
+      "lhs": "N:C",
+      "rhs": [
+        "T:e:e",
+        "N:S"
+      ],
+      "predicate": null,
+      "hash": 20000011
+    },
+    {
+      "id": 3,
+      "lhs": "N:G",
+      "rhs": [],
+      "predicate": null,
+      "hash": 20000030
+    },
+    {
+      "id": 4,
+      "lhs": "N:R",
+      "rhs": [
+        "T:a:a"
+      ],
+      "predicate": null,
+      "hash": 20000020
+    },
+    {
+      "id": 5,
+      "lhs": "N:R",
+      "rhs": [
+        "T:b:b",
+        "N:S"
+      ],
+      "predicate": null,
+      "hash": 20000021
+    },
+    {
+      "id": 6,
+      "lhs": "N:S",
+      "rhs": [
+        "N:G",
+        "N:C"
+      ],
+      "predicate": null,
+      "hash": 20000000
+    }
+  ],
+  "states": [
+    {
+      "id": 0,
+      "items": [
+        {
+          "rule": 0,
+          "dot": 0,
+          "hash": 200000400,
+          "lookahead": [
+            "$"
+          ]
+        },
+        {
+          "rule": 3,
+          "dot": 0,
+          "hash": 200000300,
+          "lookahead": [
+            "T:a:a",
+            "T:b:b",
+            "T:e:e"
+          ]
+        },
+        {
+          "rule": 6,
+          "dot": 0,
+          "hash": 200000000,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "items": [
+        {
+          "rule": 0,
+          "dot": 1,
+          "hash": 200000401,
+          "lookahead": [
+            "$"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "items": [
+        {
+          "rule": 1,
+          "dot": 0,
+          "hash": 200000100,
+          "lookahead": []
+        },
+        {
+          "rule": 2,
+          "dot": 0,
+          "hash": 200000110,
+          "lookahead": null
+        },
+        {
+          "rule": 4,
+          "dot": 0,
+          "hash": 200000200,
+          "lookahead": null
+        },
+        {
+          "rule": 5,
+          "dot": 0,
+          "hash": 200000210,
+          "lookahead": null
+        },
+        {
+          "rule": 6,
+          "dot": 1,
+          "hash": 200000001,
+          "lookahead": [
+            "$"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "items": [
+        {
+          "rule": 6,
+          "dot": 2,
+          "hash": 200000002,
+          "lookahead": [
+            "$"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "items": [
+        {
+          "rule": 1,
+          "dot": 1,
+          "hash": 200000101,
+          "lookahead": [
+            "$"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "items": [
+        {
+          "rule": 4,
+          "dot": 1,
+          "hash": 200000201,
+          "lookahead": []
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "items": [
+        {
+          "rule": 3,
+          "dot": 0,
+          "hash": 200000300,
+          "lookahead": [
+            "T:a:a",
+            "T:b:b",
+            "T:e:e"
+          ]
+        },
+        {
+          "rule": 5,
+          "dot": 1,
+          "hash": 200000211,
+          "lookahead": []
+        },
+        {
+          "rule": 6,
+          "dot": 0,
+          "hash": 200000000,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "items": [
+        {
+          "rule": 2,
+          "dot": 1,
+          "hash": 200000111,
+          "lookahead": []
+        },
+        {
+          "rule": 3,
+          "dot": 0,
+          "hash": 200000300,
+          "lookahead": [
+            "T:a:a",
+            "T:b:b",
+            "T:e:e"
+          ]
+        },
+        {
+          "rule": 6,
+          "dot": 0,
+          "hash": 200000000,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "items": [
+        {
+          "rule": 5,
+          "dot": 2,
+          "hash": 200000212,
+          "lookahead": []
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "items": [
+        {
+          "rule": 2,
+          "dot": 2,
+          "hash": 200000112,
+          "lookahead": [
+            "$"
+          ]
+        }
+      ]
+    }
+  ],
+  "first": {
+    "N:S": [
+      "T:a:a",
+      "T:b:b",
+      "T:e:e"
+    ],
+    "N:C": [
+      "T:a:a",
+      "T:b:b",
+      "T:e:e"
+    ],
+    "N:R": [
+      "T:a:a",
+      "T:b:b"
+    ],
+    "N:G": [
+      "EPS"
+    ],
+    "N:Accept": [
+      "T:a:a",
+      "T:b:b",
+      "T:e:e"
+    ]
+  },
+  "follow": {
+    "N:S": [
+      "$"
+    ],
+    "N:C": [
+      "$"
+    ],
+    "N:R": [
+      "$"
+    ],
+    "N:G": [
+      "T:a:a",
+      "T:b:b",
+      "T:e:e"
+    ],
+    "N:Accept": [
+      "$"
+    ]
+  },
+  "collisions": [],
+  "parse": {
+    "input": "a",
+    "success": false,
+    "alwaysCalls": 0,
+    "neverCalls": 0,
+    "exception": "Janglim.FrontEnd.Parsers.ParsingException: Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown.\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32\u0026 index) in C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 472\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 303\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList\u00601 tokenCells) in C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 332",
+    "conflicts": "no grammar conflicts",
+    "steps": [
+      {
+        "token": "a",
+        "action": "epsilon reduce G -\u003E epsilon",
+        "error": ""
+      },
+      {
+        "token": "a",
+        "action": "goto 2",
+        "error": ""
+      },
+      {
+        "token": "a",
+        "action": "shift 5",
+        "error": ""
+      },
+      {
+        "token": "\u0449",
+        "action": "failed null",
+        "error": "(shift \uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4 {} \uC640\uC57C \uD569\uB2C8\uB2E4)"
+      }
+    ]
+  },
+  "eofActions": [
+    {
+      "id": 0,
+      "actions": []
+    },
+    {
+      "id": 1,
+      "actions": [
+        "accept Accept -\u003E S"
+      ]
+    },
+    {
+      "id": 2,
+      "actions": []
+    },
+    {
+      "id": 3,
+      "actions": [
+        "reduce S -\u003E G C"
+      ]
+    },
+    {
+      "id": 4,
+      "actions": [
+        "reduce C -\u003E R"
+      ]
+    },
+    {
+      "id": 5,
+      "actions": []
+    },
+    {
+      "id": 6,
+      "actions": []
+    },
+    {
+      "id": 7,
+      "actions": []
+    },
+    {
+      "id": 8,
+      "actions": []
+    },
+    {
+      "id": 9,
+      "actions": [
+        "reduce C -\u003E e S"
+      ]
+    }
+  ]
+}

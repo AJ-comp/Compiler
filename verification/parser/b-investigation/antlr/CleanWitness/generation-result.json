@@ -1,0 +1,5 @@
+{
+  "Grammar": "CleanWitness",
+  "ExitCode": 1,
+  "Output": "error(147): CleanWitness.g4:7:0: left recursive rule u must contain an alternative which is not left recursive\r\n"
+}

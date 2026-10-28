@@ -1,0 +1,245 @@
+{
+  "ProductionCount": 2406,
+  "Failures": [
+    {
+      "Phase": "LRItem",
+      "Production": "ClassMethod -\u003E ClassElementName ClassModifierName ClassModifierName TSOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload",
+      "Item": "ClassMethod -\u003E ClassElementName ClassModifierName ClassModifierName TSOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload\u2022",
+      "UniqueKey": 2000298,
+      "BaseHash": 200029810,
+      "Dot": 10,
+      "Concatenated": "20002981010",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await ClassModifierName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters ) TSOptionalReturnType__Await TSMethodOverload",
+      "Item": "ClassMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await ClassModifierName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters ) TSOptionalReturnType__Await TSMethodOverload\u2022",
+      "UniqueKey": 2000299,
+      "BaseHash": 200029910,
+      "Dot": 10,
+      "Concatenated": "20002991010",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod -\u003E ClassElementName AsyncModifier * ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload",
+      "Item": "ClassAsyncMethod -\u003E ClassElementName AsyncModifier * ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType\u2022TSMethodOverload",
+      "UniqueKey": 2000398,
+      "BaseHash": 200039810,
+      "Dot": 10,
+      "Concatenated": "20003981010",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod -\u003E ClassElementName AsyncModifier * ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload",
+      "Item": "ClassAsyncMethod -\u003E ClassElementName AsyncModifier * ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload\u2022",
+      "UniqueKey": 2000398,
+      "BaseHash": 200039810,
+      "Dot": 11,
+      "Concatenated": "20003981011",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod -\u003E ClassElementName AsyncModifier * ClassElementName TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload",
+      "Item": "ClassAsyncMethod -\u003E ClassElementName AsyncModifier * ClassElementName TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload\u2022",
+      "UniqueKey": 2000398,
+      "BaseHash": 200039811,
+      "Dot": 10,
+      "Concatenated": "20003981110",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload",
+      "Item": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType\u2022TSMethodOverload",
+      "UniqueKey": 2000398,
+      "BaseHash": 200039812,
+      "Dot": 10,
+      "Concatenated": "20003981210",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload",
+      "Item": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload\u2022",
+      "UniqueKey": 2000398,
+      "BaseHash": 200039812,
+      "Dot": 11,
+      "Concatenated": "20003981211",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier ClassElementName TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload",
+      "Item": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier ClassElementName TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload\u2022",
+      "UniqueKey": 2000398,
+      "BaseHash": 200039813,
+      "Dot": 10,
+      "Concatenated": "20003981310",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier * ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload",
+      "Item": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier * ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await )\u2022TSOptionalReturnType TSMethodOverload",
+      "UniqueKey": 2000398,
+      "BaseHash": 200039814,
+      "Dot": 10,
+      "Concatenated": "20003981410",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier * ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload",
+      "Item": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier * ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType\u2022TSMethodOverload",
+      "UniqueKey": 2000398,
+      "BaseHash": 200039814,
+      "Dot": 11,
+      "Concatenated": "20003981411",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier * ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload",
+      "Item": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier * ClassElementName TSOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload\u2022",
+      "UniqueKey": 2000398,
+      "BaseHash": 200039814,
+      "Dot": 12,
+      "Concatenated": "20003981412",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier * ClassElementName TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload",
+      "Item": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier * ClassElementName TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType\u2022TSMethodOverload",
+      "UniqueKey": 2000398,
+      "BaseHash": 200039815,
+      "Dot": 10,
+      "Concatenated": "20003981510",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier * ClassElementName TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload",
+      "Item": "ClassAsyncMethod -\u003E ClassElementName ClassModifierName AsyncModifier * ClassElementName TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload\u2022",
+      "UniqueKey": 2000398,
+      "BaseHash": 200039815,
+      "Dot": 11,
+      "Concatenated": "20003981511",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod__Await -\u003E ClassElementName__Await AsyncModifier * ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload",
+      "Item": "ClassAsyncMethod__Await -\u003E ClassElementName__Await AsyncModifier * ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await\u2022TSMethodOverload",
+      "UniqueKey": 2000399,
+      "BaseHash": 200039910,
+      "Dot": 10,
+      "Concatenated": "20003991010",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod__Await -\u003E ClassElementName__Await AsyncModifier * ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload",
+      "Item": "ClassAsyncMethod__Await -\u003E ClassElementName__Await AsyncModifier * ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload\u2022",
+      "UniqueKey": 2000399,
+      "BaseHash": 200039910,
+      "Dot": 11,
+      "Concatenated": "20003991011",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod__Await -\u003E ClassElementName__Await AsyncModifier * ClassElementName__Await TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload",
+      "Item": "ClassAsyncMethod__Await -\u003E ClassElementName__Await AsyncModifier * ClassElementName__Await TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload\u2022",
+      "UniqueKey": 2000399,
+      "BaseHash": 200039911,
+      "Dot": 10,
+      "Concatenated": "20003991110",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload",
+      "Item": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await\u2022TSMethodOverload",
+      "UniqueKey": 2000399,
+      "BaseHash": 200039912,
+      "Dot": 10,
+      "Concatenated": "20003991210",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload",
+      "Item": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload\u2022",
+      "UniqueKey": 2000399,
+      "BaseHash": 200039912,
+      "Dot": 11,
+      "Concatenated": "20003991211",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier ClassElementName__Await TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload",
+      "Item": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier ClassElementName__Await TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload\u2022",
+      "UniqueKey": 2000399,
+      "BaseHash": 200039913,
+      "Dot": 10,
+      "Concatenated": "20003991310",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier * ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload",
+      "Item": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier * ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await )\u2022TSOptionalReturnType__Await TSMethodOverload",
+      "UniqueKey": 2000399,
+      "BaseHash": 200039914,
+      "Dot": 10,
+      "Concatenated": "20003991410",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier * ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload",
+      "Item": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier * ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await\u2022TSMethodOverload",
+      "UniqueKey": 2000399,
+      "BaseHash": 200039914,
+      "Dot": 11,
+      "Concatenated": "20003991411",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier * ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload",
+      "Item": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier * ClassElementName__Await TSOptional TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload\u2022",
+      "UniqueKey": 2000399,
+      "BaseHash": 200039914,
+      "Dot": 12,
+      "Concatenated": "20003991412",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier * ClassElementName__Await TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload",
+      "Item": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier * ClassElementName__Await TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await\u2022TSMethodOverload",
+      "UniqueKey": 2000399,
+      "BaseHash": 200039915,
+      "Dot": 10,
+      "Concatenated": "20003991510",
+      "Int32Max": 2147483647
+    },
+    {
+      "Phase": "LRItem",
+      "Production": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier * ClassElementName__Await TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload",
+      "Item": "ClassAsyncMethod__Await -\u003E ClassElementName__Await ClassModifierName__Await AsyncModifier * ClassElementName__Await TSOptionalTypeParameters__Await ( FormalParameters__Await ) TSOptionalReturnType__Await TSMethodOverload\u2022",
+      "UniqueKey": 2000399,
+      "BaseHash": 200039915,
+      "Dot": 11,
+      "Concatenated": "20003991511",
+      "Int32Max": 2147483647
+    }
+  ]
+}

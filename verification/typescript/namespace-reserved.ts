@@ -1,0 +1,1 @@
+namespace A.while { export const x = 1; }

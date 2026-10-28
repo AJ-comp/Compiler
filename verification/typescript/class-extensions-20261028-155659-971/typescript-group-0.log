@@ -1,0 +1,33 @@
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)
+[xUnit.net 00:00:00.28]   Discovering: Parse.FrontEnd.Parsers.Tests
+[xUnit.net 00:00:02.95]   Discovered:  Parse.FrontEnd.Parsers.Tests
+[xUnit.net 00:00:03.01]   Starting:    Parse.FrontEnd.Parsers.Tests
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Module_entry_accepts_exported_assertions_and_top_level_await(source: "export const result = (value as T)!;") [45 s]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Module_entry_accepts_exported_assertions_and_top_level_await(source: "export default (value as T)!;") [33 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Module_entry_accepts_exported_assertions_and_top_level_await(source: "export const result = (await task)! as Result;") [34 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Module_entry_accepts_exported_assertions_and_top_level_await(source: "export const result = value! satisfies T;") [34 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Expression_entry_accepts_assertions_and_their_runtime_continuations(source: "(value satisfies unknown)!()") [2 m 18 s]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Expression_entry_accepts_assertions_and_their_runtime_continuations(source: "value!!") [23 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Expression_entry_accepts_assertions_and_their_runtime_continuations(source: "base?.property!.next as Result") [53 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Expression_entry_accepts_assertions_and_their_runtime_continuations(source: "value! as Box<T> satisfies Named") [48 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Expression_entry_accepts_assertions_and_their_runtime_continuations(source: "(value as { property: number })!.property") [35 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Module_entry_preserves_await_strictness_and_export_checks(source: "export const result = value!; with (obj) {}") [13 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Module_entry_preserves_await_strictness_and_export_checks(source: "export const result = (await)!;") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Module_entry_preserves_await_strictness_and_export_checks(source: "const result = value!; export { missing };") [11 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Expression_entry_keeps_type_target_and_whole_input_restrictions(source: "base?.property! = next") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Expression_entry_keeps_type_target_and_whole_input_restrictions(source: "value!; other") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Expression_entry_keeps_type_target_and_whole_input_restrictions(source: "value as number!") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Default_non_strict_script_does_not_turn_asserted_strings_into_directives(source: "\"use strict\"!; with (obj) { value!; }") [2 m 18 s]
+[xUnit.net 00:05:25.99]   Finished:    Parse.FrontEnd.Parsers.Tests
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Default_non_strict_script_does_not_turn_asserted_strings_into_directives(source: "\"use strict\" satisfies string; with (obj) { valu"···) [13 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Default_non_strict_script_does_not_turn_asserted_strings_into_directives(source: "\"use strict\" as string; with (obj) { value!; }") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Default_script_still_applies_a_real_strict_directive_after_assertion_support_is_added(source: "\"use strict\"; eval! = value;") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionEntryPointTests.Default_script_still_applies_a_real_strict_directive_after_assertion_support_is_added(source: "\"use strict\"; with (obj) { value!; }") [10 ms]
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\class-extensions-20261028-155659-971\typescript-group-0.trx
+
+테스트를 실행했습니다.
+총 테스트 수: 20
+     통과: 20
+ 총 시간: 5.4577 분

@@ -1,0 +1,228 @@
+  복원할 프로젝트를 확인하는 중...
+  C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Parse.FrontEnd.Parsers.Tests.csproj을(를) 1.4초 동안 복원했습니다.
+  복원할 7 프로젝트의 6이(가) 최신 상태입니다.
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\KeyManager.cs(17,22): warning CS0414: 'KeyManager.meaningUnitKey' 필드가 할당되었지만 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\Parse.FrontEnd.csproj]
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Grammars.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(51,48): warning CS0067: 'LRParser.ShiftAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(49,48): warning CS0067: 'LRParser.ReduceAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(21,55): warning CS0067: 'LLParser.ASTCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(20,62): warning CS0067: 'LLParser.ParseTreeCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Grammars.Ebnf.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(62,23): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Parse.FrontEnd.Parsers.Tests.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(82,28): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Parse.FrontEnd.Parsers.Tests.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(152,20): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Parse.FrontEnd.Parsers.Tests.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(175,20): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Parse.FrontEnd.Parsers.Tests.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(193,20): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Parse.FrontEnd.Parsers.Tests.csproj]
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:02.64]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Finishing_a_has_exactly_the_required_reduce_on_eof [FAIL]
+[xUnit.net 00:00:02.64]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: False, reverseAlternatives: True) [FAIL]
+[xUnit.net 00:00:02.66]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: True, reverseAlternatives: False) [FAIL]
+[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: True, reverseAlternatives: True) [FAIL]
+[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "eea") [FAIL]
+[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "eba") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Finishing_a_has_exactly_the_required_reduce_on_eof [3 ms]
+  오류 메시지:
+   Assert.Equal() Failure: Collections differ
+           ↓ (pos 0)
+Expected: ["$"]
+Actual:   []
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.AssertTerminals(TerminalSet actual, String[] expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 254
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Finishing_a_has_exactly_the_required_reduce_on_eof() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 66
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: False, reverseAlternatives: True) [2 ms]
+  오류 메시지:
+   Assert.Equal() Failure: Collections differ
+                                                                                                                                  ↓ (pos 6)
+Expected: [···, "C -> T:e N:S @ 1 | G ->  @ 0 | S -> N:G N:C @ 0 //"···, "G ->  @ 0 | R -> T:b N:S @ 1 | S -> N:G N:C @ 0 //"···, "R -> T:a @ 0 // R -> T:a @ 0 : ", "R -> T:b N:S @ 0 // R -> T:b N:S @ 0 : ", "S -> N:G N:C @ 0 // S -> N:G N:C @ 0 : $"]
+Actual:   [···, "C -> T:e N:S @ 1 | G ->  @ 0 | S -> N:G N:C @ 0 //"···, "G ->  @ 0 | R -> T:b N:S @ 1 | S -> N:G N:C @ 0 //"···, "R -> T:a @ 0 // R -> T:a @ 0 : $", "R -> T:b N:S @ 0 // R -> T:b N:S @ 0 : $", "S -> N:G N:C @ 0 // S -> N:G N:C @ 0 : $"]
+                                                                                                                                  ↑ (pos 6)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Boolean reverseDeclarationOrder, Boolean reverseAlternatives) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 117
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: True, reverseAlternatives: False) [17 ms]
+  오류 메시지:
+   a
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Boolean reverseDeclarationOrder, Boolean reverseAlternatives) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 118
+   at InvokeStub_LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: True, reverseAlternatives: True) [16 ms]
+  오류 메시지:
+   Assert.Equal() Failure: Collections differ
+                                                                                                                                  ↓ (pos 6)
+Expected: [···, "C -> T:e N:S @ 1 | G ->  @ 0 | S -> N:G N:C @ 0 //"···, "G ->  @ 0 | R -> T:b N:S @ 1 | S -> N:G N:C @ 0 //"···, "R -> T:a @ 0 // R -> T:a @ 0 : ", "R -> T:b N:S @ 0 // R -> T:b N:S @ 0 : ", "S -> N:G N:C @ 0 // S -> N:G N:C @ 0 : $"]
+Actual:   [···, "C -> T:e N:S @ 1 | G ->  @ 0 | S -> N:G N:C @ 0 //"···, "G ->  @ 0 | R -> T:b N:S @ 1 | S -> N:G N:C @ 0 //"···, "R -> T:a @ 0 // R -> T:a @ 0 : $", "R -> T:b N:S @ 0 // R -> T:b N:S @ 0 : $", "S -> N:G N:C @ 0 // S -> N:G N:C @ 0 : $"]
+                                                                                                                                  ↑ (pos 6)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Boolean reverseDeclarationOrder, Boolean reverseAlternatives) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 117
+   at InvokeStub_LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "eea") [2 ms]
+  오류 메시지:
+   eea
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "eba") [1 ms]
+  오류 메시지:
+   eba
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "ba") [FAIL]
+[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "bebeea") [FAIL]
+[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "bea") [FAIL]
+[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "ea") [FAIL]
+[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "a") [FAIL]
+[xUnit.net 00:00:02.69]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "bba") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "ba") [< 1 ms]
+  오류 메시지:
+   ba
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "bebeea") [< 1 ms]
+  오류 메시지:
+   bebeea
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "bea") [1 ms]
+  오류 메시지:
+   bea
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "ea") [< 1 ms]
+  오류 메시지:
+   ea
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "a") [< 1 ms]
+  오류 메시지:
+   a
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "bba") [< 1 ms]
+  오류 메시지:
+   bba
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:02.69]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Every_completed_tiny_production_has_its_exact_lookahead [FAIL]
+[xUnit.net 00:00:02.70]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Predicate_lowering_uses_the_same_complete_lookahead_information [FAIL]
+[xUnit.net 00:00:02.71]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Inlining_the_nullable_prefix_preserves_the_original_language [FAIL]
+[xUnit.net 00:00:02.71]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Eof_reaches_the_intermediate_item_in_the_dependency_cycle [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Every_completed_tiny_production_has_its_exact_lookahead [< 1 ms]
+  오류 메시지:
+   Assert.Equal() Failure: Collections differ
+           ↓ (pos 0)
+Expected: ["$"]
+Actual:   []
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.AssertTerminals(TerminalSet actual, String[] expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 254
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Every_completed_tiny_production_has_its_exact_lookahead() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 101
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Predicate_lowering_uses_the_same_complete_lookahead_information [11 ms]
+  오류 메시지:
+   a
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Predicate_lowering_uses_the_same_complete_lookahead_information() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 219
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Inlining_the_nullable_prefix_preserves_the_original_language [1 ms]
+  오류 메시지:
+   a
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Inlining_the_nullable_prefix_preserves_the_original_language() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 129
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Eof_reaches_the_intermediate_item_in_the_dependency_cycle [< 1 ms]
+  오류 메시지:
+   Assert.Equal() Failure: Collections differ
+           ↓ (pos 0)
+Expected: ["$"]
+Actual:   []
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.AssertTerminals(TerminalSet actual, String[] expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 254
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Eof_reaches_the_intermediate_item_in_the_dependency_cycle() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 89
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-results\lalr-lookahead-baseline.trx
+
+실패!  - 실패:    16, 통과:    18, 건너뜀:     0, 전체:    34, 기간: 509 ms - Parse.FrontEnd.Parsers.Tests.dll (net8.0)

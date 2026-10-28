@@ -1,0 +1,10 @@
+문법 검사 통과
+Parsing.Success=True
+Validate.Count=0
+ORIGINAL INPUT:
+<!-- 이전 웹 문서의 주석
+var total = 077;
+with (settings) {
+    total = value;
+}
+VERIFIED_DOC_EXAMPLE

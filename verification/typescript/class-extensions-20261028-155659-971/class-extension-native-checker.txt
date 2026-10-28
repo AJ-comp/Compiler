@@ -1,0 +1,15 @@
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/abstract-errors-129.ts(2,20): error TS1005: ',' expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-136.ts(2,11): error TS1434: Unexpected keyword or identifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-136.ts(2,17): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-136.ts(2,18): error TS1109: Expression expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-136.ts(2,28): error TS1128: Declaration or statement expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-137.ts(2,11): error TS1434: Unexpected keyword or identifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-137.ts(2,17): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-137.ts(2,18): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/field-errors-141.ts(2,22): error TS1005: '(' expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/modifier-errors-098.ts(2,18): error TS1434: Unexpected keyword or identifier.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/parameter-errors-150.ts(2,23): error TS1433: Neither decorators nor modifiers may be applied to 'this' parameters.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-165.ts(2,20): error TS1005: '(' expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-165.ts(2,21): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-165.ts(2,32): error TS1005: '=>' expected.
+artifacts/typescript/class-extensions-20261028-155659-971/native-class-cases/signature-errors-165.ts(2,46): error TS1128: Declaration or statement expected.

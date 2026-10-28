@@ -1,0 +1,864 @@
+{
+  "node": "v24.12.0",
+  "evaluation": false,
+  "rows": [
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "00",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "00",
+      "accepted": false,
+      "error": "Octal literals are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "000",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "000",
+      "accepted": false,
+      "error": "Octal literals are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "077",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "077",
+      "accepted": false,
+      "error": "Octal literals are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "0123",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "0123",
+      "accepted": false,
+      "error": "Octal literals are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "08",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "08",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "09",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "09",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "078",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "078",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "008",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "008",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "009",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "009",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "0009",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "0009",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "08.5",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "08.5",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "09.",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "09.",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "08e2",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "08e2",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "078.5e+2",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "078.5e+2",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "08.1_2",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "08.1_2",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "08e1_2",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "08e1_2",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "008.01",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "008.01",
+      "accepted": false,
+      "error": "Decimals with leading zeros are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "08_1",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "08_1",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "0_1",
+      "accepted": false,
+      "error": "Numeric separator can not be used after leading 0."
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "0_1",
+      "accepted": false,
+      "error": "Numeric separator can not be used after leading 0."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "00n",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "00n",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "08n",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "08n",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "00.1",
+      "accepted": false,
+      "error": "Unexpected number"
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "00.1",
+      "accepted": false,
+      "error": "Unexpected number"
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "00e1",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "00e1",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "0123.4",
+      "accepted": false,
+      "error": "Unexpected number"
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "0123.4",
+      "accepted": false,
+      "error": "Unexpected number"
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "077n",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "077n",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "08e",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "08e",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "08e+",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "08e+",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "0x1n",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "0x1n",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "0o7_1n",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "0o7_1n",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "0b10n",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "0b10n",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "0n",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "0n",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "0.1",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "0.1",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "0e1",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "0e1",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "1_000",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "1_000",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\1'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\1'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\7'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\7'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\00'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\00'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\000'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\000'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\123'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\123'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\377'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\377'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\400'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\400'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\777'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\777'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\08'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\08'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\09'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\09'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\8'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\8'",
+      "accepted": false,
+      "error": "\\8 and \\9 are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\9'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\9'",
+      "accepted": false,
+      "error": "\\8 and \\9 are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\18'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\18'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\078'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\078'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\0009'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\0009'",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\0'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\0'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\q'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\q'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\x41'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\x41'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\u0041'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\u0041'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\u{1F600}'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\u{1F600}'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\\\1'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\\\1'",
+      "accepted": true
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\xG0'",
+      "accepted": false,
+      "error": "Invalid hexadecimal escape sequence"
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\xG0'",
+      "accepted": false,
+      "error": "Invalid hexadecimal escape sequence"
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\u{}'",
+      "accepted": false,
+      "error": "Invalid Unicode escape sequence"
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\u{}'",
+      "accepted": false,
+      "error": "Invalid Unicode escape sequence"
+    },
+    {
+      "goal": "Expression",
+      "strict": false,
+      "input": "'\\u{110000}'",
+      "accepted": false,
+      "error": "Undefined Unicode code-point"
+    },
+    {
+      "goal": "Expression",
+      "strict": true,
+      "input": "'\\u{110000}'",
+      "accepted": false,
+      "error": "Undefined Unicode code-point"
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "function f(){return 077;}",
+      "accepted": true
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "function f(){'use strict'; return 077;}",
+      "accepted": false,
+      "error": "Octal literals are not allowed in strict mode."
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "function f(){'use strict';return 1;} 077;",
+      "accepted": true
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "{ 'use strict'; 077; }",
+      "accepted": true
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "function f(){ ('use strict'); return 077; }",
+      "accepted": true
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "'use\\x20strict'; 077;",
+      "accepted": true
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "'\\1'; 'use strict';",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "class A{field=077;}",
+      "accepted": false,
+      "error": "Octal literals are not allowed in strict mode."
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "class A extends (077, B) {}",
+      "accepted": false,
+      "error": "Octal literals are not allowed in strict mode."
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "class A{method(){return '\\1';}}",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in strict mode."
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "function f(value=077){'use strict';}",
+      "accepted": false,
+      "error": "Illegal 'use strict' directive in function with non-simple parameter list"
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "function f(){'use strict';function g(){return 077;}}",
+      "accepted": false,
+      "error": "Octal literals are not allowed in strict mode."
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "function f(){return '\\1';} function g(){'use strict';return 1;}",
+      "accepted": true
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "'\\\\1'; 'use strict';",
+      "accepted": true
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "tag`\\1`",
+      "accepted": true
+    },
+    {
+      "goal": "Script",
+      "strict": false,
+      "input": "`\\1`",
+      "accepted": false,
+      "error": "Octal escape sequences are not allowed in template strings."
+    }
+  ]
+}

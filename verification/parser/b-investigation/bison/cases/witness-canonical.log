@@ -1,0 +1,14 @@
+witness-canonical.y: warning: 3 nonterminals useless in grammar [-Wother]
+witness-canonical.y: warning: 4 rules useless in grammar [-Wother]
+witness-canonical.y:5.1: warning: nonterminal useless in grammar: A [-Wother]
+    5 |  'x' ;
+      | ^
+witness-canonical.y:6.1: warning: nonterminal useless in grammar: B [-Wother]
+    6 |  'x' ;
+      | ^
+witness-canonical.y:8.1: warning: nonterminal useless in grammar: U [-Wother]
+    8 | 'x' ;
+      | ^
+witness-canonical.y:4.5-7: warning: rule useless in grammar [-Wother]
+    4 | rt S
+      |     ^~~

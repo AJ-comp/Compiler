@@ -1,0 +1,5 @@
+explicit-epsilon.y: warning: 1 reduce/reduce conflict [-Wconflicts-rr]
+explicit-epsilon.y: note: rerun with option '-Wcounterexamples' to generate conflict counterexamples
+explicit-epsilon.y:12.6-11: warning: rule useless in parser due to conflicts [-Wother]
+   12 | y ;
+      |      ^~~~~~

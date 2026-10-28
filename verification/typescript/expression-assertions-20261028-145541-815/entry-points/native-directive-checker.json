@@ -1,0 +1,22 @@
+[
+  {
+    "id": 15,
+    "diagnostic": "artifacts/typescript/expression-assertions-20261028-145541-815/entry-points/directive-15.ts(1,25): error TS1101: 'with' statements are not allowed in strict mode.\r\nartifacts/typescript/expression-assertions-20261028-145541-815/entry-points/directive-15.ts(1,25): error TS2410: The 'with' statement is not supported. All symbols in a 'with' block will have type 'any'."
+  },
+  {
+    "id": 16,
+    "diagnostic": "artifacts/typescript/expression-assertions-20261028-145541-815/entry-points/directive-16.ts(1,32): error TS1101: 'with' statements are not allowed in strict mode.\r\nartifacts/typescript/expression-assertions-20261028-145541-815/entry-points/directive-16.ts(1,32): error TS2410: The 'with' statement is not supported. All symbols in a 'with' block will have type 'any'."
+  },
+  {
+    "id": 17,
+    "diagnostic": "artifacts/typescript/expression-assertions-20261028-145541-815/entry-points/directive-17.ts(1,16): error TS1101: 'with' statements are not allowed in strict mode.\r\nartifacts/typescript/expression-assertions-20261028-145541-815/entry-points/directive-17.ts(1,16): error TS2410: The 'with' statement is not supported. All symbols in a 'with' block will have type 'any'."
+  },
+  {
+    "id": 18,
+    "diagnostic": "artifacts/typescript/expression-assertions-20261028-145541-815/entry-points/directive-18.ts(1,15): error TS1101: 'with' statements are not allowed in strict mode.\r\nartifacts/typescript/expression-assertions-20261028-145541-815/entry-points/directive-18.ts(1,15): error TS2410: The 'with' statement is not supported. All symbols in a 'with' block will have type 'any'."
+  },
+  {
+    "id": 19,
+    "diagnostic": "artifacts/typescript/expression-assertions-20261028-145541-815/entry-points/directive-19.ts(1,15): error TS2630: Cannot assign to 'eval' because it is a function."
+  }
+]

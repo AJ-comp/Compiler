@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="f09b5b80-32a3-42e6-8840-6e9b0aab0d89" name="AhjLv@JJW-PC 2026-10-23 05:21:18" runUser="JJW-PC\AhjLv" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-23T05:21:18.6505499+09:00" queuing="2026-10-23T05:21:18.6505501+09:00" start="2026-10-23T05:21:14.7013774+09:00" finish="2026-10-23T05:21:18.7609149+09:00" />
+  <TestSettings name="default" id="579a3f39-a3e8-476d-93ba-bfd765198222">
+    <Deployment runDeploymentRoot="AhjLv_JJW-PC_2026-10-23_05_21_18" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="45701ed7-6938-48f4-a247-94dd052b3b72" testId="34cfaae1-8a43-fbef-60f5-b4c8a5b19f6d" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Inlining_the_nullable_prefix_preserves_the_original_language" computerName="JJW-PC" duration="00:00:00.0014947" startTime="2026-10-23T05:21:18.7181932+09:00" endTime="2026-10-23T05:21:18.7181934+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="45701ed7-6938-48f4-a247-94dd052b3b72">
+      <Output>
+        <ErrorInfo>
+          <Message>a&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Inlining_the_nullable_prefix_preserves_the_original_language() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 129&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4ee2dfd9-fc62-4f8e-b00d-9cc76f05a6ad" testId="63749f0a-2766-b8df-f330-a5665880418e" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;&quot;)" computerName="JJW-PC" duration="00:00:00.0008454" startTime="2026-10-23T05:21:18.6212229+09:00" endTime="2026-10-23T05:21:18.6212230+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4ee2dfd9-fc62-4f8e-b00d-9cc76f05a6ad" />
+    <UnitTestResult executionId="c2c552d2-9f29-43f3-bc13-c188d57d5327" testId="a0aae7d0-b80f-83e1-cab7-4fc2427f0500" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;beeb&quot;)" computerName="JJW-PC" duration="00:00:00.4044612" startTime="2026-10-23T05:21:18.6144238+09:00" endTime="2026-10-23T05:21:18.6144540+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c2c552d2-9f29-43f3-bc13-c188d57d5327" />
+    <UnitTestResult executionId="d8a4be1a-9325-41e4-9894-d2d141853e64" testId="3daf271b-4a37-51fc-45e0-929fc15f2131" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;eba&quot;)" computerName="JJW-PC" duration="00:00:00.0010517" startTime="2026-10-23T05:21:18.6923788+09:00" endTime="2026-10-23T05:21:18.6923789+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d8a4be1a-9325-41e4-9894-d2d141853e64">
+      <Output>
+        <ErrorInfo>
+          <Message>eba&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39&#xD;
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f6c68049-c458-48c9-817c-22865b36c54c" testId="03bf1a64-33cc-bc5c-9508-69daa218a3f0" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: True, reverseAlternatives: False)" computerName="JJW-PC" duration="00:00:00.0179579" startTime="2026-10-23T05:21:18.6726483+09:00" endTime="2026-10-23T05:21:18.6726486+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f6c68049-c458-48c9-817c-22865b36c54c">
+      <Output>
+        <ErrorInfo>
+          <Message>a&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Boolean reverseDeclarationOrder, Boolean reverseAlternatives) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 118&#xD;
+   at InvokeStub_LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9c7b856c-220d-4667-bd53-7c9f1894d0f4" testId="1630b1d6-6e14-bde5-7e5d-51177462ae36" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.A_nonnullable_suffix_does_not_inherit_eof" computerName="JJW-PC" duration="00:00:00.0006060" startTime="2026-10-23T05:21:18.7163803+09:00" endTime="2026-10-23T05:21:18.7163803+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9c7b856c-220d-4667-bd53-7c9f1894d0f4" />
+    <UnitTestResult executionId="fe9ad0b3-7c46-4273-bcca-0e8478782cac" testId="02d3fbd0-8ad3-7f65-2f70-fcf537c7efad" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_does_not_hide_a_required_suffix_or_allow_extra_tokens(input: &quot;xaz&quot;)" computerName="JJW-PC" duration="00:00:00.0007052" startTime="2026-10-23T05:21:18.6983653+09:00" endTime="2026-10-23T05:21:18.6983654+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fe9ad0b3-7c46-4273-bcca-0e8478782cac" />
+    <UnitTestResult executionId="0a56bff6-46ce-4ae0-9ea2-a2e57641a9d8" testId="9f2b5a69-ca1f-4843-ddc9-e203735d7873" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;bba&quot;)" computerName="JJW-PC" duration="00:00:00.0008495" startTime="2026-10-23T05:21:18.6978446+09:00" endTime="2026-10-23T05:21:18.6978446+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0a56bff6-46ce-4ae0-9ea2-a2e57641a9d8">
+      <Output>
+        <ErrorInfo>
+          <Message>bba&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39&#xD;
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="606bfb01-c655-45f4-afff-6102397f8f10" testId="da5e1a11-d1cf-ecd8-81b7-6818f4a0ba73" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;bea&quot;)" computerName="JJW-PC" duration="00:00:00.0010081" startTime="2026-10-23T05:21:18.6953404+09:00" endTime="2026-10-23T05:21:18.6953405+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="606bfb01-c655-45f4-afff-6102397f8f10">
+      <Output>
+        <ErrorInfo>
+          <Message>bea&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39&#xD;
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="65af0c61-9f06-469c-a993-77473d7bb420" testId="1c95957c-411f-4e6a-d26a-b6adb2107fa3" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Predicate_lowering_uses_the_same_complete_lookahead_information" computerName="JJW-PC" duration="00:00:00.0112812" startTime="2026-10-23T05:21:18.7160647+09:00" endTime="2026-10-23T05:21:18.7160650+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="65af0c61-9f06-469c-a993-77473d7bb420">
+      <Output>
+        <ErrorInfo>
+          <Message>a&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Predicate_lowering_uses_the_same_complete_lookahead_information() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 219&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6a4fa59a-4c6b-4063-a6f2-410f516f7310" testId="adda5cf3-fe8b-afb2-9aca-d01de4965dc8" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;bebeea&quot;)" computerName="JJW-PC" duration="00:00:00.0007891" startTime="2026-10-23T05:21:18.6941397+09:00" endTime="2026-10-23T05:21:18.6941398+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6a4fa59a-4c6b-4063-a6f2-410f516f7310">
+      <Output>
+        <ErrorInfo>
+          <Message>bebeea&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39&#xD;
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e73d8e61-f95d-410b-8123-be74e0954ba1" testId="19fe0509-e7d1-5fb2-6dba-db5803b7e3e6" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_combines_its_first_tokens_with_the_parent_lookahead(input: &quot;xab&quot;)" computerName="JJW-PC" duration="00:00:00.0007774" startTime="2026-10-23T05:21:18.6387303+09:00" endTime="2026-10-23T05:21:18.6387303+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e73d8e61-f95d-410b-8123-be74e0954ba1" />
+    <UnitTestResult executionId="fff68aa8-bb06-4c70-9a53-e2750fbb6ac6" testId="78c7f64f-dcf4-a1d7-5ab1-768ad12b1f7a" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;b&quot;)" computerName="JJW-PC" duration="00:00:00.0009680" startTime="2026-10-23T05:21:18.6193479+09:00" endTime="2026-10-23T05:21:18.6193480+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fff68aa8-bb06-4c70-9a53-e2750fbb6ac6" />
+    <UnitTestResult executionId="1e56f5a4-c4d9-42f7-a18d-4bbb4011384c" testId="47e76893-6022-8b29-76d3-a45e5ea4fd80" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_does_not_hide_a_required_suffix_or_allow_extra_tokens(input: &quot;ab&quot;)" computerName="JJW-PC" duration="00:00:00.0007044" startTime="2026-10-23T05:21:18.6998974+09:00" endTime="2026-10-23T05:21:18.6998974+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1e56f5a4-c4d9-42f7-a18d-4bbb4011384c" />
+    <UnitTestResult executionId="b5a75844-93f2-4e51-a9f5-5e88f0095882" testId="12c0084e-9e66-0724-1420-9869603d2e88" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_does_not_hide_a_required_suffix_or_allow_extra_tokens(input: &quot;xabb&quot;)" computerName="JJW-PC" duration="00:00:00.0007667" startTime="2026-10-23T05:21:18.6991592+09:00" endTime="2026-10-23T05:21:18.6991593+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b5a75844-93f2-4e51-a9f5-5e88f0095882" />
+    <UnitTestResult executionId="02ae061f-ddd1-4132-a5bc-d6faa46d8308" testId="970e701c-b583-ca22-9ea1-c9a679fb1c79" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;ea&quot;)" computerName="JJW-PC" duration="00:00:00.0008539" startTime="2026-10-23T05:21:18.6961990+09:00" endTime="2026-10-23T05:21:18.6961991+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="02ae061f-ddd1-4132-a5bc-d6faa46d8308">
+      <Output>
+        <ErrorInfo>
+          <Message>ea&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39&#xD;
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2d337fe6-f04b-4214-b369-9c950c67f60a" testId="a9677cbc-ad91-4491-4cc6-8849901052ed" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Eof_reaches_the_intermediate_item_in_the_dependency_cycle" computerName="JJW-PC" duration="00:00:00.0009068" startTime="2026-10-23T05:21:18.7192059+09:00" endTime="2026-10-23T05:21:18.7192060+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2d337fe6-f04b-4214-b369-9c950c67f60a">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Collections differ&#xD;
+           ↓ (pos 0)&#xD;
+Expected: ["$"]&#xD;
+Actual:   []</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.AssertTerminals(TerminalSet actual, String[] expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 254&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Eof_reaches_the_intermediate_item_in_the_dependency_cycle() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 89&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="3125963e-1669-44f4-abd5-2507896707f1" testId="5d960b34-97dd-a61e-596e-3f083b74dfc8" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_combines_its_first_tokens_with_the_parent_lookahead(input: &quot;az&quot;)" computerName="JJW-PC" duration="00:00:00.0006830" startTime="2026-10-23T05:21:18.6387474+09:00" endTime="2026-10-23T05:21:18.6387474+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3125963e-1669-44f4-abd5-2507896707f1" />
+    <UnitTestResult executionId="35c840df-35bd-40cc-babd-7b165df8ba8e" testId="113e2bb4-a3d7-68bd-e2da-9e80257a2d62" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_combines_its_first_tokens_with_the_parent_lookahead(input: &quot;abz&quot;)" computerName="JJW-PC" duration="00:00:00.0114985" startTime="2026-10-23T05:21:18.6329286+09:00" endTime="2026-10-23T05:21:18.6329288+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="35c840df-35bd-40cc-babd-7b165df8ba8e" />
+    <UnitTestResult executionId="5ab16fd5-2ff9-470c-9dc2-a18ce82f9518" testId="062a3ba4-95cc-3fe4-a0d1-bb95a583f6bd" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Every_completed_tiny_production_has_its_exact_lookahead" computerName="JJW-PC" duration="00:00:00.0008317" startTime="2026-10-23T05:21:18.7045827+09:00" endTime="2026-10-23T05:21:18.7045828+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5ab16fd5-2ff9-470c-9dc2-a18ce82f9518">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Collections differ&#xD;
+           ↓ (pos 0)&#xD;
+Expected: ["$"]&#xD;
+Actual:   []</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.AssertTerminals(TerminalSet actual, String[] expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 254&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Every_completed_tiny_production_has_its_exact_lookahead() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 101&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e254f76c-131d-4961-a67d-2351f938dff0" testId="f550d59b-666f-3c20-ac5a-8b44d4c2c20c" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_combines_its_first_tokens_with_the_parent_lookahead(input: &quot;xa&quot;)" computerName="JJW-PC" duration="00:00:00.0010114" startTime="2026-10-23T05:21:18.6386997+09:00" endTime="2026-10-23T05:21:18.6386997+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e254f76c-131d-4961-a67d-2351f938dff0" />
+    <UnitTestResult executionId="697e83b2-9c49-4854-8a02-e7ffb1a7a580" testId="0623fe00-e554-17e6-9c14-c1c746326cbd" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Multiple_nullable_suffixes_propagate_first_and_eof_without_epsilon" computerName="JJW-PC" duration="00:00:00.0027196" startTime="2026-10-23T05:21:18.7033804+09:00" endTime="2026-10-23T05:21:18.7033806+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="697e83b2-9c49-4854-8a02-e7ffb1a7a580" />
+    <UnitTestResult executionId="40bd8797-6915-4d12-b4b0-3424c4b1f26a" testId="08697191-b9f2-2b56-7ba0-44cfd2ed60fb" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;baba&quot;)" computerName="JJW-PC" duration="00:00:00.0012727" startTime="2026-10-23T05:21:18.6159630+09:00" endTime="2026-10-23T05:21:18.6159630+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="40bd8797-6915-4d12-b4b0-3424c4b1f26a" />
+    <UnitTestResult executionId="f000da5b-2c66-4753-bec5-8da648f84a5c" testId="9461eeb9-e94a-8685-811a-84726c0cf8df" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: False, reverseAlternatives: True)" computerName="JJW-PC" duration="00:00:00.0028457" startTime="2026-10-23T05:21:18.6542946+09:00" endTime="2026-10-23T05:21:18.6542947+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f000da5b-2c66-4753-bec5-8da648f84a5c">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Collections differ&#xD;
+                                                                                                                                  ↓ (pos 6)&#xD;
+Expected: [···, "C -&gt; T:e N:S @ 1 | G -&gt;  @ 0 | S -&gt; N:G N:C @ 0 //"···, "G -&gt;  @ 0 | R -&gt; T:b N:S @ 1 | S -&gt; N:G N:C @ 0 //"···, "R -&gt; T:a @ 0 // R -&gt; T:a @ 0 : ", "R -&gt; T:b N:S @ 0 // R -&gt; T:b N:S @ 0 : ", "S -&gt; N:G N:C @ 0 // S -&gt; N:G N:C @ 0 : $"]&#xD;
+Actual:   [···, "C -&gt; T:e N:S @ 1 | G -&gt;  @ 0 | S -&gt; N:G N:C @ 0 //"···, "G -&gt;  @ 0 | R -&gt; T:b N:S @ 1 | S -&gt; N:G N:C @ 0 //"···, "R -&gt; T:a @ 0 // R -&gt; T:a @ 0 : $", "R -&gt; T:b N:S @ 0 // R -&gt; T:b N:S @ 0 : $", "S -&gt; N:G N:C @ 0 // S -&gt; N:G N:C @ 0 : $"]&#xD;
+                                                                                                                                  ↑ (pos 6)</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Boolean reverseDeclarationOrder, Boolean reverseAlternatives) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 117&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b24e8cc0-145d-47e6-a044-3de0dc279ce1" testId="a7b12af4-e919-15d3-a2d0-b0aa9b8c23d4" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: True, reverseAlternatives: True)" computerName="JJW-PC" duration="00:00:00.0163527" startTime="2026-10-23T05:21:18.6891020+09:00" endTime="2026-10-23T05:21:18.6891022+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b24e8cc0-145d-47e6-a044-3de0dc279ce1">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Collections differ&#xD;
+                                                                                                                                  ↓ (pos 6)&#xD;
+Expected: [···, "C -&gt; T:e N:S @ 1 | G -&gt;  @ 0 | S -&gt; N:G N:C @ 0 //"···, "G -&gt;  @ 0 | R -&gt; T:b N:S @ 1 | S -&gt; N:G N:C @ 0 //"···, "R -&gt; T:a @ 0 // R -&gt; T:a @ 0 : ", "R -&gt; T:b N:S @ 0 // R -&gt; T:b N:S @ 0 : ", "S -&gt; N:G N:C @ 0 // S -&gt; N:G N:C @ 0 : $"]&#xD;
+Actual:   [···, "C -&gt; T:e N:S @ 1 | G -&gt;  @ 0 | S -&gt; N:G N:C @ 0 //"···, "G -&gt;  @ 0 | R -&gt; T:b N:S @ 1 | S -&gt; N:G N:C @ 0 //"···, "R -&gt; T:a @ 0 // R -&gt; T:a @ 0 : $", "R -&gt; T:b N:S @ 0 // R -&gt; T:b N:S @ 0 : $", "S -&gt; N:G N:C @ 0 // S -&gt; N:G N:C @ 0 : $"]&#xD;
+                                                                                                                                  ↑ (pos 6)</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Boolean reverseDeclarationOrder, Boolean reverseAlternatives) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 117&#xD;
+   at InvokeStub_LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="df83da74-41ec-4bd5-b0e6-942764e2ff15" testId="86b58164-9d08-e5f1-2ddd-d419115ea587" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;e&quot;)" computerName="JJW-PC" duration="00:00:00.0010649" startTime="2026-10-23T05:21:18.6183357+09:00" endTime="2026-10-23T05:21:18.6183359+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="df83da74-41ec-4bd5-b0e6-942764e2ff15" />
+    <UnitTestResult executionId="7fa94613-dd5a-4fab-9bb0-98d8f64291a1" testId="ad51a866-1f77-9adf-c772-998b4e7a58e0" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;ab&quot;)" computerName="JJW-PC" duration="00:00:00.0010857" startTime="2026-10-23T05:21:18.6172151+09:00" endTime="2026-10-23T05:21:18.6172153+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7fa94613-dd5a-4fab-9bb0-98d8f64291a1" />
+    <UnitTestResult executionId="e2fef67b-23ef-466d-b7ed-a996b9f19b94" testId="775f4716-7c15-bb36-fb07-90e4e8f8f40c" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_does_not_hide_a_required_suffix_or_allow_extra_tokens(input: &quot;a&quot;)" computerName="JJW-PC" duration="00:00:00.0006252" startTime="2026-10-23T05:21:18.7005700+09:00" endTime="2026-10-23T05:21:18.7005701+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e2fef67b-23ef-466d-b7ed-a996b9f19b94" />
+    <UnitTestResult executionId="4df6d5a3-103f-4709-bf6e-c8bfc469a649" testId="78f9ae3e-ab35-4df9-a1ef-623c3a99a299" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;eea&quot;)" computerName="JJW-PC" duration="00:00:00.0020925" startTime="2026-10-23T05:21:18.6912460+09:00" endTime="2026-10-23T05:21:18.6912461+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4df6d5a3-103f-4709-bf6e-c8bfc469a649">
+      <Output>
+        <ErrorInfo>
+          <Message>eea&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="33f8d181-81f1-4c33-85d5-f75fe97d36db" testId="725e7567-d711-0236-e112-d65af676ba28" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;a&quot;)" computerName="JJW-PC" duration="00:00:00.0007236" startTime="2026-10-23T05:21:18.6969371+09:00" endTime="2026-10-23T05:21:18.6969372+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="33f8d181-81f1-4c33-85d5-f75fe97d36db">
+      <Output>
+        <ErrorInfo>
+          <Message>a&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39&#xD;
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="feb1d4eb-9bee-4c9d-85d6-dcc38ed9dfd5" testId="9ada9faa-bc2a-6659-8e5f-aa668391042b" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Finishing_a_has_exactly_the_required_reduce_on_eof" computerName="JJW-PC" duration="00:00:00.0038061" startTime="2026-10-23T05:21:18.6535912+09:00" endTime="2026-10-23T05:21:18.6535915+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="feb1d4eb-9bee-4c9d-85d6-dcc38ed9dfd5">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Collections differ&#xD;
+           ↓ (pos 0)&#xD;
+Expected: ["$"]&#xD;
+Actual:   []</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.AssertTerminals(TerminalSet actual, String[] expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 254&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Finishing_a_has_exactly_the_required_reduce_on_eof() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 66&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0f47e482-c513-4401-ab04-d1d402766fdd" testId="31159b54-db71-b0e8-797b-59458073ca88" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;ae&quot;)" computerName="JJW-PC" duration="00:00:00.0009183" startTime="2026-10-23T05:21:18.6203224+09:00" endTime="2026-10-23T05:21:18.6203225+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0f47e482-c513-4401-ab04-d1d402766fdd" />
+    <UnitTestResult executionId="56d71275-d3a3-4e7b-bd11-e6e1e05c7129" testId="7f33211c-88dd-4163-8703-3f7a72ffffbc" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;ba&quot;)" computerName="JJW-PC" duration="00:00:00.0008988" startTime="2026-10-23T05:21:18.6935143+09:00" endTime="2026-10-23T05:21:18.6935143+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="56d71275-d3a3-4e7b-bd11-e6e1e05c7129">
+      <Output>
+        <ErrorInfo>
+          <Message>ba&#xD;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 277&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs:line 39&#xD;
+   at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1515605b-fd7d-41c3-b62b-85f8d54798dc" testId="8fc62cd4-adf3-78c5-c5f4-4eb4696bbb07" testName="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;aa&quot;)" computerName="JJW-PC" duration="00:00:00.0010043" startTime="2026-10-23T05:21:18.6161678+09:00" endTime="2026-10-23T05:21:18.6161679+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1515605b-fd7d-41c3-b62b-85f8d54798dc" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Inlining_the_nullable_prefix_preserves_the_original_language" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="34cfaae1-8a43-fbef-60f5-b4c8a5b19f6d">
+      <Execution id="45701ed7-6938-48f4-a247-94dd052b3b72" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Inlining_the_nullable_prefix_preserves_the_original_language" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: False, reverseAlternatives: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="9461eeb9-e94a-8685-811a-84726c0cf8df">
+      <Execution id="f000da5b-2c66-4753-bec5-8da648f84a5c" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Declaration_and_alternative_order_do_not_change_the_table_information" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_combines_its_first_tokens_with_the_parent_lookahead(input: &quot;xa&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="f550d59b-666f-3c20-ac5a-8b44d4c2c20c">
+      <Execution id="e254f76c-131d-4961-a67d-2351f938dff0" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_suffix_combines_its_first_tokens_with_the_parent_lookahead" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;ea&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="970e701c-b583-ca22-9ea1-c9a679fb1c79">
+      <Execution id="02ae061f-ddd1-4132-a5bc-d6faa46d8308" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_prefix_and_mutual_recursion_accept_their_language" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;a&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="725e7567-d711-0236-e112-d65af676ba28">
+      <Execution id="33f8d181-81f1-4c33-85d5-f75fe97d36db" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_prefix_and_mutual_recursion_accept_their_language" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Multiple_nullable_suffixes_propagate_first_and_eof_without_epsilon" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="0623fe00-e554-17e6-9c14-c1c746326cbd">
+      <Execution id="697e83b2-9c49-4854-8a02-e7ffb1a7a580" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Multiple_nullable_suffixes_propagate_first_and_eof_without_epsilon" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_does_not_hide_a_required_suffix_or_allow_extra_tokens(input: &quot;xabb&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="12c0084e-9e66-0724-1420-9869603d2e88">
+      <Execution id="b5a75844-93f2-4e51-a9f5-5e88f0095882" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_suffix_does_not_hide_a_required_suffix_or_allow_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_combines_its_first_tokens_with_the_parent_lookahead(input: &quot;az&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="5d960b34-97dd-a61e-596e-3f083b74dfc8">
+      <Execution id="3125963e-1669-44f4-abd5-2507896707f1" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_suffix_combines_its_first_tokens_with_the_parent_lookahead" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;beeb&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="a0aae7d0-b80f-83e1-cab7-4fc2427f0500">
+      <Execution id="c2c552d2-9f29-43f3-bc13-c188d57d5327" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Propagating_eof_does_not_accept_incomplete_or_trailing_input" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;eea&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="78f9ae3e-ab35-4df9-a1ef-623c3a99a299">
+      <Execution id="4df6d5a3-103f-4709-bf6e-c8bfc469a649" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_prefix_and_mutual_recursion_accept_their_language" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;bea&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="da5e1a11-d1cf-ecd8-81b7-6818f4a0ba73">
+      <Execution id="606bfb01-c655-45f4-afff-6102397f8f10" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_prefix_and_mutual_recursion_accept_their_language" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Eof_reaches_the_intermediate_item_in_the_dependency_cycle" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="a9677cbc-ad91-4491-4cc6-8849901052ed">
+      <Execution id="2d337fe6-f04b-4214-b369-9c950c67f60a" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Eof_reaches_the_intermediate_item_in_the_dependency_cycle" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;bebeea&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="adda5cf3-fe8b-afb2-9aca-d01de4965dc8">
+      <Execution id="6a4fa59a-4c6b-4063-a6f2-410f516f7310" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_prefix_and_mutual_recursion_accept_their_language" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Finishing_a_has_exactly_the_required_reduce_on_eof" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="9ada9faa-bc2a-6659-8e5f-aa668391042b">
+      <Execution id="feb1d4eb-9bee-4c9d-85d6-dcc38ed9dfd5" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Finishing_a_has_exactly_the_required_reduce_on_eof" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;ae&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="31159b54-db71-b0e8-797b-59458073ca88">
+      <Execution id="0f47e482-c513-4401-ab04-d1d402766fdd" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Propagating_eof_does_not_accept_incomplete_or_trailing_input" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_does_not_hide_a_required_suffix_or_allow_extra_tokens(input: &quot;a&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="775f4716-7c15-bb36-fb07-90e4e8f8f40c">
+      <Execution id="e2fef67b-23ef-466d-b7ed-a996b9f19b94" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_suffix_does_not_hide_a_required_suffix_or_allow_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_does_not_hide_a_required_suffix_or_allow_extra_tokens(input: &quot;ab&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="47e76893-6022-8b29-76d3-a45e5ea4fd80">
+      <Execution id="1e56f5a4-c4d9-42f7-a18d-4bbb4011384c" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_suffix_does_not_hide_a_required_suffix_or_allow_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;eba&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="3daf271b-4a37-51fc-45e0-929fc15f2131">
+      <Execution id="d8a4be1a-9325-41e4-9894-d2d141853e64" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_prefix_and_mutual_recursion_accept_their_language" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;baba&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="08697191-b9f2-2b56-7ba0-44cfd2ed60fb">
+      <Execution id="40bd8797-6915-4d12-b4b0-3424c4b1f26a" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Propagating_eof_does_not_accept_incomplete_or_trailing_input" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;bba&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="9f2b5a69-ca1f-4843-ddc9-e203735d7873">
+      <Execution id="0a56bff6-46ce-4ae0-9ea2-a2e57641a9d8" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_prefix_and_mutual_recursion_accept_their_language" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;b&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="78c7f64f-dcf4-a1d7-5ab1-768ad12b1f7a">
+      <Execution id="fff68aa8-bb06-4c70-9a53-e2750fbb6ac6" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Propagating_eof_does_not_accept_incomplete_or_trailing_input" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;e&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="86b58164-9d08-e5f1-2ddd-d419115ea587">
+      <Execution id="df83da74-41ec-4bd5-b0e6-942764e2ff15" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Propagating_eof_does_not_accept_incomplete_or_trailing_input" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;aa&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="8fc62cd4-adf3-78c5-c5f4-4eb4696bbb07">
+      <Execution id="1515605b-fd7d-41c3-b62b-85f8d54798dc" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Propagating_eof_does_not_accept_incomplete_or_trailing_input" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: &quot;ba&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="7f33211c-88dd-4163-8703-3f7a72ffffbc">
+      <Execution id="56d71275-d3a3-4e7b-bd11-e6e1e05c7129" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_prefix_and_mutual_recursion_accept_their_language" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: True, reverseAlternatives: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="a7b12af4-e919-15d3-a2d0-b0aa9b8c23d4">
+      <Execution id="b24e8cc0-145d-47e6-a044-3de0dc279ce1" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Declaration_and_alternative_order_do_not_change_the_table_information" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;ab&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="ad51a866-1f77-9adf-c772-998b4e7a58e0">
+      <Execution id="7fa94613-dd5a-4fab-9bb0-98d8f64291a1" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Propagating_eof_does_not_accept_incomplete_or_trailing_input" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Propagating_eof_does_not_accept_incomplete_or_trailing_input(input: &quot;&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="63749f0a-2766-b8df-f330-a5665880418e">
+      <Execution id="4ee2dfd9-fc62-4f8e-b00d-9cc76f05a6ad" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Propagating_eof_does_not_accept_incomplete_or_trailing_input" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.A_nonnullable_suffix_does_not_inherit_eof" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="1630b1d6-6e14-bde5-7e5d-51177462ae36">
+      <Execution id="9c7b856c-220d-4667-bd53-7c9f1894d0f4" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="A_nonnullable_suffix_does_not_inherit_eof" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_combines_its_first_tokens_with_the_parent_lookahead(input: &quot;abz&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="113e2bb4-a3d7-68bd-e2da-9e80257a2d62">
+      <Execution id="35c840df-35bd-40cc-babd-7b165df8ba8e" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_suffix_combines_its_first_tokens_with_the_parent_lookahead" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_combines_its_first_tokens_with_the_parent_lookahead(input: &quot;xab&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="19fe0509-e7d1-5fb2-6dba-db5803b7e3e6">
+      <Execution id="e73d8e61-f95d-410b-8123-be74e0954ba1" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_suffix_combines_its_first_tokens_with_the_parent_lookahead" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_suffix_does_not_hide_a_required_suffix_or_allow_extra_tokens(input: &quot;xaz&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="02d3fbd0-8ad3-7f65-2f70-fcf537c7efad">
+      <Execution id="fe9ad0b3-7c46-4273-bcca-0e8478782cac" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Nullable_suffix_does_not_hide_a_required_suffix_or_allow_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: True, reverseAlternatives: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="03bf1a64-33cc-bc5c-9508-69daa218a3f0">
+      <Execution id="f6c68049-c458-48c9-817c-22865b36c54c" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Declaration_and_alternative_order_do_not_change_the_table_information" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Predicate_lowering_uses_the_same_complete_lookahead_information" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="1c95957c-411f-4e6a-d26a-b6adb2107fa3">
+      <Execution id="65af0c61-9f06-469c-a993-77473d7bb420" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Predicate_lowering_uses_the_same_complete_lookahead_information" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Every_completed_tiny_production_has_its_exact_lookahead" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\lookahead-regression-baseline-bin\parse.frontend.parsers.tests.dll" id="062a3ba4-95cc-3fe4-a0d1-bb95a583f6bd">
+      <Execution id="5ab16fd5-2ff9-470c-9dc2-a18ce82f9518" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-regression-baseline-bin\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests" name="Every_completed_tiny_production_has_its_exact_lookahead" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="34cfaae1-8a43-fbef-60f5-b4c8a5b19f6d" executionId="45701ed7-6938-48f4-a247-94dd052b3b72" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="63749f0a-2766-b8df-f330-a5665880418e" executionId="4ee2dfd9-fc62-4f8e-b00d-9cc76f05a6ad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a0aae7d0-b80f-83e1-cab7-4fc2427f0500" executionId="c2c552d2-9f29-43f3-bc13-c188d57d5327" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3daf271b-4a37-51fc-45e0-929fc15f2131" executionId="d8a4be1a-9325-41e4-9894-d2d141853e64" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="03bf1a64-33cc-bc5c-9508-69daa218a3f0" executionId="f6c68049-c458-48c9-817c-22865b36c54c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1630b1d6-6e14-bde5-7e5d-51177462ae36" executionId="9c7b856c-220d-4667-bd53-7c9f1894d0f4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="02d3fbd0-8ad3-7f65-2f70-fcf537c7efad" executionId="fe9ad0b3-7c46-4273-bcca-0e8478782cac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9f2b5a69-ca1f-4843-ddc9-e203735d7873" executionId="0a56bff6-46ce-4ae0-9ea2-a2e57641a9d8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="da5e1a11-d1cf-ecd8-81b7-6818f4a0ba73" executionId="606bfb01-c655-45f4-afff-6102397f8f10" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c95957c-411f-4e6a-d26a-b6adb2107fa3" executionId="65af0c61-9f06-469c-a993-77473d7bb420" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="adda5cf3-fe8b-afb2-9aca-d01de4965dc8" executionId="6a4fa59a-4c6b-4063-a6f2-410f516f7310" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19fe0509-e7d1-5fb2-6dba-db5803b7e3e6" executionId="e73d8e61-f95d-410b-8123-be74e0954ba1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="78c7f64f-dcf4-a1d7-5ab1-768ad12b1f7a" executionId="fff68aa8-bb06-4c70-9a53-e2750fbb6ac6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="47e76893-6022-8b29-76d3-a45e5ea4fd80" executionId="1e56f5a4-c4d9-42f7-a18d-4bbb4011384c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12c0084e-9e66-0724-1420-9869603d2e88" executionId="b5a75844-93f2-4e51-a9f5-5e88f0095882" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="970e701c-b583-ca22-9ea1-c9a679fb1c79" executionId="02ae061f-ddd1-4132-a5bc-d6faa46d8308" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a9677cbc-ad91-4491-4cc6-8849901052ed" executionId="2d337fe6-f04b-4214-b369-9c950c67f60a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5d960b34-97dd-a61e-596e-3f083b74dfc8" executionId="3125963e-1669-44f4-abd5-2507896707f1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="113e2bb4-a3d7-68bd-e2da-9e80257a2d62" executionId="35c840df-35bd-40cc-babd-7b165df8ba8e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="062a3ba4-95cc-3fe4-a0d1-bb95a583f6bd" executionId="5ab16fd5-2ff9-470c-9dc2-a18ce82f9518" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f550d59b-666f-3c20-ac5a-8b44d4c2c20c" executionId="e254f76c-131d-4961-a67d-2351f938dff0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0623fe00-e554-17e6-9c14-c1c746326cbd" executionId="697e83b2-9c49-4854-8a02-e7ffb1a7a580" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="08697191-b9f2-2b56-7ba0-44cfd2ed60fb" executionId="40bd8797-6915-4d12-b4b0-3424c4b1f26a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9461eeb9-e94a-8685-811a-84726c0cf8df" executionId="f000da5b-2c66-4753-bec5-8da648f84a5c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a7b12af4-e919-15d3-a2d0-b0aa9b8c23d4" executionId="b24e8cc0-145d-47e6-a044-3de0dc279ce1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="86b58164-9d08-e5f1-2ddd-d419115ea587" executionId="df83da74-41ec-4bd5-b0e6-942764e2ff15" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ad51a866-1f77-9adf-c772-998b4e7a58e0" executionId="7fa94613-dd5a-4fab-9bb0-98d8f64291a1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="775f4716-7c15-bb36-fb07-90e4e8f8f40c" executionId="e2fef67b-23ef-466d-b7ed-a996b9f19b94" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="78f9ae3e-ab35-4df9-a1ef-623c3a99a299" executionId="4df6d5a3-103f-4709-bf6e-c8bfc469a649" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="725e7567-d711-0236-e112-d65af676ba28" executionId="33f8d181-81f1-4c33-85d5-f75fe97d36db" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9ada9faa-bc2a-6659-8e5f-aa668391042b" executionId="feb1d4eb-9bee-4c9d-85d6-dcc38ed9dfd5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="31159b54-db71-b0e8-797b-59458073ca88" executionId="0f47e482-c513-4401-ab04-d1d402766fdd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7f33211c-88dd-4163-8703-3f7a72ffffbc" executionId="56d71275-d3a3-4e7b-bd11-e6e1e05c7129" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8fc62cd4-adf3-78c5-c5f4-4eb4696bbb07" executionId="1515605b-fd7d-41c3-b62b-85f8d54798dc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="목록에 없는 결과" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="로드된 모든 결과" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="34" executed="34" passed="18" failed="16" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)&#xD;
+[xUnit.net 00:00:01.20]   Discovering: Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:02.17]   Discovered:  Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:02.17]   Starting:    Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:02.64]       Assert.Equal() Failure: Collections differ&#xD;
+[xUnit.net 00:00:02.64]                  ↓ (pos 0)&#xD;
+[xUnit.net 00:00:02.64]       Expected: ["$"]&#xD;
+[xUnit.net 00:00:02.64]       Actual:   []&#xD;
+[xUnit.net 00:00:02.64]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.64]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(254,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.AssertTerminals(TerminalSet actual, String[] expected)&#xD;
+[xUnit.net 00:00:02.64]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(66,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Finishing_a_has_exactly_the_required_reduce_on_eof()&#xD;
+[xUnit.net 00:00:02.64]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:02.64]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:02.64]       Assert.Equal() Failure: Collections differ&#xD;
+[xUnit.net 00:00:02.64]                                                                                                                                         ↓ (pos 6)&#xD;
+[xUnit.net 00:00:02.64]       Expected: [···, "C -&gt; T:e N:S @ 1 | G -&gt;  @ 0 | S -&gt; N:G N:C @ 0 //"···, "G -&gt;  @ 0 | R -&gt; T:b N:S @ 1 | S -&gt; N:G N:C @ 0 //"···, "R -&gt; T:a @ 0 // R -&gt; T:a @ 0 : ", "R -&gt; T:b N:S @ 0 // R -&gt; T:b N:S @ 0 : ", "S -&gt; N:G N:C @ 0 // S -&gt; N:G N:C @ 0 : $"]&#xD;
+[xUnit.net 00:00:02.64]       Actual:   [···, "C -&gt; T:e N:S @ 1 | G -&gt;  @ 0 | S -&gt; N:G N:C @ 0 //"···, "G -&gt;  @ 0 | R -&gt; T:b N:S @ 1 | S -&gt; N:G N:C @ 0 //"···, "R -&gt; T:a @ 0 // R -&gt; T:a @ 0 : $", "R -&gt; T:b N:S @ 0 // R -&gt; T:b N:S @ 0 : $", "S -&gt; N:G N:C @ 0 // S -&gt; N:G N:C @ 0 : $"]&#xD;
+[xUnit.net 00:00:02.64]                                                                                                                                         ↑ (pos 6)&#xD;
+[xUnit.net 00:00:02.64]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.64]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(117,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Boolean reverseDeclarationOrder, Boolean reverseAlternatives)&#xD;
+[xUnit.net 00:00:02.64]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:02.64]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:02.66]       a&#xD;
+[xUnit.net 00:00:02.66]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:02.66]          at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+[xUnit.net 00:00:02.66]          at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+[xUnit.net 00:00:02.66]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332&#xD;
+[xUnit.net 00:00:02.66]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.66]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(277,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input)&#xD;
+[xUnit.net 00:00:02.66]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(118,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Boolean reverseDeclarationOrder, Boolean reverseAlternatives)&#xD;
+[xUnit.net 00:00:02.66]            at InvokeStub_LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Object, Span`1)&#xD;
+[xUnit.net 00:00:02.66]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:02.68]       Assert.Equal() Failure: Collections differ&#xD;
+[xUnit.net 00:00:02.68]                                                                                                                                         ↓ (pos 6)&#xD;
+[xUnit.net 00:00:02.68]       Expected: [···, "C -&gt; T:e N:S @ 1 | G -&gt;  @ 0 | S -&gt; N:G N:C @ 0 //"···, "G -&gt;  @ 0 | R -&gt; T:b N:S @ 1 | S -&gt; N:G N:C @ 0 //"···, "R -&gt; T:a @ 0 // R -&gt; T:a @ 0 : ", "R -&gt; T:b N:S @ 0 // R -&gt; T:b N:S @ 0 : ", "S -&gt; N:G N:C @ 0 // S -&gt; N:G N:C @ 0 : $"]&#xD;
+[xUnit.net 00:00:02.68]       Actual:   [···, "C -&gt; T:e N:S @ 1 | G -&gt;  @ 0 | S -&gt; N:G N:C @ 0 //"···, "G -&gt;  @ 0 | R -&gt; T:b N:S @ 1 | S -&gt; N:G N:C @ 0 //"···, "R -&gt; T:a @ 0 // R -&gt; T:a @ 0 : $", "R -&gt; T:b N:S @ 0 // R -&gt; T:b N:S @ 0 : $", "S -&gt; N:G N:C @ 0 // S -&gt; N:G N:C @ 0 : $"]&#xD;
+[xUnit.net 00:00:02.68]                                                                                                                                         ↑ (pos 6)&#xD;
+[xUnit.net 00:00:02.68]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(117,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Boolean reverseDeclarationOrder, Boolean reverseAlternatives)&#xD;
+[xUnit.net 00:00:02.68]            at InvokeStub_LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(Object, Span`1)&#xD;
+[xUnit.net 00:00:02.68]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:02.68]       eea&#xD;
+[xUnit.net 00:00:02.68]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332&#xD;
+[xUnit.net 00:00:02.68]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(277,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input)&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(39,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input)&#xD;
+[xUnit.net 00:00:02.68]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:02.68]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:02.68]       eba&#xD;
+[xUnit.net 00:00:02.68]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332&#xD;
+[xUnit.net 00:00:02.68]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(277,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input)&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(39,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input)&#xD;
+[xUnit.net 00:00:02.68]            at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+[xUnit.net 00:00:02.68]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:02.68]       ba&#xD;
+[xUnit.net 00:00:02.68]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332&#xD;
+[xUnit.net 00:00:02.68]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(277,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input)&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(39,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input)&#xD;
+[xUnit.net 00:00:02.68]            at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+[xUnit.net 00:00:02.68]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:02.68]       bebeea&#xD;
+[xUnit.net 00:00:02.68]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332&#xD;
+[xUnit.net 00:00:02.68]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(277,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input)&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(39,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input)&#xD;
+[xUnit.net 00:00:02.68]            at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+[xUnit.net 00:00:02.68]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:02.68]       bea&#xD;
+[xUnit.net 00:00:02.68]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332&#xD;
+[xUnit.net 00:00:02.68]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(277,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input)&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(39,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input)&#xD;
+[xUnit.net 00:00:02.68]            at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+[xUnit.net 00:00:02.68]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:02.68]       ea&#xD;
+[xUnit.net 00:00:02.68]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332&#xD;
+[xUnit.net 00:00:02.68]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(277,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input)&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(39,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input)&#xD;
+[xUnit.net 00:00:02.68]            at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+[xUnit.net 00:00:02.68]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:02.68]       a&#xD;
+[xUnit.net 00:00:02.68]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+[xUnit.net 00:00:02.68]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332&#xD;
+[xUnit.net 00:00:02.68]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(277,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input)&#xD;
+[xUnit.net 00:00:02.68]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(39,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input)&#xD;
+[xUnit.net 00:00:02.68]            at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+[xUnit.net 00:00:02.68]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:02.69]       bba&#xD;
+[xUnit.net 00:00:02.69]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:02.69]          at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+[xUnit.net 00:00:02.69]          at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+[xUnit.net 00:00:02.69]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332&#xD;
+[xUnit.net 00:00:02.69]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.69]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(277,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input)&#xD;
+[xUnit.net 00:00:02.69]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(39,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(String input)&#xD;
+[xUnit.net 00:00:02.69]            at InvokeStub_LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(Object, Span`1)&#xD;
+[xUnit.net 00:00:02.69]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:02.69]       Assert.Equal() Failure: Collections differ&#xD;
+[xUnit.net 00:00:02.69]                  ↓ (pos 0)&#xD;
+[xUnit.net 00:00:02.69]       Expected: ["$"]&#xD;
+[xUnit.net 00:00:02.69]       Actual:   []&#xD;
+[xUnit.net 00:00:02.69]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.69]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(254,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.AssertTerminals(TerminalSet actual, String[] expected)&#xD;
+[xUnit.net 00:00:02.69]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(101,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Every_completed_tiny_production_has_its_exact_lookahead()&#xD;
+[xUnit.net 00:00:02.69]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:02.69]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:02.70]       a&#xD;
+[xUnit.net 00:00:02.70]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:02.70]          at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+[xUnit.net 00:00:02.70]          at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+[xUnit.net 00:00:02.70]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332&#xD;
+[xUnit.net 00:00:02.70]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.70]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(277,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input)&#xD;
+[xUnit.net 00:00:02.70]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(219,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Predicate_lowering_uses_the_same_complete_lookahead_information()&#xD;
+[xUnit.net 00:00:02.70]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:02.70]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:02.71]       a&#xD;
+[xUnit.net 00:00:02.71]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.&#xD;
+[xUnit.net 00:00:02.71]          at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32&amp; index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472&#xD;
+[xUnit.net 00:00:02.71]          at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303&#xD;
+[xUnit.net 00:00:02.71]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332&#xD;
+[xUnit.net 00:00:02.71]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.71]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(277,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Accept(LALRParser parser, String input)&#xD;
+[xUnit.net 00:00:02.71]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(129,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Inlining_the_nullable_prefix_preserves_the_original_language()&#xD;
+[xUnit.net 00:00:02.71]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:02.71]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:02.71]       Assert.Equal() Failure: Collections differ&#xD;
+[xUnit.net 00:00:02.71]                  ↓ (pos 0)&#xD;
+[xUnit.net 00:00:02.71]       Expected: ["$"]&#xD;
+[xUnit.net 00:00:02.71]       Actual:   []&#xD;
+[xUnit.net 00:00:02.71]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.71]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(254,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.AssertTerminals(TerminalSet actual, String[] expected)&#xD;
+[xUnit.net 00:00:02.71]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadRegressionTests.cs(89,0): at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Eof_reaches_the_intermediate_item_in_the_dependency_cycle()&#xD;
+[xUnit.net 00:00:02.71]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:02.71]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:02.71]   Finished:    Parse.FrontEnd.Parsers.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.6564740+09:00">
+        <Text>[xUnit.net 00:00:02.64]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Finishing_a_has_exactly_the_required_reduce_on_eof [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.6566766+09:00">
+        <Text>[xUnit.net 00:00:02.64]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: False, reverseAlternatives: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.6727409+09:00">
+        <Text>[xUnit.net 00:00:02.66]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: True, reverseAlternatives: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.6891907+09:00">
+        <Text>[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Declaration_and_alternative_order_do_not_change_the_table_information(reverseDeclarationOrder: True, reverseAlternatives: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.6912960+09:00">
+        <Text>[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "eea") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.6924373+09:00">
+        <Text>[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "eba") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.6951911+09:00">
+        <Text>[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "ba") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.6952248+09:00">
+        <Text>[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "bebeea") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.6952419+09:00">
+        <Text>[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "bea") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.6962462+09:00">
+        <Text>[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "ea") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.6969758+09:00">
+        <Text>[xUnit.net 00:00:02.68]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "a") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.6978417+09:00">
+        <Text>[xUnit.net 00:00:02.69]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Nullable_prefix_and_mutual_recursion_accept_their_language(input: "bba") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.7046398+09:00">
+        <Text>[xUnit.net 00:00:02.69]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Every_completed_tiny_production_has_its_exact_lookahead [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.7161423+09:00">
+        <Text>[xUnit.net 00:00:02.70]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Predicate_lowering_uses_the_same_complete_lookahead_information [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.7182221+09:00">
+        <Text>[xUnit.net 00:00:02.71]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Inlining_the_nullable_prefix_preserves_the_original_language [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-23T05:21:18.7191815+09:00">
+        <Text>[xUnit.net 00:00:02.71]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests.Eof_reaches_the_intermediate_item_in_the_dependency_cycle [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

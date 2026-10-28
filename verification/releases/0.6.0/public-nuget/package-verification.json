@@ -1,0 +1,38 @@
+{
+  "url": "https://api.nuget.org/v3-flatcontainer/janglim/0.6.0/janglim.0.6.0.nupkg",
+  "version": "0.6.0",
+  "repositoryCommit": "efe182f49d3ff265e42e93a33bc144a1811c4c9c",
+  "expectedCommit": "efe182f49d3ff265e42e93a33bc144a1811c4c9c",
+  "publicSha256": "3992a522201006e7ca7bb8dcd88a41d5a0fa940a9aaae10089c66a5781d4ebc4",
+  "ciPackage": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\release-0.6.0\\ci-package\\extracted\\Janglim.0.6.0.nupkg",
+  "ciSha256": "3d5bdf2c5dec80381020f242fae48bc9efaac8c20ec20f7aa432b95d1f73e5ba",
+  "archiveMatchesCi": false,
+  "payloadMatchesCi": true,
+  "payloadEntryCount": 56,
+  "payloadChanged": [],
+  "payloadAdded": [],
+  "payloadRemoved": [],
+  "signatureEntries": {
+    "public": true,
+    "ci": false
+  },
+  "signatureVerification": "Run dotnet nuget verify --all separately.",
+  "engineDlls": [
+    "lib/netstandard2.1/AJ.Common.dll",
+    "lib/netstandard2.1/Janglim.dll",
+    "lib/netstandard2.1/Parse.FrontEnd.ErrorHandler.dll",
+    "lib/netstandard2.1/Parse.FrontEnd.Grammars.Ebnf.dll",
+    "lib/netstandard2.1/Parse.FrontEnd.Grammars.dll",
+    "lib/netstandard2.1/Parse.FrontEnd.Parsers.dll",
+    "lib/netstandard2.1/Parse.FrontEnd.Support.dll",
+    "lib/netstandard2.1/Parse.FrontEnd.dll",
+    "lib/netstandard2.1/Parse.dll"
+  ],
+  "readmeMetadata": "README.md",
+  "licenseMetadata": "MIT",
+  "readmeVersionPresent": true,
+  "readmeMatchesCi": true,
+  "unicodeLicensePresent": true,
+  "unicodeLicenseMatchesCi": true,
+  "passed": true
+}

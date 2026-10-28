@@ -1,0 +1,2212 @@
+[
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a|b/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a||b/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/(?:)/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/|/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a|/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/|a/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/./"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a*/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a+/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a?/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a*?/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a+?/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a??/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{0}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{2}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{2,}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{2,4}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{0,0}?/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{0002,0004}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/(?:ab|cd){2,4}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/(a(b(c)))+/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{999999999999999999999999999999999999999}/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{999999999999999999999999999999999999999,}/v"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{100000000000000000000000000000000000000,200000000000000000000000000000000000000}/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/(?:x(?:y|z)*)?/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a\\{2\\}/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/[{}]+/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{2/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{2,/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{,2}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{z}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/{/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/]/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{2,1x}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{1, 2}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/(?:*a)/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/+a/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/?a/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a**/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a++/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a?+/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{1}*/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{1}+/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{1}?+/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{3,2}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{3,2}/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{3,2}/v"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{0003,0002}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/{1}/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/|*/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/(?:a|*)/"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{999999999999999999999999999999999999998,999999999999999999999999999999999999997}/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{1000000000000000000000000000000000000000,999999999999999999999999999999999999999}/v"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{2/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{2,/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{,2}/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{z}/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a}/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/{/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/]/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{2,1x}/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{1, 2}/u"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/{,}/v"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{1,,2}/v"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/()/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(())/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?:a)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?=a)a/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?!a)b/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<=a)b/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<!a)b/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<=a|bc)d/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<=a*)b/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/^a$/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/\\ba\\B/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?:^|$)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?=a)?/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?!a)*/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?=a)+/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?=a){2}/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?=a)??/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?:\\b)*/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<name>a)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<π>a)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<$x>a)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<_x>a)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<\\u0061>a)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<\\u{61}>a)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<\\u{10400}>a)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<a\\u200Cb>x)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<a\\u200Db>x)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<\\uD835\\uDC00>a)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<𝒜>a)/v"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<a>(?:x|y))/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<a>x)|(?:(?<a>y)|z)/v"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(a))/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/((a)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?a)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?#comment)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?P<name>a)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<name>a/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<name)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<>a)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<1>a)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<a-b>x)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<a b>x)/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\u0030>x)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\uD800>x)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\u{110000}>x)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\u{}>x)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\x61>x)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<😀>a)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?=a)?/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?=a)*/v"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\u{D835}\\u{DC00}>a)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\uDC00\\uD800>a)/u"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<=a)?/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<!a)*/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/^*/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/$+/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/\\b?/"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/\\B{2}/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(a)\\1/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\1(a)/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(a)\\1/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(a)(b)\\2\\1/v"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<name>a)\\k<name>/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\k<name>(?<name>a)/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<\\u0061>x)\\k<a>/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<a>x)\\k<\\u0061>/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<π>x)\\k<π>/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<x>a)|(?<x>b)/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?:(?<x>a)|(?<x>b))\\k<x>/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?:(?<x>a)|(?<x>b))*/v"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<x>a)|(?<x>b)|(?<x>c)/v"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?:(?<x>a)|b)|(?<x>c)/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?:(?<x>a)|b)(?:(?<y>c)|(?<y>d))/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<x>a)|(?:(?<y>b)(?<x>c))/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\k<unknown>/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\k/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\1/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\8/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\9/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\11/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(a)\\11/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(a)\\2/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\123/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/[\\1]/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/[(?<name>)]\\k<unknown>/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\k<missing>[(?<name>)]/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?:(?<a>x)|(?<a>y)){2}/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\0/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\0/v"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\0a/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\1/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\8/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\9/v"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(a)\\2/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(a)\\11/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\99999999999999999999999999999/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/[\\1]/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/[\\8]/v"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\01/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\00/v"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\09/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)(?<x>b)/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)(?<\\u0078>b)/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a(?<x>b))/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<a>(?<a>x)|y)/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?:(?<x>a)|b)(?:(?<x>c)|d)/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)|(?<x>b)(?<x>c)/v"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?=(?<x>a))(?<x>b)/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\k<unknown>/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)\\k<unknown>/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)\\k/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)\\k<>/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)\\k<x/"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\k<1>/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<a>x)\\k<\\x61>/u"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\k/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\n\\r\\t\\v\\f\\b\\B/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\d\\D\\s\\S\\w\\W/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\cA\\cz/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\x00\\xFF/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u0000\\uFFFF/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u{0}\\u{10FFFF}/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u{0000000000000000000000000000000000000061}/v"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\uD800/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\uDC00/v"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\uD83D\\uDE00/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u{D800}/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u{DFFF}/v"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\^\\$\\\\\\.\\*\\+\\?\\(\\)\\[\\]\\{\\}\\|\\//u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\q/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\a/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\_/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\-/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\:/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\c/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\c1/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\x/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\xG0/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\uG000/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u{61}/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\p{Letter}/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\P{bad}/"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\q/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\a/v"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\_/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\-/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\:/v"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\c/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\c1/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\x/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\xG0/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\x1/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\uG000/v"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u123/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u{}/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u{110000}/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u{FFFFFFFFFFFFFFFFFFFFFF}/v"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u{-1}/u"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u{1_0}/v"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u{61/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[^]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[abc]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[^abc]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[a-zA-Z0-9_]/v"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[-a]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[a-]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\-]/v"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\]\\[]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\b]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\0]/v"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\cA]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\c_]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\c0]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\c]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\x41-\\u005A]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\u{1F600}-\\u{1F64F}]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\uD800-\\uDFFF]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[😀-🙏]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[a-a]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\uD83D\\uDE00-\\uD83D\\uDE4F]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\d-a]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[a-\\d]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\s-\\w]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[a&&b]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[&&]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[!!]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[()[\\]{}|\\/]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\p{L}\\P{N}]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[z-a]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[z-a]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[9-0]/v"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\u005A-\\x41]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\u{1F64F}-\\u{1F600}]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\d-a]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[a-\\d]/v"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\s-\\w]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\p{L}-a]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[a-\\p{L}]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\c_]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\c0]/v"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\c]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\B]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\q]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\u{}]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\01]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\8]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\-a-\\-]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\u{D83D}\\u{DE00}-\\u{D83D}\\u{DE4F}]/u"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\p{L}-a]/"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[a--]/"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{L}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Letter}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Lu}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\P{Lowercase_Letter}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{General_Category=Decimal_Number}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{gc=Nd}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Script=Greek}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{sc=Grek}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Script_Extensions=Hira}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{scx=Katakana}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{ASCII}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\P{Any}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Assigned}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Alphabetic}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{White_Space}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{space}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{ID_Start}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{ID_Continue}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Emoji}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Extended_Pictographic}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{RGI_Emoji}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Basic_Emoji}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Emoji_Keycap_Sequence}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{RGI_Emoji_Modifier_Sequence}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{RGI_Emoji_Flag_Sequence}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{RGI_Emoji_Tag_Sequence}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{RGI_Emoji_ZWJ_Sequence}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/[\\p{RGI_Emoji}]/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/[\\p{ASCII}&&\\p{Letter}]/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{Unknown}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{letter}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{ASCII_Hex_digit}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{Script=greek}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{script=Greek}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{Greek}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{gc=Greek}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{sc=Letter}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{GeneralCategory=Letter}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{General_Category = Letter}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{General_Category=Uppercase Letter}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{IsGreek}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{InBasic_Latin}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{Age=17.0}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{ASCII=Yes}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{Emoji=Yes}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{WSpace}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{RGI_Emoji}/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\P{RGI_Emoji}/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/[^\\p{RGI_Emoji}]/v"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{L/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\pL/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p/u"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\P/u"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[abc]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[[a-z][0-9]]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[a&&b]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[a--b]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[[a-z]&&[^aeiou]]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[[a-z]--[aeiou]]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[a&&b&&c]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[a--b--c]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{ab|cd}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{a|}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{a|b}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{\\n|\\u{1F600}}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{ab}&&\\q{ab|cd}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{ab}--\\q{cd}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^\\q{a|b}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^a&&\\q{ab}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^a--\\q{ab}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^\\q{ab}&&a]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^\\q{a}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^\\q{😀}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^\\q{\\uD83D\\uDE00}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[a\\&b]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\(\\)\\[\\]\\{\\}\\|\\/\\-]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^^]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\!\\#\\$\\%\\&\\*\\+\\,\\.\\:\\;\\<\\=\\>\\?\\@\\^\\`\\~]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a&&]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[&&a]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a--]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[--a]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a&&b--c]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a--b&&c]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[ab&&c]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a&&bc]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a&&&b]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a---b]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a-b-c]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[-a]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a-]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[()]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[{}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[|]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[[a]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[!!]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[##]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[$$]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[%%]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[**]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[++]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[,,]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[..]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[::]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[;;]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[<<]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[==]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[>>]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[??]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[@@]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[``]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[~~]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[\\q{a|b}]/u"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/\\q{ab}/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[\\q{ab]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[\\q{(a)}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[\\q{a-b}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[^\\q{ab}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[^\\q{}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[^\\p{RGI_Emoji}--a]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[^\\q{ab}&&\\q{ab}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[\\q{ab}-z]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a-\\q{ab}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[^\\q{ab}--\\q{ab}]/v"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[^\\q{\\u{D83D}\\u{DE00}}]/v"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?m:^a$)/u"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?s:.)/v"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?ims:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?-i:a)/i"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i-m:a)/m"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?im-s:a)/s"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i-ms:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?-ims:a)/ims"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i:a(?-i:b)c)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i:(?<a>x))\\k<a>/u"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i:)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?s:.){2}/v"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i:(a))\\1/u"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i-:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i)a/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i:a/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i:a))/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?ii:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i-i:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i-ii:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?g:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?d:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?u:a)/u"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?v:a)/v"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?y:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?a:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?-:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?--i:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i-m-s:a)/"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?I:a)/"
+  }
+]

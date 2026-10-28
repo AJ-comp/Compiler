@@ -1,0 +1,115 @@
+{
+  "Status": "completed_productivity_validation_verified_only_preexisting_typescript_failures_remain",
+  "Scope": [
+    "Validate all registered nonterminals after normalization and generated-helper cleanup",
+    "Collect finishable rules until no new rule is added",
+    "Preserve productive recursion and epsilon; do not execute predicates",
+    "Report nonproductive rules before FIRST/FOLLOW and LR table construction",
+    "Return ordinary EBNF reader diagnostics",
+    "Revalidate already-normalized mutable grammars"
+  ],
+  "SolutionBuild": {
+    "Configuration": "Release",
+    "Warnings": 0,
+    "Log": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\productivity-validation-20261028-124708-647\\solution-build.log",
+    "ExitCode": 0,
+    "Errors": 0
+  },
+  "NewTests": {
+    "Passed": 79,
+    "EbnfCases": 39,
+    "Total": 79,
+    "NativeCases": 40,
+    "Failed": 0
+  },
+  "Core": {
+    "Passed": 1248,
+    "Trx": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\productivity-validation-20261028-124708-647\\core-final.trx",
+    "Total": 1249,
+    "Skipped": 1,
+    "Failed": 0
+  },
+  "FullParser": {
+    "UnexpectedFailures": [],
+    "Failures": [
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value\")",
+        "Message": "(value: unknown) => asserts value\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\nGrammar predicate TSNoTypeReferenceSuffix evaluated to false.",
+        "SameNameAndMessageAsPriorBaseline": true
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value is string\")",
+        "Message": "(value: unknown) => asserts value is string\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\nGrammar predicate TSNoTypeReferenceSuffix evaluated to false.",
+        "SameNameAndMessageAsPriorBaseline": true
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: \"export declare namespace Tools { function run(): v\"···)",
+        "Message": "export declare namespace Tools { function run(): void; }\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {{} 와야 합니다)",
+        "SameNameAndMessageAsPriorBaseline": true
+      }
+    ],
+    "Skipped": 1,
+    "Passed": 6710,
+    "Failed": 3,
+    "Trx": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\productivity-validation-20261028-124708-647\\parser-full.trx",
+    "Total": 6714
+  },
+  "Mcp": {
+    "Passed": 69,
+    "Trx": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\productivity-validation-20261028-124708-647\\mcp.trx",
+    "Total": 69,
+    "Failed": 0
+  },
+  "SnapshotFilesChecked": 11,
+  "ChangedSnapshots": [],
+  "SourceHashesMatchTestedSources": true,
+  "SourceHashes": [
+    {
+      "Path": "src/FrontEnd/Parse.FrontEnd.Grammars/Grammar.cs",
+      "Sha256": "065FEB56BB0A481A256025D886ADF702970C051AD55C8CB1453030E05212996B"
+    },
+    {
+      "Path": "src/FrontEnd/Parse.FrontEnd.Grammars/GrammarProductivityException.cs",
+      "Sha256": "E6B1C82FDECE0B43CDA5BFA26338821B17DD62DD865435A9D8C23CF80E423F33"
+    },
+    {
+      "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/EbnfGrammar.cs",
+      "Sha256": "FAB90A889B87D980F307D7E38B8EBBC7A91FD151E8D68766FEC939901894D4EC"
+    },
+    {
+      "Path": "Tests/Parse.FrontEnd.Parsers.Tests/Conformance/GrammarProductivityTests.cs",
+      "Sha256": "351C9E7404DF52D78E757EEC54E9238AFDD65CFEC99D0521664DF71B3268D6C6"
+    },
+    {
+      "Path": "Tests/Parse.FrontEnd.Parsers.Tests/Conformance/EbnfProductivityTests.cs",
+      "Sha256": "BCD7AABC24FB9A470AED35D2A69DBE6B6D9659F1322A0A587B3DB0032A10D96D"
+    },
+    {
+      "Path": "Tests/Parse.FrontEnd.Parsers.Tests/Conformance/GrammarProgressTests.cs",
+      "Sha256": "7621A462BD7A43453BB9EB3B1CBF0815D2D0F065CBEA5B8C3BEAF86E13D2E275"
+    },
+    {
+      "Path": "Tests/Parse.FrontEnd.Parsers.Tests/Conformance/PredicateLeftRecursionGraphTests.cs",
+      "Sha256": "29E151AF13DEEFCC3733C1857FC2C92CB0BD8EDF37E6A5216877D792CBB13DB3"
+    },
+    {
+      "Path": "Tests/Parse.FrontEnd.Parsers.Tests/Conformance/PredicateLeftRecursionTests.cs",
+      "Sha256": "223B2C6107D4D37925ED41442543504B75CBC19EC21A4B500C06DAE3F006C402"
+    },
+    {
+      "Path": "Tests/Parse.FrontEnd.Parsers.Tests/Conformance/PredicateIntegrationTests.cs",
+      "Sha256": "A10609220772369BEF808F908145FE6EF6BCAD2F52DF9AF49F06C060DC36EE35"
+    },
+    {
+      "Path": "Tests/Parse.FrontEnd.Parsers.Tests/LalrEmptySuffixTests.cs",
+      "Sha256": "046A217BB898CDD76D849BD75B4212227E653F40F9493351035D92C850F66C15"
+    },
+    {
+      "Path": "Tests/Parse.FrontEnd.Parsers.Tests/LalrLookaheadReferenceTests.cs",
+      "Sha256": "9EC7FA07C2941542F43FD7A3CF45BD59ACC6311DFDBE17928F5E0BAE3E135199"
+    }
+  ],
+  "FixtureAdaptation": "Only empty, unreferenced, non-start test helper fields are unregistered; actual productions and test assertions remain intact.",
+  "ReferenceTestAdaptation": "Nonproductive grammars now assert early rejection. Productive canonical-LR1 merge oracle and assertions are unchanged.",
+  "Baseline": "artifacts/typescript/first-empty-sequence-20261028-094647-206/verification.json"
+}

@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj" />
+    <EmbeddedResource Include="..\..\..\grammars\javascript\ecmascript-2026-expressions.ebnf" LogicalName="Janglim.JavaScript.Ecma2026.Expressions.ebnf" />
+    <EmbeddedResource Include="..\..\..\grammars\javascript\ecmascript-2026-bindings.ebnf" LogicalName="Janglim.JavaScript.Ecma2026.Bindings.ebnf" />
+    <EmbeddedResource Include="..\..\..\grammars\javascript\ecmascript-2026-statements.ebnf" LogicalName="Janglim.JavaScript.Ecma2026.Statements.ebnf" />
+    <EmbeddedResource Include="..\..\..\grammars\javascript\ecmascript-2026-classes.ebnf" LogicalName="Janglim.JavaScript.Ecma2026.Classes.ebnf" />
+    <EmbeddedResource Include="..\..\..\grammars\javascript\ecmascript-2026-modules.ebnf" LogicalName="Janglim.JavaScript.Ecma2026.Modules.ebnf" />
+    <EmbeddedResource Include="..\..\..\grammars\javascript\ecmascript-2026-functions.ebnf" LogicalName="Janglim.JavaScript.Ecma2026.Functions.ebnf" />
+    <EmbeddedResource Include="..\..\..\grammars\typescript\typescript-types.ebnf" LogicalName="Janglim.TypeScript.Types.ebnf" />
+    <EmbeddedResource Include="..\..\..\grammars\typescript\typescript-declarations.ebnf" LogicalName="Janglim.TypeScript.Declarations.ebnf" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+</Project>

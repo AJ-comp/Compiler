@@ -1,0 +1,14 @@
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(1,7): error TS2300: Duplicate identifier 'C'.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(1,23): error TS2681: A constructor cannot have a 'this' parameter.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(2,7): error TS2300: Duplicate identifier 'C'.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(2,21): error TS2784: 'get' and 'set' accessors cannot declare 'this' parameters.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(3,7): error TS2300: Duplicate identifier 'C'.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(3,21): error TS2784: 'get' and 'set' accessors cannot declare 'this' parameters.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(4,16): error TS2300: Duplicate identifier 'C'.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(4,39): error TS2784: 'get' and 'set' accessors cannot declare 'this' parameters.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(5,15): error TS2300: Duplicate identifier 'C'.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(5,29): error TS2784: 'get' and 'set' accessors cannot declare 'this' parameters.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(6,16): error TS2300: Duplicate identifier 'C'.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(6,43): error TS1051: A 'set' accessor cannot have an optional parameter.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(7,15): error TS2300: Duplicate identifier 'C'.
+artifacts/typescript/class-extensions-20261028-155659-971/accessor-this-cases.ts(7,33): error TS1051: A 'set' accessor cannot have an optional parameter.

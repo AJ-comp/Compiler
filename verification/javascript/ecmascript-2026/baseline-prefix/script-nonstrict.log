@@ -1,0 +1,52 @@
+
+COMMAND ["C:\\Users\\AhjLv\\.dotnet\\dotnet.exe", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\tools\\Janglim.Test262\\bin\\Release\\net8.0\\Janglim.Test262.dll", "--input", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\baseline-prefix.jsonl", "--output", "artifacts\\ecmascript-2026\\baseline-prefix\\script-nonstrict.jsonl", "--profile", "script-nonstrict", "--skip", "0", "--timeout-ms", "30000"]
+Preparing script-nonstrict (web=True) ...
+Ready script-nonstrict at 00:00:20.9163559.
+250 cases, 250 passed, 0 mismatches/errors; 00:00:25.2804127.
+500 cases, 500 passed, 0 mismatches/errors; 00:00:26.2157018.
+750 cases, 750 passed, 0 mismatches/errors; 00:00:27.4013180.
+1000 cases, 1000 passed, 0 mismatches/errors; 00:00:28.9725393.
+1250 cases, 1250 passed, 0 mismatches/errors; 00:00:33.1324485.
+1500 cases, 1500 passed, 0 mismatches/errors; 00:04:25.3785113.
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-2026\\baseline-prefix.jsonl",
+  "profile": "script-nonstrict",
+  "skip": 0,
+  "processed": 1698,
+  "outcomes": {
+    "pass": 1697,
+    "timeout": 1
+  },
+  "elapsedSeconds": 350.7153135,
+  "syntaxOnly": true
+}
+
+COMMAND ["C:\\Users\\AhjLv\\.dotnet\\dotnet.exe", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\tools\\Janglim.Test262\\bin\\Release\\net8.0\\Janglim.Test262.dll", "--input", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\baseline-prefix.jsonl", "--output", "artifacts\\ecmascript-2026\\baseline-prefix\\script-nonstrict.jsonl", "--profile", "script-nonstrict", "--skip", "1698", "--timeout-ms", "30000", "--append"]
+Preparing script-nonstrict (web=True) ...
+Ready script-nonstrict at 00:00:37.5930266.
+250 cases, 250 passed, 0 mismatches/errors; 00:01:56.9636132.
+500 cases, 500 passed, 0 mismatches/errors; 00:02:01.3012638.
+750 cases, 750 passed, 0 mismatches/errors; 00:02:07.8668044.
+1000 cases, 1000 passed, 0 mismatches/errors; 00:02:13.2948766.
+1250 cases, 1250 passed, 0 mismatches/errors; 00:02:19.8623185.
+1500 cases, 1500 passed, 0 mismatches/errors; 00:02:24.7688507.
+1750 cases, 1750 passed, 0 mismatches/errors; 00:02:26.7067001.
+2000 cases, 2000 passed, 0 mismatches/errors; 00:02:29.3793701.
+2250 cases, 2250 passed, 0 mismatches/errors; 00:02:31.7736220.
+2500 cases, 2500 passed, 0 mismatches/errors; 00:02:39.7307828.
+2750 cases, 2750 passed, 0 mismatches/errors; 00:02:43.0357367.
+3000 cases, 3000 passed, 0 mismatches/errors; 00:02:47.2053075.
+3250 cases, 3250 passed, 0 mismatches/errors; 00:02:49.0938749.
+3500 cases, 3500 passed, 0 mismatches/errors; 00:02:50.5234302.
+3750 cases, 3750 passed, 0 mismatches/errors; 00:02:55.2482953.
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-2026\\baseline-prefix.jsonl",
+  "profile": "script-nonstrict",
+  "skip": 1698,
+  "processed": 3890,
+  "outcomes": {
+    "pass": 3890
+  },
+  "elapsedSeconds": 178.0809703,
+  "syntaxOnly": true
+}

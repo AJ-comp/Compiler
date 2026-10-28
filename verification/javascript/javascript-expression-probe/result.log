@@ -1,0 +1,4 @@
+name => first kind=IdentifierName, text='name', nextOffset=4
+$name => first kind=, text='$', nextOffset=1
+name$ => first kind=IdentifierName, text='name', nextOffset=4
+true$ => first kind=true, text='true', nextOffset=4

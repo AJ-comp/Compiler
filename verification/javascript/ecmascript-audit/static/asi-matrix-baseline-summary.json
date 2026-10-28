@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "syntaxOnly": true,
+  "nodeVersion": "v24.12.0",
+  "total": 980,
+  "expectedAccept": 938,
+  "expectedReject": 42,
+  "processed": 980,
+  "outcomes": {
+    "pass": 705,
+    "unexpected-reject": 275
+  },
+  "failureGroups": {
+    "async-function/lf/regexp": 35,
+    "async-function/crlf/regexp": 35,
+    "async-function/multiline-comment/regexp": 35,
+    "class/lf/regexp": 15,
+    "class/crlf/regexp": 15,
+    "class/multiline-comment/regexp": 15,
+    "function/lf/regexp": 15,
+    "function/crlf/regexp": 15,
+    "function/multiline-comment/regexp": 15,
+    "generator/lf/regexp": 15,
+    "generator/crlf/regexp": 15,
+    "generator/multiline-comment/regexp": 15,
+    "async-generator/lf/regexp": 35
+  },
+  "inputSha256": "2cda7d0258a8492db9d78ad2be44f4873ce73f95e4c39c0f519ed7fa9c54adb6",
+  "runner": "artifacts/ecmascript-2026/runner-final/Janglim.Test262.dll",
+  "runnerSha256": "b49e4874bbc983f50a0b1e56430d58b54d8ec8230036171ec511aeba59372129",
+  "specification": [
+    "https://tc39.es/ecma262/2026/multipage/ecmascript-language-lexical-grammar.html#sec-automatic-semicolon-insertion",
+    "https://tc39.es/ecma262/2026/multipage/ecmascript-language-statements-and-declarations.html#sec-expression-statement",
+    "https://tc39.es/ecma262/2026/multipage/ecmascript-language-functions-and-classes.html#sec-async-function-definitions"
+  ]
+}

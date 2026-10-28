@@ -1,0 +1,5 @@
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Janglim.Mcp.Tests\bin\Release\net10.0\Janglim.Mcp.Tests.dll(.NETCoreApp,Version=v10.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\non-strict\TestResults\mcp-final.trx
+
+통과!  - 실패:     0, 통과:    69, 건너뜀:     0, 전체:    69, 기간: 23 s - Janglim.Mcp.Tests.dll (net10.0)

@@ -1,0 +1,76 @@
+{
+  "Tool": "ANTLR 4.13.2",
+  "OfficialDownload": "https://www.antlr.org/download/antlr-4.13.2-complete.jar",
+  "Release": "https://github.com/antlr/antlr4/releases/tag/4.13.2",
+  "JarSha256": "EAE2DFA119A64327444672AFF63E9EC35A20180DC5B8090B7A6AB85125DF4D76",
+  "ExistingJava": "C:\\Program Files\\Microsoft\\jdk-21.0.6.7-hotspot\\bin\\java.exe; OpenJDK 21.0.6+7 LTS",
+  "Generation": [
+    {
+      "Grammar": "Base",
+      "ExitCode": 1,
+      "Output": "error(169): Base.g4:6:0: rule u is left recursive but doesn't conform to a pattern ANTLR can handle\r\n"
+    },
+    {
+      "Grammar": "Overlap",
+      "ExitCode": 1,
+      "Output": "error(169): Overlap.g4:7:0: rule u is left recursive but doesn't conform to a pattern ANTLR can handle\r\n"
+    },
+    {
+      "Grammar": "Pruned",
+      "ExitCode": 0,
+      "Output": null
+    },
+    {
+      "Grammar": "RightDead",
+      "ExitCode": 0,
+      "Output": null
+    },
+    {
+      "Grammar": "LeftDead",
+      "ExitCode": 1,
+      "Output": "error(147): LeftDead.g4:7:0: left recursive rule u must contain an alternative which is not left recursive\r\n"
+    },
+    {
+      "Grammar": "MutualDead",
+      "ExitCode": 1,
+      "Output": "error(119): MutualDead.g4::: The following sets of rules are mutually left-recursive [u, v]\r\n"
+    },
+    {
+      "Grammar": "CleanWitness",
+      "ExitCode": 1,
+      "Output": "error(147): CleanWitness.g4:7:0: left recursive rule u must contain an alternative which is not left recursive\r\n"
+    }
+  ],
+  "RuntimeControls": [
+    "Pruned\tinput=ax\taccepted=true\terrors=[]\ttree=(start (s (c a) x) <EOF>)",
+    "Pruned\tinput=a\taccepted=false\terrors=[ParseCancellationException]\ttree=",
+    "Pruned\tinput=axq\taccepted=false\terrors=[token recognition error at: 'q']\ttree=(start (s (c a) x) <EOF>)",
+    "Pruned\tinput=\taccepted=false\terrors=[ParseCancellationException]\ttree=",
+    "RightDead\tinput=ax\taccepted=true\terrors=[]\ttree=(start (s (c a) x) <EOF>)",
+    "RightDead\tinput=a\taccepted=false\terrors=[no viable alternative at input 'a', ParseCancellationException]\ttree=",
+    "RightDead\tinput=axq\taccepted=false\terrors=[ParseCancellationException]\ttree=",
+    "RightDead\tinput=\taccepted=false\terrors=[no viable alternative at input '<EOF>', ParseCancellationException]\ttree="
+  ],
+  "OfficialSources": [
+    {
+      "Url": "https://github.com/antlr/antlr4/blob/4.13.2/tool/src/org/antlr/v4/tool/ErrorType.java#L928",
+      "Meaning": "NONCONFORMING_LR_RULE is error169"
+    },
+    {
+      "Url": "https://github.com/antlr/antlr4/blob/4.13.2/tool/src/org/antlr/v4/analysis/LeftRecursiveRuleTransformer.java#L63-L78",
+      "Meaning": "Reject immediate-left-recursive rules that do not fit supported transformation"
+    },
+    {
+      "Url": "https://github.com/antlr/antlr4/blob/4.13.2/tool/src/org/antlr/v4/analysis/LeftRecursiveRuleTransformer.java#L145-L150",
+      "Meaning": "Error147 when transformed left-recursive rule has no primary alternative"
+    }
+  ],
+  "Findings": [
+    "Exact original u:u grammar and overlap variant are rejected during parser generation with error169.",
+    "Clean consuming-left-recursive no-base u:u u grammar is rejected with error147.",
+    "Pruned valid grammar generates and accepts ax.",
+    "Right-recursive no-base u:q u generates; ANTLR accepts ax via the valid C path. Therefore do not claim ANTLR universally rejects all nonproductive grammars.",
+    "ANTLR is LL with adaptive prediction; its left-recursion validation is not evidence about LALR Reduce/Reduce lookahead equations."
+  ],
+  "SourceModification": "None. All created/downloaded files are under artifacts/b-investigation/antlr."
+}

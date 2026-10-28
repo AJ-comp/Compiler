@@ -1,0 +1,2864 @@
+[
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a|b/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a||b/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/(?:)/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/|/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a|/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/|a/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/./",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a*/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a+/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a?/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a*?/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a+?/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a??/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{0}/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{2}/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{2,}/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{2,4}/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{0,0}?/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{0002,0004}/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/(?:ab|cd){2,4}/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/(a(b(c)))+/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{999999999999999999999999999999999999999}/u",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{999999999999999999999999999999999999999,}/v",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{100000000000000000000000000000000000000,200000000000000000000000000000000000000}/u",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/(?:x(?:y|z)*)?/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a\\{2\\}/u",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/[{}]+/u",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{2/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{2,/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{,2}/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{z}/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a}/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/{/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/]/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{2,1x}/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": true,
+    "literal": "/a{1, 2}/",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/(?:*a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?:*a)/: Nothing to repeat"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/+a/",
+    "actual": false,
+    "error": "Invalid regular expression: /+a/: Nothing to repeat"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/?a/",
+    "actual": false,
+    "error": "Invalid regular expression: /?a/: Nothing to repeat"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a**/",
+    "actual": false,
+    "error": "Invalid regular expression: /a**/: Nothing to repeat"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a++/",
+    "actual": false,
+    "error": "Invalid regular expression: /a++/: Nothing to repeat"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a?+/",
+    "actual": false,
+    "error": "Invalid regular expression: /a?+/: Nothing to repeat"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{1}*/",
+    "actual": false,
+    "error": "Invalid regular expression: /a{1}*/: Nothing to repeat"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{1}+/",
+    "actual": false,
+    "error": "Invalid regular expression: /a{1}+/: Nothing to repeat"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{1}?+/",
+    "actual": false,
+    "error": "Invalid regular expression: /a{1}?+/: Nothing to repeat"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{3,2}/",
+    "actual": false,
+    "error": "Invalid regular expression: /a{3,2}/: numbers out of order in {} quantifier"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{3,2}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /a{3,2}/u: numbers out of order in {} quantifier"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{3,2}/v",
+    "actual": false,
+    "error": "Invalid regular expression: /a{3,2}/v: numbers out of order in {} quantifier"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{0003,0002}/",
+    "actual": false,
+    "error": "Invalid regular expression: /a{0003,0002}/: numbers out of order in {} quantifier"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/{1}/",
+    "actual": false,
+    "error": "Invalid regular expression: /{1}/: Nothing to repeat"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/|*/",
+    "actual": false,
+    "error": "Invalid regular expression: /|*/: Nothing to repeat"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/(?:a|*)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?:a|*)/: Nothing to repeat"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{999999999999999999999999999999999999998,999999999999999999999999999999999999997}/u",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{1000000000000000000000000000000000000000,999999999999999999999999999999999999999}/v",
+    "actual": true
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{2/u",
+    "actual": false,
+    "error": "Invalid regular expression: /a{2/u: Incomplete quantifier"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{2,/u",
+    "actual": false,
+    "error": "Invalid regular expression: /a{2,/u: Incomplete quantifier"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{,2}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /a{,2}/u: Incomplete quantifier"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{z}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /a{z}/u: Incomplete quantifier"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /a}/u: Lone quantifier brackets"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/{/u",
+    "actual": false,
+    "error": "Invalid regular expression: /{/u: Lone quantifier brackets"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /]/u: Lone quantifier brackets"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{2,1x}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /a{2,1x}/u: Incomplete quantifier"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{1, 2}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /a{1, 2}/u: Incomplete quantifier"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/{,}/v",
+    "actual": false,
+    "error": "Invalid regular expression: /{,}/v: Lone quantifier brackets"
+  },
+  {
+    "category": "Atoms_alternatives_and_quantifiers",
+    "expected": false,
+    "literal": "/a{1,,2}/v",
+    "actual": false,
+    "error": "Invalid regular expression: /a{1,,2}/v: Incomplete quantifier"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/()/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(())/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?:a)/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?=a)a/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?!a)b/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<=a)b/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<!a)b/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<=a|bc)d/u",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<=a*)b/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/^a$/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/\\ba\\B/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?:^|$)/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?=a)?/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?!a)*/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?=a)+/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?=a){2}/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?=a)??/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?:\\b)*/u",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<name>a)/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<π>a)/u",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<$x>a)/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<_x>a)/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<\\u0061>a)/u",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<\\u{61}>a)/u",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<\\u{10400}>a)/u",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<a\\u200Cb>x)/u",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<a\\u200Db>x)/u",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<\\uD835\\uDC00>a)/u",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<𝒜>a)/v",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<a>(?:x|y))/",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": true,
+    "literal": "/(?<a>x)|(?:(?<a>y)|z)/v",
+    "actual": true
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(/",
+    "actual": false,
+    "error": "Invalid regular expression: /(/: Unterminated group"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/)/",
+    "actual": false,
+    "error": "Invalid regular expression: /)/: Unmatched ')'"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(a))/",
+    "actual": false,
+    "error": "Invalid regular expression: /(a))/: Unmatched ')'"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/((a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /((a)/: Unterminated group"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?a)/: Invalid group"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?#comment)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?#comment)/: Invalid group"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?P<name>a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?P<name>a)/: Invalid group"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<name>a/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<name>a/: Unterminated group"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<name)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<name)/: Invalid capture group name"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<>a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<>a)/: Invalid capture group name"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<1>a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<1>a)/: Invalid capture group name"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<a-b>x)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<a-b>x)/: Invalid capture group name"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<a b>x)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<a b>x)/: Invalid capture group name"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\u0030>x)/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<\\u0030>x)/u: Invalid capture group name"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\uD800>x)/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<\\uD800>x)/u: Invalid capture group name"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\u{110000}>x)/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<\\u{110000}>x)/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\u{}>x)/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<\\u{}>x)/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\x61>x)/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<\\x61>x)/u: Invalid capture group name"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<😀>a)/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<😀>a)/u: Invalid capture group name"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?=a)?/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?=a)?/u: Invalid quantifier"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?=a)*/v",
+    "actual": false,
+    "error": "Invalid regular expression: /(?=a)*/v: Invalid quantifier"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\u{D835}\\u{DC00}>a)/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<\\u{D835}\\u{DC00}>a)/u: Invalid capture group name"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<\\uDC00\\uD800>a)/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<\\uDC00\\uD800>a)/u: Invalid capture group name"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<=a)?/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<=a)?/: Invalid quantifier"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/(?<!a)*/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<!a)*/: Invalid quantifier"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/^*/",
+    "actual": false,
+    "error": "Invalid regular expression: /^*/: Nothing to repeat"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/$+/",
+    "actual": false,
+    "error": "Invalid regular expression: /$+/: Nothing to repeat"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/\\b?/",
+    "actual": false,
+    "error": "Invalid regular expression: /\\b?/: Nothing to repeat"
+  },
+  {
+    "category": "Groups_and_assertions",
+    "expected": false,
+    "literal": "/\\B{2}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\B{2}/u: Nothing to repeat"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(a)\\1/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\1(a)/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(a)\\1/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(a)(b)\\2\\1/v",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<name>a)\\k<name>/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\k<name>(?<name>a)/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<\\u0061>x)\\k<a>/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<a>x)\\k<\\u0061>/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<π>x)\\k<π>/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<x>a)|(?<x>b)/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?:(?<x>a)|(?<x>b))\\k<x>/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?:(?<x>a)|(?<x>b))*/v",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<x>a)|(?<x>b)|(?<x>c)/v",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?:(?<x>a)|b)|(?<x>c)/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?:(?<x>a)|b)(?:(?<y>c)|(?<y>d))/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?<x>a)|(?:(?<y>b)(?<x>c))/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\k<unknown>/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\k/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\1/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\8/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\9/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\11/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(a)\\11/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(a)\\2/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\123/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/[\\1]/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/[(?<name>)]\\k<unknown>/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\k<missing>[(?<name>)]/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/(?:(?<a>x)|(?<a>y)){2}/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\0/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\0/v",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": true,
+    "literal": "/\\0a/u",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\1/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\1/u: Invalid escape"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\8/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\8/u: Invalid escape"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\9/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\9/v: Invalid escape"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(a)\\2/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(a)\\2/u: Invalid escape"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(a)\\11/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(a)\\11/u: Invalid escape"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\99999999999999999999999999999/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\99999999999999999999999999999/u: Invalid escape"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/[\\1]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\1]/u: Invalid decimal escape"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/[\\8]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\8]/v: Invalid escape"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\01/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\01/u: Invalid decimal escape"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\00/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\00/v: Invalid decimal escape"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\09/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\09/u: Invalid decimal escape"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)(?<x>b)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<x>a)(?<x>b)/: Duplicate capture group name"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)(?<\\u0078>b)/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<x>a)(?<\\u0078>b)/u: Duplicate capture group name"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a(?<x>b))/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<x>a(?<x>b))/: Duplicate capture group name"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<a>(?<a>x)|y)/",
+    "actual": true
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?:(?<x>a)|b)(?:(?<x>c)|d)/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?:(?<x>a)|b)(?:(?<x>c)|d)/u: Duplicate capture group name"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)|(?<x>b)(?<x>c)/v",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<x>a)|(?<x>b)(?<x>c)/v: Duplicate capture group name"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?=(?<x>a))(?<x>b)/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?=(?<x>a))(?<x>b)/u: Duplicate capture group name"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\k<unknown>/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\k<unknown>/u: Invalid named capture referenced"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)\\k<unknown>/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<x>a)\\k<unknown>/: Invalid named capture referenced"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)\\k/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<x>a)\\k/: Invalid named reference"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)\\k<>/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<x>a)\\k<>/: Invalid capture group name"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<x>a)\\k<x/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<x>a)\\k<x/: Invalid capture group name"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\k<1>/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\k<1>/u: Invalid capture group name"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/(?<a>x)\\k<\\x61>/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?<a>x)\\k<\\x61>/u: Invalid capture group name"
+  },
+  {
+    "category": "Backreferences_and_duplicate_named_groups",
+    "expected": false,
+    "literal": "/\\k/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\k/u: Invalid named reference"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\n\\r\\t\\v\\f\\b\\B/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\d\\D\\s\\S\\w\\W/u",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\cA\\cz/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\x00\\xFF/u",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u0000\\uFFFF/u",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u{0}\\u{10FFFF}/u",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u{0000000000000000000000000000000000000061}/v",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\uD800/u",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\uDC00/v",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\uD83D\\uDE00/u",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u{D800}/u",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u{DFFF}/v",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\^\\$\\\\\\.\\*\\+\\?\\(\\)\\[\\]\\{\\}\\|\\//u",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\q/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\a/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\_/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\-/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\:/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\c/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\c1/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\x/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\xG0/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\uG000/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\u{61}/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\p{Letter}/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": true,
+    "literal": "/\\P{bad}/",
+    "actual": true
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\q/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\q/u: Invalid escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\a/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\a/v: Invalid escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\_/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\_/u: Invalid escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\-/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\-/u: Invalid escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\:/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\:/v: Invalid escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\c/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\c/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\c1/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\c1/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\x/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\x/u: Invalid escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\xG0/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\xG0/u: Invalid escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\x1/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\x1/u: Invalid escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\u/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\uG000/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\uG000/v: Invalid Unicode escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u123/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\u123/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u{}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\u{}/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u{110000}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\u{110000}/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u{FFFFFFFFFFFFFFFFFFFFFF}/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\u{FFFFFFFFFFFFFFFFFFFFFF}/v: Invalid Unicode escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u{-1}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\u{-1}/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u{1_0}/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\u{1_0}/v: Invalid Unicode escape"
+  },
+  {
+    "category": "Escapes_across_legacy_and_Unicode_modes",
+    "expected": false,
+    "literal": "/\\u{61/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\u{61/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[]/",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[^]/",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[abc]/",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[^abc]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[a-zA-Z0-9_]/v",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[-a]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[a-]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\-]/v",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\]\\[]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\b]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\0]/v",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\cA]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\c_]/",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\c0]/",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\c]/",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\x41-\\u005A]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\u{1F600}-\\u{1F64F}]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\uD800-\\uDFFF]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[😀-🙏]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[a-a]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\uD83D\\uDE00-\\uD83D\\uDE4F}]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\d-a]/",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[a-\\d]/",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\s-\\w]/",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[a&&b]/",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[&&]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[!!]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[()[\\]{}|\\/]/",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": true,
+    "literal": "/[\\p{L}\\P{N}]/u",
+    "actual": true
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[z-a]/",
+    "actual": false,
+    "error": "Invalid regular expression: /[z-a]/: Range out of order in character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[z-a]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[z-a]/u: Range out of order in character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[9-0]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[9-0]/v: Range out of order in character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\u005A-\\x41]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\u005A-\\x41]/u: Range out of order in character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\u{1F64F}-\\u{1F600}]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\u{1F64F}-\\u{1F600}]/u: Range out of order in character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\d-a]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\d-a]/u: Invalid character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[a-\\d]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[a-\\d]/v: Invalid character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\s-\\w]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\s-\\w]/u: Invalid character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\p{L}-a]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\p{L}-a]/u: Invalid character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[a-\\p{L}]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[a-\\p{L}]/u: Invalid character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\c_]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\c_]/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\c0]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\c0]/v: Invalid Unicode escape"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\c]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\c]/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\B]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\B]/u: Invalid escape"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\q]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\q]/u: Invalid escape"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\u{}]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\u{}]/u: Invalid Unicode escape"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\01]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\01]/u: Invalid decimal escape"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\8]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\8]/u: Invalid escape"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\-a-\\-]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\-a-\\-]/u: Range out of order in character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\u{D83D}\\u{DE00}-\\u{D83D}\\u{DE4F}]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\u{D83D}\\u{DE00}-\\u{D83D}\\u{DE4F}]/u: Range out of order in character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[\\p{L}-a]/",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\p{L}-a]/: Range out of order in character class"
+  },
+  {
+    "category": "Character_classes_and_ranges",
+    "expected": false,
+    "literal": "/[a--]/",
+    "actual": false,
+    "error": "Invalid regular expression: /[a--]/: Range out of order in character class"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{L}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Letter}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Lu}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\P{Lowercase_Letter}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{General_Category=Decimal_Number}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{gc=Nd}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Script=Greek}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{sc=Grek}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Script_Extensions=Hira}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{scx=Katakana}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{ASCII}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\P{Any}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Assigned}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Alphabetic}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{White_Space}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{space}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{ID_Start}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{ID_Continue}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Emoji}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Extended_Pictographic}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{RGI_Emoji}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Basic_Emoji}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{Emoji_Keycap_Sequence}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{RGI_Emoji_Modifier_Sequence}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{RGI_Emoji_Flag_Sequence}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{RGI_Emoji_Tag_Sequence}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/\\p{RGI_Emoji_ZWJ_Sequence}/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/[\\p{RGI_Emoji}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": true,
+    "literal": "/[\\p{ASCII}&&\\p{Letter}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{Unknown}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{Unknown}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{letter}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{letter}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{ASCII_Hex_digit}/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{ASCII_Hex_digit}/v: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{Script=greek}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{Script=greek}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{script=Greek}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{script=Greek}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{Greek}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{Greek}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{gc=Greek}/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{gc=Greek}/v: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{sc=Letter}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{sc=Letter}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{GeneralCategory=Letter}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{GeneralCategory=Letter}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{General_Category = Letter}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{General_Category = Letter}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{General_Category=Uppercase Letter}/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{General_Category=Uppercase Letter}/v: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{IsGreek}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{IsGreek}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{InBasic_Latin}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{InBasic_Latin}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{Age=17.0}/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{Age=17.0}/v: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{ASCII=Yes}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{ASCII=Yes}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{Emoji=Yes}/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{Emoji=Yes}/v: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{WSpace}/u",
+    "actual": true
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{RGI_Emoji}/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{RGI_Emoji}/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\P{RGI_Emoji}/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\P{RGI_Emoji}/v: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/[^\\p{RGI_Emoji}]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[^\\p{RGI_Emoji}]/v: Negated character class may contain strings"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p{L/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p{L/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\pL/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\pL/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\p/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\p/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_properties",
+    "expected": false,
+    "literal": "/\\P/u",
+    "actual": false,
+    "error": "Invalid regular expression: /\\P/u: Invalid property name"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[abc]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[[a-z][0-9]]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[a&&b]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[a--b]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[[a-z]&&[^aeiou]]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[[a-z]--[aeiou]]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[a&&b&&c]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[a--b--c]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{ab|cd}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{a|}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{a|b}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{\\n|\\u{1F600}}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{ab}&&\\q{ab|cd}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\q{ab}--\\q{cd}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^\\q{a|b}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^a&&\\q{ab}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^a--\\q{ab}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^\\q{ab}&&a]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^\\q{a}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^\\q{😀}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^\\q{\\uD83D\\uDE00}]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[a\\&b]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\(\\)\\[\\]\\{\\}\\|\\/\\-]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[^^]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": true,
+    "literal": "/[\\!\\#\\$\\%\\&\\*\\+\\,\\.\\:\\;\\<\\=\\>\\?\\@\\^\\`\\~]/v",
+    "actual": true
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a&&]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[a&&]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[&&a]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[&&a]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a--]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[a--]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[--a]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[--a]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a&&b--c]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[a&&b--c]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a--b&&c]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[a--b&&c]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[ab&&c]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[ab&&c]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a&&bc]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[a&&bc]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a&&&b]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[a&&&b]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a---b]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[a---b]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a-b-c]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[a-b-c]/v: Invalid character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[-a]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[-a]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a-]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[a-]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[()]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[()]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[{}]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[{}]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[|]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[|]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[[a]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[[a]/v: Unterminated character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[!!]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[!!]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[##]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[##]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[$$]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[$$]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[%%]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[%%]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[**]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[**]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[++]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[++]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[,,]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[,,]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[..]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[..]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[::]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[::]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[;;]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[;;]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[<<]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[<<]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[==]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[==]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[>>]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[>>]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[??]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[??]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[@@]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[@@]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[``]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[``]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[~~]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[~~]/v: Invalid set operation in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[\\q{a|b}]/u",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\q{a|b}]/u: Invalid escape"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/\\q{ab}/v",
+    "actual": false,
+    "error": "Invalid regular expression: /\\q{ab}/v: Invalid escape"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[\\q{ab]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\q{ab]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[\\q{(a)}]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\q{(a)}]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[\\q{a-b}]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\q{a-b}]/v: Invalid character in character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[^\\q{ab}]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[^\\q{ab}]/v: Negated character class may contain strings"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[^\\q{}]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[^\\q{}]/v: Negated character class may contain strings"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[^\\p{RGI_Emoji}--a]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[^\\p{RGI_Emoji}--a]/v: Negated character class may contain strings"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[^\\q{ab}&&\\q{ab}]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[^\\q{ab}&&\\q{ab}]/v: Negated character class may contain strings"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[\\q{ab}-z]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[\\q{ab}-z]/v: Invalid character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[a-\\q{ab}]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[a-\\q{ab}]/v: Invalid character class"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[^\\q{ab}--\\q{ab}]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[^\\q{ab}--\\q{ab}]/v: Negated character class may contain strings"
+  },
+  {
+    "category": "Unicode_set_operations_and_strings",
+    "expected": false,
+    "literal": "/[^\\q{\\u{D83D}\\u{DE00}}]/v",
+    "actual": false,
+    "error": "Invalid regular expression: /[^\\q{\\u{D83D}\\u{DE00}}]/v: Negated character class may contain strings"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i:a)/",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?m:^a$)/u",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?s:.)/v",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?ims:a)/",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?-i:a)/i",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i-m:a)/m",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?im-s:a)/s",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i-ms:a)/",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?-ims:a)/ims",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i:a(?-i:b)c)/",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i:(?<a>x))\\k<a>/u",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i:)/",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?s:.){2}/v",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i:(a))\\1/u",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": true,
+    "literal": "/(?i-:a)/",
+    "actual": true
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?i)/: Invalid group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i)a/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?i)a/: Invalid group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i:a/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?i:a/: Unterminated group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i:a))/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?i:a))/: Unmatched ')'"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?ii:a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?ii:a)/: Repeated flag in flag group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i-i:a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?i-i:a)/: Repeated flag in flag group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i-ii:a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?i-ii:a)/: Repeated flag in flag group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?g:a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?g:a)/: Invalid group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?d:a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?d:a)/: Invalid group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?u:a)/u",
+    "actual": false,
+    "error": "Invalid regular expression: /(?u:a)/u: Invalid group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?v:a)/v",
+    "actual": false,
+    "error": "Invalid regular expression: /(?v:a)/v: Invalid group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?y:a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?y:a)/: Invalid group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?a:a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?a:a)/: Invalid group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?-:a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?-:a)/: Invalid flag group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?--i:a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?--i:a)/: Multiple dashes in flag group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?i-m-s:a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?i-m-s:a)/: Multiple dashes in flag group"
+  },
+  {
+    "category": "Modifier_groups",
+    "expected": false,
+    "literal": "/(?I:a)/",
+    "actual": false,
+    "error": "Invalid regular expression: /(?I:a)/: Invalid group"
+  }
+]

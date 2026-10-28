@@ -1,0 +1,56 @@
+[
+  {
+    "Grammar": "Base",
+    "ExitCode": 1,
+    "Output": "error(169): Base.g4:6:0: rule u is left recursive but doesn't conform to a pattern ANTLR can handle\r\n",
+    "GeneratedJavaFiles": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\Base\\generated\\BaseLexer.java"
+    ]
+  },
+  {
+    "Grammar": "Overlap",
+    "ExitCode": 1,
+    "Output": "error(169): Overlap.g4:7:0: rule u is left recursive but doesn't conform to a pattern ANTLR can handle\r\n",
+    "GeneratedJavaFiles": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\Overlap\\generated\\OverlapLexer.java"
+    ]
+  },
+  {
+    "Grammar": "Pruned",
+    "ExitCode": 0,
+    "Output": null,
+    "GeneratedJavaFiles": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\Pruned\\generated\\PrunedBaseListener.java",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\Pruned\\generated\\PrunedLexer.java",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\Pruned\\generated\\PrunedListener.java",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\Pruned\\generated\\PrunedParser.java"
+    ]
+  },
+  {
+    "Grammar": "RightDead",
+    "ExitCode": 0,
+    "Output": null,
+    "GeneratedJavaFiles": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\RightDead\\generated\\RightDeadBaseListener.java",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\RightDead\\generated\\RightDeadLexer.java",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\RightDead\\generated\\RightDeadListener.java",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\RightDead\\generated\\RightDeadParser.java"
+    ]
+  },
+  {
+    "Grammar": "LeftDead",
+    "ExitCode": 1,
+    "Output": "error(147): LeftDead.g4:7:0: left recursive rule u must contain an alternative which is not left recursive\r\n",
+    "GeneratedJavaFiles": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\LeftDead\\generated\\LeftDeadLexer.java"
+    ]
+  },
+  {
+    "Grammar": "MutualDead",
+    "ExitCode": 1,
+    "Output": "error(119): MutualDead.g4::: The following sets of rules are mutually left-recursive [u, v]\r\n",
+    "GeneratedJavaFiles": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\b-investigation\\antlr\\MutualDead\\generated\\MutualDeadLexer.java"
+    ]
+  }
+]

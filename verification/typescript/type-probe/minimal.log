@@ -1,0 +1,243 @@
+GRAMMAR True
+CONFLICTS 277
+PASS string
+FAIL A => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR щ 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) щ@-1
+A : epsilon reduce __predicate2 -> epsilon 
+A : goto 4 
+A : shift 43 
+щ : reduce TSBindingIdentifier -> IdentifierName 
+щ : goto 42 
+щ : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL A.B<C<D>> => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR > 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) >@7
+< : goto 128 
+< : shift 212 
+D : epsilon reduce __predicate2 -> epsilon 
+D : goto 4 
+D : shift 43 
+> : reduce TSBindingIdentifier -> IdentifierName 
+> : goto 42 
+> : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+PASS A|B&C[]
+FAIL T extends U ? X : Y => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR : 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) :@16
+? : goto 293 
+? : shift 371 
+X : epsilon reduce __predicate2 -> epsilon 
+X : goto 4 
+X : shift 43 
+: : reduce TSBindingIdentifier -> IdentifierName 
+: : goto 42 
+: : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL T extends infer U extends X ? U : never => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR : 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) :@32
+? : goto 293 
+? : shift 371 
+U : epsilon reduce __predicate2 -> epsilon 
+U : goto 4 
+U : shift 43 
+: : reduce TSBindingIdentifier -> IdentifierName 
+: : goto 42 
+: : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL infer U extends X ? Y : Z => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR : 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) :@22
+? : goto 293 
+? : shift 371 
+Y : epsilon reduce __predicate2 -> epsilon 
+Y : goto 4 
+Y : shift 43 
+: : reduce TSBindingIdentifier -> IdentifierName 
+: : goto 42 
+: : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL keyof T => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR щ 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) щ@-1
+keyof : epsilon reduce __predicate2 -> epsilon 
+keyof : goto 4 
+keyof : shift 85 
+T : shift 43 
+щ : reduce TSBindingIdentifier -> IdentifierName 
+щ : goto 42 
+щ : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+PASS readonly [string, number?]
+PASS [name: string, count?: number, ...rest: number[]]
+FAIL [A, B?, ...C[]] => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR , 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) ,@2
+A : epsilon reduce __predicate17 -> epsilon 
+A : goto 152 
+A : epsilon reduce __predicate2 -> epsilon 
+A : goto 4 
+A : shift 43 
+, : reduce TSBindingIdentifier -> IdentifierName 
+, : goto 42 
+, : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL [...A, B] => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR , 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) ,@5
+... : goto 152 
+... : shift 231 
+A : epsilon reduce __predicate2 -> epsilon 
+A : goto 4 
+A : shift 43 
+, : reduce TSBindingIdentifier -> IdentifierName 
+, : goto 42 
+, : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL (T) => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR ) 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) )@2
+( : goto 4 
+( : shift 79 
+T : epsilon reduce __predicate2 -> epsilon 
+T : goto 4 
+T : shift 43 
+) : reduce TSBindingIdentifier -> IdentifierName 
+) : goto 42 
+) : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL ((x:T)=>U) => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR ) 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) )@5
+: : goto 96 
+: : shift 172 
+T : epsilon reduce __predicate2 -> epsilon 
+T : goto 4 
+T : shift 43 
+) : reduce TSBindingIdentifier -> IdentifierName 
+) : goto 42 
+) : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL (x:T)=>U => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR ) 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) )@4
+: : goto 96 
+: : shift 172 
+T : epsilon reduce __predicate2 -> epsilon 
+T : goto 4 
+T : shift 43 
+) : reduce TSBindingIdentifier -> IdentifierName 
+) : goto 42 
+) : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL <T extends U = V>(x:T)=>T => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR = 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) =@13
+extends : goto 113 
+extends : shift 198 
+U : epsilon reduce __predicate2 -> epsilon 
+U : goto 4 
+U : shift 43 
+= : reduce TSBindingIdentifier -> IdentifierName 
+= : goto 42 
+= : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL abstract new <T>(x:T)=>C<T> => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR ) 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) )@20
+: : goto 96 
+: : shift 172 
+T : epsilon reduce __predicate2 -> epsilon 
+T : goto 4 
+T : shift 43 
+) : reduce TSBindingIdentifier -> IdentifierName 
+) : goto 42 
+) : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL {name:string; value?:T} => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR } 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) }@22
+: : goto 338 
+: : shift 172 
+T : epsilon reduce __predicate2 -> epsilon 
+T : goto 4 
+T : shift 43 
+} : reduce TSBindingIdentifier -> IdentifierName 
+} : goto 42 
+} : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL {readonly [key:string]:T} => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR } 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) }@24
+] : shift 477 
+: : shift 172 
+T : epsilon reduce __predicate2 -> epsilon 
+T : goto 4 
+T : shift 43 
+} : reduce TSBindingIdentifier -> IdentifierName 
+} : goto 42 
+} : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL {[Symbol.iterator]():Iterator<T>} => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR . 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {), ,, }, ]} 와야 합니다) .@8
+{ : epsilon reduce __predicate10 -> epsilon 
+{ : goto 84 
+{ : shift 158 
+[ : epsilon reduce __predicate20 -> epsilon 
+[ : goto 183 
+[ : shift 272 
+Symbol : shift 267 
+. : failed null (shift 할 수 없습니다 {), ,, }, ]} 와야 합니다)
+FAIL {<T>(value:T):T; new(value:T):C;} => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR ) 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) )@12
+: : goto 96 
+: : shift 172 
+T : epsilon reduce __predicate2 -> epsilon 
+T : goto 4 
+T : shift 43 
+) : reduce TSBindingIdentifier -> IdentifierName 
+) : goto 42 
+) : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL {get value():T; set value(v:T);} => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR ; 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) ;@14
+: : goto 411 
+: : shift 348 
+T : epsilon reduce __predicate2 -> epsilon 
+T : goto 4 
+T : shift 43 
+; : reduce TSBindingIdentifier -> IdentifierName 
+; : goto 42 
+; : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL {[K in keyof T as `get${K}`]?: T[K]} => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR as 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) as@15
+in : shift 405 
+keyof : epsilon reduce __predicate2 -> epsilon 
+keyof : goto 4 
+keyof : shift 85 
+T : shift 43 
+as : reduce TSBindingIdentifier -> IdentifierName 
+as : goto 42 
+as : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL typeof Foo.bar<T> => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR > 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) >@16
+< : goto 220 
+< : shift 212 
+T : epsilon reduce __predicate2 -> epsilon 
+T : goto 4 
+T : shift 43 
+> : reduce TSBindingIdentifier -> IdentifierName 
+> : goto 42 
+> : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL import('x').Foo<T> => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR > 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) >@17
+< : goto 146 
+< : shift 212 
+T : epsilon reduce __predicate2 -> epsilon 
+T : goto 4 
+T : shift 43 
+> : reduce TSBindingIdentifier -> IdentifierName 
+> : goto 42 
+> : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL typeof import('x', {with:{'resolution-mode':'import'}}).Foo => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR 'import' 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {IdentifierName} 와야 합니다) 'import'@44
+, : shift 388 
+{ : shift 392 
+with : shift 444 
+: : shift 468 
+{ : shift 481 
+'resolution-mode' : shift 493 
+: : shift 499 
+'import' : failed null (shift 할 수 없습니다 {IdentifierName} 와야 합니다)
+FAIL (x:any)=>x is string => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR щ 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다) щ@-1
+щ : goto 13 
+щ : epsilon reduce __predicate5 -> epsilon 
+щ : goto 117 
+щ : reduce TSConditionalType -> TSUnionType __predicate5 
+щ : goto 12 
+щ : reduce TSType -> __predicate2 TSConditionalType 
+щ : goto 301 
+щ : failed null (shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)
+FAIL (x:any)=>asserts x is string => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR щ 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다) щ@-1
+щ : goto 13 
+щ : epsilon reduce __predicate5 -> epsilon 
+щ : goto 117 
+щ : reduce TSConditionalType -> TSUnionType __predicate5 
+щ : goto 12 
+щ : reduce TSType -> __predicate2 TSConditionalType 
+щ : goto 439 
+щ : failed null (shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)
+FAIL `a${T}b${U}` => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR }` 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) }`@10
+`a${T}b${ : goto 4 
+`a${T}b${ : shift 81 
+U : epsilon reduce __predicate2 -> epsilon 
+U : goto 4 
+U : shift 43 
+}` : reduce TSBindingIdentifier -> IdentifierName 
+}` : goto 42 
+}` : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL any.Foo => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR щ 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다) щ@-1
+. : goto 19 
+. : shift 124 
+Foo : shift 43 
+щ : reduce TSBindingIdentifier -> IdentifierName 
+щ : goto 136 
+щ : reduce TSPropertyIdentifierName -> TSBindingIdentifier 
+щ : goto 209 
+щ : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)
+FAIL asserts => Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown. ERR щ 은(는) 현재 위치에 적절하지 않은 토큰입니다. (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?, IdentifierName, abstract, accessor, as, assert, asserts, async, await, constructor, declare, from, get, global, module, namespace, of, out, override, require, satisfies, set, type, using, yield, this} 와야 합니다) щ@-1
+asserts : epsilon reduce __predicate2 -> epsilon 
+asserts : goto 4 
+asserts : shift 49 
+щ : failed null (shift 할 수 없습니다 {., <, is, &, |, extends, [, ?, IdentifierName, abstract, accessor, as, assert, asserts, async, await, constructor, declare, from, get, global, module, namespace, of, out, override, require, satisfies, set, type, using, yield, this} 와야 합니다)
+PASS unknown | (()=>string)

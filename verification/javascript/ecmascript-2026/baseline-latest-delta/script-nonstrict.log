@@ -1,0 +1,15 @@
+
+COMMAND ["C:\\Users\\AhjLv\\.dotnet\\dotnet.exe", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\tools\\Janglim.Test262\\bin\\Release\\net8.0\\Janglim.Test262.dll", "--input", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-latest-delta.jsonl", "--output", "artifacts\\ecmascript-2026\\baseline-latest-delta\\script-nonstrict.jsonl", "--profile", "script-nonstrict", "--skip", "0", "--timeout-ms", "120000"]
+Preparing script-nonstrict (web=True) ...
+Ready script-nonstrict at 00:00:29.3593323.
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-latest-delta.jsonl",
+  "profile": "script-nonstrict",
+  "skip": 0,
+  "processed": 13,
+  "outcomes": {
+    "pass": 13
+  },
+  "elapsedSeconds": 29.650045,
+  "syntaxOnly": true
+}

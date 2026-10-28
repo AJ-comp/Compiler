@@ -1,0 +1,733 @@
+{
+  "grammarText": "S : {Always()}? C ;\nC : P {Always()}? | P {Never()}? 'e' 'x' '?' S ':' S ;\nP : R {Always()}? ;\nR : id {Always()}? | id {Never()}? 'i' S ;\nid := \"[a-z]+\" ;",
+  "sourceAssembly": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\typescript\\lookahead-audit-reference\\bin\\Release\\net8.0\\Parse.FrontEnd.Parsers.dll",
+  "grammarAssembly": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\typescript\\lookahead-audit-reference\\bin\\Release\\net8.0\\Parse.FrontEnd.Grammars.Ebnf.dll",
+  "rules": [
+    {
+      "id": 0,
+      "lhs": "N:__predicate1",
+      "rhs": [],
+      "predicate": "Always",
+      "hash": 20000040
+    },
+    {
+      "id": 1,
+      "lhs": "N:__predicate2",
+      "rhs": [],
+      "predicate": "Always",
+      "hash": 20000050
+    },
+    {
+      "id": 2,
+      "lhs": "N:__predicate3",
+      "rhs": [],
+      "predicate": "Never",
+      "hash": 20000060
+    },
+    {
+      "id": 3,
+      "lhs": "N:__predicate4",
+      "rhs": [],
+      "predicate": "Always",
+      "hash": 20000070
+    },
+    {
+      "id": 4,
+      "lhs": "N:__predicate5",
+      "rhs": [],
+      "predicate": "Always",
+      "hash": 20000080
+    },
+    {
+      "id": 5,
+      "lhs": "N:__predicate6",
+      "rhs": [],
+      "predicate": "Never",
+      "hash": 20000090
+    },
+    {
+      "id": 6,
+      "lhs": "N:Accept",
+      "rhs": [
+        "N:S"
+      ],
+      "predicate": null,
+      "hash": 20000100
+    },
+    {
+      "id": 7,
+      "lhs": "N:C",
+      "rhs": [
+        "N:P",
+        "N:__predicate2"
+      ],
+      "predicate": null,
+      "hash": 20000010
+    },
+    {
+      "id": 8,
+      "lhs": "N:C",
+      "rhs": [
+        "N:P",
+        "N:__predicate3",
+        "T:e:e",
+        "T:x:x",
+        "T:?:?",
+        "N:S",
+        "T::::",
+        "N:S"
+      ],
+      "predicate": null,
+      "hash": 20000011
+    },
+    {
+      "id": 9,
+      "lhs": "N:P",
+      "rhs": [
+        "N:R",
+        "N:__predicate4"
+      ],
+      "predicate": null,
+      "hash": 20000020
+    },
+    {
+      "id": 10,
+      "lhs": "N:R",
+      "rhs": [
+        "T:id:[a-z]+",
+        "N:__predicate5"
+      ],
+      "predicate": null,
+      "hash": 20000030
+    },
+    {
+      "id": 11,
+      "lhs": "N:R",
+      "rhs": [
+        "T:id:[a-z]+",
+        "N:__predicate6",
+        "T:i:i",
+        "N:S"
+      ],
+      "predicate": null,
+      "hash": 20000031
+    },
+    {
+      "id": 12,
+      "lhs": "N:S",
+      "rhs": [
+        "N:__predicate1",
+        "N:C"
+      ],
+      "predicate": null,
+      "hash": 20000000
+    }
+  ],
+  "states": [
+    {
+      "id": 0,
+      "items": [
+        {
+          "rule": 0,
+          "dot": 0,
+          "hash": 200000400,
+          "lookahead": [
+            "T:id:[a-z]+"
+          ]
+        },
+        {
+          "rule": 6,
+          "dot": 0,
+          "hash": 200001000,
+          "lookahead": [
+            "$"
+          ]
+        },
+        {
+          "rule": 12,
+          "dot": 0,
+          "hash": 200000000,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "items": [
+        {
+          "rule": 6,
+          "dot": 1,
+          "hash": 200001001,
+          "lookahead": [
+            "$"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "items": [
+        {
+          "rule": 7,
+          "dot": 0,
+          "hash": 200000100,
+          "lookahead": []
+        },
+        {
+          "rule": 8,
+          "dot": 0,
+          "hash": 200000110,
+          "lookahead": null
+        },
+        {
+          "rule": 9,
+          "dot": 0,
+          "hash": 200000200,
+          "lookahead": [
+            "T:e:e"
+          ]
+        },
+        {
+          "rule": 10,
+          "dot": 0,
+          "hash": 200000300,
+          "lookahead": null
+        },
+        {
+          "rule": 11,
+          "dot": 0,
+          "hash": 200000310,
+          "lookahead": null
+        },
+        {
+          "rule": 12,
+          "dot": 1,
+          "hash": 200000001,
+          "lookahead": [
+            "$",
+            "T::::",
+            "T:e:e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "items": [
+        {
+          "rule": 12,
+          "dot": 2,
+          "hash": 200000002,
+          "lookahead": [
+            "$",
+            "T::::",
+            "T:e:e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "items": [
+        {
+          "rule": 1,
+          "dot": 0,
+          "hash": 200000500,
+          "lookahead": [
+            "$",
+            "T::::",
+            "T:e:e"
+          ]
+        },
+        {
+          "rule": 2,
+          "dot": 0,
+          "hash": 200000600,
+          "lookahead": [
+            "T:e:e"
+          ]
+        },
+        {
+          "rule": 7,
+          "dot": 1,
+          "hash": 200000101,
+          "lookahead": [
+            "$",
+            "T::::",
+            "T:e:e"
+          ]
+        },
+        {
+          "rule": 8,
+          "dot": 1,
+          "hash": 200000111,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "items": [
+        {
+          "rule": 3,
+          "dot": 0,
+          "hash": 200000700,
+          "lookahead": [
+            "T:e:e"
+          ]
+        },
+        {
+          "rule": 9,
+          "dot": 1,
+          "hash": 200000201,
+          "lookahead": [
+            "T:e:e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "items": [
+        {
+          "rule": 4,
+          "dot": 0,
+          "hash": 200000800,
+          "lookahead": [
+            "T:e:e"
+          ]
+        },
+        {
+          "rule": 5,
+          "dot": 0,
+          "hash": 200000900,
+          "lookahead": [
+            "T:i:i"
+          ]
+        },
+        {
+          "rule": 10,
+          "dot": 1,
+          "hash": 200000301,
+          "lookahead": [
+            "T:e:e"
+          ]
+        },
+        {
+          "rule": 11,
+          "dot": 1,
+          "hash": 200000311,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "items": [
+        {
+          "rule": 7,
+          "dot": 2,
+          "hash": 200000102,
+          "lookahead": [
+            "$",
+            "T::::",
+            "T:e:e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "items": [
+        {
+          "rule": 8,
+          "dot": 2,
+          "hash": 200000112,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "items": [
+        {
+          "rule": 9,
+          "dot": 2,
+          "hash": 200000202,
+          "lookahead": [
+            "T:e:e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "items": [
+        {
+          "rule": 10,
+          "dot": 2,
+          "hash": 200000302,
+          "lookahead": [
+            "T:e:e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "items": [
+        {
+          "rule": 11,
+          "dot": 2,
+          "hash": 200000312,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "items": [
+        {
+          "rule": 8,
+          "dot": 3,
+          "hash": 200000113,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "items": [
+        {
+          "rule": 0,
+          "dot": 0,
+          "hash": 200000400,
+          "lookahead": [
+            "T:id:[a-z]+"
+          ]
+        },
+        {
+          "rule": 11,
+          "dot": 3,
+          "hash": 200000313,
+          "lookahead": [
+            "T:e:e"
+          ]
+        },
+        {
+          "rule": 12,
+          "dot": 0,
+          "hash": 200000000,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "items": [
+        {
+          "rule": 8,
+          "dot": 4,
+          "hash": 200000114,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "items": [
+        {
+          "rule": 11,
+          "dot": 4,
+          "hash": 200000314,
+          "lookahead": [
+            "T:e:e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "items": [
+        {
+          "rule": 0,
+          "dot": 0,
+          "hash": 200000400,
+          "lookahead": [
+            "T:id:[a-z]+"
+          ]
+        },
+        {
+          "rule": 8,
+          "dot": 5,
+          "hash": 200000115,
+          "lookahead": null
+        },
+        {
+          "rule": 12,
+          "dot": 0,
+          "hash": 200000000,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "items": [
+        {
+          "rule": 8,
+          "dot": 6,
+          "hash": 200000116,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "items": [
+        {
+          "rule": 0,
+          "dot": 0,
+          "hash": 200000400,
+          "lookahead": [
+            "T:id:[a-z]+"
+          ]
+        },
+        {
+          "rule": 8,
+          "dot": 7,
+          "hash": 200000117,
+          "lookahead": []
+        },
+        {
+          "rule": 12,
+          "dot": 0,
+          "hash": 200000000,
+          "lookahead": null
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "items": [
+        {
+          "rule": 8,
+          "dot": 8,
+          "hash": 200000118,
+          "lookahead": [
+            "$",
+            "T::::",
+            "T:e:e"
+          ]
+        }
+      ]
+    }
+  ],
+  "first": {
+    "N:S": [
+      "T:id:[a-z]+"
+    ],
+    "N:C": [
+      "T:id:[a-z]+"
+    ],
+    "N:P": [
+      "T:id:[a-z]+"
+    ],
+    "N:R": [
+      "T:id:[a-z]+"
+    ],
+    "N:__predicate1": [
+      "EPS"
+    ],
+    "N:__predicate2": [
+      "EPS"
+    ],
+    "N:__predicate3": [
+      "EPS"
+    ],
+    "N:__predicate4": [
+      "EPS"
+    ],
+    "N:__predicate5": [
+      "EPS"
+    ],
+    "N:__predicate6": [
+      "EPS"
+    ],
+    "N:Accept": [
+      "T:id:[a-z]+"
+    ]
+  },
+  "follow": {
+    "N:S": [
+      "$",
+      "T::::",
+      "T:e:e"
+    ],
+    "N:C": [
+      "$",
+      "T::::",
+      "T:e:e"
+    ],
+    "N:P": [
+      "$",
+      "T::::",
+      "T:e:e"
+    ],
+    "N:R": [
+      "$",
+      "T::::",
+      "T:e:e"
+    ],
+    "N:__predicate1": [
+      "T:id:[a-z]+"
+    ],
+    "N:__predicate2": [
+      "$",
+      "T::::",
+      "T:e:e"
+    ],
+    "N:__predicate3": [
+      "T:e:e"
+    ],
+    "N:__predicate4": [
+      "$",
+      "T::::",
+      "T:e:e"
+    ],
+    "N:__predicate5": [
+      "$",
+      "T::::",
+      "T:e:e"
+    ],
+    "N:__predicate6": [
+      "T:i:i"
+    ],
+    "N:Accept": [
+      "$"
+    ]
+  },
+  "collisions": [],
+  "parse": {
+    "input": "a",
+    "success": false,
+    "alwaysCalls": 1,
+    "neverCalls": 0,
+    "exception": "Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 472\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 303\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 332",
+    "conflicts": "1 grammar conflict(s):\r\n  state I4: reduce-reduce conflict (on 'P')",
+    "steps": [
+      {
+        "token": "a",
+        "action": "epsilon reduce __predicate1 -> epsilon",
+        "error": ""
+      },
+      {
+        "token": "a",
+        "action": "goto 2",
+        "error": ""
+      },
+      {
+        "token": "a",
+        "action": "shift 6",
+        "error": ""
+      },
+      {
+        "token": "\u0449",
+        "action": "failed null",
+        "error": "(shift \ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4 {e, i} \uc640\uc57c \ud569\ub2c8\ub2e4)"
+      }
+    ]
+  },
+  "eofActions": [
+    {
+      "id": 0,
+      "actions": []
+    },
+    {
+      "id": 1,
+      "actions": [
+        "accept Accept -> S"
+      ]
+    },
+    {
+      "id": 2,
+      "actions": []
+    },
+    {
+      "id": 3,
+      "actions": [
+        "reduce S -> __predicate1 C"
+      ]
+    },
+    {
+      "id": 4,
+      "actions": [
+        "epsilon reduce __predicate2 -> epsilon"
+      ]
+    },
+    {
+      "id": 5,
+      "actions": []
+    },
+    {
+      "id": 6,
+      "actions": []
+    },
+    {
+      "id": 7,
+      "actions": [
+        "reduce C -> P __predicate2"
+      ]
+    },
+    {
+      "id": 8,
+      "actions": []
+    },
+    {
+      "id": 9,
+      "actions": []
+    },
+    {
+      "id": 10,
+      "actions": []
+    },
+    {
+      "id": 11,
+      "actions": []
+    },
+    {
+      "id": 12,
+      "actions": []
+    },
+    {
+      "id": 13,
+      "actions": []
+    },
+    {
+      "id": 14,
+      "actions": []
+    },
+    {
+      "id": 15,
+      "actions": []
+    },
+    {
+      "id": 16,
+      "actions": []
+    },
+    {
+      "id": 17,
+      "actions": []
+    },
+    {
+      "id": 18,
+      "actions": []
+    },
+    {
+      "id": 19,
+      "actions": [
+        "reduce C -> P __predicate3 e x ? S : S"
+      ]
+    }
+  ]
+}

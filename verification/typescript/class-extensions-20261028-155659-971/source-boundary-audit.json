@@ -1,0 +1,22 @@
+{
+  "Compared": 651,
+  "Modified": [
+    "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptValidation.cs",
+    "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptProjection.cs",
+    "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptLexicalPolicy.cs",
+    "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptDialect.cs"
+  ],
+  "New": [
+    "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptClasses.cs",
+    "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptClassProjection.cs",
+    "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptClassSignatureProjection.cs",
+    "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptClassValidation.cs",
+    "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassAccessorTests.cs",
+    "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassEntryPointTests.cs",
+    "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassExtensionTests.cs",
+    "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassIndexSignatureTests.cs",
+    "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassLexicalTests.cs",
+    "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptClassPrivateSignatureTests.cs"
+  ],
+  "Unexpected": []
+}

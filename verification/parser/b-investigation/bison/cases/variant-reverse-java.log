@@ -1,0 +1,14 @@
+variant-reverse.y: warning: 3 nonterminals useless in grammar [-Wother]
+variant-reverse.y: warning: 4 rules useless in grammar [-Wother]
+variant-reverse.y:4.1: warning: nonterminal useless in grammar: U [-Wother]
+    4 | S
+      | ^
+variant-reverse.y:6.1: warning: nonterminal useless in grammar: B [-Wother]
+    6 | S
+      | ^
+variant-reverse.y:7.1: warning: nonterminal useless in grammar: A [-Wother]
+    7 | art S
+      | ^
+variant-reverse.y:8.13-15: warning: rule useless in grammar [-Wother]
+    8 | art S
+      |             ^~~

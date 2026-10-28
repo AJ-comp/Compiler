@@ -1,0 +1,16 @@
+{
+  "Directory": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\recursive-lookahead-targets\\completion-only-20261027-104118-204",
+  "Backups": [
+    {
+      "Original": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.lalr.canonical.approved.txt",
+      "Backup": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\recursive-lookahead-targets\\completion-only-20261027-104118-204\\Ex1.lalr.canonical.approved.txt.before",
+      "Sha256": "4501567B05E97EEEFDCEBFBAB5C37B7819F2EA7FBAA3252265C3A29FE501D5FE"
+    },
+    {
+      "Original": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.lalr.canonical.received.txt",
+      "Backup": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\recursive-lookahead-targets\\completion-only-20261027-104118-204\\Ex1.lalr.canonical.received.txt.before",
+      "Sha256": "4501567B05E97EEEFDCEBFBAB5C37B7819F2EA7FBAA3252265C3A29FE501D5FE"
+    }
+  ],
+  "ProductSha256": "FDD7ABC710862B4F896B44C067603BD9C7C469A160006B6385212F4EE1B23A15"
+}

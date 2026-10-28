@@ -1,0 +1,1856 @@
+[
+  {
+    "source": "import \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import \"m\"\n",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Import attribute has duplicate key 'type'"
+  },
+  {
+    "source": "import d from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d from \"m\"\n",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Import attribute has duplicate key 'type'"
+  },
+  {
+    "source": "import * as ns from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import * as ns from \"m\"\n",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import * as ns from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import * as ns from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import * as ns from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import * as ns from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Import attribute has duplicate key 'type'"
+  },
+  {
+    "source": "import {} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {} from \"m\"\n",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Import attribute has duplicate key 'type'"
+  },
+  {
+    "source": "import {x} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x} from \"m\"\n",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Import attribute has duplicate key 'type'"
+  },
+  {
+    "source": "import {x,} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x,} from \"m\"\n",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x,} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x,} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x,} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x,} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Import attribute has duplicate key 'type'"
+  },
+  {
+    "source": "import {x as y} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x as y} from \"m\"\n",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x as y} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x as y} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x as y} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x as y} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Import attribute has duplicate key 'type'"
+  },
+  {
+    "source": "import {default as d} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {default as d} from \"m\"\n",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {default as d} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {default as d} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {default as d} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {default as d} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Import attribute has duplicate key 'type'"
+  },
+  {
+    "source": "import {await as a} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {await as a} from \"m\"\n",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {await as a} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {await as a} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {await as a} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {await as a} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Import attribute has duplicate key 'type'"
+  },
+  {
+    "source": "import {\"x-y\" as xy} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {\"x-y\" as xy} from \"m\"\n",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {\"x-y\" as xy} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {\"x-y\" as xy} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {\"x-y\" as xy} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {\"x-y\" as xy} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Import attribute has duplicate key 'type'"
+  },
+  {
+    "source": "import d, * as ns from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d, * as ns from \"m\"\n",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d, * as ns from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d, * as ns from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d, * as ns from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d, * as ns from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Import attribute has duplicate key 'type'"
+  },
+  {
+    "source": "import d, {x as y, z} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d, {x as y, z} from \"m\"\n",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d, {x as y, z} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d, {x as y, z} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d, {x as y, z} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import d, {x as y, z} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Import attribute has duplicate key 'type'"
+  },
+  {
+    "source": "import d, from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token ','"
+  },
+  {
+    "source": "import * ns from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected identifier 'ns'"
+  },
+  {
+    "source": "import {default} from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "import {await} from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "import {\"x\"} from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "import {x as await} from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "import {x as eval} from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected eval or arguments in strict mode"
+  },
+  {
+    "source": "import {x as arguments} from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected eval or arguments in strict mode"
+  },
+  {
+    "source": "import d from `m`;",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected template string"
+  },
+  {
+    "source": "import d from \"m\" with {type:1};",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected number"
+  },
+  {
+    "source": "import d from \"m\" with {...attrs};",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token '...'"
+  },
+  {
+    "source": "import d from \"m\" assert {type:\"json\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected identifier 'assert'"
+  },
+  {
+    "source": "import d from \"m\" with {type};",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token '}'"
+  },
+  {
+    "source": "import d from \"m\" with {type:\"json\",,};",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token ','"
+  },
+  {
+    "source": "import a, {x as a} from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Identifier 'a' has already been declared"
+  },
+  {
+    "source": "import {x as a} from \"m\"; var a;",
+    "mode": "module",
+    "valid": false,
+    "error": "Identifier 'a' has already been declared"
+  },
+  {
+    "source": "import a from \"m\"; function a(){}",
+    "mode": "module",
+    "valid": false,
+    "error": "Identifier 'a' has already been declared"
+  },
+  {
+    "source": "import a from \"m\"; {let a;}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {x as a} from \"m\"; {var a;}",
+    "mode": "module",
+    "valid": false,
+    "error": "Identifier 'a' has already been declared"
+  },
+  {
+    "source": "import \"\\ud800\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import {\"\\ud800\" as a} from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Invalid module export name: contains unpaired surrogate"
+  },
+  {
+    "source": "import {\"\\ud800\\udc00\" as a} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import \"m\" with {\"\\ud800\":\"\\ud800\"};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "const x=1; export {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "const x=1; export {x};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "const x=1; export {x as y};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x as y} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x as y} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x as y} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "const x=1; export {x as \"\"};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x as \"\"} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x as \"\"} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x as \"\"} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "const x=1; export {x as \"x-y\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x as \"x-y\",} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x as \"x-y\",} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x as \"x-y\",} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "const x=1; export {\"x-y\" as x};",
+    "mode": "module",
+    "valid": false,
+    "error": "String literal module export names must be followed by a 'from' clause"
+  },
+  {
+    "source": "export {\"x-y\" as x} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {\"x-y\" as x} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {\"x-y\" as x} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "const x=1; export {await as x};",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "export {await as x} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {await as x} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {await as x} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "const x=1; export {default as x};",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "export {default as x} from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {default as x} from \"m\" with {};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {default as x} from \"m\" with {type:\"json\",};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export * from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export * as x from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export * as \"x-y\" from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export * as default from \"m\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export * from \"a\"; export * from \"b\";",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export * from \"a\"; export const x=1;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export const {x,y:z}=obj;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export var [a,...b]=arr;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export let a,b;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export function f(){}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export class C{}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export default function(){}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export default function f(){}; export {f};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export default class {}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export default class C{}; export {C};",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export default function(){}(1)",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export default class {}(1)",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export default function(){} /re/;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export default class {} /re/;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export default {} / 2;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export default async\nfunction f(){}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export default 1,2;",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token ','"
+  },
+  {
+    "source": "export default (1,2);",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x}; var x;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x}; {var x;}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x}; {let x;}",
+    "mode": "module",
+    "valid": false,
+    "error": "Export 'x' is not defined in module"
+  },
+  {
+    "source": "export {x}; for(var x of a){}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "export {x}; for(let x of a){}",
+    "mode": "module",
+    "valid": false,
+    "error": "Export 'x' is not defined in module"
+  },
+  {
+    "source": "export {x}; try{}catch(x){}",
+    "mode": "module",
+    "valid": false,
+    "error": "Export 'x' is not defined in module"
+  },
+  {
+    "source": "export {x}; function f(){var x;}",
+    "mode": "module",
+    "valid": false,
+    "error": "Export 'x' is not defined in module"
+  },
+  {
+    "source": "export {x}; class C {static {var x;}}",
+    "mode": "module",
+    "valid": false,
+    "error": "Export 'x' is not defined in module"
+  },
+  {
+    "source": "function f(){} var f;",
+    "mode": "module",
+    "valid": false,
+    "error": "Identifier 'f' has already been declared"
+  },
+  {
+    "source": "function f(){} function f(){}",
+    "mode": "module",
+    "valid": false,
+    "error": "Identifier 'f' has already been declared"
+  },
+  {
+    "source": "export default function f(){} var f;",
+    "mode": "module",
+    "valid": false,
+    "error": "Identifier 'f' has already been declared"
+  },
+  {
+    "source": "export default function f(){}; export function f(){}",
+    "mode": "module",
+    "valid": false,
+    "error": "Identifier 'f' has already been declared"
+  },
+  {
+    "source": "export default 1; export {x as default} from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Duplicate export of 'default'"
+  },
+  {
+    "source": "export {x} from \"a\"; export {y as x} from \"b\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Duplicate export of 'x'"
+  },
+  {
+    "source": "export {x} from \"a\"; var x;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "const x=1; export {x as \"a\",x as \"\\u0061\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Duplicate export of 'a'"
+  },
+  {
+    "source": "const x=1; export {x as \"\\ud800\"};",
+    "mode": "module",
+    "valid": false,
+    "error": "Invalid module export name: contains unpaired surrogate"
+  },
+  {
+    "source": "export {\"\\ud800\" as x} from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Invalid module export name: contains unpaired surrogate"
+  },
+  {
+    "source": "export * as \"\\ud800\" from \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Invalid module export name: contains unpaired surrogate"
+  },
+  {
+    "source": "export default function(){}; export {default};",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "{ import \"m\"; }",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected string"
+  },
+  {
+    "source": "if (true) import \"m\";",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected string"
+  },
+  {
+    "source": "function f(){ import \"m\"; }",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected string"
+  },
+  {
+    "source": "const f=()=>{ import \"m\"; };",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected string"
+  },
+  {
+    "source": "class C{m(){ import \"m\"; }}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected string"
+  },
+  {
+    "source": "class C{static{ import \"m\"; }}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected string"
+  },
+  {
+    "source": "while(true){ import \"m\"; }",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected string"
+  },
+  {
+    "source": "{ export {}; }",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "if (true) export {};",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "function f(){ export {}; }",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "const f=()=>{ export {}; };",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "class C{m(){ export {}; }}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "class C{static{ export {}; }}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "while(true){ export {}; }",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "{ export const x=1; }",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "if (true) export const x=1;",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "function f(){ export const x=1; }",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "const f=()=>{ export const x=1; };",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "class C{m(){ export const x=1; }}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "class C{static{ export const x=1; }}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "while(true){ export const x=1; }",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'export'"
+  },
+  {
+    "source": "import(\"m\");",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\");",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\")",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",);",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",);",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",)",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{});",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{});",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{})",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{},);",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{},);",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{},)",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import((\"a\",\"b\"));",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import((\"a\",\"b\"));",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "import((\"a\",\"b\"))",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{with:{type:\"json\",type:\"other\"}});",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{with:{type:\"json\",type:\"other\"}});",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{with:{type:\"json\",type:\"other\"}})",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{with:42});",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{with:42});",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{with:42})",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{with:{\"\\ud800\":\"x\"}});",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{with:{\"\\ud800\":\"x\"}});",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\",{with:{\"\\ud800\":\"x\"}})",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import();",
+    "mode": "module",
+    "valid": false,
+    "error": "import() requires a specifier"
+  },
+  {
+    "source": "import();",
+    "mode": "script",
+    "valid": false,
+    "error": "import() requires a specifier"
+  },
+  {
+    "source": "import()",
+    "mode": "expression",
+    "valid": false,
+    "error": "import() requires a specifier"
+  },
+  {
+    "source": "import(\"m\",{},1);",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected number"
+  },
+  {
+    "source": "import(\"m\",{},1);",
+    "mode": "script",
+    "valid": false,
+    "error": "Unexpected number"
+  },
+  {
+    "source": "import(\"m\",{},1)",
+    "mode": "expression",
+    "valid": false,
+    "error": "Unexpected number"
+  },
+  {
+    "source": "import(...x);",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token '...'"
+  },
+  {
+    "source": "import(...x);",
+    "mode": "script",
+    "valid": false,
+    "error": "Unexpected token '...'"
+  },
+  {
+    "source": "import(...x)",
+    "mode": "expression",
+    "valid": false,
+    "error": "Unexpected token '...'"
+  },
+  {
+    "source": "import(\"m\",...x);",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token '...'"
+  },
+  {
+    "source": "import(\"m\",...x);",
+    "mode": "script",
+    "valid": false,
+    "error": "Unexpected token '...'"
+  },
+  {
+    "source": "import(\"m\",...x)",
+    "mode": "expression",
+    "valid": false,
+    "error": "Unexpected token '...'"
+  },
+  {
+    "source": "import(\"m\",,);",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token ','"
+  },
+  {
+    "source": "import(\"m\",,);",
+    "mode": "script",
+    "valid": false,
+    "error": "Unexpected token ','"
+  },
+  {
+    "source": "import(\"m\",,)",
+    "mode": "expression",
+    "valid": false,
+    "error": "Unexpected token ','"
+  },
+  {
+    "source": "import?.(\"m\");",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token '?.'"
+  },
+  {
+    "source": "import?.(\"m\");",
+    "mode": "script",
+    "valid": false,
+    "error": "Cannot use import statement outside a module"
+  },
+  {
+    "source": "import?.(\"m\")",
+    "mode": "expression",
+    "valid": false,
+    "error": "Cannot use import statement outside a module"
+  },
+  {
+    "source": "new import(\"m\");",
+    "mode": "module",
+    "valid": false,
+    "error": "Cannot use new with import"
+  },
+  {
+    "source": "new import(\"m\");",
+    "mode": "script",
+    "valid": false,
+    "error": "Cannot use new with import"
+  },
+  {
+    "source": "new import(\"m\")",
+    "mode": "expression",
+    "valid": false,
+    "error": "Cannot use new with import"
+  },
+  {
+    "source": "new (import(\"m\"));",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "new (import(\"m\"));",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "new (import(\"m\"))",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\").x;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\").x;",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\").x",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\")?.x;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\")?.x;",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\")?.x",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\")`t`;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\")`t`;",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\")`t`",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\")(x);",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\")(x);",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "import(\"m\")(x)",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "import.meta;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import.meta;",
+    "mode": "script",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "import.meta",
+    "mode": "expression",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "import.meta.url;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import.meta.url;",
+    "mode": "script",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "import.meta.url",
+    "mode": "expression",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "import.meta[\"url\"];",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import.meta[\"url\"];",
+    "mode": "script",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "import.meta[\"url\"]",
+    "mode": "expression",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "import.meta?.url;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import.meta?.url;",
+    "mode": "script",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "import.meta?.url",
+    "mode": "expression",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "import.meta`x`;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "import.meta`x`;",
+    "mode": "script",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "import.meta`x`",
+    "mode": "expression",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "new import.meta;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "new import.meta;",
+    "mode": "script",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "new import.meta",
+    "mode": "expression",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "import.meta=1;",
+    "mode": "module",
+    "valid": false,
+    "error": "Invalid left-hand side in assignment"
+  },
+  {
+    "source": "import.meta=1;",
+    "mode": "script",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "import.meta=1",
+    "mode": "expression",
+    "valid": false,
+    "error": "Cannot use 'import.meta' outside a module"
+  },
+  {
+    "source": "import.metax;",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected identifier 'metax'"
+  },
+  {
+    "source": "import.metax;",
+    "mode": "script",
+    "valid": false,
+    "error": "Unexpected identifier 'metax'"
+  },
+  {
+    "source": "import.metax",
+    "mode": "expression",
+    "valid": false,
+    "error": "Unexpected identifier 'metax'"
+  },
+  {
+    "source": "import.me\\u0074a;",
+    "mode": "module",
+    "valid": false,
+    "error": "'import.meta' must not contain escaped characters"
+  },
+  {
+    "source": "import.me\\u0074a;",
+    "mode": "script",
+    "valid": false,
+    "error": "'import.meta' must not contain escaped characters"
+  },
+  {
+    "source": "import.me\\u0074a",
+    "mode": "expression",
+    "valid": false,
+    "error": "'import.meta' must not contain escaped characters"
+  },
+  {
+    "source": "import.\\u006deta;",
+    "mode": "module",
+    "valid": false,
+    "error": "'import.meta' must not contain escaped characters"
+  },
+  {
+    "source": "import.\\u006deta;",
+    "mode": "script",
+    "valid": false,
+    "error": "'import.meta' must not contain escaped characters"
+  },
+  {
+    "source": "import.\\u006deta",
+    "mode": "expression",
+    "valid": false,
+    "error": "'import.meta' must not contain escaped characters"
+  },
+  {
+    "source": "impor\\u0074(\"m\");",
+    "mode": "module",
+    "valid": false,
+    "error": "Keyword must not contain escaped characters"
+  },
+  {
+    "source": "impor\\u0074(\"m\");",
+    "mode": "script",
+    "valid": false,
+    "error": "Keyword must not contain escaped characters"
+  },
+  {
+    "source": "impor\\u0074(\"m\")",
+    "mode": "expression",
+    "valid": false,
+    "error": "Keyword must not contain escaped characters"
+  },
+  {
+    "source": "typeof import;",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token ';'"
+  },
+  {
+    "source": "typeof import;",
+    "mode": "script",
+    "valid": false,
+    "error": "Cannot use import statement outside a module"
+  },
+  {
+    "source": "typeof import",
+    "mode": "expression",
+    "valid": false,
+    "error": "Cannot use import statement outside a module"
+  },
+  {
+    "source": "(import);",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token ')'"
+  },
+  {
+    "source": "(import);",
+    "mode": "script",
+    "valid": false,
+    "error": "Cannot use import statement outside a module"
+  },
+  {
+    "source": "(import)",
+    "mode": "expression",
+    "valid": false,
+    "error": "Cannot use import statement outside a module"
+  },
+  {
+    "source": "({import:1,meta:2,as:3,from:4});",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "({import:1,meta:2,as:3,from:4});",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "({import:1,meta:2,as:3,from:4})",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "as+from+meta;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "as+from+meta;",
+    "mode": "script",
+    "valid": true
+  },
+  {
+    "source": "as+from+meta",
+    "mode": "expression",
+    "valid": true
+  },
+  {
+    "source": "await x;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "await\nx;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "await /x/;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "await await x;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "await x ** 2;",
+    "mode": "module",
+    "valid": false,
+    "error": "Unary operator used immediately before exponentiation expression. Parenthesis must be used to disambiguate operator precedence"
+  },
+  {
+    "source": "(await x) ** 2;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "await (x ** 2);",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "await;",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token ';'"
+  },
+  {
+    "source": "await\n;",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token ';'"
+  },
+  {
+    "source": "let await=1;",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "function f(){return await;}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "function await(){}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "const f=function await(){};",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "const f=()=>await x;",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "const f=()=>{await x;};",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "const f=(x=await f())=>x;",
+    "mode": "module",
+    "valid": false,
+    "error": "Illegal await-expression in formal parameters of async function"
+  },
+  {
+    "source": "const f=(x=class {[await key](){}})=>x;",
+    "mode": "module",
+    "valid": false,
+    "error": "Illegal await-expression in formal parameters of async function"
+  },
+  {
+    "source": "const f=(x=function(){return 1;})=>x;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "class C extends (await load()){}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "class C {[await key](){}}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "class C {[await key]=1;}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "class C {x=await x;}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "class C {static x=await x;}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "class C {static {await x;}}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "class C {m(){await x;}}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "class C {await(){return 1;}}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "class C {await=1;}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "({await:1});",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "obj.await;",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "await: while(true) break await;",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token ':'"
+  },
+  {
+    "source": "for await (const x of xs) {}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "for await (var {x} of xs) {}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "for await ([x] of xs) {}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "for await (async of xs) {}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "for await (let.x of xs) {}",
+    "mode": "module",
+    "valid": false,
+    "error": "The left-hand side of a for-of loop may not start with 'let'."
+  },
+  {
+    "source": "for await (x in xs) {}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected token 'in'"
+  },
+  {
+    "source": "for await (let x=1; x<2; x++) {}",
+    "mode": "module",
+    "valid": false,
+    "error": "for-await-of loop variable declaration may not have an initializer."
+  },
+  {
+    "source": "for\nawait(x of xs){}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "function f(){for await(x of xs){}}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "const f=()=>{for await(x of xs){}}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "class C{static{for await(x of xs){}}}",
+    "mode": "module",
+    "valid": false,
+    "error": "Unexpected reserved word"
+  },
+  {
+    "source": "{await x;}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "for(let i=await f();i<2;i++){}",
+    "mode": "module",
+    "valid": true
+  },
+  {
+    "source": "for(x=await f() in obj){}",
+    "mode": "module",
+    "valid": false,
+    "error": "Invalid left-hand side in for-loop"
+  },
+  {
+    "source": "for(x=await (f() in obj);;){break;}",
+    "mode": "module",
+    "valid": true
+  }
+]

@@ -1,0 +1,401 @@
+INPUT function f(value: unknown) { return value as User; }
+SUCCESS False EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+I0 TOKEN=function KIND=function ACTION=shift 42 ERROR=
+  CANDIDATE Shift 42
+  CANDIDATE EpsilonReduce __predicate4 -> epsilon PRED=ExpressionStatementStart
+I42 TOKEN=f KIND=IdentifierName ACTION=shift 62 ERROR=
+  CANDIDATE Shift 62
+I62 TOKEN=( KIND=( ACTION=reduce BindingIdentifier -> IdentifierName ERROR=
+  CANDIDATE Reduce BindingIdentifier -> IdentifierName PRED=
+I42 TOKEN=( KIND=( ACTION=goto 250 ERROR=
+I250 TOKEN=( KIND=( ACTION=epsilon reduce TSOptionalTypeParameters -> epsilon ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I250 TOKEN=( KIND=( ACTION=goto 703 ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I703 TOKEN=( KIND=( ACTION=shift 986 ERROR=
+  CANDIDATE Shift 986
+I986 TOKEN=value KIND=TSTypeIdentifierName ACTION=failed null ERROR=(shift 할 수 없습니다 {IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, {, [, this, ..., )} 와야 합니다)
+  ITEM FunctionDeclaration -> function BindingIdentifier TSOptionalTypeParameters (•FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM FormalParameters ->•__grp1
+  ITEM __grp1 ->•FormalParameterList
+  ITEM FormalParameterList ->•FormalParameter
+  ITEM FormalParameter ->•BindingIdentifier TSOptional TSAnnotation Initializer
+  ITEM BindingIdentifier ->•IdentifierName
+  ITEM BindingIdentifier ->•await
+  ITEM BindingIdentifier ->•of
+  ITEM BindingIdentifier ->•async
+  ITEM BindingIdentifier ->•any
+  ITEM BindingIdentifier ->•unknown
+  ITEM BindingIdentifier ->•string
+  ITEM BindingIdentifier ->•number
+  ITEM BindingIdentifier ->•bigint
+  ITEM BindingIdentifier ->•symbol
+  ITEM BindingIdentifier ->•boolean
+  ITEM BindingIdentifier ->•undefined
+  ITEM BindingIdentifier ->•never
+  ITEM BindingIdentifier ->•object
+  ITEM BindingIdentifier ->•intrinsic
+  ITEM BindingIdentifier ->•keyof
+  ITEM BindingIdentifier ->•unique
+  ITEM BindingIdentifier ->•readonly
+  ITEM BindingIdentifier ->•infer
+  ITEM BindingIdentifier ->•abstract
+  ITEM BindingIdentifier ->•accessor
+  ITEM BindingIdentifier ->•as
+  ITEM BindingIdentifier ->•assert
+  ITEM BindingIdentifier ->•asserts
+  ITEM BindingIdentifier ->•constructor
+  ITEM BindingIdentifier ->•declare
+  ITEM BindingIdentifier ->•from
+  ITEM BindingIdentifier ->•get
+  ITEM BindingIdentifier ->•global
+  ITEM BindingIdentifier ->•is
+  ITEM BindingIdentifier ->•module
+  ITEM BindingIdentifier ->•namespace
+  ITEM BindingIdentifier ->•out
+  ITEM BindingIdentifier ->•override
+  ITEM BindingIdentifier ->•require
+  ITEM BindingIdentifier ->•satisfies
+  ITEM BindingIdentifier ->•set
+  ITEM BindingIdentifier ->•type
+  ITEM BindingIdentifier ->•using
+  ITEM FormalParameter ->•BindingIdentifier TSOptional TSAnnotation
+  ITEM FormalParameter ->•BindingIdentifier TSOptional Initializer
+  ITEM FormalParameter ->•BindingIdentifier TSOptional
+  ITEM FormalParameter ->•BindingIdentifier TSAnnotation Initializer
+  ITEM FormalParameter ->•BindingIdentifier TSAnnotation
+  ITEM FormalParameter ->•BindingIdentifier Initializer
+  ITEM FormalParameter ->•BindingIdentifier
+  ITEM FormalParameter ->•BindingPattern TSOptional TSAnnotation Initializer
+  ITEM BindingPattern ->•ObjectBindingPattern
+  ITEM ObjectBindingPattern ->•{ }
+  ITEM ObjectBindingPattern ->•{ BindingPropertyList }
+  ITEM ObjectBindingPattern ->•{ BindingPropertyList , }
+  ITEM ObjectBindingPattern ->•{ BindingRestProperty }
+  ITEM ObjectBindingPattern ->•{ BindingPropertyList , BindingRestProperty }
+  ITEM BindingPattern ->•ArrayBindingPattern
+  ITEM ArrayBindingPattern ->•[ ]
+  ITEM ArrayBindingPattern ->•[ ArrayBindingElements ]
+  ITEM FormalParameter ->•BindingPattern TSOptional TSAnnotation
+  ITEM FormalParameter ->•BindingPattern TSOptional Initializer
+  ITEM FormalParameter ->•BindingPattern TSOptional
+  ITEM FormalParameter ->•BindingPattern TSAnnotation Initializer
+  ITEM FormalParameter ->•BindingPattern TSAnnotation
+  ITEM FormalParameter ->•BindingPattern Initializer
+  ITEM FormalParameter ->•BindingPattern
+  ITEM FormalParameter ->•TSThisParameter
+  ITEM TSThisParameter ->•this TSAnnotation
+  ITEM FormalParameterList ->•FormalParameterList , FormalParameter
+  ITEM __grp1 ->•FormalParameterList ,
+  ITEM __grp1 ->•FunctionRestParameter
+  ITEM FunctionRestParameter ->•BindingRestElement TSAnnotation
+  ITEM BindingRestElement ->•... BindingIdentifier
+  ITEM BindingRestElement ->•... BindingPattern
+  ITEM FunctionRestParameter ->•BindingRestElement
+  ITEM __grp1 ->•FormalParameterList , FunctionRestParameter
+  ITEM FormalParameters ->•
+  ITEM FunctionDeclaration -> function BindingIdentifier TSOptionalTypeParameters (•FormalParameters ) TSOptionalReturnType TSFunctionOverload
+INPUT const result = value != /ab/.test(text);
+SUCCESS False EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+I0 TOKEN=const KIND=const ACTION=shift 46 ERROR=
+  CANDIDATE Shift 46
+  CANDIDATE EpsilonReduce __predicate44 -> epsilon PRED=TSDeclarationStart
+I46 TOKEN=result KIND=IdentifierName ACTION=reduce LetOrConst -> const ERROR=
+  CANDIDATE Reduce LetOrConst -> const PRED=
+I0 TOKEN=result KIND=IdentifierName ACTION=goto 44 ERROR=
+  CANDIDATE EpsilonReduce __predicate4 -> epsilon PRED=ExpressionStatementStart
+I44 TOKEN=result KIND=IdentifierName ACTION=shift 62 ERROR=
+  CANDIDATE Shift 62
+I62 TOKEN== KIND== ACTION=reduce BindingIdentifier -> IdentifierName ERROR=
+  CANDIDATE Reduce BindingIdentifier -> IdentifierName PRED=
+I44 TOKEN== KIND== ACTION=goto 254 ERROR=
+I254 TOKEN== KIND== ACTION=shift 286 ERROR=
+  CANDIDATE Shift 286
+I286 TOKEN=value KIND=IdentifierName ACTION=shift 131 ERROR=
+  CANDIDATE Shift 131
+I131 TOKEN=!= KIND=!= ACTION=reduce IdentifierReference -> IdentifierName ERROR=
+  CANDIDATE Reduce IdentifierReference -> IdentifierName PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 472 ERROR=
+I472 TOKEN=!= KIND=!= ACTION=reduce PrimaryExpression -> IdentifierReference ERROR=
+  CANDIDATE Reduce PrimaryExpression -> IdentifierReference PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 129 ERROR=
+I129 TOKEN=!= KIND=!= ACTION=reduce MemberExpression -> PrimaryExpression ERROR=
+  CANDIDATE Reduce MemberExpression -> PrimaryExpression PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 128 ERROR=
+I128 TOKEN=!= KIND=!= ACTION=reduce NewExpression -> MemberExpression ERROR=
+  CANDIDATE Reduce NewExpression -> MemberExpression PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 127 ERROR=
+I127 TOKEN=!= KIND=!= ACTION=reduce LeftHandSideExpression -> NewExpression ERROR=
+  CANDIDATE Reduce LeftHandSideExpression -> NewExpression PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 126 ERROR=
+I126 TOKEN=!= KIND=!= ACTION=epsilon reduce __predicate1 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate1 -> epsilon PRED=TSNoPostfix
+I126 TOKEN=!= KIND=!= ACTION=goto 437 ERROR=
+  CANDIDATE EpsilonReduce __predicate1 -> epsilon PRED=TSNoPostfix
+I437 TOKEN=!= KIND=!= ACTION=reduce SimpleUpdateExpression -> LeftHandSideExpression __predicate1 ERROR=
+  CANDIDATE Reduce SimpleUpdateExpression -> LeftHandSideExpression __predicate1 PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 125 ERROR=
+I125 TOKEN=!= KIND=!= ACTION=reduce UpdateExpression -> SimpleUpdateExpression ERROR=
+  CANDIDATE Reduce UpdateExpression -> SimpleUpdateExpression PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 124 ERROR=
+I124 TOKEN=!= KIND=!= ACTION=reduce UnaryExpression -> UpdateExpression ERROR=
+  CANDIDATE Reduce UnaryExpression -> UpdateExpression PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 123 ERROR=
+I123 TOKEN=!= KIND=!= ACTION=reduce ExponentiationExpression -> UnaryExpression ERROR=
+  CANDIDATE Reduce ExponentiationExpression -> UnaryExpression PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 122 ERROR=
+I122 TOKEN=!= KIND=!= ACTION=reduce MultiplicativeExpression -> ExponentiationExpression ERROR=
+  CANDIDATE Reduce MultiplicativeExpression -> ExponentiationExpression PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 121 ERROR=
+I121 TOKEN=!= KIND=!= ACTION=reduce AdditiveExpression -> MultiplicativeExpression ERROR=
+  CANDIDATE Reduce AdditiveExpression -> MultiplicativeExpression PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 120 ERROR=
+I120 TOKEN=!= KIND=!= ACTION=reduce ShiftExpression -> AdditiveExpression ERROR=
+  CANDIDATE Reduce ShiftExpression -> AdditiveExpression PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 119 ERROR=
+I119 TOKEN=!= KIND=!= ACTION=reduce RelationalExpression -> ShiftExpression ERROR=
+  CANDIDATE Reduce RelationalExpression -> ShiftExpression PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 118 ERROR=
+I118 TOKEN=!= KIND=!= ACTION=epsilon reduce __predicate43 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate43 -> epsilon PRED=TSNoAssertionOperatorStart
+I118 TOKEN=!= KIND=!= ACTION=goto 415 ERROR=
+  CANDIDATE EpsilonReduce __predicate43 -> epsilon PRED=TSNoAssertionOperatorStart
+I415 TOKEN=!= KIND=!= ACTION=reduce TSAssertionEnd -> __predicate43 ERROR=
+  CANDIDATE Reduce TSAssertionEnd -> __predicate43 PRED=
+I118 TOKEN=!= KIND=!= ACTION=goto 414 ERROR=
+  CANDIDATE EpsilonReduce __predicate43 -> epsilon PRED=TSNoAssertionOperatorStart
+I414 TOKEN=!= KIND=!= ACTION=reduce EqualityExpression -> RelationalExpression TSAssertionEnd ERROR=
+  CANDIDATE Reduce EqualityExpression -> RelationalExpression TSAssertionEnd PRED=
+I286 TOKEN=!= KIND=!= ACTION=goto 117 ERROR=
+I117 TOKEN=!= KIND=!= ACTION=shift 411 ERROR=
+  CANDIDATE Shift 411
+I411 TOKEN=/ab/ KIND=RegularExpressionLiteral ACTION=reduce EqualityOperator -> != ERROR=
+  CANDIDATE Reduce EqualityOperator -> != PRED=
+I117 TOKEN=/ab/ KIND=RegularExpressionLiteral ACTION=goto 409 ERROR=
+  CANDIDATE Reduce BitwiseANDExpression -> EqualityExpression PRED=
+I409 TOKEN=/ab/ KIND=RegularExpressionLiteral ACTION=shift 173 ERROR=
+  CANDIDATE Shift 173
+I173 TOKEN=. KIND=. ACTION=reduce Literal -> RegularExpressionLiteral ERROR=
+  CANDIDATE Reduce Literal -> RegularExpressionLiteral PRED=
+I409 TOKEN=. KIND=. ACTION=goto 170 ERROR=
+I170 TOKEN=. KIND=. ACTION=reduce PrimaryExpression -> Literal ERROR=
+  CANDIDATE Reduce PrimaryExpression -> Literal PRED=
+I409 TOKEN=. KIND=. ACTION=goto 129 ERROR=
+I129 TOKEN=. KIND=. ACTION=reduce MemberExpression -> PrimaryExpression ERROR=
+  CANDIDATE Reduce MemberExpression -> PrimaryExpression PRED=
+I409 TOKEN=. KIND=. ACTION=goto 128 ERROR=
+I128 TOKEN=. KIND=. ACTION=shift 457 ERROR=
+  CANDIDATE Shift 457
+I457 TOKEN=test KIND=IdentifierName ACTION=shift 769 ERROR=
+  CANDIDATE Shift 769
+I769 TOKEN=( KIND=( ACTION=reduce PropertyIdentifierName -> IdentifierName ERROR=
+  CANDIDATE Reduce PropertyIdentifierName -> IdentifierName PRED=
+I457 TOKEN=( KIND=( ACTION=goto 768 ERROR=
+I768 TOKEN=( KIND=( ACTION=reduce MemberAccess -> . PropertyIdentifierName ERROR=
+  CANDIDATE Reduce MemberAccess -> . PropertyIdentifierName PRED=
+I128 TOKEN=( KIND=( ACTION=goto 456 ERROR=
+  CANDIDATE Shift 467
+  CANDIDATE Reduce NewExpression -> MemberExpression PRED=
+I456 TOKEN=( KIND=( ACTION=reduce MemberExpression -> MemberExpression MemberAccess ERROR=
+  CANDIDATE Reduce MemberExpression -> MemberExpression MemberAccess PRED=
+I409 TOKEN=( KIND=( ACTION=goto 128 ERROR=
+  CANDIDATE Shift 179
+I128 TOKEN=( KIND=( ACTION=shift 467 ERROR=
+  CANDIDATE Shift 467
+  CANDIDATE Reduce NewExpression -> MemberExpression PRED=
+I467 TOKEN=text KIND=TSTypeIdentifierName ACTION=failed null ERROR=(shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+  ITEM Arguments -> (•)
+  ITEM Arguments -> (•ArgumentList )
+  ITEM ArgumentList ->•Argument
+  ITEM Argument ->•AssignmentExpression
+  ITEM AssignmentExpression ->•ConditionalExpression
+  ITEM ConditionalExpression ->•ShortCircuitExpression
+  ITEM ShortCircuitExpression ->•LogicalORExpression
+  ITEM LogicalORExpression ->•LogicalANDExpression
+  ITEM LogicalANDExpression ->•BitwiseORExpression
+  ITEM BitwiseORExpression ->•BitwiseXORExpression
+  ITEM BitwiseXORExpression ->•BitwiseANDExpression
+  ITEM BitwiseANDExpression ->•EqualityExpression
+  ITEM EqualityExpression ->•RelationalExpression TSAssertionEnd
+  ITEM RelationalExpression ->•ShiftExpression
+  ITEM ShiftExpression ->•AdditiveExpression
+  ITEM AdditiveExpression ->•MultiplicativeExpression
+  ITEM MultiplicativeExpression ->•ExponentiationExpression
+  ITEM ExponentiationExpression ->•UnaryExpression
+  ITEM UnaryExpression ->•UpdateExpression
+  ITEM UpdateExpression ->•SimpleUpdateExpression
+  ITEM SimpleUpdateExpression ->•LeftHandSideExpression __predicate1
+  ITEM LeftHandSideExpression ->•NewExpression
+  ITEM NewExpression ->•MemberExpression
+  ITEM MemberExpression ->•PrimaryExpression
+  ITEM PrimaryExpression ->•IdentifierReference
+  ITEM IdentifierReference ->•IdentifierName
+  ITEM IdentifierReference ->•await
+  ITEM IdentifierReference ->•of
+  ITEM IdentifierReference ->•async
+  ITEM IdentifierReference ->•any
+  ITEM IdentifierReference ->•unknown
+  ITEM IdentifierReference ->•string
+  ITEM IdentifierReference ->•number
+  ITEM IdentifierReference ->•bigint
+  ITEM IdentifierReference ->•symbol
+  ITEM IdentifierReference ->•boolean
+  ITEM IdentifierReference ->•undefined
+  ITEM IdentifierReference ->•never
+  ITEM IdentifierReference ->•object
+  ITEM IdentifierReference ->•intrinsic
+  ITEM IdentifierReference ->•keyof
+  ITEM IdentifierReference ->•unique
+  ITEM IdentifierReference ->•readonly
+  ITEM IdentifierReference ->•infer
+  ITEM IdentifierReference ->•abstract
+  ITEM IdentifierReference ->•accessor
+  ITEM IdentifierReference ->•as
+  ITEM IdentifierReference ->•assert
+  ITEM IdentifierReference ->•asserts
+  ITEM IdentifierReference ->•constructor
+  ITEM IdentifierReference ->•declare
+  ITEM IdentifierReference ->•from
+  ITEM IdentifierReference ->•get
+  ITEM IdentifierReference ->•global
+  ITEM IdentifierReference ->•is
+  ITEM IdentifierReference ->•module
+  ITEM IdentifierReference ->•namespace
+  ITEM IdentifierReference ->•out
+  ITEM IdentifierReference ->•override
+  ITEM IdentifierReference ->•require
+  ITEM IdentifierReference ->•satisfies
+  ITEM IdentifierReference ->•set
+  ITEM IdentifierReference ->•type
+  ITEM IdentifierReference ->•using
+  ITEM PrimaryExpression ->•Literal
+  ITEM Literal ->•NumericLiteral
+  ITEM Literal ->•StringLiteral
+  ITEM Literal ->•RegularExpressionLiteral
+  ITEM Literal ->•null
+  ITEM Literal ->•true
+  ITEM Literal ->•false
+  ITEM PrimaryExpression ->•this
+  ITEM PrimaryExpression ->•ParenthesizedExpression
+  ITEM ParenthesizedExpression ->•( Expression )
+  ITEM ParenthesizedExpression ->•( )
+  ITEM ParenthesizedExpression ->•( Expression , )
+  ITEM ParenthesizedExpression ->•( Expression , SpreadElement )
+  ITEM ParenthesizedExpression ->•( SpreadElement )
+  ITEM PrimaryExpression ->•ArrayLiteral
+  ITEM ArrayLiteral ->•[ ]
+  ITEM ArrayLiteral ->•[ ArrayElements ]
+  ITEM PrimaryExpression ->•ObjectLiteral
+  ITEM ObjectLiteral ->•{ }
+  ITEM ObjectLiteral ->•{ PropertyDefinitionList }
+  ITEM ObjectLiteral ->•{ PropertyDefinitionList , }
+  ITEM PrimaryExpression ->•TemplateLiteral
+  ITEM TemplateLiteral ->•TemplateContent
+  ITEM TemplateContent ->•NoSubstitutionTemplate
+  ITEM TemplateContent ->•TemplateHead Expression TemplateSpans
+  ITEM PrimaryExpression ->•FunctionExpression
+  ITEM FunctionExpression ->•function TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM FunctionExpression ->•function BindingIdentifier TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM PrimaryExpression ->•ClassExpression
+  ITEM ClassExpression ->•class ClassTail
+  ITEM ClassExpression ->•class BindingIdentifier TSOptionalTypeParameters ClassTail
+  ITEM PrimaryExpression ->•AsyncFunctionExpression
+  ITEM AsyncFunctionExpression ->•AsyncFunctionStart TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM AsyncFunctionStart ->•__predicate24 async NoLineTerminator function
+  ITEM __predicate24 ->•
+  ITEM AsyncFunctionExpression ->•AsyncFunctionStart BindingIdentifier__Await TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM PrimaryExpression ->•GeneratorExpression
+  ITEM GeneratorExpression ->•function * TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM GeneratorExpression ->•function * BindingIdentifier TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM PrimaryExpression ->•AsyncGeneratorExpression
+  ITEM AsyncGeneratorExpression ->•AsyncFunctionStart * TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM AsyncGeneratorExpression ->•AsyncFunctionStart * BindingIdentifier__Await TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM MemberExpression ->•SuperProperty
+  ITEM SuperProperty ->•super . PropertyIdentifierName
+  ITEM SuperProperty ->•super [ Expression ]
+  ITEM MemberExpression ->•NewTarget
+  ITEM NewTarget ->•new . PropertyIdentifierName
+  ITEM MemberExpression ->•ImportMeta
+  ITEM ImportMeta ->•import . PropertyIdentifierName
+  ITEM MemberExpression ->•MemberExpression MemberAccess
+  ITEM MemberExpression ->•MemberExpression TaggedTemplate
+  ITEM MemberExpression ->•new MemberExpression Arguments
+  ITEM MemberExpression ->•TSNonNullExpressionMember
+  ITEM TSNonNullExpressionMember ->•MemberExpression NoLineTerminator TSNonNullToken
+  ITEM MemberExpression ->•TSNonNullExpressionOptional TaggedTemplate
+  ITEM TSNonNullExpressionOptional ->•OptionalExpression NoLineTerminator TSNonNullToken
+  ITEM OptionalExpression ->•MemberExpression OptionalChain
+  ITEM OptionalExpression ->•CallExpression OptionalChain
+  ITEM CallExpression ->•MemberExpression Arguments
+  ITEM CallExpression ->•SuperCall
+  ITEM SuperCall ->•super Arguments
+  ITEM CallExpression ->•ImportCall
+  ITEM ImportCall ->•import ( AssignmentExpression )
+  ITEM ImportCall ->•import ( AssignmentExpression , )
+  ITEM ImportCall ->•import ( AssignmentExpression , AssignmentExpression )
+  ITEM ImportCall ->•import ( AssignmentExpression , AssignmentExpression , )
+  ITEM CallExpression ->•CallExpression Arguments
+  ITEM CallExpression ->•CallExpression MemberAccess
+  ITEM CallExpression ->•CallExpression TaggedTemplate
+  ITEM CallExpression ->•TSNonNullExpressionCall
+  ITEM TSNonNullExpressionCall ->•CallExpression NoLineTerminator TSNonNullToken
+  ITEM OptionalExpression ->•OptionalExpression OptionalChain
+  ITEM OptionalExpression ->•TSNonNullExpressionOptional
+  ITEM OptionalExpression ->•OptionalExpression MemberAccess
+  ITEM OptionalExpression ->•OptionalExpression Arguments
+  ITEM NewExpression ->•new NewExpression
+  ITEM LeftHandSideExpression ->•CallExpression
+  ITEM LeftHandSideExpression ->•OptionalExpression
+  ITEM UpdateExpression ->•LeftHandSideExpression NoLineTerminator PostfixOperator
+  ITEM UpdateExpression ->•PrefixOperator UnaryExpression
+  ITEM PrefixOperator ->•++
+  ITEM PrefixOperator ->•--
+  ITEM UnaryExpression ->•UnaryOperator UnaryExpression
+  ITEM UnaryOperator ->•delete
+  ITEM UnaryOperator ->•void
+  ITEM UnaryOperator ->•typeof
+  ITEM UnaryOperator ->•+
+  ITEM UnaryOperator ->•-
+  ITEM UnaryOperator ->•~
+  ITEM UnaryOperator ->•!
+  ITEM ExponentiationExpression ->•UpdateExpression ** ExponentiationExpression
+  ITEM MultiplicativeExpression ->•MultiplicativeExpression MultiplicativeOperator ExponentiationExpression
+  ITEM AdditiveExpression ->•AdditiveExpression AdditiveOperator MultiplicativeExpression
+  ITEM ShiftExpression ->•ShiftExpression ShiftOperator AdditiveExpression
+  ITEM RelationalExpression ->•RelationalExpression RelationalOperator ShiftExpression
+  ITEM RelationalExpression ->•PrivateInExpression
+  ITEM PrivateInExpression ->•PrivateIdentifier in ShiftExpression
+  ITEM RelationalExpression ->•TSAssertionContinuation
+  ITEM TSAssertionContinuation ->•TSAsExpression
+  ITEM TSAsExpression ->•RelationalExpression __predicate35 as TSType
+  ITEM TSAssertionContinuation ->•TSSatisfiesExpression
+  ITEM TSSatisfiesExpression ->•RelationalExpression __predicate37 satisfies TSType
+  ITEM TSAssertionContinuation ->•TSAssertionContinuation ** ExponentiationExpression
+  ITEM TSAssertionContinuation ->•TSAssertionContinuation MultiplicativeOperator ExponentiationExpression
+  ITEM TSAssertionContinuation ->•TSAssertionContinuation AdditiveOperator MultiplicativeExpression
+  ITEM TSAssertionContinuation ->•TSAssertionContinuation ShiftOperator AdditiveExpression
+  ITEM EqualityExpression ->•EqualityExpression EqualityOperator RelationalExpression TSAssertionEnd
+  ITEM BitwiseANDExpression ->•BitwiseANDExpression & EqualityExpression
+  ITEM BitwiseXORExpression ->•BitwiseXORExpression ^ BitwiseANDExpression
+  ITEM BitwiseORExpression ->•BitwiseORExpression | BitwiseXORExpression
+  ITEM LogicalANDExpression ->•LogicalANDExpression && BitwiseORExpression
+  ITEM LogicalORExpression ->•LogicalORExpression || LogicalANDExpression
+  ITEM ShortCircuitExpression ->•CoalesceExpression
+  ITEM CoalesceExpression ->•BitwiseORExpression ?? BitwiseORExpression
+  ITEM CoalesceExpression ->•CoalesceExpression ?? BitwiseORExpression
+  ITEM ConditionalExpression ->•ShortCircuitExpression ? AssignmentExpression : AssignmentExpression
+  ITEM AssignmentExpression ->•LeftHandSideExpression AssignmentOperator AssignmentExpression
+  ITEM AssignmentExpression ->•ArrowFunction
+  ITEM ArrowFunction ->•IdentifierReference NoLineTerminator => ConciseBody
+  ITEM ArrowFunction ->•ParenthesizedExpression NoLineTerminator => ConciseBody
+  ITEM AssignmentExpression ->•AsyncArrowFunction
+  ITEM AsyncArrowFunction ->•CallExpression NoLineTerminator => AsyncConciseBody
+  ITEM AsyncArrowFunction ->•LeftHandSideExpression NoLineTerminator IdentifierReference NoLineTerminator => AsyncConciseBody
+  ITEM AssignmentExpression ->•YieldExpression
+  ITEM YieldExpression ->•yield __predicate27
+  ITEM YieldExpression ->•yield NoLineTerminator AssignmentExpression
+  ITEM YieldExpression ->•yield NoLineTerminator * AssignmentExpression
+  ITEM Argument ->•SpreadElement
+  ITEM SpreadElement ->•... AssignmentExpression
+  ITEM ArgumentList ->•ArgumentList , Argument
+  ITEM Arguments -> (•ArgumentList , )

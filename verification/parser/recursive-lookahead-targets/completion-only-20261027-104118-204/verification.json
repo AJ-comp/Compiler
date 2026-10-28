@@ -1,0 +1,61 @@
+{
+  "Status": "completed_only_test_contract_applied_two_real_FIRST_failures_retained",
+  "TestScope": "Require every completed LR item exact lookaheads; no mandatory initial/intermediate lookahead publication. Keep state/core and actual parsing validation.",
+  "ProductSourceUnchanged": true,
+  "ProductSourceSha256": "FDD7ABC710862B4F896B44C067603BD9C7C469A160006B6385212F4EE1B23A15",
+  "FocusedTests": {
+    "Total": 167,
+    "Passed": 165,
+    "Failed": 2,
+    "Trx": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\recursive-lookahead-targets\\completion-only-20261027-104118-204\\focused-final.trx"
+  },
+  "Suites": [
+    {
+      "Name": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests",
+      "Total": 17,
+      "Passed": 17,
+      "Failed": 0
+    },
+    {
+      "Name": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadPropagationTests",
+      "Total": 31,
+      "Passed": 31,
+      "Failed": 0
+    },
+    {
+      "Name": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests",
+      "Total": 80,
+      "Passed": 78,
+      "Failed": 2
+    },
+    {
+      "Name": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests",
+      "Total": 36,
+      "Passed": 36,
+      "Failed": 0
+    },
+    {
+      "Name": "Janglim.FrontEnd.Parsers.Tests.LalrTableTests",
+      "Total": 3,
+      "Passed": 3,
+      "Failed": 0
+    }
+  ],
+  "Failures": [
+    {
+      "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(name: \"unproductive-suffix\")",
+      "Message": "unproductive-suffix: I4 B -> a•\r\nExpected: \r\nActual: T:x"
+    },
+    {
+      "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(name: \"unproductive-suffix-with-nullable-prefix\")",
+      "Message": "unproductive-suffix-with-nullable-prefix: I6 B -> a•\r\nExpected: \r\nActual: T:x"
+    }
+  ],
+  "SnapshotReview": {
+    "RowsPreserved": 46,
+    "NoncompletedCellsMasked": 19,
+    "CompletedValuesUnchanged": true,
+    "OriginalReceivedSnapshotRestored": true
+  },
+  "CallerOwnedTableContract": "Fresh empty caller-owned dictionary; identity and completed-set publication checked. No stale-table reset requirement."
+}

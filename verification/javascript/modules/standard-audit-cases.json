@@ -1,0 +1,1366 @@
+[
+  {
+    "source": "import \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import \"m\"\n",
+    "mode": "module"
+  },
+  {
+    "source": "import \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "import \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "import \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module"
+  },
+  {
+    "source": "import \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import d from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import d from \"m\"\n",
+    "mode": "module"
+  },
+  {
+    "source": "import d from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "import d from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "import d from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module"
+  },
+  {
+    "source": "import d from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import * as ns from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import * as ns from \"m\"\n",
+    "mode": "module"
+  },
+  {
+    "source": "import * as ns from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "import * as ns from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "import * as ns from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module"
+  },
+  {
+    "source": "import * as ns from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import {} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {} from \"m\"\n",
+    "mode": "module"
+  },
+  {
+    "source": "import {} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "import {} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "import {} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module"
+  },
+  {
+    "source": "import {} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import {x} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {x} from \"m\"\n",
+    "mode": "module"
+  },
+  {
+    "source": "import {x} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "import {x} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "import {x} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module"
+  },
+  {
+    "source": "import {x} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import {x,} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {x,} from \"m\"\n",
+    "mode": "module"
+  },
+  {
+    "source": "import {x,} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "import {x,} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "import {x,} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module"
+  },
+  {
+    "source": "import {x,} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import {x as y} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {x as y} from \"m\"\n",
+    "mode": "module"
+  },
+  {
+    "source": "import {x as y} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "import {x as y} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "import {x as y} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module"
+  },
+  {
+    "source": "import {x as y} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import {default as d} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {default as d} from \"m\"\n",
+    "mode": "module"
+  },
+  {
+    "source": "import {default as d} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "import {default as d} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "import {default as d} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module"
+  },
+  {
+    "source": "import {default as d} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import {await as a} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {await as a} from \"m\"\n",
+    "mode": "module"
+  },
+  {
+    "source": "import {await as a} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "import {await as a} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "import {await as a} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module"
+  },
+  {
+    "source": "import {await as a} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import {\"x-y\" as xy} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {\"x-y\" as xy} from \"m\"\n",
+    "mode": "module"
+  },
+  {
+    "source": "import {\"x-y\" as xy} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "import {\"x-y\" as xy} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "import {\"x-y\" as xy} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module"
+  },
+  {
+    "source": "import {\"x-y\" as xy} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import d, * as ns from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import d, * as ns from \"m\"\n",
+    "mode": "module"
+  },
+  {
+    "source": "import d, * as ns from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "import d, * as ns from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "import d, * as ns from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module"
+  },
+  {
+    "source": "import d, * as ns from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import d, {x as y, z} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import d, {x as y, z} from \"m\"\n",
+    "mode": "module"
+  },
+  {
+    "source": "import d, {x as y, z} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "import d, {x as y, z} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "import d, {x as y, z} from \"m\" with {bad:\"unknown\",} ;",
+    "mode": "module"
+  },
+  {
+    "source": "import d, {x as y, z} from \"m\" with {type:\"json\", \"\\u0074ype\":\"other\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import d, from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import * ns from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {default} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {await} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {\"x\"} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {x as await} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {x as eval} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {x as arguments} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import d from `m`;",
+    "mode": "module"
+  },
+  {
+    "source": "import d from \"m\" with {type:1};",
+    "mode": "module"
+  },
+  {
+    "source": "import d from \"m\" with {...attrs};",
+    "mode": "module"
+  },
+  {
+    "source": "import d from \"m\" assert {type:\"json\"};",
+    "mode": "module"
+  },
+  {
+    "source": "import d from \"m\" with {type};",
+    "mode": "module"
+  },
+  {
+    "source": "import d from \"m\" with {type:\"json\",,};",
+    "mode": "module"
+  },
+  {
+    "source": "import a, {x as a} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {x as a} from \"m\"; var a;",
+    "mode": "module"
+  },
+  {
+    "source": "import a from \"m\"; function a(){}",
+    "mode": "module"
+  },
+  {
+    "source": "import a from \"m\"; {let a;}",
+    "mode": "module"
+  },
+  {
+    "source": "import {x as a} from \"m\"; {var a;}",
+    "mode": "module"
+  },
+  {
+    "source": "import \"\\ud800\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {\"\\ud800\" as a} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import {\"\\ud800\\udc00\" as a} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "import \"m\" with {\"\\ud800\":\"\\ud800\"};",
+    "mode": "module"
+  },
+  {
+    "source": "const x=1; export {};",
+    "mode": "module"
+  },
+  {
+    "source": "export {} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export {} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "export {} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "const x=1; export {x};",
+    "mode": "module"
+  },
+  {
+    "source": "export {x} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export {x} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "export {x} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "const x=1; export {x as y};",
+    "mode": "module"
+  },
+  {
+    "source": "export {x as y} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export {x as y} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "export {x as y} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "const x=1; export {x as \"\"};",
+    "mode": "module"
+  },
+  {
+    "source": "export {x as \"\"} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export {x as \"\"} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "export {x as \"\"} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "const x=1; export {x as \"x-y\",};",
+    "mode": "module"
+  },
+  {
+    "source": "export {x as \"x-y\",} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export {x as \"x-y\",} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "export {x as \"x-y\",} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "const x=1; export {\"x-y\" as x};",
+    "mode": "module"
+  },
+  {
+    "source": "export {\"x-y\" as x} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export {\"x-y\" as x} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "export {\"x-y\" as x} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "const x=1; export {await as x};",
+    "mode": "module"
+  },
+  {
+    "source": "export {await as x} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export {await as x} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "export {await as x} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "const x=1; export {default as x};",
+    "mode": "module"
+  },
+  {
+    "source": "export {default as x} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export {default as x} from \"m\" with {};",
+    "mode": "module"
+  },
+  {
+    "source": "export {default as x} from \"m\" with {type:\"json\",};",
+    "mode": "module"
+  },
+  {
+    "source": "export * from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export * as x from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export * as \"x-y\" from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export * as default from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export * from \"a\"; export * from \"b\";",
+    "mode": "module"
+  },
+  {
+    "source": "export * from \"a\"; export const x=1;",
+    "mode": "module"
+  },
+  {
+    "source": "export const {x,y:z}=obj;",
+    "mode": "module"
+  },
+  {
+    "source": "export var [a,...b]=arr;",
+    "mode": "module"
+  },
+  {
+    "source": "export let a,b;",
+    "mode": "module"
+  },
+  {
+    "source": "export function f(){}",
+    "mode": "module"
+  },
+  {
+    "source": "export class C{}",
+    "mode": "module"
+  },
+  {
+    "source": "export default function(){}",
+    "mode": "module"
+  },
+  {
+    "source": "export default function f(){}; export {f};",
+    "mode": "module"
+  },
+  {
+    "source": "export default class {}",
+    "mode": "module"
+  },
+  {
+    "source": "export default class C{}; export {C};",
+    "mode": "module"
+  },
+  {
+    "source": "export default function(){}(1)",
+    "mode": "module"
+  },
+  {
+    "source": "export default class {}(1)",
+    "mode": "module"
+  },
+  {
+    "source": "export default function(){} /re/;",
+    "mode": "module"
+  },
+  {
+    "source": "export default class {} /re/;",
+    "mode": "module"
+  },
+  {
+    "source": "export default {} / 2;",
+    "mode": "module"
+  },
+  {
+    "source": "export default async\nfunction f(){}",
+    "mode": "module"
+  },
+  {
+    "source": "export default 1,2;",
+    "mode": "module"
+  },
+  {
+    "source": "export default (1,2);",
+    "mode": "module"
+  },
+  {
+    "source": "export {x}; var x;",
+    "mode": "module"
+  },
+  {
+    "source": "export {x}; {var x;}",
+    "mode": "module"
+  },
+  {
+    "source": "export {x}; {let x;}",
+    "mode": "module"
+  },
+  {
+    "source": "export {x}; for(var x of a){}",
+    "mode": "module"
+  },
+  {
+    "source": "export {x}; for(let x of a){}",
+    "mode": "module"
+  },
+  {
+    "source": "export {x}; try{}catch(x){}",
+    "mode": "module"
+  },
+  {
+    "source": "export {x}; function f(){var x;}",
+    "mode": "module"
+  },
+  {
+    "source": "export {x}; class C {static {var x;}}",
+    "mode": "module"
+  },
+  {
+    "source": "function f(){} var f;",
+    "mode": "module"
+  },
+  {
+    "source": "function f(){} function f(){}",
+    "mode": "module"
+  },
+  {
+    "source": "export default function f(){} var f;",
+    "mode": "module"
+  },
+  {
+    "source": "export default function f(){}; export function f(){}",
+    "mode": "module"
+  },
+  {
+    "source": "export default 1; export {x as default} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export {x} from \"a\"; export {y as x} from \"b\";",
+    "mode": "module"
+  },
+  {
+    "source": "export {x} from \"a\"; var x;",
+    "mode": "module"
+  },
+  {
+    "source": "const x=1; export {x as \"a\",x as \"\\u0061\"};",
+    "mode": "module"
+  },
+  {
+    "source": "const x=1; export {x as \"\\ud800\"};",
+    "mode": "module"
+  },
+  {
+    "source": "export {\"\\ud800\" as x} from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export * as \"\\ud800\" from \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "export default function(){}; export {default};",
+    "mode": "module"
+  },
+  {
+    "source": "{ import \"m\"; }",
+    "mode": "module"
+  },
+  {
+    "source": "if (true) import \"m\";",
+    "mode": "module"
+  },
+  {
+    "source": "function f(){ import \"m\"; }",
+    "mode": "module"
+  },
+  {
+    "source": "const f=()=>{ import \"m\"; };",
+    "mode": "module"
+  },
+  {
+    "source": "class C{m(){ import \"m\"; }}",
+    "mode": "module"
+  },
+  {
+    "source": "class C{static{ import \"m\"; }}",
+    "mode": "module"
+  },
+  {
+    "source": "while(true){ import \"m\"; }",
+    "mode": "module"
+  },
+  {
+    "source": "{ export {}; }",
+    "mode": "module"
+  },
+  {
+    "source": "if (true) export {};",
+    "mode": "module"
+  },
+  {
+    "source": "function f(){ export {}; }",
+    "mode": "module"
+  },
+  {
+    "source": "const f=()=>{ export {}; };",
+    "mode": "module"
+  },
+  {
+    "source": "class C{m(){ export {}; }}",
+    "mode": "module"
+  },
+  {
+    "source": "class C{static{ export {}; }}",
+    "mode": "module"
+  },
+  {
+    "source": "while(true){ export {}; }",
+    "mode": "module"
+  },
+  {
+    "source": "{ export const x=1; }",
+    "mode": "module"
+  },
+  {
+    "source": "if (true) export const x=1;",
+    "mode": "module"
+  },
+  {
+    "source": "function f(){ export const x=1; }",
+    "mode": "module"
+  },
+  {
+    "source": "const f=()=>{ export const x=1; };",
+    "mode": "module"
+  },
+  {
+    "source": "class C{m(){ export const x=1; }}",
+    "mode": "module"
+  },
+  {
+    "source": "class C{static{ export const x=1; }}",
+    "mode": "module"
+  },
+  {
+    "source": "while(true){ export const x=1; }",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\");",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\");",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\")",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\",);",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\",);",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\",)",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\",{});",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\",{});",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\",{})",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\",{},);",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\",{},);",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\",{},)",
+    "mode": "expression"
+  },
+  {
+    "source": "import((\"a\",\"b\"));",
+    "mode": "module"
+  },
+  {
+    "source": "import((\"a\",\"b\"));",
+    "mode": "script"
+  },
+  {
+    "source": "import((\"a\",\"b\"))",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\",{with:{type:\"json\",type:\"other\"}});",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\",{with:{type:\"json\",type:\"other\"}});",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\",{with:{type:\"json\",type:\"other\"}})",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\",{with:42});",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\",{with:42});",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\",{with:42})",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\",{with:{\"\\ud800\":\"x\"}});",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\",{with:{\"\\ud800\":\"x\"}});",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\",{with:{\"\\ud800\":\"x\"}})",
+    "mode": "expression"
+  },
+  {
+    "source": "import();",
+    "mode": "module"
+  },
+  {
+    "source": "import();",
+    "mode": "script"
+  },
+  {
+    "source": "import()",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\",{},1);",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\",{},1);",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\",{},1)",
+    "mode": "expression"
+  },
+  {
+    "source": "import(...x);",
+    "mode": "module"
+  },
+  {
+    "source": "import(...x);",
+    "mode": "script"
+  },
+  {
+    "source": "import(...x)",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\",...x);",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\",...x);",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\",...x)",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\",,);",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\",,);",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\",,)",
+    "mode": "expression"
+  },
+  {
+    "source": "import?.(\"m\");",
+    "mode": "module"
+  },
+  {
+    "source": "import?.(\"m\");",
+    "mode": "script"
+  },
+  {
+    "source": "import?.(\"m\")",
+    "mode": "expression"
+  },
+  {
+    "source": "new import(\"m\");",
+    "mode": "module"
+  },
+  {
+    "source": "new import(\"m\");",
+    "mode": "script"
+  },
+  {
+    "source": "new import(\"m\")",
+    "mode": "expression"
+  },
+  {
+    "source": "new (import(\"m\"));",
+    "mode": "module"
+  },
+  {
+    "source": "new (import(\"m\"));",
+    "mode": "script"
+  },
+  {
+    "source": "new (import(\"m\"))",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\").x;",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\").x;",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\").x",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\")?.x;",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\")?.x;",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\")?.x",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\")`t`;",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\")`t`;",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\")`t`",
+    "mode": "expression"
+  },
+  {
+    "source": "import(\"m\")(x);",
+    "mode": "module"
+  },
+  {
+    "source": "import(\"m\")(x);",
+    "mode": "script"
+  },
+  {
+    "source": "import(\"m\")(x)",
+    "mode": "expression"
+  },
+  {
+    "source": "import.meta;",
+    "mode": "module"
+  },
+  {
+    "source": "import.meta;",
+    "mode": "script"
+  },
+  {
+    "source": "import.meta",
+    "mode": "expression"
+  },
+  {
+    "source": "import.meta.url;",
+    "mode": "module"
+  },
+  {
+    "source": "import.meta.url;",
+    "mode": "script"
+  },
+  {
+    "source": "import.meta.url",
+    "mode": "expression"
+  },
+  {
+    "source": "import.meta[\"url\"];",
+    "mode": "module"
+  },
+  {
+    "source": "import.meta[\"url\"];",
+    "mode": "script"
+  },
+  {
+    "source": "import.meta[\"url\"]",
+    "mode": "expression"
+  },
+  {
+    "source": "import.meta?.url;",
+    "mode": "module"
+  },
+  {
+    "source": "import.meta?.url;",
+    "mode": "script"
+  },
+  {
+    "source": "import.meta?.url",
+    "mode": "expression"
+  },
+  {
+    "source": "import.meta`x`;",
+    "mode": "module"
+  },
+  {
+    "source": "import.meta`x`;",
+    "mode": "script"
+  },
+  {
+    "source": "import.meta`x`",
+    "mode": "expression"
+  },
+  {
+    "source": "new import.meta;",
+    "mode": "module"
+  },
+  {
+    "source": "new import.meta;",
+    "mode": "script"
+  },
+  {
+    "source": "new import.meta",
+    "mode": "expression"
+  },
+  {
+    "source": "import.meta=1;",
+    "mode": "module"
+  },
+  {
+    "source": "import.meta=1;",
+    "mode": "script"
+  },
+  {
+    "source": "import.meta=1",
+    "mode": "expression"
+  },
+  {
+    "source": "import.metax;",
+    "mode": "module"
+  },
+  {
+    "source": "import.metax;",
+    "mode": "script"
+  },
+  {
+    "source": "import.metax",
+    "mode": "expression"
+  },
+  {
+    "source": "import.me\\u0074a;",
+    "mode": "module"
+  },
+  {
+    "source": "import.me\\u0074a;",
+    "mode": "script"
+  },
+  {
+    "source": "import.me\\u0074a",
+    "mode": "expression"
+  },
+  {
+    "source": "import.\\u006deta;",
+    "mode": "module"
+  },
+  {
+    "source": "import.\\u006deta;",
+    "mode": "script"
+  },
+  {
+    "source": "import.\\u006deta",
+    "mode": "expression"
+  },
+  {
+    "source": "impor\\u0074(\"m\");",
+    "mode": "module"
+  },
+  {
+    "source": "impor\\u0074(\"m\");",
+    "mode": "script"
+  },
+  {
+    "source": "impor\\u0074(\"m\")",
+    "mode": "expression"
+  },
+  {
+    "source": "typeof import;",
+    "mode": "module"
+  },
+  {
+    "source": "typeof import;",
+    "mode": "script"
+  },
+  {
+    "source": "typeof import",
+    "mode": "expression"
+  },
+  {
+    "source": "(import);",
+    "mode": "module"
+  },
+  {
+    "source": "(import);",
+    "mode": "script"
+  },
+  {
+    "source": "(import)",
+    "mode": "expression"
+  },
+  {
+    "source": "({import:1,meta:2,as:3,from:4});",
+    "mode": "module"
+  },
+  {
+    "source": "({import:1,meta:2,as:3,from:4});",
+    "mode": "script"
+  },
+  {
+    "source": "({import:1,meta:2,as:3,from:4})",
+    "mode": "expression"
+  },
+  {
+    "source": "as+from+meta;",
+    "mode": "module"
+  },
+  {
+    "source": "as+from+meta;",
+    "mode": "script"
+  },
+  {
+    "source": "as+from+meta",
+    "mode": "expression"
+  },
+  {
+    "source": "await x;",
+    "mode": "module"
+  },
+  {
+    "source": "await\nx;",
+    "mode": "module"
+  },
+  {
+    "source": "await /x/;",
+    "mode": "module"
+  },
+  {
+    "source": "await await x;",
+    "mode": "module"
+  },
+  {
+    "source": "await x ** 2;",
+    "mode": "module"
+  },
+  {
+    "source": "(await x) ** 2;",
+    "mode": "module"
+  },
+  {
+    "source": "await (x ** 2);",
+    "mode": "module"
+  },
+  {
+    "source": "await;",
+    "mode": "module"
+  },
+  {
+    "source": "await\n;",
+    "mode": "module"
+  },
+  {
+    "source": "let await=1;",
+    "mode": "module"
+  },
+  {
+    "source": "function f(){return await;}",
+    "mode": "module"
+  },
+  {
+    "source": "function await(){}",
+    "mode": "module"
+  },
+  {
+    "source": "const f=function await(){};",
+    "mode": "module"
+  },
+  {
+    "source": "const f=()=>await x;",
+    "mode": "module"
+  },
+  {
+    "source": "const f=()=>{await x;};",
+    "mode": "module"
+  },
+  {
+    "source": "const f=(x=await f())=>x;",
+    "mode": "module"
+  },
+  {
+    "source": "const f=(x=class {[await key](){}})=>x;",
+    "mode": "module"
+  },
+  {
+    "source": "const f=(x=function(){return 1;})=>x;",
+    "mode": "module"
+  },
+  {
+    "source": "class C extends (await load()){}",
+    "mode": "module"
+  },
+  {
+    "source": "class C {[await key](){}}",
+    "mode": "module"
+  },
+  {
+    "source": "class C {[await key]=1;}",
+    "mode": "module"
+  },
+  {
+    "source": "class C {x=await x;}",
+    "mode": "module"
+  },
+  {
+    "source": "class C {static x=await x;}",
+    "mode": "module"
+  },
+  {
+    "source": "class C {static {await x;}}",
+    "mode": "module"
+  },
+  {
+    "source": "class C {m(){await x;}}",
+    "mode": "module"
+  },
+  {
+    "source": "class C {await(){return 1;}}",
+    "mode": "module"
+  },
+  {
+    "source": "class C {await=1;}",
+    "mode": "module"
+  },
+  {
+    "source": "({await:1});",
+    "mode": "module"
+  },
+  {
+    "source": "obj.await;",
+    "mode": "module"
+  },
+  {
+    "source": "await: while(true) break await;",
+    "mode": "module"
+  },
+  {
+    "source": "for await (const x of xs) {}",
+    "mode": "module"
+  },
+  {
+    "source": "for await (var {x} of xs) {}",
+    "mode": "module"
+  },
+  {
+    "source": "for await ([x] of xs) {}",
+    "mode": "module"
+  },
+  {
+    "source": "for await (async of xs) {}",
+    "mode": "module"
+  },
+  {
+    "source": "for await (let.x of xs) {}",
+    "mode": "module"
+  },
+  {
+    "source": "for await (x in xs) {}",
+    "mode": "module"
+  },
+  {
+    "source": "for await (let x=1; x<2; x++) {}",
+    "mode": "module"
+  },
+  {
+    "source": "for\nawait(x of xs){}",
+    "mode": "module"
+  },
+  {
+    "source": "function f(){for await(x of xs){}}",
+    "mode": "module"
+  },
+  {
+    "source": "const f=()=>{for await(x of xs){}}",
+    "mode": "module"
+  },
+  {
+    "source": "class C{static{for await(x of xs){}}}",
+    "mode": "module"
+  },
+  {
+    "source": "{await x;}",
+    "mode": "module"
+  },
+  {
+    "source": "for(let i=await f();i<2;i++){}",
+    "mode": "module"
+  },
+  {
+    "source": "for(x=await f() in obj){}",
+    "mode": "module"
+  },
+  {
+    "source": "for(x=await (f() in obj);;){break;}",
+    "mode": "module"
+  }
+]

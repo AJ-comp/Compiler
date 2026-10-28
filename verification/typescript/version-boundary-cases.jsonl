@@ -1,0 +1,10 @@
+{"id": "malformed-rest-optional", "source": "type T = [...string?];"}
+{"id": "malformed-rest-optional-array", "source": "type T = [...string[]?];"}
+{"id": "closure-function", "source": "let f: function(string): void;"}
+{"id": "jsdoc-unknown", "source": "let x: ?;"}
+{"id": "future-ambient-attributes", "source": "declare module \"*\" with { type: \"text\" } {}"}
+{"id": "future-source-import", "source": "import source M from \"./m.wasm\";"}
+{"id": "legacy-param-decorators", "source": "class C { method(@dec x: number) {} }"}
+{"id": "type-error", "source": "let x: number = \"x\";"}
+{"id": "using", "source": "using resource = acquire();"}
+{"id": "regexp-unicode", "source": "const re = /[\\q{ab}]/v;"}

@@ -1,0 +1,134 @@
+INPUT export declare namespace Tools { function run(): void; } SUCCESS=False
+EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+TOKEN=; ACTION=goto 1093 ERROR=
+TOKEN=; ACTION=reduce TSIntersectionType__Await -> TSTypeOperator__Await ERROR=
+TOKEN=; ACTION=goto 1092 ERROR=
+TOKEN=; ACTION=reduce TSUnionType__Await -> TSIntersectionType__Await ERROR=
+TOKEN=; ACTION=goto 1091 ERROR=
+TOKEN=; ACTION=epsilon reduce __predicate47 -> epsilon ERROR=
+TOKEN=; ACTION=goto 1382 ERROR=
+TOKEN=; ACTION=reduce TSConditionalType__Await -> TSUnionType__Await __predicate47 ERROR=
+TOKEN=; ACTION=goto 1090 ERROR=
+TOKEN=; ACTION=reduce TSType__Await -> __predicate40 TSConditionalType__Await ERROR=
+TOKEN=; ACTION=goto 1831 ERROR=
+TOKEN=; ACTION=reduce TSReturnType__Await -> TSType__Await ERROR=
+TOKEN=; ACTION=goto 2565 ERROR=
+TOKEN=; ACTION=reduce TSReturnTypeAnnotation__Await -> : TSReturnType__Await ERROR=
+TOKEN=; ACTION=goto 2107 ERROR=
+TOKEN=; ACTION=reduce TSOptionalReturnType__Await -> TSReturnTypeAnnotation__Await ERROR=
+TOKEN=; ACTION=goto 2215 ERROR=
+TOKEN=; ACTION=failed null ERROR=(shift 할 수 없습니다 {{} 와야 합니다)
+STATE 2215
+  FunctionDeclaration__Await -> function BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters ) TSOptionalReturnType__Await•FunctionBody LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+  FunctionBody ->•{ } LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+  FunctionBody ->•{ StatementList } LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+STATE 1764
+  FunctionDeclaration__Await -> function BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters )•TSOptionalReturnType__Await FunctionBody LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+  TSOptionalReturnType__Await ->•TSReturnTypeAnnotation__Await LA={{}
+  TSReturnTypeAnnotation__Await ->•: TSReturnType__Await LA={{}
+  TSOptionalReturnType__Await ->• LA={{}
+INPUT declare namespace Tools { function run(): void; } SUCCESS=False
+EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+TOKEN=; ACTION=goto 1093 ERROR=
+TOKEN=; ACTION=reduce TSIntersectionType__Await -> TSTypeOperator__Await ERROR=
+TOKEN=; ACTION=goto 1092 ERROR=
+TOKEN=; ACTION=reduce TSUnionType__Await -> TSIntersectionType__Await ERROR=
+TOKEN=; ACTION=goto 1091 ERROR=
+TOKEN=; ACTION=epsilon reduce __predicate47 -> epsilon ERROR=
+TOKEN=; ACTION=goto 1382 ERROR=
+TOKEN=; ACTION=reduce TSConditionalType__Await -> TSUnionType__Await __predicate47 ERROR=
+TOKEN=; ACTION=goto 1090 ERROR=
+TOKEN=; ACTION=reduce TSType__Await -> __predicate40 TSConditionalType__Await ERROR=
+TOKEN=; ACTION=goto 1831 ERROR=
+TOKEN=; ACTION=reduce TSReturnType__Await -> TSType__Await ERROR=
+TOKEN=; ACTION=goto 2565 ERROR=
+TOKEN=; ACTION=reduce TSReturnTypeAnnotation__Await -> : TSReturnType__Await ERROR=
+TOKEN=; ACTION=goto 2107 ERROR=
+TOKEN=; ACTION=reduce TSOptionalReturnType__Await -> TSReturnTypeAnnotation__Await ERROR=
+TOKEN=; ACTION=goto 2215 ERROR=
+TOKEN=; ACTION=failed null ERROR=(shift 할 수 없습니다 {{} 와야 합니다)
+STATE 2215
+  FunctionDeclaration__Await -> function BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters ) TSOptionalReturnType__Await•FunctionBody LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+  FunctionBody ->•{ } LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+  FunctionBody ->•{ StatementList } LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+STATE 1764
+  FunctionDeclaration__Await -> function BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters )•TSOptionalReturnType__Await FunctionBody LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+  TSOptionalReturnType__Await ->•TSReturnTypeAnnotation__Await LA={{}
+  TSReturnTypeAnnotation__Await ->•: TSReturnType__Await LA={{}
+  TSOptionalReturnType__Await ->• LA={{}
+INPUT export declare namespace Tools { function run<T>(): void; } SUCCESS=False
+EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+TOKEN=; ACTION=goto 1093 ERROR=
+TOKEN=; ACTION=reduce TSIntersectionType__Await -> TSTypeOperator__Await ERROR=
+TOKEN=; ACTION=goto 1092 ERROR=
+TOKEN=; ACTION=reduce TSUnionType__Await -> TSIntersectionType__Await ERROR=
+TOKEN=; ACTION=goto 1091 ERROR=
+TOKEN=; ACTION=epsilon reduce __predicate47 -> epsilon ERROR=
+TOKEN=; ACTION=goto 1382 ERROR=
+TOKEN=; ACTION=reduce TSConditionalType__Await -> TSUnionType__Await __predicate47 ERROR=
+TOKEN=; ACTION=goto 1090 ERROR=
+TOKEN=; ACTION=reduce TSType__Await -> __predicate40 TSConditionalType__Await ERROR=
+TOKEN=; ACTION=goto 1831 ERROR=
+TOKEN=; ACTION=reduce TSReturnType__Await -> TSType__Await ERROR=
+TOKEN=; ACTION=goto 2565 ERROR=
+TOKEN=; ACTION=reduce TSReturnTypeAnnotation__Await -> : TSReturnType__Await ERROR=
+TOKEN=; ACTION=goto 2107 ERROR=
+TOKEN=; ACTION=reduce TSOptionalReturnType__Await -> TSReturnTypeAnnotation__Await ERROR=
+TOKEN=; ACTION=goto 2215 ERROR=
+TOKEN=; ACTION=failed null ERROR=(shift 할 수 없습니다 {{} 와야 합니다)
+STATE 2215
+  FunctionDeclaration__Await -> function BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters ) TSOptionalReturnType__Await•FunctionBody LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+  FunctionBody ->•{ } LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+  FunctionBody ->•{ StatementList } LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+STATE 1764
+  FunctionDeclaration__Await -> function BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters )•TSOptionalReturnType__Await FunctionBody LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+  TSOptionalReturnType__Await ->•TSReturnTypeAnnotation__Await LA={{}
+  TSReturnTypeAnnotation__Await ->•: TSReturnType__Await LA={{}
+  TSOptionalReturnType__Await ->• LA={{}
+INPUT export declare namespace Tools { function run() ; } SUCCESS=False
+EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+TOKEN=Tools ACTION=goto 260 ERROR=
+TOKEN=Tools ACTION=reduce NoLineTerminator -> __predicate3 ERROR=
+TOKEN=Tools ACTION=goto 799 ERROR=
+TOKEN=Tools ACTION=shift 70 ERROR=
+TOKEN={ ACTION=reduce BindingIdentifier__Await -> IdentifierName ERROR=
+TOKEN={ ACTION=goto 1050 ERROR=
+TOKEN={ ACTION=shift 1053 ERROR=
+TOKEN=function ACTION=shift 51 ERROR=
+TOKEN=run ACTION=shift 70 ERROR=
+TOKEN=( ACTION=reduce BindingIdentifier__Await -> IdentifierName ERROR=
+TOKEN=( ACTION=goto 271 ERROR=
+TOKEN=( ACTION=epsilon reduce TSOptionalTypeParameters__Await -> epsilon ERROR=
+TOKEN=( ACTION=goto 782 ERROR=
+TOKEN=( ACTION=shift 1036 ERROR=
+TOKEN=) ACTION=epsilon reduce FormalParameters -> epsilon ERROR=
+TOKEN=) ACTION=goto 1298 ERROR=
+TOKEN=) ACTION=shift 1764 ERROR=
+TOKEN=; ACTION=failed null ERROR=(shift 할 수 없습니다 {:, {} 와야 합니다)
+STATE 1764
+  FunctionDeclaration__Await -> function BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters )•TSOptionalReturnType__Await FunctionBody LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+  TSOptionalReturnType__Await ->•TSReturnTypeAnnotation__Await LA={{}
+  TSReturnTypeAnnotation__Await ->•: TSReturnType__Await LA={{}
+  TSOptionalReturnType__Await ->• LA={{}
+STATE 1298
+  FunctionDeclaration__Await -> function BindingIdentifier__Await TSOptionalTypeParameters__Await ( FormalParameters•) TSOptionalReturnType__Await FunctionBody LA={This is EndMarker! char : щ, import, export, {, var, ;, IdentifierName, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, NoSubstitutionTemplate, TemplateHead, function, class, super, new, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield, if, while, do, for, continue, break, return, throw, switch, try, debugger, let, const, interface, enum, }, case, default}
+INPUT export declare namespace Tools { function run(): void {} } SUCCESS=True
+EXCEPTION 
+TOKEN= ACTION=goto 1054 ERROR=
+TOKEN= ACTION=reduce TSAmbientDeclaration__Await -> declare NoLineTerminator TSAmbientTarget__Await ERROR=
+TOKEN= ACTION=goto 298 ERROR=
+TOKEN= ACTION=reduce TSActualDeclaration__Await -> TSAmbientDeclaration__Await ERROR=
+TOKEN= ACTION=goto 283 ERROR=
+TOKEN= ACTION=reduce TSDeclaration__Await -> __predicate36 TSActualDeclaration__Await ERROR=
+TOKEN= ACTION=goto 63 ERROR=
+TOKEN= ACTION=reduce Declaration__Await -> TSDeclaration__Await ERROR=
+TOKEN= ACTION=goto 117 ERROR=
+TOKEN= ACTION=reduce ExportDeclaration__Await -> export Declaration__Await ERROR=
+TOKEN= ACTION=goto 6 ERROR=
+TOKEN= ACTION=reduce ModuleItem__Await -> ExportDeclaration__Await ERROR=
+TOKEN= ACTION=goto 3 ERROR=
+TOKEN= ACTION=reduce ModuleItemList__Await -> ModuleItem__Await ERROR=
+TOKEN= ACTION=goto 2 ERROR=
+TOKEN= ACTION=reduce Module -> ModuleItemList__Await ERROR=
+TOKEN= ACTION=goto 1 ERROR=
+TOKEN= ACTION=accept Accept -> Module ERROR=

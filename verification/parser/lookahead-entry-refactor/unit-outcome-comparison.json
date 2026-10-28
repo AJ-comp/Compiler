@@ -1,0 +1,38 @@
+{
+  "comparison": "every existing test-name/outcome multiset is unchanged after applying the already-verified pre-refactor snapshot rerun",
+  "baselineFullTrx": "artifacts\\typescript\\lookahead-fix\\full-fixed\\lookahead-full-fixed.trx",
+  "baselineSnapshotRerunTrx": "artifacts\\typescript\\lookahead-fix\\snapshot-fixed\\lookahead-snapshots-fixed.trx",
+  "newFullTrx": "artifacts\\typescript\\lookahead-entry-refactor\\full\\entry-full.trx",
+  "existingCasesCompared": 6525,
+  "newContractCases": 17,
+  "newContractOutcomes": {
+    "Passed": 17
+  },
+  "existingOutcomeChanges": 0,
+  "counts": {
+    "total": 6542,
+    "executed": 6541,
+    "passed": 6538,
+    "failed": 3,
+    "error": 0,
+    "timeout": 0,
+    "aborted": 0,
+    "inconclusive": 0,
+    "passedButRunAborted": 0,
+    "notRunnable": 0,
+    "notExecuted": 0,
+    "disconnected": 0,
+    "warning": 0,
+    "completed": 0,
+    "inProgress": 0,
+    "pending": 0
+  },
+  "unchangedFailures": [
+    "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value\")",
+    "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: \"export declare namespace Tools { function run(): v\"···)",
+    "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value is string\")"
+  ],
+  "unchangedSkipped": [
+    "Janglim.FrontEnd.Parsers.Tests.SlrKnownIssueTests.Slr_should_parse_valid_Ex1"
+  ]
+}

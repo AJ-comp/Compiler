@@ -1,0 +1,1 @@
+error(147): LeftDead.g4:7:0: left recursive rule u must contain an alternative which is not left recursive

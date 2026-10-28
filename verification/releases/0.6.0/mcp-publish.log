@@ -1,0 +1,8 @@
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Release\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Release\netstandard2.1\Parse.dll
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Release\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Release\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+  Janglim.Mcp -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\services\Janglim.Mcp\bin\Release\net10.0\Janglim.Mcp.dll
+  Janglim.Mcp -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\release-0.6.0\mcp-publish\

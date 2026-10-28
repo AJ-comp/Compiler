@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "files": [
+    "native-class-cases/extra-2.ts",
+    "native-class-cases/extra-3.ts",
+    "native-class-cases/extra-4.ts"
+  ]
+}

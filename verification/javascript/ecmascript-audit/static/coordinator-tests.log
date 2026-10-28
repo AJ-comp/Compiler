@@ -1,0 +1,29 @@
+test_all_empty_profiles_produce_nonzero_exit (test_run_test262.FileTests.test_all_empty_profiles_produce_nonzero_exit) ... ok
+test_completed_profile_has_exact_case_counts (test_run_test262.FileTests.test_completed_profile_has_exact_case_counts) ... ok
+test_crash_after_last_result_cannot_pass (test_run_test262.FileTests.test_crash_after_last_result_cannot_pass) ... ok
+test_duplicate_cli_profiles_are_rejected (test_run_test262.FileTests.test_duplicate_cli_profiles_are_rejected) ... ok
+test_empty_profile_is_explicitly_skipped_without_running_child (test_run_test262.FileTests.test_empty_profile_is_explicitly_skipped_without_running_child) ... ok
+test_existing_results_are_preserved_without_resume (test_run_test262.FileTests.test_existing_results_are_preserved_without_resume) ... ok
+test_failure_exit_with_all_pass_results_cannot_pass (test_run_test262.FileTests.test_failure_exit_with_all_pass_results_cannot_pass) ... ok
+test_manifest_tracks_runner_and_all_product_dependencies (test_run_test262.FileTests.test_manifest_tracks_runner_and_all_product_dependencies) ... ok
+test_missing_manifest_cannot_authorize_resume (test_run_test262.FileTests.test_missing_manifest_cannot_authorize_resume) ... ok
+test_premature_success_exit_remains_incomplete (test_run_test262.FileTests.test_premature_success_exit_remains_incomplete) ... ok
+test_process_crash_records_case_as_failure_and_continues (test_run_test262.FileTests.test_process_crash_records_case_as_failure_and_continues) ... ok
+test_recorded_negative_mismatch_retains_failure_outcome (test_run_test262.FileTests.test_recorded_negative_mismatch_retains_failure_outcome) ... ok
+test_restart_limit_prevents_unbounded_restarts (test_run_test262.FileTests.test_restart_limit_prevents_unbounded_restarts) ... ok
+test_resume_rejects_added_dependency (test_run_test262.FileTests.test_resume_rejects_added_dependency) ... ok
+test_resume_rejects_changed_input_options_or_profile_selection (test_run_test262.FileTests.test_resume_rejects_changed_input_options_or_profile_selection) ... ok
+test_resume_rejects_changed_product_dependency (test_run_test262.FileTests.test_resume_rejects_changed_product_dependency) ... ok
+test_resume_rejects_changed_runner (test_run_test262.FileTests.test_resume_rejects_changed_runner) ... ok
+test_timeout_is_retained_and_next_case_runs_in_fresh_child (test_run_test262.FileTests.test_timeout_is_retained_and_next_case_runs_in_fresh_child) ... ok
+test_unrecorded_timeout_cannot_skip_a_case (test_run_test262.FileTests.test_unrecorded_timeout_cannot_skip_a_case) ... ok
+test_changed_case_identity_is_rejected (test_run_test262.ResumeTests.test_changed_case_identity_is_rejected) ... ok
+test_hashless_results_cannot_authorize_resume (test_run_test262.ResumeTests.test_hashless_results_cannot_authorize_resume) ... ok
+test_identical_cases_are_resumable (test_run_test262.ResumeTests.test_identical_cases_are_resumable) ... ok
+test_profile_mapping (test_run_test262.ResumeTests.test_profile_mapping) ... ok
+test_results_cannot_exceed_input_count (test_run_test262.ResumeTests.test_results_cannot_exceed_input_count) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.483s
+
+OK

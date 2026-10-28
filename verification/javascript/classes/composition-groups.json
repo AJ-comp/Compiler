@@ -1,0 +1,10 @@
+{
+  "names": 112,
+  "prefix-newline": 78,
+  "heritage": 112,
+  "class-suffix": 80,
+  "field-suffix": 120,
+  "private": 100,
+  "scope-reset": 80,
+  "modifier-and-nested-regressions": 30
+}

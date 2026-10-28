@@ -1,0 +1,65 @@
+{"kind":"ts","id":"0","source":"value!;"}
+{"kind":"ts","id":"1","source":"value!!;"}
+{"kind":"ts","id":"2","source":"value !;"}
+{"kind":"ts","id":"3","source":"value/* comment */!;"}
+{"kind":"ts","id":"4","source":"!value!;"}
+{"kind":"ts","id":"5","source":"value!.property;"}
+{"kind":"ts","id":"6","source":"value![index];"}
+{"kind":"ts","id":"7","source":"f()!;"}
+{"kind":"ts","id":"8","source":"f()!.property;"}
+{"kind":"ts","id":"9","source":"f()!();"}
+{"kind":"ts","id":"10","source":"f!();"}
+{"kind":"ts","id":"11","source":"f!.property![index]!;"}
+{"kind":"ts","id":"12","source":"(value + other)!;"}
+{"kind":"ts","id":"13","source":"new C!();"}
+{"kind":"ts","id":"14","source":"new C()!;"}
+{"kind":"ts","id":"15","source":"new C!.Nested();"}
+{"kind":"ts","id":"16","source":"tag!`text`;"}
+{"kind":"ts","id":"17","source":"tag!`value ${value!}`;"}
+{"kind":"ts","id":"18","source":"/ab/!.test(text);"}
+{"kind":"ts","id":"19","source":"({ property: 1 })!.property;"}
+{"kind":"ts","id":"20","source":"value! = next;"}
+{"kind":"ts","id":"21","source":"value! += 1;"}
+{"kind":"ts","id":"22","source":"value!++;"}
+{"kind":"ts","id":"23","source":"++value!;"}
+{"kind":"ts","id":"24","source":"object!.property = next;"}
+{"kind":"ts","id":"25","source":"object!.property!++;"}
+{"kind":"ts","id":"26","source":"({ target: value! } = source);"}
+{"kind":"ts","id":"27","source":"([value!] = source);"}
+{"kind":"ts","id":"28","source":"base?.property!;"}
+{"kind":"ts","id":"29","source":"base!.property?.next;"}
+{"kind":"ts","id":"30","source":"base?.method!();"}
+{"kind":"ts","id":"31","source":"base?.property!.next;"}
+{"kind":"ts","id":"32","source":"(base?.property)!.next = value;"}
+{"kind":"ts","id":"33","source":"(base?.property)!`text`;"}
+{"kind":"ts","id":"34","source":"base?.tag!`text`;"}
+{"kind":"ts","id":"35","source":"(base?.property)!();"}
+{"kind":"ts","id":"36","source":"new (base?.Ctor)!();"}
+{"kind":"ts","id":"37","source":"new (base?.tag!`text`)();"}
+{"kind":"ts","id":"38","source":"value\n!other;"}
+{"kind":"ts","id":"39","source":"value/*\n*/!other;"}
+{"kind":"ts","id":"40","source":"value\n!other!;"}
+{"kind":"ts","id":"41","source":"value!\n.property;"}
+{"kind":"ts","id":"42","source":"f!\n();"}
+{"kind":"ts","id":"43","source":"value!\n++other;"}
+{"kind":"ts","id":"44","source":"value != other;"}
+{"kind":"ts","id":"45","source":"value !== other;"}
+{"kind":"ts","id":"46","source":"value!!=other;"}
+{"kind":"ts","id":"47","source":"value!!==other;"}
+{"kind":"ts","id":"48","source":"value!!!=other;"}
+{"kind":"ts","id":"49","source":"!!value;"}
+{"kind":"ts","id":"50","source":"1! = value;"}
+{"kind":"ts","id":"51","source":"(value + other)! = next;"}
+{"kind":"ts","id":"52","source":"f()! = value;"}
+{"kind":"ts","id":"53","source":"f()!++;"}
+{"kind":"ts","id":"54","source":"1!++;"}
+{"kind":"ts","id":"55","source":"base?.property! = next;"}
+{"kind":"ts","id":"56","source":"base?.property!.next = next;"}
+{"kind":"ts","id":"57","source":"++base?.property!;"}
+{"kind":"ts","id":"58","source":"base?.property!++;"}
+{"kind":"ts","id":"59","source":"new base?.Ctor!();"}
+{"kind":"ts","id":"60","source":"new base?.tag!`text`();"}
+{"kind":"ts","id":"61","source":"new base?.tag!`text`.Ctor();"}
+{"kind":"ts","id":"62","source":"delete value!;"}
+{"kind":"ts","id":"63","source":"let result = value\n!;"}
+{"kind":"ts","id":"64","source":"let result = value\n!.property;"}

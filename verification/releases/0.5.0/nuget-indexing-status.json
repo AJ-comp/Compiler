@@ -1,0 +1,74 @@
+{
+  "observedAtUtc": "2026-10-21T02:15:57.599937+00:00",
+  "results": [
+    {
+      "url": "https://www.nuget.org/packages/Janglim/0.5.0",
+      "status": 200,
+      "bytes": 94689,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "private",
+      "age": null,
+      "sha256": "2cca70afaf942c6530273ef57fc2658a9a6a3c6e289aebabf1da2ab7c167ded0",
+      "messages": [
+        "# and EBNF grammars, longest-match lexing, parser-driven token sources, and registered C# predicates. Includes ECMAScript 2026 strict Script and Module profiles with static syntax validation. Inspect parsing tables, FIRST/FOLLOW sets, traces, syntax trees, and diagnostics, with incremental reparsing and pluggable error recovery.\" /> <meta property=\"og:image\" content=\"https://api.nuge",
+        "pts, and Modules. The JavaScript language layer includes templates, destructuring, functions, async functions, generators, object methods, classes, modules, and regular-expression validation. Quick start using System; using Janglim.FrontEnd.Grammars.Ebnf; using Janglim.FrontEnd.Parsers.LR; using Janglim.FrontEnd.Tokenize; var read = EbnfGrammarReader.Read(@\" Expr : Expr '+' T",
+        "e basic quoted tokens. Token kinds classify the result and select comment/rejection behavior; the regex determines accepted text, and literal values are not decoded. Full C escape validation belongs to the language profile. The repository provides a C11 Core syntax profile with a documented scope and regression examples. It does n",
+        "arsed.ToParseTree.AllInputDatas); Check both parsed.Success and language.Validate(...) . Parsing builds the syntax tree; validation checks assignment/binding restrictions, declaration and function contexts, private names, regular-expression bodies, and other documented static errors. The code does not execute JavaScript. Diagnostic offsets and lengths use .NET UTF-16 code units. Su",
+        "resource limits, and reports failed or ambiguous predictions. The actual parser then executes the selected first action. Other conflicts keep their existing policy. Grammar validation rejects ({Allow()}?)* and ({Allow()}?)+ because an iteration can consume no input, and rejects A : {Allow()}? A 'x' | 'x'; because its condition precedes a zero-token recursive entry. Ordinary left recursion and repetiti",
+        "ecause its condition precedes a zero-token recursive entry. Ordinary left recursion and repetitions that require a token, such as ('x' {Allow()}?)* , remain supported. Validation examines the grammar without calling conditions. Read the lexer guide , <a href=\"https://github.com/AJ-comp/Compiler/blob/master/docs/ko/pr",
+        "repetition-rules.html\" rel=\"noopener noreferrer nofollow\">predicate repetition rules , left-recursion validation , and prediction walkthrough for the detailed beh",
+        " repetition rules , left-recursion validation , and prediction walkthrough for the detailed behavior and examples. Su",
+        " token-trivia grammar-validation parse-tree <a href=\"/packages?q=",
+        "rivia%22\" title=\"Search for token-trivia\" class=\"tag\">token-trivia grammar-validation parse-tree <a href=\"/packages?q=Tags%3A%22ast%22\" title=\"Search for ast\" ",
+        "n-trivia\" class=\"tag\">token-trivia grammar-validation parse-tree ast ",
+        "text alert alert-brand-warning\" > This package has not been indexed yet. It will appear in search results and will be available for install/restore after indexing is complete. ",
+        "warning\" > The package icon will become available after this package is indexed. <a href=\"#dotnet-cli\" id=\"do",
+        " This package has not been indexed yet. It will appear in search results and will be available for install/restore after indexing is complete. The package icon will become availab",
+        " class=\"icon-text alert alert-brand-warning\" > This package has not been indexed yet. It will appear in search results and will be available for install/restore after indexing is complete. "
+      ],
+      "versions": null
+    },
+    {
+      "url": "https://api.nuget.org/v3-flatcontainer/janglim/index.json?release_verification=0.5.0-20261021",
+      "status": 200,
+      "bytes": 197,
+      "contentType": "application/json",
+      "cacheControl": "max-age=0, no-cache",
+      "age": null,
+      "sha256": "32f8d3e6862278a1647fd5144d8b4a8f500e79f4749b499cb0ed59893d1ac11d",
+      "messages": [],
+      "versions": [
+        "0.1.0-preview.1",
+        "0.2.0-preview.1",
+        "0.2.0-preview.2",
+        "0.2.0-preview.3",
+        "0.3.0-preview.1",
+        "0.3.0-preview.2",
+        "0.3.0",
+        "0.4.0"
+      ]
+    },
+    {
+      "url": "https://api.nuget.org/v3-flatcontainer/janglim/0.5.0/janglim.nuspec",
+      "status": 404,
+      "bytes": 215,
+      "contentType": "application/xml",
+      "cacheControl": null,
+      "age": null,
+      "sha256": "75fa39c3f9d44d30a2c5a3f3902ffce1d812f275ba84cf9ab5ec62bd498dafe7",
+      "messages": [],
+      "versions": null
+    },
+    {
+      "url": "https://api.nuget.org/v3-flatcontainer/janglim/0.5.0/janglim.0.5.0.nupkg",
+      "status": 404,
+      "bytes": 215,
+      "contentType": "application/xml",
+      "cacheControl": null,
+      "age": null,
+      "sha256": "e87e677d4022e4f81417794dfd4f69a9cce25b2ba80b23dd48ba6ea2bd0a7554",
+      "messages": [],
+      "versions": null
+    }
+  ]
+}

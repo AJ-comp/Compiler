@@ -1,0 +1,7134 @@
+[
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 1,
+    "title": "이전 설명과 같은 문법을 사용합니다.",
+    "height": 504,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "S : G C ;",
+      "C : R | 'e' S ;",
+      "R : 'a' | 'b' S ;",
+      "G : epsilon ;"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 2,
+    "title": "한 상태 안에도 LR 항목이 여러 개 있습니다.",
+    "height": 538,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I2",
+      "S → G • C",
+      "{}",
+      "I2",
+      "C → • R",
+      "{}"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 3,
+    "title": "각 키의 값은 하나의 TerminalSet 집합입니다.",
+    "height": 590,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I2",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 4,
+    "title": "시작 규칙 전체의 완료를 확인할 규칙을 하나 추가합니다.",
+    "height": 428,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "Accept → S",
+      "I0 · Accept → • S"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 5,
+    "title": "먼저 저장소를 비우고, 전달 관계를 준비합니다.",
+    "height": 556,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable: 항목별 룩어헤드",
+      "dependencies: 항목별 전달 대상"
+    ],
+    "code": [
+      {
+        "line": 242,
+        "code": "LookAheadTable.Clear();"
+      },
+      {
+        "line": 243,
+        "code": "var dependencies = BuildLookAheadDependencies();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 6,
+    "title": "시작 항목의 빈 집합을 먼저 만듭니다.",
+    "height": 564,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 7,
+    "title": "확장 시작 항목에 EOF를 넣습니다.",
+    "height": 590,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 298,
+        "code": "if (item.IsFirst && item.SingleNT.UniqueKey == virtualStartSymbol.UniqueKey)"
+      },
+      {
+        "line": 299,
+        "code": "LookAheadTable[key].Add(new EndMarker());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 8,
+    "title": "나머지 항목에도 각각 빈 집합을 준비합니다.",
+    "height": 978,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{EOF}",
+      "I2",
+      "S → G • C",
+      "{}",
+      "I2",
+      "C → • R",
+      "{}",
+      "I5",
+      "R → 'a' •",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 291,
+        "code": "foreach (var state in IndexStateDic)"
+      },
+      {
+        "line": 293,
+        "code": "foreach (var item in state.Value)"
+      },
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 9,
+    "title": "이제 정보를 넘길 두 항목을 연결합니다.",
+    "height": 734,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{}",
+      "dependencies에 전달 관계 등록",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 338,
+        "code": "foreach (var production in productions)"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 10,
+    "title": "뒤쪽에 다른 기호가 없으면 부모의 집합을 물려줍니다.",
+    "height": 776,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{}",
+      "Inherit = true",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 332,
+        "code": "suffix = GetLookAheadSuffixFirst(item, firstBySymbol);"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      },
+      {
+        "line": 368,
+        "code": "return (terminals, true); // 뒤쪽이 없거나 모든 기호가 빈 입력을 허용합니다."
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 11,
+    "title": "G 뒤에는 C가 있으므로, C가 시작할 토큰을 구합니다.",
+    "height": 764,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{}",
+      "First = {'a', 'b', 'e'}",
+      "Inherit = false",
+      "I0 · target",
+      "G → •",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 332,
+        "code": "suffix = GetLookAheadSuffixFirst(item, firstBySymbol);"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 12,
+    "title": "전달할 작업을 순서대로 보관할 큐를 만듭니다.",
+    "height": 586,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · 첫 전달 작업의 후보",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 244,
+        "code": "var pending = new Queue<(int State, LRItem Item)>();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 13,
+    "title": "큐에 이미 들어간 항목을 별도로 표시합니다.",
+    "height": 612,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 245,
+        "code": "var queued = new HashSet<(int State, LRItem Item)>();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 14,
+    "title": "처음에는 EOF를 가진 시작 항목만 큐에 넣습니다.",
+    "height": 739,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · 초기 등록",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 247,
+        "code": "foreach (var entry in LookAheadTable)"
+      },
+      {
+        "line": 249,
+        "code": "if (entry.Value.Count == 0) continue;"
+      },
+      {
+        "line": 250,
+        "code": "pending.Enqueue(entry.Key);"
+      },
+      {
+        "line": 251,
+        "code": "queued.Add(entry.Key);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 15,
+    "title": "큐에서 꺼낸 항목을 source에 담습니다.",
+    "height": 654,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 16,
+    "title": "꺼낸 항목의 등록 표시를 지웁니다.",
+    "height": 612,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 17,
+    "title": "시작 항목의 EOF가 첫 S 항목으로 전달됩니다.",
+    "height": 980,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}",
+      "EOF 전달",
+      "I0 · target",
+      "S → • G C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 18,
+    "title": "3번째 source는 S → • G C입니다.",
+    "height": 921,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{EOF}",
+      "Goto 뒤 항목에도 EOF 전달",
+      "I2 · target",
+      "S → G • C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 19,
+    "title": "같은 source에서 G 항목에는 First 토큰을 전달합니다.",
+    "height": 968,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{EOF}",
+      "First = {'a', 'b', 'e'}",
+      "Inherit = false",
+      "I0 · target",
+      "G → •",
+      "{'a', 'b', 'e'}"
+    ],
+    "code": [
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 20,
+    "title": "4번째 source는 먼저 S 규칙의 완료 항목에 EOF를 전달합니다.",
+    "height": 980,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "S 규칙의 완료 항목으로 EOF 전달",
+      "I3 · target",
+      "S → G C •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 21,
+    "title": "같은 source에서 다음 전달 대상 C → • R을 선택합니다.",
+    "height": 880,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "다음 전달 대상 선택",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 262,
+        "code": "var target = dependency.Target;"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 22,
+    "title": "받을 집합을 targetSet 참조에 담습니다.",
+    "height": 809,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 263,
+        "code": "var targetSet = LookAheadTable[target];"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 23,
+    "title": "추가하기 전 집합 크기를 before에 기록합니다.",
+    "height": 835,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 264,
+        "code": "int before = targetSet.Count;"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 24,
+    "title": "targetSet에 EOF를 합치면 저장소의 집합도 바뀝니다.",
+    "height": 903,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 25,
+    "title": "집합이 커졌고 대기 중인 항목도 아니므로, C를 큐에 넣습니다.",
+    "height": 767,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · 새로 등록한 전달 작업",
+      "C → • R",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 26,
+    "title": "C의 다른 생성 규칙도 EOF를 받아 큐에 등록됩니다.",
+    "height": 1050,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "C의 다른 생성 규칙으로 EOF 전달",
+      "I2 · target",
+      "C → • 'e' S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 27,
+    "title": "7번째 source가 된 C 항목은 EOF를 R 항목에 전달합니다.",
+    "height": 1092,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "C → • R",
+      "{EOF}",
+      "C 항목에서 R 항목으로 EOF 전달",
+      "I2 · target",
+      "R → • 'a'",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 28,
+    "title": "10번째 source가 된 R 항목은 완료 항목으로 EOF를 넘깁니다.",
+    "height": 1007,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "R → • 'a'",
+      "{EOF}",
+      "Goto 뒤 완료 항목으로 EOF 전달",
+      "I5 · target",
+      "R → 'a' •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 29,
+    "title": "같은 EOF가 다시 와도 집합 크기는 늘어나지 않습니다.",
+    "height": 948,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I7 · source",
+      "S → • G C",
+      "{EOF}",
+      "EOF를 다시 합쳐도 {EOF}",
+      "I2 · target",
+      "S → G • C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 30,
+    "title": "큐에 남은 항목까지 처리하면 계산이 끝납니다.",
+    "height": 844,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I2",
+      "C → • R",
+      "{EOF}",
+      "I5",
+      "R → 'a' •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 275,
+        "code": "}"
+      },
+      {
+        "line": 276,
+        "code": "}"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 31,
+    "title": "완성된 룩어헤드로 EOF 열의 Reduce를 만들 수 있습니다.",
+    "height": 562,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I5 · 계산이 끝난 룩어헤드",
+      "R → 'a' •",
+      "{EOF}",
+      "ACTION[I5, EOF]",
+      "= Reduce(R → a)",
+      "실제 입력 a → 파싱 성공"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 32,
+    "title": "이번에는 두 경로가 같은 A 규칙을 사용하는 문법을 보겠습니다.",
+    "height": 436,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "S : A '!'",
+      "| 'b' 'c' 'd' A '?' ;",
+      "A : 'a' 'z' ;"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 33,
+    "title": "첫 경로에서는 A 뒤에 !가 옵니다.",
+    "height": 939,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "A → • 'a' 'z'",
+      "{'!'}",
+      "'!' 전달",
+      "I3 · target",
+      "A → 'a' • 'z'",
+      "{'!'}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 34,
+    "title": "9번째 처리에서 중간 A 항목이 !를 완료 항목으로 넘깁니다.",
+    "height": 980,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · source",
+      "A → 'a' • 'z'",
+      "{'!'}",
+      "'!' 전달",
+      "I6 · target",
+      "A → 'a' 'z' •",
+      "{'!'}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 35,
+    "title": "이후 두 번째 경로에서 ?가 도착합니다.",
+    "height": 821,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I8 · source",
+      "A → • 'a' 'z'",
+      "{'?'}",
+      "새 토큰 '?' 전달",
+      "I3 · target",
+      "A → 'a' • 'z'",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 36,
+    "title": "이미 처리한 중간 항목을 큐에 다시 넣습니다.",
+    "height": 724,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · 다시 등록한 전달 작업",
+      "A → 'a' • 'z'",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 37,
+    "title": "16번째 처리에서 중간 항목이 새 정보를 완료 항목까지 넘깁니다.",
+    "height": 963,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · source",
+      "A → 'a' • 'z'",
+      "{'!', '?'}",
+      "이번에는 '?'도 함께 전달",
+      "I6 · target",
+      "A → 'a' 'z' •",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 38,
+    "title": "완료 항목은 !와 ?에서 모두 Reduce할 수 있습니다.",
+    "height": 842,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I6 · 계산이 끝난 룩어헤드",
+      "A → 'a' 'z' •",
+      "{'!', '?'}",
+      "ACTION[I6, !] / ACTION[I6, ?]",
+      "= Reduce(A → a z)",
+      "az! · bcdaz? → 모두 파싱 성공"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 275,
+        "code": "}"
+      },
+      {
+        "line": 276,
+        "code": "}"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 1,
+    "title": "이전 설명과 같은 문법을 사용합니다.",
+    "height": 504,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "S : G C ;",
+      "C : R | 'e' S ;",
+      "R : 'a' | 'b' S ;",
+      "G : epsilon ;"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 2,
+    "title": "한 상태 안에도 LR 항목이 여러 개 있습니다.",
+    "height": 538,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I2",
+      "S → G • C",
+      "{}",
+      "I2",
+      "C → • R",
+      "{}"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 3,
+    "title": "각 키의 값은 하나의 TerminalSet 집합입니다.",
+    "height": 590,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I2",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 4,
+    "title": "시작 규칙 전체의 완료를 확인할 규칙을 하나 추가합니다.",
+    "height": 428,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "Accept → S",
+      "I0 · Accept → • S"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 5,
+    "title": "먼저 저장소를 비우고, 전달 관계를 준비합니다.",
+    "height": 556,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable: 항목별 룩어헤드",
+      "dependencies: 항목별 전달 대상"
+    ],
+    "code": [
+      {
+        "line": 242,
+        "code": "LookAheadTable.Clear();"
+      },
+      {
+        "line": 243,
+        "code": "var dependencies = BuildLookAheadDependencies();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 6,
+    "title": "시작 항목의 빈 집합을 먼저 만듭니다.",
+    "height": 564,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 7,
+    "title": "확장 시작 항목에 EOF를 넣습니다.",
+    "height": 590,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 298,
+        "code": "if (item.IsFirst && item.SingleNT.UniqueKey == virtualStartSymbol.UniqueKey)"
+      },
+      {
+        "line": 299,
+        "code": "LookAheadTable[key].Add(new EndMarker());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 8,
+    "title": "나머지 항목에도 각각 빈 집합을 준비합니다.",
+    "height": 978,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{EOF}",
+      "I2",
+      "S → G • C",
+      "{}",
+      "I2",
+      "C → • R",
+      "{}",
+      "I5",
+      "R → 'a' •",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 291,
+        "code": "foreach (var state in IndexStateDic)"
+      },
+      {
+        "line": 293,
+        "code": "foreach (var item in state.Value)"
+      },
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 9,
+    "title": "이제 정보를 넘길 두 항목을 연결합니다.",
+    "height": 734,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{}",
+      "dependencies에 전달 관계 등록",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 338,
+        "code": "foreach (var production in productions)"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 10,
+    "title": "뒤쪽에 다른 기호가 없으면 부모의 집합을 물려줍니다.",
+    "height": 776,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{}",
+      "Inherit = true",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 332,
+        "code": "suffix = GetLookAheadSuffixFirst(item, firstBySymbol);"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      },
+      {
+        "line": 368,
+        "code": "return (terminals, true); // 뒤쪽이 없거나 모든 기호가 빈 입력을 허용합니다."
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 11,
+    "title": "G 뒤에는 C가 있으므로, C가 시작할 토큰을 구합니다.",
+    "height": 764,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{}",
+      "First = {'a', 'b', 'e'}",
+      "Inherit = false",
+      "I0 · target",
+      "G → •",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 332,
+        "code": "suffix = GetLookAheadSuffixFirst(item, firstBySymbol);"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 12,
+    "title": "전달할 작업을 순서대로 보관할 큐를 만듭니다.",
+    "height": 586,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · 첫 전달 작업의 후보",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 244,
+        "code": "var pending = new Queue<(int State, LRItem Item)>();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 13,
+    "title": "큐에 이미 들어간 항목을 별도로 표시합니다.",
+    "height": 612,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 245,
+        "code": "var queued = new HashSet<(int State, LRItem Item)>();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 14,
+    "title": "처음에는 EOF를 가진 시작 항목만 큐에 넣습니다.",
+    "height": 739,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · 초기 등록",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 247,
+        "code": "foreach (var entry in LookAheadTable)"
+      },
+      {
+        "line": 249,
+        "code": "if (entry.Value.Count == 0) continue;"
+      },
+      {
+        "line": 250,
+        "code": "pending.Enqueue(entry.Key);"
+      },
+      {
+        "line": 251,
+        "code": "queued.Add(entry.Key);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 15,
+    "title": "큐에서 꺼낸 항목을 source에 담습니다.",
+    "height": 654,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 16,
+    "title": "꺼낸 항목의 등록 표시를 지웁니다.",
+    "height": 612,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 17,
+    "title": "시작 항목의 EOF가 첫 S 항목으로 전달됩니다.",
+    "height": 980,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}",
+      "EOF 전달",
+      "I0 · target",
+      "S → • G C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 18,
+    "title": "3번째 source는 S → • G C입니다.",
+    "height": 921,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{EOF}",
+      "Goto 뒤 항목에도 EOF 전달",
+      "I2 · target",
+      "S → G • C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 19,
+    "title": "같은 source에서 G 항목에는 First 토큰을 전달합니다.",
+    "height": 968,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{EOF}",
+      "First = {'a', 'b', 'e'}",
+      "Inherit = false",
+      "I0 · target",
+      "G → •",
+      "{'a', 'b', 'e'}"
+    ],
+    "code": [
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 20,
+    "title": "4번째 source는 먼저 S 규칙의 완료 항목에 EOF를 전달합니다.",
+    "height": 980,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "S 규칙의 완료 항목으로 EOF 전달",
+      "I3 · target",
+      "S → G C •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 21,
+    "title": "같은 source에서 다음 전달 대상 C → • R을 선택합니다.",
+    "height": 880,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "다음 전달 대상 선택",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 262,
+        "code": "var target = dependency.Target;"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 22,
+    "title": "받을 집합을 targetSet 참조에 담습니다.",
+    "height": 809,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 263,
+        "code": "var targetSet = LookAheadTable[target];"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 23,
+    "title": "추가하기 전 집합 크기를 before에 기록합니다.",
+    "height": 835,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 264,
+        "code": "int before = targetSet.Count;"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 24,
+    "title": "targetSet에 EOF를 합치면 저장소의 집합도 바뀝니다.",
+    "height": 903,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 25,
+    "title": "집합이 커졌고 대기 중인 항목도 아니므로, C를 큐에 넣습니다.",
+    "height": 767,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · 새로 등록한 전달 작업",
+      "C → • R",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 26,
+    "title": "C의 다른 생성 규칙도 EOF를 받아 큐에 등록됩니다.",
+    "height": 1050,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "C의 다른 생성 규칙으로 EOF 전달",
+      "I2 · target",
+      "C → • 'e' S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 27,
+    "title": "7번째 source가 된 C 항목은 EOF를 R 항목에 전달합니다.",
+    "height": 1092,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "C → • R",
+      "{EOF}",
+      "C 항목에서 R 항목으로 EOF 전달",
+      "I2 · target",
+      "R → • 'a'",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 28,
+    "title": "10번째 source가 된 R 항목은 완료 항목으로 EOF를 넘깁니다.",
+    "height": 1007,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "R → • 'a'",
+      "{EOF}",
+      "Goto 뒤 완료 항목으로 EOF 전달",
+      "I5 · target",
+      "R → 'a' •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 29,
+    "title": "같은 EOF가 다시 와도 집합 크기는 늘어나지 않습니다.",
+    "height": 948,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I7 · source",
+      "S → • G C",
+      "{EOF}",
+      "EOF를 다시 합쳐도 {EOF}",
+      "I2 · target",
+      "S → G • C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 30,
+    "title": "큐에 남은 항목까지 처리하면 계산이 끝납니다.",
+    "height": 844,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I2",
+      "C → • R",
+      "{EOF}",
+      "I5",
+      "R → 'a' •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 275,
+        "code": "}"
+      },
+      {
+        "line": 276,
+        "code": "}"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 31,
+    "title": "완성된 룩어헤드로 EOF 열의 Reduce를 만들 수 있습니다.",
+    "height": 562,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I5 · 계산이 끝난 룩어헤드",
+      "R → 'a' •",
+      "{EOF}",
+      "ACTION[I5, EOF]",
+      "= Reduce(R → a)",
+      "실제 입력 a → 파싱 성공"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 32,
+    "title": "이번에는 두 경로가 같은 A 규칙을 사용하는 문법을 보겠습니다.",
+    "height": 436,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "S : A '!'",
+      "| 'b' 'c' 'd' A '?' ;",
+      "A : 'a' 'z' ;"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 33,
+    "title": "첫 경로에서는 A 뒤에 !가 옵니다.",
+    "height": 939,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "A → • 'a' 'z'",
+      "{'!'}",
+      "'!' 전달",
+      "I3 · target",
+      "A → 'a' • 'z'",
+      "{'!'}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 34,
+    "title": "9번째 처리에서 중간 A 항목이 !를 완료 항목으로 넘깁니다.",
+    "height": 980,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · source",
+      "A → 'a' • 'z'",
+      "{'!'}",
+      "'!' 전달",
+      "I6 · target",
+      "A → 'a' 'z' •",
+      "{'!'}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 35,
+    "title": "이후 두 번째 경로에서 ?가 도착합니다.",
+    "height": 821,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I8 · source",
+      "A → • 'a' 'z'",
+      "{'?'}",
+      "새 토큰 '?' 전달",
+      "I3 · target",
+      "A → 'a' • 'z'",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 36,
+    "title": "이미 처리한 중간 항목을 큐에 다시 넣습니다.",
+    "height": 724,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · 다시 등록한 전달 작업",
+      "A → 'a' • 'z'",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 37,
+    "title": "16번째 처리에서 중간 항목이 새 정보를 완료 항목까지 넘깁니다.",
+    "height": 963,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · source",
+      "A → 'a' • 'z'",
+      "{'!', '?'}",
+      "이번에는 '?'도 함께 전달",
+      "I6 · target",
+      "A → 'a' 'z' •",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 38,
+    "title": "완료 항목은 !와 ?에서 모두 Reduce할 수 있습니다.",
+    "height": 842,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I6 · 계산이 끝난 룩어헤드",
+      "A → 'a' 'z' •",
+      "{'!', '?'}",
+      "ACTION[I6, !] / ACTION[I6, ?]",
+      "= Reduce(A → a z)",
+      "az! · bcdaz? → 모두 파싱 성공"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 275,
+        "code": "}"
+      },
+      {
+        "line": 276,
+        "code": "}"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 1,
+    "title": "이전 설명과 같은 문법을 사용합니다.",
+    "height": 504,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "S : G C ;",
+      "C : R | 'e' S ;",
+      "R : 'a' | 'b' S ;",
+      "G : epsilon ;"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 2,
+    "title": "한 상태 안에도 LR 항목이 여러 개 있습니다.",
+    "height": 614,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I2",
+      "S → G • C",
+      "{}",
+      "I2",
+      "C → • R",
+      "{}"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 3,
+    "title": "각 키의 값은 하나의 TerminalSet 집합입니다.",
+    "height": 615,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I2",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 4,
+    "title": "시작 규칙 전체의 완료를 확인할 규칙을 하나 추가합니다.",
+    "height": 428,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "Accept → S",
+      "I0 · Accept → • S"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 5,
+    "title": "먼저 저장소를 비우고, 전달 관계를 준비합니다.",
+    "height": 582,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable: 항목별 룩어헤드",
+      "dependencies: 항목별 전달 대상"
+    ],
+    "code": [
+      {
+        "line": 242,
+        "code": "LookAheadTable.Clear();"
+      },
+      {
+        "line": 243,
+        "code": "var dependencies = BuildLookAheadDependencies();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 6,
+    "title": "시작 항목의 빈 집합을 먼저 만듭니다.",
+    "height": 615,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 7,
+    "title": "확장 시작 항목에 EOF를 넣습니다.",
+    "height": 641,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 298,
+        "code": "if (item.IsFirst && item.SingleNT.UniqueKey == virtualStartSymbol.UniqueKey)"
+      },
+      {
+        "line": 299,
+        "code": "LookAheadTable[key].Add(new EndMarker());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 8,
+    "title": "나머지 항목에도 각각 빈 집합을 준비합니다.",
+    "height": 1104,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{EOF}",
+      "I2",
+      "S → G • C",
+      "{}",
+      "I2",
+      "C → • R",
+      "{}",
+      "I5",
+      "R → 'a' •",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 291,
+        "code": "foreach (var state in IndexStateDic)"
+      },
+      {
+        "line": 293,
+        "code": "foreach (var item in state.Value)"
+      },
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 9,
+    "title": "이제 정보를 넘길 두 항목을 연결합니다.",
+    "height": 836,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{}",
+      "dependencies에 전달 관계 등록",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 338,
+        "code": "foreach (var production in productions)"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 10,
+    "title": "뒤쪽에 다른 기호가 없으면 부모의 집합을 물려줍니다.",
+    "height": 930,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{}",
+      "Inherit = true",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 332,
+        "code": "suffix = GetLookAheadSuffixFirst(item, firstBySymbol);"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      },
+      {
+        "line": 368,
+        "code": "return (terminals, true); // 뒤쪽이 없거나 모든 기호가 빈 입력을 허용합니다."
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 11,
+    "title": "G 뒤에는 C가 있으므로, C가 시작할 토큰을 구합니다.",
+    "height": 892,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{}",
+      "First = {'a', 'b', 'e'}",
+      "Inherit = false",
+      "I0 · target",
+      "G → •",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 332,
+        "code": "suffix = GetLookAheadSuffixFirst(item, firstBySymbol);"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 12,
+    "title": "전달할 작업을 순서대로 보관할 큐를 만듭니다.",
+    "height": 663,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · 첫 전달 작업의 후보",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 244,
+        "code": "var pending = new Queue<(int State, LRItem Item)>();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 13,
+    "title": "큐에 이미 들어간 항목을 별도로 표시합니다.",
+    "height": 689,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 245,
+        "code": "var queued = new HashSet<(int State, LRItem Item)>();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 14,
+    "title": "처음에는 EOF를 가진 시작 항목만 큐에 넣습니다.",
+    "height": 790,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · 초기 등록",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 247,
+        "code": "foreach (var entry in LookAheadTable)"
+      },
+      {
+        "line": 249,
+        "code": "if (entry.Value.Count == 0) continue;"
+      },
+      {
+        "line": 250,
+        "code": "pending.Enqueue(entry.Key);"
+      },
+      {
+        "line": 251,
+        "code": "queued.Add(entry.Key);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 15,
+    "title": "큐에서 꺼낸 항목을 source에 담습니다.",
+    "height": 679,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 16,
+    "title": "꺼낸 항목의 등록 표시를 지웁니다.",
+    "height": 663,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 17,
+    "title": "시작 항목의 EOF가 첫 S 항목으로 전달됩니다.",
+    "height": 1160,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}",
+      "EOF 전달",
+      "I0 · target",
+      "S → • G C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 18,
+    "title": "3번째 source는 S → • G C입니다.",
+    "height": 1023,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{EOF}",
+      "Goto 뒤 항목에도 EOF 전달",
+      "I2 · target",
+      "S → G • C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 19,
+    "title": "같은 source에서 G 항목에는 First 토큰을 전달합니다.",
+    "height": 1096,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{EOF}",
+      "First = {'a', 'b', 'e'}",
+      "Inherit = false",
+      "I0 · target",
+      "G → •",
+      "{'a', 'b', 'e'}"
+    ],
+    "code": [
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 20,
+    "title": "4번째 source는 먼저 S 규칙의 완료 항목에 EOF를 전달합니다.",
+    "height": 1108,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "S 규칙의 완료 항목으로 EOF 전달",
+      "I3 · target",
+      "S → G C •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 21,
+    "title": "같은 source에서 다음 전달 대상 C → • R을 선택합니다.",
+    "height": 956,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "다음 전달 대상 선택",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 262,
+        "code": "var target = dependency.Target;"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 22,
+    "title": "받을 집합을 targetSet 참조에 담습니다.",
+    "height": 835,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 263,
+        "code": "var targetSet = LookAheadTable[target];"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 23,
+    "title": "추가하기 전 집합 크기를 before에 기록합니다.",
+    "height": 835,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 264,
+        "code": "int before = targetSet.Count;"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 24,
+    "title": "targetSet에 EOF를 합치면 저장소의 집합도 바뀝니다.",
+    "height": 955,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 25,
+    "title": "집합이 커졌고 대기 중인 항목도 아니므로, C를 큐에 넣습니다.",
+    "height": 818,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · 새로 등록한 전달 작업",
+      "C → • R",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 26,
+    "title": "C의 다른 생성 규칙도 EOF를 받아 큐에 등록됩니다.",
+    "height": 1178,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "C의 다른 생성 규칙으로 EOF 전달",
+      "I2 · target",
+      "C → • 'e' S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 27,
+    "title": "7번째 source가 된 C 항목은 EOF를 R 항목에 전달합니다.",
+    "height": 1194,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "C → • R",
+      "{EOF}",
+      "C 항목에서 R 항목으로 EOF 전달",
+      "I2 · target",
+      "R → • 'a'",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 28,
+    "title": "10번째 source가 된 R 항목은 완료 항목으로 EOF를 넘깁니다.",
+    "height": 1109,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "R → • 'a'",
+      "{EOF}",
+      "Goto 뒤 완료 항목으로 EOF 전달",
+      "I5 · target",
+      "R → 'a' •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 29,
+    "title": "같은 EOF가 다시 와도 집합 크기는 늘어나지 않습니다.",
+    "height": 1076,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I7 · source",
+      "S → • G C",
+      "{EOF}",
+      "EOF를 다시 합쳐도 {EOF}",
+      "I2 · target",
+      "S → G • C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 30,
+    "title": "큐에 남은 항목까지 처리하면 계산이 끝납니다.",
+    "height": 920,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I2",
+      "C → • R",
+      "{EOF}",
+      "I5",
+      "R → 'a' •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 275,
+        "code": "}"
+      },
+      {
+        "line": 276,
+        "code": "}"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 31,
+    "title": "완성된 룩어헤드로 EOF 열의 Reduce를 만들 수 있습니다.",
+    "height": 613,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I5 · 계산이 끝난 룩어헤드",
+      "R → 'a' •",
+      "{EOF}",
+      "ACTION[I5, EOF]",
+      "= Reduce(R → a)",
+      "실제 입력 a → 파싱 성공"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 32,
+    "title": "이번에는 두 경로가 같은 A 규칙을 사용하는 문법을 보겠습니다.",
+    "height": 488,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "S : A '!'",
+      "| 'b' 'c' 'd' A '?' ;",
+      "A : 'a' 'z' ;"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 33,
+    "title": "첫 경로에서는 A 뒤에 !가 옵니다.",
+    "height": 1067,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "A → • 'a' 'z'",
+      "{'!'}",
+      "'!' 전달",
+      "I3 · target",
+      "A → 'a' • 'z'",
+      "{'!'}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 34,
+    "title": "9번째 처리에서 중간 A 항목이 !를 완료 항목으로 넘깁니다.",
+    "height": 1082,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · source",
+      "A → 'a' • 'z'",
+      "{'!'}",
+      "'!' 전달",
+      "I6 · target",
+      "A → 'a' 'z' •",
+      "{'!'}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 35,
+    "title": "이후 두 번째 경로에서 ?가 도착합니다.",
+    "height": 897,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I8 · source",
+      "A → • 'a' 'z'",
+      "{'?'}",
+      "새 토큰 '?' 전달",
+      "I3 · target",
+      "A → 'a' • 'z'",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 36,
+    "title": "이미 처리한 중간 항목을 큐에 다시 넣습니다.",
+    "height": 813,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · 다시 등록한 전달 작업",
+      "A → 'a' • 'z'",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 37,
+    "title": "16번째 처리에서 중간 항목이 새 정보를 완료 항목까지 넘깁니다.",
+    "height": 1091,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · source",
+      "A → 'a' • 'z'",
+      "{'!', '?'}",
+      "이번에는 '?'도 함께 전달",
+      "I6 · target",
+      "A → 'a' 'z' •",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 38,
+    "title": "완료 항목은 !와 ?에서 모두 Reduce할 수 있습니다.",
+    "height": 893,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I6 · 계산이 끝난 룩어헤드",
+      "A → 'a' 'z' •",
+      "{'!', '?'}",
+      "ACTION[I6, !] / ACTION[I6, ?]",
+      "= Reduce(A → a z)",
+      "az! · bcdaz? → 모두 파싱 성공"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 275,
+        "code": "}"
+      },
+      {
+        "line": 276,
+        "code": "}"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 1,
+    "title": "이전 설명과 같은 문법을 사용합니다.",
+    "height": 504,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "S : G C ;",
+      "C : R | 'e' S ;",
+      "R : 'a' | 'b' S ;",
+      "G : epsilon ;"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 2,
+    "title": "한 상태 안에도 LR 항목이 여러 개 있습니다.",
+    "height": 614,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I2",
+      "S → G • C",
+      "{}",
+      "I2",
+      "C → • R",
+      "{}"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 3,
+    "title": "각 키의 값은 하나의 TerminalSet 집합입니다.",
+    "height": 615,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I2",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 4,
+    "title": "시작 규칙 전체의 완료를 확인할 규칙을 하나 추가합니다.",
+    "height": 428,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "Accept → S",
+      "I0 · Accept → • S"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 5,
+    "title": "먼저 저장소를 비우고, 전달 관계를 준비합니다.",
+    "height": 582,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable: 항목별 룩어헤드",
+      "dependencies: 항목별 전달 대상"
+    ],
+    "code": [
+      {
+        "line": 242,
+        "code": "LookAheadTable.Clear();"
+      },
+      {
+        "line": 243,
+        "code": "var dependencies = BuildLookAheadDependencies();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 6,
+    "title": "시작 항목의 빈 집합을 먼저 만듭니다.",
+    "height": 615,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 7,
+    "title": "확장 시작 항목에 EOF를 넣습니다.",
+    "height": 641,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 298,
+        "code": "if (item.IsFirst && item.SingleNT.UniqueKey == virtualStartSymbol.UniqueKey)"
+      },
+      {
+        "line": 299,
+        "code": "LookAheadTable[key].Add(new EndMarker());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 8,
+    "title": "나머지 항목에도 각각 빈 집합을 준비합니다.",
+    "height": 1104,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{EOF}",
+      "I2",
+      "S → G • C",
+      "{}",
+      "I2",
+      "C → • R",
+      "{}",
+      "I5",
+      "R → 'a' •",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 291,
+        "code": "foreach (var state in IndexStateDic)"
+      },
+      {
+        "line": 293,
+        "code": "foreach (var item in state.Value)"
+      },
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 9,
+    "title": "이제 정보를 넘길 두 항목을 연결합니다.",
+    "height": 836,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{}",
+      "dependencies에 전달 관계 등록",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 338,
+        "code": "foreach (var production in productions)"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 10,
+    "title": "뒤쪽에 다른 기호가 없으면 부모의 집합을 물려줍니다.",
+    "height": 930,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{}",
+      "Inherit = true",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 332,
+        "code": "suffix = GetLookAheadSuffixFirst(item, firstBySymbol);"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      },
+      {
+        "line": 368,
+        "code": "return (terminals, true); // 뒤쪽이 없거나 모든 기호가 빈 입력을 허용합니다."
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 11,
+    "title": "G 뒤에는 C가 있으므로, C가 시작할 토큰을 구합니다.",
+    "height": 892,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{}",
+      "First = {'a', 'b', 'e'}",
+      "Inherit = false",
+      "I0 · target",
+      "G → •",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 332,
+        "code": "suffix = GetLookAheadSuffixFirst(item, firstBySymbol);"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 12,
+    "title": "전달할 작업을 순서대로 보관할 큐를 만듭니다.",
+    "height": 663,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · 첫 전달 작업의 후보",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 244,
+        "code": "var pending = new Queue<(int State, LRItem Item)>();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 13,
+    "title": "큐에 이미 들어간 항목을 별도로 표시합니다.",
+    "height": 689,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 245,
+        "code": "var queued = new HashSet<(int State, LRItem Item)>();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 14,
+    "title": "처음에는 EOF를 가진 시작 항목만 큐에 넣습니다.",
+    "height": 790,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · 초기 등록",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 247,
+        "code": "foreach (var entry in LookAheadTable)"
+      },
+      {
+        "line": 249,
+        "code": "if (entry.Value.Count == 0) continue;"
+      },
+      {
+        "line": 250,
+        "code": "pending.Enqueue(entry.Key);"
+      },
+      {
+        "line": 251,
+        "code": "queued.Add(entry.Key);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 15,
+    "title": "큐에서 꺼낸 항목을 source에 담습니다.",
+    "height": 679,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 16,
+    "title": "꺼낸 항목의 등록 표시를 지웁니다.",
+    "height": 663,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 17,
+    "title": "시작 항목의 EOF가 첫 S 항목으로 전달됩니다.",
+    "height": 1160,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}",
+      "EOF 전달",
+      "I0 · target",
+      "S → • G C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 18,
+    "title": "3번째 source는 S → • G C입니다.",
+    "height": 1023,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{EOF}",
+      "Goto 뒤 항목에도 EOF 전달",
+      "I2 · target",
+      "S → G • C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 19,
+    "title": "같은 source에서 G 항목에는 First 토큰을 전달합니다.",
+    "height": 1096,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{EOF}",
+      "First = {'a', 'b', 'e'}",
+      "Inherit = false",
+      "I0 · target",
+      "G → •",
+      "{'a', 'b', 'e'}"
+    ],
+    "code": [
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 20,
+    "title": "4번째 source는 먼저 S 규칙의 완료 항목에 EOF를 전달합니다.",
+    "height": 1108,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "S 규칙의 완료 항목으로 EOF 전달",
+      "I3 · target",
+      "S → G C •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 21,
+    "title": "같은 source에서 다음 전달 대상 C → • R을 선택합니다.",
+    "height": 956,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "다음 전달 대상 선택",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 262,
+        "code": "var target = dependency.Target;"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 22,
+    "title": "받을 집합을 targetSet 참조에 담습니다.",
+    "height": 835,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 263,
+        "code": "var targetSet = LookAheadTable[target];"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 23,
+    "title": "추가하기 전 집합 크기를 before에 기록합니다.",
+    "height": 835,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 264,
+        "code": "int before = targetSet.Count;"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 24,
+    "title": "targetSet에 EOF를 합치면 저장소의 집합도 바뀝니다.",
+    "height": 955,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 25,
+    "title": "집합이 커졌고 대기 중인 항목도 아니므로, C를 큐에 넣습니다.",
+    "height": 818,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · 새로 등록한 전달 작업",
+      "C → • R",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 26,
+    "title": "C의 다른 생성 규칙도 EOF를 받아 큐에 등록됩니다.",
+    "height": 1178,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "C의 다른 생성 규칙으로 EOF 전달",
+      "I2 · target",
+      "C → • 'e' S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 27,
+    "title": "7번째 source가 된 C 항목은 EOF를 R 항목에 전달합니다.",
+    "height": 1194,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "C → • R",
+      "{EOF}",
+      "C 항목에서 R 항목으로 EOF 전달",
+      "I2 · target",
+      "R → • 'a'",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 28,
+    "title": "10번째 source가 된 R 항목은 완료 항목으로 EOF를 넘깁니다.",
+    "height": 1109,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "R → • 'a'",
+      "{EOF}",
+      "Goto 뒤 완료 항목으로 EOF 전달",
+      "I5 · target",
+      "R → 'a' •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 29,
+    "title": "같은 EOF가 다시 와도 집합 크기는 늘어나지 않습니다.",
+    "height": 1076,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I7 · source",
+      "S → • G C",
+      "{EOF}",
+      "EOF를 다시 합쳐도 {EOF}",
+      "I2 · target",
+      "S → G • C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 30,
+    "title": "큐에 남은 항목까지 처리하면 계산이 끝납니다.",
+    "height": 920,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR 항목)별 저장소",
+      "I2",
+      "C → • R",
+      "{EOF}",
+      "I5",
+      "R → 'a' •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 275,
+        "code": "}"
+      },
+      {
+        "line": 276,
+        "code": "}"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 31,
+    "title": "완성된 룩어헤드로 EOF 열의 Reduce를 만들 수 있습니다.",
+    "height": 613,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I5 · 계산이 끝난 룩어헤드",
+      "R → 'a' •",
+      "{EOF}",
+      "ACTION[I5, EOF]",
+      "= Reduce(R → a)",
+      "실제 입력 a → 파싱 성공"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 32,
+    "title": "이번에는 두 경로가 같은 A 규칙을 사용하는 문법을 보겠습니다.",
+    "height": 488,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "S : A '!'",
+      "| 'b' 'c' 'd' A '?' ;",
+      "A : 'a' 'z' ;"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 33,
+    "title": "첫 경로에서는 A 뒤에 !가 옵니다.",
+    "height": 1067,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "A → • 'a' 'z'",
+      "{'!'}",
+      "'!' 전달",
+      "I3 · target",
+      "A → 'a' • 'z'",
+      "{'!'}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 34,
+    "title": "9번째 처리에서 중간 A 항목이 !를 완료 항목으로 넘깁니다.",
+    "height": 1082,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · source",
+      "A → 'a' • 'z'",
+      "{'!'}",
+      "'!' 전달",
+      "I6 · target",
+      "A → 'a' 'z' •",
+      "{'!'}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 35,
+    "title": "이후 두 번째 경로에서 ?가 도착합니다.",
+    "height": 897,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I8 · source",
+      "A → • 'a' 'z'",
+      "{'?'}",
+      "새 토큰 '?' 전달",
+      "I3 · target",
+      "A → 'a' • 'z'",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 36,
+    "title": "이미 처리한 중간 항목을 큐에 다시 넣습니다.",
+    "height": 813,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · 다시 등록한 전달 작업",
+      "A → 'a' • 'z'",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 37,
+    "title": "16번째 처리에서 중간 항목이 새 정보를 완료 항목까지 넘깁니다.",
+    "height": 1091,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · source",
+      "A → 'a' • 'z'",
+      "{'!', '?'}",
+      "이번에는 '?'도 함께 전달",
+      "I6 · target",
+      "A → 'a' 'z' •",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 480,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 38,
+    "title": "완료 항목은 !와 ?에서 모두 Reduce할 수 있습니다.",
+    "height": 893,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I6 · 계산이 끝난 룩어헤드",
+      "A → 'a' 'z' •",
+      "{'!', '?'}",
+      "ACTION[I6, !] / ACTION[I6, ?]",
+      "= Reduce(A → a z)",
+      "az! · bcdaz? → 모두 파싱 성공"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 275,
+        "code": "}"
+      },
+      {
+        "line": 276,
+        "code": "}"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 1,
+    "title": "이전 설명과 같은 문법을 사용합니다.",
+    "height": 561,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "S : G C ;",
+      "C : R | 'e' S ;",
+      "R : 'a' | 'b' S ;",
+      "G : epsilon ;"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 2,
+    "title": "한 상태 안에도 LR 항목이 여러 개 있습니다.",
+    "height": 701,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR",
+      "항목)별 저장소",
+      "I2",
+      "S → G • C",
+      "{}",
+      "I2",
+      "C → • R",
+      "{}"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 3,
+    "title": "각 키의 값은 하나의 TerminalSet 집합입니다.",
+    "height": 818,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR",
+      "항목)별 저장소",
+      "I2",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 4,
+    "title": "시작 규칙 전체의 완료를 확인할 규칙을 하나 추가합니다.",
+    "height": 511,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "Accept → S",
+      "I0 · Accept → • S"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 5,
+    "title": "먼저 저장소를 비우고, 전달 관계를 준비합니다.",
+    "height": 759,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable: 항목별",
+      "룩어헤드",
+      "dependencies: 항목별 전달",
+      "대상"
+    ],
+    "code": [
+      {
+        "line": 242,
+        "code": "LookAheadTable.Clear();"
+      },
+      {
+        "line": 243,
+        "code": "var dependencies = BuildLookAheadDependencies();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 6,
+    "title": "시작 항목의 빈 집합을 먼저 만듭니다.",
+    "height": 754,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR",
+      "항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 7,
+    "title": "확장 시작 항목에 EOF를 넣습니다.",
+    "height": 832,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR",
+      "항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 298,
+        "code": "if (item.IsFirst && item.SingleNT.UniqueKey == virtualStartSymbol.UniqueKey)"
+      },
+      {
+        "line": 299,
+        "code": "LookAheadTable[key].Add(new EndMarker());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 8,
+    "title": "나머지 항목에도 각각 빈 집합을 준비합니다.",
+    "height": 1321,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR",
+      "항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{EOF}",
+      "I2",
+      "S → G • C",
+      "{}",
+      "I2",
+      "C → • R",
+      "{}",
+      "I5",
+      "R → 'a' •",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 291,
+        "code": "foreach (var state in IndexStateDic)"
+      },
+      {
+        "line": 293,
+        "code": "foreach (var item in state.Value)"
+      },
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 9,
+    "title": "이제 정보를 넘길 두 항목을 연결합니다.",
+    "height": 975,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{}",
+      "dependencies에 전달",
+      "관계 등록",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 338,
+        "code": "foreach (var production in productions)"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 10,
+    "title": "뒤쪽에 다른 기호가 없으면 부모의 집합을 물려줍니다.",
+    "height": 1091,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{}",
+      "Inherit = true",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 332,
+        "code": "suffix = GetLookAheadSuffixFirst(item, firstBySymbol);"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      },
+      {
+        "line": 368,
+        "code": "return (terminals, true); // 뒤쪽이 없거나 모든 기호가 빈 입력을 허용합니다."
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 11,
+    "title": "G 뒤에는 C가 있으므로, C가 시작할 토큰을 구합니다.",
+    "height": 1057,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{}",
+      "First = {'a', 'b',",
+      "'e'}",
+      "Inherit = false",
+      "I0 · target",
+      "G → •",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 332,
+        "code": "suffix = GetLookAheadSuffixFirst(item, firstBySymbol);"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 12,
+    "title": "전달할 작업을 순서대로 보관할 큐를 만듭니다.",
+    "height": 772,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · 첫 전달 작업의 후보",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 244,
+        "code": "var pending = new Queue<(int State, LRItem Item)>();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 13,
+    "title": "큐에 이미 들어간 항목을 별도로 표시합니다.",
+    "height": 824,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 245,
+        "code": "var queued = new HashSet<(int State, LRItem Item)>();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 14,
+    "title": "처음에는 EOF를 가진 시작 항목만 큐에 넣습니다.",
+    "height": 977,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · 초기 등록",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 247,
+        "code": "foreach (var entry in LookAheadTable)"
+      },
+      {
+        "line": 249,
+        "code": "if (entry.Value.Count == 0) continue;"
+      },
+      {
+        "line": 250,
+        "code": "pending.Enqueue(entry.Key);"
+      },
+      {
+        "line": 251,
+        "code": "queued.Add(entry.Key);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 15,
+    "title": "큐에서 꺼낸 항목을 source에 담습니다.",
+    "height": 788,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 16,
+    "title": "꺼낸 항목의 등록 표시를 지웁니다.",
+    "height": 746,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 17,
+    "title": "시작 항목의 EOF가 첫 S 항목으로 전달됩니다.",
+    "height": 1373,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}",
+      "EOF 전달",
+      "I0 · target",
+      "S → • G C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 18,
+    "title": "3번째 source는 S → • G C입니다.",
+    "height": 1214,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{EOF}",
+      "Goto 뒤 항목에도 EOF",
+      "전달",
+      "I2 · target",
+      "S → G • C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 19,
+    "title": "같은 source에서 G 항목에는 First 토큰을 전달합니다.",
+    "height": 1339,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{EOF}",
+      "First = {'a', 'b',",
+      "'e'}",
+      "Inherit = false",
+      "I0 · target",
+      "G → •",
+      "{'a', 'b', 'e'}"
+    ],
+    "code": [
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 20,
+    "title": "4번째 source는 먼저 S 규칙의 완료 항목에 EOF를 전달합니다.",
+    "height": 1325,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "S 규칙의 완료 항목으로",
+      "EOF 전달",
+      "I3 · target",
+      "S → G C •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 21,
+    "title": "같은 source에서 다음 전달 대상 C → • R을 선택합니다.",
+    "height": 1091,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "다음 전달 대상 선택",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 262,
+        "code": "var target = dependency.Target;"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 22,
+    "title": "받을 집합을 targetSet 참조에 담습니다.",
+    "height": 918,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 263,
+        "code": "var targetSet = LookAheadTable[target];"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 23,
+    "title": "추가하기 전 집합 크기를 before에 기록합니다.",
+    "height": 970,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 264,
+        "code": "int before = targetSet.Count;"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 24,
+    "title": "targetSet에 EOF를 합치면 저장소의 집합도 바뀝니다.",
+    "height": 1142,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 25,
+    "title": "집합이 커졌고 대기 중인 항목도 아니므로, C를 큐에 넣습니다.",
+    "height": 979,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · 새로 등록한 전달 작업",
+      "C → • R",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 26,
+    "title": "C의 다른 생성 규칙도 EOF를 받아 큐에 등록됩니다.",
+    "height": 1369,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "C의 다른 생성 규칙으로",
+      "EOF 전달",
+      "I2 · target",
+      "C → • 'e' S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 27,
+    "title": "7번째 source가 된 C 항목은 EOF를 R 항목에 전달합니다.",
+    "height": 1411,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "C → • R",
+      "{EOF}",
+      "C 항목에서 R 항목으로",
+      "EOF 전달",
+      "I2 · target",
+      "R → • 'a'",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 28,
+    "title": "10번째 source가 된 R 항목은 완료 항목으로 EOF를 넘깁니다.",
+    "height": 1326,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "R → • 'a'",
+      "{EOF}",
+      "Goto 뒤 완료 항목으로",
+      "EOF 전달",
+      "I5 · target",
+      "R → 'a' •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 29,
+    "title": "같은 EOF가 다시 와도 집합 크기는 늘어나지 않습니다.",
+    "height": 1275,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I7 · source",
+      "S → • G C",
+      "{EOF}",
+      "EOF를 다시 합쳐도 {EOF}",
+      "I2 · target",
+      "S → G • C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 30,
+    "title": "큐에 남은 항목까지 처리하면 계산이 끝납니다.",
+    "height": 1033,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR",
+      "항목)별 저장소",
+      "I2",
+      "C → • R",
+      "{EOF}",
+      "I5",
+      "R → 'a' •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 275,
+        "code": "}"
+      },
+      {
+        "line": 276,
+        "code": "}"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 31,
+    "title": "완성된 룩어헤드로 EOF 열의 Reduce를 만들 수 있습니다.",
+    "height": 696,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I5 · 계산이 끝난 룩어헤드",
+      "R → 'a' •",
+      "{EOF}",
+      "ACTION[I5, EOF]",
+      "= Reduce(R → a)",
+      "실제 입력 a → 파싱 성공"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 32,
+    "title": "이번에는 두 경로가 같은 A 규칙을 사용하는 문법을 보겠습니다.",
+    "height": 545,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "S : A '!'",
+      "| 'b' 'c' 'd' A '?' ;",
+      "A : 'a' 'z' ;"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 33,
+    "title": "첫 경로에서는 A 뒤에 !가 옵니다.",
+    "height": 1176,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "A → • 'a' 'z'",
+      "{'!'}",
+      "'!' 전달",
+      "I3 · target",
+      "A → 'a' • 'z'",
+      "{'!'}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 34,
+    "title": "9번째 처리에서 중간 A 항목이 !를 완료 항목으로 넘깁니다.",
+    "height": 1269,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · source",
+      "A → 'a' • 'z'",
+      "{'!'}",
+      "'!' 전달",
+      "I6 · target",
+      "A → 'a' 'z' •",
+      "{'!'}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 35,
+    "title": "이후 두 번째 경로에서 ?가 도착합니다.",
+    "height": 1006,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I8 · source",
+      "A → • 'a' 'z'",
+      "{'?'}",
+      "새 토큰 '?' 전달",
+      "I3 · target",
+      "A → 'a' • 'z'",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 36,
+    "title": "이미 처리한 중간 항목을 큐에 다시 넣습니다.",
+    "height": 948,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · 다시 등록한 전달 작업",
+      "A → 'a' • 'z'",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 37,
+    "title": "16번째 처리에서 중간 항목이 새 정보를 완료 항목까지 넘깁니다.",
+    "height": 1252,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · source",
+      "A → 'a' • 'z'",
+      "{'!', '?'}",
+      "이번에는 '?'도 함께 전달",
+      "I6 · target",
+      "A → 'a' 'z' •",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "step": 38,
+    "title": "완료 항목은 !와 ?에서 모두 Reduce할 수 있습니다.",
+    "height": 1036,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I6 · 계산이 끝난 룩어헤드",
+      "A → 'a' 'z' •",
+      "{'!', '?'}",
+      "ACTION[I6, !] /",
+      "ACTION[I6, ?]",
+      "= Reduce(A → a z)",
+      "az! · bcdaz? → 모두 파싱 성공"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 275,
+        "code": "}"
+      },
+      {
+        "line": 276,
+        "code": "}"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 1,
+    "title": "이전 설명과 같은 문법을 사용합니다.",
+    "height": 561,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "S : G C ;",
+      "C : R | 'e' S ;",
+      "R : 'a' | 'b' S ;",
+      "G : epsilon ;"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 2,
+    "title": "한 상태 안에도 LR 항목이 여러 개 있습니다.",
+    "height": 701,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR",
+      "항목)별 저장소",
+      "I2",
+      "S → G • C",
+      "{}",
+      "I2",
+      "C → • R",
+      "{}"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 3,
+    "title": "각 키의 값은 하나의 TerminalSet 집합입니다.",
+    "height": 818,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR",
+      "항목)별 저장소",
+      "I2",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 4,
+    "title": "시작 규칙 전체의 완료를 확인할 규칙을 하나 추가합니다.",
+    "height": 511,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "Accept → S",
+      "I0 · Accept → • S"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 5,
+    "title": "먼저 저장소를 비우고, 전달 관계를 준비합니다.",
+    "height": 759,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable: 항목별",
+      "룩어헤드",
+      "dependencies: 항목별 전달",
+      "대상"
+    ],
+    "code": [
+      {
+        "line": 242,
+        "code": "LookAheadTable.Clear();"
+      },
+      {
+        "line": 243,
+        "code": "var dependencies = BuildLookAheadDependencies();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 6,
+    "title": "시작 항목의 빈 집합을 먼저 만듭니다.",
+    "height": 754,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR",
+      "항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 7,
+    "title": "확장 시작 항목에 EOF를 넣습니다.",
+    "height": 832,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR",
+      "항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 298,
+        "code": "if (item.IsFirst && item.SingleNT.UniqueKey == virtualStartSymbol.UniqueKey)"
+      },
+      {
+        "line": 299,
+        "code": "LookAheadTable[key].Add(new EndMarker());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 8,
+    "title": "나머지 항목에도 각각 빈 집합을 준비합니다.",
+    "height": 1321,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR",
+      "항목)별 저장소",
+      "I0",
+      "Accept → • S",
+      "{EOF}",
+      "I2",
+      "S → G • C",
+      "{}",
+      "I2",
+      "C → • R",
+      "{}",
+      "I5",
+      "R → 'a' •",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 291,
+        "code": "foreach (var state in IndexStateDic)"
+      },
+      {
+        "line": 293,
+        "code": "foreach (var item in state.Value)"
+      },
+      {
+        "line": 295,
+        "code": "var key = (State: state.Key, Item: item);"
+      },
+      {
+        "line": 296,
+        "code": "LookAheadTable.Add(key, new TerminalSet());"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 9,
+    "title": "이제 정보를 넘길 두 항목을 연결합니다.",
+    "height": 975,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{}",
+      "dependencies에 전달",
+      "관계 등록",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 338,
+        "code": "foreach (var production in productions)"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 10,
+    "title": "뒤쪽에 다른 기호가 없으면 부모의 집합을 물려줍니다.",
+    "height": 1091,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{}",
+      "Inherit = true",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 332,
+        "code": "suffix = GetLookAheadSuffixFirst(item, firstBySymbol);"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      },
+      {
+        "line": 368,
+        "code": "return (terminals, true); // 뒤쪽이 없거나 모든 기호가 빈 입력을 허용합니다."
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 11,
+    "title": "G 뒤에는 C가 있으므로, C가 시작할 토큰을 구합니다.",
+    "height": 1057,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{}",
+      "First = {'a', 'b',",
+      "'e'}",
+      "Inherit = false",
+      "I0 · target",
+      "G → •",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 332,
+        "code": "suffix = GetLookAheadSuffixFirst(item, firstBySymbol);"
+      },
+      {
+        "line": 339,
+        "code": "dependencies[source].Add(((state.Key, production), suffix.Terminals, suffix.Nullable));"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 12,
+    "title": "전달할 작업을 순서대로 보관할 큐를 만듭니다.",
+    "height": 772,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · 첫 전달 작업의 후보",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 244,
+        "code": "var pending = new Queue<(int State, LRItem Item)>();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 13,
+    "title": "큐에 이미 들어간 항목을 별도로 표시합니다.",
+    "height": 824,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 245,
+        "code": "var queued = new HashSet<(int State, LRItem Item)>();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 14,
+    "title": "처음에는 EOF를 가진 시작 항목만 큐에 넣습니다.",
+    "height": 977,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · 초기 등록",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 247,
+        "code": "foreach (var entry in LookAheadTable)"
+      },
+      {
+        "line": 249,
+        "code": "if (entry.Value.Count == 0) continue;"
+      },
+      {
+        "line": 250,
+        "code": "pending.Enqueue(entry.Key);"
+      },
+      {
+        "line": 251,
+        "code": "queued.Add(entry.Key);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 15,
+    "title": "큐에서 꺼낸 항목을 source에 담습니다.",
+    "height": 788,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 16,
+    "title": "꺼낸 항목의 등록 표시를 지웁니다.",
+    "height": 746,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 17,
+    "title": "시작 항목의 EOF가 첫 S 항목으로 전달됩니다.",
+    "height": 1373,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "Accept → • S",
+      "{EOF}",
+      "EOF 전달",
+      "I0 · target",
+      "S → • G C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 18,
+    "title": "3번째 source는 S → • G C입니다.",
+    "height": 1214,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{EOF}",
+      "Goto 뒤 항목에도 EOF",
+      "전달",
+      "I2 · target",
+      "S → G • C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 19,
+    "title": "같은 source에서 G 항목에는 First 토큰을 전달합니다.",
+    "height": 1339,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "S → • G C",
+      "{EOF}",
+      "First = {'a', 'b',",
+      "'e'}",
+      "Inherit = false",
+      "I0 · target",
+      "G → •",
+      "{'a', 'b', 'e'}"
+    ],
+    "code": [
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 20,
+    "title": "4번째 source는 먼저 S 규칙의 완료 항목에 EOF를 전달합니다.",
+    "height": 1325,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "S 규칙의 완료 항목으로",
+      "EOF 전달",
+      "I3 · target",
+      "S → G C •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 21,
+    "title": "같은 source에서 다음 전달 대상 C → • R을 선택합니다.",
+    "height": 1091,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "다음 전달 대상 선택",
+      "I2 · target",
+      "C → • R",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 262,
+        "code": "var target = dependency.Target;"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 22,
+    "title": "받을 집합을 targetSet 참조에 담습니다.",
+    "height": 918,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 263,
+        "code": "var targetSet = LookAheadTable[target];"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 23,
+    "title": "추가하기 전 집합 크기를 before에 기록합니다.",
+    "height": 970,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{}"
+    ],
+    "code": [
+      {
+        "line": 264,
+        "code": "int before = targetSet.Count;"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 24,
+    "title": "targetSet에 EOF를 합치면 저장소의 집합도 바뀝니다.",
+    "height": 1142,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable",
+      "[(I2, C → • R)]",
+      "targetSet",
+      "공유하는 TerminalSet 객체",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 269,
+        "code": "if (dependency.First != null) targetSet.UnionWith(dependency.First);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 25,
+    "title": "집합이 커졌고 대기 중인 항목도 아니므로, C를 큐에 넣습니다.",
+    "height": 979,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · 새로 등록한 전달 작업",
+      "C → • R",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 26,
+    "title": "C의 다른 생성 규칙도 EOF를 받아 큐에 등록됩니다.",
+    "height": 1369,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "S → G • C",
+      "{EOF}",
+      "C의 다른 생성 규칙으로",
+      "EOF 전달",
+      "I2 · target",
+      "C → • 'e' S",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 260,
+        "code": "foreach (var dependency in dependencies[source])"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 27,
+    "title": "7번째 source가 된 C 항목은 EOF를 R 항목에 전달합니다.",
+    "height": 1411,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "C → • R",
+      "{EOF}",
+      "C 항목에서 R 항목으로",
+      "EOF 전달",
+      "I2 · target",
+      "R → • 'a'",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 28,
+    "title": "10번째 source가 된 R 항목은 완료 항목으로 EOF를 넘깁니다.",
+    "height": 1326,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I2 · source",
+      "R → • 'a'",
+      "{EOF}",
+      "Goto 뒤 완료 항목으로",
+      "EOF 전달",
+      "I5 · target",
+      "R → 'a' •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 29,
+    "title": "같은 EOF가 다시 와도 집합 크기는 늘어나지 않습니다.",
+    "height": 1275,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I7 · source",
+      "S → • G C",
+      "{EOF}",
+      "EOF를 다시 합쳐도 {EOF}",
+      "I2 · target",
+      "S → G • C",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 30,
+    "title": "큐에 남은 항목까지 처리하면 계산이 끝납니다.",
+    "height": 1033,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "LookAheadTable · (상태, LR",
+      "항목)별 저장소",
+      "I2",
+      "C → • R",
+      "{EOF}",
+      "I5",
+      "R → 'a' •",
+      "{EOF}"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 275,
+        "code": "}"
+      },
+      {
+        "line": 276,
+        "code": "}"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 31,
+    "title": "완성된 룩어헤드로 EOF 열의 Reduce를 만들 수 있습니다.",
+    "height": 696,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I5 · 계산이 끝난 룩어헤드",
+      "R → 'a' •",
+      "{EOF}",
+      "ACTION[I5, EOF]",
+      "= Reduce(R → a)",
+      "실제 입력 a → 파싱 성공"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 32,
+    "title": "이번에는 두 경로가 같은 A 규칙을 사용하는 문법을 보겠습니다.",
+    "height": 545,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "S : A '!'",
+      "| 'b' 'c' 'd' A '?' ;",
+      "A : 'a' 'z' ;"
+    ],
+    "code": [],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 33,
+    "title": "첫 경로에서는 A 뒤에 !가 옵니다.",
+    "height": 1176,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I0 · source",
+      "A → • 'a' 'z'",
+      "{'!'}",
+      "'!' 전달",
+      "I3 · target",
+      "A → 'a' • 'z'",
+      "{'!'}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 34,
+    "title": "9번째 처리에서 중간 A 항목이 !를 완료 항목으로 넘깁니다.",
+    "height": 1269,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · source",
+      "A → 'a' • 'z'",
+      "{'!'}",
+      "'!' 전달",
+      "I6 · target",
+      "A → 'a' 'z' •",
+      "{'!'}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 35,
+    "title": "이후 두 번째 경로에서 ?가 도착합니다.",
+    "height": 1006,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I8 · source",
+      "A → • 'a' 'z'",
+      "{'?'}",
+      "새 토큰 '?' 전달",
+      "I3 · target",
+      "A → 'a' • 'z'",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 36,
+    "title": "이미 처리한 중간 항목을 큐에 다시 넣습니다.",
+    "height": 948,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · 다시 등록한 전달 작업",
+      "A → 'a' • 'z'",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 37,
+    "title": "16번째 처리에서 중간 항목이 새 정보를 완료 항목까지 넘깁니다.",
+    "height": 1252,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I3 · source",
+      "A → 'a' • 'z'",
+      "{'!', '?'}",
+      "이번에는 '?'도 함께 전달",
+      "I6 · target",
+      "A → 'a' 'z' •",
+      "{'!', '?'}"
+    ],
+    "code": [
+      {
+        "line": 256,
+        "code": "var source = pending.Dequeue();"
+      },
+      {
+        "line": 258,
+        "code": "queued.Remove(source);"
+      },
+      {
+        "line": 270,
+        "code": "if (dependency.Inherit) targetSet.UnionWith(LookAheadTable[source]);"
+      },
+      {
+        "line": 272,
+        "code": "if (targetSet.Count > before && queued.Add(target))"
+      },
+      {
+        "line": 273,
+        "code": "pending.Enqueue(target);"
+      }
+    ],
+    "codeDifferences": []
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "step": 38,
+    "title": "완료 항목은 !와 ?에서 모두 Reduce할 수 있습니다.",
+    "height": 1036,
+    "overflow": false,
+    "outside": [],
+    "overlaps": [],
+    "labels": [
+      "I6 · 계산이 끝난 룩어헤드",
+      "A → 'a' 'z' •",
+      "{'!', '?'}",
+      "ACTION[I6, !] /",
+      "ACTION[I6, ?]",
+      "= Reduce(A → a z)",
+      "az! · bcdaz? → 모두 파싱 성공"
+    ],
+    "code": [
+      {
+        "line": 254,
+        "code": "while (pending.Count > 0)"
+      },
+      {
+        "line": 275,
+        "code": "}"
+      },
+      {
+        "line": 276,
+        "code": "}"
+      }
+    ],
+    "codeDifferences": []
+  }
+]

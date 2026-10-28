@@ -1,0 +1,634 @@
+{
+  "kind": "independent-regexp-pattern-syntax-differential-probes",
+  "nodeVersion": "v24.12.0",
+  "assemblySha256": "b8d7f2ff57e033cf7241514db2493af1ccd32c862c0f98e1f1fdf60eb0802fee",
+  "cases": 66546,
+  "mismatches": 55,
+  "mismatchCases": [
+    {
+      "id": "quantifier-00063",
+      "group": "quantifier",
+      "body": "a{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00064",
+      "group": "quantifier",
+      "body": "a{999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00065",
+      "group": "quantifier",
+      "body": "a{999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00132",
+      "group": "quantifier",
+      "body": ".{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00133",
+      "group": "quantifier",
+      "body": ".{999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00134",
+      "group": "quantifier",
+      "body": ".{999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00201",
+      "group": "quantifier",
+      "body": "\\d{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00202",
+      "group": "quantifier",
+      "body": "\\d{999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00203",
+      "group": "quantifier",
+      "body": "\\d{999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00270",
+      "group": "quantifier",
+      "body": "\\w{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00271",
+      "group": "quantifier",
+      "body": "\\w{999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00272",
+      "group": "quantifier",
+      "body": "\\w{999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00339",
+      "group": "quantifier",
+      "body": "[a]{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00340",
+      "group": "quantifier",
+      "body": "[a]{999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00341",
+      "group": "quantifier",
+      "body": "[a]{999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00408",
+      "group": "quantifier",
+      "body": "[^a]{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00409",
+      "group": "quantifier",
+      "body": "[^a]{999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00410",
+      "group": "quantifier",
+      "body": "[^a]{999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00477",
+      "group": "quantifier",
+      "body": "[]{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00478",
+      "group": "quantifier",
+      "body": "[]{999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00479",
+      "group": "quantifier",
+      "body": "[]{999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00546",
+      "group": "quantifier",
+      "body": "[^]{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00547",
+      "group": "quantifier",
+      "body": "[^]{999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00548",
+      "group": "quantifier",
+      "body": "[^]{999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00615",
+      "group": "quantifier",
+      "body": "(a){999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00616",
+      "group": "quantifier",
+      "body": "(a){999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00617",
+      "group": "quantifier",
+      "body": "(a){999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00684",
+      "group": "quantifier",
+      "body": "(?:a){999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00685",
+      "group": "quantifier",
+      "body": "(?:a){999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00686",
+      "group": "quantifier",
+      "body": "(?:a){999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00753",
+      "group": "quantifier",
+      "body": "(?=a){999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-00822",
+      "group": "quantifier",
+      "body": "(?!a){999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01029",
+      "group": "quantifier",
+      "body": "(?<x>a){999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01030",
+      "group": "quantifier",
+      "body": "(?<x>a){999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01031",
+      "group": "quantifier",
+      "body": "(?<x>a){999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01098",
+      "group": "quantifier",
+      "body": "(?i:a){999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01099",
+      "group": "quantifier",
+      "body": "(?i:a){999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01100",
+      "group": "quantifier",
+      "body": "(?i:a){999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01167",
+      "group": "quantifier",
+      "body": "(?-i:a){999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01168",
+      "group": "quantifier",
+      "body": "(?-i:a){999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01169",
+      "group": "quantifier",
+      "body": "(?-i:a){999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01512",
+      "group": "quantifier",
+      "body": "\\1{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01581",
+      "group": "quantifier",
+      "body": "\\0{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01582",
+      "group": "quantifier",
+      "body": "\\0{999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01583",
+      "group": "quantifier",
+      "body": "\\0{999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01650",
+      "group": "quantifier",
+      "body": "\\k<x>{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01719",
+      "group": "quantifier",
+      "body": "{{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01788",
+      "group": "quantifier",
+      "body": "}{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01857",
+      "group": "quantifier",
+      "body": "]{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01926",
+      "group": "quantifier",
+      "body": "\\p{L}{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01927",
+      "group": "quantifier",
+      "body": "\\p{L}{999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01928",
+      "group": "quantifier",
+      "body": "\\p{L}{999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01995",
+      "group": "quantifier",
+      "body": "\\P{ASCII}{999999999999999999999999,888888888888888888888888}",
+      "flags": "",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01996",
+      "group": "quantifier",
+      "body": "\\P{ASCII}{999999999999999999999999,888888888888888888888888}",
+      "flags": "u",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    },
+    {
+      "id": "quantifier-01997",
+      "group": "quantifier",
+      "body": "\\P{ASCII}{999999999999999999999999,888888888888888888888888}",
+      "flags": "v",
+      "nodeAccepted": true,
+      "janglimAccepted": false,
+      "nodeError": null,
+      "janglimError": "A quantifier's minimum exceeds its maximum."
+    }
+  ],
+  "scope": "RegExp Pattern grammar compiled only; no regex is matched, no JS program or Test262 runtime body executed. Node is a cross-check, frozen 2026 specification decides final classification.",
+  "nodeUnicodeVersion": "16.0",
+  "janglimUnicodeVersion": "17.0.0",
+  "confirmedImplementationDefects": [],
+  "reviewedDifferences": [
+    {
+      "kind": "reference-engine-quantifier-saturation",
+      "count": 55,
+      "minimalExample": {
+        "body": "a{999999999999999999999999,888888888888888888888888}",
+        "flags": "u"
+      },
+      "expectedAccepted": false,
+      "janglimAccepted": false,
+      "nodeAccepted": true,
+      "reason": "The first mathematical DecimalDigits value exceeds the second. The frozen specification requires SyntaxError. Node accepting this appears to result from saturating both values to the same internal bound; do not change the exact Janglim comparison to match Node.",
+      "specification": "https://tc39.es/ecma262/2026/multipage/text-processing.html#sec-patterns-static-semantics-early-errors"
+    },
+    {
+      "kind": "reference-engine-older-unicode-data",
+      "count": 128,
+      "minimalExample": {
+        "body": "\\p{Script=Beria_Erfe}",
+        "flags": "u"
+      },
+      "expectedAccepted": true,
+      "janglimAccepted": true,
+      "nodeAccepted": false,
+      "reason": "All 128 string-probe differences use the Unicode 17 Script/Script_Extensions aliases Beria_Erfe/Berf, Sidetic/Sidt, Tai_Yo/Tayo, Tolong_Siki/Tols. Official Unicode 17 PropertyValueAliases.txt contains all four. Node reports Unicode 16.0; Janglim pins Unicode 17.0.0.",
+      "unicodeSource": "https://www.unicode.org/Public/17.0.0/ucd/PropertyValueAliases.txt",
+      "sourceSha256": "64e9a5f76f7a1e8b5a47d6a1f9a26522a251208f5276bdfa1559dac7cf2e827a"
+    }
+  ],
+  "supplementalChecks": [
+    {
+      "report": "artifacts/ecmascript-2026/regexp-repro/generated.report.json",
+      "kind": "generated",
+      "cases": 66546,
+      "mismatches": 55,
+      "unexpectedExceptions": 0,
+      "verifiedOriginalUtf16Hashes": 66546,
+      "casesSha256": "952423725d40c5c18416e71b50fb858d465a9a3fa428578487d2018a113f5811",
+      "transportSha256": "7f4e39d72d7fbf323a79ebb5a81a8996543eeaf895268d620226707b6ebf3add"
+    },
+    {
+      "report": "artifacts/ecmascript-2026/regexp-repro/constructors.report.json",
+      "kind": "constructors",
+      "cases": 752,
+      "mismatches": 0,
+      "unexpectedExceptions": 0,
+      "verifiedOriginalUtf16Hashes": 752,
+      "casesSha256": "0b8d76fe2ef480f9132e30df7d5d56b82c2bcc44e5facff7b5230b18a78829df",
+      "transportSha256": "125f1bb5a159648089e96046811d7feee8a0847eda6e9c6141dc8de0d9efe329"
+    },
+    {
+      "report": "artifacts/ecmascript-2026/regexp-repro/source-strings.report.json",
+      "kind": "source-strings",
+      "cases": 33084,
+      "mismatches": 128,
+      "unexpectedExceptions": 0,
+      "verifiedOriginalUtf16Hashes": 33084,
+      "casesSha256": "0735972172325486132206e660b5d98885b3bd689fcb206f78e54e2583c8666e",
+      "transportSha256": "9d43f23f81e8def5ebb896222102776b45967b52a8924f4437b0eb308fe93380"
+    }
+  ],
+  "sourceHashes": {
+    "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptRegExpProperties.cs": "082dd4ad16afcbd53b627680f036ab050721fa555262ad7d15be9a7f607d889b",
+    "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptRegExpProperties.g.cs": "e6d608fd111fd576dd7605efd28c60c09a6957afb22f3b875eba272a3f1165a1",
+    "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptRegExpSets.cs": "ee93319fcfdd5d3bca5b271dd05893834b976771eb475e7cd8cbd65d49cd1aa3",
+    "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptRegExpValidation.cs": "ccba656c0e9d23c574742cc5baf5c68c6e0d353a4402c0eb191b417f478cb468"
+  },
+  "reproducibleTool": "tools/Test262/audit_regexp_patterns.py",
+  "latestReproductionSummary": "artifacts/ecmascript-2026/regexp-repro/summary.json",
+  "utf16TransportVerifiedInputs": 100382,
+  "skippedSourceLiterals": []
+}

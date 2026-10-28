@@ -1,0 +1,797 @@
+450 grammar conflict(s):
+  state I0: shift-reduce conflict
+  state I2: shift-reduce conflict (on 'StatementList')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I2: shift-reduce conflict (on 'StatementList')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I52: shift-reduce conflict (on 'UninitializedVariableDeclaration')
+  state I57: shift-reduce conflict (on 'InitializedVariableDeclaration')
+  state I64: shift-reduce conflict (on 'Expression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I6: shift-reduce conflict (on '{')
+  state I137: shift-reduce conflict (on ':')
+  state I143: shift-reduce conflict (on 'UninitializedLexicalBinding')
+  state I145: shift-reduce conflict (on 'InitializedLexicalBinding')
+  state I286: shift-reduce conflict (on 'OptionalChain')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I310: shift-reduce conflict (on 'MemberExpression')
+  state I315: shift-reduce conflict (on 'OptionalChain')
+  state I316: shift-reduce conflict (on 'OptionalChain')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I344: shift-reduce conflict (on 'IdentifierReference')
+  state I345: shift-reduce conflict (on 'IdentifierReference')
+  state I346: shift-reduce conflict (on 'Expression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I347: shift-reduce conflict (on 'Expression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I52: shift-reduce conflict (on 'UninitializedVariableDeclaration')
+  state I57: shift-reduce conflict (on 'InitializedVariableDeclaration')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I386: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I432: shift-reduce conflict (on ')')
+  state I433: shift-reduce conflict (on ')')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I6: shift-reduce conflict (on '{')
+  state I6: shift-reduce conflict (on '{')
+  state I143: shift-reduce conflict (on 'UninitializedLexicalBinding')
+  state I145: shift-reduce conflict (on 'InitializedLexicalBinding')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I502: shift-reduce conflict (on 'Statement')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I319: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I532: shift-reduce conflict (on ')')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I548: shift-reduce conflict (on '{')
+  state I552: shift-reduce conflict (on 'else')
+  state I553: shift-reduce conflict (on ')')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I556: shift-reduce conflict (on ')')
+  state I558: shift-reduce conflict (on ')')
+  state I559: shift-reduce conflict (on ')')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I568: shift-reduce conflict (on ')')
+  state I569: shift-reduce conflict (on ')')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I571: shift-reduce conflict (on ')')
+  state I572: shift-reduce conflict (on ')')
+  state I548: shift-reduce conflict (on '{')
+  state I2: shift-reduce conflict (on 'StatementList')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I548: shift-reduce conflict (on '{')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I587: shift-reduce conflict (on ')')
+  state I588: shift-reduce conflict (on ')')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I593: shift-reduce conflict (on ')')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I76: shift-reduce conflict (on 'AdditiveExpression')
+  state I81: reduce-reduce conflict (on 'LeftHandSideExpression')
+  state I83: shift-reduce conflict (on 'MemberExpression')
+  state I107: shift-reduce conflict (on 'CallExpression')
+  state I601: shift-reduce conflict (on ':')
+  state I6: shift-reduce conflict (on '{')
+  state I604: shift-reduce conflict (on ')')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I608: shift-reduce conflict (on ':')
+  state I2: shift-reduce conflict (on 'StatementList')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+  state I2: shift-reduce conflict (on 'StatementList')
+  state I6: shift-reduce conflict (on '{')
+  state I18: shift-reduce conflict (on 'do')
+  state I24: reduce-reduce conflictshift-reduce conflict (on 'continue')
+  state I26: reduce-reduce conflictshift-reduce conflict (on 'break')
+  state I28: reduce-reduce conflictshift-reduce conflict (on 'return')
+  state I41: shift-reduce conflict (on 'debugger')
+INPUT a++;
+RESULT False Janglim.FrontEnd.Parsers.LR.PredictionFailedException: No candidate can continue through the predicate conflict (state 0, token index 1). Source offset 1.
+   at Janglim.FrontEnd.Parsers.LR.ContextualConflictPredictor.SelectFirstAction(IReadOnlyList`1 initialActions, IReadOnlyList`1 actualStates, ContextualInput actualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualConflictPredictor.cs:line 69
+   at Janglim.FrontEnd.Parsers.LR.LRParser.ShiftOrReduce(ParsingUnit parsingUnit, TokenData inputValue, ConflictItem& conflictItem, IReadOnlyList`1 tokens, Int32 tokenIndex, ContextualInput contextualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[DecideParsingDirection].cs:line 90
+a failed null BEFORE 0
+INPUT function f(a=0){'use strict'; let a;}
+RESULT True 
+; reduce BindingIdentifier -> IdentifierName BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 LetOrConst 46 a 54
+; goto 144 BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 LetOrConst 46 BindingIdentifier
+; reduce UninitializedLexicalBinding -> BindingIdentifier BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 LetOrConst 46 BindingIdentifier 144
+; goto 143 BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 LetOrConst 46 UninitializedLexicalBinding
+; shift 150 BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 LetOrConst 46 UninitializedLexicalBinding 143
+} reduce BindingEnd -> ; BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 LetOrConst 46 UninitializedLexicalBinding 143 ; 150
+} goto 355 BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 LetOrConst 46 UninitializedLexicalBinding 143 BindingEnd
+} reduce LexicalBindingList -> UninitializedLexicalBinding BindingEnd BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 LetOrConst 46 UninitializedLexicalBinding 143 BindingEnd 355
+} goto 142 BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 LetOrConst 46 LexicalBindingList
+} reduce LexicalDeclaration -> LetOrConst LexicalBindingList BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 LetOrConst 46 LexicalBindingList 142
+} goto 45 BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 LexicalDeclaration
+} reduce Declaration -> LexicalDeclaration BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 LexicalDeclaration 45
+} goto 42 BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 Declaration
+} reduce StatementListItem -> Declaration BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 Declaration 42
+} goto 49 BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 StatementListItem
+} reduce StatementList -> StatementList StatementListItem BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2 StatementListItem 49
+} goto 2 BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList
+} reduce Script -> StatementList BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 StatementList 2
+} goto 580 BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 Script
+} shift 603 BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 Script 580
+ reduce FunctionBody -> { Script } BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 Script 580 } 603
+ goto 579 BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 FunctionBody
+ reduce FunctionDeclaration -> function BindingIdentifier ( FormalParameters ) FunctionBody BEFORE 0 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 FunctionBody 579
+ goto 43 BEFORE 0 FunctionDeclaration
+ reduce Declaration -> FunctionDeclaration BEFORE 0 FunctionDeclaration 43
+ goto 42 BEFORE 0 Declaration
+ reduce StatementListItem -> Declaration BEFORE 0 Declaration 42
+ goto 3 BEFORE 0 StatementListItem
+ reduce StatementList -> StatementListItem BEFORE 0 StatementListItem 3
+ goto 2 BEFORE 0 StatementList
+ reduce Script -> StatementList BEFORE 0 StatementList 2
+ goto 1 BEFORE 0 Script
+ accept Accept -> Script BEFORE 0 Script 1
+Script
+ StatementList
+  StatementListItem
+   Declaration
+    FunctionDeclaration
+     'function'
+     BindingIdentifier
+      'f'
+     '('
+     FormalParameters
+      __grp1
+       FormalParameterList
+        FormalParameter
+         BindingElement
+          SingleNameBinding
+           BindingIdentifier
+            'a'
+           Initializer
+            '='
+            AssignmentExpression
+             ConditionalExpression
+              ShortCircuitExpression
+               LogicalORExpression
+                LogicalANDExpression
+                 BitwiseORExpression
+                  BitwiseXORExpression
+                   BitwiseANDExpression
+                    EqualityExpression
+                     RelationalExpression
+                      ShiftExpression
+                       AdditiveExpression
+                        MultiplicativeExpression
+                         ExponentiationExpression
+                          UnaryExpression
+                           UpdateExpression
+                            LeftHandSideExpression
+                             NewExpression
+                              MemberExpression
+                               PrimaryExpression
+                                Literal
+                                 '0'
+     ')'
+     FunctionBody
+      '{'
+      Script
+       StatementList
+        StatementList
+         StatementListItem
+          Statement
+           ExpressionStatement
+            __predicate2
+            Expression
+             AssignmentExpression
+              ConditionalExpression
+               ShortCircuitExpression
+                LogicalORExpression
+                 LogicalANDExpression
+                  BitwiseORExpression
+                   BitwiseXORExpression
+                    BitwiseANDExpression
+                     EqualityExpression
+                      RelationalExpression
+                       ShiftExpression
+                        AdditiveExpression
+                         MultiplicativeExpression
+                          ExponentiationExpression
+                           UnaryExpression
+                            UpdateExpression
+                             LeftHandSideExpression
+                              NewExpression
+                               MemberExpression
+                                PrimaryExpression
+                                 Literal
+                                  ''use strict''
+            ExpressionEnd
+             ';'
+        StatementListItem
+         Declaration
+          LexicalDeclaration
+           LetOrConst
+            'let'
+           LexicalBindingList
+            UninitializedLexicalBinding
+             BindingIdentifier
+              'a'
+            BindingEnd
+             ';'
+      '}'
+INPUT { function f(){} function f(){} }
+RESULT True 
+} epsilon reduce Script -> epsilon BEFORE 0 { 6 StatementList 2 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548
+} goto 580 BEFORE 0 { 6 StatementList 2 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 Script
+} shift 603 BEFORE 0 { 6 StatementList 2 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 Script 580
+} reduce FunctionBody -> { Script } BEFORE 0 { 6 StatementList 2 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 { 548 Script 580 } 603
+} goto 579 BEFORE 0 { 6 StatementList 2 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 FunctionBody
+} reduce FunctionDeclaration -> function BindingIdentifier ( FormalParameters ) FunctionBody BEFORE 0 { 6 StatementList 2 function 44 BindingIdentifier 141 ( 354 FormalParameters 478 ) 540 FunctionBody 579
+} goto 43 BEFORE 0 { 6 StatementList 2 FunctionDeclaration
+} reduce Declaration -> FunctionDeclaration BEFORE 0 { 6 StatementList 2 FunctionDeclaration 43
+} goto 42 BEFORE 0 { 6 StatementList 2 Declaration
+} reduce StatementListItem -> Declaration BEFORE 0 { 6 StatementList 2 Declaration 42
+} goto 49 BEFORE 0 { 6 StatementList 2 StatementListItem
+} reduce StatementList -> StatementList StatementListItem BEFORE 0 { 6 StatementList 2 StatementListItem 49
+} goto 2 BEFORE 0 { 6 StatementList
+} reduce Script -> StatementList BEFORE 0 { 6 StatementList 2
+} goto 50 BEFORE 0 { 6 Script
+} shift 148 BEFORE 0 { 6 Script 50
+ reduce Block -> { Script } BEFORE 0 { 6 Script 50 } 148
+ goto 5 BEFORE 0 Block
+ reduce Statement -> Block BEFORE 0 Block 5
+ goto 4 BEFORE 0 Statement
+ reduce StatementListItem -> Statement BEFORE 0 Statement 4
+ goto 3 BEFORE 0 StatementListItem
+ reduce StatementList -> StatementListItem BEFORE 0 StatementListItem 3
+ goto 2 BEFORE 0 StatementList
+ reduce Script -> StatementList BEFORE 0 StatementList 2
+ goto 1 BEFORE 0 Script
+ accept Accept -> Script BEFORE 0 Script 1
+Script
+ StatementList
+  StatementListItem
+   Statement
+    Block
+     '{'
+     Script
+      StatementList
+       StatementList
+        StatementListItem
+         Declaration
+          FunctionDeclaration
+           'function'
+           BindingIdentifier
+            'f'
+           '('
+           FormalParameters
+           ')'
+           FunctionBody
+            '{'
+            Script
+            '}'
+       StatementListItem
+        Declaration
+         FunctionDeclaration
+          'function'
+          BindingIdentifier
+           'f'
+          '('
+          FormalParameters
+          ')'
+          FunctionBody
+           '{'
+           Script
+           '}'
+     '}'
+INPUT switch(v){case 0:let a;case 1:let a;}
+RESULT True 
+; reduce BindingIdentifier -> IdentifierName BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 LetOrConst 46 a 54
+; goto 144 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 LetOrConst 46 BindingIdentifier
+; reduce UninitializedLexicalBinding -> BindingIdentifier BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 LetOrConst 46 BindingIdentifier 144
+; goto 143 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 LetOrConst 46 UninitializedLexicalBinding
+; shift 150 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 LetOrConst 46 UninitializedLexicalBinding 143
+} reduce BindingEnd -> ; BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 LetOrConst 46 UninitializedLexicalBinding 143 ; 150
+} goto 355 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 LetOrConst 46 UninitializedLexicalBinding 143 BindingEnd
+} reduce LexicalBindingList -> UninitializedLexicalBinding BindingEnd BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 LetOrConst 46 UninitializedLexicalBinding 143 BindingEnd 355
+} goto 142 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 LetOrConst 46 LexicalBindingList
+} reduce LexicalDeclaration -> LetOrConst LexicalBindingList BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 LetOrConst 46 LexicalBindingList 142
+} goto 45 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 LexicalDeclaration
+} reduce Declaration -> LexicalDeclaration BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 LexicalDeclaration 45
+} goto 42 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 Declaration
+} reduce StatementListItem -> Declaration BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 Declaration 42
+} goto 3 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 StatementListItem
+} reduce StatementList -> StatementListItem BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 StatementListItem 3
+} goto 2 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 StatementList
+} reduce Script -> StatementList BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 StatementList 2
+} goto 611 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 Script
+} reduce CaseClause -> case Expression : Script BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 case 575 Expression 600 : 608 Script 611
+} goto 599 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 CaseClause
+} reduce CaseClauses -> CaseClauses CaseClause BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 CaseClause 599
+} goto 573 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses
+} shift 598 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573
+ reduce CaseBlock -> { CaseClauses } BEFORE 0 switch 32 ( 135 Expression 348 ) 473 { 536 CaseClauses 573 } 598
+ goto 535 BEFORE 0 switch 32 ( 135 Expression 348 ) 473 CaseBlock
+ reduce SwitchStatement -> switch ( Expression ) CaseBlock BEFORE 0 switch 32 ( 135 Expression 348 ) 473 CaseBlock 535
+ goto 31 BEFORE 0 SwitchStatement
+ reduce Statement -> SwitchStatement BEFORE 0 SwitchStatement 31
+ goto 4 BEFORE 0 Statement
+ reduce StatementListItem -> Statement BEFORE 0 Statement 4
+ goto 3 BEFORE 0 StatementListItem
+ reduce StatementList -> StatementListItem BEFORE 0 StatementListItem 3
+ goto 2 BEFORE 0 StatementList
+ reduce Script -> StatementList BEFORE 0 StatementList 2
+ goto 1 BEFORE 0 Script
+ accept Accept -> Script BEFORE 0 Script 1
+Script
+ StatementList
+  StatementListItem
+   Statement
+    SwitchStatement
+     'switch'
+     '('
+     Expression
+      AssignmentExpression
+       ConditionalExpression
+        ShortCircuitExpression
+         LogicalORExpression
+          LogicalANDExpression
+           BitwiseORExpression
+            BitwiseXORExpression
+             BitwiseANDExpression
+              EqualityExpression
+               RelationalExpression
+                ShiftExpression
+                 AdditiveExpression
+                  MultiplicativeExpression
+                   ExponentiationExpression
+                    UnaryExpression
+                     UpdateExpression
+                      LeftHandSideExpression
+                       NewExpression
+                        MemberExpression
+                         PrimaryExpression
+                          IdentifierReference
+                           'v'
+     ')'
+     CaseBlock
+      '{'
+      CaseClauses
+       CaseClauses
+        CaseClause
+         'case'
+         Expression
+          AssignmentExpression
+           ConditionalExpression
+            ShortCircuitExpression
+             LogicalORExpression
+              LogicalANDExpression
+               BitwiseORExpression
+                BitwiseXORExpression
+                 BitwiseANDExpression
+                  EqualityExpression
+                   RelationalExpression
+                    ShiftExpression
+                     AdditiveExpression
+                      MultiplicativeExpression
+                       ExponentiationExpression
+                        UnaryExpression
+                         UpdateExpression
+                          LeftHandSideExpression
+                           NewExpression
+                            MemberExpression
+                             PrimaryExpression
+                              Literal
+                               '0'
+         ':'
+         Script
+          StatementList
+           StatementListItem
+            Declaration
+             LexicalDeclaration
+              LetOrConst
+               'let'
+              LexicalBindingList
+               UninitializedLexicalBinding
+                BindingIdentifier
+                 'a'
+               BindingEnd
+                ';'
+       CaseClause
+        'case'
+        Expression
+         AssignmentExpression
+          ConditionalExpression
+           ShortCircuitExpression
+            LogicalORExpression
+             LogicalANDExpression
+              BitwiseORExpression
+               BitwiseXORExpression
+                BitwiseANDExpression
+                 EqualityExpression
+                  RelationalExpression
+                   ShiftExpression
+                    AdditiveExpression
+                     MultiplicativeExpression
+                      ExponentiationExpression
+                       UnaryExpression
+                        UpdateExpression
+                         LeftHandSideExpression
+                          NewExpression
+                           MemberExpression
+                            PrimaryExpression
+                             Literal
+                              '1'
+        ':'
+        Script
+         StatementList
+          StatementListItem
+           Declaration
+            LexicalDeclaration
+             LetOrConst
+              'let'
+             LexicalBindingList
+              UninitializedLexicalBinding
+               BindingIdentifier
+                'a'
+              BindingEnd
+               ';'
+      '}'

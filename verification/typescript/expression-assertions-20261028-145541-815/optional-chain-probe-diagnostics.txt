@@ -1,0 +1,5 @@
+artifacts/typescript/expression-assertions-20261028-145541-815/optional-chain-probe.ts(2,1): error TS2349: This expression is not callable.
+  Not all constituents of type '((strings: TemplateStringsArray) => unknown) | undefined' are callable.
+    Type 'undefined' has no call signatures.
+artifacts/typescript/expression-assertions-20261028-145541-815/optional-chain-probe.ts(2,7): error TS1358: Tagged template expressions are not permitted in an optional chain.
+artifacts/typescript/expression-assertions-20261028-145541-815/optional-chain-probe.ts(4,1): error TS2779: The left-hand side of an assignment expression may not be an optional property access.

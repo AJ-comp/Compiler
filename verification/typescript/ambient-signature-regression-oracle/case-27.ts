@@ -1,0 +1,1 @@
+export declare namespace Tools { function run<T>(value: T): T { return value; } }

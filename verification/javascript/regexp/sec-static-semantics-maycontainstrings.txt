@@ -1,0 +1,79 @@
+22.2.1.8 Static Semantics: MayContainStrings
+The syntax-directed operation MayContainStrings takes no arguments and returns a Boolean. It is defined piecewise over the following productions:
+CharacterClassEscape ::
+d
+D
+s
+S
+w
+W
+P{
+UnicodePropertyValueExpression
+}
+UnicodePropertyValueExpression ::
+UnicodePropertyName
+=
+UnicodePropertyValue
+NestedClass ::
+[^
+ClassContents
+]
+ClassContents ::
+[empty]
+NonemptyClassRanges
+ClassSetOperand ::
+ClassSetCharacter
+Return false.
+UnicodePropertyValueExpression :: LoneUnicodePropertyNameOrValue
+If the source text matched by LoneUnicodePropertyNameOrValue is a binary property of strings listed in the “Property name” column of Table 66, return true.
+Return false.
+ClassUnion ::
+ClassSetRange
+ClassUnionopt
+If the ClassUnion is present, return MayContainStrings of the ClassUnion.
+Return false.
+ClassUnion ::
+ClassSetOperand
+ClassUnionopt
+If MayContainStrings of the ClassSetOperand is true, return true.
+If ClassUnion is present, return MayContainStrings of the ClassUnion.
+Return false.
+ClassIntersection ::
+ClassSetOperand
+&&
+ClassSetOperand
+If MayContainStrings of the first ClassSetOperand is false, return false.
+If MayContainStrings of the second ClassSetOperand is false, return false.
+Return true.
+ClassIntersection ::
+ClassIntersection
+&&
+ClassSetOperand
+If MayContainStrings of the ClassIntersection is false, return false.
+If MayContainStrings of the ClassSetOperand is false, return false.
+Return true.
+ClassSubtraction ::
+ClassSetOperand
+--
+ClassSetOperand
+Return MayContainStrings of the first ClassSetOperand.
+ClassSubtraction ::
+ClassSubtraction
+--
+ClassSetOperand
+Return MayContainStrings of the ClassSubtraction.
+ClassStringDisjunctionContents ::
+ClassString
+|
+ClassStringDisjunctionContents
+If MayContainStrings of the ClassString is true, return true.
+Return MayContainStrings of the ClassStringDisjunctionContents.
+ClassString :: [empty]
+Return true.
+ClassString :: NonEmptyClassString
+Return MayContainStrings of the NonEmptyClassString.
+NonEmptyClassString ::
+ClassSetCharacter
+NonEmptyClassStringopt
+If NonEmptyClassString is present, return true.
+Return false.

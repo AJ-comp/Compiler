@@ -1,0 +1,670 @@
+[
+  {
+    "Name": "original-unit-cycle",
+    "CanonicalOracleConflicts": 1,
+    "LalrOracleConflicts": 1,
+    "Reverse": false,
+    "HasConflicts": true,
+    "ConflictCount": 1,
+    "ConflictReport": "1 grammar conflict(s):\r\n  state I6: reduce-reduce conflict (on 'U')",
+    "Completed": [
+      {
+        "State": 1,
+        "Item": "Accept -> S•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 4,
+        "Item": "B -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 5,
+        "Item": "S -> z•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 6,
+        "Item": "S -> A U•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 6,
+        "Item": "U -> U•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 7,
+        "Item": "A -> B x•",
+        "LookAhead": []
+      }
+    ],
+    "Outcomes": [
+      {
+        "Input": "z",
+        "Success": true,
+        "Exception": null,
+        "Errors": []
+      },
+      {
+        "Input": "ax",
+        "Success": false,
+        "Exception": "Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 472\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 303\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 332",
+        "Errors": [
+          "Janglim.FrontEnd.ParsingErrorInfo"
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "original-unit-cycle",
+    "CanonicalOracleConflicts": 1,
+    "LalrOracleConflicts": 1,
+    "Reverse": true,
+    "HasConflicts": true,
+    "ConflictCount": 1,
+    "ConflictReport": "1 grammar conflict(s):\r\n  state I6: reduce-reduce conflict (on 'U')",
+    "Completed": [
+      {
+        "State": 1,
+        "Item": "Accept -> S•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 2,
+        "Item": "S -> z•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 5,
+        "Item": "B -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 6,
+        "Item": "S -> A U•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 6,
+        "Item": "U -> U•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 7,
+        "Item": "A -> B x•",
+        "LookAhead": []
+      }
+    ],
+    "Outcomes": [
+      {
+        "Input": "z",
+        "Success": true,
+        "Exception": null,
+        "Errors": []
+      },
+      {
+        "Input": "ax",
+        "Success": false,
+        "Exception": "Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 472\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 303\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 332",
+        "Errors": [
+          "Janglim.FrontEnd.ParsingErrorInfo"
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "overlapping-valid-path",
+    "CanonicalOracleConflicts": 1,
+    "LalrOracleConflicts": 1,
+    "Reverse": false,
+    "HasConflicts": true,
+    "ConflictCount": 2,
+    "ConflictReport": "2 grammar conflict(s):\r\n  state I4: reduce-reduce conflict (on 'a')\r\n  state I6: reduce-reduce conflict (on 'U')",
+    "Completed": [
+      {
+        "State": 1,
+        "Item": "Accept -> S•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 4,
+        "Item": "B -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 4,
+        "Item": "C -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 6,
+        "Item": "S -> A U•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 6,
+        "Item": "U -> U•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 7,
+        "Item": "A -> B x•",
+        "LookAhead": []
+      },
+      {
+        "State": 8,
+        "Item": "S -> C x•",
+        "LookAhead": [
+          "EOF"
+        ]
+      }
+    ],
+    "Outcomes": [
+      {
+        "Input": "ax",
+        "Success": false,
+        "Exception": "Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 472\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 303\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 332",
+        "Errors": [
+          "Janglim.FrontEnd.ParsingErrorInfo"
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "overlapping-valid-path",
+    "CanonicalOracleConflicts": 1,
+    "LalrOracleConflicts": 1,
+    "Reverse": true,
+    "HasConflicts": true,
+    "ConflictCount": 2,
+    "ConflictReport": "2 grammar conflict(s):\r\n  state I3: reduce-reduce conflict (on 'a')\r\n  state I7: reduce-reduce conflict (on 'U')",
+    "Completed": [
+      {
+        "State": 1,
+        "Item": "Accept -> S•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 3,
+        "Item": "C -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 3,
+        "Item": "B -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 6,
+        "Item": "S -> C x•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 7,
+        "Item": "S -> A U•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 7,
+        "Item": "U -> U•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 8,
+        "Item": "A -> B x•",
+        "LookAhead": []
+      }
+    ],
+    "Outcomes": [
+      {
+        "Input": "ax",
+        "Success": true,
+        "Exception": null,
+        "Errors": []
+      }
+    ]
+  },
+  {
+    "Name": "overlap-nonproductive-left-tail",
+    "CanonicalOracleConflicts": 0,
+    "LalrOracleConflicts": 0,
+    "Reverse": false,
+    "HasConflicts": true,
+    "ConflictCount": 1,
+    "ConflictReport": "1 grammar conflict(s):\r\n  state I4: reduce-reduce conflict (on 'a')",
+    "Completed": [
+      {
+        "State": 1,
+        "Item": "Accept -> S•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 4,
+        "Item": "B -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 4,
+        "Item": "C -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 6,
+        "Item": "S -> A U•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 7,
+        "Item": "A -> B x•",
+        "LookAhead": []
+      },
+      {
+        "State": 8,
+        "Item": "S -> C x•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 9,
+        "Item": "U -> U u•",
+        "LookAhead": [
+          "EOF",
+          "u"
+        ]
+      }
+    ],
+    "Outcomes": [
+      {
+        "Input": "ax",
+        "Success": false,
+        "Exception": "Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 472\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 303\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 332",
+        "Errors": [
+          "Janglim.FrontEnd.ParsingErrorInfo"
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "overlap-nonproductive-left-tail",
+    "CanonicalOracleConflicts": 0,
+    "LalrOracleConflicts": 0,
+    "Reverse": true,
+    "HasConflicts": true,
+    "ConflictCount": 1,
+    "ConflictReport": "1 grammar conflict(s):\r\n  state I3: reduce-reduce conflict (on 'a')",
+    "Completed": [
+      {
+        "State": 1,
+        "Item": "Accept -> S•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 3,
+        "Item": "C -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 3,
+        "Item": "B -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 6,
+        "Item": "S -> C x•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 7,
+        "Item": "S -> A U•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 8,
+        "Item": "A -> B x•",
+        "LookAhead": []
+      },
+      {
+        "State": 9,
+        "Item": "U -> U u•",
+        "LookAhead": [
+          "EOF",
+          "u"
+        ]
+      }
+    ],
+    "Outcomes": [
+      {
+        "Input": "ax",
+        "Success": true,
+        "Exception": null,
+        "Errors": []
+      }
+    ]
+  },
+  {
+    "Name": "productive-real-conflict-control",
+    "CanonicalOracleConflicts": 1,
+    "LalrOracleConflicts": 1,
+    "Reverse": false,
+    "HasConflicts": true,
+    "ConflictCount": 1,
+    "ConflictReport": "1 grammar conflict(s):\r\n  state I4: reduce-reduce conflict (on 'a')",
+    "Completed": [
+      {
+        "State": 1,
+        "Item": "Accept -> S•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 4,
+        "Item": "B -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 4,
+        "Item": "C -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 6,
+        "Item": "S -> A U•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 7,
+        "Item": "U -> v•",
+        "LookAhead": [
+          "EOF",
+          "u"
+        ]
+      },
+      {
+        "State": 8,
+        "Item": "A -> B x•",
+        "LookAhead": [
+          "v"
+        ]
+      },
+      {
+        "State": 9,
+        "Item": "S -> C x•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 10,
+        "Item": "U -> U u•",
+        "LookAhead": [
+          "EOF",
+          "u"
+        ]
+      }
+    ],
+    "Outcomes": [
+      {
+        "Input": "ax",
+        "Success": false,
+        "Exception": "Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 472\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 303\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 332",
+        "Errors": [
+          "Janglim.FrontEnd.ParsingErrorInfo"
+        ]
+      },
+      {
+        "Input": "axv",
+        "Success": true,
+        "Exception": null,
+        "Errors": []
+      },
+      {
+        "Input": "axvu",
+        "Success": true,
+        "Exception": null,
+        "Errors": []
+      }
+    ]
+  },
+  {
+    "Name": "productive-real-conflict-control",
+    "CanonicalOracleConflicts": 1,
+    "LalrOracleConflicts": 1,
+    "Reverse": true,
+    "HasConflicts": true,
+    "ConflictCount": 1,
+    "ConflictReport": "1 grammar conflict(s):\r\n  state I3: reduce-reduce conflict (on 'a')",
+    "Completed": [
+      {
+        "State": 1,
+        "Item": "Accept -> S•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 3,
+        "Item": "C -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 3,
+        "Item": "B -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 6,
+        "Item": "S -> C x•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 7,
+        "Item": "S -> A U•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 8,
+        "Item": "U -> v•",
+        "LookAhead": [
+          "EOF",
+          "u"
+        ]
+      },
+      {
+        "State": 9,
+        "Item": "A -> B x•",
+        "LookAhead": [
+          "v"
+        ]
+      },
+      {
+        "State": 10,
+        "Item": "U -> U u•",
+        "LookAhead": [
+          "EOF",
+          "u"
+        ]
+      }
+    ],
+    "Outcomes": [
+      {
+        "Input": "ax",
+        "Success": true,
+        "Exception": null,
+        "Errors": []
+      },
+      {
+        "Input": "axv",
+        "Success": false,
+        "Exception": "Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 472\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 303\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 332",
+        "Errors": [
+          "Janglim.FrontEnd.ParsingErrorInfo"
+        ]
+      },
+      {
+        "Input": "axvu",
+        "Success": false,
+        "Exception": "Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 472\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 303\r\n   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs:line 332",
+        "Errors": [
+          "Janglim.FrontEnd.ParsingErrorInfo"
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "pruned-valid-path",
+    "CanonicalOracleConflicts": 0,
+    "LalrOracleConflicts": 0,
+    "Reverse": false,
+    "HasConflicts": false,
+    "ConflictCount": 0,
+    "ConflictReport": "no grammar conflicts",
+    "Completed": [
+      {
+        "State": 1,
+        "Item": "Accept -> S•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 3,
+        "Item": "C -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 4,
+        "Item": "S -> C x•",
+        "LookAhead": [
+          "EOF"
+        ]
+      }
+    ],
+    "Outcomes": [
+      {
+        "Input": "ax",
+        "Success": true,
+        "Exception": null,
+        "Errors": []
+      }
+    ]
+  },
+  {
+    "Name": "pruned-valid-path",
+    "CanonicalOracleConflicts": 0,
+    "LalrOracleConflicts": 0,
+    "Reverse": true,
+    "HasConflicts": false,
+    "ConflictCount": 0,
+    "ConflictReport": "no grammar conflicts",
+    "Completed": [
+      {
+        "State": 1,
+        "Item": "Accept -> S•",
+        "LookAhead": [
+          "EOF"
+        ]
+      },
+      {
+        "State": 3,
+        "Item": "C -> a•",
+        "LookAhead": [
+          "x"
+        ]
+      },
+      {
+        "State": 4,
+        "Item": "S -> C x•",
+        "LookAhead": [
+          "EOF"
+        ]
+      }
+    ],
+    "Outcomes": [
+      {
+        "Input": "ax",
+        "Success": true,
+        "Exception": null,
+        "Errors": []
+      }
+    ]
+  }
+]

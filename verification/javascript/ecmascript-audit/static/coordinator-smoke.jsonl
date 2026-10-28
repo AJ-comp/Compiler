@@ -1,0 +1,3 @@
+{"id":"valid","path":"coordinator-smoke","variant":"strict","inputKind":"Script","mode":"Strict","webCompatibility":false,"expectAccept":true,"source":"const value=1;","sourceSha256":"6c30e40459eeb453142e0250dadb684536522c74d378ed2b553d7d3f90ead485"}
+{"id":"invalid","path":"coordinator-smoke","variant":"strict","inputKind":"Script","mode":"Strict","webCompatibility":false,"expectAccept":false,"source":"const = ;","sourceSha256":"90cdcfe37b79625ac6d36d1cbea4e5e6ee678a5489315769eee0a4d08432ecd4"}
+{"id":"early","path":"coordinator-smoke","variant":"strict","inputKind":"Script","mode":"Strict","webCompatibility":false,"expectAccept":false,"source":"let x; let x;","sourceSha256":"ae1611e10aa23940f012ede8ece88d6a662f97986f69e8de2fab2f6fac9fd52d"}

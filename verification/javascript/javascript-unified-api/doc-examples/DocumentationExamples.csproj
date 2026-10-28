@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AJ.Common"><HintPath>lib/AJ.Common.dll</HintPath></Reference>
+    <Reference Include="ConsoleTables"><HintPath>lib/ConsoleTables.dll</HintPath></Reference>
+    <Reference Include="Newtonsoft.Json"><HintPath>lib/Newtonsoft.Json.dll</HintPath></Reference>
+    <Reference Include="Parse"><HintPath>lib/Parse.dll</HintPath></Reference>
+    <Reference Include="Parse.FrontEnd"><HintPath>lib/Parse.FrontEnd.dll</HintPath></Reference>
+    <Reference Include="Parse.FrontEnd.Grammars"><HintPath>lib/Parse.FrontEnd.Grammars.dll</HintPath></Reference>
+    <Reference Include="Parse.FrontEnd.Grammars.Ebnf"><HintPath>lib/Parse.FrontEnd.Grammars.Ebnf.dll</HintPath></Reference>
+    <Reference Include="Parse.FrontEnd.Parsers"><HintPath>lib/Parse.FrontEnd.Parsers.dll</HintPath></Reference>
+    <Reference Include="Wcwidth"><HintPath>lib/Wcwidth.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

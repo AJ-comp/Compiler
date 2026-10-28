@@ -1,0 +1,41 @@
+{
+  "assembly": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\tools\\Janglim.Test262\\bin\\Release\\net8.0\\Parse.FrontEnd.Grammars.Ebnf.dll",
+  "assemblySha256": "b8d7f2ff57e033cf7241514db2493af1ccd32c862c0f98e1f1fdf60eb0802fee",
+  "reference": {
+    "node": "v24.12.0",
+    "unicode": "16.0"
+  },
+  "seed": 20261021,
+  "randomCount": 18000,
+  "transport": "Base64 of exact little-endian UTF-16 code units, including unmatched surrogates",
+  "reports": [
+    {
+      "kind": "generated",
+      "cases": 66546,
+      "mismatches": 55,
+      "unexpectedExceptions": 0,
+      "verifiedOriginalUtf16Hashes": 66546,
+      "casesSha256": "952423725d40c5c18416e71b50fb858d465a9a3fa428578487d2018a113f5811",
+      "transportSha256": "7f4e39d72d7fbf323a79ebb5a81a8996543eeaf895268d620226707b6ebf3add"
+    },
+    {
+      "kind": "constructors",
+      "cases": 752,
+      "mismatches": 0,
+      "unexpectedExceptions": 0,
+      "verifiedOriginalUtf16Hashes": 752,
+      "casesSha256": "0b8d76fe2ef480f9132e30df7d5d56b82c2bcc44e5facff7b5230b18a78829df",
+      "transportSha256": "125f1bb5a159648089e96046811d7feee8a0847eda6e9c6141dc8de0d9efe329"
+    },
+    {
+      "kind": "source-strings",
+      "cases": 33084,
+      "mismatches": 128,
+      "unexpectedExceptions": 0,
+      "verifiedOriginalUtf16Hashes": 33084,
+      "casesSha256": "0735972172325486132206e660b5d98885b3bd689fcb206f78e54e2583c8666e",
+      "transportSha256": "9d43f23f81e8def5ebb896222102776b45967b52a8924f4437b0eb308fe93380"
+    }
+  ],
+  "skippedSourceLiterals": []
+}

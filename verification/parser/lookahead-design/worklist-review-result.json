@@ -1,0 +1,16 @@
+{
+  "designModelOnly": true,
+  "originalTableUnchanged": true,
+  "originalStillRejectsA": true,
+  "nodes": 20,
+  "edges": 19,
+  "dequeued": 20,
+  "checked_items": 20,
+  "canonical_lr1_lalr_differences": [],
+  "bison_crosscheck": {
+    "source": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\typescript\\lookahead-audit-bison\\tiny-bnf.xml",
+    "lookahead_items_checked": 8,
+    "unmatched_nonaccept_state_cores": [],
+    "lookahead_differences": []
+  }
+}

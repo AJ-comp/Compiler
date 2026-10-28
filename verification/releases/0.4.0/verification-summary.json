@@ -1,0 +1,50 @@
+{
+  "engineVersion": "0.4.0",
+  "playgroundVersion": "1.1.0",
+  "mcpVersion": "0.1.0",
+  "c11CoreVersion": "1.0.0",
+  "status": "prepared locally",
+  "verifiedAtUtc": "2026-10-19T03:46:18.3848787Z",
+  "checks": {
+    "defaultSolutionDebug": {
+      "errors": 0,
+      "warnings": 5
+    },
+    "defaultSolutionRelease": {
+      "errors": 0,
+      "warnings": 5
+    },
+    "parserTests": {
+      "passed": 692,
+      "skipReason": "Existing SLR known-issue test",
+      "skipped": 1,
+      "failed": 0
+    },
+    "mcpTests": {
+      "passed": 51,
+      "skipped": 0,
+      "failed": 0
+    },
+    "uiTests": {
+      "passed": 22,
+      "failed": 0
+    },
+    "releaseInfrastructureTests": {
+      "passed": 12,
+      "failed": 0
+    },
+    "publicFrontendBuild": "passed",
+    "playgroundPublish": "passed",
+    "mcpPublish": "passed",
+    "nugetPackage": "packages/Janglim.0.4.0.nupkg",
+    "packageContentReport": "package-verification.json",
+    "bundledAssemblyVersions": "All 9 engine assemblies are 0.4.0.0",
+    "packageConsumer": "Passed README quick start, predicate example, typed token examples, Reject rule, and exact comment/newline trivia",
+    "dockerContainerBuild": "Not run: local Docker Desktop Linux engine is unavailable"
+  },
+  "remoteActions": {
+    "azureDeploy": false,
+    "nugetPublish": false,
+    "push": false
+  }
+}

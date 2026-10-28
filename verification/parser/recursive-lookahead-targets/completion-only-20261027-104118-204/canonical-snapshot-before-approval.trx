@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="4d5bc1e1-55c3-404c-996f-183b291544c6" name="AhjLv@JJW-PC 2026-10-27 19:43:07" runUser="JJW-PC\AhjLv" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-27T19:43:07.2427082+09:00" queuing="2026-10-27T19:43:07.2427084+09:00" start="2026-10-27T19:43:05.4480955+09:00" finish="2026-10-27T19:43:07.2477743+09:00" />
+  <TestSettings name="default" id="c2b2b8f9-3c7b-4efb-bf02-05d3c1331b76">
+    <Deployment runDeploymentRoot="AhjLv_JJW-PC_2026-10-27_19_43_07" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="ccc21677-42d7-4ce1-80d6-c76d73626bba" testId="9b247825-2de5-8878-991e-8848c5a73452" testName="Janglim.FrontEnd.Parsers.Tests.LalrTableTests.Canonical_matches_snapshot" computerName="JJW-PC" duration="00:00:00.0385840" startTime="2026-10-27T19:43:07.1288875+09:00" endTime="2026-10-27T19:43:07.1289034+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ccc21677-42d7-4ce1-80d6-c76d73626bba">
+      <Output>
+        <ErrorInfo>
+          <Message>Snapshot 'Ex1.lalr.canonical' differs from the approved baseline.
+  approved: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Infra\__snapshots__\Ex1.lalr.canonical.approved.txt
+  received: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Infra\__snapshots__\Ex1.lalr.canonical.received.txt
+If this change is intended, overwrite the .approved.txt with the .received.txt.</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.Infra.Snapshot.Match(String name, String actual) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Infra\Snapshot.cs:line 44&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.LalrTableTests.Canonical_matches_snapshot() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Variants\LalrTableTests.cs:line 54&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrTableTests.Canonical_matches_snapshot" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\tests\parse.frontend.parsers.tests\bin\release\net8.0\parse.frontend.parsers.tests.dll" id="9b247825-2de5-8878-991e-8848c5a73452">
+      <Execution id="ccc21677-42d7-4ce1-80d6-c76d73626bba" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrTableTests" name="Canonical_matches_snapshot" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="9b247825-2de5-8878-991e-8848c5a73452" executionId="ccc21677-42d7-4ce1-80d6-c76d73626bba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="목록에 없는 결과" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="로드된 모든 결과" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)&#xD;
+[xUnit.net 00:00:00.08]   Discovering: Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:01.19]   Discovered:  Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:01.20]   Starting:    Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:01.27]       Snapshot 'Ex1.lalr.canonical' differs from the approved baseline.
+  approved: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Infra\__snapshots__\Ex1.lalr.canonical.approved.txt
+  received: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Infra\__snapshots__\Ex1.lalr.canonical.received.txt
+If this change is intended, overwrite the .approved.txt with the .received.txt.&#xD;
+[xUnit.net 00:00:01.27]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.27]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Infra\Snapshot.cs(44,0): at Janglim.FrontEnd.Parsers.Tests.Infra.Snapshot.Match(String name, String actual)&#xD;
+[xUnit.net 00:00:01.27]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Variants\LalrTableTests.cs(54,0): at Janglim.FrontEnd.Parsers.Tests.LalrTableTests.Canonical_matches_snapshot()&#xD;
+[xUnit.net 00:00:01.27]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:01.27]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:01.28]   Finished:    Parse.FrontEnd.Parsers.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-27T19:43:07.1271649+09:00">
+        <Text>[xUnit.net 00:00:01.27]     Janglim.FrontEnd.Parsers.Tests.LalrTableTests.Canonical_matches_snapshot [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

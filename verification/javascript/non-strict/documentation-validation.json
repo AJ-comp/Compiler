@@ -1,0 +1,11 @@
+{
+  "html": "docs/ko/javascript-non-strict.html",
+  "htmlBalanced": true,
+  "htmlIdsUnique": true,
+  "localAnchorsExist": true,
+  "sections": 9,
+  "stylesheetReused": true,
+  "existingReadmeAuthorAttributionUnchanged": true,
+  "readmeCodeFencesBalanced": true,
+  "buildOrTestCountsAdded": false
+}

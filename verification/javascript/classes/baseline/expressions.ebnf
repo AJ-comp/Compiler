@@ -1,0 +1,110 @@
+# ECMAScript 2026 (17th edition), section 13: strict Script expression grammar.
+# Source: https://tc39.es/ecma262/2026/multipage/ecmascript-language-expressions.html
+# Entry context: strict Script; ordinary and non-async arrow functions introduce bodies.
+# Lexical pattern placeholders are filled by JavaScriptExpressionGrammar.
+# Assignment/update targets, destructuring patterns, and escaped reserved words require
+# the host's early-error checks. Array/Object literals cover assignment patterns for '='.
+# Class/async/generator bodies, private names and import/meta syntax
+# are developed in subsequent language stages.
+
+Expression : AssignmentExpression | Expression ',' AssignmentExpression ;
+
+# Assignment and conditional expressions associate to the right.
+AssignmentExpression : ConditionalExpression | LeftHandSideExpression AssignmentOperator AssignmentExpression | ArrowFunction ;
+AssignmentOperator : '=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '>>>=' | '&=' | '^=' | '|=' | '**=' | '&&=' | '||=' | '??=' ;
+ConditionalExpression : ShortCircuitExpression | ShortCircuitExpression '?' AssignmentExpression ':' AssignmentExpression ;
+
+# Coalesce and logical OR/AND are separate branches, so a ?? b || c needs parentheses.
+ShortCircuitExpression : LogicalORExpression | CoalesceExpression ;
+LogicalORExpression : LogicalANDExpression | LogicalORExpression '||' LogicalANDExpression ;
+LogicalANDExpression : BitwiseORExpression | LogicalANDExpression '&&' BitwiseORExpression ;
+CoalesceExpression : BitwiseORExpression '??' BitwiseORExpression | CoalesceExpression '??' BitwiseORExpression ;
+
+BitwiseORExpression : BitwiseXORExpression | BitwiseORExpression '|' BitwiseXORExpression ;
+BitwiseXORExpression : BitwiseANDExpression | BitwiseXORExpression '^' BitwiseANDExpression ;
+BitwiseANDExpression : EqualityExpression | BitwiseANDExpression '&' EqualityExpression ;
+EqualityExpression : RelationalExpression | EqualityExpression EqualityOperator RelationalExpression ;
+EqualityOperator : '==' | '!=' | '===' | '!==' ;
+RelationalExpression : ShiftExpression | RelationalExpression RelationalOperator ShiftExpression ;
+RelationalOperator : '<' | '>' | '<=' | '>=' | 'instanceof' | 'in' ;
+ShiftExpression : AdditiveExpression | ShiftExpression ShiftOperator AdditiveExpression ;
+ShiftOperator : '<<' | '>>' | '>>>' ;
+AdditiveExpression : MultiplicativeExpression | AdditiveExpression AdditiveOperator MultiplicativeExpression ;
+AdditiveOperator : '+' | '-' ;
+MultiplicativeExpression : ExponentiationExpression | MultiplicativeExpression MultiplicativeOperator ExponentiationExpression ;
+MultiplicativeOperator : '*' | '/' | '%' ;
+
+# The left operand of ** is an UpdateExpression, not an arbitrary UnaryExpression.
+# This accepts (-2) ** 2 and 2 ** -2 while rejecting -2 ** 2.
+ExponentiationExpression : UnaryExpression | UpdateExpression '**' ExponentiationExpression ;
+UnaryExpression : UpdateExpression | UnaryOperator UnaryExpression ;
+UnaryOperator : 'delete' | 'void' | 'typeof' | '+' | '-' | '~' | '!' ;
+UpdateExpression : SimpleUpdateExpression | LeftHandSideExpression NoLineTerminator PostfixOperator | PrefixOperator UnaryExpression ;
+SimpleUpdateExpression : LeftHandSideExpression {NoPostfix()}? ;
+PrefixOperator : '++' | '--' ;
+PostfixOperator : '++' | '--' ;
+NoLineTerminator : {NoLineBreak()}? ;
+
+# Distinct new/member/call productions preserve ECMAScript's constructor binding rules.
+LeftHandSideExpression : NewExpression | CallExpression | OptionalExpression ;
+NewExpression : MemberExpression | 'new' NewExpression ;
+MemberExpression : PrimaryExpression | MemberExpression MemberAccess | MemberExpression TaggedTemplate | 'new' MemberExpression Arguments ;
+CallExpression : MemberExpression Arguments | CallExpression Arguments | CallExpression MemberAccess | CallExpression TaggedTemplate ;
+MemberAccess : '.' PropertyIdentifierName | '[' Expression ']' ;
+
+OptionalExpression : MemberExpression OptionalChain | CallExpression OptionalChain | OptionalExpression OptionalChain ;
+OptionalChain : OptionalChainStart | OptionalChain MemberAccess | OptionalChain Arguments ;
+OptionalChainStart : OptionalChainPunctuator PropertyIdentifierName | OptionalChainPunctuator '[' Expression ']' | OptionalChainPunctuator Arguments ;
+
+Arguments : '(' ')' | '(' ArgumentList ')' | '(' ArgumentList ',' ')' ;
+ArgumentList : Argument | ArgumentList ',' Argument ;
+Argument : AssignmentExpression | SpreadElement ;
+SpreadElement : '...' AssignmentExpression ;
+
+PrimaryExpression : IdentifierReference | Literal | 'this' | ParenthesizedExpression | ArrayLiteral | ObjectLiteral | TemplateLiteral | FunctionExpression ;
+# Cover syntax: only an actual arrow head may use empty/trailing-comma/rest forms.
+# The host reinterprets arrow parameters as bindings and rejects these forms elsewhere.
+ParenthesizedExpression : '(' Expression ')' | '(' ')' | '(' Expression ',' ')'
+                        | '(' Expression ',' SpreadElement ')' | '(' SpreadElement ')' ;
+Literal : NumericLiteral | StringLiteral | RegularExpressionLiteral | 'null' | 'true' | 'false' ;
+
+# Separate wrappers retain ECMAScript's Tagged parameter in the concrete tree.
+# Only the template's own text segments inherit Tagged; expressions inside ${...} do not.
+# OptionalChain has no TaggedTemplate suffix, so a?.b`text` requires (a?.b)`text`.
+TemplateLiteral : TemplateContent ;
+TaggedTemplate : TemplateContent ;
+TemplateContent : NoSubstitutionTemplate | TemplateHead Expression TemplateSpans ;
+TemplateSpans : TemplateTail | TemplateMiddleList TemplateTail ;
+TemplateMiddleList : TemplateMiddle Expression | TemplateMiddleList TemplateMiddle Expression ;
+
+# await is an identifier in a Script expression outside an async function.
+# Every ReservedWord also occurs as a literal below so it cannot fall through as an identifier.
+IdentifierReference : IdentifierName | 'await' | 'of' ;
+PropertyIdentifierName : IdentifierName | ReservedWord | 'of' ;
+ReservedWord : 'await' | 'break' | 'case' | 'catch' | 'class' | 'const' | 'continue' | 'debugger' | 'default' | 'delete' | 'do' | 'else' | 'enum' | 'export' | 'extends' | 'false' | 'finally' | 'for' | 'function' | 'if' | 'import' | 'in' | 'instanceof' | 'new' | 'null' | 'return' | 'super' | 'switch' | 'this' | 'throw' | 'true' | 'try' | 'typeof' | 'var' | 'void' | 'while' | 'with' | 'yield' | 'let' | 'static' | 'implements' | 'interface' | 'package' | 'private' | 'protected' | 'public' ;
+
+# Elisions are represented by commas without elements: [,], [,,], and [a,,b].
+ArrayLiteral : '[' ']' | '[' ArrayElements ']' ;
+ArrayElements : ArrayElement | ArrayElement ',' | ArrayElement ',' ArrayElements | ',' | ',' ArrayElements ;
+ArrayElement : AssignmentExpression | SpreadElement ;
+
+# Object data properties, shorthand properties, computed keys, and spread properties.
+# CoverInitializedName also covers shorthand defaults in object assignment patterns.
+# The host rejects CoverInitializedName when this object is an ordinary object literal.
+# Methods/accessors belong to the subsequent object/class method stage.
+ObjectLiteral : '{' '}' | '{' PropertyDefinitionList '}' | '{' PropertyDefinitionList ',' '}' ;
+PropertyDefinitionList : PropertyDefinition | PropertyDefinitionList ',' PropertyDefinition ;
+PropertyDefinition : IdentifierReference | CoverInitializedName | PropertyName ':' AssignmentExpression | SpreadElement ;
+CoverInitializedName : IdentifierReference '=' AssignmentExpression ;
+PropertyName : PropertyIdentifierName | StringLiteral | NumericLiteral | '[' AssignmentExpression ']' ;
+
+IdentifierName := Identifier "{{IdentifierName}}" ;
+NumericLiteral := NumberLiteral "{{NumericLiteral}}" ;
+StringLiteral := StringLiteral "{{StringLiteral}}" ;
+RegularExpressionLiteral := StringLiteral "{{RegularExpressionLiteral}}" ;
+NoSubstitutionTemplate := StringLiteral "{{NoSubstitutionTemplate}}" ;
+TemplateHead := StringLiteral "{{TemplateHead}}" ;
+TemplateMiddle := StringLiteral "{{TemplateMiddle}}" ;
+TemplateTail := StringLiteral "{{TemplateTail}}" ;
+OptionalChainPunctuator := Identifier "\?\.(?![0-9])" ;
+Comment := Comment "{{Comment}}" ;

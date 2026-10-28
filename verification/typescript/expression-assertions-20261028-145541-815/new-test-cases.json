@@ -1,0 +1,32 @@
+[
+  {
+    "File": "TypeScriptAsSatisfiesTests.cs",
+    "Cases": 77,
+    "Sha256": "D6DD8453666EAE97FB7DB4B0A496B0B470EC73AB6B64E291FAF26D57E71C27F9"
+  },
+  {
+    "File": "TypeScriptNonNullTests.cs",
+    "Cases": 66,
+    "Sha256": "F4B9DD30BA23E0C826B162EF0976E734F46CEA9D45789934D08D8EFFF1643FF5"
+  },
+  {
+    "File": "TypeScriptAssertionLexicalTests.cs",
+    "Cases": 36,
+    "Sha256": "6132E103E9EE55FDA2C07902E4D3EB50D624877EDF49C6E6EA954047CF551122"
+  },
+  {
+    "File": "TypeScriptAssertionCompositionTests.cs",
+    "Cases": 18,
+    "Sha256": "8AC8FA7A1554D84C759E76C9FC555FF2EAB1F8DF9A57586288F4A762CB2E95B7"
+  },
+  {
+    "File": "TypeScriptAssertionLoopTests.cs",
+    "Cases": 14,
+    "Sha256": "DD537A7BF9C2C754F9921A63912E98D47824C2FDE8321BCB2A2AACDB3D24098C"
+  },
+  {
+    "File": "TypeScriptAssertionEntryPointTests.cs",
+    "Cases": 20,
+    "Sha256": "BB96B8C3DE6447B520870B7A33789A4FF461A2357E0C9A13FC80D54D2CF13D5D"
+  }
+]

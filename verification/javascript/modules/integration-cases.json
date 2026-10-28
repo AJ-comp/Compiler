@@ -1,0 +1,488 @@
+[
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "import('module');",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "import('module',);",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "import('module', {},);",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "import('module', {with: {type: 'json'}});",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "import(path, options);",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "import(1, false);",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "import('module', 1);",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "import('module', null);",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "import('module', value => value);",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "import('module')`tag`;",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "new (import('module'));",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "const f = () => import('module');",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "function f() { return import('module'); }",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "class A { field = import('module'); static { import('module'); } }",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "const value = `${import('module')}`;",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "let await; await = import('module');",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "const f = await => import(await);",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "var from = 1, as = 2, meta = 3; from + as + meta;",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "import('module') / divisor;",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "import('module'); /a/.test(value);",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "const value = import('module', (first, second));",
+    "entry": "script"
+  },
+  {
+    "name": "Dynamic_import_is_valid_in_Script_without_changing_await_identifier_rules",
+    "valid": true,
+    "input": "const value = import('module', /a/);",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "import value from 'module';",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "import 'module';",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "export {};",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "export default 1;",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "import.meta;",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "function f() { return import.meta; }",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "const f = () => import.meta;",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "class A { field = import.meta; }",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "class A { static { import.meta; } }",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "`${import.meta}`;",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "import();",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "import(...values);",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "import('module', {}, third);",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "import?.('module');",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "new import('module');",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "await import('module');",
+    "entry": "script"
+  },
+  {
+    "name": "Script_rejects_static_module_items_and_import_meta_in_all_nested_contexts",
+    "valid": false,
+    "input": "for await (const value of values) ;",
+    "entry": "script"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module')",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module',)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module', {},)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module', {with: {type: 'json'}})",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import(path, options)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import(1, false)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module', null)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module', true)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import((first, second))",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module').then(handler)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module')?.value",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module')`tag`",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "new (import('module'))",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module') / divisor",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "() => import('module')",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "function() { return import('module'); }",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "class { method() { return import('module'); } }",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "`${import('module')}`",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "[import('one'), import('two')]",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "({value: import('module')})",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module', options = value)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module', (first, second))",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_accepts_dynamic_imports_and_chains_as_ordinary_expressions",
+    "valid": true,
+    "input": "import('module', () => /a/)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "import.meta",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "import.meta.url",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "function() { return import.meta; }",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "() => import.meta",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "class { field = import.meta; }",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "`${import.meta}`",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "import value from 'module'",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "export default 1",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "await import('module')",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "import()",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "import(...values)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "import('module', ...values)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "import('module', {}, third)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "import('module',,)",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "import?.('module')",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "new import('module')",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "import.other",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "import`module`",
+    "entry": "expression"
+  },
+  {
+    "name": "Expression_entry_preserves_its_Script_goal_and_rejects_module_only_syntax",
+    "valid": false,
+    "input": "import('module'); next()",
+    "entry": "expression"
+  }
+]

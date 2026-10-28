@@ -1,0 +1,86 @@
+[
+  {
+    "Case": "base",
+    "ExitCode": 0,
+    "ConflictsReported": false,
+    "StateCount": 4,
+    "Diagnostics": "base.y: warning: 3 nonterminals useless in grammar [-Wother]\r\nbase.y: warning: 4 rules useless in grammar [-Wother]\r\nbase.y:5.1: warning: nonterminal useless in grammar: A [-Wother]\r\n    5 | ' ;\r\n      | ^\r\nbase.y:6.1: warning: nonterminal useless in grammar: B [-Wother]\r\n    6 | ' ;\r\n      | ^\r\nbase.y:7.1: warning: nonterminal useless in grammar: U [-Wother]\r\n    7 | ' ;\r\n      | ^\r\nbase.y:4.5-7: warning: rule useless in grammar [-Wother]\r\n    4 | S\r\n      |     ^~~\r\n"
+  },
+  {
+    "Case": "variant",
+    "ExitCode": 0,
+    "ConflictsReported": false,
+    "StateCount": 6,
+    "Diagnostics": "variant.y: warning: 3 nonterminals useless in grammar [-Wother]\r\nvariant.y: warning: 4 rules useless in grammar [-Wother]\r\nvariant.y:5.1: warning: nonterminal useless in grammar: A [-Wother]\r\n    5 | x' ;\r\n      | ^\r\nvariant.y:6.1: warning: nonterminal useless in grammar: B [-Wother]\r\n    6 | x' ;\r\n      | ^\r\nvariant.y:8.1: warning: nonterminal useless in grammar: U [-Wother]\r\n    8 | ' ;\r\n      | ^\r\nvariant.y:4.5-7: warning: rule useless in grammar [-Wother]\r\n    4 |  S\r\n      |     ^~~\r\n"
+  },
+  {
+    "Case": "pruned",
+    "ExitCode": 0,
+    "ConflictsReported": false,
+    "StateCount": 6,
+    "Diagnostics": null
+  },
+  {
+    "Case": "witness",
+    "ExitCode": 0,
+    "ConflictsReported": false,
+    "StateCount": 6,
+    "Diagnostics": "witness.y: warning: 3 nonterminals useless in grammar [-Wother]\r\nwitness.y: warning: 4 rules useless in grammar [-Wother]\r\nwitness.y:5.1: warning: nonterminal useless in grammar: A [-Wother]\r\n    5 | 'x' ;\r\n      | ^\r\nwitness.y:6.1: warning: nonterminal useless in grammar: B [-Wother]\r\n    6 | 'x' ;\r\n      | ^\r\nwitness.y:8.1: warning: nonterminal useless in grammar: U [-Wother]\r\n    8 | x' ;\r\n      | ^\r\nwitness.y:4.5-7: warning: rule useless in grammar [-Wother]\r\n    4 | t S\r\n      |     ^~~\r\n"
+  },
+  {
+    "Case": "variant-reverse",
+    "ExitCode": 0,
+    "ConflictsReported": false,
+    "StateCount": 6,
+    "Diagnostics": "variant-reverse.y: warning: 3 nonterminals useless in grammar [-Wother]\r\nvariant-reverse.y: warning: 4 rules useless in grammar [-Wother]\r\nvariant-reverse.y:4.1: warning: nonterminal useless in grammar: U [-Wother]\r\n    4 |  S\r\n      | ^\r\nvariant-reverse.y:6.1: warning: nonterminal useless in grammar: B [-Wother]\r\n    6 |  S\r\n      | ^\r\nvariant-reverse.y:7.1: warning: nonterminal useless in grammar: A [-Wother]\r\n    7 | tart S\r\n      | ^\r\nvariant-reverse.y:8.13-15: warning: rule useless in grammar [-Wother]\r\n    8 | tart S\r\n      |             ^~~\r\n"
+  },
+  {
+    "Case": "witness-reverse",
+    "ExitCode": 0,
+    "ConflictsReported": false,
+    "StateCount": 6,
+    "Diagnostics": "witness-reverse.y: warning: 3 nonterminals useless in grammar [-Wother]\r\nwitness-reverse.y: warning: 4 rules useless in grammar [-Wother]\r\nwitness-reverse.y:4.1: warning: nonterminal useless in grammar: U [-Wother]\r\n    4 |  S\r\n      | ^\r\nwitness-reverse.y:6.1: warning: nonterminal useless in grammar: B [-Wother]\r\n    6 |  S\r\n      | ^\r\nwitness-reverse.y:7.1: warning: nonterminal useless in grammar: A [-Wother]\r\n    7 | tart S\r\n      | ^\r\nwitness-reverse.y:8.13-15: warning: rule useless in grammar [-Wother]\r\n    8 | tart S\r\n      |             ^~~\r\n"
+  },
+  {
+    "Case": "all-dead",
+    "ExitCode": 1,
+    "ConflictsReported": false,
+    "StateCount": 0,
+    "Diagnostics": "all-dead.y: warning: 3 nonterminals useless in grammar [-Wother]\r\nall-dead.y: warning: 3 rules useless in grammar [-Wother]\r\nall-dead.y:2.8: error: start symbol S does not derive any sentence\r\n    2 | lalr\r\n      |        ^\r\n"
+  },
+  {
+    "Case": "right-recursive",
+    "ExitCode": 0,
+    "ConflictsReported": false,
+    "StateCount": 6,
+    "Diagnostics": "right-recursive.y: warning: 3 nonterminals useless in grammar [-Wother]\r\nright-recursive.y: warning: 4 rules useless in grammar [-Wother]\r\nright-recursive.y:5.1: warning: nonterminal useless in grammar: A [-Wother]\r\n    5 | 'x' ;\r\n      | ^\r\nright-recursive.y:6.1: warning: nonterminal useless in grammar: B [-Wother]\r\n    6 | 'x' ;\r\n      | ^\r\nright-recursive.y:8.1: warning: nonterminal useless in grammar: U [-Wother]\r\n    8 | x' ;\r\n      | ^\r\nright-recursive.y:4.5-7: warning: rule useless in grammar [-Wother]\r\n    4 | t S\r\n      |     ^~~\r\n"
+  },
+  {
+    "Case": "base-canonical",
+    "ExitCode": 0,
+    "ConflictsReported": false,
+    "StateCount": 4,
+    "Diagnostics": "base-canonical.y: warning: 3 nonterminals useless in grammar [-Wother]\r\nbase-canonical.y: warning: 4 rules useless in grammar [-Wother]\r\nbase-canonical.y:5.1: warning: nonterminal useless in grammar: A [-Wother]\r\n    5 | z' ;\r\n      | ^\r\nbase-canonical.y:6.1: warning: nonterminal useless in grammar: B [-Wother]\r\n    6 | z' ;\r\n      | ^\r\nbase-canonical.y:7.1: warning: nonterminal useless in grammar: U [-Wother]\r\n    7 | z' ;\r\n      | ^\r\nbase-canonical.y:4.5-7: warning: rule useless in grammar [-Wother]\r\n    4 |  S\r\n      |     ^~~\r\n"
+  },
+  {
+    "Case": "variant-canonical",
+    "ExitCode": 0,
+    "ConflictsReported": false,
+    "StateCount": 6,
+    "Diagnostics": "variant-canonical.y: warning: 3 nonterminals useless in grammar [-Wother]\r\nvariant-canonical.y: warning: 4 rules useless in grammar [-Wother]\r\nvariant-canonical.y:5.1: warning: nonterminal useless in grammar: A [-Wother]\r\n    5 | 'x' ;\r\n      | ^\r\nvariant-canonical.y:6.1: warning: nonterminal useless in grammar: B [-Wother]\r\n    6 | 'x' ;\r\n      | ^\r\nvariant-canonical.y:8.1: warning: nonterminal useless in grammar: U [-Wother]\r\n    8 | x' ;\r\n      | ^\r\nvariant-canonical.y:4.5-7: warning: rule useless in grammar [-Wother]\r\n    4 | t S\r\n      |     ^~~\r\n"
+  },
+  {
+    "Case": "pruned-canonical",
+    "ExitCode": 0,
+    "ConflictsReported": false,
+    "StateCount": 6,
+    "Diagnostics": null
+  },
+  {
+    "Case": "witness-canonical",
+    "ExitCode": 0,
+    "ConflictsReported": false,
+    "StateCount": 6,
+    "Diagnostics": "witness-canonical.y: warning: 3 nonterminals useless in grammar [-Wother]\r\nwitness-canonical.y: warning: 4 rules useless in grammar [-Wother]\r\nwitness-canonical.y:5.1: warning: nonterminal useless in grammar: A [-Wother]\r\n    5 |  'x' ;\r\n      | ^\r\nwitness-canonical.y:6.1: warning: nonterminal useless in grammar: B [-Wother]\r\n    6 |  'x' ;\r\n      | ^\r\nwitness-canonical.y:8.1: warning: nonterminal useless in grammar: U [-Wother]\r\n    8 | 'x' ;\r\n      | ^\r\nwitness-canonical.y:4.5-7: warning: rule useless in grammar [-Wother]\r\n    4 | rt S\r\n      |     ^~~\r\n"
+  }
+]

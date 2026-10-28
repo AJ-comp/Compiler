@@ -1,0 +1,11 @@
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-2026\\test262-es2026-archive.jsonl",
+  "profile": "module",
+  "skip": 0,
+  "processed": 696,
+  "outcomes": {
+    "pass": 696
+  },
+  "elapsedSeconds": 23.1681743,
+  "syntaxOnly": true
+}

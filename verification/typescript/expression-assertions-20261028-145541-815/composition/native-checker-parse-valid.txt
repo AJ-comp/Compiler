@@ -1,0 +1,4 @@
+artifacts/typescript/expression-assertions-20261028-145541-815/composition/case-12.ts(2,10): error TS17019: '!' at the end of a type is not valid TypeScript syntax. Did you mean to write 'number'?
+artifacts/typescript/expression-assertions-20261028-145541-815/composition/case-13.ts(2,17): error TS17019: '!' at the end of a type is not valid TypeScript syntax. Did you mean to write 'number'?
+artifacts/typescript/expression-assertions-20261028-145541-815/composition/case-16.ts(2,1): error TS2364: The left-hand side of an assignment expression must be a variable or a property access.
+artifacts/typescript/expression-assertions-20261028-145541-815/composition/case-17.ts(2,1): error TS2779: The left-hand side of an assignment expression may not be an optional property access.

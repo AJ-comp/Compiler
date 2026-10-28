@@ -1,0 +1,786 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="e7565fa7-e5e5-4c88-b831-98bc2a1ade5e" name="AhjLv@JJW-PC 2026-10-28 09:51:00" runUser="JJW-PC\AhjLv" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-28T09:51:00.0666329+09:00" queuing="2026-10-28T09:51:00.0666334+09:00" start="2026-10-28T09:50:50.4244578+09:00" finish="2026-10-28T09:51:00.3612485+09:00" />
+  <TestSettings name="default" id="7835bb67-eacd-46c1-9c13-12d9a40f87de">
+    <Deployment runDeploymentRoot="AhjLv_JJW-PC_2026-10-28_09_51_00" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="b9af428e-9aa0-43f4-b494-ac6005b7fe52" testId="3d6690b3-5cff-8f4b-6c84-ddde4234cef6" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(calculateRecursively: False)" computerName="JJW-PC" duration="00:00:00.0009704" startTime="2026-10-28T09:50:59.9911420+09:00" endTime="2026-10-28T09:50:59.9911421+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b9af428e-9aa0-43f4-b494-ac6005b7fe52">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure&#xD;
+Expected: True&#xD;
+Actual:   False</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(Boolean calculateRecursively) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 124&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="bff5d6a3-63d0-4f12-a613-253a5b5eb71d" testId="eb969769-ff86-cc30-4a20-81589e88f6af" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Completed_A_lookahead_distinguishes_nullable_and_required_suffixes(suffix: &quot;absent&quot;, expected: &quot;$&quot;)" computerName="JJW-PC" duration="00:00:00.0005156" startTime="2026-10-28T09:51:00.2292419+09:00" endTime="2026-10-28T09:51:00.2292420+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bff5d6a3-63d0-4f12-a613-253a5b5eb71d" />
+    <UnitTestResult executionId="d5f33ddb-5c02-47cd-92ad-e7f45fbb3425" testId="9d5d70cf-4e3f-2cec-340e-ecfbb2b1a8a9" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Absent_suffix_passes_EOF_through_a_productive_unit_production_chain" computerName="JJW-PC" duration="00:00:00.0020434" startTime="2026-10-28T09:51:00.2314013+09:00" endTime="2026-10-28T09:51:00.2314015+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d5f33ddb-5c02-47cd-92ad-e7f45fbb3425" />
+    <UnitTestResult executionId="0fefbcdc-51cf-40d9-b01e-191333edaab5" testId="865683c2-a0c8-c258-9b5d-c9f073430be9" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable&quot;, input: &quot;e&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0023703" startTime="2026-10-28T09:51:00.1414322+09:00" endTime="2026-10-28T09:51:00.1414325+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0fefbcdc-51cf-40d9-b01e-191333edaab5" />
+    <UnitTestResult executionId="71f26208-1183-445a-b504-66fc8471aae4" testId="4aab3a99-dc16-434c-9ba3-759064be54fb" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: True, reverse: True)" computerName="JJW-PC" duration="00:00:00.0013438" startTime="2026-10-28T09:51:00.0690122+09:00" endTime="2026-10-28T09:51:00.0690123+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="71f26208-1183-445a-b504-66fc8471aae4">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Empty() Failure: Collection was not empty&#xD;
+Collection: [This is EndMarker! char : щ]</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Boolean emptyPrefix, Boolean reverse) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrEmptySuffixTests.cs:line 38&#xD;
+   at InvokeStub_LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="523b951e-47da-40c3-9b9b-657555464f42" testId="d06602a1-e5de-bc71-f55b-9a6b54a5e961" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: True, epsilonCount: 1)" computerName="JJW-PC" duration="00:00:00.0011109" startTime="2026-10-28T09:50:59.9620138+09:00" endTime="2026-10-28T09:50:59.9620140+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="523b951e-47da-40c3-9b9b-657555464f42">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Boolean calculateRecursively, Int32 epsilonCount) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 49&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e531542d-a691-4e3b-914c-652fc1278386" testId="3163ddff-b18e-a8b7-9d7f-0e075bfea4d3" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(calculateRecursively: False)" computerName="JJW-PC" duration="00:00:00.2591794" startTime="2026-10-28T09:50:59.9509404+09:00" endTime="2026-10-28T09:50:59.9509735+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e531542d-a691-4e3b-914c-652fc1278386">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(Boolean calculateRecursively) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 68&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="fa4d38ed-b824-47b3-ad23-2fdcdcdb30c5" testId="493e55e4-dc89-d669-37a5-09d0936e20a3" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: True, epsilonCount: 4)" computerName="JJW-PC" duration="00:00:00.0000957" startTime="2026-10-28T09:50:59.9813900+09:00" endTime="2026-10-28T09:50:59.9813902+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fa4d38ed-b824-47b3-ad23-2fdcdcdb30c5">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Boolean calculateRecursively, Int32 epsilonCount) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 49&#xD;
+   at InvokeStub_FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="45220539-9dea-45a6-a82a-4e9a899cc20e" testId="d0edb8d2-3fa7-e030-a1da-90fccb5e68b2" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(calculateRecursively: False)" computerName="JJW-PC" duration="00:00:00.0062474" startTime="2026-10-28T09:50:59.9953128+09:00" endTime="2026-10-28T09:50:59.9953130+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="45220539-9dea-45a6-a82a-4e9a899cc20e">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(Boolean calculateRecursively) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 138&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="5b8d2f60-3095-40d9-bd62-777b966c2416" testId="1d9357e6-e9ee-bf71-5ebd-a3e235913f20" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: False, epsilonCount: 1)" computerName="JJW-PC" duration="00:00:00.0000801" startTime="2026-10-28T09:50:59.9838959+09:00" endTime="2026-10-28T09:50:59.9838961+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5b8d2f60-3095-40d9-bd62-777b966c2416">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Boolean calculateRecursively, Int32 epsilonCount) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 49&#xD;
+   at InvokeStub_FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="bdec5314-d4cb-40c2-ba28-8b7435dae86d" testId="cbb54c91-1b85-b993-9b50-b61b82510dd5" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(calculateRecursively: True)" computerName="JJW-PC" duration="00:00:00.0008890" startTime="2026-10-28T09:50:59.9592147+09:00" endTime="2026-10-28T09:50:59.9592149+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bdec5314-d4cb-40c2-ba28-8b7435dae86d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(Boolean calculateRecursively) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 68&#xD;
+   at InvokeStub_FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="db5af99c-d796-41d9-af0f-e8b5eb7ee8bd" testId="77acb7e0-e7c7-4581-606a-ad73e662a38a" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Terminal_prefix_keeps_its_first_before_a_nullable_suffix(calculateRecursively: False)" computerName="JJW-PC" duration="00:00:00.0137250" startTime="2026-10-28T09:50:59.9840003+09:00" endTime="2026-10-28T09:50:59.9840004+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db5af99c-d796-41d9-af0f-e8b5eb7ee8bd" />
+    <UnitTestResult executionId="4637538a-9d08-4084-b1b3-6cd63bbdd3f5" testId="386c85cd-e3bd-f6bd-355c-e51707647725" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: True, epsilonCount: 2)" computerName="JJW-PC" duration="00:00:00.0001065" startTime="2026-10-28T09:50:59.9805234+09:00" endTime="2026-10-28T09:50:59.9805236+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4637538a-9d08-4084-b1b3-6cd63bbdd3f5">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Boolean calculateRecursively, Int32 epsilonCount) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 49&#xD;
+   at InvokeStub_FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2198d1ff-d304-46bf-9e47-e70a4d8e7ca5" testId="d3db12bd-496b-a482-c283-4e987900d4ec" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence(calculateRecursively: True, epsilonBefore: True, epsilonAfter: True)" computerName="JJW-PC" duration="00:00:00.0000113" startTime="2026-10-28T09:50:59.9610589+09:00" endTime="2026-10-28T09:50:59.9610590+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2198d1ff-d304-46bf-9e47-e70a4d8e7ca5" />
+    <UnitTestResult executionId="63442066-3ada-4633-8dd1-a4a4f3c23ad1" testId="93409cb7-2100-fc6a-d017-b351e8451dc7" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable&quot;, input: &quot;aee&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0014188" startTime="2026-10-28T09:51:00.1605509+09:00" endTime="2026-10-28T09:51:00.1605511+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="63442066-3ada-4633-8dd1-a4a4f3c23ad1" />
+    <UnitTestResult executionId="3d10d955-cdc0-4f42-b528-53cc9f4db447" testId="819b2e27-7096-9076-f90a-255c6307f698" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable-chain&quot;, input: &quot;af&quot;, expectedSuccess: True)" computerName="JJW-PC" duration="00:00:00.0031372" startTime="2026-10-28T09:51:00.1541378+09:00" endTime="2026-10-28T09:51:00.1541380+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3d10d955-cdc0-4f42-b528-53cc9f4db447" />
+    <UnitTestResult executionId="dd904774-3d87-4b94-b7d4-b64af02cf0c7" testId="8b5d7e5f-7e9e-d65c-8db5-732a0e0acf46" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(calculateRecursively: True)" computerName="JJW-PC" duration="00:00:00.0005001" startTime="2026-10-28T09:50:59.9920133+09:00" endTime="2026-10-28T09:50:59.9920136+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dd904774-3d87-4b94-b7d4-b64af02cf0c7">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure&#xD;
+Expected: True&#xD;
+Actual:   False</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(Boolean calculateRecursively) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 124&#xD;
+   at InvokeStub_FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2741234a-cc7f-470b-9ff5-65e33b95b101" testId="4471f122-7930-3ec4-0790-95c08fba9d8b" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable-chain&quot;, input: &quot;a&quot;, expectedSuccess: True)" computerName="JJW-PC" duration="00:00:00.0021300" startTime="2026-10-28T09:51:00.2120479+09:00" endTime="2026-10-28T09:51:00.2120481+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2741234a-cc7f-470b-9ff5-65e33b95b101" />
+    <UnitTestResult executionId="3cbb6985-1301-4972-8455-95656cf6cae2" testId="7e93daf3-8acf-1496-51ab-ee5147db5a70" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_prefix_does_not_make_a_nonproductive_suffix_nullable(calculateRecursively: True)" computerName="JJW-PC" duration="00:00:00.0004168" startTime="2026-10-28T09:50:59.9960460+09:00" endTime="2026-10-28T09:50:59.9960461+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3cbb6985-1301-4972-8455-95656cf6cae2" />
+    <UnitTestResult executionId="a189dfd5-580a-4871-86ed-e6362d153869" testId="7e01d8e4-5729-39ac-c5b9-faf805fb6629" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable-chain&quot;, input: &quot;f&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0018101" startTime="2026-10-28T09:51:00.1590213+09:00" endTime="2026-10-28T09:51:00.1590215+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a189dfd5-580a-4871-86ed-e6362d153869" />
+    <UnitTestResult executionId="fa3e1e0c-d79a-41fc-8ec4-730310241ae8" testId="cca63c70-d7f2-c32d-1886-42acdd1ffc57" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence(calculateRecursively: True, epsilonBefore: True, epsilonAfter: False)" computerName="JJW-PC" duration="00:00:00.0008529" startTime="2026-10-28T09:50:59.9608604+09:00" endTime="2026-10-28T09:50:59.9608605+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fa3e1e0c-d79a-41fc-8ec4-730310241ae8" />
+    <UnitTestResult executionId="814593a5-9db1-4fa6-8bea-ad18423b6858" testId="5eda6a26-915f-8935-8128-7e4b94d1cd38" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;epsilon&quot;, input: &quot;aa&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0014731" startTime="2026-10-28T09:51:00.1911644+09:00" endTime="2026-10-28T09:51:00.1911647+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="814593a5-9db1-4fa6-8bea-ad18423b6858" />
+    <UnitTestResult executionId="7c1685d7-5cca-4329-80bf-631051afe80a" testId="7560196b-0413-8b8b-1ffb-90d144258db1" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(calculateRecursively: True)" computerName="JJW-PC" duration="00:00:00.0006386" startTime="2026-10-28T09:50:59.9959389+09:00" endTime="2026-10-28T09:50:59.9959390+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7c1685d7-5cca-4329-80bf-631051afe80a">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(Boolean calculateRecursively) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 138&#xD;
+   at InvokeStub_FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="76401cb9-3a23-44f8-b7bb-d7776c101b76" testId="bcd36bc8-79ff-b83d-9b8d-c135498df32a" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: False, epsilonCount: 2)" computerName="JJW-PC" duration="00:00:00.0000961" startTime="2026-10-28T09:50:59.9826907+09:00" endTime="2026-10-28T09:50:59.9826909+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="76401cb9-3a23-44f8-b7bb-d7776c101b76">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Boolean calculateRecursively, Int32 epsilonCount) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 49&#xD;
+   at InvokeStub_FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2b68fe65-c729-4070-ad98-a8a5c91008d1" testId="e9f3c20a-5716-473f-264a-12923d7c620b" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_prefix_does_not_make_a_nonproductive_suffix_nullable(calculateRecursively: False)" computerName="JJW-PC" duration="00:00:00.0003726" startTime="2026-10-28T09:50:59.9972447+09:00" endTime="2026-10-28T09:50:59.9972448+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2b68fe65-c729-4070-ad98-a8a5c91008d1" />
+    <UnitTestResult executionId="302b2c82-7ff4-4223-a112-646910855aea" testId="a62c5368-6084-ee73-652c-e0a35ca7be25" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nonnullable&quot;, input: &quot;a&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0018664" startTime="2026-10-28T09:51:00.1433564+09:00" endTime="2026-10-28T09:51:00.1433566+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="302b2c82-7ff4-4223-a112-646910855aea" />
+    <UnitTestResult executionId="60612f2e-5afd-431a-a899-a3e9a6c38411" testId="181a5ebe-3940-34d8-fcca-9a97676515af" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;terminal&quot;, input: &quot;e&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0029053" startTime="2026-10-28T09:51:00.1571270+09:00" endTime="2026-10-28T09:51:00.1571272+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="60612f2e-5afd-431a-a899-a3e9a6c38411" />
+    <UnitTestResult executionId="7b0ae9e1-2d8c-4708-a0da-6a4e47ad7205" testId="48481c9d-b47e-0bd2-6bce-9f1ce9614e28" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Terminal_sequence_does_not_contain_epsilon(calculateRecursively: False)" computerName="JJW-PC" duration="00:00:00.0002071" startTime="2026-10-28T09:50:59.9841026+09:00" endTime="2026-10-28T09:50:59.9841026+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7b0ae9e1-2d8c-4708-a0da-6a4e47ad7205" />
+    <UnitTestResult executionId="5b17455d-cee1-4557-820a-39ba10266d9f" testId="4074b9a1-9098-22f4-163d-6e4a776af6d4" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;absent&quot;, input: &quot;&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0010865" startTime="2026-10-28T09:51:00.1895748+09:00" endTime="2026-10-28T09:51:00.1895750+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5b17455d-cee1-4557-820a-39ba10266d9f" />
+    <UnitTestResult executionId="daeea2ba-b71b-40f2-8751-6983480eba37" testId="28a1c150-5bcd-0586-c534-244c0edba620" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;terminal&quot;, input: &quot;ae&quot;, expectedSuccess: True)" computerName="JJW-PC" duration="00:00:00.0014700" startTime="2026-10-28T09:51:00.1506522+09:00" endTime="2026-10-28T09:51:00.1506524+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="daeea2ba-b71b-40f2-8751-6983480eba37" />
+    <UnitTestResult executionId="3746086c-9109-4e44-8611-0cce0f5df2fb" testId="a2aea114-30fe-374a-a0d7-89f2bb3a7066" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nonnullable&quot;, input: &quot;ae&quot;, expectedSuccess: True)" computerName="JJW-PC" duration="00:00:00.0023205" startTime="2026-10-28T09:51:00.2075073+09:00" endTime="2026-10-28T09:51:00.2075075+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3746086c-9109-4e44-8611-0cce0f5df2fb" />
+    <UnitTestResult executionId="43a98108-9cf7-448f-8df9-cbbe67b73a3b" testId="b9c99ae8-e4e8-0fdd-dca0-8fffef610102" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(calculateRecursively: True)" computerName="JJW-PC" duration="00:00:00.0007205" startTime="2026-10-28T09:50:59.9934776+09:00" endTime="2026-10-28T09:50:59.9934779+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="43a98108-9cf7-448f-8df9-cbbe67b73a3b">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(Boolean calculateRecursively) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 159&#xD;
+   at InvokeStub_FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="62bf8c2c-c5ee-4279-aeed-10ce216612ca" testId="a3efb0dd-a839-c957-339e-05a217fd7dd1" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable&quot;, input: &quot;&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0069831" startTime="2026-10-28T09:51:00.1997034+09:00" endTime="2026-10-28T09:51:00.1997038+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="62bf8c2c-c5ee-4279-aeed-10ce216612ca" />
+    <UnitTestResult executionId="6dda071f-6cf9-44ae-bf3c-e1c8efa3238b" testId="a2aa5ac3-4da5-beae-2eec-e82c255faeb9" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;epsilon&quot;, input: &quot;&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0013533" startTime="2026-10-28T09:51:00.1491013+09:00" endTime="2026-10-28T09:51:00.1491017+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6dda071f-6cf9-44ae-bf3c-e1c8efa3238b" />
+    <UnitTestResult executionId="210a7bf0-4eb0-41d4-a301-1437d67a430b" testId="b74357c3-9ab1-cf89-4ffd-6414e318a98a" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence(calculateRecursively: False, epsilonBefore: True, epsilonAfter: True)" computerName="JJW-PC" duration="00:00:00.0000166" startTime="2026-10-28T09:50:59.9611251+09:00" endTime="2026-10-28T09:50:59.9611252+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="210a7bf0-4eb0-41d4-a301-1437d67a430b" />
+    <UnitTestResult executionId="deac4f91-2269-463d-b5ec-630bfcf751f1" testId="c299ac94-391d-2836-c820-6a4409a132db" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: False, reverse: True)" computerName="JJW-PC" duration="00:00:00.0788724" startTime="2026-10-28T09:51:00.0636000+09:00" endTime="2026-10-28T09:51:00.0636003+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="deac4f91-2269-463d-b5ec-630bfcf751f1">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Empty() Failure: Collection was not empty&#xD;
+Collection: [This is EndMarker! char : щ]</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Boolean emptyPrefix, Boolean reverse) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrEmptySuffixTests.cs:line 38&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4b69fb59-4d72-48e2-bd14-6b906e0ece6b" testId="7c761799-b86b-8470-54ab-6887dc398928" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: False, epsilonCount: 4)" computerName="JJW-PC" duration="00:00:00.0004762" startTime="2026-10-28T09:50:59.9798701+09:00" endTime="2026-10-28T09:50:59.9798702+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4b69fb59-4d72-48e2-bd14-6b906e0ece6b">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Boolean calculateRecursively, Int32 epsilonCount) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 49&#xD;
+   at InvokeStub_FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="14edcc19-6e6a-4334-8ccd-718bd8f6f20a" testId="b3f63659-2e9e-bddd-26da-80e2e96aeb0c" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable-chain&quot;, input: &quot;aff&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0022506" startTime="2026-10-28T09:51:00.2098268+09:00" endTime="2026-10-28T09:51:00.2098270+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="14edcc19-6e6a-4334-8ccd-718bd8f6f20a" />
+    <UnitTestResult executionId="374e8d21-553f-4aae-a3cf-795d63d3ceef" testId="eaec22e8-38ad-4c04-d323-c76155eb831b" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;epsilon&quot;, input: &quot;a&quot;, expectedSuccess: True)" computerName="JJW-PC" duration="00:00:00.0032298" startTime="2026-10-28T09:51:00.1714275+09:00" endTime="2026-10-28T09:51:00.1714277+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="374e8d21-553f-4aae-a3cf-795d63d3ceef" />
+    <UnitTestResult executionId="945ad993-c696-41d6-b929-b817017b4612" testId="9f545ea5-7587-302d-e212-bbc992a09070" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable&quot;, input: &quot;ae&quot;, expectedSuccess: True)" computerName="JJW-PC" duration="00:00:00.0124564" startTime="2026-10-28T09:51:00.1883993+09:00" endTime="2026-10-28T09:51:00.1883997+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="945ad993-c696-41d6-b929-b817017b4612" />
+    <UnitTestResult executionId="e77bcf59-c297-4a0a-939f-56bbfcff9e3e" testId="96fee54c-80c4-aeaf-9cd9-79a11077f7ca" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nonnullable&quot;, input: &quot;e&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0042669" startTime="2026-10-28T09:51:00.1758092+09:00" endTime="2026-10-28T09:51:00.1758094+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e77bcf59-c297-4a0a-939f-56bbfcff9e3e" />
+    <UnitTestResult executionId="8d61da23-a254-4967-8dd3-48adfd2146ef" testId="06938cda-a084-970c-6246-6706cc7693bb" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: True, reverse: False)" computerName="JJW-PC" duration="00:00:00.0023290" startTime="2026-10-28T09:51:00.0661538+09:00" endTime="2026-10-28T09:51:00.0661541+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8d61da23-a254-4967-8dd3-48adfd2146ef">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Empty() Failure: Collection was not empty&#xD;
+Collection: [This is EndMarker! char : щ]</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Boolean emptyPrefix, Boolean reverse) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrEmptySuffixTests.cs:line 38&#xD;
+   at InvokeStub_LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b9de9dea-0865-4103-a653-6699033e1747" testId="f7ee6d67-c777-567c-6d57-c0027629b2c3" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(calculateRecursively: False)" computerName="JJW-PC" duration="00:00:00.0002593" startTime="2026-10-28T09:50:59.9940119+09:00" endTime="2026-10-28T09:50:59.9940120+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b9de9dea-0865-4103-a653-6699033e1747">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(Boolean calculateRecursively) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 27&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7d16a6e3-19fb-4e7f-ad87-5d18bca29361" testId="2a97f098-8867-ef57-8caa-898ea2fff586" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Completed_A_lookahead_distinguishes_nullable_and_required_suffixes(suffix: &quot;nullable-chain&quot;, expected: &quot;$,f&quot;)" computerName="JJW-PC" duration="00:00:00.0109117" startTime="2026-10-28T09:51:00.2239898+09:00" endTime="2026-10-28T09:51:00.2239902+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7d16a6e3-19fb-4e7f-ad87-5d18bca29361" />
+    <UnitTestResult executionId="894c5e01-7281-4146-953f-253222051723" testId="a9a45531-7da9-2d69-2a4a-0b2f32b12f49" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence(calculateRecursively: True, epsilonBefore: False, epsilonAfter: True)" computerName="JJW-PC" duration="00:00:00.0000072" startTime="2026-10-28T09:50:59.9609972+09:00" endTime="2026-10-28T09:50:59.9609973+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="894c5e01-7281-4146-953f-253222051723" />
+    <UnitTestResult executionId="e7f91e9a-70dd-4d0d-acc5-6dfe18697a37" testId="12458eef-099b-2777-8de6-81f703437e77" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: False, reverse: False)" computerName="JJW-PC" duration="00:00:00.0013385" startTime="2026-10-28T09:51:00.0676116+09:00" endTime="2026-10-28T09:51:00.0676118+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e7f91e9a-70dd-4d0d-acc5-6dfe18697a37">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Empty() Failure: Collection was not empty&#xD;
+Collection: [This is EndMarker! char : щ]</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Boolean emptyPrefix, Boolean reverse) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrEmptySuffixTests.cs:line 38&#xD;
+   at InvokeStub_LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e5d773fb-a0f5-479d-a1b8-bff7bc2dc8e6" testId="bb447a18-00a4-b946-c664-dc668bbb9bc8" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Completed_A_lookahead_distinguishes_nullable_and_required_suffixes(suffix: &quot;nullable&quot;, expected: &quot;$,e&quot;)" computerName="JJW-PC" duration="00:00:00.0009009" startTime="2026-10-28T09:51:00.2266079+09:00" endTime="2026-10-28T09:51:00.2266081+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e5d773fb-a0f5-479d-a1b8-bff7bc2dc8e6" />
+    <UnitTestResult executionId="f5eacdc8-2be4-4465-92d9-21b75839b5de" testId="391e4113-3f0d-a00d-9960-a7d83630957f" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;absent&quot;, input: &quot;a&quot;, expectedSuccess: True)" computerName="JJW-PC" duration="00:00:00.0039979" startTime="2026-10-28T09:51:00.1476570+09:00" endTime="2026-10-28T09:51:00.1476572+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f5eacdc8-2be4-4465-92d9-21b75839b5de" />
+    <UnitTestResult executionId="ef796b71-5937-4f1f-af2d-67d39b011810" testId="2140a83c-e3a0-c996-9ba3-5fe1e4bcc8bd" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Completed_A_lookahead_distinguishes_nullable_and_required_suffixes(suffix: &quot;epsilon&quot;, expected: &quot;$&quot;)" computerName="JJW-PC" duration="00:00:00.0006823" startTime="2026-10-28T09:51:00.2286674+09:00" endTime="2026-10-28T09:51:00.2286677+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ef796b71-5937-4f1f-af2d-67d39b011810" />
+    <UnitTestResult executionId="70ff0914-8341-4448-baaf-44672e4385fe" testId="cfd4654f-8a82-5e95-cf07-dc8f37c25a98" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nonnullable&quot;, input: &quot;aee&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0013896" startTime="2026-10-28T09:51:00.1926127+09:00" endTime="2026-10-28T09:51:00.1926129+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="70ff0914-8341-4448-baaf-44672e4385fe" />
+    <UnitTestResult executionId="995378ef-22a8-482b-94f0-343c67cfc471" testId="23e52db3-d128-3a92-7f7c-45792c9e3887" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(calculateRecursively: True)" computerName="JJW-PC" duration="00:00:00.0002897" startTime="2026-10-28T09:50:59.9945579+09:00" endTime="2026-10-28T09:50:59.9945580+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="995378ef-22a8-482b-94f0-343c67cfc471">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(Boolean calculateRecursively) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 27&#xD;
+   at InvokeStub_FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d0922a10-d1d3-421f-a426-8c1554f130b9" testId="f62e96f5-7be5-f977-28cf-34b506e266ba" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence(calculateRecursively: False, epsilonBefore: True, epsilonAfter: False)" computerName="JJW-PC" duration="00:00:00.0027521" startTime="2026-10-28T09:50:59.9606578+09:00" endTime="2026-10-28T09:50:59.9606580+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d0922a10-d1d3-421f-a426-8c1554f130b9" />
+    <UnitTestResult executionId="c75884b0-bb14-4d60-8dd8-524c656dd8af" testId="7526a311-5eb9-26b1-d756-f7bd12097716" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Terminal_sequence_does_not_contain_epsilon(calculateRecursively: True)" computerName="JJW-PC" duration="00:00:00.0002054" startTime="2026-10-28T09:50:59.9841446+09:00" endTime="2026-10-28T09:50:59.9841446+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c75884b0-bb14-4d60-8dd8-524c656dd8af" />
+    <UnitTestResult executionId="125b578a-ec94-4242-be55-14150338290d" testId="8200d21a-4f34-04ec-ecb3-53d9321e0a55" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;terminal&quot;, input: &quot;a&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0074536" startTime="2026-10-28T09:51:00.1681246+09:00" endTime="2026-10-28T09:51:00.1681248+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="125b578a-ec94-4242-be55-14150338290d" />
+    <UnitTestResult executionId="9b395614-2aa6-44c6-8b7f-5b7b098fe22c" testId="ef139b78-588d-2700-7f8e-f9400cbb16cb" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Completed_A_lookahead_distinguishes_nullable_and_required_suffixes(suffix: &quot;terminal&quot;, expected: &quot;e&quot;)" computerName="JJW-PC" duration="00:00:00.0008141" startTime="2026-10-28T09:51:00.2275822+09:00" endTime="2026-10-28T09:51:00.2275824+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9b395614-2aa6-44c6-8b7f-5b7b098fe22c" />
+    <UnitTestResult executionId="78e4ac03-0b9f-45fa-9002-5a4147757b00" testId="2a292f34-b087-6cea-01ef-0c4a7382dc43" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(calculateRecursively: False)" computerName="JJW-PC" duration="00:00:00.0020841" startTime="2026-10-28T09:50:59.9926340+09:00" endTime="2026-10-28T09:50:59.9926342+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="78e4ac03-0b9f-45fa-9002-5a4147757b00">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Single() Failure: The collection was empty</Message>
+          <StackTrace>   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 205&#xD;
+   at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(Boolean calculateRecursively) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs:line 159&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="30289f43-8a5d-4913-b418-2e872fe16a33" testId="ffe78535-33de-63a6-30cf-40fdf56c65a6" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable&quot;, input: &quot;a&quot;, expectedSuccess: True)" computerName="JJW-PC" duration="00:00:00.0052268" startTime="2026-10-28T09:51:00.2050654+09:00" endTime="2026-10-28T09:51:00.2050657+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="30289f43-8a5d-4913-b418-2e872fe16a33" />
+    <UnitTestResult executionId="a5cd5b33-07ec-43af-a4a3-340c33af000b" testId="07dbd534-5b33-0eca-4ea7-8e91246d0437" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence(calculateRecursively: False, epsilonBefore: False, epsilonAfter: True)" computerName="JJW-PC" duration="00:00:00.0000138" startTime="2026-10-28T09:50:59.9609385+09:00" endTime="2026-10-28T09:50:59.9609386+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a5cd5b33-07ec-43af-a4a3-340c33af000b" />
+    <UnitTestResult executionId="24df6e0a-4a5a-4857-bf0d-d014dd31ea62" testId="84f3b599-147d-7630-440d-fe9496d98379" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Completed_A_lookahead_distinguishes_nullable_and_required_suffixes(suffix: &quot;nonnullable&quot;, expected: &quot;e&quot;)" computerName="JJW-PC" duration="00:00:00.0012263" startTime="2026-10-28T09:51:00.2254821+09:00" endTime="2026-10-28T09:51:00.2254824+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="24df6e0a-4a5a-4857-bf0d-d014dd31ea62" />
+    <UnitTestResult executionId="ca64ecfa-c73b-4f61-80e2-89e6b58ee305" testId="b5e1309d-29e2-1b9c-4a38-8985176f30be" testName="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Terminal_prefix_keeps_its_first_before_a_nullable_suffix(calculateRecursively: True)" computerName="JJW-PC" duration="00:00:00.0004505" startTime="2026-10-28T09:50:59.9840429+09:00" endTime="2026-10-28T09:50:59.9840430+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ca64ecfa-c73b-4f61-80e2-89e6b58ee305" />
+    <UnitTestResult executionId="f91fe68b-c43d-49d0-bc12-bd6961796fb8" testId="4a206475-ad80-014b-8606-26dac210d3b3" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;absent&quot;, input: &quot;aa&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0702568" startTime="2026-10-28T09:51:00.1389660+09:00" endTime="2026-10-28T09:51:00.1389669+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f91fe68b-c43d-49d0-bc12-bd6961796fb8" />
+    <UnitTestResult executionId="d8bc92fe-beeb-4f45-b3d8-bce1f783cd1e" testId="814b448a-88e2-59ce-c753-d6d20e9156a6" testName="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;terminal&quot;, input: &quot;aee&quot;, expectedSuccess: False)" computerName="JJW-PC" duration="00:00:00.0008572" startTime="2026-10-28T09:51:00.2130023+09:00" endTime="2026-10-28T09:51:00.2130024+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d8bc92fe-beeb-4f45-b3d8-bce1f783cd1e" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;terminal&quot;, input: &quot;e&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="181a5ebe-3940-34d8-fcca-9a97676515af">
+      <Execution id="60612f2e-5afd-431a-a899-a3e9a6c38411" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_prefix_does_not_make_a_nonproductive_suffix_nullable(calculateRecursively: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="e9f3c20a-5716-473f-264a-12923d7c620b">
+      <Execution id="2b68fe65-c729-4070-ad98-a8a5c91008d1" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Nullable_prefix_does_not_make_a_nonproductive_suffix_nullable" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: True, epsilonCount: 4)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="493e55e4-dc89-d669-37a5-09d0936e20a3">
+      <Execution id="fa4d38ed-b824-47b3-ad23-2fdcdcdb30c5" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Explicit_epsilon_and_empty_sequence_have_identical_first_sets" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable-chain&quot;, input: &quot;af&quot;, expectedSuccess: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="819b2e27-7096-9076-f90a-255c6307f698">
+      <Execution id="3d10d955-cdc0-4f42-b528-53cc9f4db447" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable&quot;, input: &quot;&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="a3efb0dd-a839-c957-339e-05a217fd7dd1">
+      <Execution id="62bf8c2c-c5ee-4279-aeed-10ce216612ca" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable-chain&quot;, input: &quot;f&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="7e01d8e4-5729-39ac-c5b9-faf805fb6629">
+      <Execution id="a189dfd5-580a-4871-86ed-e6362d153869" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nonnullable&quot;, input: &quot;a&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="a62c5368-6084-ee73-652c-e0a35ca7be25">
+      <Execution id="302b2c82-7ff4-4223-a112-646910855aea" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;terminal&quot;, input: &quot;a&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="8200d21a-4f34-04ec-ecb3-53d9321e0a55">
+      <Execution id="125b578a-ec94-4242-be55-14150338290d" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(calculateRecursively: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="8b5d7e5f-7e9e-d65c-8db5-732a0e0acf46">
+      <Execution id="dd904774-3d87-4b94-b7d4-b64af02cf0c7" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Nullable_nonterminal_chain_has_the_same_first_as_empty_input" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence(calculateRecursively: True, epsilonBefore: False, epsilonAfter: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="a9a45531-7da9-2d69-2a4a-0b2f32b12f49">
+      <Execution id="894c5e01-7281-4146-953f-253222051723" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;absent&quot;, input: &quot;&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="4074b9a1-9098-22f4-163d-6e4a776af6d4">
+      <Execution id="5b17455d-cee1-4557-820a-39ba10266d9f" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable-chain&quot;, input: &quot;aff&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="b3f63659-2e9e-bddd-26da-80e2e96aeb0c">
+      <Execution id="14edcc19-6e6a-4334-8ccd-718bd8f6f20a" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: False, reverse: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="c299ac94-391d-2836-c820-6a4409a132db">
+      <Execution id="deac4f91-2269-463d-b5ec-630bfcf751f1" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence(calculateRecursively: False, epsilonBefore: True, epsilonAfter: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="b74357c3-9ab1-cf89-4ffd-6414e318a98a">
+      <Execution id="210a7bf0-4eb0-41d4-a301-1437d67a430b" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;epsilon&quot;, input: &quot;aa&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="5eda6a26-915f-8935-8128-7e4b94d1cd38">
+      <Execution id="814593a5-9db1-4fa6-8bea-ad18423b6858" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence(calculateRecursively: False, epsilonBefore: False, epsilonAfter: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="07dbd534-5b33-0eca-4ea7-8e91246d0437">
+      <Execution id="a5cd5b33-07ec-43af-a4a3-340c33af000b" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(calculateRecursively: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="cbb54c91-1b85-b993-9b50-b61b82510dd5">
+      <Execution id="bdec5314-d4cb-40c2-ba28-8b7435dae86d" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Empty_sequence_queries_return_independent_sets" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Completed_A_lookahead_distinguishes_nullable_and_required_suffixes(suffix: &quot;absent&quot;, expected: &quot;$&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="eb969769-ff86-cc30-4a20-81589e88f6af">
+      <Execution id="bff5d6a3-63d0-4f12-a613-253a5b5eb71d" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Completed_A_lookahead_distinguishes_nullable_and_required_suffixes" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: False, reverse: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="12458eef-099b-2777-8de6-81f703437e77">
+      <Execution id="e7f91e9a-70dd-4d0d-acc5-6dfe18697a37" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable&quot;, input: &quot;ae&quot;, expectedSuccess: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="9f545ea5-7587-302d-e212-bbc992a09070">
+      <Execution id="945ad993-c696-41d6-b929-b817017b4612" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(calculateRecursively: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="23e52db3-d128-3a92-7f7c-45792c9e3887">
+      <Execution id="995378ef-22a8-482b-94f0-343c67cfc471" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Empty_sequence_contains_exactly_epsilon" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable&quot;, input: &quot;e&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="865683c2-a0c8-c258-9b5d-c9f073430be9">
+      <Execution id="0fefbcdc-51cf-40d9-b01e-191333edaab5" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_prefix_does_not_make_a_nonproductive_suffix_nullable(calculateRecursively: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="7e93daf3-8acf-1496-51ab-ee5147db5a70">
+      <Execution id="3cbb6985-1301-4972-8455-95656cf6cae2" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Nullable_prefix_does_not_make_a_nonproductive_suffix_nullable" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(calculateRecursively: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="3163ddff-b18e-a8b7-9d7f-0e075bfea4d3">
+      <Execution id="e531542d-a691-4e3b-914c-652fc1278386" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Empty_sequence_queries_return_independent_sets" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Terminal_sequence_does_not_contain_epsilon(calculateRecursively: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="48481c9d-b47e-0bd2-6bce-9f1ce9614e28">
+      <Execution id="7b0ae9e1-2d8c-4708-a0da-6a4e47ad7205" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Terminal_sequence_does_not_contain_epsilon" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: True, epsilonCount: 2)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="386c85cd-e3bd-f6bd-355c-e51707647725">
+      <Execution id="4637538a-9d08-4084-b1b3-6cd63bbdd3f5" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Explicit_epsilon_and_empty_sequence_have_identical_first_sets" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Completed_A_lookahead_distinguishes_nullable_and_required_suffixes(suffix: &quot;nullable-chain&quot;, expected: &quot;$,f&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="2a97f098-8867-ef57-8caa-898ea2fff586">
+      <Execution id="7d16a6e3-19fb-4e7f-ad87-5d18bca29361" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Completed_A_lookahead_distinguishes_nullable_and_required_suffixes" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;terminal&quot;, input: &quot;aee&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="814b448a-88e2-59ce-c753-d6d20e9156a6">
+      <Execution id="d8bc92fe-beeb-4f45-b3d8-bce1f783cd1e" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Terminal_sequence_does_not_contain_epsilon(calculateRecursively: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="7526a311-5eb9-26b1-d756-f7bd12097716">
+      <Execution id="c75884b0-bb14-4d60-8dd8-524c656dd8af" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Terminal_sequence_does_not_contain_epsilon" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Completed_A_lookahead_distinguishes_nullable_and_required_suffixes(suffix: &quot;epsilon&quot;, expected: &quot;$&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="2140a83c-e3a0-c996-9ba3-5fe1e4bcc8bd">
+      <Execution id="ef796b71-5937-4f1f-af2d-67d39b011810" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Completed_A_lookahead_distinguishes_nullable_and_required_suffixes" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(calculateRecursively: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="2a292f34-b087-6cea-01ef-0c4a7382dc43">
+      <Execution id="78e4ac03-0b9f-45fa-9002-5a4147757b00" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Nonproductive_symbol_is_not_confused_with_empty_input" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Terminal_prefix_keeps_its_first_before_a_nullable_suffix(calculateRecursively: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="77acb7e0-e7c7-4581-606a-ad73e662a38a">
+      <Execution id="db5af99c-d796-41d9-af0f-e8b5eb7ee8bd" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Terminal_prefix_keeps_its_first_before_a_nullable_suffix" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: False, epsilonCount: 2)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="bcd36bc8-79ff-b83d-9b8d-c135498df32a">
+      <Execution id="76401cb9-3a23-44f8-b7bb-d7776c101b76" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Explicit_epsilon_and_empty_sequence_have_identical_first_sets" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Absent_suffix_passes_EOF_through_a_productive_unit_production_chain" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="9d5d70cf-4e3f-2cec-340e-ecfbb2b1a8a9">
+      <Execution id="d5f33ddb-5c02-47cd-92ad-e7f45fbb3425" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Absent_suffix_passes_EOF_through_a_productive_unit_production_chain" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: True, reverse: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="06938cda-a084-970c-6246-6706cc7693bb">
+      <Execution id="8d61da23-a254-4967-8dd3-48adfd2146ef" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: False, epsilonCount: 1)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="1d9357e6-e9ee-bf71-5ebd-a3e235913f20">
+      <Execution id="5b8d2f60-3095-40d9-bd62-777b966c2416" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Explicit_epsilon_and_empty_sequence_have_identical_first_sets" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(calculateRecursively: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="b9c99ae8-e4e8-0fdd-dca0-8fffef610102">
+      <Execution id="43a98108-9cf7-448f-8df9-cbbe67b73a3b" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Nonproductive_symbol_is_not_confused_with_empty_input" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Completed_A_lookahead_distinguishes_nullable_and_required_suffixes(suffix: &quot;terminal&quot;, expected: &quot;e&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="ef139b78-588d-2700-7f8e-f9400cbb16cb">
+      <Execution id="9b395614-2aa6-44c6-8b7f-5b7b098fe22c" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Completed_A_lookahead_distinguishes_nullable_and_required_suffixes" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable&quot;, input: &quot;aee&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="93409cb7-2100-fc6a-d017-b351e8451dc7">
+      <Execution id="63442066-3ada-4633-8dd1-a4a4f3c23ad1" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence(calculateRecursively: True, epsilonBefore: True, epsilonAfter: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="cca63c70-d7f2-c32d-1886-42acdd1ffc57">
+      <Execution id="fa3e1e0c-d79a-41fc-8ec4-730310241ae8" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;terminal&quot;, input: &quot;ae&quot;, expectedSuccess: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="28a1c150-5bcd-0586-c534-244c0edba620">
+      <Execution id="daeea2ba-b71b-40f2-8751-6983480eba37" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;absent&quot;, input: &quot;aa&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="4a206475-ad80-014b-8606-26dac210d3b3">
+      <Execution id="f91fe68b-c43d-49d0-bc12-bd6961796fb8" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(calculateRecursively: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="f7ee6d67-c777-567c-6d57-c0027629b2c3">
+      <Execution id="b9de9dea-0865-4103-a653-6699033e1747" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Empty_sequence_contains_exactly_epsilon" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence(calculateRecursively: True, epsilonBefore: True, epsilonAfter: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="d3db12bd-496b-a482-c283-4e987900d4ec">
+      <Execution id="2198d1ff-d304-46bf-9e47-e70a4d8e7ca5" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: False, epsilonCount: 4)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="7c761799-b86b-8470-54ab-6887dc398928">
+      <Execution id="4b69fb59-4d72-48e2-bd14-6b906e0ece6b" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Explicit_epsilon_and_empty_sequence_have_identical_first_sets" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable&quot;, input: &quot;a&quot;, expectedSuccess: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="ffe78535-33de-63a6-30cf-40fdf56c65a6">
+      <Execution id="30289f43-8a5d-4913-b418-2e872fe16a33" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: True, reverse: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="4aab3a99-dc16-434c-9ba3-759064be54fb">
+      <Execution id="71f26208-1183-445a-b504-66fc8471aae4" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;epsilon&quot;, input: &quot;&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="a2aa5ac3-4da5-beae-2eec-e82c255faeb9">
+      <Execution id="6dda071f-6cf9-44ae-bf3c-e1c8efa3238b" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(calculateRecursively: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="7560196b-0413-8b8b-1ffb-90d144258db1">
+      <Execution id="7c1685d7-5cca-4329-80bf-631051afe80a" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Empty_rhs_and_explicit_epsilon_productions_have_the_same_first" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Completed_A_lookahead_distinguishes_nullable_and_required_suffixes(suffix: &quot;nullable&quot;, expected: &quot;$,e&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="bb447a18-00a4-b946-c664-dc668bbb9bc8">
+      <Execution id="e5d773fb-a0f5-479d-a1b8-bff7bc2dc8e6" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Completed_A_lookahead_distinguishes_nullable_and_required_suffixes" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Completed_A_lookahead_distinguishes_nullable_and_required_suffixes(suffix: &quot;nonnullable&quot;, expected: &quot;e&quot;)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="84f3b599-147d-7630-440d-fe9496d98379">
+      <Execution id="24df6e0a-4a5a-4857-bf0d-d014dd31ea62" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Completed_A_lookahead_distinguishes_nullable_and_required_suffixes" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nonnullable&quot;, input: &quot;ae&quot;, expectedSuccess: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="a2aea114-30fe-374a-a0d7-89f2bb3a7066">
+      <Execution id="3746086c-9109-4e44-8611-0cce0f5df2fb" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nullable-chain&quot;, input: &quot;a&quot;, expectedSuccess: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="4471f122-7930-3ec4-0790-95c08fba9d8b">
+      <Execution id="2741234a-cc7f-470b-9ff5-65e33b95b101" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nonnullable&quot;, input: &quot;e&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="96fee54c-80c4-aeaf-9cd9-79a11077f7ca">
+      <Execution id="e77bcf59-c297-4a0a-939f-56bbfcff9e3e" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Terminal_prefix_keeps_its_first_before_a_nullable_suffix(calculateRecursively: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="b5e1309d-29e2-1b9c-4a38-8985176f30be">
+      <Execution id="ca64ecfa-c73b-4f61-80e2-89e6b58ee305" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Terminal_prefix_keeps_its_first_before_a_nullable_suffix" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence(calculateRecursively: False, epsilonBefore: True, epsilonAfter: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="f62e96f5-7be5-f977-28cf-34b506e266ba">
+      <Execution id="d0922a10-d1d3-421f-a426-8c1554f130b9" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Explicit_epsilon_does_not_change_the_first_token_of_a_nonempty_sequence" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(calculateRecursively: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="d0edb8d2-3fa7-e030-a1da-90fccb5e68b2">
+      <Execution id="45220539-9dea-45a6-a82a-4e9a899cc20e" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Empty_rhs_and_explicit_epsilon_productions_have_the_same_first" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: True, epsilonCount: 1)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="d06602a1-e5de-bc71-f55b-9a6b54a5e961">
+      <Execution id="523b951e-47da-40c3-9b9b-657555464f42" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Explicit_epsilon_and_empty_sequence_have_identical_first_sets" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;absent&quot;, input: &quot;a&quot;, expectedSuccess: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="391e4113-3f0d-a00d-9960-a7d83630957f">
+      <Execution id="f5eacdc8-2be4-4465-92d9-21b75839b5de" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;epsilon&quot;, input: &quot;a&quot;, expectedSuccess: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="eaec22e8-38ad-4c04-d323-c76155eb831b">
+      <Execution id="374e8d21-553f-4aae-a3cf-795d63d3ceef" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens(suffix: &quot;nonnullable&quot;, input: &quot;aee&quot;, expectedSuccess: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="cfd4654f-8a82-5e95-cf07-dc8f37c25a98">
+      <Execution id="70ff0914-8341-4448-baaf-44672e4385fe" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests" name="Suffix_lookaheads_preserve_accepted_inputs_and_reject_missing_or_extra_tokens" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(calculateRecursively: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\parse.frontend.parsers.tests.dll" id="3d6690b3-5cff-8f4b-6c84-ddde4234cef6">
+      <Execution id="b9af428e-9aa0-43f4-b494-ac6005b7fe52" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\baseline-tests\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests" name="Nullable_nonterminal_chain_has_the_same_first_as_empty_input" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="3d6690b3-5cff-8f4b-6c84-ddde4234cef6" executionId="b9af428e-9aa0-43f4-b494-ac6005b7fe52" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="eb969769-ff86-cc30-4a20-81589e88f6af" executionId="bff5d6a3-63d0-4f12-a613-253a5b5eb71d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9d5d70cf-4e3f-2cec-340e-ecfbb2b1a8a9" executionId="d5f33ddb-5c02-47cd-92ad-e7f45fbb3425" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="865683c2-a0c8-c258-9b5d-c9f073430be9" executionId="0fefbcdc-51cf-40d9-b01e-191333edaab5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4aab3a99-dc16-434c-9ba3-759064be54fb" executionId="71f26208-1183-445a-b504-66fc8471aae4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d06602a1-e5de-bc71-f55b-9a6b54a5e961" executionId="523b951e-47da-40c3-9b9b-657555464f42" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3163ddff-b18e-a8b7-9d7f-0e075bfea4d3" executionId="e531542d-a691-4e3b-914c-652fc1278386" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="493e55e4-dc89-d669-37a5-09d0936e20a3" executionId="fa4d38ed-b824-47b3-ad23-2fdcdcdb30c5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d0edb8d2-3fa7-e030-a1da-90fccb5e68b2" executionId="45220539-9dea-45a6-a82a-4e9a899cc20e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d9357e6-e9ee-bf71-5ebd-a3e235913f20" executionId="5b8d2f60-3095-40d9-bd62-777b966c2416" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cbb54c91-1b85-b993-9b50-b61b82510dd5" executionId="bdec5314-d4cb-40c2-ba28-8b7435dae86d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="77acb7e0-e7c7-4581-606a-ad73e662a38a" executionId="db5af99c-d796-41d9-af0f-e8b5eb7ee8bd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="386c85cd-e3bd-f6bd-355c-e51707647725" executionId="4637538a-9d08-4084-b1b3-6cd63bbdd3f5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d3db12bd-496b-a482-c283-4e987900d4ec" executionId="2198d1ff-d304-46bf-9e47-e70a4d8e7ca5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="93409cb7-2100-fc6a-d017-b351e8451dc7" executionId="63442066-3ada-4633-8dd1-a4a4f3c23ad1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="819b2e27-7096-9076-f90a-255c6307f698" executionId="3d10d955-cdc0-4f42-b528-53cc9f4db447" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8b5d7e5f-7e9e-d65c-8db5-732a0e0acf46" executionId="dd904774-3d87-4b94-b7d4-b64af02cf0c7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4471f122-7930-3ec4-0790-95c08fba9d8b" executionId="2741234a-cc7f-470b-9ff5-65e33b95b101" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7e93daf3-8acf-1496-51ab-ee5147db5a70" executionId="3cbb6985-1301-4972-8455-95656cf6cae2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7e01d8e4-5729-39ac-c5b9-faf805fb6629" executionId="a189dfd5-580a-4871-86ed-e6362d153869" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cca63c70-d7f2-c32d-1886-42acdd1ffc57" executionId="fa3e1e0c-d79a-41fc-8ec4-730310241ae8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5eda6a26-915f-8935-8128-7e4b94d1cd38" executionId="814593a5-9db1-4fa6-8bea-ad18423b6858" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7560196b-0413-8b8b-1ffb-90d144258db1" executionId="7c1685d7-5cca-4329-80bf-631051afe80a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bcd36bc8-79ff-b83d-9b8d-c135498df32a" executionId="76401cb9-3a23-44f8-b7bb-d7776c101b76" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e9f3c20a-5716-473f-264a-12923d7c620b" executionId="2b68fe65-c729-4070-ad98-a8a5c91008d1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a62c5368-6084-ee73-652c-e0a35ca7be25" executionId="302b2c82-7ff4-4223-a112-646910855aea" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="181a5ebe-3940-34d8-fcca-9a97676515af" executionId="60612f2e-5afd-431a-a899-a3e9a6c38411" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="48481c9d-b47e-0bd2-6bce-9f1ce9614e28" executionId="7b0ae9e1-2d8c-4708-a0da-6a4e47ad7205" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4074b9a1-9098-22f4-163d-6e4a776af6d4" executionId="5b17455d-cee1-4557-820a-39ba10266d9f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="28a1c150-5bcd-0586-c534-244c0edba620" executionId="daeea2ba-b71b-40f2-8751-6983480eba37" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a2aea114-30fe-374a-a0d7-89f2bb3a7066" executionId="3746086c-9109-4e44-8611-0cce0f5df2fb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b9c99ae8-e4e8-0fdd-dca0-8fffef610102" executionId="43a98108-9cf7-448f-8df9-cbbe67b73a3b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a3efb0dd-a839-c957-339e-05a217fd7dd1" executionId="62bf8c2c-c5ee-4279-aeed-10ce216612ca" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a2aa5ac3-4da5-beae-2eec-e82c255faeb9" executionId="6dda071f-6cf9-44ae-bf3c-e1c8efa3238b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b74357c3-9ab1-cf89-4ffd-6414e318a98a" executionId="210a7bf0-4eb0-41d4-a301-1437d67a430b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c299ac94-391d-2836-c820-6a4409a132db" executionId="deac4f91-2269-463d-b5ec-630bfcf751f1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7c761799-b86b-8470-54ab-6887dc398928" executionId="4b69fb59-4d72-48e2-bd14-6b906e0ece6b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b3f63659-2e9e-bddd-26da-80e2e96aeb0c" executionId="14edcc19-6e6a-4334-8ccd-718bd8f6f20a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="eaec22e8-38ad-4c04-d323-c76155eb831b" executionId="374e8d21-553f-4aae-a3cf-795d63d3ceef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9f545ea5-7587-302d-e212-bbc992a09070" executionId="945ad993-c696-41d6-b929-b817017b4612" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="96fee54c-80c4-aeaf-9cd9-79a11077f7ca" executionId="e77bcf59-c297-4a0a-939f-56bbfcff9e3e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="06938cda-a084-970c-6246-6706cc7693bb" executionId="8d61da23-a254-4967-8dd3-48adfd2146ef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f7ee6d67-c777-567c-6d57-c0027629b2c3" executionId="b9de9dea-0865-4103-a653-6699033e1747" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2a97f098-8867-ef57-8caa-898ea2fff586" executionId="7d16a6e3-19fb-4e7f-ad87-5d18bca29361" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a9a45531-7da9-2d69-2a4a-0b2f32b12f49" executionId="894c5e01-7281-4146-953f-253222051723" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12458eef-099b-2777-8de6-81f703437e77" executionId="e7f91e9a-70dd-4d0d-acc5-6dfe18697a37" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bb447a18-00a4-b946-c664-dc668bbb9bc8" executionId="e5d773fb-a0f5-479d-a1b8-bff7bc2dc8e6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="391e4113-3f0d-a00d-9960-a7d83630957f" executionId="f5eacdc8-2be4-4465-92d9-21b75839b5de" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2140a83c-e3a0-c996-9ba3-5fe1e4bcc8bd" executionId="ef796b71-5937-4f1f-af2d-67d39b011810" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cfd4654f-8a82-5e95-cf07-dc8f37c25a98" executionId="70ff0914-8341-4448-baaf-44672e4385fe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="23e52db3-d128-3a92-7f7c-45792c9e3887" executionId="995378ef-22a8-482b-94f0-343c67cfc471" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f62e96f5-7be5-f977-28cf-34b506e266ba" executionId="d0922a10-d1d3-421f-a426-8c1554f130b9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7526a311-5eb9-26b1-d756-f7bd12097716" executionId="c75884b0-bb14-4d60-8dd8-524c656dd8af" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8200d21a-4f34-04ec-ecb3-53d9321e0a55" executionId="125b578a-ec94-4242-be55-14150338290d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ef139b78-588d-2700-7f8e-f9400cbb16cb" executionId="9b395614-2aa6-44c6-8b7f-5b7b098fe22c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2a292f34-b087-6cea-01ef-0c4a7382dc43" executionId="78e4ac03-0b9f-45fa-9002-5a4147757b00" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ffe78535-33de-63a6-30cf-40fdf56c65a6" executionId="30289f43-8a5d-4913-b418-2e872fe16a33" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="07dbd534-5b33-0eca-4ea7-8e91246d0437" executionId="a5cd5b33-07ec-43af-a4a3-340c33af000b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="84f3b599-147d-7630-440d-fe9496d98379" executionId="24df6e0a-4a5a-4857-bf0d-d014dd31ea62" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b5e1309d-29e2-1b9c-4a38-8985176f30be" executionId="ca64ecfa-c73b-4f61-80e2-89e6b58ee305" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4a206475-ad80-014b-8606-26dac210d3b3" executionId="f91fe68b-c43d-49d0-bc12-bd6961796fb8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="814b448a-88e2-59ce-c753-d6d20e9156a6" executionId="d8bc92fe-beeb-4f45-b3d8-bce1f783cd1e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="목록에 없는 결과" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="로드된 모든 결과" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="62" executed="62" passed="42" failed="20" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)&#xD;
+[xUnit.net 00:00:03.33]   Discovering: Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:06.41]   Discovered:  Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:06.46]   Starting:    Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:06.84]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.84]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.84]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.84]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(Boolean calculateRecursively)&#xD;
+[xUnit.net 00:00:06.84]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:06.84]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:06.85]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.85]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.85]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.85]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(Boolean calculateRecursively)&#xD;
+[xUnit.net 00:00:06.85]            at InvokeStub_FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.85]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:06.86]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.86]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.86]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.86]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(49,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Boolean calculateRecursively, Int32 epsilonCount)&#xD;
+[xUnit.net 00:00:06.86]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:06.86]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:06.88]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.88]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(49,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Boolean calculateRecursively, Int32 epsilonCount)&#xD;
+[xUnit.net 00:00:06.88]            at InvokeStub_FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.88]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:06.88]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.88]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(49,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Boolean calculateRecursively, Int32 epsilonCount)&#xD;
+[xUnit.net 00:00:06.88]            at InvokeStub_FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.88]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:06.88]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.88]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(49,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Boolean calculateRecursively, Int32 epsilonCount)&#xD;
+[xUnit.net 00:00:06.88]            at InvokeStub_FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.88]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:06.88]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.88]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(49,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Boolean calculateRecursively, Int32 epsilonCount)&#xD;
+[xUnit.net 00:00:06.88]            at InvokeStub_FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.88]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:06.88]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.88]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(49,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Boolean calculateRecursively, Int32 epsilonCount)&#xD;
+[xUnit.net 00:00:06.88]            at InvokeStub_FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.88]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:06.89]       Assert.True() Failure&#xD;
+[xUnit.net 00:00:06.89]       Expected: True&#xD;
+[xUnit.net 00:00:06.89]       Actual:   False&#xD;
+[xUnit.net 00:00:06.89]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(124,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(Boolean calculateRecursively)&#xD;
+[xUnit.net 00:00:06.89]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:06.89]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:06.89]       Assert.True() Failure&#xD;
+[xUnit.net 00:00:06.89]       Expected: True&#xD;
+[xUnit.net 00:00:06.89]       Actual:   False&#xD;
+[xUnit.net 00:00:06.89]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(124,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(Boolean calculateRecursively)&#xD;
+[xUnit.net 00:00:06.89]            at InvokeStub_FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.89]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:06.89]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.89]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(159,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(Boolean calculateRecursively)&#xD;
+[xUnit.net 00:00:06.89]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:06.89]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:06.89]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.89]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(159,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(Boolean calculateRecursively)&#xD;
+[xUnit.net 00:00:06.89]            at InvokeStub_FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.89]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:06.89]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.89]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(27,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(Boolean calculateRecursively)&#xD;
+[xUnit.net 00:00:06.89]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:06.89]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:06.89]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.89]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(27,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(Boolean calculateRecursively)&#xD;
+[xUnit.net 00:00:06.89]            at InvokeStub_FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.89]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:06.89]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.89]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(138,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(Boolean calculateRecursively)&#xD;
+[xUnit.net 00:00:06.89]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:06.89]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:06.89]       Assert.Single() Failure: The collection was empty&#xD;
+[xUnit.net 00:00:06.89]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(205,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.AssertOnly(TerminalSet actual, Terminal expected)&#xD;
+[xUnit.net 00:00:06.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Common\FirstEmptySequenceTests.cs(138,0): at Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(Boolean calculateRecursively)&#xD;
+[xUnit.net 00:00:06.89]            at InvokeStub_FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.89]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:06.96]       Assert.Empty() Failure: Collection was not empty&#xD;
+[xUnit.net 00:00:06.96]       Collection: [This is EndMarker! char : щ]&#xD;
+[xUnit.net 00:00:06.96]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.96]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrEmptySuffixTests.cs(38,0): at Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Boolean emptyPrefix, Boolean reverse)&#xD;
+[xUnit.net 00:00:06.96]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:06.96]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:06.96]       Assert.Empty() Failure: Collection was not empty&#xD;
+[xUnit.net 00:00:06.96]       Collection: [This is EndMarker! char : щ]&#xD;
+[xUnit.net 00:00:06.96]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.96]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrEmptySuffixTests.cs(38,0): at Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Boolean emptyPrefix, Boolean reverse)&#xD;
+[xUnit.net 00:00:06.96]            at InvokeStub_LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.96]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:06.96]       Assert.Empty() Failure: Collection was not empty&#xD;
+[xUnit.net 00:00:06.96]       Collection: [This is EndMarker! char : щ]&#xD;
+[xUnit.net 00:00:06.96]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.96]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrEmptySuffixTests.cs(38,0): at Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Boolean emptyPrefix, Boolean reverse)&#xD;
+[xUnit.net 00:00:06.96]            at InvokeStub_LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.96]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:06.96]       Assert.Empty() Failure: Collection was not empty&#xD;
+[xUnit.net 00:00:06.96]       Collection: [This is EndMarker! char : щ]&#xD;
+[xUnit.net 00:00:06.96]       Stack Trace:&#xD;
+[xUnit.net 00:00:06.96]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrEmptySuffixTests.cs(38,0): at Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Boolean emptyPrefix, Boolean reverse)&#xD;
+[xUnit.net 00:00:06.96]            at InvokeStub_LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(Object, Span`1)&#xD;
+[xUnit.net 00:00:06.96]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:07.13]   Finished:    Parse.FrontEnd.Parsers.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:50:59.9462490+09:00">
+        <Text>[xUnit.net 00:00:06.84]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(calculateRecursively: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:50:59.9588742+09:00">
+        <Text>[xUnit.net 00:00:06.85]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(calculateRecursively: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:50:59.9616136+09:00">
+        <Text>[xUnit.net 00:00:06.86]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: True, epsilonCount: 1) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0835443+09:00">
+        <Text>[xUnit.net 00:00:06.88]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: False, epsilonCount: 4) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0836529+09:00">
+        <Text>[xUnit.net 00:00:06.88]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: True, epsilonCount: 2) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0837409+09:00">
+        <Text>[xUnit.net 00:00:06.88]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: True, epsilonCount: 4) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0838416+09:00">
+        <Text>[xUnit.net 00:00:06.88]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: False, epsilonCount: 2) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0839325+09:00">
+        <Text>[xUnit.net 00:00:06.88]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: False, epsilonCount: 1) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0857680+09:00">
+        <Text>[xUnit.net 00:00:06.89]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(calculateRecursively: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0858734+09:00">
+        <Text>[xUnit.net 00:00:06.89]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(calculateRecursively: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0859617+09:00">
+        <Text>[xUnit.net 00:00:06.89]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(calculateRecursively: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0860787+09:00">
+        <Text>[xUnit.net 00:00:06.89]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(calculateRecursively: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0861602+09:00">
+        <Text>[xUnit.net 00:00:06.89]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(calculateRecursively: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0862412+09:00">
+        <Text>[xUnit.net 00:00:06.89]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(calculateRecursively: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0863332+09:00">
+        <Text>[xUnit.net 00:00:06.89]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(calculateRecursively: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0864239+09:00">
+        <Text>[xUnit.net 00:00:06.89]     Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(calculateRecursively: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0925840+09:00">
+        <Text>[xUnit.net 00:00:06.96]     Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: False, reverse: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0926344+09:00">
+        <Text>[xUnit.net 00:00:06.96]     Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: True, reverse: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0927763+09:00">
+        <Text>[xUnit.net 00:00:06.96]     Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: False, reverse: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="JJW-PC" outcome="Error" timestamp="2026-10-28T09:51:00.0928341+09:00">
+        <Text>[xUnit.net 00:00:06.96]     Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: True, reverse: True) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,14 @@
+  복원할 프로젝트를 확인하는 중...
+  수행할 작업이 없습니다. 지정한 프로젝트에 복원할 패키지가 없습니다.
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\legacy\ParsingLibrary\Grammars\Grammar.cs(25,24): warning CS0414: 'Grammar.varLetter' 필드가 할당되었지만 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\legacy\ParsingLibrary\ParsingLibrary.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\legacy\ParsingLibrary\Grammars\Grammar.cs(24,24): warning CS0414: 'Grammar.letter' 필드가 할당되었지만 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\legacy\ParsingLibrary\ParsingLibrary.csproj]
+  ParsingLibrary -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\legacy\ParsingLibrary\bin\Release\ParsingLibrary.dll
+
+빌드했습니다.
+
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\legacy\ParsingLibrary\Grammars\Grammar.cs(25,24): warning CS0414: 'Grammar.varLetter' 필드가 할당되었지만 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\legacy\ParsingLibrary\ParsingLibrary.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\legacy\ParsingLibrary\Grammars\Grammar.cs(24,24): warning CS0414: 'Grammar.letter' 필드가 할당되었지만 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\legacy\ParsingLibrary\ParsingLibrary.csproj]
+    경고 2개
+    오류 0개
+
+경과 시간: 00:00:00.79

@@ -1,0 +1,291 @@
+Grammar
+
+    0 $accept: S $end
+
+    1 S: G1 C
+
+    2 C: P G2
+    3  | G3 'e' 'x' '?' S ':' S
+
+    4 P: R G4
+
+    5 R: 'a' G5
+    6  | 'b' G6 'i' S
+
+    7 G1: %empty
+
+    8 G2: %empty
+
+    9 G3: %empty
+
+   10 G4: %empty
+
+   11 G5: %empty
+
+   12 G6: %empty
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    ':' (58) 3
+    '?' (63) 3
+    'a' (97) 5
+    'b' (98) 6
+    'e' (101) 3
+    'i' (105) 6
+    'x' (120) 3
+    error (256)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (10)
+        on left: 0
+    S (11)
+        on left: 1
+        on right: 0 3 6
+    C (12)
+        on left: 2 3
+        on right: 1
+    P (13)
+        on left: 4
+        on right: 2
+    R (14)
+        on left: 5 6
+        on right: 4
+    G1 (15)
+        on left: 7
+        on right: 1
+    G2 (16)
+        on left: 8
+        on right: 2
+    G3 (17)
+        on left: 9
+        on right: 3
+    G4 (18)
+        on left: 10
+        on right: 4
+    G5 (19)
+        on left: 11
+        on right: 5
+    G6 (20)
+        on left: 12
+        on right: 6
+
+
+State 0
+
+    0 $accept: . S $end
+    1 S: . G1 C
+    7 G1: %empty .  ['e', 'a', 'b']
+
+    'e'  reduce using rule 7 (G1)
+    'a'  reduce using rule 7 (G1)
+    'b'  reduce using rule 7 (G1)
+
+    S   go to state 1
+    G1  go to state 2
+
+
+State 1
+
+    0 $accept: S . $end
+
+    $end  shift, and go to state 3
+
+
+State 2
+
+    1 S: G1 . C
+    2 C: . P G2
+    3  | . G3 'e' 'x' '?' S ':' S
+    4 P: . R G4
+    5 R: . 'a' G5
+    6  | . 'b' G6 'i' S
+    9 G3: %empty .  ['e']
+
+    'a'  shift, and go to state 4
+    'b'  shift, and go to state 5
+
+    'e'  reduce using rule 9 (G3)
+
+    C   go to state 6
+    P   go to state 7
+    R   go to state 8
+    G3  go to state 9
+
+
+State 3
+
+    0 $accept: S $end .
+
+    $default  accept
+
+
+State 4
+
+    5 R: 'a' . G5
+   11 G5: %empty .  [$end, ':']
+
+    $end  reduce using rule 11 (G5)
+    ':'   reduce using rule 11 (G5)
+
+    G5  go to state 10
+
+
+State 5
+
+    6 R: 'b' . G6 'i' S
+   12 G6: %empty .  ['i']
+
+    'i'  reduce using rule 12 (G6)
+
+    G6  go to state 11
+
+
+State 6
+
+    1 S: G1 C .  [$end, ':']
+
+    $end  reduce using rule 1 (S)
+    ':'   reduce using rule 1 (S)
+
+
+State 7
+
+    2 C: P . G2
+    8 G2: %empty .  [$end, ':']
+
+    $end  reduce using rule 8 (G2)
+    ':'   reduce using rule 8 (G2)
+
+    G2  go to state 12
+
+
+State 8
+
+    4 P: R . G4
+   10 G4: %empty .  [$end, ':']
+
+    $end  reduce using rule 10 (G4)
+    ':'   reduce using rule 10 (G4)
+
+    G4  go to state 13
+
+
+State 9
+
+    3 C: G3 . 'e' 'x' '?' S ':' S
+
+    'e'  shift, and go to state 14
+
+
+State 10
+
+    5 R: 'a' G5 .  [$end, ':']
+
+    $end  reduce using rule 5 (R)
+    ':'   reduce using rule 5 (R)
+
+
+State 11
+
+    6 R: 'b' G6 . 'i' S
+
+    'i'  shift, and go to state 15
+
+
+State 12
+
+    2 C: P G2 .  [$end, ':']
+
+    $end  reduce using rule 2 (C)
+    ':'   reduce using rule 2 (C)
+
+
+State 13
+
+    4 P: R G4 .  [$end, ':']
+
+    $end  reduce using rule 4 (P)
+    ':'   reduce using rule 4 (P)
+
+
+State 14
+
+    3 C: G3 'e' . 'x' '?' S ':' S
+
+    'x'  shift, and go to state 16
+
+
+State 15
+
+    1 S: . G1 C
+    6 R: 'b' G6 'i' . S
+    7 G1: %empty .  ['e', 'a', 'b']
+
+    'e'  reduce using rule 7 (G1)
+    'a'  reduce using rule 7 (G1)
+    'b'  reduce using rule 7 (G1)
+
+    S   go to state 17
+    G1  go to state 2
+
+
+State 16
+
+    3 C: G3 'e' 'x' . '?' S ':' S
+
+    '?'  shift, and go to state 18
+
+
+State 17
+
+    6 R: 'b' G6 'i' S .  [$end, ':']
+
+    $end  reduce using rule 6 (R)
+    ':'   reduce using rule 6 (R)
+
+
+State 18
+
+    1 S: . G1 C
+    3 C: G3 'e' 'x' '?' . S ':' S
+    7 G1: %empty .  ['e', 'a', 'b']
+
+    'e'  reduce using rule 7 (G1)
+    'a'  reduce using rule 7 (G1)
+    'b'  reduce using rule 7 (G1)
+
+    S   go to state 19
+    G1  go to state 2
+
+
+State 19
+
+    3 C: G3 'e' 'x' '?' S . ':' S
+
+    ':'  shift, and go to state 20
+
+
+State 20
+
+    1 S: . G1 C
+    3 C: G3 'e' 'x' '?' S ':' . S
+    7 G1: %empty .  ['e', 'a', 'b']
+
+    'e'  reduce using rule 7 (G1)
+    'a'  reduce using rule 7 (G1)
+    'b'  reduce using rule 7 (G1)
+
+    S   go to state 21
+    G1  go to state 2
+
+
+State 21
+
+    3 C: G3 'e' 'x' '?' S ':' S .  [$end, ':']
+
+    $end  reduce using rule 3 (C)
+    ':'   reduce using rule 3 (C)

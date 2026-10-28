@@ -1,0 +1,71 @@
+{
+  "Finding": "Unproductive path introduces a spurious B/C reduce-reduce conflict; valid ax is rejected in one registration order and accepted in reverse order. Pruned grammar accepts in both orders.",
+  "SourceChecks": [
+    {
+      "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd\\FirstFollowAnalyzer [First].cs",
+      "Unchanged": true
+    },
+    {
+      "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\CanonicalRelation.cs",
+      "Unchanged": true
+    }
+  ],
+  "Cases": [
+    {
+      "Case": "original",
+      "Reverse": false,
+      "Input": "z",
+      "Accepted": true,
+      "ConflictCount": 1
+    },
+    {
+      "Case": "original",
+      "Reverse": false,
+      "Input": "ax",
+      "Accepted": false,
+      "ConflictCount": 1
+    },
+    {
+      "Case": "original",
+      "Reverse": true,
+      "Input": "z",
+      "Accepted": true,
+      "ConflictCount": 1
+    },
+    {
+      "Case": "original",
+      "Reverse": true,
+      "Input": "ax",
+      "Accepted": false,
+      "ConflictCount": 1
+    },
+    {
+      "Case": "overlapping-valid-path",
+      "Reverse": false,
+      "Input": "ax",
+      "Accepted": false,
+      "ConflictCount": 2
+    },
+    {
+      "Case": "overlapping-valid-path",
+      "Reverse": true,
+      "Input": "ax",
+      "Accepted": true,
+      "ConflictCount": 2
+    },
+    {
+      "Case": "pruned-valid-path",
+      "Reverse": false,
+      "Input": "ax",
+      "Accepted": true,
+      "ConflictCount": 0
+    },
+    {
+      "Case": "pruned-valid-path",
+      "Reverse": true,
+      "Input": "ax",
+      "Accepted": true,
+      "ConflictCount": 0
+    }
+  ]
+}

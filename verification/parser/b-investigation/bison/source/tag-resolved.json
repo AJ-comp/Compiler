@@ -1,0 +1,24 @@
+{
+  "node_id": "TA_kwDOCMY83toAKGI1MmY4NmNiYTQ2ZWI2ZmU1ZjQ0Y2NlYTQxNWY3YTE0MzgxMTI4MGI",
+  "sha": "b52f86cba46eb6fe5f44ccea415f7a143811280b",
+  "url": "https://api.github.com/repos/akimd/bison/git/tags/b52f86cba46eb6fe5f44ccea415f7a143811280b",
+  "tagger": {
+    "name": "Akim Demaille",
+    "email": "akim.demaille@gmail.com",
+    "date": "2021-09-25T08:43:40Z"
+  },
+  "object": {
+    "sha": "9beba1919cad5dd08b0cac277c27896808719e4b",
+    "type": "commit",
+    "url": "https://api.github.com/repos/akimd/bison/git/commits/9beba1919cad5dd08b0cac277c27896808719e4b"
+  },
+  "tag": "v3.8.2",
+  "message": "bison 3.8.2\n-----BEGIN PGP SIGNATURE-----\n\niHYEABECADYWIQR9+EN0se4fl2S74l0N3KoyeNUmTgUCYU7hPBgcYWtpbS5kZW1h\naWxsZUBnbWFpbC5jb20ACgkQDdyqMnjVJk7lZACgiDcocsvPQ8eBy8Sylgom67a+\nUzMAnR8YxK0e1wzOem97RZrWprO+Uzc3\n=uMPc\n-----END PGP SIGNATURE-----\n",
+  "verification": {
+    "verified": false,
+    "reason": "unknown_key",
+    "signature": "-----BEGIN PGP SIGNATURE-----\n\niHYEABECADYWIQR9+EN0se4fl2S74l0N3KoyeNUmTgUCYU7hPBgcYWtpbS5kZW1h\naWxsZUBnbWFpbC5jb20ACgkQDdyqMnjVJk7lZACgiDcocsvPQ8eBy8Sylgom67a+\nUzMAnR8YxK0e1wzOem97RZrWprO+Uzc3\n=uMPc\n-----END PGP SIGNATURE-----\n",
+    "payload": "object 9beba1919cad5dd08b0cac277c27896808719e4b\ntype commit\ntag v3.8.2\ntagger Akim Demaille <akim.demaille@gmail.com> 1632559420 +0200\n\nbison 3.8.2\n",
+    "verified_at": null
+  }
+}

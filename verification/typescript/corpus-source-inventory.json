@@ -1,0 +1,10 @@
+{
+  "revision": "4d4f005c8541e0255a9d8791205fdce326e462bc",
+  "archiveSha256": "99cbcb9abf5308b15e90b991919b3f897918f5c19c13dce3a4d3cab618c64bf9",
+  "paths": {
+    "tests/baselines/reference": 60932,
+    "tests/cases/compiler": 6537,
+    "tests/cases/conformance": 5908,
+    "tests/cases/fourslash": 6568
+  }
+}

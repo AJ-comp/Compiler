@@ -1,0 +1,234 @@
+using Janglim.FrontEnd.ParseTree;
+using Janglim.FrontEnd.RegularGrammar;
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+namespace Janglim.FrontEnd.Grammars.TypeScript
+{
+    /// <summary>
+    /// Builds the JavaScript validation view of a TypeScript concrete tree. Type
+    /// syntax stays in the caller's original tree; only the temporary validation
+    /// view omits it. New tree nodes reuse the original immutable token data, so
+    /// diagnostics retain their original UTF-16 source positions.
+    /// </summary>
+    internal static class TypeScriptProjection
+    {
+        internal static ParseTreeSymbol Create(ParseTreeSymbol tree)
+        {
+            if (ReferenceEquals(tree, null)) throw new ArgumentNullException(nameof(tree));
+            var projected = new Dictionary<ParseTreeSymbol, ParseTreeSymbol>(Identity.Instance);
+            var hasTokens = new Dictionary<ParseTreeSymbol, bool>(Identity.Instance);
+            var pending = new Stack<Visit>();
+            pending.Push(new Visit(tree, false));
+            while (pending.Count != 0)
+            {
+                var visit = pending.Pop();
+                var original = visit.Symbol;
+                if (original is ParseTreeTerminal terminal)
+                {
+                    // Sharing a terminal wrapper would change its Parent when it
+                    // is attached below. TokenData itself is safe to share.
+                    projected[original] = new ParseTreeTerminal(terminal.Token);
+                    hasTokens[original] = true;
+                    continue;
+                }
+                if (!(original is ParseTreeNonTerminal node))
+                    throw new ArgumentException("The TypeScript tree contains an unsupported symbol.", nameof(tree));
+                string name = Name(node);
+                // NoIn changes expression precedence/context, not the runtime
+                // meaning of a TypeScript assertion wrapper.
+                if (name.EndsWith("NoIn", StringComparison.Ordinal)) name = name.Substring(0, name.Length - 4);
+                if (IsTypeOnly(name) || IsFunctionSignature(node))
+                {
+                    projected[original] = null;
+                    hasTokens[original] = false;
+                    continue;
+                }
+                if (!visit.Complete)
+                {
+                    pending.Push(new Visit(node, true, visit.InNamespace));
+                    bool inNamespace = visit.InNamespace || name == "TSNamespaceBody";
+                    for (int i = node.Count - 1; i >= 0; i--) pending.Push(new Visit(node[i], false, inNamespace));
+                    continue;
+                }
+                if (IsRuntimeAssertion(name))
+                {
+                    ParseTreeSymbol operand = null;
+                    foreach (var child in node.Items)
+                    {
+                        if (!(child is ParseTreeNonTerminal) || !hasTokens[child] || ReferenceEquals(projected[child], null)) continue;
+                        if (!ReferenceEquals(operand, null))
+                            throw new InvalidOperationException("A TypeScript assertion must contain one runtime operand: " + name);
+                        operand = projected[child];
+                    }
+                    if (ReferenceEquals(operand, null))
+                        throw new InvalidOperationException("The TypeScript assertion has no runtime operand: " + name);
+                    projected[original] = operand;
+                    hasTokens[original] = true;
+                    continue;
+                }
+                if (name == "TSNamespaceDeclaration")
+                {
+                    // A namespace has its own variable scope. Present its body
+                    // as an ordinary non-async function boundary to the shared
+                    // JavaScript scope checker; TS validation separately rejects
+                    // namespace-level return/new.target. Namespace declarations
+                    // and declaration merging remain TypeScript concerns.
+                    var body = NamespaceBody(node);
+                    if (ReferenceEquals(body, null) || !projected.TryGetValue(body, out var view) || ReferenceEquals(view, null))
+                    {
+                        projected[original] = null;
+                        hasTokens[original] = false;
+                    }
+                    else
+                    {
+                        var scope = NamedNode("FunctionExpression");
+                        scope.Add(view);
+                        projected[original] = scope;
+                        hasTokens[original] = hasTokens[body];
+                    }
+                    continue;
+                }
+                string role = name == "TSNamespaceBody" ? "FunctionBody" :
+                    visit.InNamespace && name == "ModuleItemList" ? "StatementList" :
+                    visit.InNamespace && name == "ModuleItem" ? "StatementListItem" : null;
+                var copy = role == null ? new ParseTreeNonTerminal(node.SignPost) : NamedNode(role);
+                bool containsToken = false;
+                foreach (var child in node.Items)
+                {
+                    var value = projected[child];
+                    if (!ReferenceEquals(value, null)) copy.Add(value);
+                    containsToken |= hasTokens[child];
+                }
+                // An assertion statement such as `"use strict" as string;` is
+                // not a directive in the original TypeScript source. Retain one
+                // original assertion punctuation/keyword as a validation-only
+                // boundary so erasure cannot manufacture a directive prologue.
+                // JavaScript statement validation does not parse this temporary
+                // view; its directive check sees the extra non-string token.
+                if (name == "ExpressionStatement" && LooksLikeStringDirective(copy))
+                {
+                    var boundary = AssertionBoundary(node);
+                    if (!ReferenceEquals(boundary, null)) copy.Add(new ParseTreeTerminal(boundary.Token));
+                }
+                projected[original] = copy;
+                hasTokens[original] = containsToken;
+            }
+            return projected[tree];
+        }
+
+        internal static string Name(ParseTreeSymbol symbol)
+        {
+            string name = (symbol as ParseTreeNonTerminal)?.SignPost?.Name ?? string.Empty;
+            while (name.EndsWith("__Await", StringComparison.Ordinal) || name.EndsWith("__Yield", StringComparison.Ordinal))
+                name = name.Substring(0, name.Length - 7);
+            return name;
+        }
+
+        // A signature shares FunctionDeclaration's header with an implementation.
+        // Its direct ending marker identifies the whole declaration as type-only;
+        // a signature in a nested function must not erase the enclosing function.
+        internal static bool IsFunctionSignature(ParseTreeNonTerminal node)
+        {
+            if (Name(node) != "FunctionDeclaration") return false;
+            foreach (var child in node.Items)
+                if (Name(child) == "TSFunctionOverload") return true;
+            return false;
+        }
+
+        private static bool IsRuntimeAssertion(string name)
+            => name == "TSAsExpression" || name == "TSSatisfiesExpression" ||
+               name == "TSNonNullExpression" || name == "TSTypeAssertion";
+
+        private static ParseTreeNonTerminal NamedNode(string name)
+        {
+            var rule = new NonTerminal(name);
+            rule.Add(new Epsilon());
+            return new ParseTreeNonTerminal(rule[0]);
+        }
+
+        private static ParseTreeNonTerminal NamespaceBody(ParseTreeNonTerminal declaration)
+        {
+            var pending = new Stack<ParseTreeSymbol>();
+            pending.Push(declaration);
+            while (pending.Count != 0)
+            {
+                if (!(pending.Pop() is ParseTreeNonTerminal node)) continue;
+                string name = Name(node);
+                if (name == "TSNamespaceBody") return node;
+                if (name == "TSGlobalAugmentation" || name == "TSAmbientModuleDeclaration") continue;
+                for (int i = node.Count - 1; i >= 0; i--) pending.Push(node[i]);
+            }
+            return null;
+        }
+
+        private static bool LooksLikeStringDirective(ParseTreeSymbol root)
+        {
+            int tokens = 0;
+            var pending = new Stack<ParseTreeSymbol>();
+            pending.Push(root);
+            while (pending.Count != 0)
+            {
+                var symbol = pending.Pop();
+                if (symbol is ParseTreeTerminal terminal)
+                {
+                    if (tokens == 0 && terminal.Token.Kind.Caption != "StringLiteral") return false;
+                    if (tokens == 1 && terminal.Token.Input != ";" || tokens > 1) return false;
+                    tokens++;
+                }
+                else if (symbol is ParseTreeNonTerminal node)
+                    for (int i = node.Count - 1; i >= 0; i--) pending.Push(node[i]);
+            }
+            return tokens != 0;
+        }
+
+        private static ParseTreeTerminal AssertionBoundary(ParseTreeSymbol root)
+        {
+            var pending = new Stack<ParseTreeSymbol>();
+            pending.Push(root);
+            while (pending.Count != 0)
+            {
+                if (!(pending.Pop() is ParseTreeNonTerminal node)) continue;
+                string name = Name(node);
+                if (name.EndsWith("NoIn", StringComparison.Ordinal)) name = name.Substring(0, name.Length - 4);
+                if (IsRuntimeAssertion(name))
+                    foreach (var child in node.Items)
+                        if (child is ParseTreeTerminal terminal && (terminal.Token.Input == "as" ||
+                            terminal.Token.Input == "satisfies" || terminal.Token.Input == "!" || terminal.Token.Input == "<"))
+                            return terminal;
+                for (int i = node.Count - 1; i >= 0; i--) pending.Push(node[i]);
+            }
+            return null;
+        }
+
+        private static bool IsTypeOnly(string name)
+        {
+            if (name == "TSTypeAssertion") return false;
+            return name.StartsWith("TSType", StringComparison.Ordinal) ||
+                name == "TSAnnotation" || name == "TSReturnType" || name == "TSReturnTypeAnnotation" || name == "TSOptional" ||
+                name == "TSDefinite" || name == "TSModifiers" || name == "TSThisParameter" ||
+                name == "TSOptionalTypeParameters" || name == "TSOptionalReturnType" ||
+                name == "TSInterfaceDeclaration" || name == "TSAmbientDeclaration" ||
+                name == "TSGlobalAugmentation" || name == "TSAmbientModuleDeclaration" || name == "TSNamespaceExportDeclaration" ||
+                name == "TSOverloadDeclaration" || name == "TSFunctionOverload" ||
+                name == "TSMethodOverload" || name == "TSTypeOnlyImport" || name == "TSTypeOnlyExport";
+        }
+
+        private readonly struct Visit
+        {
+            internal Visit(ParseTreeSymbol symbol, bool complete, bool inNamespace = false)
+            { Symbol = symbol; Complete = complete; InNamespace = inNamespace; }
+            internal ParseTreeSymbol Symbol { get; }
+            internal bool Complete { get; }
+            internal bool InNamespace { get; }
+        }
+
+        private sealed class Identity : IEqualityComparer<ParseTreeSymbol>
+        {
+            internal static readonly Identity Instance = new Identity();
+            public bool Equals(ParseTreeSymbol left, ParseTreeSymbol right) => ReferenceEquals(left, right);
+            public int GetHashCode(ParseTreeSymbol symbol) => RuntimeHelpers.GetHashCode(symbol);
+        }
+    }
+}

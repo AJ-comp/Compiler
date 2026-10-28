@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RestoreSources>https://api.nuget.org/v3/index.json</RestoreSources>
+    <RestorePackagesPath>$(MSBuildThisFileDirectory).packages-published-042179ed189e47268ac7c6bf72a62e60</RestorePackagesPath>
+    <RestoreFallbackFolders></RestoreFallbackFolders>
+    <DisableImplicitLibraryPacksFolder>true</DisableImplicitLibraryPacksFolder>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Janglim" Version="0.3.0" />
+  </ItemGroup>
+</Project>

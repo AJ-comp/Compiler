@@ -1,0 +1,5 @@
+MINIMIZE fullFail=True candidates=81
+DISABLED 40 chunk=40
+DISABLED 80 chunk=40
+DISABLED 81 chunk=40
+RETAINED 

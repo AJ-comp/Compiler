@@ -1,0 +1,11 @@
+{
+  "input": "artifacts/ecmascript-audit/static/context-probes.jsonl",
+  "skip": 0,
+  "processed": 1008,
+  "outcomes": {
+    "pass": 998,
+    "unexpected-reject": 10
+  },
+  "elapsedSeconds": 31.8225023,
+  "syntaxOnly": true
+}

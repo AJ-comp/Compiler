@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "syntaxOnly": true,
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\baseline-prefix.jsonl",
+  "inputSha256": "f275324e0f757c32b3f0b505ceba31217175b374a2486cf7dc2aa14c9ab874dc",
+  "runnerSha256": "5661f9058a9779d6fa3cb160a8f012b01bfbf565472236f90e89e9df13bfa010",
+  "profiles": [
+    {
+      "profile": "script-strict",
+      "expected": 4403,
+      "processed": 4403,
+      "complete": true,
+      "outcomes": {
+        "pass": 4401,
+        "timeout": 2
+      },
+      "restarts": 2
+    },
+    {
+      "profile": "script-nonstrict",
+      "expected": 5588,
+      "processed": 5588,
+      "complete": true,
+      "outcomes": {
+        "pass": 5587,
+        "timeout": 1
+      },
+      "restarts": 1
+    },
+    {
+      "profile": "module",
+      "expected": 9,
+      "processed": 9,
+      "complete": true,
+      "outcomes": {
+        "pass": 9
+      },
+      "restarts": 0
+    }
+  ],
+  "processed": 10000,
+  "outcomes": {
+    "pass": 9997,
+    "timeout": 3
+  },
+  "complete": true,
+  "elapsedSeconds": 529.878
+}

@@ -1,0 +1,176 @@
+TSTypeEntry : TSType ;
+# TypeScript 7.0.2 type syntax.
+# Authoritative implementation: microsoft/typescript-go commit
+# 2bd066d87f5bafd315be9f40889d0a60b9e58e0b, internal/parser/parser.go:
+# parseType, parseTypeOperatorOrHigher, parseNonArrayType, parseTypeMember,
+# parseTupleType, parseMappedType, parseFunctionOrConstructorType, parseImportType.
+# This fragment composes with Janglim's ECMAScript 2026 grammar. It retains actual
+# type productions in the concrete tree. Runtime expressions inside computed names
+# and parameter defaults reuse JavaScript productions; type bindings stay TS-prefixed.
+# Host lookahead predicates resolve TypeScript's documented syntactic decisions.
+# '>' is a distinct terminal so nested A<B<C>> can read two closing tokens
+# without changing the JavaScript shift-operator tokens or the common lexer engine.
+
+TSType : {TSFunctionTypeStart()}? TSFunctionType
+       | {TSNotFunctionTypeStart()}? TSConditionalType ;
+TSTypeNoConditional : {TSFunctionTypeStart()}? TSFunctionType
+                    | {TSNotFunctionTypeStart()}? TSUnionTypeNoConditional ;
+TSConditionalType : TSUnionType {TSNotConditionalTypeStart()}?
+                  | TSUnionType {TSConditionalTypeStart()}? 'extends' TSTypeNoConditional '?' TSType ':' TSType ;
+TSUnionType : TSIntersectionType | '|' TSIntersectionType | TSUnionType '|' TSIntersectionType ;
+TSIntersectionType : TSTypeOperator | '&' TSTypeOperator | TSIntersectionType '&' TSTypeOperator ;
+TSTypeOperator : TSPostfixType | 'keyof' TSTypeOperator | 'unique' TSTypeOperator
+               | 'readonly' TSTypeOperator | TSInferType ;
+TSInferType : 'infer' TSBindingIdentifier ;
+TSUnionTypeNoConditional : TSIntersectionTypeNoConditional | '|' TSIntersectionTypeNoConditional
+                         | TSUnionTypeNoConditional '|' TSIntersectionTypeNoConditional ;
+TSIntersectionTypeNoConditional : TSTypeOperatorNoConditional | '&' TSTypeOperatorNoConditional
+                                | TSIntersectionTypeNoConditional '&' TSTypeOperatorNoConditional ;
+TSTypeOperatorNoConditional : TSPostfixType | 'keyof' TSTypeOperatorNoConditional
+                            | 'unique' TSTypeOperatorNoConditional | 'readonly' TSTypeOperatorNoConditional
+                            | TSInferType | TSInferType 'extends' TSTypeNoConditional ;
+TSPostfixType : TSPostfixCore {TSNotPostfixTypeStart()}? ;
+TSPostfixCore : TSPrimaryType | TSPostfixCore TSPostfixSuffix ;
+TSPostfixSuffix : {TSPostfixTypeStart()}? '[' TSIndexTypeTail ;
+TSIndexTypeTail : ']' | TSType ']' ;
+
+TSPrimaryType : TSPrimitiveType | TSLiteralType | TSTypeReference | TSThisType
+              | TSTypeQuery | TSImportType | TSTupleType | TSParenthesizedType
+              | TSTemplateLiteralType | TSAssertsTypePredicate
+              | {TSMappedTypeStart()}? TSMappedType
+              | {TSNotMappedTypeStart()}? TSObjectType ;
+TSPrimitiveType : 'any' | 'unknown' | 'string' | 'number' | 'bigint' | 'symbol'
+                | 'boolean' | 'undefined' | 'never' | 'object' | 'void' | 'intrinsic' ;
+TSLiteralType : StringLiteral | NumericLiteral | '-' NumericLiteral
+              | 'null' | 'true' | 'false' | NoSubstitutionTemplate ;
+TSThisType : 'this' {TSNotTypePredicateStart()}? | 'this' {TSTypePredicateStart()}? 'is' TSType ;
+TSParenthesizedType : '(' TSType ')' ;
+
+TSTypeReference : TSQualifiedName {TSNoTypeReferenceSuffix()}?
+                | TSQualifiedName {TSTypeArgumentsStart()}? TSTypeArguments
+                | TSQualifiedName {TSTypePredicateStart()}? 'is' TSType ;
+TSQualifiedName : TSBindingIdentifier | TSQualifiedName '.' TSPropertyIdentifierName
+                | TSPrimitiveType '.' TSPropertyIdentifierName ;
+TSTypeArguments : '<' TSTypeArgumentList '>' | '<' TSTypeArgumentList ',' '>' ;
+TSTypeArgumentList : TSType | TSTypeArgumentList ',' TSType ;
+TSTypeParameters : '<' TSTypeParameterList '>' | '<' TSTypeParameterList ',' '>' ;
+TSTypeParameterList : TSTypeParameter | TSTypeParameterList ',' TSTypeParameter ;
+TSTypeParameter : TSTypeParameterModifiers? TSBindingIdentifier TSTypeConstraint? TSTypeDefault? ;
+TSTypeParameterModifiers : TSTypeParameterModifier | TSTypeParameterModifiers TSTypeParameterModifier ;
+TSTypeParameterModifier : 'const' | 'in' | 'out' ;
+TSTypeConstraint : 'extends' TSType ;
+TSTypeDefault : '=' TSType ;
+TSTypeAnnotation : ':' TSType ;
+TSReturnTypeAnnotation : ':' TSReturnType ;
+TSReturnType : TSType ;
+TSAssertsTypePredicate : 'asserts' NoLineTerminator TSAssertTarget
+                       | 'asserts' NoLineTerminator TSAssertTarget NoLineTerminator 'is' TSType ;
+TSAssertTarget : TSBindingIdentifier | 'this' ;
+
+TSFunctionType : TSFunctionParameters '=>' TSReturnType
+               | TSTypeParameters TSFunctionParameters '=>' TSReturnType
+               | 'new' TSFunctionParameters '=>' TSType
+               | 'new' TSTypeParameters TSFunctionParameters '=>' TSType
+               | 'abstract' 'new' TSFunctionParameters '=>' TSType
+               | 'abstract' 'new' TSTypeParameters TSFunctionParameters '=>' TSType ;
+TSFunctionParameters : '(' ')' | '(' TSParameterList ')' | '(' TSParameterList ',' ')' ;
+TSParameterList : TSParameter | TSParameterList ',' TSParameter ;
+TSParameter : TSParameterBinding TSParameterOptional? TSTypeAnnotation? TSParameterInitializer?
+            | '...' TSParameterBinding TSParameterOptional? TSTypeAnnotation? TSParameterInitializer? ;
+TSParameterOptional : '?' ;
+TSParameterInitializer : '=' AssignmentExpression ;
+TSParameterBinding : TSBindingIdentifier | 'this' | TSObjectBindingPattern | TSArrayBindingPattern ;
+TSObjectBindingPattern : '{' '}' | '{' TSBindingPropertyList '}' | '{' TSBindingPropertyList ',' '}' ;
+TSBindingPropertyList : TSBindingProperty | TSBindingPropertyList ',' TSBindingProperty ;
+TSBindingProperty : TSBindingIdentifier TSParameterInitializer?
+                  | TSPropertyName ':' TSParameterBinding TSParameterInitializer?
+                  | '...' TSParameterBinding ;
+TSArrayBindingPattern : '[' ']' | '[' TSArrayBindingElements ']' ;
+TSArrayBindingElements : TSArrayBindingElement | TSArrayBindingElements ',' TSArrayBindingElement
+                       | ',' | TSArrayBindingElements ',' ;
+TSArrayBindingElement : TSParameterBinding TSParameterInitializer? | '...' TSParameterBinding ;
+
+TSTupleType : '[' ']' | '[' TSTupleElements ']' | '[' TSTupleElements ',' ']' ;
+TSTupleElements : TSTupleElement | TSTupleElements ',' TSTupleElement ;
+TSTupleElement : {TSNamedTupleStart()}? TSNamedTupleMember
+               | {TSNotNamedTupleStart()}? TSUnnamedTupleMember ;
+TSNamedTupleMember : TSPropertyIdentifierName ':' TSType
+                   | TSPropertyIdentifierName '?' ':' TSType
+                   | '...' TSPropertyIdentifierName ':' TSType
+                   | '...' TSPropertyIdentifierName '?' ':' TSType ;
+TSUnnamedTupleMember : TSType | TSType '?' | '...' TSType ;
+
+TSObjectType : '{' '}' | '{' TSTypeMembers '}' ;
+TSTypeMembers : TSTypeMember | TSTypeMembers TSTypeMember ;
+TSTypeMember : TSPropertySignature TSTypeMemberEnd
+             | TSMethodSignature TSTypeMemberEnd
+             | TSCallSignature TSTypeMemberEnd
+             | TSConstructSignature TSTypeMemberEnd
+             | TSGetterSignature TSTypeMemberEnd
+             | TSSetterSignature TSTypeMemberEnd
+             | {TSIndexSignatureStart()}? TSIndexSignature TSTypeMemberEnd ;
+TSTypeMemberEnd : ';' | ',' | {TSTypeMemberEnd()}? ;
+TSPropertySignature : TSPropertyName TSParameterOptional? TSTypeAnnotation?
+                    | 'readonly' TSPropertyName TSParameterOptional? TSTypeAnnotation? ;
+TSMethodSignature : TSPropertyName TSParameterOptional? TSFunctionParameters TSReturnTypeAnnotation?
+                  | TSPropertyName TSParameterOptional? TSTypeParameters TSFunctionParameters TSReturnTypeAnnotation? ;
+TSCallSignature : TSFunctionParameters TSReturnTypeAnnotation?
+                | TSTypeParameters TSFunctionParameters TSReturnTypeAnnotation? ;
+TSConstructSignature : 'new' TSFunctionParameters TSReturnTypeAnnotation?
+                     | 'new' TSTypeParameters TSFunctionParameters TSReturnTypeAnnotation? ;
+TSGetterSignature : 'get' TSPropertyName TSFunctionParameters TSReturnTypeAnnotation? ;
+TSSetterSignature : 'set' TSPropertyName TSFunctionParameters TSReturnTypeAnnotation? ;
+TSIndexSignature : '[' TSIndexParameters ']' TSTypeAnnotation?
+                 | 'readonly' '[' TSIndexParameters ']' TSTypeAnnotation? ;
+TSIndexParameters : TSIndexParameter | TSIndexParameters ',' TSIndexParameter ;
+TSIndexParameter : TSBindingIdentifier TSTypeAnnotation? ;
+TSPropertyName : TSPropertyIdentifierName | StringLiteral | NumericLiteral
+               | {TSNotIndexSignatureStart()}? '[' AssignmentExpression ']' ;
+
+TSMappedType : '{' TSMappedHeader TSMappedValue '}' ;
+TSMappedHeader : TSMappedReadonly? '[' TSPropertyIdentifierName 'in' TSType TSMappedName? ']' ;
+TSMappedValue : TSMappedOptional? TSTypeAnnotation? TSMappedEnd? ;
+TSMappedReadonly : 'readonly' | '+' 'readonly' | '-' 'readonly' ;
+TSMappedName : 'as' TSType ;
+TSMappedOptional : '?' | '+' '?' | '-' '?' ;
+TSMappedEnd : ';' | ',' ;
+
+TSTypeQuery : 'typeof' TSQueryName {TSNotTypeArgumentsStart()}?
+            | 'typeof' TSQueryName {TSTypeArgumentsStart()}? TSTypeArguments ;
+TSQueryName : TSPropertyIdentifierName | TSQueryName '.' TSPropertyIdentifierName ;
+TSImportType : TSImportTypeBase {TSNotTypeArgumentsStart()}?
+              | TSImportTypeBase {TSTypeArgumentsStart()}? TSTypeArguments ;
+TSImportTypeBase : 'import' '(' TSType ')' TSImportQualifier?
+                  | 'typeof' 'import' '(' TSType ')' TSImportQualifier?
+                  | 'import' '(' TSType ',' TSImportTypeOptions ')' TSImportQualifier?
+                  | 'typeof' 'import' '(' TSType ',' TSImportTypeOptions ')' TSImportQualifier? ;
+TSImportQualifier : '.' TSQueryName ;
+TSImportTypeOptions : '{' 'with' ':' TSImportAttributes '}' | '{' 'with' ':' TSImportAttributes ',' '}' ;
+TSImportAttributes : '{' '}' | '{' TSImportAttributeList '}' | '{' TSImportAttributeList ',' '}' ;
+TSImportAttributeList : TSImportAttribute | TSImportAttributeList ',' TSImportAttribute ;
+TSImportAttribute : TSPropertyIdentifierName ':' AssignmentExpression | StringLiteral ':' AssignmentExpression ;
+
+TSTemplateLiteralType : TemplateHead TSType TSTypeTemplateSpans ;
+TSTypeTemplateSpans : TemplateTail | TSTypeTemplateMiddleList TemplateTail ;
+TSTypeTemplateMiddleList : TemplateMiddle TSType | TSTypeTemplateMiddleList TemplateMiddle TSType ;
+
+TSBindingIdentifier : IdentifierName | TSContextualIdentifier ;
+TSContextualIdentifier : 'abstract' | 'accessor' | 'as' | 'assert' | 'asserts' | 'async' | 'await'
+                       | 'constructor' | 'declare' | 'from' | 'get' | 'global' | 'is' | 'module'
+                       | 'namespace' | 'of' | 'out' | 'override' | 'require' | 'satisfies' | 'set'
+                       | 'type' | 'using' | 'yield' ;
+TSPropertyIdentifierName : TSBindingIdentifier | TSPrimitiveType | ReservedWord
+                         | 'keyof' | 'unique' | 'readonly' | 'infer' ;
+
+
+
+AssignmentExpression : IdentifierName ;
+IdentifierName := "[A-Za-z_][A-Za-z0-9_]*" ;
+ReservedWord : 'class' ;
+StringLiteral := "'(?:[^'\\]|\\.)*'" ;
+NumericLiteral := "[0-9]+n?" ;
+NoSubstitutionTemplate := "`[^`$]*`" ;
+TemplateHead := "`[^`]*\$\{" ;
+TemplateMiddle := "\}[^`]*\$\{" ;
+TemplateTail := "\}[^`]*`" ;
+NoLineTerminator : {NoLineBreak()}? ;

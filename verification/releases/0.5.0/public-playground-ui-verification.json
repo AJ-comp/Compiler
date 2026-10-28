@@ -1,0 +1,16 @@
+{
+  "url": "https://janglim.mythosia.net/",
+  "commit": "1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+  "method": "Read the rendered browser accessibility tree after a fresh production-page load",
+  "visibleVersion": "1.1.0",
+  "input": "a + a * a",
+  "outcome": "accept",
+  "tokens": 5,
+  "states": 12,
+  "traceSteps": 22,
+  "syntaxTrees": 1,
+  "treeNodes": 13,
+  "grammarEditorLoaded": true,
+  "parsingTableTabLoaded": true,
+  "traceTabLoaded": true
+}

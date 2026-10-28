@@ -1,0 +1,415 @@
+{
+  "Status": "implemented_recursive_targets_completed_only_tests_pending_FIRST_discussion",
+  "Design": "Original recursive lookahead records Targets in Entry-valued table; stable shared TerminalSet; after recursion a queue propagates inherited tokens with early-continue guard.",
+  "Source": "src/FrontEnd/Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs",
+  "SourceSha256": "FDD7ABC710862B4F896B44C067603BD9C7C469A160006B6385212F4EE1B23A15",
+  "ParserProjectForcedRebuild": {
+    "Configuration": "Release",
+    "Errors": 0,
+    "ExistingWarnings": 5
+  },
+  "TestRuns": [
+    {
+      "Trx": "focused.trx",
+      "Total": 164,
+      "Passed": 81,
+      "Failed": 83,
+      "Suites": [
+        {
+          "Name": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests",
+          "Total": 17,
+          "Passed": 12,
+          "Failed": 5
+        },
+        {
+          "Name": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadPropagationTests",
+          "Total": 31,
+          "Passed": 31,
+          "Failed": 0
+        },
+        {
+          "Name": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests",
+          "Total": 80,
+          "Passed": 2,
+          "Failed": 78
+        },
+        {
+          "Name": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadRegressionTests",
+          "Total": 36,
+          "Passed": 36,
+          "Failed": 0
+        }
+      ],
+      "Failures": [
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 15)",
+          "Message": "seed=15\r\nS -> a | S g | f B\r\nA -> b | f S | e A\r\nB -> c | g B: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 26)",
+          "Message": "seed=26\r\nS -> a | B | g S\r\nA -> b | d | g\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: \"balanced-nullable-recursion\")",
+          "Message": "balanced-nullable-recursion: no lookahead entry for I0 S ->•( S ) S"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 2)",
+          "Message": "seed=2\r\nS -> a | B\r\nA -> b | B\r\nB -> c | S f: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Every_public_lookahead_entry_contains_the_same_set_published_on_its_LR_item(lateSecondContext: False)",
+          "Message": "System.Collections.Generic.KeyNotFoundException : The given key '(0, S ->•A !)' was not present in the dictionary."
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 33)",
+          "Message": "seed=33\r\nS -> a | e A\r\nA -> b | B | S e\r\nB -> c | g A | e A: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 61)",
+          "Message": "seed=61\r\nS -> a | g A | B\r\nA -> b | A d\r\nB -> c | S e: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: \"lalr-not-slr\")",
+          "Message": "lalr-not-slr: no lookahead entry for I0 S ->•L = R"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 42)",
+          "Message": "seed=42\r\nS -> a | f B | d B\r\nA -> b | f A\r\nB -> c | d S: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 11)",
+          "Message": "seed=11\r\nS -> a | B\r\nA -> b | B\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 57)",
+          "Message": "seed=57\r\nS -> a | A d | e\r\nA -> b | d A | e\r\nB -> c | f S | f B: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 7)",
+          "Message": "seed=7\r\nS -> a | A\r\nA -> b | d | f\r\nB -> c | e S | A g: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 32)",
+          "Message": "seed=32\r\nS -> a | f S | A\r\nA -> b | B\r\nB -> c | e S | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 27)",
+          "Message": "seed=27\r\nS -> a | d\r\nA -> b | B\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Calculate_keeps_the_caller_assigned_dictionary_and_publishes_the_actual_item_sets",
+          "Message": "System.Collections.Generic.KeyNotFoundException : The given key '-100' was not present in the dictionary."
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 58)",
+          "Message": "seed=58\r\nS -> a | A\r\nA -> b | B\r\nB -> c | B d | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 54)",
+          "Message": "seed=54\r\nS -> a | A\r\nA -> b | d A | g\r\nB -> c | f A: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 20)",
+          "Message": "seed=20\r\nS -> a | A e\r\nA -> b | e S | f\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 37)",
+          "Message": "seed=37\r\nS -> a | d A\r\nA -> b | B\r\nB -> c | f B | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 36)",
+          "Message": "seed=36\r\nS -> a | e | S g\r\nA -> b | B\r\nB -> c | epsilon | d B: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 53)",
+          "Message": "seed=53\r\nS -> a | S e | g B\r\nA -> b | f S | f\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 43)",
+          "Message": "seed=43\r\nS -> a | S e\r\nA -> b | B\r\nB -> c | epsilon | B g: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Existing_Ex1_canonical_snapshot_has_independently_verified_intermediate_item_lookaheads",
+          "Message": "Ex1Grammar: no lookahead entry for I0 A ->•a B = e"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 45)",
+          "Message": "seed=45\r\nS -> a | f | B\r\nA -> b | d\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 8)",
+          "Message": "seed=8\r\nS -> a | g\r\nA -> b | g A | d\r\nB -> c | A e | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 34)",
+          "Message": "seed=34\r\nS -> a | A d | A\r\nA -> b | d B | B\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 4)",
+          "Message": "seed=4\r\nS -> a | d B\r\nA -> b | d S | f B\r\nB -> c | epsilon | B e: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 39)",
+          "Message": "seed=39\r\nS -> a | B\r\nA -> b | B f | g A\r\nB -> c | epsilon | S g: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 1)",
+          "Message": "seed=1\r\nS -> a | B g | e\r\nA -> b | f | g\r\nB -> c | S d: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 22)",
+          "Message": "seed=22\r\nS -> a | f\r\nA -> b | d B | S e\r\nB -> c | g S | S g: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 63)",
+          "Message": "seed=63\r\nS -> a | A | f\r\nA -> b | f\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 41)",
+          "Message": "seed=41\r\nS -> a | g\r\nA -> b | B\r\nB -> c | S f: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 59)",
+          "Message": "seed=59\r\nS -> a | f | d\r\nA -> b | B | d B\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Equivalent_nullable_cycle_is_independent_of_symbol_and_alternative_registration_order(reverse: True)",
+          "Message": "registration-order=True: no lookahead entry for I0 S ->•G C"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 19)",
+          "Message": "seed=19\r\nS -> a | f S | d\r\nA -> b | d B | d A\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 44)",
+          "Message": "seed=44\r\nS -> a | B | d B\r\nA -> b | f | B\r\nB -> c | S e: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: \"nullable-shared-child\")",
+          "Message": "nullable-shared-child: no lookahead entry for I0 S ->•A a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 10)",
+          "Message": "seed=10\r\nS -> a | A e\r\nA -> b | g S\r\nB -> c | B e | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Equivalent_nullable_cycle_is_independent_of_symbol_and_alternative_registration_order(reverse: False)",
+          "Message": "registration-order=False: no lookahead entry for I0 S ->•G C"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 40)",
+          "Message": "seed=40\r\nS -> a | A | e A\r\nA -> b | f\r\nB -> c | S g | A f: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 12)",
+          "Message": "seed=12\r\nS -> a | A\r\nA -> b | d\r\nB -> c | B d | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 17)",
+          "Message": "seed=17\r\nS -> a | d | e\r\nA -> b | B\r\nB -> c | f A | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 18)",
+          "Message": "seed=18\r\nS -> a | g B\r\nA -> b | e S\r\nB -> c | epsilon | A f: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: \"expression-precedence\")",
+          "Message": "expression-precedence: no lookahead entry for I0 E ->•E + T"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 13)",
+          "Message": "seed=13\r\nS -> a | e | g B\r\nA -> b | B | d\r\nB -> c | epsilon | A d: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 51)",
+          "Message": "seed=51\r\nS -> a | g A | d B\r\nA -> b | B | S g\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 30)",
+          "Message": "seed=30\r\nS -> a | A | g B\r\nA -> b | d S\r\nB -> c | g B | e S: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 56)",
+          "Message": "seed=56\r\nS -> a | e S\r\nA -> b | e A\r\nB -> c | B e: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 14)",
+          "Message": "seed=14\r\nS -> a | d B\r\nA -> b | f B\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 25)",
+          "Message": "seed=25\r\nS -> a | A\r\nA -> b | B\r\nB -> c | S e | d S: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: \"late-eof-and-two-delimiters\")",
+          "Message": "late-eof-and-two-delimiters: no lookahead entry for I0 S ->•G C"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 6)",
+          "Message": "seed=6\r\nS -> a | A e\r\nA -> b | d B | B\r\nB -> c | g A: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 21)",
+          "Message": "seed=21\r\nS -> a | A\r\nA -> b | B | A f\r\nB -> c | B f | f A: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 16)",
+          "Message": "seed=16\r\nS -> a | A\r\nA -> b | A d | g S\r\nB -> c | A g: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 29)",
+          "Message": "seed=29\r\nS -> a | S f\r\nA -> b | B\r\nB -> c | e A | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: \"nullable-chain\")",
+          "Message": "nullable-chain: no lookahead entry for I0 A ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 24)",
+          "Message": "seed=24\r\nS -> a | B d | f B\r\nA -> b | g\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 23)",
+          "Message": "seed=23\r\nS -> a | e A\r\nA -> b | B\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 46)",
+          "Message": "seed=46\r\nS -> a | e S\r\nA -> b | g B | d\r\nB -> c | epsilon | S g: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 31)",
+          "Message": "seed=31\r\nS -> a | g\r\nA -> b | B | g\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Both_delimiters_reach_intermediate_and_completed_items(lateSecondContext: False)",
+          "Message": "Assert.Equal() Failure: Collections differ\r\n                                             ↓ (pos 0)\r\nExpected: OrderedEnumerable<string, string> [\"!\", \"?\"]\r\nActual:   string[]                          []"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: \"unproductive-suffix-with-nullable-prefix\")",
+          "Message": "unproductive-suffix-with-nullable-prefix: no lookahead entry for I0 S ->•G A U"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 9)",
+          "Message": "seed=9\r\nS -> a | f S | S e\r\nA -> b | B | d S\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 62)",
+          "Message": "seed=62\r\nS -> a | B f\r\nA -> b | B d | d\r\nB -> c | f B: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 48)",
+          "Message": "seed=48\r\nS -> a | B g\r\nA -> b | g A | A g\r\nB -> c | S e: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: \"nullable-left-recursion\")",
+          "Message": "nullable-left-recursion: no lookahead entry for I0 S ->•A z"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: \"nullable-prefix-cycle\")",
+          "Message": "nullable-prefix-cycle: no lookahead entry for I0 S ->•G C"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 0)",
+          "Message": "seed=0\r\nS -> a | e B\r\nA -> b | e A | d A\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 52)",
+          "Message": "seed=52\r\nS -> a | B f\r\nA -> b | f B\r\nB -> c | e S | e B: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Every_public_lookahead_entry_contains_the_same_set_published_on_its_LR_item(lateSecondContext: True)",
+          "Message": "System.Collections.Generic.KeyNotFoundException : The given key '(0, S ->•A !)' was not present in the dictionary."
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Both_delimiters_reach_intermediate_and_completed_items(lateSecondContext: True)",
+          "Message": "Assert.Equal() Failure: Collections differ\r\n                                             ↓ (pos 0)\r\nExpected: OrderedEnumerable<string, string> [\"!\", \"?\"]\r\nActual:   string[]                          []"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 49)",
+          "Message": "seed=49\r\nS -> a | A | B\r\nA -> b | g\r\nB -> c | d S | S f: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 5)",
+          "Message": "seed=5\r\nS -> a | g S | B\r\nA -> b | B\r\nB -> c | epsilon | B e: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 60)",
+          "Message": "seed=60\r\nS -> a | d\r\nA -> b | B d\r\nB -> c | S e | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: \"lr1-not-lalr\")",
+          "Message": "lr1-not-lalr: no lookahead entry for I0 S ->•a A d"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 3)",
+          "Message": "seed=3\r\nS -> a | e | B\r\nA -> b | e | g\r\nB -> c | B f: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: \"unproductive-suffix\")",
+          "Message": "unproductive-suffix: no lookahead entry for I0 A ->•B x"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 50)",
+          "Message": "seed=50\r\nS -> a | d\r\nA -> b | f S | f\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 28)",
+          "Message": "seed=28\r\nS -> a | g B | d\r\nA -> b | B\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 38)",
+          "Message": "seed=38\r\nS -> a | B g | S f\r\nA -> b | d S\r\nB -> c | S d: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 47)",
+          "Message": "seed=47\r\nS -> a | d A | S f\r\nA -> b | B\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 35)",
+          "Message": "seed=35\r\nS -> a | B\r\nA -> b | f\r\nB -> c | g B: no lookahead entry for I0 S ->•a"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 55)",
+          "Message": "seed=55\r\nS -> a | f\r\nA -> b | B | B g\r\nB -> c | epsilon: no lookahead entry for I0 S ->•a"
+        }
+      ]
+    },
+    {
+      "Trx": "completed-items.trx",
+      "Total": 77,
+      "Passed": 75,
+      "Failed": 2,
+      "Suites": [
+        {
+          "Name": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests",
+          "Total": 77,
+          "Passed": 75,
+          "Failed": 2
+        }
+      ],
+      "Failures": [
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_in_named_grammar_matches_independent_canonical_LR1_core_merging(name: \"unproductive-suffix-with-nullable-prefix\")",
+          "Message": "unproductive-suffix-with-nullable-prefix: I6 B -> a•\r\nExpected: \r\nActual: T:x"
+        },
+        {
+          "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_in_named_grammar_matches_independent_canonical_LR1_core_merging(name: \"unproductive-suffix\")",
+          "Message": "unproductive-suffix: I4 B -> a•\r\nExpected: \r\nActual: T:x"
+        }
+      ]
+    }
+  ],
+  "DiscussionRequired": [
+    "Two completed-item independent reference failures for unproductive-suffix FIRST handling remain; expectations preserved and product source untouched in test scope update."
+  ],
+  "ModifiedWorkFiles": [
+    "src/FrontEnd/Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs",
+    "Tests/Parse.FrontEnd.Parsers.Tests/LalrLookaheadContractTests.cs",
+    "Tests/Parse.FrontEnd.Parsers.Tests/LalrLookaheadReferenceTests.cs",
+    "Tests/Parse.FrontEnd.Parsers.Tests/LalrLookaheadRegressionTests.cs",
+    "Tests/Parse.FrontEnd.Parsers.Tests/LalrLookaheadPropagationTests.cs"
+  ],
+  "UnrelatedChangesPreserved": true,
+  "LatestVerification": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\recursive-lookahead-targets\\completion-only-20261027-104118-204\\verification.json"
+}

@@ -1,0 +1,108 @@
+{
+  "html": "docs\\ko\\parser-driven-lexing.html",
+  "builtHtmlMatches": true,
+  "anchors": 18,
+  "localLinks": 17,
+  "summaryLinks": [
+    {
+      "source": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\ContextualConflictPredictor.cs",
+      "href": "../../../../docs/ko/parser-driven-lexing.html#prediction-role",
+      "valid": true
+    },
+    {
+      "source": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRConflictPredictor.cs",
+      "href": "../../../../docs/ko/parser-driven-lexing.html#prediction-role",
+      "valid": true
+    },
+    {
+      "source": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs",
+      "href": "../../../../docs/ko/parser-driven-lexing.html#parser-role",
+      "valid": true
+    },
+    {
+      "source": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser[TokenSource].cs",
+      "href": "../../../../docs/ko/parser-driven-lexing.html#parser-role",
+      "valid": true
+    },
+    {
+      "source": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\ITokenSource.cs",
+      "href": "../../../../docs/ko/parser-driven-lexing.html#exchange",
+      "valid": true
+    },
+    {
+      "source": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\Lexer [Common].cs",
+      "href": "../../../../docs/ko/parser-driven-lexing.html#lexer-role",
+      "valid": true
+    },
+    {
+      "source": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\Lexer [TokenSource].cs",
+      "href": "../../../../docs/ko/parser-driven-lexing.html#exchange",
+      "valid": true
+    },
+    {
+      "source": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\LexicalGoal.cs",
+      "href": "../../../../docs/ko/parser-driven-lexing.html#exchange",
+      "valid": true
+    },
+    {
+      "source": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\LexicalPolicy.cs",
+      "href": "../../../../docs/ko/parser-driven-lexing.html#goal-selection",
+      "valid": true
+    },
+    {
+      "source": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\LexicalPolicy.cs",
+      "href": "../../../../docs/ko/parser-driven-lexing.html#goal-selection",
+      "valid": true
+    },
+    {
+      "source": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\TokenCursor.cs",
+      "href": "../../../../docs/ko/parser-driven-lexing.html#exchange",
+      "valid": true
+    },
+    {
+      "source": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\TokenRead.cs",
+      "href": "../../../../docs/ko/parser-driven-lexing.html#exchange",
+      "valid": true
+    }
+  ],
+  "authorAttributionPreserved": true,
+  "tests": {
+    "policy-api": {
+      "total": "854",
+      "executed": "853",
+      "passed": "853",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "mcp-policy-api": {
+      "total": "51",
+      "executed": "51",
+      "passed": "51",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    }
+  },
+  "issues": []
+}

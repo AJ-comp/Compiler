@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="TraceProbe.cs" />
+    <Reference Include="Parse"><HintPath>../test262-runner/Parse.dll</HintPath></Reference>
+    <Reference Include="Parse.FrontEnd"><HintPath>../test262-runner/Parse.FrontEnd.dll</HintPath></Reference>
+    <Reference Include="Parse.FrontEnd.Grammars"><HintPath>../test262-runner/Parse.FrontEnd.Grammars.dll</HintPath></Reference>
+    <Reference Include="Parse.FrontEnd.Parsers"><HintPath>../test262-runner/Parse.FrontEnd.Parsers.dll</HintPath></Reference>
+    <Reference Include="AJ.Common"><HintPath>../test262-runner/AJ.Common.dll</HintPath></Reference>
+    <Reference Include="ConsoleTables"><HintPath>../test262-runner/ConsoleTables.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

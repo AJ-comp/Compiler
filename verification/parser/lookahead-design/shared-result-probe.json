@@ -1,0 +1,383 @@
+[
+  {
+    "profile": "tiny",
+    "conflicts": 0,
+    "order": "current outer state order",
+    "differences": [],
+    "emptyCopies": []
+  },
+  {
+    "profile": "tiny",
+    "conflicts": 0,
+    "order": "reverse outer state order",
+    "differences": [],
+    "emptyCopies": [
+      "I2 S -\u003E G\u2022C copied empty I6 R -\u003E b\u2022S"
+    ]
+  },
+  {
+    "profile": "original",
+    "conflicts": 1,
+    "order": "current outer state order",
+    "differences": [
+      {
+        "state": 13,
+        "item": "R -\u003E id __predicate6 i\u2022S",
+        "actual": [
+          "e",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 2,
+        "item": "P -\u003E\u2022R __predicate4",
+        "actual": [
+          "e",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 2,
+        "item": "C -\u003E\u2022P __predicate2",
+        "actual": [
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 15,
+        "item": "R -\u003E id __predicate6 i S\u2022",
+        "actual": [
+          "e",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 10,
+        "item": "R -\u003E id __predicate5\u2022",
+        "actual": [
+          "e",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 9,
+        "item": "P -\u003E R __predicate4\u2022",
+        "actual": [
+          "e",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 6,
+        "item": "__predicate5 -\u003E\u2022",
+        "actual": [
+          "e",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 6,
+        "item": "R -\u003E id\u2022__predicate5",
+        "actual": [
+          "e",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 5,
+        "item": "__predicate4 -\u003E\u2022",
+        "actual": [
+          "e",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 5,
+        "item": "P -\u003E R\u2022__predicate4",
+        "actual": [
+          "e",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      }
+    ],
+    "emptyCopies": []
+  },
+  {
+    "profile": "original",
+    "conflicts": 1,
+    "order": "reverse outer state order",
+    "differences": [
+      {
+        "state": 2,
+        "item": "C -\u003E\u2022P __predicate2",
+        "actual": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 2,
+        "item": "S -\u003E __predicate1\u2022C",
+        "actual": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 18,
+        "item": "C -\u003E P __predicate3 e x ? S :\u2022S",
+        "actual": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 4,
+        "item": "__predicate2 -\u003E\u2022",
+        "actual": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 4,
+        "item": "C -\u003E P\u2022__predicate2",
+        "actual": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 7,
+        "item": "C -\u003E P __predicate2\u2022",
+        "actual": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 19,
+        "item": "C -\u003E P __predicate3 e x ? S : S\u2022",
+        "actual": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "e",
+          "This is EndMarker! char : \u0449"
+        ]
+      }
+    ],
+    "emptyCopies": [
+      "I2 S -\u003E __predicate1\u2022C copied empty I13 R -\u003E id __predicate6 i\u2022S"
+    ]
+  },
+  {
+    "profile": "zero-conflict-ordinary-bnf",
+    "conflicts": 0,
+    "order": "current outer state order",
+    "differences": [
+      {
+        "state": 14,
+        "item": "R -\u003E b G6 i\u2022S",
+        "actual": [
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 2,
+        "item": "P -\u003E\u2022R G4",
+        "actual": [
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 2,
+        "item": "C -\u003E\u2022P G2",
+        "actual": [
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 16,
+        "item": "R -\u003E b G6 i S\u2022",
+        "actual": [
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 11,
+        "item": "R -\u003E a G5\u2022",
+        "actual": [
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 10,
+        "item": "P -\u003E R G4\u2022",
+        "actual": [
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 6,
+        "item": "G5 -\u003E\u2022",
+        "actual": [
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 6,
+        "item": "R -\u003E a\u2022G5",
+        "actual": [
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 5,
+        "item": "G4 -\u003E\u2022",
+        "actual": [
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ]
+      },
+      {
+        "state": 5,
+        "item": "P -\u003E R\u2022G4",
+        "actual": [
+          "This is EndMarker! char : \u0449"
+        ],
+        "expected": [
+          ":",
+          "This is EndMarker! char : \u0449"
+        ]
+      }
+    ],
+    "emptyCopies": []
+  },
+  {
+    "profile": "zero-conflict-ordinary-bnf",
+    "conflicts": 0,
+    "order": "reverse outer state order",
+    "differences": [],
+    "emptyCopies": [
+      "I2 S -\u003E G1\u2022C copied empty I14 R -\u003E b G6 i\u2022S"
+    ]
+  }
+]

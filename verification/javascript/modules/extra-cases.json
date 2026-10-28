@@ -1,0 +1,212 @@
+[
+  {
+    "valid": true,
+    "input": "const value = 1; export {value}\n/a/.test(value);",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "export {}\nfrom 'module';",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "export default value\n/a/g;",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "export default value\n/a/;",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "import\n.meta;",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "import\n('module');",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "import\n'module';",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "import /* comment */ . /* comment */ meta;",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "for await (const [value = await task] of values) {}",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "for await (const {[await task]: value} of values) {}",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "const value = import('module', {with: {type: 1}});",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "const value = import('module', {with: {type: null}});",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "const value = import('module', {with: {type: 'json', type: 'text'}});",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "export default function named() {} export {named as other};",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "export default (function named() {}); export {named};",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "export default class Named {} export {Named as other};",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "export default (class Named {}); export {Named};",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "export default function named() {} var named;",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "export default class Named {} var Named;",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "export {value}; try {} catch (error) { var value; }",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "export {error}; try {} catch (error) {}",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "export {value}; class A { static { var value; } }",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "export {value}; class A { method() { var value; } }",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "export {value}; const f = () => { var value; };",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "import {'\\u0000' as nul} from 'module'; export {nul as '\\u0000'};",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "import '\\uD800' with {'\\uD800': '\\uDC00'};",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "import {\\u0069f as value} from 'module';",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "export {\\u0069f as value} from 'module';",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "import {value \\u0061s local} from 'module';",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "import value \\u0066rom 'module';",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "export {value} \\u0066rom 'module';",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "export * \\u0061s ns from 'module';",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "import value from 'module' with {unknown: 'anything'};",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "await /a/g;",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "const value = await `${import.meta.url}`;",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "const value = await (await task);",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "class A { [await task]() { return import.meta; } }",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "class A { method(value = await task) {} }",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "class A { get value() { return await task; } }",
+    "entry": "module"
+  },
+  {
+    "valid": false,
+    "input": "class A { set value(input) { await task; } }",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "const f = () => ({await: 1});",
+    "entry": "module"
+  },
+  {
+    "valid": true,
+    "input": "function f() { return {await: 1}; }",
+    "entry": "module"
+  }
+]

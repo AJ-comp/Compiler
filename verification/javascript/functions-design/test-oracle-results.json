@@ -1,0 +1,14 @@
+{
+  "runtime": "v24.12.0",
+  "count": 524,
+  "mismatches": [
+    {
+      "input": "for (call() of values) ;",
+      "valid": false,
+      "method": "Invalid_syntax_control_contexts_and_ASI_locations_are_rejected",
+      "file": "JavaScriptStatementTests.cs",
+      "actual": true,
+      "error": ""
+    }
+  ]
+}

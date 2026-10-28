@@ -1,0 +1,26 @@
+  복원할 프로젝트를 확인하는 중...
+  복원할 모든 프로젝트가 최신 상태입니다.
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Release\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Release\netstandard2.1\Parse.dll
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Release\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Release\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Janglim.Mcp -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\services\Janglim.Mcp\bin\Release\net10.0\Janglim.Mcp.dll
+  Janglim.Mcp.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Janglim.Mcp.Tests\bin\Release\net10.0\Janglim.Mcp.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Janglim.Mcp.Tests\bin\Release\net10.0\Janglim.Mcp.Tests.dll(.NETCoreApp,Version=v10.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:01.98]     Janglim.Mcp.Tests.WorkerLifecycleTests.Deadline_terminates_synchronous_regex_work_and_allows_the_next_job [FAIL]
+  실패 Janglim.Mcp.Tests.WorkerLifecycleTests.Deadline_terminates_synchronous_regex_work_and_allows_the_next_job [1 s]
+  오류 메시지:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "runtime_limit"
+Actual:   "worker_error"
+           ↑ (pos 0)
+  스택 추적:
+     at Janglim.Mcp.Tests.WorkerLifecycleTests.Deadline_terminates_synchronous_regex_work_and_allows_the_next_job() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Janglim.Mcp.Tests\WorkerLifecycleTests.cs:line 18
+--- End of stack trace from previous location ---
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\maximal-munch\tests\maximal-munch-mcp.trx
+
+실패!  - 실패:     1, 통과:    50, 건너뜀:     0, 전체:    51, 기간: 17 s - Janglim.Mcp.Tests.dll (net10.0)

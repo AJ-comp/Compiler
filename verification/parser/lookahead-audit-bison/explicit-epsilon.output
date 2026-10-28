@@ -1,0 +1,312 @@
+Rules useless in parser due to conflicts
+
+    9 G3: %empty
+
+
+State 6 conflicts: 1 reduce/reduce
+
+
+Grammar
+
+    0 $accept: S $end
+
+    1 S: G1 C
+
+    2 C: P G2
+    3  | P G3 'e' 'x' '?' S ':' S
+
+    4 P: R G4
+
+    5 R: ID G5
+    6  | ID G6 'i' S
+
+    7 G1: %empty
+
+    8 G2: %empty
+
+    9 G3: %empty
+
+   10 G4: %empty
+
+   11 G5: %empty
+
+   12 G6: %empty
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    ':' (58) 3
+    '?' (63) 3
+    'e' (101) 3
+    'i' (105) 6
+    'x' (120) 3
+    error (256)
+    ID (258) 5 6
+
+
+Nonterminals, with rules where they appear
+
+    $accept (9)
+        on left: 0
+    S (10)
+        on left: 1
+        on right: 0 3 6
+    C (11)
+        on left: 2 3
+        on right: 1
+    P (12)
+        on left: 4
+        on right: 2 3
+    R (13)
+        on left: 5 6
+        on right: 4
+    G1 (14)
+        on left: 7
+        on right: 1
+    G2 (15)
+        on left: 8
+        on right: 2
+    G3 (16)
+        on left: 9
+        on right: 3
+    G4 (17)
+        on left: 10
+        on right: 4
+    G5 (18)
+        on left: 11
+        on right: 5
+    G6 (19)
+        on left: 12
+        on right: 6
+
+
+State 0
+
+    0 $accept: . S $end
+    1 S: . G1 C
+    7 G1: %empty .  [ID]
+
+    ID  reduce using rule 7 (G1)
+
+    S   go to state 1
+    G1  go to state 2
+
+
+State 1
+
+    0 $accept: S . $end
+
+    $end  shift, and go to state 3
+
+
+State 2
+
+    1 S: G1 . C
+    2 C: . P G2
+    3  | . P G3 'e' 'x' '?' S ':' S
+    4 P: . R G4
+    5 R: . ID G5
+    6  | . ID G6 'i' S
+
+    ID  shift, and go to state 4
+
+    C  go to state 5
+    P  go to state 6
+    R  go to state 7
+
+
+State 3
+
+    0 $accept: S $end .
+
+    $default  accept
+
+
+State 4
+
+    5 R: ID . G5
+    6  | ID . G6 'i' S
+   11 G5: %empty .  [$end, 'e', ':']
+   12 G6: %empty .  ['i']
+
+    $end  reduce using rule 11 (G5)
+    'e'   reduce using rule 11 (G5)
+    ':'   reduce using rule 11 (G5)
+    'i'   reduce using rule 12 (G6)
+
+    G5  go to state 8
+    G6  go to state 9
+
+
+State 5
+
+    1 S: G1 C .  [$end, 'e', ':']
+
+    $end  reduce using rule 1 (S)
+    'e'   reduce using rule 1 (S)
+    ':'   reduce using rule 1 (S)
+
+
+State 6
+
+    2 C: P . G2
+    3  | P . G3 'e' 'x' '?' S ':' S
+    8 G2: %empty .  [$end, 'e', ':']
+    9 G3: %empty .  ['e']
+
+    $end  reduce using rule 8 (G2)
+    'e'   reduce using rule 8 (G2)
+    'e'   [reduce using rule 9 (G3)]
+    ':'   reduce using rule 8 (G2)
+
+    G2  go to state 10
+    G3  go to state 11
+
+    reduce/reduce conflict on token 'e':
+        8 G2: %empty .
+        9 G3: %empty .
+      Example: ID G6 'i' G1 P . 'e' 'x' '?' S ':' S
+      First reduce derivation
+        C
+        `-> 3: P                                                                        G3            'e' 'x' '?' S ':' S
+               `-> 4: R                                                   G4            `-> 3: %empty
+                      `-> 6: ID G6 'i' S                                  `-> 4: %empty
+                                       `-> 1: G1 C
+                                                 `-> 2: P G2
+                                                          `-> 8: %empty .
+      Second reduce derivation
+        R
+        `-> 6: ID G6 'i' S
+                         `-> 1: G1 C
+                                   `-> 3: P G3              'e' 'x' '?' S ':' S
+                                            `-> 9: %empty .
+
+
+
+State 7
+
+    4 P: R . G4
+   10 G4: %empty .  [$end, 'e', ':']
+
+    $end  reduce using rule 10 (G4)
+    'e'   reduce using rule 10 (G4)
+    ':'   reduce using rule 10 (G4)
+
+    G4  go to state 12
+
+
+State 8
+
+    5 R: ID G5 .  [$end, 'e', ':']
+
+    $end  reduce using rule 5 (R)
+    'e'   reduce using rule 5 (R)
+    ':'   reduce using rule 5 (R)
+
+
+State 9
+
+    6 R: ID G6 . 'i' S
+
+    'i'  shift, and go to state 13
+
+
+State 10
+
+    2 C: P G2 .  [$end, 'e', ':']
+
+    $end  reduce using rule 2 (C)
+    'e'   reduce using rule 2 (C)
+    ':'   reduce using rule 2 (C)
+
+
+State 11
+
+    3 C: P G3 . 'e' 'x' '?' S ':' S
+
+    'e'  shift, and go to state 14
+
+
+State 12
+
+    4 P: R G4 .  [$end, 'e', ':']
+
+    $end  reduce using rule 4 (P)
+    'e'   reduce using rule 4 (P)
+    ':'   reduce using rule 4 (P)
+
+
+State 13
+
+    1 S: . G1 C
+    6 R: ID G6 'i' . S
+    7 G1: %empty .  [ID]
+
+    ID  reduce using rule 7 (G1)
+
+    S   go to state 15
+    G1  go to state 2
+
+
+State 14
+
+    3 C: P G3 'e' . 'x' '?' S ':' S
+
+    'x'  shift, and go to state 16
+
+
+State 15
+
+    6 R: ID G6 'i' S .  [$end, 'e', ':']
+
+    $end  reduce using rule 6 (R)
+    'e'   reduce using rule 6 (R)
+    ':'   reduce using rule 6 (R)
+
+
+State 16
+
+    3 C: P G3 'e' 'x' . '?' S ':' S
+
+    '?'  shift, and go to state 17
+
+
+State 17
+
+    1 S: . G1 C
+    3 C: P G3 'e' 'x' '?' . S ':' S
+    7 G1: %empty .  [ID]
+
+    ID  reduce using rule 7 (G1)
+
+    S   go to state 18
+    G1  go to state 2
+
+
+State 18
+
+    3 C: P G3 'e' 'x' '?' S . ':' S
+
+    ':'  shift, and go to state 19
+
+
+State 19
+
+    1 S: . G1 C
+    3 C: P G3 'e' 'x' '?' S ':' . S
+    7 G1: %empty .  [ID]
+
+    ID  reduce using rule 7 (G1)
+
+    S   go to state 20
+    G1  go to state 2
+
+
+State 20
+
+    3 C: P G3 'e' 'x' '?' S ':' S .  [$end, 'e', ':']
+
+    $end  reduce using rule 3 (C)
+    'e'   reduce using rule 3 (C)
+    ':'   reduce using rule 3 (C)

@@ -1,0 +1,27 @@
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:09.47]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(name: "unproductive-suffix") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(name: "unproductive-suffix") [2 ms]
+  오류 메시지:
+   unproductive-suffix: I4 B -> a•
+Expected: 
+Actual: T:x
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 132
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 57
+   at InvokeStub_LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:09.48]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(name: "unproductive-suffix-with-nullable-prefix") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(name: "unproductive-suffix-with-nullable-prefix") [2 ms]
+  오류 메시지:
+   unproductive-suffix-with-nullable-prefix: I6 B -> a•
+Expected: 
+Actual: T:x
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 132
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 57
+   at InvokeStub_LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\first-empty-sequence-20261028-094647-206\focused.trx
+
+실패!  - 실패:     2, 통과:   228, 건너뜀:     0, 전체:   230, 기간: 1 s - Parse.FrontEnd.Parsers.Tests.dll (net8.0)

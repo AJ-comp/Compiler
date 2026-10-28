@@ -262,3 +262,10 @@ __pycache__/
 # DocFX build output
 /_site/
 /samples/Playground/wwwroot/ui/
+
+# Curated historical verification records are versioned with the source.
+!/verification/releases/
+!/verification/**/*.log
+!/verification/**/TestResults/
+!/verification/**/TestResults/*.trx
+!/verification/**/TestResults/*.trx.gz

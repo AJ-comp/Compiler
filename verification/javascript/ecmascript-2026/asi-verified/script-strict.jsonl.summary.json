@@ -1,0 +1,11 @@
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-audit\\static\\asi-matrix.jsonl",
+  "profile": "script-strict",
+  "skip": 0,
+  "processed": 24,
+  "outcomes": {
+    "pass": 24
+  },
+  "elapsedSeconds": 19.4952558,
+  "syntaxOnly": true
+}

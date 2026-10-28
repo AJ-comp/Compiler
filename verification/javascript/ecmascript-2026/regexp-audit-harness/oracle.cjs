@@ -1,0 +1,1 @@
+const readline=require('node:readline');const lines=readline.createInterface({input:process.stdin});lines.on('line',line=>{const t=JSON.parse(line);let accepted=false,error=null;try{new RegExp(t.body,t.flags);accepted=true;}catch(e){error=e.message;}process.stdout.write(JSON.stringify({...t,accepted,error})+'\n');});

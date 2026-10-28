@@ -1,0 +1,21 @@
+{
+  "package": "Janglim",
+  "version": "0.6.0",
+  "repositoryCommit": "efe182f49d3ff265e42e93a33bc144a1811c4c9c",
+  "publicUrl": "https://api.nuget.org/v3-flatcontainer/janglim/0.6.0/janglim.0.6.0.nupkg",
+  "workflowRun": 40664356048,
+  "artifactId": 12806541046,
+  "ciArtifactVerified": true,
+  "payloadMatchesCi": true,
+  "matchedPayloadEntries": 56,
+  "archiveSha256Matches": false,
+  "archiveDifference": "NuGet.org added repository signature .signature.p7s; all 56 existing entries unchanged.",
+  "ciPackageSha256": "3d5bdf2c5dec80381020f242fae48bc9efaac8c20ec20f7aa432b95d1f73e5ba",
+  "publicPackageSha256": "3992a522201006e7ca7bb8dcd88a41d5a0fa940a9aaae10089c66a5781d4ebc4",
+  "repositorySignatureVerified": true,
+  "engineAssemblyCount": 9,
+  "assemblyVersion": "0.6.0.0",
+  "ebnfResourceCount": 8,
+  "readmeAndUnicodeLicenseMatchCi": true,
+  "passed": true
+}

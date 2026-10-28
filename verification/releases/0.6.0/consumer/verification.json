@@ -1,0 +1,24 @@
+{
+  "package": "Janglim 0.6.0",
+  "targetFramework": "net8.0",
+  "packageSha256": "624936a5634f2665c3c0853c2f8379205777156f215e0ad03e52ea6f5b18e57c",
+  "packageReferenceOnly": true,
+  "restoredExactLocalPackage": true,
+  "metadataPassed": true,
+  "engineAssemblies": 9,
+  "embeddedEbnfResources": 8,
+  "unicodeLicenseMatches": true,
+  "packageReadmeMatches": true,
+  "unchangedDocumentationExamples": 6,
+  "documentationExamplesPassed": true,
+  "publicApiAndAssemblyChecks": 46,
+  "publicApiAndAssemblyFailures": 0,
+  "scope": "Isolated consumer smoke verification of the packaged APIs/resources and six documentation examples; not complete language conformance.",
+  "reports": [
+    "package-metadata.json",
+    "restore-proof.json",
+    "example-results.json",
+    "smoke-results.json"
+  ],
+  "passed": true
+}

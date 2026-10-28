@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Janglim</id>
+    <version>0.5.0</version>
+    <title>Janglim</title>
+    <authors>AJ-comp</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>icon.png</icon>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/AJ-comp/Compiler</projectUrl>
+    <description>Janglim is an embeddable LALR parser-generator engine for .NET with C# and EBNF grammars, longest-match lexing, parser-driven token sources, and registered C# predicates. Includes ECMAScript 2026 strict Script and Module profiles with static syntax validation. Inspect parsing tables, FIRST/FOLLOW sets, traces, syntax trees, and diagnostics, with incremental reparsing and pluggable error recovery.</description>
+    <releaseNotes>Janglim 0.5.0 adds longest-match registered-rule lexing with stable equal-length priority and no automatic word boundaries. Parser-driven token sources use lexical policies and independent cursors for contextual reads and prediction. ECMAScript 2026 strict Script/Module profiles cover expressions, templates, destructuring, functions, async/generators, object methods, classes, modules, and regular-expression body checks. Check both Parsing and Validate results. Review regex behavior when upgrading from 0.4.0. LALRParser remains supported; the public API retains its 0.x policy. Full release notes: https://github.com/AJ-comp/Compiler/blob/master/RELEASE_NOTES.md</releaseNotes>
+    <tags>parser parser-generator parsing lalr lalr1 lr dotnet csharp grammar ebnf lexer lexical-policy contextual-lexing maximal-munch javascript ecmascript semantic-predicates lookahead token-trivia grammar-validation parse-tree ast first-follow introspection incremental error-recovery compiler dsl language-tooling janglim</tags>
+    <repository type="git" url="https://github.com/AJ-comp/Compiler" commit="1b8f85f13c063a855358a1d5bac3769fec2f84e0" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="ConsoleTables" version="2.7.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

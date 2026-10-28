@@ -1,0 +1,86 @@
+[
+  {
+    "Order": "original",
+    "TargetI6HasEof": false,
+    "TargetI6Set": "{e}",
+    "DifferentCacheEntriesFromOriginal": 0
+  },
+  {
+    "Order": "reverse",
+    "TargetI6HasEof": true,
+    "TargetI6Set": "{This is EndMarker! char : щ, :, e}",
+    "DifferentCacheEntriesFromOriginal": 15
+  },
+  {
+    "Order": "state-ascending",
+    "TargetI6HasEof": true,
+    "TargetI6Set": "{This is EndMarker! char : щ, :, e}",
+    "DifferentCacheEntriesFromOriginal": 15
+  },
+  {
+    "Order": "I6-first",
+    "TargetI6HasEof": true,
+    "TargetI6Set": "{This is EndMarker! char : щ, :, e}",
+    "DifferentCacheEntriesFromOriginal": 16
+  },
+  {
+    "Order": "random-1",
+    "TargetI6HasEof": false,
+    "TargetI6Set": "{e}",
+    "DifferentCacheEntriesFromOriginal": 4
+  },
+  {
+    "Order": "random-2",
+    "TargetI6HasEof": false,
+    "TargetI6Set": "{e}",
+    "DifferentCacheEntriesFromOriginal": 0
+  },
+  {
+    "Order": "random-3",
+    "TargetI6HasEof": true,
+    "TargetI6Set": "{This is EndMarker! char : щ, :, e}",
+    "DifferentCacheEntriesFromOriginal": 15
+  },
+  {
+    "Order": "random-4",
+    "TargetI6HasEof": true,
+    "TargetI6Set": "{This is EndMarker! char : щ, :, e}",
+    "DifferentCacheEntriesFromOriginal": 16
+  },
+  {
+    "Order": "random-5",
+    "TargetI6HasEof": true,
+    "TargetI6Set": "{This is EndMarker! char : щ, :, e}",
+    "DifferentCacheEntriesFromOriginal": 15
+  },
+  {
+    "Order": "random-6",
+    "TargetI6HasEof": false,
+    "TargetI6Set": "{e}",
+    "DifferentCacheEntriesFromOriginal": 0
+  },
+  {
+    "Order": "random-7",
+    "TargetI6HasEof": false,
+    "TargetI6Set": "{e}",
+    "DifferentCacheEntriesFromOriginal": 4
+  },
+  {
+    "Order": "random-8",
+    "TargetI6HasEof": false,
+    "TargetI6Set": "{e}",
+    "DifferentCacheEntriesFromOriginal": 4
+  },
+  {
+    "Order": "random-9",
+    "TargetI6HasEof": true,
+    "TargetI6Set": "{This is EndMarker! char : щ, :, e}",
+    "DifferentCacheEntriesFromOriginal": 16
+  },
+  {
+    "Order": "random-10",
+    "TargetI6HasEof": true,
+    "TargetI6Set": "{This is EndMarker! char : щ, :, e}",
+    "DifferentCacheEntriesFromOriginal": 16
+  }
+]

@@ -1,0 +1,220 @@
+{
+  "Status": "completed_scoped_fix_verified_only_preexisting_failures_remain",
+  "Scope": [
+    "First(empty concatenation) returns epsilon",
+    "FirstSet(empty concatenation) returns epsilon",
+    "LookAhead inherits only when suffix FIRST contains epsilon"
+  ],
+  "Build": {
+    "Errors": 0,
+    "ExistingWarnings": 5,
+    "Log": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\first-empty-sequence-20261028-094647-206\\build.log"
+  },
+  "Focused": {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\first-empty-sequence-20261028-094647-206\\focused.trx",
+    "Total": 230,
+    "Passed": 228,
+    "Failed": 2,
+    "Skipped": 0,
+    "Failures": [
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(name: \"unproductive-suffix-with-nullable-prefix\")",
+        "Message": "unproductive-suffix-with-nullable-prefix: I6 B -> a•\r\nExpected: \r\nActual: T:x"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(name: \"unproductive-suffix\")",
+        "Message": "unproductive-suffix: I4 B -> a•\r\nExpected: \r\nActual: T:x"
+      }
+    ]
+  },
+  "NewTests": {
+    "Total": 62,
+    "Passed": 62,
+    "Failed": 0
+  },
+  "SameNewTestsAgainstOldEngine": {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\first-empty-sequence-20261028-094647-206\\baseline-new-tests.trx",
+    "Total": 62,
+    "Passed": 42,
+    "Failed": 20,
+    "Skipped": 0,
+    "Failures": [
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(calculateRecursively: False)",
+        "Message": "Assert.True() Failure\r\nExpected: True\r\nActual:   False"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: True, reverse: True)",
+        "Message": "Assert.Empty() Failure: Collection was not empty\r\nCollection: [This is EndMarker! char : щ]"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: True, epsilonCount: 1)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(calculateRecursively: False)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: True, epsilonCount: 4)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(calculateRecursively: False)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: False, epsilonCount: 1)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_queries_return_independent_sets(calculateRecursively: True)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: True, epsilonCount: 2)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nullable_nonterminal_chain_has_the_same_first_as_empty_input(calculateRecursively: True)",
+        "Message": "Assert.True() Failure\r\nExpected: True\r\nActual:   False"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_rhs_and_explicit_epsilon_productions_have_the_same_first(calculateRecursively: True)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: False, epsilonCount: 2)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(calculateRecursively: True)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: False, reverse: True)",
+        "Message": "Assert.Empty() Failure: Collection was not empty\r\nCollection: [This is EndMarker! char : щ]"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Explicit_epsilon_and_empty_sequence_have_identical_first_sets(calculateRecursively: False, epsilonCount: 4)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: True, reverse: False)",
+        "Message": "Assert.Empty() Failure: Collection was not empty\r\nCollection: [This is EndMarker! char : щ]"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(calculateRecursively: False)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.LalrEmptySuffixTests.Unproductive_suffix_does_not_pass_EOF_to_the_completed_A_item(emptyPrefix: False, reverse: False)",
+        "Message": "Assert.Empty() Failure: Collection was not empty\r\nCollection: [This is EndMarker! char : щ]"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Empty_sequence_contains_exactly_epsilon(calculateRecursively: True)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.FirstEmptySequenceTests.Nonproductive_symbol_is_not_confused_with_empty_input(calculateRecursively: False)",
+        "Message": "Assert.Single() Failure: The collection was empty"
+      }
+    ]
+  },
+  "Mcp": {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\first-empty-sequence-20261028-094647-206\\mcp.trx",
+    "Total": 69,
+    "Passed": 69,
+    "Failed": 0,
+    "Skipped": 0,
+    "Failures": []
+  },
+  "KnownRemainingIssue": "B -> a completed item still receives x from dead parent context; not changed in this patch.",
+  "Sources": [
+    {
+      "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd\\FirstFollowAnalyzer [First].cs",
+      "Hash": "0BE6F524A007AD40683296284F51A7410488EEA07327119A7247B10A4FB0D3B4"
+    },
+    {
+      "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\CanonicalRelation.cs",
+      "Hash": "86B8F682607E33B4C5A3E9A38FCC99973698832373843D5EDEAE439ED0105A17"
+    }
+  ],
+  "BaselineTypeScript": {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\first-empty-sequence-20261028-094647-206\\baseline-typescript.trx",
+    "Total": 29,
+    "Passed": 26,
+    "Failed": 3,
+    "Failures": [
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value is string\")",
+        "Message": "(value: unknown) => asserts value is string\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\nGrammar predicate TSNoTypeReferenceSuffix evaluated to false."
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: \"export declare namespace Tools { function run(): v\"···)",
+        "Message": "export declare namespace Tools { function run(): void; }\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {{} 와야 합니다)"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value\")",
+        "Message": "(value: unknown) => asserts value\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\nGrammar predicate TSNoTypeReferenceSuffix evaluated to false."
+      }
+    ]
+  },
+  "SameTestAssemblyForBaselineComparison": true,
+  "TemporaryBaselineCopy": "Retained: automatic approval review rejected the cleanup deletion command as blocked by policy.",
+  "FullParserSuite": {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\artifacts\\typescript\\first-empty-sequence-20261028-094647-206\\parser-full.trx",
+    "Total": 6635,
+    "Passed": 6629,
+    "Failed": 5,
+    "Skipped": 1,
+    "Failures": [
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value\")",
+        "Message": "(value: unknown) => asserts value\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\nGrammar predicate TSNoTypeReferenceSuffix evaluated to false."
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: \"export declare namespace Tools { function run(): v\"···)",
+        "Message": "export declare namespace Tools { function run(): void; }\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {{} 와야 합니다)"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value is string\")",
+        "Message": "(value: unknown) => asserts value is string\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\nGrammar predicate TSNoTypeReferenceSuffix evaluated to false."
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(name: \"unproductive-suffix-with-nullable-prefix\")",
+        "Message": "unproductive-suffix-with-nullable-prefix: I6 B -> a•\r\nExpected: \r\nActual: T:x"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(name: \"unproductive-suffix\")",
+        "Message": "unproductive-suffix: I4 B -> a•\r\nExpected: \r\nActual: T:x"
+      }
+    ],
+    "UnexpectedFailures": [],
+    "FailureMessageMismatchesAgainstBaseline": [],
+    "NewTestsTotal": 62,
+    "NewTestsPassed": 62
+  },
+  "ExistingReceivedSnapshots": [
+    {
+      "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.lalr.canonical.received.txt",
+      "Unchanged": true
+    }
+  ],
+  "Diagnostics": "Full test run finished before the optional stack report attached; no stack was collected. No further source changes were made.",
+  "PreChangeLookaheadReport": {
+    "Path": "artifacts/typescript/recursive-lookahead-targets/completion-only-20261027-104118-204/verification.json",
+    "ProductSourceMatchesBeforeSnapshot": true,
+    "PriorFailures": [
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(name: \"unproductive-suffix\")",
+        "Message": "unproductive-suffix: I4 B -> a•\r\nExpected: \r\nActual: T:x"
+      },
+      {
+        "Test": "Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_completed_LR_item_matches_independent_canonical_LR1_core_merging(name: \"unproductive-suffix-with-nullable-prefix\")",
+        "Message": "unproductive-suffix-with-nullable-prefix: I6 B -> a•\r\nExpected: \r\nActual: T:x"
+      }
+    ]
+  },
+  "AllFullFailuresExactlyMatchPreChangeEvidence": true
+}

@@ -1,0 +1,55 @@
+{"id": "valid-00", "source": "interface Empty {}", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-01", "source": "interface Box<T> { readonly value: T; optional?: T; run(x: T): T; }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-02", "source": "interface Derived<T> extends Base<T>, Other.X<T> {}", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-03", "source": "interface Derived extends Base\n<string> {}", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-04", "source": "interface Callable { (x: number): string; new(x: number): Callable; }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-05", "source": "interface Store { [key: string]: number; get size(): number; set size(value: number); }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-06", "source": "type Name = string;", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-07", "source": "type Box<T extends Base = Base> = { value: T };", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-08", "source": "type Transform<T> = { readonly [K in keyof T as `get${Capitalize<string & K>}`]-?: T[K] };", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-09", "source": "type Select<T> = T extends infer U ? U : never;", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-10", "source": "type Tuple = [first: string, second?: number, ...rest: boolean[]];", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-11", "source": "type Ref = import(\"lib\").Value<string>;", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-12", "source": "type Name = string\n | number;", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-13", "source": "enum Direction {}", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-14", "source": "enum Direction { Up, Down = 3, Left, }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-15", "source": "enum Flag { On = \"on\", Off = \"off\" }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-16", "source": "enum\nDirection { Up }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-17", "source": "const enum Flag { On = 1, Off = 0 }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-18", "source": "namespace Tools { export const version: string = \"1\"; export interface Options { debug: boolean; } }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-19", "source": "namespace Outer.Inner { export function run(): void {} }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-20", "source": "namespace Outer.default { export const x = 1; }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-21", "source": "module Tools { export type Name = string; }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-22", "source": "declare interface Box<T> { value: T; }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-23", "source": "declare type Name = string;", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-24", "source": "declare enum Flag { On = 1, Off = 0 }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-25", "source": "declare const enum Flag { On = 1, Off = 0 }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-26", "source": "declare namespace Tools { function run<T>(value: T): T; }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-27", "source": "declare module \"external\" { export const version: string; }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-28", "source": "declare module \"external\";", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-29", "source": "declare global { interface Window { version: string; } }\nexport {};", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-30", "source": "declare function identity<T>(value: T): T;", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-31", "source": "declare class Box<T> { value: T; constructor(value: T); }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-32", "source": "declare abstract class Box { abstract value: string; }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-33", "source": "declare const version: string;", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-34", "source": "declare let ready: boolean;", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-35", "source": "declare var count: number;", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-36", "source": "export interface Box<T> { value: T; }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-37", "source": "export default interface Box<T> { value: T; }", "kind": "ts", "expectedParseAccept": true}
+{"id": "valid-38", "source": "export namespace Tools { export type Name = string; }", "kind": "ts", "expectedParseAccept": true}
+{"id": "invalid-00", "source": "interface {}", "kind": "ts", "expectedParseAccept": false}
+{"id": "invalid-01", "source": "interface Box<T {}", "kind": "ts", "expectedParseAccept": false}
+{"id": "invalid-02", "source": "interface Box extends {}", "kind": "ts", "expectedParseAccept": true, "expectedGrammarDiagnostic": 1097}
+{"id": "invalid-03", "source": "interface Box extends Base, Other, {}", "kind": "ts", "expectedParseAccept": true, "expectedGrammarDiagnostic": 1009}
+{"id": "invalid-04", "source": "type = string;", "kind": "ts", "expectedParseAccept": true, "interpretation": "runtime assignment to contextual identifier type"}
+{"id": "invalid-05", "source": "type Name string;", "kind": "ts", "expectedParseAccept": false}
+{"id": "invalid-06", "source": "type Name = ;", "kind": "ts", "expectedParseAccept": false}
+{"id": "invalid-07", "source": "enum {}", "kind": "ts", "expectedParseAccept": false}
+{"id": "invalid-08", "source": "enum E { A = }", "kind": "ts", "expectedParseAccept": false}
+{"id": "invalid-09", "source": "namespace {}", "kind": "ts", "expectedParseAccept": false}
+{"id": "invalid-10", "source": "namespace Outer.Inner;", "kind": "ts", "expectedParseAccept": false}
+{"id": "invalid-11", "source": "namespace\nTools {}", "kind": "ts", "expectedParseAccept": false}
+{"id": "invalid-12", "source": "module\nTools {}", "kind": "ts", "expectedParseAccept": false}
+{"id": "invalid-13", "source": "declare function f(value: );", "kind": "ts", "expectedParseAccept": false}
+{"id": "invalid-14", "source": "declare module \"external\" with { type: \"json\" } {}", "kind": "ts", "expectedParseAccept": false}
+{"id": "declaration-file-ambient", "source": "module \"external\";\nexport as namespace GlobalLibrary;", "kind": "dts", "expectedParseAccept": true}

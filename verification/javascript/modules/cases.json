@@ -1,0 +1,2462 @@
+[
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import \"\";",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import Default from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import * as ns from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {value} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {value, other} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {value,} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {value as local} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import Default, {value as local} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import Default, * as ns from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {default as local} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {if as condition, null as nothing, true as yes} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {'not-an-identifier' as local} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {'👻' as ghost} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {'a\\u0062' as local} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {\\u0076alue as local} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {value as \\u006cocal} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {as, from, of, async, meta} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import Default from 'one'; import Other from 'two';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import value from 'module'; value();",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import value from 'module'; function f() { return value; }",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import value from 'module'; { let value; }",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import value from 'module'; function f(value) { return value; }",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import Default, {default as other} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import /* head */ { /* item */ value /* alias */ as local, } /* source */ from /* module */ 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import\n{value}\nfrom\n'module'\nnext();",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import 'first'\nimport 'second'\nconst value = 1",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import '\\uD800';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import 'module' with {type: '\\uD800'};",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {'\\uD83D\\uDC7B' as ghost} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Static_import_forms_accept_named_namespace_default_and_side_effect_bindings",
+    "valid": true,
+    "input": "import {await as value} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "import data from 'data' with {type: 'json'};",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "import 'module' with {};",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "import {} from 'module' with {type: 'json',};",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "import * as ns from 'module' with {'type': 'json'};",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "import data from 'module' with {type: 'json', mode: 'strict'};",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "import data from 'module' with {if: 'value', 'not-an-identifier': 'value'};",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "import data from 'module' with {\\u0074ype: 'json'};",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "import data from 'module' with {type: 'json', Type: 'other'};",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "import 'module' with\n{\n type: 'json'\n}\nnext();",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "import 'module'\nwith {type: 'json'};",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "export * from 'module' with {type: 'json'};",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "export * as ns from 'module' with {type: 'json'};",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "export {value as local} from 'module' with {type: 'json'};",
+    "entry": "module"
+  },
+  {
+    "name": "Import_attributes_accept_literal_string_values_and_unescaped_distinct_keys",
+    "valid": true,
+    "input": "export {} from 'module' with {};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export var value;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export var first = 1, second = 2;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export let value;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export const value = 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export const [first,,...rest] = source;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export const {name: local, ...rest} = source;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export function f() { return 1; }",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export class A { #value = /a/; method() { return this.#value; } }",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "const value = 1; export {value};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {value}; const value = 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {value as renamed}; let value;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {value as default}; var value;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {f}; function f() {}",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {A}; class A {}",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "var value; export {value, value as other};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "const value = 1; export {value as 'not-an-identifier'};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "const value = 1; export {value as '👻'};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "const value = 1; export {value as if, value as null};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "import {value} from 'module'; export {value};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "import Default from 'module'; export {Default as default};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {value as other} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {default} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {default as other} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {'not-an-identifier' as other} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {'one' as 'two'} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {if as null} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export * from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export * as ns from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export * as default from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export * as 'not-an-identifier' from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default value + 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default function () {};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default function named() {} export {named};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default class {};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default class Named extends Base {} export {Named};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default class extends Base { constructor() { super(); } };",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default value => value;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default () => { return /a/; };",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default {value: 1};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default /a/;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default `hello ${value}`;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default (first, second);",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default\nfunction () {}",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {value as 'a\\u0062'}; const value = 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {value}; for (var value of values) {}",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "{ var value; } export {value};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export const value = 1; export {value as other};",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export * from 'one'; export * from 'one';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export * from 'one'; export * from 'two';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export let value; { let value; }",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export {'\\uD83D\\uDC7B' as ghost} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export * as '\\uD83D\\uDC7B' from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default function () {}(1);",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default class {}(1);",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default function () {} /a/;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export default class {} /a/;",
+    "entry": "module"
+  },
+  {
+    "name": "Exports_accept_declarations_local_aliases_defaults_and_reexports",
+    "valid": true,
+    "input": "export var value; export {value as other};",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module');",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module', {with: {type: 'json'}});",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module',);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module', {},);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import(name + suffix);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import(`module-${name}`);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import((first, second));",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module').then(handler);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module')?.then(handler);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module').default;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "const load = () => import('module');",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "const load = function() { return import('module'); };",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "const first = import('one'), second = import('two');",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "const options = {with: {type: 'json'}}; import(path, options);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module', null);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module', condition ? options : fallback);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module', import.meta);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import.meta;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import.meta.url;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import.meta.resolve('module');",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import.meta['url'];",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import.meta?.url;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import.meta.url = 'replacement';",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "const {url} = import.meta;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "function f() { return import.meta; }",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "const f = () => import.meta;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "class A { field = import.meta; static { import.meta.url; } method() { return import.meta; } }",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "`${import.meta.url} ${import('module')}`;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "new (import('module'));",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module') / divisor / other;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "const value = import.meta / divisor;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import.meta();",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "new import.meta;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import.meta`tag`;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module')`tag`;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "import('module').then = handler;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "const f = function() { return import.meta.url; };",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_meta_use_expression_grammar_with_module_context",
+    "valid": true,
+    "input": "for (const key in import.meta) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "await task;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "await import('module');",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "const value = await task;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "export default await task;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "export const value = await import('module');",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "await await task;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "await /a/.test(value);",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "(await task) / divisor;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "await task / divisor;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "const value = (await task) ** 2;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "if (ready) await task;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "{ const result = await task; }",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "for await (const value of values) { await consume(value); }",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "for await (let value of values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "for await (var value of values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "for await (value of values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "for await (target.value of values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "for await (const [first, ...rest] of values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "for await (const {value} of values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "for await (const value of await values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "for\nawait\n(const value of values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "for await (async of values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "for await (const value of values) { if (value) break; continue; }",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "try { await task; } catch (error) { await recover(error); }",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "switch (await task) { case 1: await next(); }",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "class A extends (await Base) {}",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "class A { [await name]() {} }",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "class A { [await name] = value; }",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "const value = {await: await task};",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "value.await; value['await'];",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "class A { await() {} await = value; }",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "export {await as value} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "export * as await from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "export default await import('module',);",
+    "entry": "module"
+  },
+  {
+    "name": "Top_level_await_and_for_await_are_allowed_only_in_their_module_context",
+    "valid": true,
+    "input": "const value = `${await /a/.test(input)}`;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import value;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import * from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import * as ns;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {} 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {value} from module;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {value} from `module`;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {value} from 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {value,,other} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {value as} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {value other} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {value: local} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {value = fallback} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {...rest} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import Default, from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import Default, Other from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import Default, {} , from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {'value'} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {default} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {if} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {value as if} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import eval from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import arguments from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import await from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {await} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {value as await} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import * as yield from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import * as let from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {value as enum} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "{ import 'module'; }",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "function f() { import 'module'; }",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "if (ready) import 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "const f = () => { import 'module'; };",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "class A { static { import 'module'; } }",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' next();",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import {value} from 'module' const other = 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' assert {type: 'json'};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' with {type};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' with {type: value};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' with {type: 1};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' with {type: `json`};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' with {[type]: 'json'};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' with {...options};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' with {type: 'json', type: 'json'};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' with {type: 'json', 'type': 'other'};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' with {type: 'json', '\\u0074ype': 'other'};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' with {type: 'json', \\u0074ype: 'other'};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_grammar_rejects_invalid_static_import_shape_and_nested_declarations",
+    "valid": false,
+    "input": "import 'module' with {type: 'json'} with {};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import value from 'one'; import value from 'two';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import {first as value, second as value} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import value, {other as value} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import value, * as value from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import value from 'module'; let value;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import value from 'module'; const value = 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import value from 'module'; var value;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import value from 'module'; function value() {}",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import value from 'module'; class value {}",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import value from 'module'; { var value; }",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import value from 'module'; for (var value of values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import {x as \\u0061, y as a} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export {missing};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export {missing as value};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "{ let value; } export {value};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "function f() { var value; } export {value};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "for (let value of values) ; export {value};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export {if};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export {'value'};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export {'value' as other};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export {value} with {type: 'json'}; const value = 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export const value = 1; export const value = 2;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "const value = 1; export {value}; export {value};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "const value = 1; export {value, value};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "const first = 1, second = 2; export {first as value, second as value};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "const value = 1; export {value as ab, value as 'a\\u0062'};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export default 1; export default 2;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "const value = 1; export {value as default}; export default 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export * as ns from 'one'; export * as ns from 'two';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export * as default from 'one'; export default 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export {x as value} from 'one'; export {y as value} from 'two';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export default function f() {} export {f as default};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export default class A {} export {A as default};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export default function () {} export {default};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export default class {} export {default};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export let [first, first] = values;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export const {value: first, other: first} = source;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import {'\\uD800' as value} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "import {'\\uDC00' as value} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export {'\\uD800' as value} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export {value as '\\uD800'} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export * as '\\uDC00' from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "const value = 1; export {value as default, value as 'default'};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "const value = 1; export {value as '\\u0061', value as a};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_early_errors_reject_duplicate_bindings_exports_and_unresolved_local_exports",
+    "valid": false,
+    "input": "export * as '\\u0061' from 'one'; export * as a from 'two';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export value;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export default;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export default first, second;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export default const value = 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export default var value;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export default let value;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export *;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export * 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export * as ns;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export * as ns from module;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export {value as};",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export {value,, other} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export {value: other} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export {...rest} from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export {} from `module`;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export {} from source;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export var;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export let;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export const value;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export function () {}",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export class {}",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export if (ready) value();",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export import value from 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "{ export const value = 1; }",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "function f() { export const value = 1; }",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "const f = () => { export default 1; };",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "if (ready) export default 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "class A { static { export const value = 1; } }",
+    "entry": "module"
+  },
+  {
+    "name": "Module_rejects_malformed_export_forms_and_nested_exports",
+    "valid": false,
+    "input": "export default 1 next();",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import();",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import(,);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import(...values);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import('module', ...options);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import('module', {}, third);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import('module', {},,);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import('module',,);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import?.('module');",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import?.meta;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import.other;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import['meta'];",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import.\\u006deta;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import.meta = value;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "++import.meta;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import.meta++;",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "({value: import.meta} = source);",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "new import('module');",
+    "entry": "module"
+  },
+  {
+    "name": "Dynamic_import_and_import_meta_reject_invalid_arity_optional_calls_and_property_names",
+    "valid": false,
+    "input": "import`module`;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "let await;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "var await;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "const await = 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "function await() {}",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "class await {}",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "function f(await) {}",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "const f = await => await;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "const f = (await) => 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "function f() { await task; }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "function f() { await; }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "function f() { let await; }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "function f() { return await task; }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "const f = () => await task;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "const f = (value = await task) => value;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "class A { method() { await task; } }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "class A { field = await task; }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "class A { static field = await task; }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "class A { static { await task; } }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "await;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "await +;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "await task ** 2;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "for await (;;);",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "for await (const value in values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "for await (var value in values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "for await (const value = 1 of values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "for await (let first, second of values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "for await (value of values, other) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "function f() { for await (const value of values) ; }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "const f = () => { for await (const value of values) ; };",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "class A { static { for await (const value of values) ; } }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "await label: ;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "await => value;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "await",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "await\\n",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "await \\u0061wait;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "var \\u0061wait;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "function f() { \\u0061wait; }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "await: while (ready) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "label: while (ready) { break await; }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "const {await} = source;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "for await (let.value of values) ;",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "for await (const value of values) { function f() { await task; } }",
+    "entry": "module"
+  },
+  {
+    "name": "Await_grammar_and_scope_errors_are_detected_without_affecting_ordinary_functions",
+    "valid": false,
+    "input": "export default class await {}",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "with (value) {}",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "var eval;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "var arguments;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "let implements;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "function f(first, first) {}",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "delete value;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "value = 077;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "'\\1';",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "return 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "break;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "continue;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "new.target;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "super.value;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "let value; var value;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "function f() {} function f() {}",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "function f() {} var f;",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "var f; function f() {}",
+    "entry": "module"
+  },
+  {
+    "name": "Module_strictness_and_top_level_scope_errors_reuse_existing_language_checks",
+    "valid": false,
+    "input": "class A {} function A() {}",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "import value from 'module'; value / divisor / other;",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "import 'module'; /a/.test(value);",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export const value = /a/;",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default function () {} /a/.test(value);",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default class {} /a/.test(value);",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default class Named {} /a/.test(value);",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default function named() {} /a/.test(value);",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default () => {}\n/a/.test(value);",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default (class {}) / divisor;",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default (function() {}) / divisor;",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default `hello ${import.meta.url}`;",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "const value = `${await task}`;",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "const value = `${import('module')}`;",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export const f = ({value = 1}, ...rest) => value;",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export class A extends Base { #value; constructor() { super(); } method() { return import.meta; } }",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "import value from 'module'\nexport {value}",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default 1\nconst other = 2;",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default\n/a/.test(value)",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export * from 'module'\n/a/.test(value);",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export {value}\nconst value = 1;",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "await\n/a/.test(value);",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "for await (const value of values) /a/.test(value);",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default function () { return import.meta; }",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default class { static { import('module'); } }",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default function named() {} named();",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default class Named {} new Named();",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default function () {}; import 'module';",
+    "entry": "module"
+  },
+  {
+    "name": "Lexical_goals_ASI_templates_and_existing_classes_arrows_integrate_with_module_items",
+    "valid": true,
+    "input": "export default class {}; import 'module';",
+    "entry": "module"
+  }
+]

@@ -1,0 +1,9 @@
+{"id": "primitive", "source": "let count: number = 1;"}
+{"id": "optional-required-grammar-error", "source": "function f(x?: string, y: number) {}"}
+{"id": "missing-type-parse-error", "source": "let x: = 1;"}
+{"id": "js-type-error-not-syntax", "source": "let x: string = 1;"}
+{"id": "generic-tsx", "kind": "tsx", "source": "const f = <T,>(x: T) => x; const el = <div title=\"Hi\">{f(1)}</div>;"}
+{"id": "declaration", "kind": "dts", "source": "declare namespace N { function f(x: number): string; }"}
+{"id": "standard-decorators", "source": "@sealed class C { @dec accessor x: number = 0; }"}
+{"id": "nested-type-args", "source": "const x: Map<string, Array<number>> = new Map();"}
+{"id": "conditional-mapped", "source": "type F<T> = { [K in keyof T as `get${Capitalize<string & K>}`]-?: T[K] extends infer U ? U : never; };"}

@@ -1,0 +1,642 @@
+INPUT class C { value!: number; }
+PARSED False EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+I0 TOKEN=class KIND=class ACTION=shift 48 ERROR=
+  CANDIDATE Shift 48
+  CANDIDATE EpsilonReduce __predicate6 -> epsilon PRED=ExpressionStatementStart
+I48 TOKEN=C KIND=IdentifierName ACTION=shift 62 ERROR=
+  CANDIDATE Shift 62
+I62 TOKEN={ KIND={ ACTION=reduce BindingIdentifier -> IdentifierName ERROR=
+  CANDIDATE Reduce BindingIdentifier -> IdentifierName PRED=
+I48 TOKEN={ KIND={ ACTION=goto 258 ERROR=
+I258 TOKEN={ KIND={ ACTION=epsilon reduce TSOptionalTypeParameters -> epsilon ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I258 TOKEN={ KIND={ ACTION=goto 711 ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I711 TOKEN={ KIND={ ACTION=shift 886 ERROR=
+  CANDIDATE Shift 886
+I886 TOKEN=value KIND=IdentifierName ACTION=shift 769 ERROR=
+  CANDIDATE Shift 769
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I769 TOKEN=! KIND=TSNonNullToken ACTION=reduce PropertyIdentifierName -> IdentifierName ERROR=
+  CANDIDATE Reduce PropertyIdentifierName -> IdentifierName PRED=
+  ITEM PropertyIdentifierName -> IdentifierName•
+I886 TOKEN=! KIND=TSNonNullToken ACTION=goto 339 ERROR=
+  ITEM ClassBody -> {•}
+  ITEM ClassBody -> {•ClassElementList }
+  ITEM ClassElementList ->•ClassElement
+  ITEM ClassElement ->•;
+  ITEM ClassElement ->•ClassMethod
+  ITEM ClassMethod ->•ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassElementName ->•PropertyName
+  ITEM PropertyName ->•PropertyIdentifierName
+  ITEM PropertyIdentifierName ->•IdentifierName
+  ITEM PropertyIdentifierName ->•ReservedWord
+  ITEM ReservedWord ->•await
+  ITEM ReservedWord ->•break
+  ITEM ReservedWord ->•case
+  ITEM ReservedWord ->•catch
+  ITEM ReservedWord ->•class
+  ITEM ReservedWord ->•const
+  ITEM ReservedWord ->•continue
+  ITEM ReservedWord ->•debugger
+  ITEM ReservedWord ->•default
+  ITEM ReservedWord ->•delete
+  ITEM ReservedWord ->•do
+  ITEM ReservedWord ->•else
+  ITEM ReservedWord ->•enum
+  ITEM ReservedWord ->•export
+  ITEM ReservedWord ->•extends
+  ITEM ReservedWord ->•false
+  ITEM ReservedWord ->•finally
+  ITEM ReservedWord ->•for
+  ITEM ReservedWord ->•function
+  ITEM ReservedWord ->•if
+  ITEM ReservedWord ->•import
+  ITEM ReservedWord ->•in
+  ITEM ReservedWord ->•instanceof
+  ITEM ReservedWord ->•new
+  ITEM ReservedWord ->•null
+  ITEM ReservedWord ->•return
+  ITEM ReservedWord ->•super
+  ITEM ReservedWord ->•switch
+  ITEM ReservedWord ->•this
+  ITEM ReservedWord ->•throw
+  ITEM ReservedWord ->•true
+  ITEM ReservedWord ->•try
+  ITEM ReservedWord ->•typeof
+  ITEM ReservedWord ->•var
+  ITEM ReservedWord ->•void
+  ITEM ReservedWord ->•while
+  ITEM ReservedWord ->•with
+  ITEM ReservedWord ->•yield
+  ITEM ReservedWord ->•let
+  ITEM ReservedWord ->•static
+  ITEM ReservedWord ->•implements
+  ITEM ReservedWord ->•interface
+  ITEM ReservedWord ->•package
+  ITEM ReservedWord ->•private
+  ITEM ReservedWord ->•protected
+  ITEM ReservedWord ->•public
+  ITEM PropertyIdentifierName ->•of
+  ITEM PropertyIdentifierName ->•async
+  ITEM PropertyIdentifierName ->•any
+  ITEM PropertyIdentifierName ->•unknown
+  ITEM PropertyIdentifierName ->•string
+  ITEM PropertyIdentifierName ->•number
+  ITEM PropertyIdentifierName ->•bigint
+  ITEM PropertyIdentifierName ->•symbol
+  ITEM PropertyIdentifierName ->•boolean
+  ITEM PropertyIdentifierName ->•undefined
+  ITEM PropertyIdentifierName ->•never
+  ITEM PropertyIdentifierName ->•object
+  ITEM PropertyIdentifierName ->•intrinsic
+  ITEM PropertyIdentifierName ->•keyof
+  ITEM PropertyIdentifierName ->•unique
+  ITEM PropertyIdentifierName ->•readonly
+  ITEM PropertyIdentifierName ->•infer
+  ITEM PropertyIdentifierName ->•abstract
+  ITEM PropertyIdentifierName ->•accessor
+  ITEM PropertyIdentifierName ->•as
+  ITEM PropertyIdentifierName ->•assert
+  ITEM PropertyIdentifierName ->•asserts
+  ITEM PropertyIdentifierName ->•constructor
+  ITEM PropertyIdentifierName ->•declare
+  ITEM PropertyIdentifierName ->•from
+  ITEM PropertyIdentifierName ->•get
+  ITEM PropertyIdentifierName ->•global
+  ITEM PropertyIdentifierName ->•is
+  ITEM PropertyIdentifierName ->•module
+  ITEM PropertyIdentifierName ->•namespace
+  ITEM PropertyIdentifierName ->•out
+  ITEM PropertyIdentifierName ->•override
+  ITEM PropertyIdentifierName ->•require
+  ITEM PropertyIdentifierName ->•satisfies
+  ITEM PropertyIdentifierName ->•set
+  ITEM PropertyIdentifierName ->•type
+  ITEM PropertyIdentifierName ->•using
+  ITEM PropertyName ->•StringLiteral
+  ITEM PropertyName ->•NumericLiteral
+  ITEM PropertyName ->•[ AssignmentExpression ]
+  ITEM ClassElementName ->•PrivateIdentifier
+  ITEM ClassMethod ->•ClassElementName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassMethod ->•ClassElementName ClassModifierName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassMethod ->•ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassMethod ->•ClassElementName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassMethod ->•ClassElementName ClassModifierName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassElement ->•ClassField
+  ITEM ClassField ->•ClassElementName TSClassFieldMarker TSAnnotation ClassFieldEnd
+  ITEM ClassField ->•ClassElementName TSClassFieldMarker ClassFieldEnd
+  ITEM ClassField ->•ClassElementName TSAnnotation ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassFieldEnd
+  ITEM ClassField ->•ClassElementName TSClassFieldMarker TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName TSClassFieldMarker Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSClassFieldMarker TSAnnotation ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSClassFieldMarker ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSAnnotation ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSClassFieldMarker TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSClassFieldMarker Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName Initializer ClassFieldExpressionEnd
+  ITEM ClassElement ->•ClassStaticBlock
+  ITEM ClassStaticBlock ->•ClassElementName __predicate20 ClassStaticBody
+  ITEM ClassElement ->•ClassAsyncMethod
+  ITEM ClassAsyncMethod ->•ClassElementName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod ->•ClassElementName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod ->•ClassElementName ClassModifierName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod ->•ClassElementName ClassModifierName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod ->•ClassElementName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod ->•ClassElementName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod ->•ClassElementName ClassModifierName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod ->•ClassElementName ClassModifierName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassElement ->•ClassGeneratorMethod
+  ITEM ClassGeneratorMethod ->•* ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassGeneratorMethod ->•ClassElementName StaticGeneratorModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassGeneratorMethod ->•* ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassGeneratorMethod ->•ClassElementName StaticGeneratorModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassElement ->•TSClassModifiedElement
+  ITEM TSClassModifiedElement ->•__predicate51 TSModifiers TSClassModifiedMember
+  ITEM __predicate51 ->•
+  ITEM ClassElement ->•__predicate14 TSClassIndexSignature
+  ITEM __predicate14 ->•
+  ITEM ClassElementList ->•ClassElementList ClassElement
+I339 TOKEN=! KIND=TSNonNullToken ACTION=failed null ERROR=(shift 할 수 없습니다 {:, TSTypeOpen, (, IdentifierName, await, break, case, catch, class, const, continue, debugger, default, delete, do, else, enum, export, extends, false, finally, for, function, if, import, in, instanceof, new, null, return, super, switch, this, throw, true, try, typeof, var, void, while, with, yield, let, static, implements, interface, package, private, protected, public, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, StringLiteral, NumericLiteral, [, *, ?, PrivateIdentifier, !, ;, }, =, {, ,} 와야 합니다)
+  ITEM PropertyName -> PropertyIdentifierName•
+INPUT class C { [key: string]: unknown; }
+PARSED False EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+I0 TOKEN=class KIND=class ACTION=shift 48 ERROR=
+  CANDIDATE Shift 48
+  CANDIDATE EpsilonReduce __predicate6 -> epsilon PRED=ExpressionStatementStart
+I48 TOKEN=C KIND=IdentifierName ACTION=shift 62 ERROR=
+  CANDIDATE Shift 62
+I62 TOKEN={ KIND={ ACTION=reduce BindingIdentifier -> IdentifierName ERROR=
+  CANDIDATE Reduce BindingIdentifier -> IdentifierName PRED=
+I48 TOKEN={ KIND={ ACTION=goto 258 ERROR=
+I258 TOKEN={ KIND={ ACTION=epsilon reduce TSOptionalTypeParameters -> epsilon ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I258 TOKEN={ KIND={ ACTION=goto 711 ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I711 TOKEN={ KIND={ ACTION=shift 886 ERROR=
+  CANDIDATE Shift 886
+I886 TOKEN=[ KIND=[ ACTION=shift 388 ERROR=
+  CANDIDATE Shift 388
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+  CANDIDATE EpsilonReduce __predicate14 -> epsilon PRED=TSClassIndexSignatureStart
+  ITEM ClassBody -> {•}
+  ITEM ClassBody -> {•ClassElementList }
+  ITEM ClassElementList ->•ClassElement
+  ITEM ClassElement ->•;
+  ITEM ClassElement ->•ClassMethod
+  ITEM ClassMethod ->•ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassElementName ->•PropertyName
+  ITEM PropertyName ->•PropertyIdentifierName
+  ITEM PropertyIdentifierName ->•IdentifierName
+  ITEM PropertyIdentifierName ->•ReservedWord
+  ITEM ReservedWord ->•await
+  ITEM ReservedWord ->•break
+  ITEM ReservedWord ->•case
+  ITEM ReservedWord ->•catch
+  ITEM ReservedWord ->•class
+  ITEM ReservedWord ->•const
+  ITEM ReservedWord ->•continue
+  ITEM ReservedWord ->•debugger
+  ITEM ReservedWord ->•default
+  ITEM ReservedWord ->•delete
+  ITEM ReservedWord ->•do
+  ITEM ReservedWord ->•else
+  ITEM ReservedWord ->•enum
+  ITEM ReservedWord ->•export
+  ITEM ReservedWord ->•extends
+  ITEM ReservedWord ->•false
+  ITEM ReservedWord ->•finally
+  ITEM ReservedWord ->•for
+  ITEM ReservedWord ->•function
+  ITEM ReservedWord ->•if
+  ITEM ReservedWord ->•import
+  ITEM ReservedWord ->•in
+  ITEM ReservedWord ->•instanceof
+  ITEM ReservedWord ->•new
+  ITEM ReservedWord ->•null
+  ITEM ReservedWord ->•return
+  ITEM ReservedWord ->•super
+  ITEM ReservedWord ->•switch
+  ITEM ReservedWord ->•this
+  ITEM ReservedWord ->•throw
+  ITEM ReservedWord ->•true
+  ITEM ReservedWord ->•try
+  ITEM ReservedWord ->•typeof
+  ITEM ReservedWord ->•var
+  ITEM ReservedWord ->•void
+  ITEM ReservedWord ->•while
+  ITEM ReservedWord ->•with
+  ITEM ReservedWord ->•yield
+  ITEM ReservedWord ->•let
+  ITEM ReservedWord ->•static
+  ITEM ReservedWord ->•implements
+  ITEM ReservedWord ->•interface
+  ITEM ReservedWord ->•package
+  ITEM ReservedWord ->•private
+  ITEM ReservedWord ->•protected
+  ITEM ReservedWord ->•public
+  ITEM PropertyIdentifierName ->•of
+  ITEM PropertyIdentifierName ->•async
+  ITEM PropertyIdentifierName ->•any
+  ITEM PropertyIdentifierName ->•unknown
+  ITEM PropertyIdentifierName ->•string
+  ITEM PropertyIdentifierName ->•number
+  ITEM PropertyIdentifierName ->•bigint
+  ITEM PropertyIdentifierName ->•symbol
+  ITEM PropertyIdentifierName ->•boolean
+  ITEM PropertyIdentifierName ->•undefined
+  ITEM PropertyIdentifierName ->•never
+  ITEM PropertyIdentifierName ->•object
+  ITEM PropertyIdentifierName ->•intrinsic
+  ITEM PropertyIdentifierName ->•keyof
+  ITEM PropertyIdentifierName ->•unique
+  ITEM PropertyIdentifierName ->•readonly
+  ITEM PropertyIdentifierName ->•infer
+  ITEM PropertyIdentifierName ->•abstract
+  ITEM PropertyIdentifierName ->•accessor
+  ITEM PropertyIdentifierName ->•as
+  ITEM PropertyIdentifierName ->•assert
+  ITEM PropertyIdentifierName ->•asserts
+  ITEM PropertyIdentifierName ->•constructor
+  ITEM PropertyIdentifierName ->•declare
+  ITEM PropertyIdentifierName ->•from
+  ITEM PropertyIdentifierName ->•get
+  ITEM PropertyIdentifierName ->•global
+  ITEM PropertyIdentifierName ->•is
+  ITEM PropertyIdentifierName ->•module
+  ITEM PropertyIdentifierName ->•namespace
+  ITEM PropertyIdentifierName ->•out
+  ITEM PropertyIdentifierName ->•override
+  ITEM PropertyIdentifierName ->•require
+  ITEM PropertyIdentifierName ->•satisfies
+  ITEM PropertyIdentifierName ->•set
+  ITEM PropertyIdentifierName ->•type
+  ITEM PropertyIdentifierName ->•using
+  ITEM PropertyName ->•StringLiteral
+  ITEM PropertyName ->•NumericLiteral
+  ITEM PropertyName ->•[ AssignmentExpression ]
+  ITEM ClassElementName ->•PrivateIdentifier
+  ITEM ClassMethod ->•ClassElementName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassMethod ->•ClassElementName ClassModifierName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassMethod ->•ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassMethod ->•ClassElementName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassMethod ->•ClassElementName ClassModifierName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassElement ->•ClassField
+  ITEM ClassField ->•ClassElementName TSClassFieldMarker TSAnnotation ClassFieldEnd
+  ITEM ClassField ->•ClassElementName TSClassFieldMarker ClassFieldEnd
+  ITEM ClassField ->•ClassElementName TSAnnotation ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassFieldEnd
+  ITEM ClassField ->•ClassElementName TSClassFieldMarker TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName TSClassFieldMarker Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSClassFieldMarker TSAnnotation ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSClassFieldMarker ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSAnnotation ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSClassFieldMarker TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSClassFieldMarker Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName Initializer ClassFieldExpressionEnd
+  ITEM ClassElement ->•ClassStaticBlock
+  ITEM ClassStaticBlock ->•ClassElementName __predicate20 ClassStaticBody
+  ITEM ClassElement ->•ClassAsyncMethod
+  ITEM ClassAsyncMethod ->•ClassElementName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod ->•ClassElementName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod ->•ClassElementName ClassModifierName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod ->•ClassElementName ClassModifierName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod ->•ClassElementName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod ->•ClassElementName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod ->•ClassElementName ClassModifierName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod ->•ClassElementName ClassModifierName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassElement ->•ClassGeneratorMethod
+  ITEM ClassGeneratorMethod ->•* ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassGeneratorMethod ->•ClassElementName StaticGeneratorModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassGeneratorMethod ->•* ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassGeneratorMethod ->•ClassElementName StaticGeneratorModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassElement ->•TSClassModifiedElement
+  ITEM TSClassModifiedElement ->•__predicate51 TSModifiers TSClassModifiedMember
+  ITEM __predicate51 ->•
+  ITEM ClassElement ->•__predicate14 TSClassIndexSignature
+  ITEM __predicate14 ->•
+  ITEM ClassElementList ->•ClassElementList ClassElement
+I388 TOKEN=key KIND=IdentifierName ACTION=shift 131 ERROR=
+  CANDIDATE Shift 131
+I131 TOKEN=: KIND=: ACTION=reduce IdentifierReference -> IdentifierName ERROR=
+  CANDIDATE Reduce IdentifierReference -> IdentifierName PRED=
+I388 TOKEN=: KIND=: ACTION=goto 474 ERROR=
+I474 TOKEN=: KIND=: ACTION=reduce PrimaryExpression -> IdentifierReference ERROR=
+  CANDIDATE Reduce PrimaryExpression -> IdentifierReference PRED=
+I388 TOKEN=: KIND=: ACTION=goto 129 ERROR=
+I129 TOKEN=: KIND=: ACTION=reduce MemberExpression -> PrimaryExpression ERROR=
+  CANDIDATE Reduce MemberExpression -> PrimaryExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 128 ERROR=
+I128 TOKEN=: KIND=: ACTION=reduce NewExpression -> MemberExpression ERROR=
+  CANDIDATE Reduce NewExpression -> MemberExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 127 ERROR=
+I127 TOKEN=: KIND=: ACTION=reduce LeftHandSideExpression -> NewExpression ERROR=
+  CANDIDATE Reduce LeftHandSideExpression -> NewExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 126 ERROR=
+I126 TOKEN=: KIND=: ACTION=epsilon reduce __predicate1 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate1 -> epsilon PRED=TSNoPostfix
+I126 TOKEN=: KIND=: ACTION=goto 439 ERROR=
+  CANDIDATE EpsilonReduce __predicate1 -> epsilon PRED=TSNoPostfix
+I439 TOKEN=: KIND=: ACTION=reduce SimpleUpdateExpression -> LeftHandSideExpression __predicate1 ERROR=
+  CANDIDATE Reduce SimpleUpdateExpression -> LeftHandSideExpression __predicate1 PRED=
+I388 TOKEN=: KIND=: ACTION=goto 125 ERROR=
+I125 TOKEN=: KIND=: ACTION=reduce UpdateExpression -> SimpleUpdateExpression ERROR=
+  CANDIDATE Reduce UpdateExpression -> SimpleUpdateExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 124 ERROR=
+I124 TOKEN=: KIND=: ACTION=reduce UnaryExpression -> UpdateExpression ERROR=
+  CANDIDATE Reduce UnaryExpression -> UpdateExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 123 ERROR=
+I123 TOKEN=: KIND=: ACTION=reduce ExponentiationExpression -> UnaryExpression ERROR=
+  CANDIDATE Reduce ExponentiationExpression -> UnaryExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 122 ERROR=
+I122 TOKEN=: KIND=: ACTION=reduce MultiplicativeExpression -> ExponentiationExpression ERROR=
+  CANDIDATE Reduce MultiplicativeExpression -> ExponentiationExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 121 ERROR=
+I121 TOKEN=: KIND=: ACTION=reduce AdditiveExpression -> MultiplicativeExpression ERROR=
+  CANDIDATE Reduce AdditiveExpression -> MultiplicativeExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 120 ERROR=
+I120 TOKEN=: KIND=: ACTION=reduce ShiftExpression -> AdditiveExpression ERROR=
+  CANDIDATE Reduce ShiftExpression -> AdditiveExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 119 ERROR=
+I119 TOKEN=: KIND=: ACTION=reduce RelationalExpression -> ShiftExpression ERROR=
+  CANDIDATE Reduce RelationalExpression -> ShiftExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 118 ERROR=
+I118 TOKEN=: KIND=: ACTION=epsilon reduce __predicate47 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate47 -> epsilon PRED=TSNoAssertionOperatorStart
+I118 TOKEN=: KIND=: ACTION=goto 417 ERROR=
+  CANDIDATE EpsilonReduce __predicate47 -> epsilon PRED=TSNoAssertionOperatorStart
+I417 TOKEN=: KIND=: ACTION=reduce TSAssertionEnd -> __predicate47 ERROR=
+  CANDIDATE Reduce TSAssertionEnd -> __predicate47 PRED=
+I118 TOKEN=: KIND=: ACTION=goto 416 ERROR=
+  CANDIDATE EpsilonReduce __predicate47 -> epsilon PRED=TSNoAssertionOperatorStart
+I416 TOKEN=: KIND=: ACTION=reduce EqualityExpression -> RelationalExpression TSAssertionEnd ERROR=
+  CANDIDATE Reduce EqualityExpression -> RelationalExpression TSAssertionEnd PRED=
+I388 TOKEN=: KIND=: ACTION=goto 117 ERROR=
+I117 TOKEN=: KIND=: ACTION=reduce BitwiseANDExpression -> EqualityExpression ERROR=
+  CANDIDATE Reduce BitwiseANDExpression -> EqualityExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 116 ERROR=
+I116 TOKEN=: KIND=: ACTION=reduce BitwiseXORExpression -> BitwiseANDExpression ERROR=
+  CANDIDATE Reduce BitwiseXORExpression -> BitwiseANDExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 115 ERROR=
+I115 TOKEN=: KIND=: ACTION=reduce BitwiseORExpression -> BitwiseXORExpression ERROR=
+  CANDIDATE Reduce BitwiseORExpression -> BitwiseXORExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 114 ERROR=
+I114 TOKEN=: KIND=: ACTION=reduce LogicalANDExpression -> BitwiseORExpression ERROR=
+  CANDIDATE Reduce LogicalANDExpression -> BitwiseORExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 113 ERROR=
+I113 TOKEN=: KIND=: ACTION=reduce LogicalORExpression -> LogicalANDExpression ERROR=
+  CANDIDATE Reduce LogicalORExpression -> LogicalANDExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 112 ERROR=
+I112 TOKEN=: KIND=: ACTION=reduce ShortCircuitExpression -> LogicalORExpression ERROR=
+  CANDIDATE Reduce ShortCircuitExpression -> LogicalORExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 111 ERROR=
+I111 TOKEN=: KIND=: ACTION=reduce ConditionalExpression -> ShortCircuitExpression ERROR=
+  CANDIDATE Reduce ConditionalExpression -> ShortCircuitExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 110 ERROR=
+I110 TOKEN=: KIND=: ACTION=reduce AssignmentExpression -> ConditionalExpression ERROR=
+  CANDIDATE Reduce AssignmentExpression -> ConditionalExpression PRED=
+I388 TOKEN=: KIND=: ACTION=goto 734 ERROR=
+I734 TOKEN=: KIND=: ACTION=failed null ERROR=(shift 할 수 없습니다 {]} 와야 합니다)
+  ITEM PropertyName -> [ AssignmentExpression•]
+INPUT class C { readonly value: number = 1; }
+PARSED False EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+I0 TOKEN=class KIND=class ACTION=shift 48 ERROR=
+  CANDIDATE Shift 48
+  CANDIDATE EpsilonReduce __predicate6 -> epsilon PRED=ExpressionStatementStart
+I48 TOKEN=C KIND=IdentifierName ACTION=shift 62 ERROR=
+  CANDIDATE Shift 62
+I62 TOKEN={ KIND={ ACTION=reduce BindingIdentifier -> IdentifierName ERROR=
+  CANDIDATE Reduce BindingIdentifier -> IdentifierName PRED=
+I48 TOKEN={ KIND={ ACTION=goto 258 ERROR=
+I258 TOKEN={ KIND={ ACTION=epsilon reduce TSOptionalTypeParameters -> epsilon ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I258 TOKEN={ KIND={ ACTION=goto 711 ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I711 TOKEN={ KIND={ ACTION=shift 886 ERROR=
+  CANDIDATE Shift 886
+I886 TOKEN=readonly KIND=readonly ACTION=shift 786 ERROR=
+  CANDIDATE Shift 786
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+  CANDIDATE EpsilonReduce __predicate14 -> epsilon PRED=TSClassIndexSignatureStart
+  ITEM ClassBody -> {•}
+  ITEM ClassBody -> {•ClassElementList }
+  ITEM ClassElementList ->•ClassElement
+  ITEM ClassElement ->•;
+  ITEM ClassElement ->•ClassMethod
+  ITEM ClassMethod ->•ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassElementName ->•PropertyName
+  ITEM PropertyName ->•PropertyIdentifierName
+  ITEM PropertyIdentifierName ->•IdentifierName
+  ITEM PropertyIdentifierName ->•ReservedWord
+  ITEM ReservedWord ->•await
+  ITEM ReservedWord ->•break
+  ITEM ReservedWord ->•case
+  ITEM ReservedWord ->•catch
+  ITEM ReservedWord ->•class
+  ITEM ReservedWord ->•const
+  ITEM ReservedWord ->•continue
+  ITEM ReservedWord ->•debugger
+  ITEM ReservedWord ->•default
+  ITEM ReservedWord ->•delete
+  ITEM ReservedWord ->•do
+  ITEM ReservedWord ->•else
+  ITEM ReservedWord ->•enum
+  ITEM ReservedWord ->•export
+  ITEM ReservedWord ->•extends
+  ITEM ReservedWord ->•false
+  ITEM ReservedWord ->•finally
+  ITEM ReservedWord ->•for
+  ITEM ReservedWord ->•function
+  ITEM ReservedWord ->•if
+  ITEM ReservedWord ->•import
+  ITEM ReservedWord ->•in
+  ITEM ReservedWord ->•instanceof
+  ITEM ReservedWord ->•new
+  ITEM ReservedWord ->•null
+  ITEM ReservedWord ->•return
+  ITEM ReservedWord ->•super
+  ITEM ReservedWord ->•switch
+  ITEM ReservedWord ->•this
+  ITEM ReservedWord ->•throw
+  ITEM ReservedWord ->•true
+  ITEM ReservedWord ->•try
+  ITEM ReservedWord ->•typeof
+  ITEM ReservedWord ->•var
+  ITEM ReservedWord ->•void
+  ITEM ReservedWord ->•while
+  ITEM ReservedWord ->•with
+  ITEM ReservedWord ->•yield
+  ITEM ReservedWord ->•let
+  ITEM ReservedWord ->•static
+  ITEM ReservedWord ->•implements
+  ITEM ReservedWord ->•interface
+  ITEM ReservedWord ->•package
+  ITEM ReservedWord ->•private
+  ITEM ReservedWord ->•protected
+  ITEM ReservedWord ->•public
+  ITEM PropertyIdentifierName ->•of
+  ITEM PropertyIdentifierName ->•async
+  ITEM PropertyIdentifierName ->•any
+  ITEM PropertyIdentifierName ->•unknown
+  ITEM PropertyIdentifierName ->•string
+  ITEM PropertyIdentifierName ->•number
+  ITEM PropertyIdentifierName ->•bigint
+  ITEM PropertyIdentifierName ->•symbol
+  ITEM PropertyIdentifierName ->•boolean
+  ITEM PropertyIdentifierName ->•undefined
+  ITEM PropertyIdentifierName ->•never
+  ITEM PropertyIdentifierName ->•object
+  ITEM PropertyIdentifierName ->•intrinsic
+  ITEM PropertyIdentifierName ->•keyof
+  ITEM PropertyIdentifierName ->•unique
+  ITEM PropertyIdentifierName ->•readonly
+  ITEM PropertyIdentifierName ->•infer
+  ITEM PropertyIdentifierName ->•abstract
+  ITEM PropertyIdentifierName ->•accessor
+  ITEM PropertyIdentifierName ->•as
+  ITEM PropertyIdentifierName ->•assert
+  ITEM PropertyIdentifierName ->•asserts
+  ITEM PropertyIdentifierName ->•constructor
+  ITEM PropertyIdentifierName ->•declare
+  ITEM PropertyIdentifierName ->•from
+  ITEM PropertyIdentifierName ->•get
+  ITEM PropertyIdentifierName ->•global
+  ITEM PropertyIdentifierName ->•is
+  ITEM PropertyIdentifierName ->•module
+  ITEM PropertyIdentifierName ->•namespace
+  ITEM PropertyIdentifierName ->•out
+  ITEM PropertyIdentifierName ->•override
+  ITEM PropertyIdentifierName ->•require
+  ITEM PropertyIdentifierName ->•satisfies
+  ITEM PropertyIdentifierName ->•set
+  ITEM PropertyIdentifierName ->•type
+  ITEM PropertyIdentifierName ->•using
+  ITEM PropertyName ->•StringLiteral
+  ITEM PropertyName ->•NumericLiteral
+  ITEM PropertyName ->•[ AssignmentExpression ]
+  ITEM ClassElementName ->•PrivateIdentifier
+  ITEM ClassMethod ->•ClassElementName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassMethod ->•ClassElementName ClassModifierName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassMethod ->•ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassMethod ->•ClassElementName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassMethod ->•ClassElementName ClassModifierName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassElement ->•ClassField
+  ITEM ClassField ->•ClassElementName TSClassFieldMarker TSAnnotation ClassFieldEnd
+  ITEM ClassField ->•ClassElementName TSClassFieldMarker ClassFieldEnd
+  ITEM ClassField ->•ClassElementName TSAnnotation ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassFieldEnd
+  ITEM ClassField ->•ClassElementName TSClassFieldMarker TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName TSClassFieldMarker Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSClassFieldMarker TSAnnotation ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSClassFieldMarker ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSAnnotation ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName ClassFieldEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSClassFieldMarker TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSClassFieldMarker Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField ->•ClassElementName ClassModifierName Initializer ClassFieldExpressionEnd
+  ITEM ClassElement ->•ClassStaticBlock
+  ITEM ClassStaticBlock ->•ClassElementName __predicate20 ClassStaticBody
+  ITEM ClassElement ->•ClassAsyncMethod
+  ITEM ClassAsyncMethod ->•ClassElementName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod ->•ClassElementName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod ->•ClassElementName ClassModifierName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod ->•ClassElementName ClassModifierName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod ->•ClassElementName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod ->•ClassElementName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod ->•ClassElementName ClassModifierName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod ->•ClassElementName ClassModifierName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassElement ->•ClassGeneratorMethod
+  ITEM ClassGeneratorMethod ->•* ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassGeneratorMethod ->•ClassElementName StaticGeneratorModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassGeneratorMethod ->•* ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassGeneratorMethod ->•ClassElementName StaticGeneratorModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassElement ->•TSClassModifiedElement
+  ITEM TSClassModifiedElement ->•__predicate51 TSModifiers TSClassModifiedMember
+  ITEM __predicate51 ->•
+  ITEM ClassElement ->•__predicate14 TSClassIndexSignature
+  ITEM __predicate14 ->•
+  ITEM ClassElementList ->•ClassElementList ClassElement
+I786 TOKEN=value KIND=IdentifierName ACTION=reduce PropertyIdentifierName -> readonly ERROR=
+  CANDIDATE Reduce PropertyIdentifierName -> readonly PRED=
+I886 TOKEN=value KIND=IdentifierName ACTION=goto 339 ERROR=
+  CANDIDATE Shift 769
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I339 TOKEN=value KIND=IdentifierName ACTION=reduce PropertyName -> PropertyIdentifierName ERROR=
+  CANDIDATE Reduce PropertyName -> PropertyIdentifierName PRED=
+I886 TOKEN=value KIND=IdentifierName ACTION=goto 1101 ERROR=
+  CANDIDATE Shift 769
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I1101 TOKEN=value KIND=IdentifierName ACTION=reduce ClassElementName -> PropertyName ERROR=
+  CANDIDATE Reduce ClassElementName -> PropertyName PRED=
+I886 TOKEN=value KIND=IdentifierName ACTION=goto 1100 ERROR=
+  CANDIDATE Shift 769
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I1100 TOKEN=value KIND=IdentifierName ACTION=failed null ERROR=Grammar predicate ClassModifierName evaluated to false.
+  CANDIDATE EpsilonReduce __predicate16 -> epsilon PRED=ClassModifierName
+  CANDIDATE EpsilonReduce __predicate18 -> epsilon PRED=ClassFieldEnd
+  CANDIDATE EpsilonReduce __predicate35 -> epsilon PRED=AsyncModifier
+  ITEM ClassMethod -> ClassElementName•TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM TSClassMethodOptional ->•TSOptional
+  ITEM TSOptional ->•?
+  ITEM TSClassMethodOptional ->•
+  ITEM ClassMethod -> ClassElementName•ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassModifierName ->•__predicate16 ClassElementName
+  ITEM __predicate16 ->•
+  ITEM ClassMethod -> ClassElementName•ClassModifierName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM ClassMethod -> ClassElementName•TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassMethod -> ClassElementName•ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassMethod -> ClassElementName•ClassModifierName ClassModifierName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassField -> ClassElementName•TSClassFieldMarker TSAnnotation ClassFieldEnd
+  ITEM TSClassFieldMarker ->•TSOptional
+  ITEM TSClassFieldMarker ->•TSDefinite
+  ITEM TSDefinite ->•NoLineTerminator !
+  ITEM NoLineTerminator ->•__predicate3
+  ITEM __predicate3 ->•
+  ITEM ClassField -> ClassElementName•TSClassFieldMarker ClassFieldEnd
+  ITEM ClassField -> ClassElementName•TSAnnotation ClassFieldEnd
+  ITEM TSAnnotation ->•: TSType
+  ITEM ClassField -> ClassElementName•ClassFieldEnd
+  ITEM ClassFieldEnd ->•;
+  ITEM ClassFieldEnd ->•__predicate18
+  ITEM __predicate18 ->•
+  ITEM ClassField -> ClassElementName•TSClassFieldMarker TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•TSClassFieldMarker Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•Initializer ClassFieldExpressionEnd
+  ITEM Initializer ->•= AssignmentExpression
+  ITEM ClassField -> ClassElementName•ClassModifierName TSClassFieldMarker TSAnnotation ClassFieldEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSClassFieldMarker ClassFieldEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSAnnotation ClassFieldEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName ClassFieldEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSClassFieldMarker TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSClassFieldMarker Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName TSAnnotation Initializer ClassFieldExpressionEnd
+  ITEM ClassField -> ClassElementName•ClassModifierName Initializer ClassFieldExpressionEnd
+  ITEM ClassStaticBlock -> ClassElementName•__predicate20 ClassStaticBody
+  ITEM __predicate20 ->•
+  ITEM ClassAsyncMethod -> ClassElementName•AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM AsyncModifier ->•__predicate35
+  ITEM __predicate35 ->•
+  ITEM ClassAsyncMethod -> ClassElementName•AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod -> ClassElementName•ClassModifierName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod -> ClassElementName•ClassModifierName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType FunctionBody__Await
+  ITEM ClassAsyncMethod -> ClassElementName•AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod -> ClassElementName•AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod -> ClassElementName•ClassModifierName AsyncModifier ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassAsyncMethod -> ClassElementName•ClassModifierName AsyncModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters__Await ) TSOptionalReturnType TSMethodOverload
+  ITEM ClassGeneratorMethod -> ClassElementName•StaticGeneratorModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType FunctionBody
+  ITEM StaticGeneratorModifier ->•__predicate38
+  ITEM __predicate38 ->•
+  ITEM ClassGeneratorMethod -> ClassElementName•StaticGeneratorModifier * ClassElementName TSClassMethodOptional TSOptionalTypeParameters ( FormalParameters ) TSOptionalReturnType TSMethodOverload

@@ -1,0 +1,1 @@
+function outer(): void { function inner(): void; function inner(): void {} const value = 1; const value = 2; } export {};

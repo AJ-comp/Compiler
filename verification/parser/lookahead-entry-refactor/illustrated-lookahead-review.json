@@ -1,0 +1,568 @@
+[
+  {
+    "name": "full-graph",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "full-graph",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-01",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-01",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-01-mobile",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-01-mobile",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-02",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-02",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-02-mobile",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-02-mobile",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-03",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-03",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-03-mobile",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-03-mobile",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-04",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-04",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-04-mobile",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-04-mobile",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-05",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-05",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-05-mobile",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-05-mobile",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-06",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-06",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-06-mobile",
+    "colorScheme": "light",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "name": "requeue-06-mobile",
+    "colorScheme": "dark",
+    "outside": [],
+    "overlaps": []
+  },
+  {
+    "width": 1800,
+    "colorScheme": "light",
+    "errors": [],
+    "overflow": false,
+    "controls": 0,
+    "imageCount": 7,
+    "images": [
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-full-graph.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-01.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-02.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-03.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-04.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-05.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-06.svg"
+      }
+    ],
+    "graphEntries": 1,
+    "graphFits": true,
+    "codeMatches": true
+  },
+  {
+    "width": 1800,
+    "colorScheme": "dark",
+    "errors": [],
+    "overflow": false,
+    "controls": 0,
+    "imageCount": 7,
+    "images": [
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-full-graph.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-01.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-02.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-03.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-04.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-05.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-06.svg"
+      }
+    ],
+    "graphEntries": 1,
+    "graphFits": true,
+    "codeMatches": true
+  },
+  {
+    "width": 1100,
+    "colorScheme": "light",
+    "errors": [],
+    "overflow": false,
+    "controls": 0,
+    "imageCount": 7,
+    "images": [
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-full-graph.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-01.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-02.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-03.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-04.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-05.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-06.svg"
+      }
+    ],
+    "graphEntries": 1,
+    "graphFits": true,
+    "codeMatches": true
+  },
+  {
+    "width": 1100,
+    "colorScheme": "dark",
+    "errors": [],
+    "overflow": false,
+    "controls": 0,
+    "imageCount": 7,
+    "images": [
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-full-graph.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-01.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-02.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-03.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-04.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-05.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-06.svg"
+      }
+    ],
+    "graphEntries": 1,
+    "graphFits": true,
+    "codeMatches": true
+  },
+  {
+    "width": 736,
+    "colorScheme": "light",
+    "errors": [],
+    "overflow": false,
+    "controls": 0,
+    "imageCount": 7,
+    "images": [
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-full-graph.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-01.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-02.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-03.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-04.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-05.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-06.svg"
+      }
+    ],
+    "graphEntries": 1,
+    "graphFits": true,
+    "codeMatches": true
+  },
+  {
+    "width": 736,
+    "colorScheme": "dark",
+    "errors": [],
+    "overflow": false,
+    "controls": 0,
+    "imageCount": 7,
+    "images": [
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-full-graph.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-01.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-02.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-03.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-04.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-05.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-06.svg"
+      }
+    ],
+    "graphEntries": 1,
+    "graphFits": true,
+    "codeMatches": true
+  },
+  {
+    "width": 390,
+    "colorScheme": "light",
+    "errors": [],
+    "overflow": false,
+    "controls": 0,
+    "imageCount": 7,
+    "images": [
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-full-graph.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-01-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-02-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-03-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-04-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-05-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-06-mobile.svg"
+      }
+    ],
+    "graphEntries": 1,
+    "graphFits": true,
+    "codeMatches": true
+  },
+  {
+    "width": 390,
+    "colorScheme": "dark",
+    "errors": [],
+    "overflow": false,
+    "controls": 0,
+    "imageCount": 7,
+    "images": [
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-full-graph.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-01-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-02-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-03-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-04-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-05-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-06-mobile.svg"
+      }
+    ],
+    "graphEntries": 1,
+    "graphFits": true,
+    "codeMatches": true
+  },
+  {
+    "width": 320,
+    "colorScheme": "light",
+    "errors": [],
+    "overflow": false,
+    "controls": 0,
+    "imageCount": 7,
+    "images": [
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-full-graph.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-01-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-02-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-03-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-04-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-05-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-06-mobile.svg"
+      }
+    ],
+    "graphEntries": 1,
+    "graphFits": true,
+    "codeMatches": true
+  },
+  {
+    "width": 320,
+    "colorScheme": "dark",
+    "errors": [],
+    "overflow": false,
+    "controls": 0,
+    "imageCount": 7,
+    "images": [
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-full-graph.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-01-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-02-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-03-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-04-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-05-mobile.svg"
+      },
+      {
+        "loaded": true,
+        "src": "file:///C:/Users/AhjLv/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/%EA%B0%9C%EC%9D%B8%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/AJPGS/docs/images/lalr-lookahead-requeue-06-mobile.svg"
+      }
+    ],
+    "graphEntries": 1,
+    "graphFits": true,
+    "codeMatches": true
+  }
+]

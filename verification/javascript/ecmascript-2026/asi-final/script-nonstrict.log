@@ -1,0 +1,18 @@
+
+COMMAND ["C:\\Users\\AhjLv\\.dotnet\\dotnet.exe", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\runner-asi-final\\Janglim.Test262.dll", "--input", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-audit\\static\\asi-matrix.jsonl", "--output", "artifacts\\ecmascript-2026\\asi-final\\script-nonstrict.jsonl", "--profile", "script-nonstrict", "--skip", "0", "--timeout-ms", "120000"]
+Preparing script-nonstrict (web=True) ...
+Ready script-nonstrict at 00:00:38.7164674.
+250 cases, 250 passed, 0 mismatches/errors; 00:00:40.2979505.
+500 cases, 500 passed, 0 mismatches/errors; 00:00:41.5832945.
+750 cases, 750 passed, 0 mismatches/errors; 00:00:43.4976816.
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-audit\\static\\asi-matrix.jsonl",
+  "profile": "script-nonstrict",
+  "skip": 0,
+  "processed": 956,
+  "outcomes": {
+    "pass": 956
+  },
+  "elapsedSeconds": 44.5581054,
+  "syntaxOnly": true
+}

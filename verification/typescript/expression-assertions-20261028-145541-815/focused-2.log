@@ -1,0 +1,353 @@
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Release\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Release\netstandard2.1\Parse.dll
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Release\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Release\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)
+[xUnit.net 00:00:01.70]   Discovering: Parse.FrontEnd.Parsers.Tests
+[xUnit.net 00:00:02.67]   Discovered:  Parse.FrontEnd.Parsers.Tests
+[xUnit.net 00:00:02.67]   Starting:    Parse.FrontEnd.Parsers.Tests
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User as Named;") [24 s]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = [input as User, other satisfies Named"···) [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as T extends U ? X : Y;") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User & Named;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as readonly string[];") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as number == other;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value as number) / divisor;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as User satisfies Named;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = flag && value as User;") [26 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as number + other;") [20 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as User;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value as Handler)(argument);") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input /*\n*/ as(User);") [14 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input satisfies\nUser;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = ({name: 'test'} as const);") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = object.as + object.satisfies;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = flag ? value as User : fallback;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value as User).name;") [9 ms]
+[xUnit.net 00:00:26.97]       let result = value as User | undefined;
+[xUnit.net 00:00:26.97]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as User | undefined;") [FAIL]
+[xUnit.net 00:00:26.97]       Janglim.FrontEnd.Parsers.LR.AmbiguousPredictionException: More than one initial action accepts the same complete input (state 1024, token index 9). Source offset 39.
+[xUnit.net 00:00:26.97]          at Janglim.FrontEnd.Parsers.LR.ContextualConflictPredictor.SelectFirstAction(IReadOnlyList`1 initialActions, IReadOnlyList`1 actualStates, ContextualInput actualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualConflictPredictor.cs:line 74
+[xUnit.net 00:00:26.97]          at Janglim.FrontEnd.Parsers.LR.LRParser.ShiftOrReduce(ParsingUnit parsingUnit, TokenData inputValue, ConflictItem& conflictItem, IReadOnlyList`1 tokens, Int32 tokenIndex, ContextualInput contextualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[DecideParsingDirection].cs:line 90
+[xUnit.net 00:00:26.97]       More than one initial action accepts the same complete input (state 1024, token index 9). Source offset 39.
+[xUnit.net 00:00:26.97]       Stack Trace:
+[xUnit.net 00:00:26.97]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:26.97]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:26.97]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:26.97]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as User | undefined;") [13 ms]
+  오류 메시지:
+   let result = value as User | undefined;
+Janglim.FrontEnd.Parsers.LR.AmbiguousPredictionException: More than one initial action accepts the same complete input (state 1024, token index 9). Source offset 39.
+   at Janglim.FrontEnd.Parsers.LR.ContextualConflictPredictor.SelectFirstAction(IReadOnlyList`1 initialActions, IReadOnlyList`1 actualStates, ContextualInput actualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualConflictPredictor.cs:line 74
+   at Janglim.FrontEnd.Parsers.LR.LRParser.ShiftOrReduce(ParsingUnit parsingUnit, TokenData inputValue, ConflictItem& conflictItem, IReadOnlyList`1 tokens, Int32 tokenIndex, ContextualInput contextualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[DecideParsingDirection].cs:line 90
+More than one initial action accepts the same complete input (state 1024, token index 9). Source offset 39.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as {name: string};") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input\nsatisfies(User);") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value => value) satisfies Handler;") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies Box<User> >>> shift;") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as (() => number);") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = object[key as string];") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as unknown as User;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies readonly string[];") [7 ms]
+[xUnit.net 00:00:27.07]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "function f(value: unknown) { return value as User;"···) [FAIL]
+[xUnit.net 00:00:27.07]       function f(value: unknown) { return value as User; }
+[xUnit.net 00:00:27.07]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:27.07]       (shift 할 수 없습니다 {IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, {, [, this, ..., )} 와야 합니다)
+[xUnit.net 00:00:27.07]       Stack Trace:
+[xUnit.net 00:00:27.07]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:27.07]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:27.07]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:27.07]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User satisfies Named;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as Map<string, Array<User>>;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "for (let item = value as Item; check; step) {}") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies const;") [7 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "function f(value: unknown) { return value as User;"···) [7 ms]
+  오류 메시지:
+   function f(value: unknown) { return value as User; }
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, {, [, this, ..., )} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input as /*\n*/ User;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = {value: input as User};") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies {name: string};") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value satisfies User).name;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input as\nUser;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input\nas(User);") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as boolean || fallback;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = typeof value as string;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as Box<User> > other;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as Box<User> >> shift;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "for (let item = value satisfies Item; check; step)"···) [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as `prefix${Name}`;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = left + right as number;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = [1, 2] as const;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = left == value as number;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let as = 1; let satisfies = 2; as + satisfies;") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User ? yes : no;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value as const Type;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value satisfies;") [5 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = left + right as T * third;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value as T |;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = left + right satisfies T * third;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value as <User>;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = left < right satisfies T + third;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value satisfies Array<>;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value as Box<User;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value satisfies T &;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value as;") [5 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value as Array<>;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = satisfies User;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = as User;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value satisfies <User>;") [5 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = left < right as T + third;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left satisfies T && right;", assertionRole: "TSSatisfiesExpression", expectedOperand: "left") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "value as A satisfies B;", assertionRole: "TSSatisfiesExpression", expectedOperand: "valueasA") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left + right satisfies T;", assertionRole: "TSSatisfiesExpression", expectedOperand: "left+right") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "value as A as B;", assertionRole: "TSAsExpression", expectedOperand: "valueasA") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left as T + right;", assertionRole: "TSAsExpression", expectedOperand: "left") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left < right as T;", assertionRole: "TSAsExpression", expectedOperand: "left<right") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left + right as T;", assertionRole: "TSAsExpression", expectedOperand: "left+right") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "value satisfies A as B;", assertionRole: "TSAsExpression", expectedOperand: "valuesatisfiesA") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left == right as T;", assertionRole: "TSAsExpression", expectedOperand: "right") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left as T > right;", assertionRole: "TSAsExpression", expectedOperand: "left") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parsed_assertions_keep_the_original_tokens_positions_and_parent_links_during_validation [13 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Generic_closing_tokens_do_not_split_the_following_runtime_operator(source: "const result = (value as Box<T>) >>= count;") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Generic_closing_tokens_do_not_split_the_following_runtime_operator(source: "const result = value as T >>> count;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Generic_closing_tokens_do_not_split_the_following_runtime_operator(source: "const result = value as Box<T>>> count;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Generic_closing_tokens_do_not_split_the_following_runtime_operator(source: "const result = value as Box<T>>= other;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Generic_closing_tokens_do_not_split_the_following_runtime_operator(source: "const result = value as Box<Box<T>>>> count;") [8 ms]
+[xUnit.net 00:00:27.45]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(source: "const result = value != /ab/.test(text);") [FAIL]
+[xUnit.net 00:00:27.45]       const result = value != /ab/.test(text);
+[xUnit.net 00:00:27.46]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:27.46]       (shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+[xUnit.net 00:00:27.46]       Stack Trace:
+[xUnit.net 00:00:27.46]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:27.46]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAssertionLexicalTests.cs(34,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(String source)
+[xUnit.net 00:00:27.46]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:27.46]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+[xUnit.net 00:00:27.47]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(source: "const result = value! + /ab/.test(text);") [FAIL]
+[xUnit.net 00:00:27.47]       const result = value! + /ab/.test(text);
+[xUnit.net 00:00:27.47]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:27.47]       (shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+[xUnit.net 00:00:27.47]       Stack Trace:
+[xUnit.net 00:00:27.47]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:27.47]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAssertionLexicalTests.cs(34,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(String source)
+[xUnit.net 00:00:27.47]            at InvokeStub_TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(Object, Span`1)
+[xUnit.net 00:00:27.47]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:27.50]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(source: "const result = value! != /ab/.test(text);") [FAIL]
+[xUnit.net 00:00:27.50]       const result = value! != /ab/.test(text);
+[xUnit.net 00:00:27.50]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:27.50]       (shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+[xUnit.net 00:00:27.50]       Stack Trace:
+[xUnit.net 00:00:27.50]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:27.50]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAssertionLexicalTests.cs(34,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(String source)
+[xUnit.net 00:00:27.50]            at InvokeStub_TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(Object, Span`1)
+[xUnit.net 00:00:27.50]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Generic_closing_tokens_do_not_split_the_following_runtime_operator(source: "const result = value as T >= other;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Generic_closing_tokens_do_not_split_the_following_runtime_operator(source: "const result = value as T >> count;") [6 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(source: "const result = value != /ab/.test(text);") [7 ms]
+  오류 메시지:
+   const result = value != /ab/.test(text);
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAssertionLexicalTests.cs:line 34
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(source: "const result = value! / 2;") [7 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(source: "const result = value! + /ab/.test(text);") [6 ms]
+  오류 메시지:
+   const result = value! + /ab/.test(text);
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAssertionLexicalTests.cs:line 34
+   at InvokeStub_TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(source: "const result = obj?.value! / 2;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(source: "const result = !value / 2;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(source: "const result = value!! / 2;") [6 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(source: "const result = value! != /ab/.test(text);") [6 ms]
+  오류 메시지:
+   const result = value! != /ab/.test(text);
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAssertionLexicalTests.cs:line 34
+   at InvokeStub_TypeScriptAssertionLexicalTests.Only_postfix_non_null_assertions_are_transparent_to_slash_context(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:27.51]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(source: "const result = value as T + /ab/.test(text);") [FAIL]
+[xUnit.net 00:00:27.51]       const result = value as T + /ab/.test(text);
+[xUnit.net 00:00:27.51]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:27.51]       (shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+[xUnit.net 00:00:27.51]       Stack Trace:
+[xUnit.net 00:00:27.51]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:27.51]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAssertionLexicalTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(String source)
+[xUnit.net 00:00:27.51]            at InvokeStub_TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(Object, Span`1)
+[xUnit.net 00:00:27.51]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:27.54]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(source: "function f(): T { return /ab/.test(text); }") [FAIL]
+[xUnit.net 00:00:27.54]       function f(): T { return /ab/.test(text); }
+[xUnit.net 00:00:27.54]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:27.54]       (shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+[xUnit.net 00:00:27.54]       Stack Trace:
+[xUnit.net 00:00:27.54]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:27.54]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAssertionLexicalTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(String source)
+[xUnit.net 00:00:27.54]            at InvokeStub_TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(Object, Span`1)
+[xUnit.net 00:00:27.54]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:27.55]       function f(value: Box<T> = left > right): T { return value; }
+[xUnit.net 00:00:27.55]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:27.55]       (shift 할 수 없습니다 {IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, {, [, this, ..., )} 와야 합니다)
+[xUnit.net 00:00:27.55]       Stack Trace:
+[xUnit.net 00:00:27.55]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:27.55]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAssertionLexicalTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(String source)
+[xUnit.net 00:00:27.55]            at InvokeStub_TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(Object, Span`1)
+[xUnit.net 00:00:27.55]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:27.55]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(source: "function f(value: Box<T> = left > right): T { retu"···) [FAIL]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(source: "const result = (value as {a: number}) / 2;") [7 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(source: "const result = value as T + /ab/.test(text);") [6 ms]
+  오류 메시지:
+   const result = value as T + /ab/.test(text);
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAssertionLexicalTests.cs:line 23
+   at InvokeStub_TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(source: "const result = value satisfies T / 2;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(source: "const result = left > right;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(source: "const result = (value as {run(): string;}) / 2;") [8 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(source: "function f(): T { return /ab/.test(text); }") [6 ms]
+  오류 메시지:
+   function f(): T { return /ab/.test(text); }
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAssertionLexicalTests.cs:line 23
+   at InvokeStub_TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(source: "function f(value: Box<T> = left > right): T { retu"···) [5 ms]
+  오류 메시지:
+   function f(value: Box<T> = left > right): T { return value; }
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, {, [, this, ..., )} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAssertionLexicalTests.cs:line 23
+   at InvokeStub_TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(source: "const result = value as T / 2;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAssertionLexicalTests.Leaving_type_syntax_restores_runtime_operator_and_brace_roles(source: "const result = left < right;") [8 ms]
+[xUnit.net 00:00:27.61]       /ab/!.test(text);
+[xUnit.net 00:00:27.61]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "/ab/!.test(text);") [FAIL]
+[xUnit.net 00:00:27.61]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:27.61]       (shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+[xUnit.net 00:00:27.61]       Stack Trace:
+[xUnit.net 00:00:27.61]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:27.61]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptNonNullTests.cs(38,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(String source)
+[xUnit.net 00:00:27.61]            at InvokeStub_TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(Object, Span`1)
+[xUnit.net 00:00:27.61]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "(value + other)!;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "value!;") [5 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "!value!;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "new C!();") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "f()!();") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "value !;") [5 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "/ab/!.test(text);") [6 ms]
+  오류 메시지:
+   /ab/!.test(text);
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {), IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, function, class, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, PrivateIdentifier, yield, ...} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptNonNullTests.cs:line 38
+   at InvokeStub_TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "f()!.property;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "({ property: 1 })!.property;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "value!!;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "value![index];") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "f()!;") [5 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "f!();") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "value/* comment */!;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "tag!`value ${value!}`;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "value!.property;") [5 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "f!.property![index]!;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "new C!.Nested();") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "new C()!;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "tag!`text`;") [5 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "++value!;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "value! += 1;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "([value!] = source);") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "object!.property!++;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "({ target: value! } = source);") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "value!++;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "object!.property = next;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "value! = next;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value!!==other;", assertionCount: 1) [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value!\n.property;", assertionCount: 1) [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value !== other;", assertionCount: 0) [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "!!value;", assertionCount: 0) [5 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value/*\n*/!other;", assertionCount: 0) [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "f!\n();", assertionCount: 1) [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value\n!other!;", assertionCount: 1) [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value != other;", assertionCount: 0) [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value!!!=other;", assertionCount: 2) [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value\n!other;", assertionCount: 0) [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value!!=other;", assertionCount: 1) [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value!\n++other;", assertionCount: 1) [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "1! = value;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "new base?.tag!`text`.Ctor();") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "++base?.property!;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "let result = value\n!.property;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "1!++;") [5 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "base?.property!++;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "base?.property!.next = next;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "(value + other)! = next;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "delete value!;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "let result = value\n!;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "base?.property! = next;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "f()! = value;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "new base?.tag!`text`();") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "new base?.Ctor!();") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "f()!++;") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "(base?.property)!.next = value;") [11 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "(base?.property)!();") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "base?.property!.next;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "base?.tag!`text`;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "new (base?.tag!`text`)();") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "new (base?.Ctor)!();") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "base?.property!;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "(base?.property)!`text`;") [6 ms]
+[xUnit.net 00:00:28.02]   Finished:    Parse.FrontEnd.Parsers.Tests
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "base?.method!();") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "base!.property?.next;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Optional_asserted_tag_projection_preserves_the_callers_tree_tokens_and_parent_links [6 ms]
+
+테스트 실행이 실패했습니다.
+총 테스트 수: 166
+     통과: 157
+     실패: 9
+ 총 시간: 28.5707 초
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\expression-assertions-20261028-145541-815\focused-2.trx

@@ -1,0 +1,32 @@
+{
+  "newFeatureTagsWithinSelectedCorpus": [],
+  "unknownSelectedFlags": [],
+  "newFeatureRegistryTags": [
+    {
+      "feature": "Iterator.prototype.join",
+      "filesInIteratorBuiltins": 18,
+      "example": "built-ins/Iterator/prototype/join/closes-on-contents-coercion-exception.js",
+      "source": "https://github.com/tc39/proposal-iterator-join",
+      "decision": "outside selected language/annexB/RegExp paths; methods use existing member/call syntax"
+    },
+    {
+      "feature": "iterator-chunking",
+      "filesInIteratorBuiltins": 78,
+      "example": "built-ins/Iterator/prototype/chunks/argument-effect-order.js",
+      "source": "https://github.com/tc39/proposal-iterator-chunking",
+      "decision": "outside selected language/annexB/RegExp paths; methods use existing member/call syntax"
+    },
+    {
+      "feature": "iterator-includes",
+      "filesInIteratorBuiltins": 44,
+      "example": "built-ins/Iterator/prototype/includes/argument-effect-order.js",
+      "source": "https://github.com/tc39/proposal-iterator-includes",
+      "decision": "outside selected language/annexB/RegExp paths; methods use existing member/call syntax"
+    }
+  ],
+  "addedFutureSyntaxFilesAlreadyExcluded": {
+    "import-defer": 2,
+    "explicit-resource-management": 6
+  },
+  "unreviewedNewSyntaxTagsRequiringFilterChange": []
+}

@@ -1,0 +1,108 @@
+{
+  "uniqueCompleteExamples": 10,
+  "scannedFiles": [
+    "docs\\ko\\javascript-classes.html",
+    "docs\\ko\\javascript-expressions.html",
+    "docs\\ko\\javascript-functions.html",
+    "docs\\ko\\javascript-modules.html",
+    "docs\\ko\\javascript-non-strict.html",
+    "docs\\ko\\javascript-regexp.html",
+    "docs\\ko\\javascript-statements.html",
+    "README.md",
+    "src\\Janglim\\README.md",
+    "grammars\\javascript\\README.md"
+  ],
+  "examples": [
+    {
+      "id": 1,
+      "sources": [
+        "docs\\ko\\javascript-classes.html"
+      ],
+      "sha256": "d237687995d3b382cc096a52a9be5bb6905045796bfa44d12d13026d471c9b08",
+      "inputKind": "Script"
+    },
+    {
+      "id": 2,
+      "sources": [
+        "docs\\ko\\javascript-expressions.html"
+      ],
+      "sha256": "899d060af59c0c7e98ca28432a04b7cb2eafc7932b985e46992607f877210470",
+      "inputKind": "Expression"
+    },
+    {
+      "id": 3,
+      "sources": [
+        "docs\\ko\\javascript-functions.html"
+      ],
+      "sha256": "2b4a3506a22ad9d3613cde91f6261c1243903fbfe63d9fd4f3688fb898e66cfc",
+      "inputKind": "Script"
+    },
+    {
+      "id": 4,
+      "sources": [
+        "docs\\ko\\javascript-modules.html"
+      ],
+      "sha256": "fd2efe1edef59dae3d641e1ead3497637e06fc0e24d8d1bbdb9afc2d67ceceaa",
+      "inputKind": "Module"
+    },
+    {
+      "id": 5,
+      "sources": [
+        "docs\\ko\\javascript-non-strict.html"
+      ],
+      "sha256": "0ee7c5b5849f4c8f8c1039ee50459f00e2719a1b28f9b5c60ef2d5cd36e726d5",
+      "inputKind": "Script"
+    },
+    {
+      "id": 6,
+      "sources": [
+        "docs\\ko\\javascript-regexp.html"
+      ],
+      "sha256": "4ed8b5f821cd5f2a65eff659848fd92bfbdb44330ce4be05fcd938bfb196cdc7",
+      "inputKind": "Script"
+    },
+    {
+      "id": 7,
+      "sources": [
+        "docs\\ko\\javascript-statements.html"
+      ],
+      "sha256": "edcfc12fbd0905e4e3437cf2e03b693c595451436f74e6f6de66735929e254f1",
+      "inputKind": "Script"
+    },
+    {
+      "id": 8,
+      "sources": [
+        "README.md"
+      ],
+      "sha256": "1afa2e633fea8b2f80f8744b2693fa234f727e61695e94a4c261d1cbe0c86cf8",
+      "inputKind": "Script"
+    },
+    {
+      "id": 9,
+      "sources": [
+        "src\\Janglim\\README.md"
+      ],
+      "sha256": "690c9ab1f15cd2f1aa5372f1881415a793d664ab45737605ce1dd3645b9d78b4",
+      "inputKind": "Script"
+    },
+    {
+      "id": 10,
+      "sources": [
+        "grammars\\javascript\\README.md"
+      ],
+      "sha256": "4c7073f5da57a3995e5471959218281c2b83a7af3c737d7df627d518f47776bb",
+      "inputKind": "Script"
+    }
+  ],
+  "executedExampleIds": [
+    5,
+    4,
+    2
+  ],
+  "notes": [
+    "HTML code entities decoded.",
+    "Adjacent staged C# blocks joined only inside the same usage section.",
+    "Original snippets preserved in *.original.txt; wrappers append validation assertions.",
+    "All assembly references point to copied Release DLL snapshots; no ProjectReference."
+  ]
+}

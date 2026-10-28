@@ -1,0 +1,765 @@
+{"input":"const fn = a =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = a =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = a =\u003E {\u0022use strict\u0022;};","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E {let a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = await =\u003E {\u0022use strict\u0022;};","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E {let a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = of =\u003E {\u0022use strict\u0022;};","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E {let a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = async =\u003E {\u0022use strict\u0022;};","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E {let a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = () =\u003E {\u0022use strict\u0022;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = (a) =\u003E {\u0022use strict\u0022;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,b) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = (a,b) =\u003E {\u0022use strict\u0022;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a,) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = (a,) =\u003E {\u0022use strict\u0022;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (a=1) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = (a=1) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["non_simple_strict_directive"],"error":null}
+{"input":"const fn = ([a]) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a]) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = ([a]) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["non_simple_strict_directive"],"error":null}
+{"input":"const fn = ({a}) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a}) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = ({a}) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["non_simple_strict_directive"],"error":null}
+{"input":"const fn = ({a=1}) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({a=1}) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = ({a=1}) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["non_simple_strict_directive"],"error":null}
+{"input":"const fn = (...a) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...a) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = (...a) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["non_simple_strict_directive"],"error":null}
+{"input":"const fn = (...[a]) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...[a]) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = (...[a]) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["non_simple_strict_directive"],"error":null}
+{"input":"const fn = (...{a}) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (...{a}) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = (...{a}) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["non_simple_strict_directive"],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = ([a=1,...rest]) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["non_simple_strict_directive"],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = ({name:a=1,...rest}) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["non_simple_strict_directive"],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E a;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E a?b:c;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E a=b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E ()=\u003Ea;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E x=\u003Ex;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E ({a:1});","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E [a];","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E /a/.test(a);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E a/b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E \u0060hello${a}\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E tag\u0060raw\\xZ\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E {return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E {};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E {a:1};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E ({a=1}=source);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E function(){return a;};","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E (a,b);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E new C();","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E a?.b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E {let a;};","success":false,"errors":["conflicting_declaration"],"error":null}
+{"input":"const fn = ({__proto__:a,__proto__:b}) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["non_simple_strict_directive"],"error":null}
+{"input":"const fn = (a,a) =\u003E a;","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E a?b:c;","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E a=b;","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E ()=\u003Ea;","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E x=\u003Ex;","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E ({a:1});","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E [a];","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E /a/.test(a);","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E a/b;","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E \u0060hello${a}\u0060;","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E tag\u0060raw\\xZ\u0060;","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E {return a;};","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E {};","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E {a:1};","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E ({a=1}=source);","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E function(){return a;};","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E (a,b);","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E new C();","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E a?.b;","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (a,a) =\u003E {let a;};","success":false,"errors":["duplicate_parameter","conflicting_declaration","conflicting_declaration"],"error":null}
+{"input":"const fn = (a,a) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["duplicate_parameter"],"error":null}
+{"input":"const fn = (eval) =\u003E a;","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E a?b:c;","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E a=b;","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E ()=\u003Ea;","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E x=\u003Ex;","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E ({a:1});","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E [a];","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E /a/.test(a);","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E a/b;","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E \u0060hello${a}\u0060;","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E tag\u0060raw\\xZ\u0060;","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E {return a;};","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E {};","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E {a:1};","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E ({a=1}=source);","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E function(){return a;};","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E (a,b);","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E new C();","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E a?.b;","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E {let a;};","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = (eval) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["invalid_binding_identifier"],"error":null}
+{"input":"const fn = ((a)) =\u003E a;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E a?b:c;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E a=b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E ()=\u003Ea;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E x=\u003Ex;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E ({a:1});","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E [a];","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E /a/.test(a);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E a/b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E \u0060hello${a}\u0060;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E tag\u0060raw\\xZ\u0060;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E {return a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E {};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E {a:1};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E ({a=1}=source);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E function(){return a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E (a,b);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E new C();","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E a?.b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E {let a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ((a)) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["invalid_binding_target","non_simple_strict_directive"],"error":null}
+{"input":"const fn = (a.b) =\u003E a;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E a?b:c;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E a=b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E ()=\u003Ea;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E x=\u003Ex;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E ({a:1});","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E [a];","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E /a/.test(a);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E a/b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E \u0060hello${a}\u0060;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E tag\u0060raw\\xZ\u0060;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E {return a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E {};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E {a:1};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E ({a=1}=source);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E function(){return a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E (a,b);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E new C();","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E a?.b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E {let a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a.b) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["invalid_binding_target","non_simple_strict_directive"],"error":null}
+{"input":"const fn = (1) =\u003E a;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E a?b:c;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E a=b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E ()=\u003Ea;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E x=\u003Ex;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E ({a:1});","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E [a];","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E /a/.test(a);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E a/b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E \u0060hello${a}\u0060;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E tag\u0060raw\\xZ\u0060;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E {return a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E {};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E {a:1};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E ({a=1}=source);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E function(){return a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E (a,b);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E new C();","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E a?.b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E {let a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (1) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["invalid_binding_target","non_simple_strict_directive"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E a;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E a?b:c;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E a=b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E ()=\u003Ea;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E x=\u003Ex;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E ({a:1});","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E [a];","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E /a/.test(a);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E a/b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E \u0060hello${a}\u0060;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E tag\u0060raw\\xZ\u0060;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E {return a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E {};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E {a:1};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E ({a=1}=source);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E function(){return a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E (a,b);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E new C();","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E a?.b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E {let a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = (a\u002Bb) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["invalid_binding_target","non_simple_strict_directive"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E a;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E a?b:c;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E a=b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E ()=\u003Ea;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E x=\u003Ex;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E ({a:1});","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E [a];","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E /a/.test(a);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E a/b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E \u0060hello${a}\u0060;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E tag\u0060raw\\xZ\u0060;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E {return a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E {};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E {a:1};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E ({a=1}=source);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E function(){return a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E (a,b);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E new C();","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E a?.b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E {let a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ([a.b]) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["invalid_binding_target","non_simple_strict_directive"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E a;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E a?b:c;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E a=b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E ()=\u003Ea;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E x=\u003Ex;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E ({a:1});","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E [a];","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E /a/.test(a);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E a/b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E \u0060hello${a}\u0060;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E tag\u0060raw\\xZ\u0060;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E {return a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E {};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E {a:1};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E ({a=1}=source);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E function(){return a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E (a,b);","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E new C();","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E a?.b;","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E {let a;};","success":false,"errors":["invalid_binding_target"],"error":null}
+{"input":"const fn = ({...{a}}) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["invalid_binding_target","non_simple_strict_directive"],"error":null}
+{"input":"const fn = (...a=1) =\u003E a;","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E a?b:c;","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E a=b;","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E ()=\u003Ea;","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E x=\u003Ex;","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E ({a:1});","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E [a];","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E /a/.test(a);","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E a/b;","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E \u0060hello${a}\u0060;","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E tag\u0060raw\\xZ\u0060;","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E {return a;};","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E {};","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E {a:1};","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E ({a=1}=source);","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E function(){return a;};","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E (a,b);","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E new C();","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E a?.b;","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E {let a;};","success":false,"errors":["invalid_rest_element"],"error":null}
+{"input":"const fn = (...a=1) =\u003E {\u0022use strict\u0022;};","success":false,"errors":["invalid_rest_element","non_simple_strict_directive"],"error":null}
+{"input":"const fn = (a,...rest,) =\u003E a;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E a?b:c;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E a=b;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E ()=\u003Ea;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E x=\u003Ex;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E ({a:1});","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E [a];","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E /a/.test(a);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E a/b;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E \u0060hello${a}\u0060;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E tag\u0060raw\\xZ\u0060;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E {return a;};","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E {};","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E {a:1};","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E ({a=1}=source);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E function(){return a;};","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E (a,b);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E new C();","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E a?.b;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E {let a;};","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a,...rest,) =\u003E {\u0022use strict\u0022;};","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = x=\u003E{}\n(b);","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E{}\n[b];","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E{}\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E{}\n/a/.test(x);","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E{}\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E{}\n-b;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E{}\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E{}\n--b;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E{}\nother;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E{}\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E{}\n{}","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E{}\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E{}\n,other;","success":false,"errors":["missing_const_initializer"],"error":null}
+{"input":"const fn = x=\u003E{}\n?.value;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = x=\u003E{}\n.value;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = x=\u003E{}\n**2;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = x=\u003E{}\n*2;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = x=\u003Ex\n(b);","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\n[b];","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = x=\u003Ex\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\n-b;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\n--b;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\nother;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\n{}","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\n,other;","success":false,"errors":["missing_const_initializer"],"error":null}
+{"input":"const fn = x=\u003Ex\n?.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\n.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\n**2;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ex\n*2;","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\n(b);","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\n[b];","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = ()=\u003E({})\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\n-b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\n--b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\nother;","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\n{}","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\n,other;","success":false,"errors":["missing_const_initializer"],"error":null}
+{"input":"const fn = ()=\u003E({})\n?.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\n.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\n**2;","success":true,"errors":[],"error":null}
+{"input":"const fn = ()=\u003E({})\n*2;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\n(b);","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\n[b];","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\n/a/.test(x);","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\n-b;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\n--b;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\nother;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\n{}","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\n,other;","success":false,"errors":["missing_const_initializer"],"error":null}
+{"input":"const fn = x=\u003Ey=\u003E{}\n?.value;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = x=\u003Ey=\u003E{}\n.value;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = x=\u003Ey=\u003E{}\n**2;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = x=\u003Ey=\u003E{}\n*2;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = x=\u003Efunction(){}\n(b);","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\n[b];","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = x=\u003Efunction(){}\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\n-b;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\n--b;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\nother;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\n{}","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\n,other;","success":false,"errors":["missing_const_initializer"],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\n?.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\n.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\n**2;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003Efunction(){}\n*2;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n(b);","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n[b];","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = x=\u003E(()=\u003E{})\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n-b;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n--b;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\nother;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n{}","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n,other;","success":false,"errors":["missing_const_initializer"],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n?.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n**2;","success":true,"errors":[],"error":null}
+{"input":"const fn = x=\u003E(()=\u003E{})\n*2;","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\n(b);","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\n[b];","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (()=\u003E{})\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\n-b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\n--b;","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\nother;","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\n{}","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\n,other;","success":false,"errors":["missing_const_initializer"],"error":null}
+{"input":"const fn = (()=\u003E{})\n?.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\n.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\n**2;","success":true,"errors":[],"error":null}
+{"input":"const fn = (()=\u003E{})\n*2;","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\n(b);","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\n[b];","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = function(){}\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\n-b;","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\n--b;","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\nother;","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\n{}","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\n,other;","success":false,"errors":["missing_const_initializer"],"error":null}
+{"input":"const fn = function(){}\n?.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\n.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\n**2;","success":true,"errors":[],"error":null}
+{"input":"const fn = function(){}\n*2;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\n(b);","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\n[b];","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\n\u0060text\u0060;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\n/a/.test(x);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = ({})\n\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\n-b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\n\u002B\u002Bb;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\n--b;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\nother;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\nfunction next(){}","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\n{}","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\nlet next=1;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\n,other;","success":false,"errors":["missing_const_initializer"],"error":null}
+{"input":"const fn = ({})\n?.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\n.value;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\n**2;","success":true,"errors":[],"error":null}
+{"input":"const fn = ({})\n*2;","success":true,"errors":[],"error":null}
+{"input":"for(a =\u003E a;;);","success":true,"errors":[],"error":null}
+{"input":"for(a =\u003E a in b;;);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"for(a =\u003E a?b in c:d;;);","success":true,"errors":[],"error":null}
+{"input":"for(a =\u003E a?b:c in d;;);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"for(a =\u003E {a in b;};;);","success":true,"errors":[],"error":null}
+{"input":"for(a =\u003E (a in b);;);","success":true,"errors":[],"error":null}
+{"input":"for((a=b in obj) =\u003E a;;);","success":true,"errors":[],"error":null}
+{"input":"for((a=b in obj) =\u003E a in b;;);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"for((a=b in obj) =\u003E a?b in c:d;;);","success":true,"errors":[],"error":null}
+{"input":"for((a=b in obj) =\u003E a?b:c in d;;);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"for((a=b in obj) =\u003E {a in b;};;);","success":true,"errors":[],"error":null}
+{"input":"for((a=b in obj) =\u003E (a in b);;);","success":true,"errors":[],"error":null}
+{"input":"for(([a=b in obj]) =\u003E a;;);","success":true,"errors":[],"error":null}
+{"input":"for(([a=b in obj]) =\u003E a in b;;);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"for(([a=b in obj]) =\u003E a?b in c:d;;);","success":true,"errors":[],"error":null}
+{"input":"for(([a=b in obj]) =\u003E a?b:c in d;;);","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"for(([a=b in obj]) =\u003E {a in b;};;);","success":true,"errors":[],"error":null}
+{"input":"for(([a=b in obj]) =\u003E (a in b);;);","success":true,"errors":[],"error":null}
+{"input":"const fn = a\n=\u003Ea;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = a\n=\u003E{};","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a)\n=\u003Ea;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = (a)\n=\u003E{};","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = ()\n=\u003Ea;","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}
+{"input":"const fn = ()\n=\u003E{};","success":false,"errors":[],"error":"Exception of type \u0027Janglim.FrontEnd.Parsers.ParsingException\u0027 was thrown."}

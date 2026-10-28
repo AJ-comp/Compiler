@@ -1,0 +1,75 @@
+  복원할 프로젝트를 확인하는 중...
+  복원할 모든 프로젝트가 최신 상태입니다.
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\KeyManager.cs(17,22): warning CS0414: 'KeyManager.meaningUnitKey' 필드가 할당되었지만 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\Parse.FrontEnd.csproj]
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Grammars.Ebnf.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(20,62): warning CS0067: 'LLParser.ParseTreeCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LLParser.cs(21,55): warning CS0067: 'LLParser.ASTCreated' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(51,48): warning CS0067: 'LRParser.ShiftAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs(49,48): warning CS0067: 'LRParser.ReduceAction' 이벤트가 사용되지 않았습니다. [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj]
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\runtime-tests-bin\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:31.64]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "function f(this: Context, value: string): void {}") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "function f(this: Context, value: string): void {}") [11 ms]
+  오류 메시지:
+   function f(this: Context, value: string): void {}
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., &, |, extends, [, ?, <, is} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 60
+   at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:31.68]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "async function f(value: Promise<number>): Promise<"···) [FAIL]
+[xUnit.net 00:00:31.71]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "let value: UnknownType;") [FAIL]
+[xUnit.net 00:00:31.78]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "function identity<T>(value: T): T { return value; "···) [FAIL]
+[xUnit.net 00:00:31.80]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "let value: Array<Map<string, number>>;") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "async function f(value: Promise<number>): Promise<"···) [12 ms]
+  오류 메시지:
+   async function f(value: Promise<number>): Promise<number> { return await value; }
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 60
+   at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "let value: UnknownType;") [10 ms]
+  오류 메시지:
+   let value: UnknownType;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 60
+   at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "function identity<T>(value: T): T { return value; "···) [11 ms]
+  오류 메시지:
+   function identity<T>(value: T): T { return value; }
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 60
+   at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(source: "let value: Array<Map<string, number>>;") [13 ms]
+  오류 메시지:
+   let value: Array<Map<string, number>>;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 60
+   at InvokeStub_TypeScriptRuntimeTests.Accepts_types_without_losing_JavaScript_runtime_validation(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+경고: 결과 파일을 덮어쓰는 중: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\test-results\typescript-runtime.trx
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\test-results\typescript-runtime.trx
+
+실패!  - 실패:     5, 통과:    15, 건너뜀:     0, 전체:    20, 기간: 30 s - Parse.FrontEnd.Parsers.Tests.dll (net8.0)

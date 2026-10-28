@@ -1,0 +1,1 @@
+function run(): void { await 1; } export {};

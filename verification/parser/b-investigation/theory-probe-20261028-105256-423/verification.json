@@ -1,0 +1,175 @@
+{
+  "Finding": "A nonproductive-left-tail grammar has no canonical LR1 or merged LALR conflict, but current Janglim emits a B/C reduce/reduce conflict and changes ax acceptance with registration order.",
+  "PreciseClassification": "Missing productivity/useless-rule validation or preprocessing before optimized LALR construction. FIRST(x) as a local spontaneous lookahead is valid under the reduced-grammar premise and is confirmed by the productive control.",
+  "NonproductiveWitness": [
+    "S -> A U | C x",
+    "A -> B x",
+    "B -> a",
+    "C -> a",
+    "U -> U u"
+  ],
+  "ProductiveControl": "Replace U -> U u with U -> U u | v. Both oracle and engine then correctly report one B/C conflict; registration-order-dependent parsing is expected with this conflicted grammar.",
+  "PriorWitnessIssue": "The original U -> U example has one conflict even in canonical LR1 and merged LALR. Its order-dependent failure alone does not prove engine failure on a conflict-free grammar.",
+  "SourceChecks": [
+    {
+      "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd\\FirstFollowAnalyzer [First].cs",
+      "Unchanged": true
+    },
+    {
+      "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\CanonicalRelation.cs",
+      "Unchanged": true
+    }
+  ],
+  "Cases": [
+    {
+      "Name": "original-unit-cycle",
+      "Reverse": false,
+      "CanonicalConflicts": 1,
+      "LalrOracleConflicts": 1,
+      "EngineConflicts": 1,
+      "Input": "z",
+      "Accepted": true
+    },
+    {
+      "Name": "original-unit-cycle",
+      "Reverse": false,
+      "CanonicalConflicts": 1,
+      "LalrOracleConflicts": 1,
+      "EngineConflicts": 1,
+      "Input": "ax",
+      "Accepted": false
+    },
+    {
+      "Name": "original-unit-cycle",
+      "Reverse": true,
+      "CanonicalConflicts": 1,
+      "LalrOracleConflicts": 1,
+      "EngineConflicts": 1,
+      "Input": "z",
+      "Accepted": true
+    },
+    {
+      "Name": "original-unit-cycle",
+      "Reverse": true,
+      "CanonicalConflicts": 1,
+      "LalrOracleConflicts": 1,
+      "EngineConflicts": 1,
+      "Input": "ax",
+      "Accepted": false
+    },
+    {
+      "Name": "overlapping-valid-path",
+      "Reverse": false,
+      "CanonicalConflicts": 1,
+      "LalrOracleConflicts": 1,
+      "EngineConflicts": 2,
+      "Input": "ax",
+      "Accepted": false
+    },
+    {
+      "Name": "overlapping-valid-path",
+      "Reverse": true,
+      "CanonicalConflicts": 1,
+      "LalrOracleConflicts": 1,
+      "EngineConflicts": 2,
+      "Input": "ax",
+      "Accepted": true
+    },
+    {
+      "Name": "overlap-nonproductive-left-tail",
+      "Reverse": false,
+      "CanonicalConflicts": 0,
+      "LalrOracleConflicts": 0,
+      "EngineConflicts": 1,
+      "Input": "ax",
+      "Accepted": false
+    },
+    {
+      "Name": "overlap-nonproductive-left-tail",
+      "Reverse": true,
+      "CanonicalConflicts": 0,
+      "LalrOracleConflicts": 0,
+      "EngineConflicts": 1,
+      "Input": "ax",
+      "Accepted": true
+    },
+    {
+      "Name": "productive-real-conflict-control",
+      "Reverse": false,
+      "CanonicalConflicts": 1,
+      "LalrOracleConflicts": 1,
+      "EngineConflicts": 1,
+      "Input": "ax",
+      "Accepted": false
+    },
+    {
+      "Name": "productive-real-conflict-control",
+      "Reverse": false,
+      "CanonicalConflicts": 1,
+      "LalrOracleConflicts": 1,
+      "EngineConflicts": 1,
+      "Input": "axv",
+      "Accepted": true
+    },
+    {
+      "Name": "productive-real-conflict-control",
+      "Reverse": false,
+      "CanonicalConflicts": 1,
+      "LalrOracleConflicts": 1,
+      "EngineConflicts": 1,
+      "Input": "axvu",
+      "Accepted": true
+    },
+    {
+      "Name": "productive-real-conflict-control",
+      "Reverse": true,
+      "CanonicalConflicts": 1,
+      "LalrOracleConflicts": 1,
+      "EngineConflicts": 1,
+      "Input": "ax",
+      "Accepted": true
+    },
+    {
+      "Name": "productive-real-conflict-control",
+      "Reverse": true,
+      "CanonicalConflicts": 1,
+      "LalrOracleConflicts": 1,
+      "EngineConflicts": 1,
+      "Input": "axv",
+      "Accepted": false
+    },
+    {
+      "Name": "productive-real-conflict-control",
+      "Reverse": true,
+      "CanonicalConflicts": 1,
+      "LalrOracleConflicts": 1,
+      "EngineConflicts": 1,
+      "Input": "axvu",
+      "Accepted": false
+    },
+    {
+      "Name": "pruned-valid-path",
+      "Reverse": false,
+      "CanonicalConflicts": 0,
+      "LalrOracleConflicts": 0,
+      "EngineConflicts": 0,
+      "Input": "ax",
+      "Accepted": true
+    },
+    {
+      "Name": "pruned-valid-path",
+      "Reverse": true,
+      "CanonicalConflicts": 0,
+      "LalrOracleConflicts": 0,
+      "EngineConflicts": 0,
+      "Input": "ax",
+      "Accepted": true
+    }
+  ],
+  "Evidence": [
+    "results.json",
+    "results-with-control.json",
+    "Program.cs",
+    "probe.csproj"
+  ]
+}

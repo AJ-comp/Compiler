@@ -1,0 +1,214 @@
+FIRST async=shift 55,epsilon reduce __predicate5 -> epsilon,epsilon reduce __predicate4 -> epsilon
+INPUT async(value); async(value, other); async({value: 1});
+SUCCESS False Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+async: shift 55 
+(: failed null (shift 할 수 없습니다 {function} 와야 합니다)
+INPUT const async = value; async(value); async
+function f() {}
+SUCCESS False Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+const: shift 51 
+async: reduce LetOrConst -> const 
+async: goto 49 
+async: shift 67 
+=: reduce BindingIdentifier -> async 
+=: goto 178 
+=: shift 189 
+value: shift 37 
+;: reduce IdentifierReference -> IdentifierName 
+;: goto 97 
+;: reduce PrimaryExpression -> IdentifierReference 
+;: goto 96 
+;: reduce MemberExpression -> PrimaryExpression 
+;: goto 95 
+;: reduce NewExpression -> MemberExpression 
+;: goto 94 
+;: reduce LeftHandSideExpression -> NewExpression 
+;: goto 93 
+;: epsilon reduce __predicate1 -> epsilon 
+;: goto 298 
+;: reduce SimpleUpdateExpression -> LeftHandSideExpression __predicate1 
+;: goto 92 
+;: reduce UpdateExpression -> SimpleUpdateExpression 
+;: goto 91 
+;: reduce UnaryExpression -> UpdateExpression 
+;: goto 90 
+;: reduce ExponentiationExpression -> UnaryExpression 
+;: goto 89 
+;: reduce MultiplicativeExpression -> ExponentiationExpression 
+;: goto 88 
+;: reduce AdditiveExpression -> MultiplicativeExpression 
+;: goto 87 
+;: reduce ShiftExpression -> AdditiveExpression 
+;: goto 86 
+;: reduce RelationalExpression -> ShiftExpression 
+;: goto 85 
+;: reduce EqualityExpression -> RelationalExpression 
+;: goto 84 
+;: reduce BitwiseANDExpression -> EqualityExpression 
+;: goto 83 
+;: reduce BitwiseXORExpression -> BitwiseANDExpression 
+;: goto 82 
+;: reduce BitwiseORExpression -> BitwiseXORExpression 
+;: goto 81 
+;: reduce LogicalANDExpression -> BitwiseORExpression 
+;: goto 80 
+;: reduce LogicalORExpression -> LogicalANDExpression 
+;: goto 79 
+;: reduce ShortCircuitExpression -> LogicalORExpression 
+;: goto 78 
+;: reduce ConditionalExpression -> ShortCircuitExpression 
+;: goto 77 
+;: reduce AssignmentExpression -> ConditionalExpression 
+;: goto 445 
+;: reduce Initializer -> = AssignmentExpression 
+;: goto 439 
+;: reduce InitializedLexicalBinding -> BindingIdentifier Initializer 
+;: goto 179 
+;: shift 191 
+async: reduce ExpressionEnd -> ; 
+async: goto 440 
+async: reduce LexicalBindingList -> InitializedLexicalBinding ExpressionEnd 
+async: goto 176 
+async: reduce LexicalDeclaration -> LetOrConst LexicalBindingList 
+async: goto 48 
+async: reduce Declaration -> LexicalDeclaration 
+async: goto 45 
+async: reduce StatementListItem -> Declaration 
+async: goto 3 
+async: reduce StatementList -> StatementListItem 
+async: goto 2 
+async: shift 55 
+(: failed null (shift 할 수 없습니다 {function} 와야 합니다)
+INPUT class A { async *items() { yield await value; } }
+SUCCESS True 
+class: shift 53 
+A: shift 64 
+{: reduce BindingIdentifier -> IdentifierName 
+{: goto 182 
+{: shift 361 
+async: shift 349 
+*: reduce PropertyIdentifierName -> async 
+*: goto 204 
+*: reduce PropertyName -> PropertyIdentifierName 
+*: goto 536 
+*: reduce ClassElementName -> PropertyName 
+*: goto 535 
+*: epsilon reduce __predicate32 -> epsilon 
+*: goto 514 
+*: reduce AsyncModifier -> __predicate32 
+*: goto 668 
+*: shift 773 
+items: shift 481 
+(: reduce PropertyIdentifierName -> IdentifierName 
+(: goto 204 
+(: reduce PropertyName -> PropertyIdentifierName 
+(: goto 536 
+(: reduce ClassElementName -> PropertyName 
+(: goto 969 
+(: shift 1184 
+): epsilon reduce FormalParameters__Await -> epsilon 
+): goto 1358 
+): shift 1477 
+{: shift 683 
+yield: epsilon reduce __predicate6 -> epsilon 
+yield: goto 806 
+yield: shift 907 
+await: epsilon reduce __predicate3 -> epsilon 
+await: goto 161 
+await: reduce NoLineTerminator -> __predicate3 
+await: goto 1123 
+await: shift 900 
+value: shift 831 
+;: reduce IdentifierReference__Await -> IdentifierName 
+;: goto 1103 
+;: reduce PrimaryExpression__Await -> IdentifierReference__Await 
+;: goto 867 
+;: reduce MemberExpression__Await -> PrimaryExpression__Await 
+;: goto 866 
+;: reduce NewExpression__Await -> MemberExpression__Await 
+;: goto 865 
+;: reduce LeftHandSideExpression__Await -> NewExpression__Await 
+;: goto 1116 
+;: epsilon reduce __predicate2 -> epsilon 
+;: goto 1053 
+;: reduce SimpleUpdateExpression__Await -> LeftHandSideExpression__Await __predicate2 
+;: goto 863 
+;: reduce UpdateExpression__Await -> SimpleUpdateExpression__Await 
+;: goto 1115 
+;: reduce UnaryExpression__Await -> UpdateExpression__Await 
+;: goto 1119 
+;: reduce AwaitExpression__Await -> await UnaryExpression__Await 
+;: goto 899 
+;: reduce UnaryExpression__Await -> AwaitExpression__Await 
+;: goto 861 
+;: reduce ExponentiationExpression__Await -> UnaryExpression__Await 
+;: goto 860 
+;: reduce MultiplicativeExpression__Await -> ExponentiationExpression__Await 
+;: goto 859 
+;: reduce AdditiveExpression__Await -> MultiplicativeExpression__Await 
+;: goto 858 
+;: reduce ShiftExpression__Await -> AdditiveExpression__Await 
+;: goto 857 
+;: reduce RelationalExpression__Await -> ShiftExpression__Await 
+;: goto 856 
+;: reduce EqualityExpression__Await -> RelationalExpression__Await 
+;: goto 855 
+;: reduce BitwiseANDExpression__Await -> EqualityExpression__Await 
+;: goto 854 
+;: reduce BitwiseXORExpression__Await -> BitwiseANDExpression__Await 
+;: goto 853 
+;: reduce BitwiseORExpression__Await -> BitwiseXORExpression__Await 
+;: goto 852 
+;: reduce LogicalANDExpression__Await -> BitwiseORExpression__Await 
+;: goto 851 
+;: reduce LogicalORExpression__Await -> LogicalANDExpression__Await 
+;: goto 850 
+;: reduce ShortCircuitExpression__Await -> LogicalORExpression__Await 
+;: goto 849 
+;: reduce ConditionalExpression__Await -> ShortCircuitExpression__Await 
+;: goto 848 
+;: reduce AssignmentExpression__Await -> ConditionalExpression__Await 
+;: goto 1321 
+;: reduce YieldExpression__Await -> yield NoLineTerminator AssignmentExpression__Await 
+;: goto 906 
+;: reduce AssignmentExpression__Await -> YieldExpression__Await 
+;: goto 1014 
+;: reduce Expression__Await -> AssignmentExpression__Await 
+;: goto 1013 
+;: shift 191 
+}: reduce ExpressionEnd -> ; 
+}: goto 1210 
+}: reduce ExpressionStatement__Await -> __predicate6 Expression__Await ExpressionEnd 
+}: goto 805 
+}: reduce Statement__Await -> ExpressionStatement__Await 
+}: goto 799 
+}: reduce StatementListItem__Await -> Statement__Await 
+}: goto 798 
+}: reduce StatementList__Await -> StatementListItem__Await 
+}: goto 797 
+}: shift 1003 
+}: reduce FunctionBody__Await -> { StatementList__Await } 
+}: goto 1549 
+}: reduce ClassAsyncMethod -> ClassElementName AsyncModifier * ClassElementName ( FormalParameters__Await ) FunctionBody__Await 
+}: goto 540 
+}: reduce ClassElement -> ClassAsyncMethod 
+}: goto 532 
+}: reduce ClassElementList -> ClassElement 
+}: goto 531 
+}: shift 658 
+: reduce ClassBody -> { ClassElementList } 
+: goto 360 
+: reduce ClassTail -> ClassBody 
+: goto 443 
+: reduce ClassDeclaration -> class BindingIdentifier ClassTail 
+: goto 52 
+: reduce Declaration -> ClassDeclaration 
+: goto 45 
+: reduce StatementListItem -> Declaration 
+: goto 3 
+: reduce StatementList -> StatementListItem 
+: goto 2 
+: reduce Script -> StatementList 
+: goto 1 
+: accept Accept -> Script 
+

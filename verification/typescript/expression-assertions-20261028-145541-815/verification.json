@@ -1,0 +1,169 @@
+{
+  "CompletedAt": "2026-10-28T15:52:07.8445856+09:00",
+  "Feature": "TypeScript as / satisfies / postfix non-null assertion syntax",
+  "ImplementationLayer": "TypeScript grammar, lexical policy and validation only",
+  "NativeReference": {
+    "Version": "7.0.2",
+    "Repository": "microsoft/typescript-go",
+    "Commit": "2bd066d87f5bafd315be9f40889d0a60b9e58e0b",
+    "Evidence": [
+      "as-satisfies-results.jsonl",
+      "as-satisfies-native-ast.jsonl",
+      "continuation-native-ast.jsonl",
+      "integration-audit-native.jsonl",
+      "non-null",
+      "composition",
+      "loop-oracle.jsonl"
+    ]
+  },
+  "Build": {
+    "Configuration": "Release",
+    "Solution": "AJPGS.sln",
+    "ExitCode": 0,
+    "Warnings": 0,
+    "Errors": 0,
+    "Log": "solution-build.log"
+  },
+  "ParserSuite": {
+    "Total": 7057,
+    "Passed": 7056,
+    "Failed": 0,
+    "Skipped": 1,
+    "Report": "all-parser.trx",
+    "SkippedTests": [
+      "Janglim.FrontEnd.Parsers.Tests.SlrKnownIssueTests.Slr_should_parse_valid_Ex1"
+    ]
+  },
+  "TypeScriptSuite": {
+    "Total": 647,
+    "Passed": 647,
+    "Failed": 0
+  },
+  "NewAssertionTests": {
+    "Total": 231,
+    "Passed": 231,
+    "Files": [
+      {
+        "File": "TypeScriptAsSatisfiesTests.cs",
+        "Cases": 77,
+        "Sha256": "D6DD8453666EAE97FB7DB4B0A496B0B470EC73AB6B64E291FAF26D57E71C27F9"
+      },
+      {
+        "File": "TypeScriptNonNullTests.cs",
+        "Cases": 66,
+        "Sha256": "F4B9DD30BA23E0C826B162EF0976E734F46CEA9D45789934D08D8EFFF1643FF5"
+      },
+      {
+        "File": "TypeScriptAssertionLexicalTests.cs",
+        "Cases": 36,
+        "Sha256": "6132E103E9EE55FDA2C07902E4D3EB50D624877EDF49C6E6EA954047CF551122"
+      },
+      {
+        "File": "TypeScriptAssertionCompositionTests.cs",
+        "Cases": 18,
+        "Sha256": "8AC8FA7A1554D84C759E76C9FC555FF2EAB1F8DF9A57586288F4A762CB2E95B7"
+      },
+      {
+        "File": "TypeScriptAssertionLoopTests.cs",
+        "Cases": 14,
+        "Sha256": "DD537A7BF9C2C754F9921A63912E98D47824C2FDE8321BCB2A2AACDB3D24098C"
+      },
+      {
+        "File": "TypeScriptAssertionEntryPointTests.cs",
+        "Cases": 20,
+        "Sha256": "BB96B8C3DE6447B520870B7A33789A4FF461A2357E0C9A13FC80D54D2CF13D5D"
+      }
+    ]
+  },
+  "McpSuite": {
+    "Total": 69,
+    "Passed": 69,
+    "Failed": 0,
+    "Report": "mcp.trx"
+  },
+  "SourceBoundary": {
+    "ComparedFiles": 722,
+    "ExistingTestFilesPreserved": 112,
+    "SnapshotFilesPreserved": 11,
+    "ModifiedExistingFiles": [
+      "grammars\\typescript\\typescript-types.ebnf",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptValidation.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptProjection.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptGrammar.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptDialect.cs"
+    ],
+    "UnexpectedChanges": [
+      null
+    ],
+    "AddedFiles": [
+      "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptNonNullTests.cs",
+      "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptAssertionLoopTests.cs",
+      "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptAssertionLexicalTests.cs",
+      "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptAssertionEntryPointTests.cs",
+      "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptAssertionCompositionTests.cs",
+      "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptAsSatisfiesTests.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptTokenSource.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptNonNullExpressions.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptLexicalPolicy.cs",
+      "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptExpressions.cs"
+    ],
+    "TypeScriptSourceHashes": [
+      {
+        "Path": "grammars/typescript\\typescript-types.ebnf",
+        "Sha256": "DF13D29407E656A3DA9F54F66361A6C4B2350B6BD65152A42A4617C1F640640C"
+      },
+      {
+        "Path": "grammars/typescript\\typescript-declarations.ebnf",
+        "Sha256": "13C17D2DAEFBF6B753724C5DB017F8F3C18A7D80DCFB11F62569BA29FBA3DEDA"
+      },
+      {
+        "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/TypeScript\\TypeScriptValidation.cs",
+        "Sha256": "AA598428B4BB31B8CAF90BC2FC988DC0FF2DA1E5EF5E46268D502ADFECF5205A"
+      },
+      {
+        "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/TypeScript\\TypeScriptTypes.cs",
+        "Sha256": "AE3E9F5D937C821DC5AC276DE8901DBD71EF0D851297821658306B38A7272FC9"
+      },
+      {
+        "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/TypeScript\\TypeScriptTokenSource.cs",
+        "Sha256": "A6743A5C91C07228180CA07987690C38FDF4C1F1C8223A9555AB74548EFB6F7C"
+      },
+      {
+        "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/TypeScript\\TypeScriptProjection.cs",
+        "Sha256": "029FA9D6AAAA63442B9666EAD9FB8952EF74B8B21987A9A2488BE6098C0F84D1"
+      },
+      {
+        "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/TypeScript\\TypeScriptNonNullExpressions.cs",
+        "Sha256": "30427667B4001927083B0C8EC73E0897A84495C92648113B05EC7F698632DD6A"
+      },
+      {
+        "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/TypeScript\\TypeScriptLookahead.cs",
+        "Sha256": "C0876223C5910E5CE00FFE26752582014AD7155F80AB5BC1B1137B356DDC752B"
+      },
+      {
+        "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/TypeScript\\TypeScriptLexicalPolicy.cs",
+        "Sha256": "7ABFC1BC13AB83CB90C2F27ED5F78F015A9244D4E26E400C4067494B7183EA1E"
+      },
+      {
+        "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/TypeScript\\TypeScriptInputKind.cs",
+        "Sha256": "1EE7DE2C01BAA5220F49B8DDFF7F1F5EFD4990FC6C2987422CDF564148079577"
+      },
+      {
+        "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/TypeScript\\TypeScriptGrammar.cs",
+        "Sha256": "F78D14ECF45C7A641EB42A52BFC925E972D3747812EE2B83AF5FC0F94611AF5A"
+      },
+      {
+        "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/TypeScript\\TypeScriptExpressions.cs",
+        "Sha256": "279B8B172452EEE2BD5E4BAFE2820230905319E3008713B4B1DC37DC7FB78706"
+      },
+      {
+        "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/TypeScript\\TypeScriptDialect.cs",
+        "Sha256": "9EF112670D164B99A4101C5A3A2415D73321D45A6B8177444F3DCAEAA1264B8C"
+      },
+      {
+        "Path": "src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/TypeScript\\TypeScriptDeclarations.cs",
+        "Sha256": "E91BBE6D3AFCBE35EE995636490788DADFA47526E22B978C06772E6B79E5FFF9"
+      }
+    ]
+  }
+}

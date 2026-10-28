@@ -1,0 +1,49 @@
+{
+  "baseCommit": "6eec1ac9ee144dafd8f344d73a21f36bfc9f6755",
+  "headCommit": "d53ebc8b1931d9f1541e43d59650776e4b766248",
+  "headCommitDate": "2026-10-13T22:44:04Z",
+  "aheadCommits": 74,
+  "headArchiveSha256": "8fbdcb0afe5d5c24168123dd6c7d410f70f03babdab3154231fb9339bf6b85f0",
+  "counts": {
+    "actionableExpectedAccept": 10,
+    "actionableExpectedReject": 10,
+    "actionableVariants": 20,
+    "addedFiles": 241,
+    "changedJavaScriptFiles": 311,
+    "editionEligibleActionableFiles": 10,
+    "editionEligibleFiles:added": 10,
+    "editionEligibleFiles:modified": 3,
+    "editionEligibleFiles:removed": 3,
+    "editionEligibleModifiedMetadataOnly": 3,
+    "excludedFutureSyntaxFiles:added": 8,
+    "modifiedFiles": 99,
+    "outsideScope:fixture_not_standalone": 15,
+    "outsideScope:intl402_outside_ecma262": 65,
+    "outsideScope:outside_selected_prefixes": 206,
+    "outsideScope:staging_not_standard_corpus": 1,
+    "removedFiles": 6
+  },
+  "actionableVariantCounts": {
+    "non-strict": 10,
+    "strict": 10
+  },
+  "changedEligiblePhaseCounts": {
+    "parse": 11,
+    "positive": 5
+  },
+  "changedEligibleFeatureFileCounts": {
+    "destructuring-binding": 9,
+    "dynamic-import": 1,
+    "object-rest": 6,
+    "top-level-await": 1
+  },
+  "changedEligibleScopeFileCounts": {
+    "language/expressions/assignment": 3,
+    "language/expressions/dynamic-import": 1,
+    "language/literals/regexp": 2,
+    "language/statements/for-in": 7,
+    "language/statements/for-of": 3
+  },
+  "newFeatureTags": {},
+  "removedFeatureTags": []
+}

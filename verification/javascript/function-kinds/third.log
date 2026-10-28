@@ -1,0 +1,21 @@
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Release\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Release\netstandard2.1\Parse.dll
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Release\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Release\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:18.82]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers(input: "async function f() { class A { static field = awai"···) [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers(input: "async function f() { class A { static field = awai"···) [2 ms]
+  오류 메시지:
+   Unexpectedly accepted: async function f() { class A { static field = await; } return A; }
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptFunctionKindsTests.cs:line 467
+   at InvokeStub_JavaScriptFunctionKindsScriptTests.Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\function-kinds\tests\functions-third.trx
+
+실패!  - 실패:     1, 통과:   585, 건너뜀:     0, 전체:   586, 기간: 11 s - Parse.FrontEnd.Parsers.Tests.dll (net8.0)

@@ -1,0 +1,227 @@
+INPUT class C extends Base<T> implements Named<T> { public run<U>(x: U): U { return x; } }
+PARSED False EXCEPTION Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+I0 TOKEN=class KIND=class ACTION=shift 48 ERROR=
+  CANDIDATE Shift 48
+  CANDIDATE EpsilonReduce __predicate6 -> epsilon PRED=ExpressionStatementStart
+I48 TOKEN=C KIND=IdentifierName ACTION=shift 62 ERROR=
+  CANDIDATE Shift 62
+I62 TOKEN=extends KIND=extends ACTION=reduce BindingIdentifier -> IdentifierName ERROR=
+  CANDIDATE Reduce BindingIdentifier -> IdentifierName PRED=
+I48 TOKEN=extends KIND=extends ACTION=goto 258 ERROR=
+I258 TOKEN=extends KIND=extends ACTION=epsilon reduce TSOptionalTypeParameters -> epsilon ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I258 TOKEN=extends KIND=extends ACTION=goto 711 ERROR=
+  CANDIDATE EpsilonReduce TSOptionalTypeParameters -> epsilon PRED=
+I711 TOKEN=extends KIND=extends ACTION=shift 888 ERROR=
+  CANDIDATE Shift 888
+I888 TOKEN=Base KIND=IdentifierName ACTION=shift 131 ERROR=
+  CANDIDATE Shift 131
+I131 TOKEN=< KIND=TSTypeOpen ACTION=reduce IdentifierReference -> IdentifierName ERROR=
+  CANDIDATE Reduce IdentifierReference -> IdentifierName PRED=
+I888 TOKEN=< KIND=TSTypeOpen ACTION=goto 590 ERROR=
+I590 TOKEN=< KIND=TSTypeOpen ACTION=reduce PrimaryExpression -> IdentifierReference ERROR=
+  CANDIDATE Reduce PrimaryExpression -> IdentifierReference PRED=
+I888 TOKEN=< KIND=TSTypeOpen ACTION=goto 129 ERROR=
+I129 TOKEN=< KIND=TSTypeOpen ACTION=reduce MemberExpression -> PrimaryExpression ERROR=
+  CANDIDATE Reduce MemberExpression -> PrimaryExpression PRED=
+I888 TOKEN=< KIND=TSTypeOpen ACTION=goto 128 ERROR=
+I128 TOKEN=< KIND=TSTypeOpen ACTION=reduce NewExpression -> MemberExpression ERROR=
+  CANDIDATE Reduce NewExpression -> MemberExpression PRED=
+I888 TOKEN=< KIND=TSTypeOpen ACTION=goto 127 ERROR=
+I127 TOKEN=< KIND=TSTypeOpen ACTION=reduce LeftHandSideExpression -> NewExpression ERROR=
+  CANDIDATE Reduce LeftHandSideExpression -> NewExpression PRED=
+I888 TOKEN=< KIND=TSTypeOpen ACTION=goto 1113 ERROR=
+I1113 TOKEN=< KIND=TSTypeOpen ACTION=shift 1385 ERROR=
+  CANDIDATE Shift 1385
+I1385 TOKEN=T KIND=TSTypeIdentifierName ACTION=epsilon reduce __predicate63 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate63 -> epsilon PRED=TSNotFunctionTypeStart
+I1385 TOKEN=T KIND=TSTypeIdentifierName ACTION=goto 727 ERROR=
+  CANDIDATE EpsilonReduce __predicate63 -> epsilon PRED=TSNotFunctionTypeStart
+I727 TOKEN=T KIND=TSTypeIdentifierName ACTION=epsilon reduce __predicate79 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate79 -> epsilon PRED=TSNotAssertsTypePredicateStart
+I727 TOKEN=T KIND=TSTypeIdentifierName ACTION=goto 1026 ERROR=
+  CANDIDATE EpsilonReduce __predicate79 -> epsilon PRED=TSNotAssertsTypePredicateStart
+I1026 TOKEN=T KIND=TSTypeIdentifierName ACTION=shift 856 ERROR=
+  CANDIDATE Shift 856
+I856 TOKEN=> KIND=TSTypeClose ACTION=reduce TSBindingIdentifier -> TSTypeIdentifierName ERROR=
+  CANDIDATE Reduce TSBindingIdentifier -> TSTypeIdentifierName PRED=
+I1026 TOKEN=> KIND=TSTypeClose ACTION=goto 1118 ERROR=
+I1118 TOKEN=> KIND=TSTypeClose ACTION=reduce TSQualifiedName -> TSBindingIdentifier ERROR=
+  CANDIDATE Reduce TSQualifiedName -> TSBindingIdentifier PRED=
+I1026 TOKEN=> KIND=TSTypeClose ACTION=goto 1287 ERROR=
+I1287 TOKEN=> KIND=TSTypeClose ACTION=epsilon reduce __predicate90 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate90 -> epsilon PRED=TSNoTypeReferenceSuffix
+I1287 TOKEN=> KIND=TSTypeClose ACTION=goto 1752 ERROR=
+  CANDIDATE EpsilonReduce __predicate90 -> epsilon PRED=TSNoTypeReferenceSuffix
+I1752 TOKEN=> KIND=TSTypeClose ACTION=reduce TSTypeReference -> TSQualifiedName __predicate90 ERROR=
+  CANDIDATE Reduce TSTypeReference -> TSQualifiedName __predicate90 PRED=
+I1026 TOKEN=> KIND=TSTypeClose ACTION=goto 1286 ERROR=
+I1286 TOKEN=> KIND=TSTypeClose ACTION=reduce TSNonAssertsPrimaryType -> TSTypeReference ERROR=
+  CANDIDATE Reduce TSNonAssertsPrimaryType -> TSTypeReference PRED=
+I1026 TOKEN=> KIND=TSTypeClose ACTION=goto 1276 ERROR=
+I1276 TOKEN=> KIND=TSTypeClose ACTION=reduce TSPrimaryType -> __predicate79 TSNonAssertsPrimaryType ERROR=
+  CANDIDATE Reduce TSPrimaryType -> __predicate79 TSNonAssertsPrimaryType PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1024 ERROR=
+I1024 TOKEN=> KIND=TSTypeClose ACTION=reduce TSPostfixCore -> TSPrimaryType ERROR=
+  CANDIDATE Reduce TSPostfixCore -> TSPrimaryType PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1023 ERROR=
+I1023 TOKEN=> KIND=TSTypeClose ACTION=epsilon reduce __predicate74 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate74 -> epsilon PRED=TSNotPostfixTypeStart
+I1023 TOKEN=> KIND=TSTypeClose ACTION=goto 1271 ERROR=
+  CANDIDATE EpsilonReduce __predicate74 -> epsilon PRED=TSNotPostfixTypeStart
+I1271 TOKEN=> KIND=TSTypeClose ACTION=reduce TSPostfixType -> TSPostfixCore __predicate74 ERROR=
+  CANDIDATE Reduce TSPostfixType -> TSPostfixCore __predicate74 PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1022 ERROR=
+I1022 TOKEN=> KIND=TSTypeClose ACTION=reduce TSTypeOperator -> TSPostfixType ERROR=
+  CANDIDATE Reduce TSTypeOperator -> TSPostfixType PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1021 ERROR=
+I1021 TOKEN=> KIND=TSTypeClose ACTION=reduce TSIntersectionType -> TSTypeOperator ERROR=
+  CANDIDATE Reduce TSIntersectionType -> TSTypeOperator PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1020 ERROR=
+I1020 TOKEN=> KIND=TSTypeClose ACTION=reduce TSUnionType -> TSIntersectionType ERROR=
+  CANDIDATE Reduce TSUnionType -> TSIntersectionType PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1019 ERROR=
+I1019 TOKEN=> KIND=TSTypeClose ACTION=epsilon reduce __predicate70 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate70 -> epsilon PRED=TSNotConditionalTypeStart
+I1019 TOKEN=> KIND=TSTypeClose ACTION=goto 1267 ERROR=
+  CANDIDATE EpsilonReduce __predicate70 -> epsilon PRED=TSNotConditionalTypeStart
+I1267 TOKEN=> KIND=TSTypeClose ACTION=reduce TSConditionalType -> TSUnionType __predicate70 ERROR=
+  CANDIDATE Reduce TSConditionalType -> TSUnionType __predicate70 PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1018 ERROR=
+I1018 TOKEN=> KIND=TSTypeClose ACTION=reduce TSType -> __predicate63 TSConditionalType ERROR=
+  CANDIDATE Reduce TSType -> __predicate63 TSConditionalType PRED=
+I1385 TOKEN=> KIND=TSTypeClose ACTION=goto 1845 ERROR=
+I1845 TOKEN=> KIND=TSTypeClose ACTION=reduce TSTypeArgumentList -> TSType ERROR=
+  CANDIDATE Reduce TSTypeArgumentList -> TSType PRED=
+I1385 TOKEN=> KIND=TSTypeClose ACTION=goto 1844 ERROR=
+I1844 TOKEN=> KIND=TSTypeClose ACTION=shift 2325 ERROR=
+  CANDIDATE Shift 2325
+I2325 TOKEN=implements KIND=implements ACTION=reduce TSTypeArguments -> TSTypeOpen TSTypeArgumentList TSTypeClose ERROR=
+  CANDIDATE Reduce TSTypeArguments -> TSTypeOpen TSTypeArgumentList TSTypeClose PRED=
+I1113 TOKEN=implements KIND=implements ACTION=goto 1384 ERROR=
+  CANDIDATE Reduce ClassHeritage -> extends LeftHandSideExpression PRED=
+I1384 TOKEN=implements KIND=implements ACTION=reduce ClassHeritage -> extends LeftHandSideExpression TSTypeArguments ERROR=
+  CANDIDATE Reduce ClassHeritage -> extends LeftHandSideExpression TSTypeArguments PRED=
+I711 TOKEN=implements KIND=implements ACTION=goto 887 ERROR=
+  CANDIDATE Shift 890
+I887 TOKEN=implements KIND=implements ACTION=shift 890 ERROR=
+  CANDIDATE Shift 890
+I890 TOKEN=Named KIND=TSTypeIdentifierName ACTION=shift 856 ERROR=
+  CANDIDATE Shift 856
+I856 TOKEN=< KIND=TSTypeOpen ACTION=reduce TSBindingIdentifier -> TSTypeIdentifierName ERROR=
+  CANDIDATE Reduce TSBindingIdentifier -> TSTypeIdentifierName PRED=
+I890 TOKEN=< KIND=TSTypeOpen ACTION=goto 1118 ERROR=
+I1118 TOKEN=< KIND=TSTypeOpen ACTION=reduce TSQualifiedName -> TSBindingIdentifier ERROR=
+  CANDIDATE Reduce TSQualifiedName -> TSBindingIdentifier PRED=
+I890 TOKEN=< KIND=TSTypeOpen ACTION=goto 1117 ERROR=
+I1117 TOKEN=< KIND=TSTypeOpen ACTION=shift 1385 ERROR=
+  CANDIDATE Shift 1385
+I1385 TOKEN=T KIND=TSTypeIdentifierName ACTION=epsilon reduce __predicate63 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate63 -> epsilon PRED=TSNotFunctionTypeStart
+I1385 TOKEN=T KIND=TSTypeIdentifierName ACTION=goto 727 ERROR=
+  CANDIDATE EpsilonReduce __predicate63 -> epsilon PRED=TSNotFunctionTypeStart
+I727 TOKEN=T KIND=TSTypeIdentifierName ACTION=epsilon reduce __predicate79 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate79 -> epsilon PRED=TSNotAssertsTypePredicateStart
+I727 TOKEN=T KIND=TSTypeIdentifierName ACTION=goto 1026 ERROR=
+  CANDIDATE EpsilonReduce __predicate79 -> epsilon PRED=TSNotAssertsTypePredicateStart
+I1026 TOKEN=T KIND=TSTypeIdentifierName ACTION=shift 856 ERROR=
+  CANDIDATE Shift 856
+I856 TOKEN=> KIND=TSTypeClose ACTION=reduce TSBindingIdentifier -> TSTypeIdentifierName ERROR=
+  CANDIDATE Reduce TSBindingIdentifier -> TSTypeIdentifierName PRED=
+I1026 TOKEN=> KIND=TSTypeClose ACTION=goto 1118 ERROR=
+I1118 TOKEN=> KIND=TSTypeClose ACTION=reduce TSQualifiedName -> TSBindingIdentifier ERROR=
+  CANDIDATE Reduce TSQualifiedName -> TSBindingIdentifier PRED=
+I1026 TOKEN=> KIND=TSTypeClose ACTION=goto 1287 ERROR=
+I1287 TOKEN=> KIND=TSTypeClose ACTION=epsilon reduce __predicate90 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate90 -> epsilon PRED=TSNoTypeReferenceSuffix
+I1287 TOKEN=> KIND=TSTypeClose ACTION=goto 1752 ERROR=
+  CANDIDATE EpsilonReduce __predicate90 -> epsilon PRED=TSNoTypeReferenceSuffix
+I1752 TOKEN=> KIND=TSTypeClose ACTION=reduce TSTypeReference -> TSQualifiedName __predicate90 ERROR=
+  CANDIDATE Reduce TSTypeReference -> TSQualifiedName __predicate90 PRED=
+I1026 TOKEN=> KIND=TSTypeClose ACTION=goto 1286 ERROR=
+I1286 TOKEN=> KIND=TSTypeClose ACTION=reduce TSNonAssertsPrimaryType -> TSTypeReference ERROR=
+  CANDIDATE Reduce TSNonAssertsPrimaryType -> TSTypeReference PRED=
+I1026 TOKEN=> KIND=TSTypeClose ACTION=goto 1276 ERROR=
+I1276 TOKEN=> KIND=TSTypeClose ACTION=reduce TSPrimaryType -> __predicate79 TSNonAssertsPrimaryType ERROR=
+  CANDIDATE Reduce TSPrimaryType -> __predicate79 TSNonAssertsPrimaryType PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1024 ERROR=
+I1024 TOKEN=> KIND=TSTypeClose ACTION=reduce TSPostfixCore -> TSPrimaryType ERROR=
+  CANDIDATE Reduce TSPostfixCore -> TSPrimaryType PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1023 ERROR=
+I1023 TOKEN=> KIND=TSTypeClose ACTION=epsilon reduce __predicate74 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate74 -> epsilon PRED=TSNotPostfixTypeStart
+I1023 TOKEN=> KIND=TSTypeClose ACTION=goto 1271 ERROR=
+  CANDIDATE EpsilonReduce __predicate74 -> epsilon PRED=TSNotPostfixTypeStart
+I1271 TOKEN=> KIND=TSTypeClose ACTION=reduce TSPostfixType -> TSPostfixCore __predicate74 ERROR=
+  CANDIDATE Reduce TSPostfixType -> TSPostfixCore __predicate74 PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1022 ERROR=
+I1022 TOKEN=> KIND=TSTypeClose ACTION=reduce TSTypeOperator -> TSPostfixType ERROR=
+  CANDIDATE Reduce TSTypeOperator -> TSPostfixType PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1021 ERROR=
+I1021 TOKEN=> KIND=TSTypeClose ACTION=reduce TSIntersectionType -> TSTypeOperator ERROR=
+  CANDIDATE Reduce TSIntersectionType -> TSTypeOperator PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1020 ERROR=
+I1020 TOKEN=> KIND=TSTypeClose ACTION=reduce TSUnionType -> TSIntersectionType ERROR=
+  CANDIDATE Reduce TSUnionType -> TSIntersectionType PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1019 ERROR=
+I1019 TOKEN=> KIND=TSTypeClose ACTION=epsilon reduce __predicate70 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate70 -> epsilon PRED=TSNotConditionalTypeStart
+I1019 TOKEN=> KIND=TSTypeClose ACTION=goto 1267 ERROR=
+  CANDIDATE EpsilonReduce __predicate70 -> epsilon PRED=TSNotConditionalTypeStart
+I1267 TOKEN=> KIND=TSTypeClose ACTION=reduce TSConditionalType -> TSUnionType __predicate70 ERROR=
+  CANDIDATE Reduce TSConditionalType -> TSUnionType __predicate70 PRED=
+I727 TOKEN=> KIND=TSTypeClose ACTION=goto 1018 ERROR=
+I1018 TOKEN=> KIND=TSTypeClose ACTION=reduce TSType -> __predicate63 TSConditionalType ERROR=
+  CANDIDATE Reduce TSType -> __predicate63 TSConditionalType PRED=
+I1385 TOKEN=> KIND=TSTypeClose ACTION=goto 1845 ERROR=
+I1845 TOKEN=> KIND=TSTypeClose ACTION=reduce TSTypeArgumentList -> TSType ERROR=
+  CANDIDATE Reduce TSTypeArgumentList -> TSType PRED=
+I1385 TOKEN=> KIND=TSTypeClose ACTION=goto 1844 ERROR=
+I1844 TOKEN=> KIND=TSTypeClose ACTION=shift 2325 ERROR=
+  CANDIDATE Shift 2325
+I2325 TOKEN={ KIND={ ACTION=reduce TSTypeArguments -> TSTypeOpen TSTypeArgumentList TSTypeClose ERROR=
+  CANDIDATE Reduce TSTypeArguments -> TSTypeOpen TSTypeArgumentList TSTypeClose PRED=
+I1117 TOKEN={ KIND={ ACTION=goto 1387 ERROR=
+  CANDIDATE Reduce TSClassImplementsType -> TSQualifiedName PRED=
+I1387 TOKEN={ KIND={ ACTION=reduce TSClassImplementsType -> TSQualifiedName TSTypeArguments ERROR=
+  CANDIDATE Reduce TSClassImplementsType -> TSQualifiedName TSTypeArguments PRED=
+I890 TOKEN={ KIND={ ACTION=goto 1116 ERROR=
+I1116 TOKEN={ KIND={ ACTION=reduce TSClassImplementsList -> TSClassImplementsType ERROR=
+  CANDIDATE Reduce TSClassImplementsList -> TSClassImplementsType PRED=
+I890 TOKEN={ KIND={ ACTION=goto 1115 ERROR=
+I1115 TOKEN={ KIND={ ACTION=reduce TSImplements -> implements TSClassImplementsList ERROR=
+  CANDIDATE Reduce TSImplements -> implements TSClassImplementsList PRED=
+I887 TOKEN={ KIND={ ACTION=goto 1112 ERROR=
+  CANDIDATE Shift 886
+I1112 TOKEN={ KIND={ ACTION=shift 886 ERROR=
+  CANDIDATE Shift 886
+I886 TOKEN=public KIND=TSClassModifierToken ACTION=epsilon reduce __predicate51 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I886 TOKEN=public KIND=TSClassModifierToken ACTION=goto 1109 ERROR=
+  CANDIDATE EpsilonReduce __predicate51 -> epsilon PRED=TSClassModifiersStart
+I1109 TOKEN=public KIND=TSClassModifierToken ACTION=epsilon reduce __predicate56 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate56 -> epsilon PRED=TSClassModifierStart
+I1109 TOKEN=public KIND=TSClassModifierToken ACTION=goto 1380 ERROR=
+  CANDIDATE EpsilonReduce __predicate56 -> epsilon PRED=TSClassModifierStart
+I1380 TOKEN=public KIND=TSClassModifierToken ACTION=shift 1838 ERROR=
+  CANDIDATE Shift 1838
+I1838 TOKEN=run KIND=IdentifierName ACTION=reduce TSModifier -> __predicate56 TSClassModifierToken ERROR=
+  CANDIDATE Reduce TSModifier -> __predicate56 TSClassModifierToken PRED=
+I1109 TOKEN=run KIND=IdentifierName ACTION=goto 1379 ERROR=
+I1379 TOKEN=run KIND=IdentifierName ACTION=reduce TSModifierList -> TSModifier ERROR=
+  CANDIDATE Reduce TSModifierList -> TSModifier PRED=
+I1109 TOKEN=run KIND=IdentifierName ACTION=goto 1378 ERROR=
+I1378 TOKEN=run KIND=IdentifierName ACTION=epsilon reduce __predicate55 -> epsilon ERROR=
+  CANDIDATE EpsilonReduce __predicate55 -> epsilon PRED=TSNoClassModifierStart
+I1378 TOKEN=run KIND=IdentifierName ACTION=goto 1836 ERROR=
+  CANDIDATE EpsilonReduce __predicate55 -> epsilon PRED=TSNoClassModifierStart
+I1836 TOKEN=run KIND=IdentifierName ACTION=reduce TSModifiers -> TSModifierList __predicate55 ERROR=
+  CANDIDATE Reduce TSModifiers -> TSModifierList __predicate55 PRED=
+I1109 TOKEN=run KIND=IdentifierName ACTION=goto 1377 ERROR=
+I1377 TOKEN=run KIND=IdentifierName ACTION=shift 769 ERROR=
+  CANDIDATE Shift 769
+I769 TOKEN=< KIND=< ACTION=reduce PropertyIdentifierName -> IdentifierName ERROR=
+  CANDIDATE Reduce PropertyIdentifierName -> IdentifierName PRED=
+I1377 TOKEN=< KIND=< ACTION=goto 339 ERROR=
+I339 TOKEN=< KIND=< ACTION=failed null ERROR=(shift 할 수 없습니다 {:, TSTypeOpen, (, IdentifierName, await, break, case, catch, class, const, continue, debugger, default, delete, do, else, enum, export, extends, false, finally, for, function, if, import, in, instanceof, new, null, return, super, switch, this, throw, true, try, typeof, var, void, while, with, yield, let, static, implements, interface, package, private, protected, public, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, StringLiteral, NumericLiteral, [, *, ?, PrivateIdentifier, TSNonNullToken, ;, }, TSClassModifierToken, =, {, ,} 와야 합니다)
+  ITEM PropertyName -> PropertyIdentifierName•

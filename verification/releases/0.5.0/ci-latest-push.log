@@ -1,0 +1,1009 @@
+Test and build release artifacts	Set up job	﻿2026-10-21T01:59:05.9845047Z Current runner version: '2.338.0'
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9884940Z ##[group]Runner Image Provisioner
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9886310Z Hosted Compute Agent
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9887255Z Version: 20261015.610
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9888308Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9889465Z Build Date: 2026-10-14T17:06:54Z
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9890889Z Worker ID: {a434dcb3-c34c-4eeb-9deb-4d32af0c6063}
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9892074Z Region: eastus
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9892968Z Cloud: Azure
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9893977Z ##[endgroup]
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9896541Z ##[group]Operating System
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9897650Z Ubuntu
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9898470Z 24.04.5
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9899390Z LTS
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9900533Z ##[endgroup]
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9901451Z ##[group]Runner Image
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9902529Z Image: ubuntu-24.04
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9903427Z Version: 20261018.339.1
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9905313Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261018.339/images/ubuntu/Ubuntu2404-Readme.md
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9908133Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261018.339
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9910076Z ##[endgroup]
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9911964Z ##[group]GITHUB_TOKEN Permissions
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9915117Z Contents: read
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9916069Z Metadata: read
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9917076Z ##[endgroup]
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9920817Z Secret source: Actions
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9922349Z Cache mode: write
+Test and build release artifacts	Set up job	2026-10-21T01:59:05.9923796Z Prepare workflow directory
+Test and build release artifacts	Set up job	2026-10-21T01:59:06.0487370Z Prepare all required actions
+Test and build release artifacts	Set up job	2026-10-21T01:59:06.0559300Z Getting action download info
+Test and build release artifacts	Set up job	2026-10-21T01:59:06.2368887Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Test and build release artifacts	Set up job	2026-10-21T01:59:06.3642953Z Download action repository 'actions/setup-dotnet@v4' (SHA:67a3573c9a986a3f9c594539f4ab511d57bb3ce9)
+Test and build release artifacts	Set up job	2026-10-21T01:59:06.5885216Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+Test and build release artifacts	Set up job	2026-10-21T01:59:06.7208636Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Test and build release artifacts	Set up job	2026-10-21T01:59:06.9928957Z Complete job name: Test and build release artifacts
+Test and build release artifacts	Run actions/checkout@v4	﻿2026-10-21T01:59:07.0925900Z ##[group]Run actions/checkout@v4
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0926816Z with:
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0927292Z   persist-credentials: false
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0927851Z   repository: AJ-comp/Compiler
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0932053Z   token: ***
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0932505Z   ssh-strict: true
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0932957Z   ssh-user: git
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0933385Z   clean: true
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0933840Z   sparse-checkout-cone-mode: true
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0934379Z   fetch-depth: 1
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0934825Z   fetch-tags: false
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0935276Z   show-progress: true
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0935738Z   lfs: false
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0936171Z   submodules: false
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0936648Z   set-safe-directory: true
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0937167Z   allow-unsafe-pr-checkout: false
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0937899Z env:
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0938323Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0938828Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0939318Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.0940052Z ##[endgroup]
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.1979544Z Syncing repository: AJ-comp/Compiler
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.1982530Z ##[group]Getting Git version info
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.1983591Z Working directory is '/home/runner/work/Compiler/Compiler'
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.1984813Z [command]/usr/bin/git version
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2246147Z git version 2.55.0
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2268756Z ##[endgroup]
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2285269Z Temporarily overriding HOME='/home/runner/work/_temp/fa31ea0d-60ec-480f-b903-f8cc09c358e6' before making global git config changes
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2287144Z Adding repository directory to the temporary git global config as a safe directory
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2291108Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Compiler/Compiler
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2346725Z Deleting the contents of '/home/runner/work/Compiler/Compiler'
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2351199Z ##[group]Initializing the repository
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2356075Z [command]/usr/bin/git init /home/runner/work/Compiler/Compiler
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2447095Z hint: Using 'master' as the name for the initial branch. This default branch name
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2448918Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2450337Z hint: to use in all of your new repositories, which will suppress this warning,
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2451782Z hint: call:
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2452594Z hint:
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2453342Z hint: 	git config --global init.defaultBranch <name>
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2454131Z hint:
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2454857Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2455915Z hint: 'development'. The just-created branch can be renamed via this command:
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2456776Z hint:
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2457391Z hint: 	git branch -m <name>
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2458008Z hint:
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2458951Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2460534Z Initialized empty Git repository in /home/runner/work/Compiler/Compiler/.git/
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2462773Z [command]/usr/bin/git remote add origin https://github.com/AJ-comp/Compiler
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2514429Z ##[endgroup]
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2515369Z ##[group]Disabling automatic garbage collection
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2518348Z [command]/usr/bin/git config --local gc.auto 0
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2558548Z ##[endgroup]
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2559483Z ##[group]Setting up auth
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2566547Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2611992Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.2989072Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.3040363Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.3302610Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.3354483Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.3613843Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.3671605Z ##[endgroup]
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.3672991Z ##[group]Fetching the repository
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.3683409Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +21d3c6aba6280eeeb4aa12c9fa545556a5b932d9:refs/remotes/origin/codex/parser-driven-lexing
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.9754807Z From https://github.com/AJ-comp/Compiler
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.9756861Z  * [new ref]         21d3c6aba6280eeeb4aa12c9fa545556a5b932d9 -> origin/codex/parser-driven-lexing
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.9761076Z ##[endgroup]
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.9762671Z ##[group]Determining the checkout info
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.9764486Z ##[endgroup]
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.9767829Z [command]/usr/bin/git sparse-checkout disable
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.9844404Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.9899173Z ##[group]Checking out the ref
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:07.9905451Z [command]/usr/bin/git checkout --progress --force -B codex/parser-driven-lexing refs/remotes/origin/codex/parser-driven-lexing
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.0778717Z Switched to a new branch 'codex/parser-driven-lexing'
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.0783143Z branch 'codex/parser-driven-lexing' set up to track 'origin/codex/parser-driven-lexing'.
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.0798967Z ##[endgroup]
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.0860340Z [command]/usr/bin/git log -1 --format=%H
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.0900525Z 21d3c6aba6280eeeb4aa12c9fa545556a5b932d9
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.0911107Z ##[group]Removing auth
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.0914970Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.0959273Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.1220826Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.1258178Z http.https://github.com/.extraheader
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.1267274Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.1311494Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.1559488Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.1603312Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test and build release artifacts	Run actions/checkout@v4	2026-10-21T01:59:08.1848892Z ##[endgroup]
+Test and build release artifacts	Detect playground frontend	﻿2026-10-21T01:59:08.2101728Z ##[group]Run if [[ -f samples/Playground/Frontend/package.json ]]; then
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2103194Z ^[[36;1mif [[ -f samples/Playground/Frontend/package.json ]]; then^[[0m
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2104474Z ^[[36;1m  if [[ ! -f samples/Playground/Frontend/package-lock.json ]]; then^[[0m
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2105813Z ^[[36;1m    echo '::error::The React frontend requires a committed package-lock.json.'^[[0m
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2106953Z ^[[36;1m    exit 1^[[0m
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2107746Z ^[[36;1m  fi^[[0m
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2108599Z ^[[36;1m  echo 'enabled=true' >> "$GITHUB_OUTPUT"^[[0m
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2109635Z ^[[36;1m  echo 'mode=React UI' >> "$GITHUB_OUTPUT"^[[0m
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2110828Z ^[[36;1melse^[[0m
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2111645Z ^[[36;1m  echo 'enabled=false' >> "$GITHUB_OUTPUT"^[[0m
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2112671Z ^[[36;1m  echo 'mode=Legacy Blazor UI' >> "$GITHUB_OUTPUT"^[[0m
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2114105Z ^[[36;1m  echo 'Legacy Blazor UI: no Frontend/package.json in this checkout; Node.js steps are skipped.' >> "$GITHUB_STEP_SUMMARY"^[[0m
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2115518Z ^[[36;1mfi^[[0m
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2272851Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2273942Z env:
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2274716Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2275582Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2276423Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Detect playground frontend	2026-10-21T01:59:08.2277337Z ##[endgroup]
+Test and build release artifacts	Set up .NET	﻿2026-10-21T01:59:08.2533785Z ##[group]Run actions/setup-dotnet@v4
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.2534726Z with:
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.2535454Z   dotnet-version: 8.0.x
+Test and build release artifacts	Set up .NET	10.0.x
+Test and build release artifacts	Set up .NET	
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.2536317Z   cache: false
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.2537050Z env:
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.2537772Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.2538567Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.2539347Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.2540459Z ##[endgroup]
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.4005308Z (node:2197) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.4007193Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.4032837Z [command]/home/runner/work/_actions/actions/setup-dotnet/v4/externals/install-dotnet.sh --skip-non-versioned-files --runtime dotnet --channel LTS
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.7370273Z dotnet-install: .NET Core Runtime with version '10.0.13' is already installed.
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.7397039Z [command]/home/runner/work/_actions/actions/setup-dotnet/v4/externals/install-dotnet.sh --skip-non-versioned-files --channel 8.0
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.9652906Z dotnet-install: .NET Core SDK with version '8.0.426' is already installed.
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:08.9671587Z [command]/home/runner/work/_actions/actions/setup-dotnet/v4/externals/install-dotnet.sh --skip-non-versioned-files --runtime dotnet --channel LTS
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:09.1868822Z dotnet-install: .NET Core Runtime with version '10.0.13' is already installed.
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:09.1879270Z [command]/home/runner/work/_actions/actions/setup-dotnet/v4/externals/install-dotnet.sh --skip-non-versioned-files --channel 10.0
+Test and build release artifacts	Set up .NET	2026-10-21T01:59:09.4082758Z dotnet-install: .NET Core SDK with version '10.0.402' is already installed.
+Test and build release artifacts	Read and validate release versions	﻿2026-10-21T01:59:09.4261818Z ##[group]Run package_version=$(dotnet msbuild src/Janglim/Janglim.csproj -nologo -getProperty:PackageVersion)
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4264391Z ^[[36;1mpackage_version=$(dotnet msbuild src/Janglim/Janglim.csproj -nologo -getProperty:PackageVersion)^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4266930Z ^[[36;1mweb_version=$(dotnet msbuild samples/Playground/Janglim.Playground.csproj -nologo -getProperty:Version)^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4269456Z ^[[36;1mversion_pattern='^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?(\+[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?$'^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4272051Z ^[[36;1mif [[ ! "$package_version" =~ $version_pattern || "$package_version" == *+* || ! "$web_version" =~ $version_pattern ]]; then^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4274320Z ^[[36;1m  echo '::error::The evaluated package and web versions must be safe semantic versions.'^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4275705Z ^[[36;1m  exit 1^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4276233Z ^[[36;1mfi^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4276776Z ^[[36;1m{^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4277650Z ^[[36;1m  echo "package_version=$package_version"^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4278745Z ^[[36;1m  echo "web_version=$web_version"^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4280128Z ^[[36;1m  echo "package_artifact=janglim-package-${RUN_ID}-${RUN_ATTEMPT}"^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4281648Z ^[[36;1m  echo "web_artifact=playground-site-${RUN_ID}-${RUN_ATTEMPT}"^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4282789Z ^[[36;1m} >> "$GITHUB_OUTPUT"^[[0m
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4346831Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4347851Z env:
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4348339Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4349000Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4349630Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4350568Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4351240Z   RUN_ID: 39530419087
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4351776Z   RUN_ATTEMPT: 1
+Test and build release artifacts	Read and validate release versions	2026-10-21T01:59:09.4352281Z ##[endgroup]
+Test and build release artifacts	Test release infrastructure helpers	﻿2026-10-21T01:59:16.4864051Z ##[group]Run python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.4864690Z ^[[36;1mpython3 -m unittest discover -s .github/scripts -p 'test_*.py'^[[0m
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.4920259Z shell: /usr/bin/bash -e {0}
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.4920566Z env:
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.4920842Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.4921133Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.4921389Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.4921698Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.4921959Z ##[endgroup]
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.6381859Z ............
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.6382507Z ----------------------------------------------------------------------
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.6382921Z Ran 12 tests in 0.007s
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.6383070Z 
+Test and build release artifacts	Test release infrastructure helpers	2026-10-21T01:59:16.6383166Z OK
+Test and build release artifacts	Set up Node.js	﻿2026-10-21T01:59:16.6636837Z ##[group]Run actions/setup-node@v4
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6637164Z with:
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6637384Z   node-version: >=22.18.0 <23
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6637634Z   cache: npm
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6637955Z   cache-dependency-path: samples/Playground/Frontend/package-lock.json
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6638321Z   always-auth: false
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6638536Z   check-latest: false
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6641061Z   token: ***
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6641278Z env:
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6641486Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6641732Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6641971Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6642452Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.6642696Z ##[endgroup]
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.8669540Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.8673657Z (node:2594) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.8674788Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:16.8676263Z ##[group]Environment details
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:17.2673194Z node: v22.23.3
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:17.2673734Z npm: 10.9.9
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:17.2674050Z yarn: 1.22.22
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:17.2696102Z ##[endgroup]
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:17.2696732Z [command]/opt/hostedtoolcache/node/22.23.3/x64/bin/npm config get cache
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:17.6023350Z /home/runner/.npm
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:17.6816507Z Cache hit for: node-cache-Linux-x64-npm-f6123ccb69a68ecc93ef5b2055a5877a1e068989c048bf5fb77a6f938670feb9
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:17.6924687Z (node:2594) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:18.0825455Z Received 44272700 of 44272700 (100.0%), 116.3 MBs/sec
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:18.0826032Z Cache Size: ~42 MB (44272700 B)
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:18.0850117Z [command]/usr/bin/tar -xf /home/runner/work/_temp/9decd9f8-996e-45cc-a8a2-2eaba19cda9a/cache.tzst -P -C /home/runner/work/Compiler/Compiler --use-compress-program unzstd
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:18.1815341Z Cache restored successfully
+Test and build release artifacts	Set up Node.js	2026-10-21T01:59:18.1843754Z Cache restored from key: node-cache-Linux-x64-npm-f6123ccb69a68ecc93ef5b2055a5877a1e068989c048bf5fb77a6f938670feb9
+Test and build release artifacts	Install UI dependencies	﻿2026-10-21T01:59:18.2103458Z ##[group]Run npm ci --no-audit --no-fund
+Test and build release artifacts	Install UI dependencies	2026-10-21T01:59:18.2103823Z ^[[36;1mnpm ci --no-audit --no-fund^[[0m
+Test and build release artifacts	Install UI dependencies	2026-10-21T01:59:18.2163518Z shell: /usr/bin/bash -e {0}
+Test and build release artifacts	Install UI dependencies	2026-10-21T01:59:18.2163801Z env:
+Test and build release artifacts	Install UI dependencies	2026-10-21T01:59:18.2164016Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Install UI dependencies	2026-10-21T01:59:18.2164268Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Install UI dependencies	2026-10-21T01:59:18.2164547Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Install UI dependencies	2026-10-21T01:59:18.2164826Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Install UI dependencies	2026-10-21T01:59:18.2165089Z ##[endgroup]
+Test and build release artifacts	Install UI dependencies	2026-10-21T01:59:23.5575929Z 
+Test and build release artifacts	Install UI dependencies	2026-10-21T01:59:23.5583753Z added 171 packages in 5s
+Test and build release artifacts	Verify web version metadata	﻿2026-10-21T01:59:23.6219226Z ##[group]Run node --input-type=module <<'NODE'
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6219690Z ^[[36;1mnode --input-type=module <<'NODE'^[[0m
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6220264Z ^[[36;1mimport { readFileSync } from 'node:fs';^[[0m
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6220647Z ^[[36;1mconst root = 'samples/Playground/Frontend/';^[[0m
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6221084Z ^[[36;1mconst pkg = JSON.parse(readFileSync(root + 'package.json', 'utf8'));^[[0m
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6221606Z ^[[36;1mconst lock = JSON.parse(readFileSync(root + 'package-lock.json', 'utf8'));^[[0m
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6222244Z ^[[36;1mif ([pkg.version, lock.version, lock.packages?.['']?.version].some(version => version !== process.env.WEB_VERSION)) {^[[0m
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6222932Z ^[[36;1m  throw new Error('The web project, package.json and package-lock.json versions must match.');^[[0m
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6223415Z ^[[36;1m}^[[0m
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6223650Z ^[[36;1mNODE^[[0m
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6280767Z shell: /usr/bin/bash -e {0}
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6281026Z env:
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6281252Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6281547Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6281782Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6282068Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6282342Z   WEB_VERSION: 1.1.0
+Test and build release artifacts	Verify web version metadata	2026-10-21T01:59:23.6282576Z ##[endgroup]
+Test and build release artifacts	Build default solution (Debug)	﻿2026-10-21T01:59:23.6730252Z ##[group]Run dotnet build AJPGS.sln -c Debug --nologo
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:23.6730694Z ^[[36;1mdotnet build AJPGS.sln -c Debug --nologo^[[0m
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:23.6786108Z shell: /usr/bin/bash -e {0}
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:23.6786392Z env:
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:23.6786629Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:23.6786899Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:23.6787160Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:23.6787675Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:23.6787931Z ##[endgroup]
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:25.4888499Z   Determining projects to restore...
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:27.1844935Z   Restored /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse/Parse.csproj (in 774 ms).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:27.1883246Z   Restored /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Support/Parse.FrontEnd.Support.csproj (in 774 ms).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:27.1888964Z   Restored /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/Parse.FrontEnd.csproj (in 774 ms).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:27.1890909Z   Restored /home/runner/work/Compiler/Compiler/src/Janglim/Janglim.csproj (in 774 ms).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:27.1967890Z   Restored /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj (in 7 ms).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:27.1991960Z   Restored /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars/Parse.FrontEnd.Grammars.csproj (in 6 ms).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:27.2007323Z   Restored /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/Parse.FrontEnd.Grammars.Ebnf.csproj (in 5 ms).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:27.2052060Z   Restored /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.ErrorHandler/Parse.FrontEnd.ErrorHandler.csproj (in 2 ms).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:27.2084809Z   Restored /home/runner/work/Compiler/Compiler/src/Common/AJ.Common/AJ.Common.csproj (in 1 ms).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:27.6273195Z   Restored /home/runner/work/Compiler/Compiler/services/Janglim.Mcp/Janglim.Mcp.csproj (in 415 ms).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:28.5982848Z   Restored /home/runner/work/Compiler/Compiler/Tests/Parse.FrontEnd.Parsers.Tests/Parse.FrontEnd.Parsers.Tests.csproj (in 1.39 sec).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:28.6812170Z   Restored /home/runner/work/Compiler/Compiler/samples/Playground/Janglim.Playground.csproj (in 1.48 sec).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:29.0096024Z   Restored /home/runner/work/Compiler/Compiler/Tests/Janglim.Mcp.Tests/Janglim.Mcp.Tests.csproj (in 1.8 sec).
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:29.8974427Z   
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:29.8975093Z   > janglim-playground-ui@1.1.0 build
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:29.8975514Z   > tsc --noEmit && node scripts/build.mjs
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:29.8975821Z   
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:32.4280705Z   ^[[36mvite v7.3.7 ^[[32mbuilding client environment for production...^[[36m^[[39m
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:32.5451241Z   transforming...
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:34.8622845Z   AJ.Common -> /home/runner/work/Compiler/Compiler/src/Common/AJ.Common/bin/Debug/netstandard2.1/AJ.Common.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:36.0591873Z   Parse -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse/bin/Debug/netstandard2.1/Parse.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:37.1708740Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/KeyManager.cs(17,22): warning CS0414: The field 'KeyManager.meaningUnitKey' is assigned but its value is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/Parse.FrontEnd.csproj]
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:37.4004183Z   Parse.FrontEnd -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/bin/Debug/netstandard2.1/Parse.FrontEnd.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:38.0752463Z   ^[[32m✓^[[39m 2052 modules transformed.
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:38.5722798Z   rendering chunks...
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:38.6681903Z   computing gzip size...
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:38.8487824Z   ^[[2m../../../../../../../../tmp/janglim-playground-build-1fhEtq/^[[22m^[[35mstyle.css      ^[[39m^[[1m^[[2m 55.82 kB^[[22m^[[1m^[[22m^[[2m │ gzip:  11.38 kB^[[22m
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:38.8522053Z   ^[[2m../../../../../../../../tmp/janglim-playground-build-1fhEtq/^[[22m^[[36mplayground.js  ^[[39m^[[1m^[[33m872.87 kB^[[39m^[[22m^[[2m │ gzip: 200.50 kB^[[22m
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:38.8602140Z   ^[[32m✓ built in 6.37s^[[39m
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:38.9652378Z   Copied playground.js, style.css, and locale.js to wwwroot/ui.
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:39.3949095Z   Parse.FrontEnd.Grammars -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars/bin/Debug/netstandard2.1/Parse.FrontEnd.Grammars.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:40.0528408Z   Parse.FrontEnd.Grammars.Ebnf -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/bin/Debug/netstandard2.1/Parse.FrontEnd.Grammars.Ebnf.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:40.2622246Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs(21,55): warning CS0067: The event 'LLParser.ASTCreated' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:40.2643007Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs(49,48): warning CS0067: The event 'LRParser.ReduceAction' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:40.2673191Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs(20,62): warning CS0067: The event 'LLParser.ParseTreeCreated' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:40.2703099Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs(51,48): warning CS0067: The event 'LRParser.ShiftAction' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:40.4974589Z   Parse.FrontEnd.Parsers -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/bin/Debug/netstandard2.1/Parse.FrontEnd.Parsers.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:46.3247825Z   Parse.FrontEnd.Support -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Support/bin/Debug/netstandard2.1/Parse.FrontEnd.Support.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:46.3505717Z   Parse.FrontEnd.ErrorHandler -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.ErrorHandler/bin/Debug/netstandard2.1/Parse.FrontEnd.ErrorHandler.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:46.4935783Z   Janglim -> /home/runner/work/Compiler/Compiler/src/Janglim/bin/Debug/netstandard2.1/Janglim.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:48.6307434Z   Janglim.Playground -> /home/runner/work/Compiler/Compiler/samples/Playground/bin/Debug/net10.0/Janglim.Playground.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:48.6310739Z   Janglim.Playground (Blazor output) -> /home/runner/work/Compiler/Compiler/samples/Playground/bin/Debug/net10.0/wwwroot
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:48.7989593Z   Janglim.Mcp -> /home/runner/work/Compiler/Compiler/services/Janglim.Mcp/bin/Debug/net10.0/Janglim.Mcp.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:49.8287428Z   Janglim.Mcp.Tests -> /home/runner/work/Compiler/Compiler/Tests/Janglim.Mcp.Tests/bin/Debug/net10.0/Janglim.Mcp.Tests.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3039264Z   Parse.FrontEnd.Parsers.Tests -> /home/runner/work/Compiler/Compiler/Tests/Parse.FrontEnd.Parsers.Tests/bin/Debug/net8.0/Parse.FrontEnd.Parsers.Tests.dll
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3442830Z 
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3453454Z Build succeeded.
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3457448Z 
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3461227Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/KeyManager.cs(17,22): warning CS0414: The field 'KeyManager.meaningUnitKey' is assigned but its value is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/Parse.FrontEnd.csproj]
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3466216Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs(21,55): warning CS0067: The event 'LLParser.ASTCreated' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3469273Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs(49,48): warning CS0067: The event 'LRParser.ReduceAction' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3474366Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs(20,62): warning CS0067: The event 'LLParser.ParseTreeCreated' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3479591Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs(51,48): warning CS0067: The event 'LRParser.ShiftAction' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3482387Z     5 Warning(s)
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3482730Z     0 Error(s)
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3482910Z 
+Test and build release artifacts	Build default solution (Debug)	2026-10-21T01:59:53.3483105Z Time Elapsed 00:00:29.26
+Test and build release artifacts	Build default solution (Release)	﻿2026-10-21T01:59:53.4020045Z ##[group]Run dotnet build AJPGS.sln -c Release --nologo
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:53.4020513Z ^[[36;1mdotnet build AJPGS.sln -c Release --nologo^[[0m
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:53.4074795Z shell: /usr/bin/bash -e {0}
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:53.4075098Z env:
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:53.4075323Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:53.4075582Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:53.4075826Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:53.4076123Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:53.4076383Z ##[endgroup]
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:54.2941295Z   Determining projects to restore...
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:54.9731224Z   All projects are up-to-date for restore.
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:55.3619351Z   AJ.Common -> /home/runner/work/Compiler/Compiler/src/Common/AJ.Common/bin/Release/netstandard2.1/AJ.Common.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:55.9911822Z   Parse -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse/bin/Release/netstandard2.1/Parse.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:56.8594695Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/KeyManager.cs(17,22): warning CS0414: The field 'KeyManager.meaningUnitKey' is assigned but its value is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/Parse.FrontEnd.csproj]
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:57.5341205Z   Parse.FrontEnd -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/bin/Release/netstandard2.1/Parse.FrontEnd.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:57.6647021Z   Parse.FrontEnd.Grammars -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:58.0485333Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs(21,55): warning CS0067: The event 'LLParser.ASTCreated' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:58.0503397Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs(51,48): warning CS0067: The event 'LRParser.ShiftAction' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:58.0510603Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs(49,48): warning CS0067: The event 'LRParser.ReduceAction' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:58.0520052Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs(20,62): warning CS0067: The event 'LLParser.ParseTreeCreated' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:58.7215108Z   Parse.FrontEnd.Grammars.Ebnf -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.Ebnf.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:58.7352960Z   Parse.FrontEnd.Parsers -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/bin/Release/netstandard2.1/Parse.FrontEnd.Parsers.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:58.9362583Z   Parse.FrontEnd.Support -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Support/bin/Release/netstandard2.1/Parse.FrontEnd.Support.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T01:59:58.9530776Z   Parse.FrontEnd.ErrorHandler -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.ErrorHandler/bin/Release/netstandard2.1/Parse.FrontEnd.ErrorHandler.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:02.6142856Z   Janglim.Playground -> /home/runner/work/Compiler/Compiler/samples/Playground/bin/Release/net10.0/Janglim.Playground.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:02.6160524Z   Janglim.Playground (Blazor output) -> /home/runner/work/Compiler/Compiler/samples/Playground/bin/Release/net10.0/wwwroot
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:03.2521661Z   Janglim.Mcp -> /home/runner/work/Compiler/Compiler/services/Janglim.Mcp/bin/Release/net10.0/Janglim.Mcp.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:04.7344055Z   Parse.FrontEnd.Parsers.Tests -> /home/runner/work/Compiler/Compiler/Tests/Parse.FrontEnd.Parsers.Tests/bin/Release/net8.0/Parse.FrontEnd.Parsers.Tests.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:04.7483380Z   Janglim -> /home/runner/work/Compiler/Compiler/src/Janglim/bin/Release/netstandard2.1/Janglim.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.2002983Z   Janglim.Mcp.Tests -> /home/runner/work/Compiler/Compiler/Tests/Janglim.Mcp.Tests/bin/Release/net10.0/Janglim.Mcp.Tests.dll
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.3812514Z 
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.3827688Z Build succeeded.
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.3840545Z 
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.3844582Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/KeyManager.cs(17,22): warning CS0414: The field 'KeyManager.meaningUnitKey' is assigned but its value is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/Parse.FrontEnd.csproj]
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.3850736Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs(21,55): warning CS0067: The event 'LLParser.ASTCreated' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.3857241Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs(51,48): warning CS0067: The event 'LRParser.ShiftAction' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.3862781Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs(49,48): warning CS0067: The event 'LRParser.ReduceAction' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.3868125Z ##[warning]/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs(20,62): warning CS0067: The event 'LLParser.ParseTreeCreated' is never used [/home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.3871116Z     5 Warning(s)
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.3871721Z     0 Error(s)
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.3872126Z 
+Test and build release artifacts	Build default solution (Release)	2026-10-21T02:00:05.3872558Z Time Elapsed 00:00:11.69
+Test and build release artifacts	Test parser engine	﻿2026-10-21T02:00:05.4403777Z ##[group]Run dotnet test Tests/Parse.FrontEnd.Parsers.Tests/Parse.FrontEnd.Parsers.Tests.csproj -c Release --logger trx --results-directory TestResults
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:05.4405624Z ^[[36;1mdotnet test Tests/Parse.FrontEnd.Parsers.Tests/Parse.FrontEnd.Parsers.Tests.csproj -c Release --logger trx --results-directory TestResults^[[0m
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:05.4486925Z shell: /usr/bin/bash -e {0}
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:05.4487442Z env:
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:05.4487824Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:05.4488275Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:05.4488686Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:05.4489192Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:05.4489636Z ##[endgroup]
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:06.2353850Z   Determining projects to restore...
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:07.5278467Z   All projects are up-to-date for restore.
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:08.7064875Z   AJ.Common -> /home/runner/work/Compiler/Compiler/src/Common/AJ.Common/bin/Release/netstandard2.1/AJ.Common.dll
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:08.8911687Z   Parse -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse/bin/Release/netstandard2.1/Parse.dll
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:09.2149510Z   Parse.FrontEnd -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/bin/Release/netstandard2.1/Parse.FrontEnd.dll
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:09.3422668Z   Parse.FrontEnd.Grammars -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.dll
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:09.4782639Z   Parse.FrontEnd.Grammars.Ebnf -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.Ebnf.dll
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:09.5948138Z   Parse.FrontEnd.Parsers -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/bin/Release/netstandard2.1/Parse.FrontEnd.Parsers.dll
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:09.9462391Z   Parse.FrontEnd.Parsers.Tests -> /home/runner/work/Compiler/Compiler/Tests/Parse.FrontEnd.Parsers.Tests/bin/Release/net8.0/Parse.FrontEnd.Parsers.Tests.dll
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:09.9746505Z Test run for /home/runner/work/Compiler/Compiler/Tests/Parse.FrontEnd.Parsers.Tests/bin/Release/net8.0/Parse.FrontEnd.Parsers.Tests.dll (.NETCoreApp,Version=v8.0)
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:10.7791436Z A total of 1 test files matched the specified pattern.
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:48.9456824Z [xUnit.net 00:00:32.43]     Janglim.FrontEnd.Parsers.Tests.SlrKnownIssueTests.Slr_should_parse_valid_Ex1 [SKIP]
+Test and build release artifacts	Test parser engine	2026-10-21T02:00:48.9534824Z   Skipped Janglim.FrontEnd.Parsers.Tests.SlrKnownIssueTests.Slr_should_parse_valid_Ex1 [1 ms]
+Test and build release artifacts	Test parser engine	2026-10-21T02:02:20.7069191Z Results File: /home/runner/work/Compiler/Compiler/TestResults/_runnervmxehtw_2026-10-21_02_00_19_net8.0.trx
+Test and build release artifacts	Test parser engine	2026-10-21T02:02:20.7074097Z 
+Test and build release artifacts	Test parser engine	2026-10-21T02:02:20.7175036Z Passed!  - Failed:     0, Passed:  4976, Skipped:     1, Total:  4977, Duration: 2 m - Parse.FrontEnd.Parsers.Tests.dll (net8.0)
+Test and build release artifacts	Test MCP protocol and isolated parser workers	﻿2026-10-21T02:02:20.8456344Z ##[group]Run dotnet test Tests/Janglim.Mcp.Tests/Janglim.Mcp.Tests.csproj -c Release --logger trx --results-directory TestResults
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:20.8457232Z ^[[36;1mdotnet test Tests/Janglim.Mcp.Tests/Janglim.Mcp.Tests.csproj -c Release --logger trx --results-directory TestResults^[[0m
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:20.8513715Z shell: /usr/bin/bash -e {0}
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:20.8513983Z env:
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:20.8514197Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:20.8514453Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:20.8514702Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:20.8515012Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:20.8515271Z ##[endgroup]
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:21.4651518Z   Determining projects to restore...
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:22.7317692Z   All projects are up-to-date for restore.
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:23.7317589Z   AJ.Common -> /home/runner/work/Compiler/Compiler/src/Common/AJ.Common/bin/Release/netstandard2.1/AJ.Common.dll
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:23.9184340Z   Parse -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse/bin/Release/netstandard2.1/Parse.dll
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:24.1942232Z   Parse.FrontEnd -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/bin/Release/netstandard2.1/Parse.FrontEnd.dll
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:24.3697804Z   Parse.FrontEnd.Grammars -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.dll
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:24.4942852Z   Parse.FrontEnd.Parsers -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/bin/Release/netstandard2.1/Parse.FrontEnd.Parsers.dll
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:24.5717829Z   Parse.FrontEnd.Grammars.Ebnf -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.Ebnf.dll
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:25.0524572Z   Janglim.Mcp -> /home/runner/work/Compiler/Compiler/services/Janglim.Mcp/bin/Release/net10.0/Janglim.Mcp.dll
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:25.4586942Z   Janglim.Mcp.Tests -> /home/runner/work/Compiler/Compiler/Tests/Janglim.Mcp.Tests/bin/Release/net10.0/Janglim.Mcp.Tests.dll
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:25.5357487Z Test run for /home/runner/work/Compiler/Compiler/Tests/Janglim.Mcp.Tests/bin/Release/net10.0/Janglim.Mcp.Tests.dll (.NETCoreApp,Version=v10.0)
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:25.8422392Z A total of 1 test files matched the specified pattern.
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:53.5537863Z Results File: /home/runner/work/Compiler/Compiler/TestResults/_runnervmxehtw_2026-10-21_02_02_27_net10.0.trx
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:53.5541541Z 
+Test and build release artifacts	Test MCP protocol and isolated parser workers	2026-10-21T02:02:53.5591761Z Passed!  - Failed:     0, Passed:    69, Skipped:     0, Total:    69, Duration: 26 s - Janglim.Mcp.Tests.dll (net10.0)
+Test and build release artifacts	Test interface	﻿2026-10-21T02:02:53.6321463Z ##[group]Run npm test
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.6321743Z ^[[36;1mnpm test^[[0m
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.6375844Z shell: /usr/bin/bash -e {0}
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.6376104Z env:
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.6376317Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.6376560Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.6376810Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.6377086Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.6377335Z ##[endgroup]
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.7763445Z 
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.7766149Z > janglim-playground-ui@1.1.0 test
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.7767196Z > node --test scripts/test-language.mjs scripts/test-workspace.mjs
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.7767772Z 
+Test and build release artifacts	Test interface	2026-10-21T02:02:53.8248026Z TAP version 13
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1461788Z # Subtest: browser language order takes precedence over the supported language order
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1494594Z ok 1 - browser language order takes precedence over the supported language order
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1535270Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1548668Z   duration_ms: 1.290251
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1549391Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1550061Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1551064Z # Subtest: regional, script, and case variants resolve to their supported base language
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1552338Z ok 2 - regional, script, and case variants resolve to their supported base language
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1553171Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1553643Z   duration_ms: 0.357437
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1554119Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1554580Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1555362Z # Subtest: unsupported and malformed language lists safely fall back to English
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1556392Z ok 3 - unsupported and malformed language lists safely fall back to English
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1557082Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1557519Z   duration_ms: 0.161628
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1558054Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1558499Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1559454Z # Subtest: Chinese scripts override regions and traditional regions select the Taiwan interface
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1564197Z ok 4 - Chinese scripts override regions and traditional regions select the Taiwan interface
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1565172Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1565668Z   duration_ms: 0.196981
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1566198Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1566679Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1567535Z # Subtest: an explicit supported preference overrides the browser list
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1568883Z ok 5 - an explicit supported preference overrides the browser list
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1570189Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1570924Z   duration_ms: 0.127167
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1640561Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1641037Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1641711Z # Subtest: saved preferences accept only exact supported values
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1642605Z ok 6 - saved preferences accept only exact supported values
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1643162Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1643513Z   duration_ms: 0.207355
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1643888Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1644304Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1645197Z # Subtest: all fourteen supported languages have selectable names and persistent overrides
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1646423Z ok 7 - all fourteen supported languages have selectable names and persistent overrides
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1647128Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1647467Z   duration_ms: 0.430294
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1647834Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1648146Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1648956Z # Subtest: reading absent, invalid, or denied storage resumes automatic resolution
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1650264Z ok 8 - reading absent, invalid, or denied storage resumes automatic resolution
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1650900Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1651238Z   duration_ms: 0.197321
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1651632Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1651947Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1652786Z # Subtest: explicit choices persist, while automatic mode removes only the language override
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1654041Z ok 9 - explicit choices persist, while automatic mode removes only the language override
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1655281Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1656030Z   duration_ms: 0.404186
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1656413Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1656742Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1657473Z # Subtest: denied writes and removals cannot invalidate a session preference
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1658559Z ok 10 - denied writes and removals cannot invalidate a session preference
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1659142Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1659460Z   duration_ms: 0.425386
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1660035Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1660362Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1661043Z # Subtest: translations interpolate zero counts and reorder named values naturally
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1662155Z ok 11 - translations interpolate zero counts and reorder named values naturally
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1662854Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1663218Z   duration_ms: 0.376045
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1663604Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1663926Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1664798Z # Subtest: technical identifiers, diagnostics, and substitution metacharacters remain literal
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1666090Z ok 12 - technical identifiers, diagnostics, and substitution metacharacters remain literal
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1666808Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1667112Z   duration_ms: 0.185193
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1667492Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1667808Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1668674Z # Subtest: all thirteen translation catalogs cover every message and preserve its placeholders
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1670189Z ok 13 - all thirteen translation catalogs cover every message and preserve its placeholders
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1670931Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1671269Z   duration_ms: 14.443655
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1671667Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1672028Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1672887Z # Subtest: every language interpolates symbols literally and retains raw engine diagnostics
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1674114Z ok 14 - every language interpolates symbols literally and retains raw engine diagnostics
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1674865Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1675217Z   duration_ms: 0.226443
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1675612Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.1675969Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3050845Z # Subtest: all authored UI keys, example captions, navigation labels, and boot labels are translated
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3052191Z ok 15 - all authored UI keys, example captions, navigation labels, and boot labels are translated
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3052668Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3052919Z   duration_ms: 169.510864
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3053212Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3053431Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3198815Z # Subtest: workspace round trips preserve Unicode, whitespace, line endings, and empty input
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3199984Z ok 16 - workspace round trips preserve Unicode, whitespace, line endings, and empty input
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3200529Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3200756Z   duration_ms: 4.001747
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3201098Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3201344Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3201898Z # Subtest: a UTF-8 BOM from an external editor is accepted
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3202492Z ok 17 - a UTF-8 BOM from an external editor is accepted
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3202904Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3203191Z   duration_ms: 0.288756
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3203434Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3203640Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3204237Z # Subtest: malformed JSON, unrelated JSON, and non-string source fields are rejected
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3205003Z ok 18 - malformed JSON, unrelated JSON, and non-string source fields are rejected
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3205478Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3205763Z   duration_ms: 1.668139
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3206079Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3206296Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3206787Z # Subtest: future and legacy schema versions are explicitly rejected
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3207514Z ok 19 - future and legacy schema versions are explicitly rejected
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3207933Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3208147Z   duration_ms: 0.341093
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3208465Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3209259Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3209985Z # Subtest: unknown metadata is ignored and cannot be exported as application state
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3211156Z ok 20 - unknown metadata is ignored and cannot be exported as application state
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3211674Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3211932Z   duration_ms: 0.273653
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3212184Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3212407Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3212801Z # Subtest: the same UTF-8 byte limit protects both import and export
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3213324Z ok 21 - the same UTF-8 byte limit protects both import and export
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3213661Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3213868Z   duration_ms: 44.402284
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3214104Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3214311Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3214830Z # Subtest: download names keep the workspace suffix and discard path and control characters
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3215522Z ok 22 - download names keep the workspace suffix and discard path and control characters
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3215935Z   ---
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3216137Z   duration_ms: 0.404616
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3216373Z   type: 'test'
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3216568Z   ...
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3216775Z 1..22
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3216976Z # tests 22
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3217179Z # suites 0
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3217386Z # pass 22
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3217582Z # fail 0
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3217791Z # cancelled 0
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3218000Z # skipped 0
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3218204Z # todo 0
+Test and build release artifacts	Test interface	2026-10-21T02:02:54.3218430Z # duration_ms 509.656895
+Test and build release artifacts	Build public playground	﻿2026-10-21T02:02:54.3385697Z ##[group]Run dotnet publish samples/Playground/Janglim.Playground.csproj -c Release -o publish
+Test and build release artifacts	Build public playground	2026-10-21T02:02:54.3386416Z ^[[36;1mdotnet publish samples/Playground/Janglim.Playground.csproj -c Release -o publish^[[0m
+Test and build release artifacts	Build public playground	2026-10-21T02:02:54.3443459Z shell: /usr/bin/bash -e {0}
+Test and build release artifacts	Build public playground	2026-10-21T02:02:54.3443742Z env:
+Test and build release artifacts	Build public playground	2026-10-21T02:02:54.3443970Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Build public playground	2026-10-21T02:02:54.3444249Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Build public playground	2026-10-21T02:02:54.3444504Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Build public playground	2026-10-21T02:02:54.3444824Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Build public playground	2026-10-21T02:02:54.3445076Z ##[endgroup]
+Test and build release artifacts	Build public playground	2026-10-21T02:02:55.0438755Z   Determining projects to restore...
+Test and build release artifacts	Build public playground	2026-10-21T02:02:55.6318142Z   All projects are up-to-date for restore.
+Test and build release artifacts	Build public playground	2026-10-21T02:02:55.9331819Z   AJ.Common -> /home/runner/work/Compiler/Compiler/src/Common/AJ.Common/bin/Release/netstandard2.1/AJ.Common.dll
+Test and build release artifacts	Build public playground	2026-10-21T02:02:55.9744596Z   Parse -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse/bin/Release/netstandard2.1/Parse.dll
+Test and build release artifacts	Build public playground	2026-10-21T02:02:56.0346522Z   Parse.FrontEnd -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/bin/Release/netstandard2.1/Parse.FrontEnd.dll
+Test and build release artifacts	Build public playground	2026-10-21T02:02:56.0972355Z   Parse.FrontEnd.Grammars -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.dll
+Test and build release artifacts	Build public playground	2026-10-21T02:02:56.1867742Z   Parse.FrontEnd.Parsers -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/bin/Release/netstandard2.1/Parse.FrontEnd.Parsers.dll
+Test and build release artifacts	Build public playground	2026-10-21T02:02:56.3030007Z   Parse.FrontEnd.Grammars.Ebnf -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.Ebnf.dll
+Test and build release artifacts	Build public playground	2026-10-21T02:02:57.3370091Z   Janglim.Playground -> /home/runner/work/Compiler/Compiler/samples/Playground/bin/Release/net10.0/Janglim.Playground.dll
+Test and build release artifacts	Build public playground	2026-10-21T02:02:57.3390914Z   Janglim.Playground (Blazor output) -> /home/runner/work/Compiler/Compiler/samples/Playground/bin/Release/net10.0/wwwroot
+Test and build release artifacts	Build public playground	2026-10-21T02:02:57.5494940Z   Optimizing assemblies for size may change the behavior of the app. Be sure to test after publishing. See: https://aka.ms/dotnet-illink
+Test and build release artifacts	Build public playground	2026-10-21T02:02:57.5508540Z   Optimizing assemblies for size. This process might take a while.
+Test and build release artifacts	Build public playground	2026-10-21T02:03:41.2415923Z   Publishing without optimizations. Although it's optional for Blazor, we strongly recommend using `wasm-tools` workload! You can install it by running `dotnet workload install wasm-tools` from the command line.
+Test and build release artifacts	Build public playground	2026-10-21T02:03:41.2433014Z   Janglim.Playground -> /home/runner/work/Compiler/Compiler/publish/
+Test and build release artifacts	Pack engine	﻿2026-10-21T02:03:41.3147085Z ##[group]Run dotnet pack src/Janglim/Janglim.csproj -c Release -o artifacts
+Test and build release artifacts	Pack engine	2026-10-21T02:03:41.3147665Z ^[[36;1mdotnet pack src/Janglim/Janglim.csproj -c Release -o artifacts^[[0m
+Test and build release artifacts	Pack engine	2026-10-21T02:03:41.3203445Z shell: /usr/bin/bash -e {0}
+Test and build release artifacts	Pack engine	2026-10-21T02:03:41.3203726Z env:
+Test and build release artifacts	Pack engine	2026-10-21T02:03:41.3203965Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Pack engine	2026-10-21T02:03:41.3204234Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Pack engine	2026-10-21T02:03:41.3204479Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Pack engine	2026-10-21T02:03:41.3204779Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Pack engine	2026-10-21T02:03:41.3205031Z ##[endgroup]
+Test and build release artifacts	Pack engine	2026-10-21T02:03:41.9601181Z   Determining projects to restore...
+Test and build release artifacts	Pack engine	2026-10-21T02:03:42.5438555Z   All projects are up-to-date for restore.
+Test and build release artifacts	Pack engine	2026-10-21T02:03:42.8085845Z   AJ.Common -> /home/runner/work/Compiler/Compiler/src/Common/AJ.Common/bin/Release/netstandard2.1/AJ.Common.dll
+Test and build release artifacts	Pack engine	2026-10-21T02:03:42.8640984Z   Parse -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse/bin/Release/netstandard2.1/Parse.dll
+Test and build release artifacts	Pack engine	2026-10-21T02:03:42.9431137Z   Parse.FrontEnd -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/bin/Release/netstandard2.1/Parse.FrontEnd.dll
+Test and build release artifacts	Pack engine	2026-10-21T02:03:43.1232611Z   Parse.FrontEnd.Grammars -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.dll
+Test and build release artifacts	Pack engine	2026-10-21T02:03:43.1943138Z   Parse.FrontEnd.Grammars.Ebnf -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.Ebnf.dll
+Test and build release artifacts	Pack engine	2026-10-21T02:03:43.1962046Z   Parse.FrontEnd.Parsers -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/bin/Release/netstandard2.1/Parse.FrontEnd.Parsers.dll
+Test and build release artifacts	Pack engine	2026-10-21T02:03:43.2956742Z   Parse.FrontEnd.ErrorHandler -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.ErrorHandler/bin/Release/netstandard2.1/Parse.FrontEnd.ErrorHandler.dll
+Test and build release artifacts	Pack engine	2026-10-21T02:03:43.2975928Z   Parse.FrontEnd.Support -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Support/bin/Release/netstandard2.1/Parse.FrontEnd.Support.dll
+Test and build release artifacts	Pack engine	2026-10-21T02:03:43.3710997Z   Janglim -> /home/runner/work/Compiler/Compiler/src/Janglim/bin/Release/netstandard2.1/Janglim.dll
+Test and build release artifacts	Pack engine	2026-10-21T02:03:44.0098159Z   Successfully created package '/home/runner/work/Compiler/Compiler/artifacts/Janglim.0.5.0.nupkg'.
+Test and build release artifacts	Publish MCP server	﻿2026-10-21T02:03:44.0636970Z ##[group]Run dotnet publish services/Janglim.Mcp/Janglim.Mcp.csproj -c Release -o mcp-publish
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:44.0638170Z ^[[36;1mdotnet publish services/Janglim.Mcp/Janglim.Mcp.csproj -c Release -o mcp-publish^[[0m
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:44.0718436Z shell: /usr/bin/bash -e {0}
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:44.0718872Z env:
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:44.0719201Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:44.0719599Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:44.0720196Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:44.0720660Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:44.0721093Z ##[endgroup]
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:44.8623074Z   Determining projects to restore...
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:45.4241693Z   All projects are up-to-date for restore.
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:45.6996769Z   AJ.Common -> /home/runner/work/Compiler/Compiler/src/Common/AJ.Common/bin/Release/netstandard2.1/AJ.Common.dll
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:45.7497414Z   Parse -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse/bin/Release/netstandard2.1/Parse.dll
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:45.8035969Z   Parse.FrontEnd -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd/bin/Release/netstandard2.1/Parse.FrontEnd.dll
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:45.8413116Z   Parse.FrontEnd.Grammars -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.dll
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:45.9101223Z   Parse.FrontEnd.Grammars.Ebnf -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.Ebnf.dll
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:46.0673369Z   Parse.FrontEnd.Parsers -> /home/runner/work/Compiler/Compiler/src/FrontEnd/Parse.FrontEnd.Parsers/bin/Release/netstandard2.1/Parse.FrontEnd.Parsers.dll
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:46.1726958Z   Janglim.Mcp -> /home/runner/work/Compiler/Compiler/services/Janglim.Mcp/bin/Release/net10.0/Janglim.Mcp.dll
+Test and build release artifacts	Publish MCP server	2026-10-21T02:03:46.2201423Z   Janglim.Mcp -> /home/runner/work/Compiler/Compiler/mcp-publish/
+Test and build release artifacts	Verify MCP container	﻿2026-10-21T02:03:46.3367101Z ##[group]Run docker build --file services/Janglim.Mcp/Dockerfile --tag janglim-mcp:verify .
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:46.3367785Z ^[[36;1mdocker build --file services/Janglim.Mcp/Dockerfile --tag janglim-mcp:verify .^[[0m
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:46.3424855Z shell: /usr/bin/bash -e {0}
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:46.3425145Z env:
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:46.3425380Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:46.3425642Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:46.3425890Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:46.3426191Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:46.3426468Z ##[endgroup]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.3351568Z #0 building with "default" instance using docker driver
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.3351934Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.3352187Z #1 [internal] load build definition from Dockerfile
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.3352599Z #1 transferring dockerfile: 1.50kB done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.3352884Z #1 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.3353006Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.3353317Z #2 [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:10.0
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.4273948Z #2 ...
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.4274296Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.4274695Z #3 [internal] load metadata for mcr.microsoft.com/dotnet/sdk:10.0
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.4275132Z #3 DONE 0.2s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.5777100Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.5777982Z #2 [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:10.0
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.6653234Z #2 DONE 0.5s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.7746482Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.7749494Z #4 [internal] load .dockerignore
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.7750413Z #4 transferring context: 263B done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.7750714Z #4 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.7750909Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.7752773Z #5 [runtime 1/3] FROM mcr.microsoft.com/dotnet/aspnet:10.0@sha256:d5633778c754e89a386882eddf8dbee6942447a8a4b8267c19cf1e1158d0b0ac
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.7759785Z #5 resolve mcr.microsoft.com/dotnet/aspnet:10.0@sha256:d5633778c754e89a386882eddf8dbee6942447a8a4b8267c19cf1e1158d0b0ac done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8965514Z #5 ...
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8968391Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8969196Z #6 [internal] load build context
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8970303Z #6 transferring context: 1.43MB 0.1s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8971119Z #6 DONE 0.1s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8971661Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8972958Z #5 [runtime 1/3] FROM mcr.microsoft.com/dotnet/aspnet:10.0@sha256:d5633778c754e89a386882eddf8dbee6942447a8a4b8267c19cf1e1158d0b0ac
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8974778Z #5 sha256:bc2779583e092a64db5ff30d209b65ba7aa647631e450ab0f77f0749ae1e8353 29.36MB / 36.63MB 0.2s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8976425Z #5 sha256:d5633778c754e89a386882eddf8dbee6942447a8a4b8267c19cf1e1158d0b0ac 1.08kB / 1.08kB done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8978003Z #5 sha256:e4b445f93a5deeb6bd7de300febceb8dd7e481ac65ccf1b474eddc3642a3010f 1.58kB / 1.58kB done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8979593Z #5 sha256:db13e9e7957d64b9e61e7b71f48126d899f6a36813c9ffcf1afe5bd7ab1d63fb 3.13kB / 3.13kB done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8981375Z #5 sha256:f2b4ef06ff01a67d4bed7657a4ae379a7d07934b7c3e743454a22a0d5275fb2b 29.77MB / 29.77MB 0.2s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8982933Z #5 sha256:efdf6b44845c4fe3e24ba690ff1e0ef2aa7df9e2bc2e1c943498cefae75bd118 16.78MB / 16.78MB 0.2s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:47.8984542Z #5 sha256:456132b86eeaf45afaa8081118ad42fa24a1a5d093f0e26ff7714e7b4742dd4f 3.56kB / 3.56kB 0.1s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:48.1466493Z #5 sha256:bc2779583e092a64db5ff30d209b65ba7aa647631e450ab0f77f0749ae1e8353 36.63MB / 36.63MB 0.3s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:48.2617175Z #5 extracting sha256:f2b4ef06ff01a67d4bed7657a4ae379a7d07934b7c3e743454a22a0d5275fb2b
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:48.3851534Z #5 sha256:bc2779583e092a64db5ff30d209b65ba7aa647631e450ab0f77f0749ae1e8353 36.63MB / 36.63MB 0.5s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:48.3853435Z #5 sha256:f2b4ef06ff01a67d4bed7657a4ae379a7d07934b7c3e743454a22a0d5275fb2b 29.77MB / 29.77MB 0.5s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:48.3855276Z #5 sha256:efdf6b44845c4fe3e24ba690ff1e0ef2aa7df9e2bc2e1c943498cefae75bd118 16.78MB / 16.78MB 0.5s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:48.3857500Z #5 sha256:550612595a7e8a6d7aa7d04b8e3d39322ef59c1ce74d2e54564f747f98f12752 155B / 155B 0.5s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:48.3859593Z #5 sha256:5ddf84f0f9ba7e1acb2deb5295d242abed105bc3847526a412d80657151f8c0c 12.75MB / 12.75MB 0.6s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:48.5954392Z #5 sha256:5ddf84f0f9ba7e1acb2deb5295d242abed105bc3847526a412d80657151f8c0c 12.75MB / 12.75MB 0.7s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:49.2956177Z #5 extracting sha256:f2b4ef06ff01a67d4bed7657a4ae379a7d07934b7c3e743454a22a0d5275fb2b 1.0s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:49.5377419Z #5 extracting sha256:efdf6b44845c4fe3e24ba690ff1e0ef2aa7df9e2bc2e1c943498cefae75bd118 0.1s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:49.9956732Z #5 extracting sha256:efdf6b44845c4fe3e24ba690ff1e0ef2aa7df9e2bc2e1c943498cefae75bd118 0.5s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:50.8047597Z #5 extracting sha256:456132b86eeaf45afaa8081118ad42fa24a1a5d093f0e26ff7714e7b4742dd4f
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:50.9261349Z #5 extracting sha256:456132b86eeaf45afaa8081118ad42fa24a1a5d093f0e26ff7714e7b4742dd4f done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:50.9262998Z #5 extracting sha256:bc2779583e092a64db5ff30d209b65ba7aa647631e450ab0f77f0749ae1e8353 0.1s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:51.3877216Z #5 extracting sha256:bc2779583e092a64db5ff30d209b65ba7aa647631e450ab0f77f0749ae1e8353 0.4s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:51.6734258Z #5 extracting sha256:550612595a7e8a6d7aa7d04b8e3d39322ef59c1ce74d2e54564f747f98f12752
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:51.7843394Z #5 extracting sha256:550612595a7e8a6d7aa7d04b8e3d39322ef59c1ce74d2e54564f747f98f12752 done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:51.7845641Z #5 extracting sha256:5ddf84f0f9ba7e1acb2deb5295d242abed105bc3847526a412d80657151f8c0c 0.1s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0937822Z #5 DONE 4.3s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0938146Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0938382Z #7 [runtime 2/3] WORKDIR /app
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0938687Z #7 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0938811Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0939435Z #8 [build  1/15] FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0940784Z #8 resolve mcr.microsoft.com/dotnet/sdk:10.0@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0941681Z #8 sha256:3a48280a9a7c6276c3eeaba1efa6a08820f18c84fb9e6274c187719ecfaf9fbc 2.64kB / 2.64kB done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0942517Z #8 sha256:456132b86eeaf45afaa8081118ad42fa24a1a5d093f0e26ff7714e7b4742dd4f 3.56kB / 3.56kB 0.1s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0943310Z #8 sha256:9cd0d6fa04def99891bf4d5a29eb9a3878b6041f9cc25cb389ea0df2177d23fd 5.64kB / 5.64kB done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0944115Z #8 sha256:bc2779583e092a64db5ff30d209b65ba7aa647631e450ab0f77f0749ae1e8353 36.63MB / 36.63MB 0.5s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0944889Z #8 sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa 1.08kB / 1.08kB done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0945665Z #8 sha256:f2b4ef06ff01a67d4bed7657a4ae379a7d07934b7c3e743454a22a0d5275fb2b 29.77MB / 29.77MB 0.5s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0946467Z #8 sha256:efdf6b44845c4fe3e24ba690ff1e0ef2aa7df9e2bc2e1c943498cefae75bd118 16.78MB / 16.78MB 0.5s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0947274Z #8 sha256:dbbf1d6473a3b7447675158d7760d0df0d4d5801d5fed193ad7474e76cc3565b 189.68MB / 189.68MB 2.4s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0948079Z #8 sha256:550612595a7e8a6d7aa7d04b8e3d39322ef59c1ce74d2e54564f747f98f12752 155B / 155B 0.5s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0948861Z #8 sha256:5ddf84f0f9ba7e1acb2deb5295d242abed105bc3847526a412d80657151f8c0c 12.75MB / 12.75MB 0.7s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0949668Z #8 sha256:1b69909a9b9db255575c1f0597207fb4f3bc7e621bed93f871e7e26d3b6ce07b 23.84MB / 23.84MB 0.8s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0950884Z #8 sha256:5ba41fa125ed418009c363055e24737041fd7e8d6ca79deba3e4b90da68f35ec 537B / 537B 0.8s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0952140Z #8 sha256:c5fd568b59b9f63c70351425bb4d879d3648371930a7461c4242274ce6197921 21.03MB / 21.03MB 1.0s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0953382Z #8 sha256:de471c2a5ff60e1eab27f50ddcd0e09ce95cb670b60050d8984d334e2d3b9c17 20.57MB / 20.57MB 1.1s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0954952Z #8 extracting sha256:5ddf84f0f9ba7e1acb2deb5295d242abed105bc3847526a412d80657151f8c0c 0.1s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.0955811Z #8 extracting sha256:1b69909a9b9db255575c1f0597207fb4f3bc7e621bed93f871e7e26d3b6ce07b 0.1s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:52.9322053Z #8 extracting sha256:1b69909a9b9db255575c1f0597207fb4f3bc7e621bed93f871e7e26d3b6ce07b 0.8s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:53.1898820Z #8 extracting sha256:dbbf1d6473a3b7447675158d7760d0df0d4d5801d5fed193ad7474e76cc3565b
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:56.5739169Z #8 extracting sha256:dbbf1d6473a3b7447675158d7760d0df0d4d5801d5fed193ad7474e76cc3565b 3.2s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:59.2756227Z #8 extracting sha256:c5fd568b59b9f63c70351425bb4d879d3648371930a7461c4242274ce6197921
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:59.4627072Z #8 extracting sha256:c5fd568b59b9f63c70351425bb4d879d3648371930a7461c4242274ce6197921 0.1s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:59.4628472Z #8 extracting sha256:5ba41fa125ed418009c363055e24737041fd7e8d6ca79deba3e4b90da68f35ec
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:59.5873832Z #8 extracting sha256:5ba41fa125ed418009c363055e24737041fd7e8d6ca79deba3e4b90da68f35ec done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:59.5875195Z #8 extracting sha256:de471c2a5ff60e1eab27f50ddcd0e09ce95cb670b60050d8984d334e2d3b9c17 0.1s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:03:59.9849220Z #8 extracting sha256:de471c2a5ff60e1eab27f50ddcd0e09ce95cb670b60050d8984d334e2d3b9c17 0.3s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.2006341Z #8 DONE 12.5s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3009626Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3010532Z #9 [build  2/15] WORKDIR /source
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3010989Z #9 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3011203Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3011875Z #10 [build  3/15] COPY src/Directory.Build.props src/Directory.Build.props
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3012567Z #10 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3012794Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3013120Z #11 [build  4/15] COPY src/Common/AJ.Common/ src/Common/AJ.Common/
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3013804Z #11 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3014033Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3014506Z #12 [build  5/15] COPY src/FrontEnd/Parse/ src/FrontEnd/Parse/
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3015107Z #12 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3084989Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3085651Z #13 [build  6/15] COPY src/FrontEnd/Parse.FrontEnd/ src/FrontEnd/Parse.FrontEnd/
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3086262Z #13 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3086434Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3087057Z #14 [build  7/15] COPY src/FrontEnd/Parse.FrontEnd.Grammars/ src/FrontEnd/Parse.FrontEnd.Grammars/
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3087665Z #14 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3087855Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.3088667Z #15 [build  8/15] COPY src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/ src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4305522Z #15 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4305853Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4306424Z #16 [build  9/15] COPY src/FrontEnd/Parse.FrontEnd.Parsers/ src/FrontEnd/Parse.FrontEnd.Parsers/
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4306927Z #16 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4307074Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4307635Z #17 [build 10/15] COPY src/FrontEnd/Parse.FrontEnd.ErrorHandler/ src/FrontEnd/Parse.FrontEnd.ErrorHandler/
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4308154Z #17 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4308364Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4308831Z #18 [build 11/15] COPY src/FrontEnd/Parse.FrontEnd.Support/ src/FrontEnd/Parse.FrontEnd.Support/
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4309352Z #18 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4309480Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4309772Z #19 [build 12/15] COPY grammars/c/c11-core.ebnf grammars/c/c11-core.ebnf
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.4311415Z #19 DONE 0.1s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.6039143Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.6040600Z #20 [build 13/15] COPY grammars/javascript/ grammars/javascript/
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.6041519Z #20 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.6041782Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.6042515Z #21 [build 14/15] COPY services/Janglim.Mcp/ services/Janglim.Mcp/
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.6045288Z #21 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.6045536Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:00.6046680Z #22 [build 15/15] RUN dotnet publish services/Janglim.Mcp/Janglim.Mcp.csproj     --configuration Release --output /app/publish /p:UseAppHost=false
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:01.3244797Z #22 0.871   Determining projects to restore...
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:03.3823439Z #22 2.929   Restored /source/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj (in 832 ms).
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:03.5410202Z #22 2.929   Restored /source/src/Common/AJ.Common/AJ.Common.csproj (in 832 ms).
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:03.5411019Z #22 2.930   Restored /source/services/Janglim.Mcp/Janglim.Mcp.csproj (in 832 ms).
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:03.5411786Z #22 2.930   Restored /source/src/FrontEnd/Parse.FrontEnd/Parse.FrontEnd.csproj (in 832 ms).
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:03.5412884Z #22 2.937   Restored /source/src/FrontEnd/Parse/Parse.csproj (in 3 ms).
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:03.5413691Z #22 2.938   Restored /source/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/Parse.FrontEnd.Grammars.Ebnf.csproj (in 3 ms).
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:03.5414629Z #22 2.938   Restored /source/src/FrontEnd/Parse.FrontEnd.Grammars/Parse.FrontEnd.Grammars.csproj (in 3 ms).
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:04.3797525Z #22 3.926 /root/.nuget/packages/microsoft.build.tasks.git/8.0.0/build/Microsoft.Build.Tasks.Git.targets(25,5): warning : Unable to locate repository with working directory that contains directory '/source/src/Common/AJ.Common'. [/source/src/Common/AJ.Common/AJ.Common.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:04.5616839Z #22 3.957 /root/.nuget/packages/microsoft.sourcelink.common/8.0.0/build/Microsoft.SourceLink.Common.targets(53,5): warning : Source control information is not available - the generated source link is empty. [/source/src/Common/AJ.Common/AJ.Common.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:05.5986618Z #22 5.145   AJ.Common -> /source/src/Common/AJ.Common/bin/Release/netstandard2.1/AJ.Common.dll
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:05.7245069Z #22 5.271 /root/.nuget/packages/microsoft.build.tasks.git/8.0.0/build/Microsoft.Build.Tasks.Git.targets(25,5): warning : Unable to locate repository with working directory that contains directory '/source/src/FrontEnd/Parse'. [/source/src/FrontEnd/Parse/Parse.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:05.9056688Z #22 5.301 /root/.nuget/packages/microsoft.sourcelink.common/8.0.0/build/Microsoft.SourceLink.Common.targets(53,5): warning : Source control information is not available - the generated source link is empty. [/source/src/FrontEnd/Parse/Parse.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:06.3663380Z #22 5.912   Parse -> /source/src/FrontEnd/Parse/bin/Release/netstandard2.1/Parse.dll
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:06.7174665Z #22 6.082 /root/.nuget/packages/microsoft.build.tasks.git/8.0.0/build/Microsoft.Build.Tasks.Git.targets(25,5): warning : Unable to locate repository with working directory that contains directory '/source/src/FrontEnd/Parse.FrontEnd'. [/source/src/FrontEnd/Parse.FrontEnd/Parse.FrontEnd.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:06.7183939Z #22 6.111 /root/.nuget/packages/microsoft.sourcelink.common/8.0.0/build/Microsoft.SourceLink.Common.targets(53,5): warning : Source control information is not available - the generated source link is empty. [/source/src/FrontEnd/Parse.FrontEnd/Parse.FrontEnd.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:07.1786139Z ##[warning]#22 6.725 /source/src/FrontEnd/Parse.FrontEnd/KeyManager.cs(17,22): warning CS0414: The field 'KeyManager.meaningUnitKey' is assigned but its value is never used [/source/src/FrontEnd/Parse.FrontEnd/Parse.FrontEnd.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:07.5232209Z #22 7.068   Parse.FrontEnd -> /source/src/FrontEnd/Parse.FrontEnd/bin/Release/netstandard2.1/Parse.FrontEnd.dll
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:07.6561065Z #22 7.203 /root/.nuget/packages/microsoft.build.tasks.git/8.0.0/build/Microsoft.Build.Tasks.Git.targets(25,5): warning : Unable to locate repository with working directory that contains directory '/source/src/FrontEnd/Parse.FrontEnd.Grammars'. [/source/src/FrontEnd/Parse.FrontEnd.Grammars/Parse.FrontEnd.Grammars.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:07.8713866Z #22 7.266 /root/.nuget/packages/microsoft.sourcelink.common/8.0.0/build/Microsoft.SourceLink.Common.targets(53,5): warning : Source control information is not available - the generated source link is empty. [/source/src/FrontEnd/Parse.FrontEnd.Grammars/Parse.FrontEnd.Grammars.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:08.0221603Z #22 7.568   Parse.FrontEnd.Grammars -> /source/src/FrontEnd/Parse.FrontEnd.Grammars/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.dll
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:08.1254359Z #22 7.661 /root/.nuget/packages/microsoft.build.tasks.git/8.0.0/build/Microsoft.Build.Tasks.Git.targets(25,5): warning : Unable to locate repository with working directory that contains directory '/source/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf'. [/source/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/Parse.FrontEnd.Grammars.Ebnf.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:08.1259247Z #22 7.672 /root/.nuget/packages/microsoft.sourcelink.common/8.0.0/build/Microsoft.SourceLink.Common.targets(53,5): warning : Source control information is not available - the generated source link is empty. [/source/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/Parse.FrontEnd.Grammars.Ebnf.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:08.2921049Z #22 7.675 /root/.nuget/packages/microsoft.build.tasks.git/8.0.0/build/Microsoft.Build.Tasks.Git.targets(25,5): warning : Unable to locate repository with working directory that contains directory '/source/src/FrontEnd/Parse.FrontEnd.Parsers'. [/source/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:08.2925642Z #22 7.687 /root/.nuget/packages/microsoft.sourcelink.common/8.0.0/build/Microsoft.SourceLink.Common.targets(53,5): warning : Source control information is not available - the generated source link is empty. [/source/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:09.2377006Z ##[warning]#22 8.784 /source/src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs(49,48): warning CS0067: The event 'LRParser.ReduceAction' is never used [/source/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:09.2383061Z ##[warning]#22 8.784 /source/src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs(20,62): warning CS0067: The event 'LLParser.ParseTreeCreated' is never used [/source/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:09.2387716Z ##[warning]#22 8.784 /source/src/FrontEnd/Parse.FrontEnd.Parsers/LR/LRParser.cs(51,48): warning CS0067: The event 'LRParser.ShiftAction' is never used [/source/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:09.2393045Z ##[warning]#22 8.784 /source/src/FrontEnd/Parse.FrontEnd.Parsers/LLParser.cs(21,55): warning CS0067: The event 'LLParser.ASTCreated' is never used [/source/src/FrontEnd/Parse.FrontEnd.Parsers/Parse.FrontEnd.Parsers.csproj]
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:09.3578470Z #22 8.904   Parse.FrontEnd.Parsers -> /source/src/FrontEnd/Parse.FrontEnd.Parsers/bin/Release/netstandard2.1/Parse.FrontEnd.Parsers.dll
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:09.5452370Z #22 8.940   Parse.FrontEnd.Grammars.Ebnf -> /source/src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/bin/Release/netstandard2.1/Parse.FrontEnd.Grammars.Ebnf.dll
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:12.5569749Z #22 12.10   Janglim.Mcp -> /source/services/Janglim.Mcp/bin/Release/net10.0/Janglim.Mcp.dll
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:12.7563694Z #22 12.15   Janglim.Mcp -> /app/publish/
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:12.8366527Z #22 DONE 12.4s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:13.0406591Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:13.0407868Z #23 [runtime 3/3] COPY --from=build /app/publish ./
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:13.0408592Z #23 DONE 0.0s
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:13.0408794Z 
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:13.0409000Z #24 exporting to image
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:13.0409409Z #24 exporting layers
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:13.1332637Z #24 exporting layers 0.2s done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:13.1508578Z #24 writing image sha256:09cfd858c639604896183e54bae73399db2e6eb253d7d31e4e0fe55333119f60 done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:13.1509646Z #24 naming to docker.io/library/janglim-mcp:verify done
+Test and build release artifacts	Verify MCP container	2026-10-21T02:04:13.1511923Z #24 DONE 0.2s
+Test and build release artifacts	Upload tested MCP server	﻿2026-10-21T02:04:13.1656093Z ##[group]Run actions/upload-artifact@v4
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1656408Z with:
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1656630Z   name: janglim-mcp-39530419087-1
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1656899Z   path: mcp-publish/
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1657149Z   if-no-files-found: error
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1657399Z   retention-days: 14
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1657629Z   compression-level: 6
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1657865Z   overwrite: false
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1658094Z   include-hidden-files: false
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1658349Z env:
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1658566Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1659049Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1659297Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1659597Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.1660144Z ##[endgroup]
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.3295724Z (node:5426) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.3296585Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.3447439Z With the provided path, there will be 54 files uploaded
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.3453015Z Artifact name is valid!
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.3453569Z Root directory input is valid!
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.5598118Z Beginning upload of artifact content to blob storage
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.7237758Z (node:5426) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.8741689Z Uploaded bytes 1233451
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.8924301Z Finished uploading artifact content to blob storage!
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.8925346Z SHA256 digest of uploaded artifact zip is a96b5c57aab567e1bbcbcaed1a42ebf62427527cef6fcbd078bf534ac8a4542b
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:13.8926055Z Finalizing artifact upload
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:14.1135346Z Artifact janglim-mcp-39530419087-1.zip successfully finalized. Artifact ID 12315640187
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:14.1136638Z Artifact janglim-mcp-39530419087-1 has been successfully uploaded! Final size is 1233451 bytes. Artifact ID is 12315640187
+Test and build release artifacts	Upload tested MCP server	2026-10-21T02:04:14.1142565Z Artifact download URL: https://github.com/AJ-comp/Compiler/actions/runs/39530419087/artifacts/12315640187
+Test and build release artifacts	Hash NuGet packages	﻿2026-10-21T02:04:14.1319764Z ##[group]Run shopt -s nullglob
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1320599Z ^[[36;1mshopt -s nullglob^[[0m
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1321024Z ^[[36;1mpackages=(*.nupkg)^[[0m
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1321482Z ^[[36;1mif (( ${#packages[@]} == 0 )); then^[[0m
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1322094Z ^[[36;1m  echo '::error::The package build produced no .nupkg files.'^[[0m
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1322713Z ^[[36;1m  exit 1^[[0m
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1323049Z ^[[36;1mfi^[[0m
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1323465Z ^[[36;1msha256sum -- "${packages[@]}" > SHA256SUMS.txt^[[0m
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1324029Z ^[[36;1msha256sum --check SHA256SUMS.txt^[[0m
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1391893Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1392281Z env:
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1392515Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1392804Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1393065Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1393380Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1393664Z ##[endgroup]
+Test and build release artifacts	Hash NuGet packages	2026-10-21T02:04:14.1522639Z Janglim.0.5.0.nupkg: OK
+Test and build release artifacts	Upload tested NuGet packages	﻿2026-10-21T02:04:14.1576263Z ##[group]Run actions/upload-artifact@v4
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1576580Z with:
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1576821Z   name: janglim-package-39530419087-1
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1577181Z   path: artifacts/*.nupkg
+Test and build release artifacts	Upload tested NuGet packages	artifacts/SHA256SUMS.txt
+Test and build release artifacts	Upload tested NuGet packages	
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1577553Z   if-no-files-found: error
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1577812Z   retention-days: 14
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1578065Z   compression-level: 6
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1578305Z   overwrite: false
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1578552Z   include-hidden-files: false
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1578809Z env:
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1579029Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1579300Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1579557Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1580246Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.1580598Z ##[endgroup]
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.3297907Z (node:5441) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.3298812Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.3366666Z With the provided path, there will be 2 files uploaded
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.3375131Z Artifact name is valid!
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.3376966Z Root directory input is valid!
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.5772910Z Beginning upload of artifact content to blob storage
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.6120657Z (node:5441) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.6849412Z Uploaded bytes 349727
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.7029461Z Finished uploading artifact content to blob storage!
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.7030600Z SHA256 digest of uploaded artifact zip is 7d35529b42772ae920d0a02a7c39392eb08e5328fe92bf7232ba25d3d92d2beb
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.7031943Z Finalizing artifact upload
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.8969654Z Artifact janglim-package-39530419087-1.zip successfully finalized. Artifact ID 12315660158
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.8971445Z Artifact janglim-package-39530419087-1 has been successfully uploaded! Final size is 349727 bytes. Artifact ID is 12315660158
+Test and build release artifacts	Upload tested NuGet packages	2026-10-21T02:04:14.8977081Z Artifact download URL: https://github.com/AJ-comp/Compiler/actions/runs/39530419087/artifacts/12315660158
+Test and build release artifacts	Upload tested playground	﻿2026-10-21T02:04:14.9164327Z ##[group]Run actions/upload-artifact@v4
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9164661Z with:
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9164928Z   name: playground-site-39530419087-1
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9165272Z   path: publish/wwwroot/
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9165578Z   if-no-files-found: error
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9165853Z   retention-days: 14
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9166101Z   compression-level: 6
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9166334Z   overwrite: false
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9166578Z   include-hidden-files: false
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9166839Z env:
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9167057Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9167313Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9167573Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9167867Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:14.9168130Z ##[endgroup]
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:15.0880991Z (node:5453) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:15.0881989Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:15.1958277Z With the provided path, there will be 791 files uploaded
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:15.1964493Z Artifact name is valid!
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:15.1965263Z Root directory input is valid!
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:15.4113280Z Beginning upload of artifact content to blob storage
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:15.9472137Z (node:5453) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:16.1813604Z Uploaded bytes 8388608
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:16.6485407Z Uploaded bytes 16777216
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:17.2077798Z Uploaded bytes 25165824
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:17.4383754Z Uploaded bytes 29575569
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:17.4559725Z Finished uploading artifact content to blob storage!
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:17.4562910Z SHA256 digest of uploaded artifact zip is 25e4345c5cc7dd9e1b14765f906c88d524d195c5b3ddc9e2779964a51d3b4f28
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:17.4565052Z Finalizing artifact upload
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:17.6412468Z Artifact playground-site-39530419087-1.zip successfully finalized. Artifact ID 12315745039
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:17.6413618Z Artifact playground-site-39530419087-1 has been successfully uploaded! Final size is 29575569 bytes. Artifact ID is 12315745039
+Test and build release artifacts	Upload tested playground	2026-10-21T02:04:17.6422630Z Artifact download URL: https://github.com/AJ-comp/Compiler/actions/runs/39530419087/artifacts/12315745039
+Test and build release artifacts	Upload engine and MCP test results	﻿2026-10-21T02:04:17.7536409Z ##[group]Run actions/upload-artifact@v4
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7536767Z with:
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7537015Z   name: parser-test-results-39530419087-1
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7537326Z   path: TestResults/**/*.trx
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7537595Z   if-no-files-found: error
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7537848Z   retention-days: 14
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7538084Z   compression-level: 6
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7538326Z   overwrite: false
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7538569Z   include-hidden-files: false
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7539044Z env:
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7539272Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7539536Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7539792Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7540437Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.7540717Z ##[endgroup]
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.9306201Z (node:5479) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.9307676Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.9373438Z With the provided path, there will be 2 files uploaded
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.9375248Z Artifact name is valid!
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:17.9376434Z Root directory input is valid!
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:18.1414782Z Beginning upload of artifact content to blob storage
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:18.2702337Z (node:5479) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:18.3806539Z Uploaded bytes 1295724
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:18.3980457Z Finished uploading artifact content to blob storage!
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:18.3981749Z SHA256 digest of uploaded artifact zip is 4ae72a18f94b33c25b4f90443c69b9383060369f06482aef0fc1804a5d712ec6
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:18.3982982Z Finalizing artifact upload
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:18.6194935Z Artifact parser-test-results-39530419087-1.zip successfully finalized. Artifact ID 12314809825
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:18.6196137Z Artifact parser-test-results-39530419087-1 has been successfully uploaded! Final size is 1295724 bytes. Artifact ID is 12314809825
+Test and build release artifacts	Upload engine and MCP test results	2026-10-21T02:04:18.6202238Z Artifact download URL: https://github.com/AJ-comp/Compiler/actions/runs/39530419087/artifacts/12314809825
+Test and build release artifacts	Build summary	﻿2026-10-21T02:04:18.6956547Z ##[group]Run {
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.6956879Z ^[[36;1m{^[[0m
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.6957152Z ^[[36;1m  echo '### Release verification'^[[0m
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.6957493Z ^[[36;1m  echo^[[0m
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.6957815Z ^[[36;1m  echo "- Result: $BUILD_RESULT"^[[0m
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.6958209Z ^[[36;1m  echo "- Frontend: ${FRONTEND_MODE:-not detected}"^[[0m
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.6958666Z ^[[36;1m  echo "- NuGet package: ${PACKAGE_VERSION:-not evaluated}"^[[0m
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.6959126Z ^[[36;1m  echo "- Playground: ${WEB_VERSION:-not evaluated}"^[[0m
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.6959579Z ^[[36;1m  echo "- Package artifact: ${PACKAGE_ARTIFACT:-not created}"^[[0m
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.6960342Z ^[[36;1m  echo "- Site artifact: ${WEB_ARTIFACT:-not created}"^[[0m
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.6961109Z ^[[36;1m  echo '- No NuGet publication or Azure deployment occurs in this workflow.'^[[0m
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.6961564Z ^[[36;1m} >> "$GITHUB_STEP_SUMMARY"^[[0m
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7018509Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7018934Z env:
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7019172Z   PLAYGROUND_PUBLIC_BUILD: 1
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7019449Z   DOTNET_NOLOGO: true
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7019732Z   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7020300Z   DOTNET_ROOT: /usr/share/dotnet
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7020590Z   BUILD_RESULT: success
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7020853Z   FRONTEND_MODE: React UI
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7021127Z   PACKAGE_VERSION: 0.5.0
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7021386Z   WEB_VERSION: 1.1.0
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7021669Z   PACKAGE_ARTIFACT: janglim-package-39530419087-1
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7022025Z   WEB_ARTIFACT: playground-site-39530419087-1
+Test and build release artifacts	Build summary	2026-10-21T02:04:18.7022330Z ##[endgroup]
+Test and build release artifacts	Post Set up Node.js	﻿2026-10-21T02:04:18.7186830Z Post job cleanup.
+Test and build release artifacts	Post Set up Node.js	2026-10-21T02:04:18.8439078Z (node:5504) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Test and build release artifacts	Post Set up Node.js	2026-10-21T02:04:18.8440292Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Test and build release artifacts	Post Set up Node.js	2026-10-21T02:04:18.8443068Z Cache hit occurred on the primary key node-cache-Linux-x64-npm-f6123ccb69a68ecc93ef5b2055a5877a1e068989c048bf5fb77a6f938670feb9, not saving cache.
+Test and build release artifacts	Post Set up .NET	﻿2026-10-21T02:04:18.8579156Z Post job cleanup.
+Test and build release artifacts	Post Set up .NET	2026-10-21T02:04:18.9895432Z (node:5512) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Test and build release artifacts	Post Set up .NET	2026-10-21T02:04:18.9896378Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Test and build release artifacts	Post Run actions/checkout@v4	﻿2026-10-21T02:04:19.0102558Z Post job cleanup.
+Test and build release artifacts	Post Run actions/checkout@v4	2026-10-21T02:04:19.1005233Z [command]/usr/bin/git version
+Test and build release artifacts	Post Run actions/checkout@v4	2026-10-21T02:04:19.1054036Z git version 2.55.0
+Test and build release artifacts	Post Run actions/checkout@v4	2026-10-21T02:04:19.1097417Z Temporarily overriding HOME='/home/runner/work/_temp/82da096c-4005-4e14-a159-c58974f9f116' before making global git config changes
+Test and build release artifacts	Post Run actions/checkout@v4	2026-10-21T02:04:19.1098537Z Adding repository directory to the temporary git global config as a safe directory
+Test and build release artifacts	Post Run actions/checkout@v4	2026-10-21T02:04:19.1104178Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Compiler/Compiler
+Test and build release artifacts	Post Run actions/checkout@v4	2026-10-21T02:04:19.1152024Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test and build release artifacts	Post Run actions/checkout@v4	2026-10-21T02:04:19.1193315Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test and build release artifacts	Post Run actions/checkout@v4	2026-10-21T02:04:19.1470627Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test and build release artifacts	Post Run actions/checkout@v4	2026-10-21T02:04:19.1512975Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test and build release artifacts	Post Run actions/checkout@v4	2026-10-21T02:04:19.1804160Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test and build release artifacts	Post Run actions/checkout@v4	2026-10-21T02:04:19.1852480Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test and build release artifacts	Complete job	﻿2026-10-21T02:04:19.2328949Z Evaluate and set job outputs
+Test and build release artifacts	Complete job	2026-10-21T02:04:19.2335340Z Set output 'package_version'
+Test and build release artifacts	Complete job	2026-10-21T02:04:19.2337090Z Set output 'web_version'
+Test and build release artifacts	Complete job	2026-10-21T02:04:19.2337941Z Set output 'package_artifact'
+Test and build release artifacts	Complete job	2026-10-21T02:04:19.2338371Z Set output 'web_artifact'
+Test and build release artifacts	Complete job	2026-10-21T02:04:19.2338777Z Set output 'frontend_enabled'
+Test and build release artifacts	Complete job	2026-10-21T02:04:19.2339465Z Cleaning up orphan processes
+Test and build release artifacts	Complete job	2026-10-21T02:04:19.2675860Z Terminate orphan process: pid (2709) (dotnet)
+Test and build release artifacts	Complete job	2026-10-21T02:04:19.2712712Z Terminate orphan process: pid (2710) (dotnet)
+Test and build release artifacts	Complete job	2026-10-21T02:04:19.2747712Z Terminate orphan process: pid (2711) (dotnet)
+Test and build release artifacts	Complete job	2026-10-21T02:04:19.2782372Z Terminate orphan process: pid (2814) (VBCSCompiler)
+Test and build release artifacts	Complete job	2026-10-21T02:04:19.2832930Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-dotnet@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

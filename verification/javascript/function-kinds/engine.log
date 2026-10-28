@@ -1,0 +1,42 @@
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Release\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Release\netstandard2.1\Parse.dll
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Release\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Release\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:18.92]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptModuleTests.Module_validation_keeps_concrete_tree_tokens_and_original_source_offsets_intact [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptModuleTests.Module_validation_keeps_concrete_tree_tokens_and_original_source_offsets_intact [14 ms]
+  오류 메시지:
+   Assert.Contains() Failure: Filter not matched in collection
+Collection: [[···], [···], [···], [···], [···], ···]
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptModuleTests.Module_validation_keeps_concrete_tree_tokens_and_original_source_offsets_intact() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptModuleTests.cs:line 699
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:59.70]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptClassTests.Published_ECMAScript_grammar_controls_Await_parameters_and_setter_arity(input: "class A { static { class B { field = await; } } }", accepted: False) [FAIL]
+[xUnit.net 00:00:59.70]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptClassTests.Published_ECMAScript_grammar_controls_Await_parameters_and_setter_arity(input: "class A { field = await; static field = await; }", accepted: True) [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptClassTests.Published_ECMAScript_grammar_controls_Await_parameters_and_setter_arity(input: "class A { static { class B { field = await; } } }", accepted: False) [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: class A { static { class B { field = await; } } }
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptClassTests.Published_ECMAScript_grammar_controls_Await_parameters_and_setter_arity(String input, Boolean accepted) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptClassTests.cs:line 478
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptClassTests.Published_ECMAScript_grammar_controls_Await_parameters_and_setter_arity(input: "class A { field = await; static field = await; }", accepted: True) [1 ms]
+  오류 메시지:
+   class A { field = await; static field = await; }
+invalid_static_block_await: A static initializer cannot use await as an identifier outside a nested function body.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 36
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptClassTests.Published_ECMAScript_grammar_controls_Await_parameters_and_setter_arity(String input, Boolean accepted) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptClassTests.cs:line 477
+   at InvokeStub_JavaScriptClassTests.Published_ECMAScript_grammar_controls_Await_parameters_and_setter_arity(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:01:10.14]     Janglim.FrontEnd.Parsers.Tests.SlrKnownIssueTests.Slr_should_parse_valid_Ex1 [SKIP]
+  건너뜀 Janglim.FrontEnd.Parsers.Tests.SlrKnownIssueTests.Slr_should_parse_valid_Ex1 [1 ms]
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\function-kinds\tests\functions-engine.trx
+
+실패!  - 실패:     3, 통과:  4964, 건너뜀:     1, 전체:  4968, 기간: 1 m 8 s - Parse.FrontEnd.Parsers.Tests.dll (net8.0)

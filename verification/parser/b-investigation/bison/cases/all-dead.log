@@ -1,0 +1,5 @@
+all-dead.y: warning: 3 nonterminals useless in grammar [-Wother]
+all-dead.y: warning: 3 rules useless in grammar [-Wother]
+all-dead.y:2.8: error: start symbol S does not derive any sentence
+    2 | lalr
+      |        ^

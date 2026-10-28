@@ -1,0 +1,52 @@
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsExpressionTests.Expression_entry_accepts_function_expressions_async_arrows_and_object_methods(input: "class { async run() { await task; } *items() { yie"···)
+Assert.Empty() Failure: Collection was not empty
+Collection: [JavaScriptDiagnostic { Code = "invalid_class_modifier", Length = 15, Message = "A class element modifier must be the exact static "···, SourceOffset = 62 }]
+
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Async_and_generator_methods_work_in_objects_and_classes(input: "class A extends Base { async *items() { yield* awa"···)
+class A extends Base { async *items() { yield* await super.items(); } }
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Async_and_generator_methods_work_in_objects_and_classes(input: "class A { async *items() { for await (const value "···)
+class A { async *items() { for await (const value of source) yield value; } }
+invalid_class_modifier: A class element modifier must be the exact static prefix, get/set accessor prefix, or static followed by get/set.
+invalid_await: An await expression or for-await-of loop requires an async function or the module's top-level evaluation context.
+
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Async_and_generator_methods_work_in_objects_and_classes(input: "class A { async static() {} *static() {} async *st"···)
+class A { async static() {} *static() {} async *static() {} }
+invalid_class_modifier: A class element modifier must be the exact static prefix, get/set accessor prefix, or static followed by get/set.
+
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate(input: "const async = value; async(value); async\nfunction"···)
+const async = value; async(value); async
+function f() {}
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Async_and_generator_methods_work_in_objects_and_classes(input: "class A { async() {} *async() {} async async() {} "···)
+class A { async() {} *async() {} async async() {} async *async() {} }
+invalid_class_modifier: A class element modifier must be the exact static prefix, get/set accessor prefix, or static followed by get/set.
+
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Async_and_generator_methods_work_in_objects_and_classes(input: "class A { async *items() { yield await value; } }")
+class A { async *items() { yield await value; } }
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Async_and_generator_methods_work_in_objects_and_classes(input: "class A { async #run() { await work(); } *#items()"···)
+class A { async #run() { await work(); } *#items() { yield value; } async *#all() {} }
+invalid_class_modifier: A class element modifier must be the exact static prefix, get/set accessor prefix, or static followed by get/set.
+
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Suspension_contexts_keep_synchronous_nested_scopes_and_method_computed_names_separate(input: "async(value); async(value, other); async({value: 1"···)
+async(value); async(value, other); async({value: 1});
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Contextual_function_keywords_distinguish_escaped_identifiers_and_method_names(input: "class A { async await() {} *yield() {} async *awai"···)
+class A { async await() {} *yield() {} async *await() {} }
+invalid_class_modifier: A class element modifier must be the exact static prefix, get/set accessor prefix, or static followed by get/set.
+
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Async_and_generator_methods_work_in_objects_and_classes(input: "class A { async ['constructor']() {} *['constructo"···)
+class A { async ['constructor']() {} *['constructor']() {} async *['constructor']() {} }
+invalid_class_modifier: A class element modifier must be the exact static prefix, get/set accessor prefix, or static followed by get/set.
+
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsScriptTests.Suspension_contexts_do_not_leak_into_nested_synchronous_bodies_or_class_initializers(input: "async function f() { class A { static field = awai"···)
+Unexpectedly accepted: async function f() { class A { static field = await; } return A; }
+
+Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptFunctionKindsModuleTests.Modules_export_all_function_kinds_and_preserve_top_level_await(input: "export class A { async run() { await task; } *item"···)
+export class A { async run() { await task; } *items() { yield value; } async *all() {} }
+invalid_class_modifier: A class element modifier must be the exact static prefix, get/set accessor prefix, or static followed by get/set.

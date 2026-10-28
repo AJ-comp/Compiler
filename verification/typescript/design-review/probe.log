@@ -1,0 +1,151 @@
+PROBE predicate-tail-nullable grammar=True
+no grammar conflicts
+x => True 
+xy => True 
+PROBE lookahead-fixedpoint-repro grammar=True
+1 grammar conflict(s):
+  state I4: reduce-reduce conflict (on 'P')
+STATE I0 EOF=MISSING
+  Accept ->•S LA={This is EndMarker! char : щ}
+  S ->•__predicate1 C LA=<none>
+  __predicate1 ->• LA={id}
+STATE I1 EOF=accept Accept -> S
+  Accept -> S• LA={This is EndMarker! char : щ}
+STATE I2 EOF=MISSING
+  S -> __predicate1•C LA={This is EndMarker! char : щ, e, :}
+  C ->•P __predicate2 LA={}
+  P ->•R __predicate4 LA={e}
+  R ->•id __predicate5 LA=<none>
+  R ->•id __predicate6 i S LA=<none>
+  C ->•P __predicate3 e x ? S : S LA=<none>
+STATE I3 EOF=reduce S -> __predicate1 C
+  S -> __predicate1 C• LA={This is EndMarker! char : щ, e, :}
+STATE I4 EOF=epsilon reduce __predicate2 -> epsilon
+  C -> P•__predicate2 LA={This is EndMarker! char : щ, e, :}
+  __predicate2 ->• LA={This is EndMarker! char : щ, e, :}
+  C -> P•__predicate3 e x ? S : S LA=<none>
+  __predicate3 ->• LA={e}
+STATE I5 EOF=MISSING
+  P -> R•__predicate4 LA={e}
+  __predicate4 ->• LA={e}
+STATE I6 EOF=MISSING
+  R -> id•__predicate5 LA={e}
+  __predicate5 ->• LA={e}
+  R -> id•__predicate6 i S LA=<none>
+  __predicate6 ->• LA={i}
+STATE I7 EOF=reduce C -> P __predicate2
+  C -> P __predicate2• LA={This is EndMarker! char : щ, e, :}
+STATE I8 EOF=MISSING
+  C -> P __predicate3•e x ? S : S LA=<none>
+STATE I9 EOF=MISSING
+  P -> R __predicate4• LA={e}
+STATE I10 EOF=MISSING
+  R -> id __predicate5• LA={e}
+STATE I11 EOF=MISSING
+  R -> id __predicate6•i S LA=<none>
+STATE I12 EOF=MISSING
+  C -> P __predicate3 e•x ? S : S LA=<none>
+STATE I13 EOF=MISSING
+  R -> id __predicate6 i•S LA={e}
+  S ->•__predicate1 C LA=<none>
+  __predicate1 ->• LA={id}
+STATE I14 EOF=MISSING
+  C -> P __predicate3 e x•? S : S LA=<none>
+STATE I15 EOF=MISSING
+  R -> id __predicate6 i S• LA={e}
+STATE I16 EOF=MISSING
+  C -> P __predicate3 e x ?•S : S LA=<none>
+  S ->•__predicate1 C LA=<none>
+  __predicate1 ->• LA={id}
+STATE I17 EOF=MISSING
+  C -> P __predicate3 e x ? S•: S LA=<none>
+STATE I18 EOF=MISSING
+  C -> P __predicate3 e x ? S :•S LA={}
+  S ->•__predicate1 C LA=<none>
+  __predicate1 ->• LA={id}
+STATE I19 EOF=reduce C -> P __predicate3 e x ? S : S
+  C -> P __predicate3 e x ? S : S• LA={This is EndMarker! char : щ, e, :}
+a => False Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+a : epsilon reduce __predicate1 -> epsilon 
+a : goto 2 
+a : shift 6 
+щ : failed null (shift 할 수 없습니다 {e, i} 와야 합니다)
+PROBE qualified-reference-predicate-end grammar=True
+no grammar conflicts
+a => True 
+a<b> => True 
+a.b => True 
+a.b<c<d>> => True 
+PROBE nullable-recursive-type-chain grammar=True
+8 grammar conflict(s):
+  state I4: reduce-reduce conflictshift-reduce conflict (on 'Union')
+  state I4: reduce-reduce conflictshift-reduce conflict (on 'Union')
+  state I4: reduce-reduce conflictshift-reduce conflict (on 'Union')
+  state I4: reduce-reduce conflictshift-reduce conflict (on 'Union')
+  state I4: reduce-reduce conflictshift-reduce conflict (on 'Union')
+  state I4: reduce-reduce conflictshift-reduce conflict (on 'Union')
+  state I4: reduce-reduce conflictshift-reduce conflict (on 'Union')
+  state I4: reduce-reduce conflictshift-reduce conflict (on 'Union')
+a => True 
+a<b> => True 
+a.b => True 
+a.b<c<d>> => True 
+a[] => True 
+PROBE generic-call-v-relational-naive grammar=True
+6 grammar conflict(s):
+  state I5: shift-reduce conflict (on 'Primary')
+  state I5: shift-reduce conflict (on 'Primary')
+  state I5: shift-reduce conflict (on 'Primary')
+  state I5: shift-reduce conflict (on 'Primary')
+  state I5: shift-reduce conflict (on 'Primary')
+  state I5: shift-reduce conflict (on 'Primary')
+f<t>(x) => True 
+f<a<b>>(x) => True 
+a<b>c => False Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+a<b => False Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+PROBE typed-arrow-naive grammar=True
+1 grammar conflict(s):
+  state I7: reduce-reduce conflict (on 'id')
+(x)=>x => False Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+   at Janglim.FrontEnd.Parsers.LR.LRParser.PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, Boolean bErrorRecover, Int32& index) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 472
+   at Janglim.FrontEnd.Parsers.LR.LRParser.AllParsing(ParsingResult target) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 303
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(IReadOnlyList`1 tokenCells) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser.cs:line 332
+(x:t)=>x => True 
+(x) => True 
+PROBE generic-call-complementary-guards grammar=True
+5 grammar conflict(s):
+  state I5: reduce-reduce conflict (on 'Primary')
+  state I5: reduce-reduce conflict (on 'Primary')
+  state I5: reduce-reduce conflict (on 'Primary')
+  state I5: reduce-reduce conflict (on 'Primary')
+  state I5: reduce-reduce conflict (on 'Primary')
+f<t>(x) => True 
+f<a<b>>(x) => True 
+a<b>c => True 
+a<b => True 
+PROBE typed-arrow-cover grammar=True
+no grammar conflicts
+(x)=>x => True 
+(x:t)=>x => True 
+(x) => True 
+(x:t) => True 
+PROBE type-operators-naive grammar=True
+3 grammar conflict(s):
+  state I8: shift-reduce conflict (on 'Type')
+  state I9: shift-reduce conflict (on 'Type')
+  state I15: shift-reduce conflict (on 'Type')
+a|b&c => True 
+a extends b ? c : d => True 
+PROBE type-operators-layered grammar=True
+no grammar conflicts
+a|b&c => True 
+a extends b ? c : d => True 

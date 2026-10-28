@@ -1,0 +1,365 @@
+{
+  "verifiedAtUtc": "2026-10-21T02:17:14.682346+00:00",
+  "sourceCommit": "1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+  "nugetIndexContainsVersion": true,
+  "packageId": "Janglim",
+  "version": "0.5.0",
+  "repositoryCommit": "1b8f85f13c063a855358a1d5bac3769fec2f84e0",
+  "nuspecEndpointMatchesEmbeddedNuspec": true,
+  "readmeMatchesMergeCommitBlob": true,
+  "readmeBytes": 13957,
+  "readmeSha256": "e268fe76ca7a49521c51929dda38954edb07c11701a364a18392364ce5c1d2c4",
+  "unicodeNoticeMatchesMergeCommitBlob": true,
+  "unicodeNoticeBytes": 1995,
+  "unicodeNoticeSha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+  "engineDllNames": [
+    "AJ.Common.dll",
+    "Janglim.dll",
+    "Parse.FrontEnd.ErrorHandler.dll",
+    "Parse.FrontEnd.Grammars.Ebnf.dll",
+    "Parse.FrontEnd.Grammars.dll",
+    "Parse.FrontEnd.Parsers.dll",
+    "Parse.FrontEnd.Support.dll",
+    "Parse.FrontEnd.dll",
+    "Parse.dll"
+  ],
+  "satelliteDllCount": 40,
+  "satelliteDllEntries": [
+    "lib/netstandard2.1/de-DE/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/de-DE/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/de-DE/Parse.FrontEnd.resources.dll",
+    "lib/netstandard2.1/en-US/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/en-US/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/en-US/Parse.FrontEnd.resources.dll",
+    "lib/netstandard2.1/es-ES/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/es-ES/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/es-ES/Parse.FrontEnd.resources.dll",
+    "lib/netstandard2.1/fr-FR/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/fr-FR/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/fr-FR/Parse.FrontEnd.resources.dll",
+    "lib/netstandard2.1/ja-JP/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/ja-JP/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/ja-JP/Parse.FrontEnd.resources.dll",
+    "lib/netstandard2.1/ko-KR/Parse.FrontEnd.Grammars.resources.dll",
+    "lib/netstandard2.1/ko-KR/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/ko-KR/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/ko-KR/Parse.FrontEnd.resources.dll",
+    "lib/netstandard2.1/pt-PT/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/pt-PT/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/pt-PT/Parse.FrontEnd.resources.dll",
+    "lib/netstandard2.1/ru-RU/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/ru-RU/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/ru-RU/Parse.FrontEnd.resources.dll",
+    "lib/netstandard2.1/th-TH/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/th-TH/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/th-TH/Parse.FrontEnd.resources.dll",
+    "lib/netstandard2.1/uk-UA/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/uk-UA/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/uk-UA/Parse.FrontEnd.resources.dll",
+    "lib/netstandard2.1/vi-VN/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/vi-VN/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/vi-VN/Parse.FrontEnd.resources.dll",
+    "lib/netstandard2.1/zh-CN/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/zh-CN/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/zh-CN/Parse.FrontEnd.resources.dll",
+    "lib/netstandard2.1/zh-TW/Parse.FrontEnd.Parsers.resources.dll",
+    "lib/netstandard2.1/zh-TW/Parse.FrontEnd.Support.resources.dll",
+    "lib/netstandard2.1/zh-TW/Parse.FrontEnd.resources.dll"
+  ],
+  "ciPackageSha256": "8d8b71123f35356c42b05b3634f01ae0dd72389b0480f42c90178ad4909c5f86",
+  "ciChecksumManifestVerified": true,
+  "remotePackageSha256": "489f338c365c2c3f33624217fcf17886b586b9c3784dd09fc12e48a83ef3e186",
+  "payloadComparison": {
+    "ciEntryCount": 56,
+    "remoteEntryCount": 57,
+    "missingEntries": [],
+    "addedEntries": [
+      ".signature.p7s"
+    ],
+    "changedPayloadEntries": [],
+    "allOriginalPayloadsIdentical": true
+  },
+  "comparedPayloads": [
+    {
+      "entry": "Janglim.nuspec",
+      "bytes": 2351,
+      "sha256": "a3be37c0f343eecf552bd147ae5ac2dfb78bf4849fb8829905ef50be3dce5968"
+    },
+    {
+      "entry": "README.md",
+      "bytes": 13957,
+      "sha256": "e268fe76ca7a49521c51929dda38954edb07c11701a364a18392364ce5c1d2c4"
+    },
+    {
+      "entry": "[Content_Types].xml",
+      "bytes": 644,
+      "sha256": "9d6e15dd850020250842ce387c71f6d25e39f7fa96779ca963a19215e92ffd88"
+    },
+    {
+      "entry": "_rels/.rels",
+      "bytes": 470,
+      "sha256": "1ab401949fcf8fefa3cc7d6ef6c7df627347dbcb0c2a62e52877f622eac412a9"
+    },
+    {
+      "entry": "icon.png",
+      "bytes": 22637,
+      "sha256": "16f24da628e480c13f5ea7aa0739a49001fb7db0e823b594b0b73cc827f78d94"
+    },
+    {
+      "entry": "lib/netstandard2.1/AJ.Common.dll",
+      "bytes": 12288,
+      "sha256": "b433c0e0377abcd1c653b8603044c7e8e5ec837dcc1f69ae2b8a7aef7f46b6b8"
+    },
+    {
+      "entry": "lib/netstandard2.1/Janglim.dll",
+      "bytes": 5120,
+      "sha256": "f844cd78eda43238c7e98240090d2ce981e194bd61fcb10787eeee3dceca9392"
+    },
+    {
+      "entry": "lib/netstandard2.1/Parse.FrontEnd.ErrorHandler.dll",
+      "bytes": 10240,
+      "sha256": "f0762596b215c1986e1ea3b1518680b62ebd151d961e77cba983f9a7267d5ef7"
+    },
+    {
+      "entry": "lib/netstandard2.1/Parse.FrontEnd.Grammars.Ebnf.dll",
+      "bytes": 188416,
+      "sha256": "4a0d98a64f19e8c6eb1dc47aa82310829f4659e9db85c942962eca4482adac41"
+    },
+    {
+      "entry": "lib/netstandard2.1/Parse.FrontEnd.Grammars.dll",
+      "bytes": 31744,
+      "sha256": "1fb40ec30a9b504aff754e179a3a6c3096bc13594d2ba68804467ea37fd6f703"
+    },
+    {
+      "entry": "lib/netstandard2.1/Parse.FrontEnd.Parsers.dll",
+      "bytes": 115200,
+      "sha256": "5a13cbc6394d60e9fbe1168978223b8dda3e350621af4e0e27084e760188b021"
+    },
+    {
+      "entry": "lib/netstandard2.1/Parse.FrontEnd.Support.dll",
+      "bytes": 15360,
+      "sha256": "4b6d43b8a9bd70154b9661b6857340f88a65a460faae70dcdeceb48147ac19dd"
+    },
+    {
+      "entry": "lib/netstandard2.1/Parse.FrontEnd.dll",
+      "bytes": 102400,
+      "sha256": "d7969da078209fa3b5dade012ddb1d2c78453768f11d94fb8264444089b325d2"
+    },
+    {
+      "entry": "lib/netstandard2.1/Parse.dll",
+      "bytes": 69632,
+      "sha256": "3597df407da6be739442266fa5456394a210bd967fc20ea516f6327aee800d48"
+    },
+    {
+      "entry": "lib/netstandard2.1/de-DE/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 5632,
+      "sha256": "b26bc5792fb7a2d20c6bb7bc7cb310bec373ab240e1147c6b4be6bf228134bea"
+    },
+    {
+      "entry": "lib/netstandard2.1/de-DE/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5120,
+      "sha256": "2444ea7ce9d206da7b2de0df06594ec098d703758e7ffdfb5c4b0424e5c044b0"
+    },
+    {
+      "entry": "lib/netstandard2.1/de-DE/Parse.FrontEnd.resources.dll",
+      "bytes": 4096,
+      "sha256": "ee1d8e37f0ceacc8d1ccdd3c7c980329c7297d7b0f67aa6c7654388d2a522ac7"
+    },
+    {
+      "entry": "lib/netstandard2.1/en-US/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 5632,
+      "sha256": "a3fc5881902438d3cc0f3fc5e683d5ab7102dc918aa8f1a69df614cd7b13d4e7"
+    },
+    {
+      "entry": "lib/netstandard2.1/en-US/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5120,
+      "sha256": "3444b5dc297cdfa618f1493712c0eaf8554f4b6bb8cc488c71ed2f97e7ce1e47"
+    },
+    {
+      "entry": "lib/netstandard2.1/en-US/Parse.FrontEnd.resources.dll",
+      "bytes": 4096,
+      "sha256": "70d8e11a6114c5ee3c688458e9626103710f42fd3e1a94b93c4a3f96df887dd9"
+    },
+    {
+      "entry": "lib/netstandard2.1/es-ES/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 5632,
+      "sha256": "c0a109327af9975f3c4aefc761d36d2123ab854789869e03b0dd613a9bab935b"
+    },
+    {
+      "entry": "lib/netstandard2.1/es-ES/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5120,
+      "sha256": "bb2d5e0b1a6ff9c2fa9d79eadd4c384beb77cac39c4f9d619e39df407ca1b998"
+    },
+    {
+      "entry": "lib/netstandard2.1/es-ES/Parse.FrontEnd.resources.dll",
+      "bytes": 4096,
+      "sha256": "86e5ec303014587c098e6ff16bcf6f624506d0b8445fa9576cbcbe084c747a3d"
+    },
+    {
+      "entry": "lib/netstandard2.1/fr-FR/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 5632,
+      "sha256": "fbb7ccff1446abe57277dad5c79cbaef3d3e9a4db8a98fc296b0fd01aa189308"
+    },
+    {
+      "entry": "lib/netstandard2.1/fr-FR/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5120,
+      "sha256": "70345965fdc525df7911905e04e6b7ca3de084a59c1c3b326732aa48cf1a8c77"
+    },
+    {
+      "entry": "lib/netstandard2.1/fr-FR/Parse.FrontEnd.resources.dll",
+      "bytes": 4096,
+      "sha256": "303581866ea0c6b00946d3c62a1edd2e07ab324257a3076d4aebc181c6f0c272"
+    },
+    {
+      "entry": "lib/netstandard2.1/ja-JP/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 5632,
+      "sha256": "62731ac640ca8395d401b8e0f3617530cde3506bc86851ea52f0c10efa1f47a0"
+    },
+    {
+      "entry": "lib/netstandard2.1/ja-JP/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5120,
+      "sha256": "09cc6726ef0a70a30c4a6100ab74049c42fdd055704b1a2c3ef1ce60fde41628"
+    },
+    {
+      "entry": "lib/netstandard2.1/ja-JP/Parse.FrontEnd.resources.dll",
+      "bytes": 4096,
+      "sha256": "efb2844bf7ab2d393484e121a03a9f0e7febb96627b5d6904940d73f87f5c8b8"
+    },
+    {
+      "entry": "lib/netstandard2.1/ko-KR/Parse.FrontEnd.Grammars.resources.dll",
+      "bytes": 3584,
+      "sha256": "bfb734c7243b4ad654c146eacc1066e6c42b304e12620ae100358b9a58d68d43"
+    },
+    {
+      "entry": "lib/netstandard2.1/ko-KR/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 5632,
+      "sha256": "cb440e656a71fd546a446ce0db38984af8382ac6eeb70039fff7d94635aa632e"
+    },
+    {
+      "entry": "lib/netstandard2.1/ko-KR/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5120,
+      "sha256": "48a1922a348780e02b1ca5bd23aeb0a67128ee3419ca8a27c96ed248cd9db5a1"
+    },
+    {
+      "entry": "lib/netstandard2.1/ko-KR/Parse.FrontEnd.resources.dll",
+      "bytes": 4608,
+      "sha256": "f9006500390d98f4643c26838c27ef592d3c7e0b84882209e99dec169f3168d9"
+    },
+    {
+      "entry": "lib/netstandard2.1/pt-PT/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 5632,
+      "sha256": "3e027b87d0d02c32fcaafc364945ae13d1129b7597c380092eaaa20509da3880"
+    },
+    {
+      "entry": "lib/netstandard2.1/pt-PT/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5120,
+      "sha256": "e88a816d7d23ea57975ae71fca797f692e43a2f0e57345eb2df6e410f790c138"
+    },
+    {
+      "entry": "lib/netstandard2.1/pt-PT/Parse.FrontEnd.resources.dll",
+      "bytes": 4096,
+      "sha256": "2ed5306c32290feb75843af093df4924b6541295785a8548e48397ca336596e3"
+    },
+    {
+      "entry": "lib/netstandard2.1/ru-RU/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 6144,
+      "sha256": "7060054190a2ed7114898c97f1f4961cbe54dcaf85071210cbe52f8680c0cd32"
+    },
+    {
+      "entry": "lib/netstandard2.1/ru-RU/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5632,
+      "sha256": "d849d0115997b9f717d890305cc5bd7a86f2535ad1818abf4450415b443d71a7"
+    },
+    {
+      "entry": "lib/netstandard2.1/ru-RU/Parse.FrontEnd.resources.dll",
+      "bytes": 4608,
+      "sha256": "d19ee68c1329b05af77255e039f91d58a3d769239967fd6faf9444ca0433902c"
+    },
+    {
+      "entry": "lib/netstandard2.1/th-TH/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 6656,
+      "sha256": "882443dfb7718656bf50621db1fb738673f838a2c625a1cdb1ff8b33ba5d2270"
+    },
+    {
+      "entry": "lib/netstandard2.1/th-TH/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5632,
+      "sha256": "53357436b03919a93d6712e0077db79b5558c7413c6bcf0571778c4df8cc1d1a"
+    },
+    {
+      "entry": "lib/netstandard2.1/th-TH/Parse.FrontEnd.resources.dll",
+      "bytes": 4608,
+      "sha256": "b613280dcbbc844473758b0160a5d8ca12ae9ac7f414e933242817f32ff71fd6"
+    },
+    {
+      "entry": "lib/netstandard2.1/uk-UA/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 6144,
+      "sha256": "f9029f2aa70bceb3f7a72290c8a2e8424bf69084c877306e75dec9a229a2ff88"
+    },
+    {
+      "entry": "lib/netstandard2.1/uk-UA/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5120,
+      "sha256": "c3d828a5091b0b005ccffbe02da22bf3ff24e6d8330fc6ffb47e7d61d73bc3f8"
+    },
+    {
+      "entry": "lib/netstandard2.1/uk-UA/Parse.FrontEnd.resources.dll",
+      "bytes": 4608,
+      "sha256": "a87268b716127113cd2f88a1cc84c9bc31c2ab8a17904676b2be1c6949963b5c"
+    },
+    {
+      "entry": "lib/netstandard2.1/vi-VN/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 5632,
+      "sha256": "3120c609462e4ae9548d16d357439d5947ccb321e4ad0304a43a6be96eea8a55"
+    },
+    {
+      "entry": "lib/netstandard2.1/vi-VN/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5120,
+      "sha256": "8a835683ca6d7af51ff5915c84587770e9d8264935f748b5e96350c1a455c9d1"
+    },
+    {
+      "entry": "lib/netstandard2.1/vi-VN/Parse.FrontEnd.resources.dll",
+      "bytes": 4608,
+      "sha256": "e6e0e4e8e671466072ba24d546f788eec919f14c0c586f36a3f7f22467741ab1"
+    },
+    {
+      "entry": "lib/netstandard2.1/zh-CN/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 5632,
+      "sha256": "5eb53b16a0f990a593f5ff88454694d65e42166f58c6362cc95b2a3ee3e9b043"
+    },
+    {
+      "entry": "lib/netstandard2.1/zh-CN/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5120,
+      "sha256": "77d524c153c495d2c8e86766bcf1f20d87e0abac8a0458bd03ae8ccb99046805"
+    },
+    {
+      "entry": "lib/netstandard2.1/zh-CN/Parse.FrontEnd.resources.dll",
+      "bytes": 4096,
+      "sha256": "dd42ae66ce8d9b7c0211bac6d9c17db5f853f7e4726b1f312376a659087168d4"
+    },
+    {
+      "entry": "lib/netstandard2.1/zh-TW/Parse.FrontEnd.Parsers.resources.dll",
+      "bytes": 5632,
+      "sha256": "d5278414a77b4680a3c95f623bfa29e736ba2da9c46f4d9f8079fb2f2762a955"
+    },
+    {
+      "entry": "lib/netstandard2.1/zh-TW/Parse.FrontEnd.Support.resources.dll",
+      "bytes": 5120,
+      "sha256": "96429bccd2be213aa6b7dee6ca0c44338564f5f42520c4e5a4df951eb8b30d32"
+    },
+    {
+      "entry": "lib/netstandard2.1/zh-TW/Parse.FrontEnd.resources.dll",
+      "bytes": 4096,
+      "sha256": "99e9998c242186fbbdc338706337c54e27ce01ba9a2b0dfebcb023a56b5b78af"
+    },
+    {
+      "entry": "licenses/Unicode-LICENSE.txt",
+      "bytes": 1995,
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+    },
+    {
+      "entry": "package/services/metadata/core-properties/nuget.psmdcp",
+      "bytes": 1298,
+      "sha256": "b6bbd6d7ef8a27ab39100047a0c085e0da5e1e4c9f18485c2778df32a1a6f514"
+    }
+  ],
+  "allPassed": true
+}

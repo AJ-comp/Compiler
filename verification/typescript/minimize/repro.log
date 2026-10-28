@@ -1,0 +1,53 @@
+STARTFAIL True
+REMOVED TSType : {TSFunctionTypeStart()}? TSFunctionType
+REMOVED TSUnionType : TSUnionType '|' TSIntersectionType
+REMOVED TSUnionType : '|' TSIntersectionType
+REMOVED TSIntersectionType : TSIntersectionType '&' TSTypeOperator
+REMOVED TSIntersectionType : '&' TSTypeOperator
+REMOVED TSTypeOperator : TSInferType
+REMOVED TSTypeOperator : 'readonly' TSTypeOperator
+REMOVED TSTypeOperator : 'unique' TSTypeOperator
+REMOVED TSTypeOperator : 'keyof' TSTypeOperator
+REMOVED TSPostfixCore : TSPostfixCore TSPostfixSuffix
+REMOVED TSPrimaryType : {TSNotMappedTypeStart()}? TSObjectType
+REMOVED TSPrimaryType : {TSMappedTypeStart()}? TSMappedType
+REMOVED TSPrimaryType : TSAssertsTypePredicate
+REMOVED TSPrimaryType : TSTemplateLiteralType
+REMOVED TSPrimaryType : TSParenthesizedType
+REMOVED TSPrimaryType : TSTupleType
+REMOVED TSPrimaryType : TSImportType
+REMOVED TSPrimaryType : TSTypeQuery
+REMOVED TSPrimaryType : TSThisType
+REMOVED TSPrimaryType : TSLiteralType
+REMOVED TSPrimaryType : TSPrimitiveType
+REMOVED TSTypeReference : TSQualifiedName {TSTypeArgumentsStart()}? TSTypeArguments
+REMOVED TSQualifiedName : TSPrimitiveType '.' TSPropertyIdentifierName
+REMOVED TSQualifiedName : TSQualifiedName '.' TSPropertyIdentifierName
+REMOVED TSBindingIdentifier : TSContextualIdentifier
+TSTypeEntry : TSType ;
+# TypeScript 7.0.2 type syntax.
+# Authoritative implementation: microsoft/typescript-go commit
+# 2bd066d87f5bafd315be9f40889d0a60b9e58e0b, internal/parser/parser.go:
+# parseType, parseTypeOperatorOrHigher, parseNonArrayType, parseTypeMember,
+# parseTupleType, parseMappedType, parseFunctionOrConstructorType, parseImportType.
+# This fragment composes with Janglim's ECMAScript 2026 grammar. It retains actual
+# type productions in the concrete tree. Runtime expressions inside computed names
+# and parameter defaults reuse JavaScript productions ;
+TSType : {TSNotFunctionTypeStart()}? TSConditionalType ;
+TSTypeNoConditional : '!disabled_TSTypeNoConditional' ;
+TSConditionalType : TSUnionType {TSNotConditionalTypeStart()}? | TSUnionType {TSConditionalTypeStart()}? 'extends' TSTypeNoConditional '?' TSType ':' TSType ;
+TSUnionType : TSIntersectionType ;
+TSIntersectionType : TSTypeOperator ;
+TSTypeOperator : TSPostfixType ;
+TSPostfixType : TSPostfixCore {TSNotPostfixTypeStart()}? ;
+TSPostfixCore : TSPrimaryType ;
+TSPrimaryType : TSTypeReference ;
+TSTypeReference : TSQualifiedName {TSNoTypeReferenceSuffix()}? | TSQualifiedName {TSTypePredicateStart()}? 'is' TSType ;
+TSQualifiedName : TSBindingIdentifier ;
+TSBindingIdentifier : IdentifierName ;
+IdentifierName := "[A-Za-z_][A-Za-z0-9_]*" ;
+FINALFAIL True
+A : epsilon reduce __predicate1 -> epsilon 
+A : goto 3 
+A : shift 14 
+щ : failed null (shift 할 수 없습니다 {extends, is} 와야 합니다)

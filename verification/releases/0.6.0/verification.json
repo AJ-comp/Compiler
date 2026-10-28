@@ -1,0 +1,97 @@
+{
+  "Version": "0.6.0",
+  "HeadCommit": "a1e66d99ee25830a2389ed8dae4a8566190d6c8b",
+  "PullRequest": "https://github.com/AJ-comp/Compiler/pull/9",
+  "PreparedAtUtc": "2026-10-28T09:11:42.3096688Z",
+  "ImplementationRegressionReport": "artifacts/typescript/class-extensions-20261028-155659-971/verification.json",
+  "LocalReleaseBuild": {
+    "Warnings": 5,
+    "WarningKind": "Existing unused members",
+    "Log": "build-release.log",
+    "Errors": 0
+  },
+  "LocalMcpPublish": "passed",
+  "LocalPackageConsumer": {
+    "package": "Janglim 0.6.0",
+    "targetFramework": "net8.0",
+    "packageSha256": "624936a5634f2665c3c0853c2f8379205777156f215e0ad03e52ea6f5b18e57c",
+    "packageReferenceOnly": true,
+    "restoredExactLocalPackage": true,
+    "metadataPassed": true,
+    "engineAssemblies": 9,
+    "embeddedEbnfResources": 8,
+    "unicodeLicenseMatches": true,
+    "packageReadmeMatches": true,
+    "unchangedDocumentationExamples": 6,
+    "documentationExamplesPassed": true,
+    "publicApiAndAssemblyChecks": 46,
+    "publicApiAndAssemblyFailures": 0,
+    "scope": "Isolated consumer smoke verification of the packaged APIs/resources and six documentation examples; not complete language conformance.",
+    "reports": [
+      "package-metadata.json",
+      "restore-proof.json",
+      "example-results.json",
+      "smoke-results.json"
+    ],
+    "passed": true
+  },
+  "HelperTests": {
+    "Release": 12,
+    "Test262": 187,
+    "TypeScript": 11,
+    "UI": 22
+  },
+  "Documentation": {
+    "Warnings": 11,
+    "Log": "docs-final.log",
+    "Errors": 0
+  },
+  "PushWorkflowRun": 40661067582,
+  "PullRequestWorkflowRun": 40661531521,
+  "MasterPublication": "Complete: NuGet 0.6.0 published and verified; Playground deployed and verified; manual deployed",
+  "MasterCommit": "efe182f49d3ff265e42e93a33bc144a1811c4c9c",
+  "ReleaseWorkflowRun": 40664356048,
+  "DocsWorkflowRun": 40664356038,
+  "DocsPublication": "success",
+  "PullRequestVerification": "success",
+  "MasterVerification": {
+    "Test262HelpersPassed": 187,
+    "TypeScriptHelpersPassed": 6,
+    "ParserPassed": 7384,
+    "ParserSkipped": 1,
+    "TypeScriptHelpersSkipped": 5,
+    "UiPassed": 22,
+    "Result": "success",
+    "TypeScriptHelperSkipReason": "Optional local reference binaries are unavailable in CI",
+    "McpPassed": 69,
+    "ReleaseHelpersPassed": 12
+  },
+  "ReleaseWorkflowResult": "success",
+  "PlaygroundPublicVerification": {
+    "FilesMatched": 16,
+    "Report": "playground-deployment-verification.json",
+    "Passed": true
+  },
+  "PublicNuGetVerification": {
+    "package": "Janglim",
+    "version": "0.6.0",
+    "repositoryCommit": "efe182f49d3ff265e42e93a33bc144a1811c4c9c",
+    "publicUrl": "https://api.nuget.org/v3-flatcontainer/janglim/0.6.0/janglim.0.6.0.nupkg",
+    "workflowRun": 40664356048,
+    "artifactId": 12806541046,
+    "ciArtifactVerified": true,
+    "payloadMatchesCi": true,
+    "matchedPayloadEntries": 56,
+    "archiveSha256Matches": false,
+    "archiveDifference": "NuGet.org added repository signature .signature.p7s; all 56 existing entries unchanged.",
+    "ciPackageSha256": "3d5bdf2c5dec80381020f242fae48bc9efaac8c20ec20f7aa432b95d1f73e5ba",
+    "publicPackageSha256": "3992a522201006e7ca7bb8dcd88a41d5a0fa940a9aaae10089c66a5781d4ebc4",
+    "repositorySignatureVerified": true,
+    "engineAssemblyCount": 9,
+    "assemblyVersion": "0.6.0.0",
+    "ebnfResourceCount": 8,
+    "readmeAndUnicodeLicenseMatchCi": true,
+    "passed": true
+  },
+  "CompletedAtUtc": "2026-10-28T09:50:34.1894350Z"
+}

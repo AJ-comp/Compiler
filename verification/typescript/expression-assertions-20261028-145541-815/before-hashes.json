@@ -1,0 +1,2890 @@
+[
+  {
+    "Path": "grammars\\typescript\\typescript-types.ebnf",
+    "Sha256": "ED973D7CC1E7D439584AD288D60F42AE00398996480ACE945765916B17C6B0A3"
+  },
+  {
+    "Path": "grammars\\typescript\\typescript-declarations.ebnf",
+    "Sha256": "13C17D2DAEFBF6B753724C5DB017F8F3C18A7D80DCFB11F62569BA29FBA3DEDA"
+  },
+  {
+    "Path": "src\\Directory.Build.props",
+    "Sha256": "89DCDAA24EDF6406373C84AE0E30FE3ACC2D723D31865756824CB89E80BB08A6"
+  },
+  {
+    "Path": "grammars\\c\\README.md",
+    "Sha256": "F8866D958ABBFEC82C8A94CC89E346A3BC846875C77D966BB67EA4063469871E"
+  },
+  {
+    "Path": "grammars\\c\\c11-core.ebnf",
+    "Sha256": "43965D00A0DA6358C06BC816AB40888C61224969A0F187E9505BDEE1BD763044"
+  },
+  {
+    "Path": "grammars\\c\\c11-core.cases.json",
+    "Sha256": "EC0AAA97C046800652F5B840B8F3E406F2340324547CF215D891A38D591A47AC"
+  },
+  {
+    "Path": "grammars\\javascript\\ecmascript-2026-functions.ebnf",
+    "Sha256": "78FA62FBCDBA59F63457C56D94FC44BE3BDC5DC3E3D0CA92A6E20742094B6C06"
+  },
+  {
+    "Path": "grammars\\javascript\\ecmascript-2026-expressions.ebnf",
+    "Sha256": "4813A5994C7B492EC76B2ADCD04990F1525DCC4424D9E31F91768B5F7AD76271"
+  },
+  {
+    "Path": "grammars\\javascript\\ecmascript-2026-classes.ebnf",
+    "Sha256": "CE4F0609B2A256B20C2E2043393CBA0D66E971BFB9D4ED1F669EC8D66F0FEC39"
+  },
+  {
+    "Path": "grammars\\javascript\\ecmascript-2026-bindings.ebnf",
+    "Sha256": "FD99FBFBE4ECFAC51044D478C26DF86C3647AB4F69C13F05AC34DAB677822020"
+  },
+  {
+    "Path": "grammars\\javascript\\ecmascript-2026-statements.ebnf",
+    "Sha256": "BD3C8F2BE3FCF68924121E7B1C9B42FE57E51A612505E346B43AC839FE5DD23C"
+  },
+  {
+    "Path": "grammars\\javascript\\ecmascript-2026-modules.ebnf",
+    "Sha256": "CEA6784A14FDD46A31CD2408292DD7DCB004C3B89D83CCC3DBD134DF3B3C1FC7"
+  },
+  {
+    "Path": "grammars\\javascript\\README.md",
+    "Sha256": "415A2EC30361B8DB7C08717C09B03DE585178E115E9BE0801FAFA002B79DB571"
+  },
+  {
+    "Path": "src\\Compile\\Compile.csproj",
+    "Sha256": "814D756196441702B4191FC6B8C9D24017EA6E15E5EC1503953F41A9EE3D8EE3"
+  },
+  {
+    "Path": "src\\Compile\\Builder.cs",
+    "Sha256": "9B6E8360ABA6DF6D2C188C9313EBF7E2DB00C265EBD2E2BBC1A83E0BF22DACE7"
+  },
+  {
+    "Path": "grammars\\javascript\\unicode\\README.txt",
+    "Sha256": "341E92EC52B2C3C47D6C2AC37B692EBDD2F6430428A9BAEBD2386D320585D74D"
+  },
+  {
+    "Path": "grammars\\javascript\\unicode\\LICENSE.txt",
+    "Sha256": "8437BA5F4E4C8AE0268C3DF5CF106006F2D045FF3452EEDD1F27E8EB26C5F327"
+  },
+  {
+    "Path": "grammars\\javascript\\unicode\\generate_regexp_property_data.py",
+    "Sha256": "8C314583CEC3DFAC04484E27F4A17AD0BD6D1F8DB9B605373D4CB8EE2405743A"
+  },
+  {
+    "Path": "grammars\\javascript\\unicode\\generate_identifier_data.py",
+    "Sha256": "5C794FFB29AA1CBE777CC56FD3D3F83FA56EE44363832E91668DD5A3B76B337C"
+  },
+  {
+    "Path": "src\\Compile\\IRExpressionGenerator.cs",
+    "Sha256": "E03E72D69E0B37F67C84B57C8EE82894DE29B674E7B3F96EBB3FD382036B9A86"
+  },
+  {
+    "Path": "src\\Janglim\\README.md",
+    "Sha256": "8B2E4600F69F619D8EF50EC3EA5A83EFF53508937E88FD611DF4929E6FFD8C3C"
+  },
+  {
+    "Path": "src\\Janglim\\Janglim.csproj",
+    "Sha256": "334ADC6A08A33C881FE7784948AA57E86972F4ED1D7C9E2C7CDF300E863CEC00"
+  },
+  {
+    "Path": "src\\Janglim\\icon.png",
+    "Sha256": "16F24DA628E480C13F5EA7AA0739A49001FB7DB0E823B594B0B73CC827F78D94"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\LalrLookaheadContractTests.cs",
+    "Sha256": "82F88A1F07261E80E598824AB8F1DEB30667FA93058377DC2DF29C60D53D31B2"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\LalrEmptySuffixTests.cs",
+    "Sha256": "046A217BB898CDD76D849BD75B4212227E653F40F9493351035D92C850F66C15"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Parse.FrontEnd.Parsers.Tests.csproj",
+    "Sha256": "EE77F950EDF6D2A0EA097D837367EEA6657181BA0D6C430CBC5DE2716CD5DAD0"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\LalrLookaheadRegressionTests.cs",
+    "Sha256": "97B32F24633524AB691C8FA7F702708B7596CA3F0BDE28F6D92AA18ECB3C73F3"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\LalrLookaheadReferenceTests.cs",
+    "Sha256": "9EC7FA07C2941542F43FD7A3CF45BD59ACC6311DFDBE17928F5E0BAE3E135199"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\LalrLookaheadPropagationTests.cs",
+    "Sha256": "6CA0CDE4ADB2515C30829DDD06EC640695831A39FBA8AF7424441E99A27E60C5"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TestParallelization.cs",
+    "Sha256": "328D74C307569732C379D345AF7E2990731574C86202F210CD99F089E09DFEDF"
+  },
+  {
+    "Path": "src\\Common\\AJ.Common\\ITree.cs",
+    "Sha256": "1EEADBE67525C6B64FBF9A8A16B42E1E40EA90A125EC55C4E50544565913EE68"
+  },
+  {
+    "Path": "src\\Common\\AJ.Common\\IExportable.cs",
+    "Sha256": "26FA9C122679C741AD723F66EE36F0ED1DE62AF0593A45F129000FA64AF4AE10"
+  },
+  {
+    "Path": "src\\Compile\\Models\\FileReferenceInfo.cs",
+    "Sha256": "C5287078DB9611893EFF457EE3921BA33B83CFA57548173085F9012778C0FBD6"
+  },
+  {
+    "Path": "src\\Compile\\Example\\ExampleCompiler.cs",
+    "Sha256": "647D736FFE8691BF6659F3DFBB0644550AEA6CCC8FDEC1A920A7700F5482FB56"
+  },
+  {
+    "Path": "src\\Compile\\CompileResult.cs",
+    "Sha256": "5DC9952C3F9AFFD92E075A143CF4173AE7B35CF200DB0CD90E8F9C6260423CD3"
+  },
+  {
+    "Path": "src\\Compile\\MakeFileSectionStruct.cs",
+    "Sha256": "03B6C512B98D280ACEFF34E8BF9A678C60B5E49C4E3E93D75324160823F17BB7"
+  },
+  {
+    "Path": "src\\Compile\\MakeFileBuilder.cs",
+    "Sha256": "E7EF04E6ED68C0671C017F43B7A7B247773BF1A2384690B5E05E7D4B0693A258"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\IRBlock.cs",
+    "Sha256": "83A9C6AEBBD9F9BD8AFCEF49EF857B3EB0B33F517CFC1C31E012AC8E1F5F09DD"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\ICanBeFirstLayer.cs",
+    "Sha256": "474BE83A1A9E7AD1E70983F91C7A23C524EC52FCE910A529BA4EFFC936ADB626"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\GlobalUsings.cs",
+    "Sha256": "B172FF398D3DF5314ABEF22A5E17356EACF5B420876C0DF20A7B24C092B59C2D"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Util\\CommandPrompt.Util.csproj",
+    "Sha256": "9881138192F3B010FEECD50BCC513C642C6A4C1BB88327D87252837493DE983F"
+  },
+  {
+    "Path": "src\\Compile\\AJ\\AJCompiler.cs",
+    "Sha256": "ED41C6084C4AD31BB2F1B6C2AAF7E13ACD86ACB5E21582F4063A313A2A06A43A"
+  },
+  {
+    "Path": "src\\Compile\\AJ\\AJCompiler [Solution].cs",
+    "Sha256": "E5366ED0858CC5622EFF5334181A21F12A925B87B2323B45600DEB2442667512"
+  },
+  {
+    "Path": "src\\Compile\\AJ\\AJCompiler [Project].cs",
+    "Sha256": "265F25FAB198EC206FDAFD169897516F7E71138707774E30129068939C7C45FF"
+  },
+  {
+    "Path": "src\\Compile\\AJ\\AJCompiler [File].cs",
+    "Sha256": "7C2D5D6E2883847C94ADCBA58DB0E0493122B7CE75F8EE18C62DCFF208A6AFFB"
+  },
+  {
+    "Path": "src\\Compile\\AJ\\AJCompiler [Build].cs",
+    "Sha256": "A01834E2AF464CDB0B7B3C6DB5A903E9A8FAAB6785FDE4108739262C21B72034"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptYieldTemplateTests.cs",
+    "Sha256": "9C16F11B8D1E3835BFBFE45BF09CDE9669D4C2E1C92649D39852906E8FE041B6"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptTemplateTests.cs",
+    "Sha256": "6BB77951AFF79D5733DBA12DF10D3C0C8ED991F536E3CCE1CE28EF48813E86F8"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptStaticConformanceTests.cs",
+    "Sha256": "74D0035BD156A0A93DC5D0A2C5C28DD7EC92A997DB764AD820DC5A6DE03676B6"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptStatementTests.cs",
+    "Sha256": "1D965B15465093937E327D431BE90FEBDC81F9ECFA26CCBC0CF5707D3DAEDE78"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptRegExpTests.cs",
+    "Sha256": "369A0B3667372A4C9F10371834E81DC17DFA29921FEB34C9573C6B88497046B1"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptNonStrictTests.cs",
+    "Sha256": "1F701F87360F0BC71DB842353AF41B8B467CF7B42D8C07131AD465B122433379"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptNonStrictSemanticTests.cs",
+    "Sha256": "26C63C554B22A725C0F91777674A0482611E933DDB29C812271C66DB572FAB4B"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptNonStrictLexicalTests.cs",
+    "Sha256": "97C4552E92CCB7572D9385F7096DCD2595E768D3AF3CD1B2B159B06578E7C24D"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptNonStrictBrowserTests.cs",
+    "Sha256": "CD40B0ED5AD49B674240664DD1D8B1D910E5966AF14D72666D74484B337ED212"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptModuleTests.cs",
+    "Sha256": "F246ECABAE6E174E0F49108F2095142681E476316EEC20FAC3A3031CC0FCE2F5"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptLexicalTests.cs",
+    "Sha256": "67BAAEDFB6EFD5B0A74787537FF1D25AB8BC755515864A0CCCA825FF651EFF2F"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptLetStatementTests.cs",
+    "Sha256": "DF1DD216CBB8E50D626813FB3B326A84122A36FB209D9C02139B4902C1F6610E"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptGrammarTests.cs",
+    "Sha256": "FCFF970C7DA1DA3F3DAAAB847CA135BB279700668580F19CFFB563BD67531235"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptFunctionKindsTests.cs",
+    "Sha256": "18DD1D1B4E33674FD94C6C04ED1BBD0640C86946F957298300B8FBDEF78C636B"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptExpressionTests.cs",
+    "Sha256": "1A33A7EA857011909E22CF4983450C6D84DA4EF20B723A2EE1338506D88FC09D"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptDestructuringTests.cs",
+    "Sha256": "38EAE96A1AB092BF3F84F5A7C3A16F15C717622DFA3178E8A27F265BA6BE6D8B"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptClassTests.cs",
+    "Sha256": "9ACC9C4FC81B293F8DA634D10BDBB9C5FA2B93C3BC4AB693F5B76D18F8EE0CCB"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptBindingTests.cs",
+    "Sha256": "641F765580E84E0299B2A2345285BBBF038C61E3F3A56DBCFF3E1485F31DE6C5"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptAsiTransitionTests.cs",
+    "Sha256": "5E1E8D912CF541293FB531D6BD27E01C6A1E559BDB2507A0303FB0FED4A649DD"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptArrowFunctionTests.cs",
+    "Sha256": "1DE41F7E07D10B7CB6193E16A8504BEBA417D390B3433D2C09D0D1EF2AFDAAC2"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\JavaScript\\JavaScriptArrayScaleTests.cs",
+    "Sha256": "99A3CD8DC79584A3D5270DB59EAF2332CD64CA7A1BCC0915F844C5C26EC76BA8"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\UCode\\UCodeBuilder.cs",
+    "Sha256": "54E53AA219662B6F3DF4A22476BCC1AD050E1F1BC4C415B3F0364206C9DD0EEE"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\UCode\\Instruction.cs",
+    "Sha256": "211737C65B9A6EA5336716CDF5897D1A15BEAFA9C7C50ED00A4EDF8FA8DADFA4"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Lint\\Program.cs",
+    "Sha256": "9FD0461CFC473AF31CF915A53CCBD9701F2ACE2680D2F72AC0CE0030B546DF72"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Util\\Properties\\Resource.resx",
+    "Sha256": "4993178CC2A622A06D834308665BC5F8FF970A6E33AFD847AAE3ECEDE69FD7F2"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Util\\Properties\\Resource.ko-KR.resx",
+    "Sha256": "98598EC6B83301364F35B4DE653ED2FA7DACFCD79323140A3EFAD41D6EA36142"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Util\\Properties\\Resource.Designer.cs",
+    "Sha256": "4E1AB38EC08C266E5623BF4B04B9BEA9BE674CB913DC2A85B5174FD93F08CCC6"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Util\\Properties\\launchSettings.json",
+    "Sha256": "E70D2F54E816EE0004F5EC2A3D80B607F388A96437C9C792AC04DF3E264BF554"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Util\\Program.cs",
+    "Sha256": "0F546989766BF2276EBBCC9F2AA783B58AB7BF12AB04CB0C8CCCB3B682196F0A"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TestGrammars\\SelfRefExprGrammar.cs",
+    "Sha256": "ADDE16F811D28252AF7325B388EAA5C658E8AC33BA0366D84C9352CF98221B21"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TestGrammars\\PaperConflictDeclExprGrammar.cs",
+    "Sha256": "D34A2701C16FED5F79586204BFF0922307BE77445510EF195F895EA24461ED62"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TestGrammars\\NoOptimizationSelfRefGrammar.cs",
+    "Sha256": "86AEDE37877371C0B34AC347E81D5FE4FE31055A0551E948E4B68ED77626C773"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TestGrammars\\LeftFactoredDeclExprGrammar.cs",
+    "Sha256": "EC0184BA535CA2E828D735AA1AC15AB7B58B774874E793A53C4F0B7825BFAF46"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TestGrammars\\ConstExpandedDeclExprGrammar.cs",
+    "Sha256": "844B8D267202B515627118D086D226605B2E20E06F0845DEC72C0F526171EC70"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TestGrammars\\ConflictBacktrackingErrorHandler.cs",
+    "Sha256": "6D9CBD83A46AC79A9715A232D5D0B1BAB152FE1BA0B5A603A193B8DE990F4E92"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TestGrammars\\AutoAbsorbDeclExprGrammar.cs",
+    "Sha256": "5DF922D0F5521733C89AE4B788A1266A3A9A7F7B04F8E1B7CF3459BFA0C14D93"
+  },
+  {
+    "Path": "Tests\\Janglim.Mcp.Tests\\WorkerLifecycleTests.cs",
+    "Sha256": "7413BBCE0069736DE6A31279E9E474D4B7DEA34D1F6F8BAA2B77447F7FC4D44D"
+  },
+  {
+    "Path": "Tests\\Janglim.Mcp.Tests\\TypedTokenHttpTests.cs",
+    "Sha256": "C68E3484BD919EB1E22832A27B727938A4C7F3126BBC88304ACAF9C31B7D89CF"
+  },
+  {
+    "Path": "Tests\\Janglim.Mcp.Tests\\McpServerFixture.cs",
+    "Sha256": "6793AFCCF7B82738ABA5F947C8E0B8F55D66978F3DC8F4554B678ED3B8B9C05A"
+  },
+  {
+    "Path": "Tests\\Janglim.Mcp.Tests\\McpHttpTests.cs",
+    "Sha256": "855EC1DEA2BD789187D8CDD989219B8D7D52C25D1D0A61FBF5F03450A096266F"
+  },
+  {
+    "Path": "Tests\\Janglim.Mcp.Tests\\MaximalMunchEngineTests.cs",
+    "Sha256": "FE847226F588A1AAD5C34954793207903F327CCA1FBC60462E0F8BC57DFA0218"
+  },
+  {
+    "Path": "Tests\\Janglim.Mcp.Tests\\Janglim.Mcp.Tests.csproj",
+    "Sha256": "361DEBD606048EDA0959B73AB2185637E19F652D12CC459F6FC62EDCE5B55287"
+  },
+  {
+    "Path": "Tests\\Janglim.Mcp.Tests\\GrammarPresetHttpTests.cs",
+    "Sha256": "566621C0E07BCA605C88ECC00CD54483349DC099E084B49A1F3A24CC30FCD87E"
+  },
+  {
+    "Path": "Tests\\Janglim.Mcp.Tests\\C11CoreHttpTests.cs",
+    "Sha256": "8592C2D030DA4657949D00D74383701FBE4DE87A10095F0C5A54DDAF16FB5355"
+  },
+  {
+    "Path": "src\\Common\\AJ.Common\\AJ.Common.csproj",
+    "Sha256": "16842F3205631A5B72D1D7C2C85979935FDCB477CB82441426EFCE2AAF8663CD"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Properties\\AlarmList.resx",
+    "Sha256": "A9D3483CA522F98DBC9B773753909E29C81524D02824CC0645822BE05C36E299"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Properties\\AlarmList.ko-KR.resx",
+    "Sha256": "7F8C477E56AEF42ADDC562F701601EF50C670AFD7C7ADBD38A95DB9EAA7DC31A"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Properties\\AlarmList.Designer.cs",
+    "Sha256": "12D068B51EEBB52029B54B6515C8339EC4B6776493C8764B508BE0836B0375FA"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Parse.MiddleEnd.IR.csproj",
+    "Sha256": "42ACCD756E024FAC3706A8A53E23A3F2AC2BCD7F503D45AEFAA2DDBF1B62B360"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\StmtExpressions\\IRStatement.cs",
+    "Sha256": "6EEEBCFC0540421222819183B555EF088355CAF29D8EBCF4A60C50B9DE01084F"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\StmtExpressions\\IRRepeatStatement.cs",
+    "Sha256": "F4A8B998A7B473B6C0E8CB0AE1873811D82FD5FC49A6865E8816E33D1276B444"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\StmtExpressions\\IRExprStatement.cs",
+    "Sha256": "C703F51BCAC6AB80247733BDA65D62DFACFD912D03144A54CC7ACB576CF6C075"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\StmtExpressions\\IRDclVarStatement.cs",
+    "Sha256": "92BB15C164E7EA5970E2A3009FC6C7A2115B1FF2AC5D6B480AD2EF69D071EBD4"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\StmtExpressions\\IRControlStatement.cs",
+    "Sha256": "EB846F616C8325370BBBCE4595228A85A543991A31510CF63057F96122592B11"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\StmtExpressions\\IRConditionStatement.cs",
+    "Sha256": "B76CE9D420279CE6E7CDC90AA4A0AAF3FB06F9977C9B09A2BDD5BD2B13FAB942"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\StmtExpressions\\IRCompoundStatement.cs",
+    "Sha256": "5BC575CD71EFDA5404BDB5DC6055B82130EC54067511A733A7397D536A6C500A"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\IRVariable.cs",
+    "Sha256": "D2BFCA5317DF74ED7DC3E846D0564F4315E6F7787624ABE812891D027DB60A89"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\IRStructDef.cs",
+    "Sha256": "DA20FCD0D7619390406932843921B7DF423D4A47A5EF5A8BD8CB78242D511BC4"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\IRProgramRoot.cs",
+    "Sha256": "788CAA64428CE6F7F5D72DD66B22D67A81659F0A04EFEDC98BB032ADF98631FB"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\IRFunction.cs",
+    "Sha256": "3299A1C8BD1B8B3C464C0DFA062FF2BF2E6AB73B552748F78B05815835C80789"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\IRExpression.cs",
+    "Sha256": "9EB740A665D6024B72F20451FB3C690481BAF514538358CB00D675952D792797"
+  },
+  {
+    "Path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target\\Targets.cs",
+    "Sha256": "E802B1DB12742FC28EDB944FCF07CA5661C193E536F39F3080DB2AD8D8D639C6"
+  },
+  {
+    "Path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target\\Parse.BackEnd.Target.csproj",
+    "Sha256": "62E1E2A72DABDC5A87E53C915A7C0ED7261819A46854CC3A343D2E8E76E7D414"
+  },
+  {
+    "Path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target\\MemoryInfo.cs",
+    "Sha256": "EC831AE64A36B6577F3D086A32C3B6F87A7607C358E1D15BD9036CDADB9B60A6"
+  },
+  {
+    "Path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target\\FileHelper.cs",
+    "Sha256": "53C79CD1533995C93F550B62C467E4C384C11976207D54372C15B96F7F65B419"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Lint\\Commands\\Load.cs",
+    "Sha256": "6EEE521B0F0455ABE2829E51B40997C119A39C1E95CA86F8F6A0CDDB87E2323B"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Lint\\CommandPrompt.Lint.csproj",
+    "Sha256": "B179F31503FEF730EE1F68FD68A15D19282AAD9A7723F73404F7408ACB01E674"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\LLVM\\LLVMVar.cs",
+    "Sha256": "EA7F0EBE819A2E0DB83D3236827EB31893AE59A1669CA0CCA90C4BCB072DC19D"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\LLVM\\LLVMInterpreter.cs",
+    "Sha256": "FC34715CFA5E4564D72BFA276C13A5B16C90F84ECFD8A061053D00CACED687CE"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\LLVM\\LLVMInterpreter [BinExpr].cs",
+    "Sha256": "DE2F837D86057D18223FCE8142063A253A8CA9128F32FCA2EBC8034DBF9BA3BA"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\LLVM\\LLVMFunction.cs",
+    "Sha256": "CD5C0A0429F290C9EE88E9AB05804DDF0F563F21C14E16DE6C97B6DB52C5F271"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\LLVM\\LLVMConverter.cs",
+    "Sha256": "FB59962C8F78E4AECE80CEC8087AF71483A546FDD2E68FA1B4F9FA69F7308F95"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\LLVM\\LLVMCode.cs",
+    "Sha256": "11DF1B043CA3EE6EC891C07C099616C9B7E6695BC25767F84E0B80185D287F62"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\LLVM\\LLVMChecker.cs",
+    "Sha256": "F0C8B2CA96E400CA7751D580A3C2885A8E2A12DE1E0DF5470CDB64D4125C052C"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\LLVM\\LLVMBuildOption.cs",
+    "Sha256": "09BB0216A4C9583A59EE8DB5AD458989CC673FFD60C7EFC5B8E547BF24DAEF6C"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\LLVM\\LLVMAttribute.cs",
+    "Sha256": "2F1ED31C9C4C73D5C12E9A246E817D745342188C5F88D438D9EC223742A8BBD6"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\LLVM\\InstructionFormatter.cs",
+    "Sha256": "2A307CF28FD37DC74BE8AB6C5B9F63CDB885F13141F26C2034078089E68B3711"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\LLVM\\CodeType.cs",
+    "Sha256": "2D2C4C3A084E4031D23FE0AB12105E2EA31B620008033DD2C017CC4D80C8FFB5"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\IRUnit.cs",
+    "Sha256": "E7808F5C0FBC39DF0A8EE1335CBAE50DBFBD15631B6C813086DBFB5FC4DD1BCA"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\IRTable.cs",
+    "Sha256": "3371DADEC1549259D83EA26AC9524887CB0F364648A50C22CA671DA551B6562C"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\IROptions.cs",
+    "Sha256": "53F014BAE320626D769311D6F1D0016362D571FA68657E5259F085B3D0FF18E6"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\IRFormatter.cs",
+    "Sha256": "5D1FD4985177C6EA1333FB8E0F1CE17219BF115E97CE242C5941CD8EB6A340E4"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\IRConverter.cs",
+    "Sha256": "0AA96B7E13D74D2B6D1C2AAB751225E4D63CADEB5228FE21A9B6011785338F23"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\IRCode.cs",
+    "Sha256": "EEE383AFCBA025A178728F7E32289CF95EF18D5E0C80E9D98EBBC2D1F815C268"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\IRChecker.cs",
+    "Sha256": "A3D170CECD13AD530339986C732DEE584D6845ABC34438B1DB05A8A83C1A4BE1"
+  },
+  {
+    "Path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target.AVR\\Parse.BackEnd.Target.AVR.csproj",
+    "Sha256": "62E1E2A72DABDC5A87E53C915A7C0ED7261819A46854CC3A343D2E8E76E7D414"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptTypeTests.cs",
+    "Sha256": "1C59543D58AA7A6FB4C05774EC31C8E6B6199F7F2BA63EFFB1014B8EF0911932"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptRuntimeTests.cs",
+    "Sha256": "C2DF151D28F94D1D0E2EFE5117CEA8800A08A2943C8A2F914B997AECA89D542B"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptProjectionTests.cs",
+    "Sha256": "ADCD3844CC1A794BE0FE6F54B06807B2EF06DDA3D72A35213AB6B3D649AA758D"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptDeclarationTests.cs",
+    "Sha256": "E3826FA2B2C59566506DD044DC14C1B55379DC5C5406B396FA5C373B0288C7E1"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptAssertionRegressionTests.cs",
+    "Sha256": "8EF5A522D78AE2C0EB84280D40B0D5F7655BF1E92D1D9ECCCBEC2308EAC2511F"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptAmbientFunctionRegressionTests.cs",
+    "Sha256": "81C642460CE116DF31718AF36345744EDA01E02F37A06524769C443CBB6C8C3D"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Variants\\SlrTableTests.cs",
+    "Sha256": "E6658D0C31061A6DFD0711BBE223A0589C16C018DFA3217530FA8BEC98949101"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Variants\\SlrKnownIssueTests.cs",
+    "Sha256": "48CB5B967632011C1702ACA65A99165F7481FC0D5627F65A3DF505BAC7B1ACE7"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Variants\\ParseTableRenderSnapshotTests.cs",
+    "Sha256": "03BB8795EC511F7AFB7C195B0332166C29A4B25C1ED23622BD612686DD9F82C9"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Variants\\LalrTableTests.cs",
+    "Sha256": "6F271DC6892A55FB79EF37A7B98037B330F7A8BE667582069295A40DD94059AC"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\ExprExpressions\\IRUseIdentExpr.cs",
+    "Sha256": "83722FB5A3DBFF8067D71545E8E5B20CB82558F1B377116F486CCD3468739DB7"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\ExprExpressions\\IRSingleExpr.cs",
+    "Sha256": "B5B05ACD3A975670EBFDBB1B38645D7515BCF79179DED7240EC44AC74D9B921E"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\ExprExpressions\\IRReturnExpr.cs",
+    "Sha256": "92A0BED0A31983085B49C8F624CE967C7D633350B2960CAF8521FF4C0ECDC84B"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\ExprExpressions\\IRLiteralExpr.cs",
+    "Sha256": "D75B8DB72E0BD6A5D45DB65F332E6D4E165DBA18B23DE7FC743147CC5EC910F0"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\ExprExpressions\\IRIndexExpr.cs",
+    "Sha256": "4ECCBDC45206C1FB6C010973307C9B1217FAE1936019383CBCE50B5324DEFA4C"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\ExprExpressions\\IRExpr.cs",
+    "Sha256": "28F484001893BD208C9D4503722DC89E7D8A60D8AC936C82D0A36A6A1B532A69"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\ExprExpressions\\IRCallExpr.cs",
+    "Sha256": "969AC03E086AAD9FC66F05275930AE0DAC87A2C5AA4BE44D8363D9BE114D5B8B"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Expressions\\ExprExpressions\\IRBinaryExpr.cs",
+    "Sha256": "8E488403C60D0FB1F140AECCEE09A0CFBAEEF1C832F863067C6A995951568A4D"
+  },
+  {
+    "Path": "src\\Common\\AJ.Common\\Helpers\\StringHelper.cs",
+    "Sha256": "CDC0D6FA09D408359AA9DECDE59B93073C67408200E308EACE250B9B7879125A"
+  },
+  {
+    "Path": "src\\Common\\AJ.Common\\Helpers\\ReflectionHelper.cs",
+    "Sha256": "29F5D820649CC586FCE3117016E5AE1548FBD20C937F2C5ACC577054330ED5B7"
+  },
+  {
+    "Path": "src\\Common\\AJ.Common\\Helpers\\PathHelper.cs",
+    "Sha256": "D0E458E332831EFB803CF76D0A8DA6B2375C4ABADB1B4169B19978E46B36E917"
+  },
+  {
+    "Path": "src\\Common\\AJ.Common\\Helpers\\ObjectHelper.cs",
+    "Sha256": "354E072A6157503186B03788B6438119E899EB282A5D166D1AD113E568C0D65C"
+  },
+  {
+    "Path": "src\\Common\\AJ.Common\\Helpers\\EnumHelper.cs",
+    "Sha256": "7490501675D14502173CD347E1BA4A52713515525D31D9490613EE886D995450"
+  },
+  {
+    "Path": "src\\Common\\AJ.Common\\Helpers\\DirectoryHelper.cs",
+    "Sha256": "8DEA3588EC937C85B3DBEACFD93CBD617ECF72E2142AEEAE8768458647DD1EFC"
+  },
+  {
+    "Path": "src\\Common\\AJ.Common\\Helpers\\DataTableHelper.cs",
+    "Sha256": "78AF3FDE34F15C95D39E0321603CD941B51AAEB8F530402570CC00DB63D56E98"
+  },
+  {
+    "Path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target.ARM\\Parse.BackEnd.Target.ARM.csproj",
+    "Sha256": "6CC5CB37A0669941D979ADEA8490F61A4307318849BC365E9918845E38B9F15B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.ErrorHandler\\Parse.FrontEnd.ErrorHandler.csproj",
+    "Sha256": "7841309C6871A1F9014504F650D5AAF97507D8080AE4DE743D3EF3473F9C01FD"
+  },
+  {
+    "Path": "src\\Common\\AJ.Common\\Exceptions\\Exception.cs",
+    "Sha256": "455A82F8CC1A8B934199A04BDCE4AA4752786135DA8A74F6586CC87819183A96"
+  },
+  {
+    "Path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target.ARM\\Arm.cs",
+    "Sha256": "34653D48211270746CEC9A382C2C4BD0B873E841E8978AED1D2D99781B981541"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Util\\Commands\\Print.cs",
+    "Sha256": "5B78F85354BA9583BC0CAA3F5BD88CBFAB441A297A711D67FA005D804EA1B6B9"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Util\\Commands\\AJCommand.cs",
+    "Sha256": "897F9E19EBBE2AA9BD942BAC6F2213EA0C0A5E9A9D572FBCB8FE262AAAB8CCFE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.ErrorHandler\\ErrorHandling\\PanicMode.cs",
+    "Sha256": "F92088A074F9241DA585013CCAC8FFEEE938158093F74C2ECF3EC191C37F695E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.ErrorHandler\\ErrorHandling\\IErrorAlgorithm.cs",
+    "Sha256": "AB0A54E8EF88DEF1594DE1461C43458417F00C6CFA3B53EA61E23236D72A5E58"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Datas\\TypeInfo.cs",
+    "Sha256": "77AD3D66A6F9D17C5F5FBB0FEAED6534D506DDA71AEB8B27343DBF18EB2C4890"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Datas\\SSAConst.cs",
+    "Sha256": "00AFDE63CDA9CBB0B67203C73A0BCA94D71EE4DA6D1F948C311B88A734A4485A"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Datas\\IUseDefChainable.cs",
+    "Sha256": "F811AAB88BD49D2CCFCC65146234163B312526115FB0E0A9E6D47EE140057571"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Datas\\ISSAForm.cs",
+    "Sha256": "88D7DCC78B44C0AA426F9BD05F45325273370EED21A24C6D48AFAD0AC297F117"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Datas\\IRType.cs",
+    "Sha256": "2BB11E8FCA9756D0BE1F7853AA68AE0EF29CEF620E2207D4C962628C640B0739"
+  },
+  {
+    "Path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Datas\\DebuggingData.cs",
+    "Sha256": "1DD43FC3164562580D43286571F6A2BC13F683877A20F2F61DBD7383E6E8509E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.zh-TW.resx",
+    "Sha256": "1D9828EB3412C6FDE689F7B43412317A2644EC95535199051495D54ADD1C8243"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.zh-CN.resx",
+    "Sha256": "168B8C53D8DB21D1A913902C8E3A4A849BF8A464FBA4A62F65E487849F894389"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.vi-VN.resx",
+    "Sha256": "ECB37DB7DF2B9923EC8F12D4569364FA4D267343C4D986E86C628E662BE554A4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.uk-UA.resx",
+    "Sha256": "74F468C81A7E7CA40CD2815050AB11C996ED1B6AD7C3F1021AF77DD82FC48E9D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.th-TH.resx",
+    "Sha256": "313E7F341288EAC60E876F7AD12BC22D7D80CA09E0E670EDE99E331FD41A8887"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.ru-RU.resx",
+    "Sha256": "9AFDB94334508460AEBAFF96F4BBCEBF47B5E6C89C48C055C76D8A0C2F116FB7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.resx",
+    "Sha256": "9457DFE490D64FEB274D6C4C26F04ACCF2BAAF0EB6DF86D90C18517223D1831A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.pt-PT.resx",
+    "Sha256": "10A61B5C91527212CF74DA644F0F946EFC06F39F083F726D611372E79B24276B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.ko-KR.resx",
+    "Sha256": "97FBA7B2A5495F13FAE785938BDCC14279BB421D7E27ABFAB1D1CF1B32CDC799"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.ja-JP.resx",
+    "Sha256": "F1AB47E570A759916B3777BC56177286F4E4D639ED82699202D6A2EE5FECB8FC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.fr-FR.resx",
+    "Sha256": "40DB264424B3AC6688A52F93DC322E3C043FA67BD55F48D0A20CF7B30AA4244F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.es-ES.resx",
+    "Sha256": "35D36B8B533BCEB9F08D15EE4419DBC18BF05CAA60E4AB501016E698F35173F6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.en-US.resx",
+    "Sha256": "F0A6D4E9D148520920552B9616D7EFB4590AA216C3AE81A4D9CE098F2519C988"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.Designer.cs",
+    "Sha256": "D89B9304E16D4292DF990B988D849BFB98B332F23F5BDA6CE9355C4369EF2C0F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Properties\\Resources.de-DE.resx",
+    "Sha256": "90368850C21A809E8FF25C4297BDD9C82B8D3D4735F9078EEC6F69817C8641CB"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Parse.FrontEnd.Support.csproj",
+    "Sha256": "A89F351978C7F307934051B337817073C49F0BC48835268F9ABB64ED23FD03AD"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.ErrorHandler\\ErrorHandling\\GrammarPrivate\\GrammarPrivateLRErrorHandler.cs",
+    "Sha256": "5D9D2AD20066C743688538B290ECA7440CD763B3564C106F4197CC99E2C769CE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.ErrorHandler\\ErrorHandling\\GrammarPrivate\\GrammarPrivateLLErrorHandler.cs",
+    "Sha256": "53045613B88D6E822039B9FD5C9772E5C00C3A0EA09640C0ECCF95F02A26A69A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.ErrorHandler\\ErrorHandling\\GrammarPrivate\\GrammarPrivateErrorHandler.cs",
+    "Sha256": "C21D48068A65435D64F56FE35FDA7C9B65D5087E5AE70DDFC370256B092E0876"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\ExtensionMethod.cs",
+    "Sha256": "EBF3A4001D030DA49A102C9BF2061050128E7E2BD9A34C99CB1A3C5C7D5CE11C"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\ExceptionCode.cs",
+    "Sha256": "8016ECBD4646DBD5567E06B6AE1AE014FB352EDA12F5B7598EA62522F77EE2F1"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\PaperConflict.lalr.parsing-table.approved.txt",
+    "Sha256": "80476D48E58B39E86FFF66E6E009DC3E83A9BDFE84610A6ED8C0A393FF8432FF"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex8_10.lalr.parsing-table.approved.txt",
+    "Sha256": "30B1DBC9B21289A63A8560C5E317D013F3620D32935C40BEBE9344A640154CA1"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.slr.parsing-table.approved.txt",
+    "Sha256": "346782385AD942D11F2280BA86487ED1755FDA68D8478CC5E515B100E4CC4378"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.slr.canonical.approved.txt",
+    "Sha256": "FDB42DAC27F18272474C20BB4F451C89F2B1113060C4B2D1D11D53381FC2779A"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.slr.ambiguity.approved.txt",
+    "Sha256": "D0706EF4897BE17EEC69EF2355C5B426AFF64B1B78676D59E1E48DEFC84ADD3F"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.lalr.parsing-table.approved.txt",
+    "Sha256": "A73312A1E721554B8013FF1B209EA5130D3D7A8DC92795365F0A0A559F0A9E04"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.lalr.parse-trace.a-equals-e.approved.txt",
+    "Sha256": "3E9B3CD6E377D38109D4246FA2791292FF491A64479D84BC96A039B70E82F15A"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.lalr.canonical.received.txt",
+    "Sha256": "4501567B05E97EEEFDCEBFBAB5C37B7819F2EA7FBAA3252265C3A29FE501D5FE"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.lalr.canonical.approved.txt",
+    "Sha256": "A133F2409D43299AB8EEB780B4CF713C7F75964E2946CF06B8FD5A8E45A662BF"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.first-follow.approved.txt",
+    "Sha256": "01AF48F89D0DBDFC3FFAAA1E6C94D89B42D8442900B66AA221C7E06174D92FE5"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.ebnf.approved.txt",
+    "Sha256": "329E6746BB7478AC8FFC58EBF00679006BEC7D3594A3829F0B8620F23A42BA1D"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\Snapshot.cs",
+    "Sha256": "02BFD2E1C1013C4A76DF6932E044AA309A6A7B502AE232CB27B16FCB5AE32489"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\DataTableTextTests.cs",
+    "Sha256": "84975C71C8C94D8707647A1A3427819D85088F8A5CDA9C6DEA3A652CA66717A5"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\DataTableText.cs",
+    "Sha256": "8F5AE2DB747449E02D32DE0DD50013635EF33129CC3659FCB75A6EE30EE80BAE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\TotalData.cs",
+    "Sha256": "6FB42901EA89AFD7C5FEFD0E137D64A7CB0DCE1B90C9DFDA935306D0B8B3ADAE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\SemanticErrorArgs.cs",
+    "Sha256": "7BA280042EDE5BC54F176240DDDA315DEAE30FB8E59422A52FEFF212311A6A1D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Drawing\\HighlightMapItem.cs",
+    "Sha256": "6BD819653A9ABECA08BEB66180B7E4F974557CF437963C03413077CE623069AB"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Properties\\Resource.resx",
+    "Sha256": "E969DDD62971DEA33365AAEBF74824C8523BF568D2CABD5EFB6FD782974B9F67"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\Drawing\\HighlightMapHelper.cs",
+    "Sha256": "219BD75074F66E593BD294B51B5ADCF963CABF8B4B6611E61C3C79295FDABD27"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Properties\\Resource.ko-KR.resx",
+    "Sha256": "FF2FE66A56AD5C91D82D8982B340FFDC8A3D42C96640A3A7BC9A09E3FEE4B095"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Properties\\Resource.Designer.cs",
+    "Sha256": "03DA1DBC1A9288D03BFE335839A8AEA86FFFFC6719D7003870A6E3BC8375F027"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Properties\\launchSettings.json",
+    "Sha256": "A4FE8B5E0E33777FAE930499FD88E7781DEC2818B902BA1BF24AED4F81A87276"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\ProjectBuildResult.cs",
+    "Sha256": "5F53F6BEC490D156EF72F3DB64F942AA46A30FE4FE14560A0A55F8D9A6B03CBD"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Program.cs",
+    "Sha256": "C93C781B738BA321E086363DE3AE399FF3C524E68624C7F82F8DFC222B6D4DD9"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\IHasVarList.cs",
+    "Sha256": "E1B831ED40A4AEA24B7DA50F88991038B42E0D7D0541C0E3F703AB71546B229E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\ShortType.cs",
+    "Sha256": "F34FD14C9C1B32750CCE48F2EA5B18B1A853D7CF21170FAAC3CA309F74A6F4ED"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\PLType.cs",
+    "Sha256": "574988BD958C9DC4D7A983D3566E771D015B57EE7F076015A5129E150F655A4E"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Commands\\Sln.cs",
+    "Sha256": "4020E96BCFE6F35EB91788C761D9D36FC78289D968938A87807FA62EF60DBB16"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Commands\\New.cs",
+    "Sha256": "2BDA94033A5FA0F512DDCDAB13B2D2547283430FA1128279916FB1FB9B509073"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Commands\\Build.cs",
+    "Sha256": "DF295994197891E0D065EC4061B75416002FB0DCBBB417E658DB0A65E7453D16"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Commands\\Arch.cs",
+    "Sha256": "3A3D5DBD035178523243A00008E80EBC0F091BAC49FEF3536659EC93C868E7C3"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Commands\\AJBuildCommand.cs",
+    "Sha256": "9BFC275351877AAB1B85CC6415A344BEC6C6D8AD7A77EA06B89A8020724AAC2C"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\CommandPrompt.Builder.csproj",
+    "Sha256": "B03BE7AB332D9AC5AE95EAE731A9739DBCE2B9E0FD335E970CEB2225BA3ABEC7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\EbnfRepetitionValidation.cs",
+    "Sha256": "3C0CB71D94CB828A81263B2262FD9146AE178F656B856D35D2C9E4A06CCF627F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\EbnfReaderOptions.cs",
+    "Sha256": "43E16E666714B78A5957C96F087D2F250676D7DB0B45ABA7A0E2B6D43AC08BB0"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\EbnfModel.cs",
+    "Sha256": "93A825AFEE097C58FA09DF075318A62168DC79671D647AF70265C5AEF93B5198"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\EbnfGrammarReader.cs",
+    "Sha256": "7E6FA2F29BF7CA55B1ABE2199F2EAEE16338A3205606BDC713575C6D47C6557E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\EbnfGrammar.cs",
+    "Sha256": "FAB90A889B87D980F307D7E38B8EBBC7A91FD151E8D68766FEC939901894D4EC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptDeclarations.cs",
+    "Sha256": "E91BBE6D3AFCBE35EE995636490788DADFA47526E22B978C06772E6B79E5FFF9"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\Parse.FrontEnd.Grammars.Ebnf.csproj",
+    "Sha256": "9F9115CD9B1FBA9EE9652AE2D743216060D2497634648DADA98C880D289F219C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptValidation.cs",
+    "Sha256": "DC4B498AFA6045EB90CBFDCAEB2FBE184D10F62CD833D6319BD408F1633518DF"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptTypes.cs",
+    "Sha256": "AE3E9F5D937C821DC5AC276DE8901DBD71EF0D851297821658306B38A7272FC9"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptProjection.cs",
+    "Sha256": "0C412C89229F67288647FADA5D38DE344ADBE931089E63C8E37DDA0873522D66"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptLookahead.cs",
+    "Sha256": "C0876223C5910E5CE00FFE26752582014AD7155F80AB5BC1B1137B356DDC752B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptInputKind.cs",
+    "Sha256": "1EE7DE2C01BAA5220F49B8DDFF7F1F5EFD4990FC6C2987422CDF564148079577"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptGrammar.cs",
+    "Sha256": "A931456D324FBF66F4030ADE4B9C2F61578A9C606F37C5549E38650E1B33025B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptDialect.cs",
+    "Sha256": "3BDF3CA704DAA6B975573CFF85171ABBE5486AFFA7B80D9093D790EB9C556BC2"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\GrammarProgressValidation.cs",
+    "Sha256": "17CB4D139DB93A09ECBAE99C06998228C9D31E5BA23F423C760152A5038D414F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\GrammarProgressException.cs",
+    "Sha256": "140E14AC7066A4A0A8EF0065FD66DC28C7B6CD8BCD0802F42A97892592BDF1E4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\GrammarProductivityException.cs",
+    "Sha256": "E6B1C82FDECE0B43CDA5BFA26338821B17DD62DD865435A9D8C23CF80E423F33"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\Grammar.cs",
+    "Sha256": "065FEB56BB0A481A256025D886ADF702970C051AD55C8CB1453030E05212996B"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\TokenTriviaParserTests.cs",
+    "Sha256": "C30D1D1CD7BF721467E138BA26F1589EE689939770491A0C59A4CACA4C9F802C"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\PredicateRecoveryEdgeTests.cs",
+    "Sha256": "3CE27B4FB41557B15E390A4D1A29ADDEEA13229257CCFE57C3C30DCD6FF75386"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\PredicateLeftRecursionTests.cs",
+    "Sha256": "223B2C6107D4D37925ED41442543504B75CBC19EC21A4B500C06DAE3F006C402"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\PredicateLeftRecursionGraphTests.cs",
+    "Sha256": "29E151AF13DEEFCC3733C1857FC2C92CB0BD8EDF37E6A5216877D792CBB13DB3"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\PredicateIntegrationTests.cs",
+    "Sha256": "A10609220772369BEF808F908145FE6EF6BCAD2F52DF9AF49F06C060DC36EE35"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\ParseTraceTests.cs",
+    "Sha256": "2A51716095FED20A47056BEF89AF6C1DE2A0DF5811ED390BB6C0C6F86A668F3C"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\ParseTableEntriesTests.cs",
+    "Sha256": "B30DE3B0C363F1A7E00173C222B55CFF18D22BED11F544D9DC44D6351FB7B3C1"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\ParserDrivenRegressionTests.cs",
+    "Sha256": "C308F197CA6F712F40690A91829D7EF3984A71ECF433509B9B9AB8362B9B6E81"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\ParserDrivenLexingTests.cs",
+    "Sha256": "B39B95767B56EF0E7A9C6197BDEA19E4D7AEA0BA882659DF3938E0FF045652B1"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\ParserDrivenContractTests.cs",
+    "Sha256": "56E9E84D58EAF2B79DB6DEA08D562582AA9307960AD28648B8F70ACE7BBF978F"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\ParseActionTypedTests.cs",
+    "Sha256": "C654DE29AF93310C7E0E98406A6D2883B7BFB29570C0165258FF82A44489A24F"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\ParseActionCellFormatTests.cs",
+    "Sha256": "FE96612B022B9E7FAD2D4CB568202F57CE21AD22FF483C0A784388879CFDB248"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\OnlyTheEpsilonMattersTests.cs",
+    "Sha256": "0DCF2B1E988A1EB1CB385DEBA903D17DD6BC819A401E0B66D7191CD27C3998E7"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\MeaningUnitPreservationTests.cs",
+    "Sha256": "4E399C2B4C33724D0FA2A97D0BD32C80B9CE46DE27398EFD36C2E687125C8C1A"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\MaximalMunchGrammarTests.cs",
+    "Sha256": "0FB85942B305C490EA456A41D94813CA5D49E2E1BBD897BCE09B8DBED5FFE975"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\LRParserConformance.cs",
+    "Sha256": "A5202F102286A89CA8F2DB1098491199C1CC89A668E4CC75097104E8EEEFD1F6"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\LRConflictPredictionTests.cs",
+    "Sha256": "410CA0BE3D1DF7EF9FA5D18EBC0454B0B54676224697172596DDB72667CE0A12"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\LeftFactoringProofTests.cs",
+    "Sha256": "9B6996DDA28A229D8E80F7791630009B149DE372647BB70B576889C9DE0DE22F"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\LalrConformance.cs",
+    "Sha256": "3DD3B370A88A6AE23BFCEC60CACD9747F6C5770C4AFFC2B5DEC6490AD425A7F7"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\GrammarProgressTests.cs",
+    "Sha256": "7621A462BD7A43453BB9EB3B1CBF0815D2D0F065CBEA5B8C3BEAF86E13D2E275"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\GrammarProductivityTests.cs",
+    "Sha256": "351C9E7404DF52D78E757EEC54E9238AFDD65CFEC99D0521664DF71B3268D6C6"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\GrammarNormalizationSpecTests.cs",
+    "Sha256": "422DFC182B7D8D681E63B99DA1E68FEF487DE11D58100CB8F8D935DA656B6C80"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\GrammarClassExtensionTests.cs",
+    "Sha256": "B07C54A3735EAC5FC9F473144DCC04DE7B1E87159478A4C6EF3CF1D8A385C242"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\EbnfTypedTokenTests.cs",
+    "Sha256": "30D110E9C3482AA839B17725D70856C45B9957982906F61239BABB433BFA135F"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\EbnfRepetitionTests.cs",
+    "Sha256": "F47BBDCFF288DE97A3B451DD5BCDE5E79AD1C5E958BEE713A686426B8D650808"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\EbnfProductivityTests.cs",
+    "Sha256": "BCD7AABC24FB9A470AED35D2A69DBE6B6D9659F1322A0A587B3DB0032A10D96D"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\EbnfPredicateTests.cs",
+    "Sha256": "082FB84F9C954EE58D5C88B32A112C82E9497E61FE63BD5A2F7163BF3B24AC3D"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\EbnfGrammarTests.cs",
+    "Sha256": "0DDF0C5249A5070C5AA08585130B9F6053B84CF77F66AE6E550D7784FA389676"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\EbnfGrammarReaderTests.cs",
+    "Sha256": "1FBE46A8D4293697532F77D5F8F758A2AEA1DD9610705B349B8EC08F69DA71C0"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\DefaultErrorHandlerTests.cs",
+    "Sha256": "751AB34EC51FD1DC2BC4E5B697257259BFA2DFF0144AA4103D2938F6060BB684"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\ContextualPredictionRegressionTests.cs",
+    "Sha256": "5E3EB60AEEC02501729A9D91945D2B6ACDF5B60DD141C03AC8DFCFAF6363C199"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\ContextualConflictPredictionTests.cs",
+    "Sha256": "2FE10E83AD63876730E6A7E9073B95824E961BE66CDA2466F6250888854D97DD"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\ConflictReportingTests.cs",
+    "Sha256": "AF9B35F5CC1B975653FAD819DC2AEA818505E4DC0F1A891F7B6CD66EA68D511D"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\C11CoreGrammarTests.cs",
+    "Sha256": "4B9379CD0B9771E1A32B11715142C73CAF91DB83D8D1EFC2879F348F78E9C8AF"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\AutoNormalizationTests.cs",
+    "Sha256": "D10B6098305E72EBC3340FE360C7C423104ACFB322E423CBBC9009D3FA4544F3"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Conformance\\AutoAbsorbTests.cs",
+    "Sha256": "22690B1C7630A7A629B69862E1797C37B414205962B01883B627A502188445CB"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\Properties\\Resource.resx",
+    "Sha256": "AC53D430E33D85B99CAD2ADA8760092FF804AEA47CA40C55DF23FF9F318DD27A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\Properties\\Resource.ko-KR.resx",
+    "Sha256": "4363CD7D5B8671C72442CE1A1BFC10D64EBD24B2D718B54BD4FCD025E4967298"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\Properties\\Resource.Designer.cs",
+    "Sha256": "6A3060B25FA927ADBDB3B756CDF5123B9FDB9F9DA5EB64A9B97B4E91BEDC40B6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\PredicateLeftRecursionValidation.cs",
+    "Sha256": "75298DE88B3CC7FDC70DE21FBB8240327EA8F4F6550DA384412645CBF66054B2"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\PredicateLeftRecursionException.cs",
+    "Sha256": "B361DB6D3BD9A3659FB8231A9C1806B16823FF40DAC40AF3C2E2A09B50FA93EC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Utilities\\Singleton.cs",
+    "Sha256": "96B230075FAE1B9C135244BCA1A4BAA2060C34DDFAC4CEDF9D0C5E4E83912F3B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Utilities\\DGMLWriter.cs",
+    "Sha256": "10C8C0A25A6B43FABD1DDE0747762284E36C6A6FB4765FF392F5687D738E163C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Utilities\\Arranger.cs",
+    "Sha256": "0FE33F300C4B990449D0D5EDF5DF6329ADED3838DE6A74436B41850CE9F1B48E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.MiniC\\Properties\\Resource.resx",
+    "Sha256": "8CEF6EE0AEC1335143EACABA02DE66391770CD1A68A6EBF6153FEE56EF4DD7E7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.MiniC\\Properties\\Resource.ko-KR.resx",
+    "Sha256": "0782A8237A86593FEFAF3F039FB2C237E0DFBF79C6A6313337227FC8DEB4C5A1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.MiniC\\Properties\\Resource.Designer.cs",
+    "Sha256": "5812F9ABA1792164793EC43300E96E6802DBB3527AC167CD387DCEAA63F3D879"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.MiniC\\Parse.FrontEnd.Grammars.MiniC.csproj",
+    "Sha256": "AA6D5196273B0CD018C16A102EE0167C1DF5CF4EF893BB931C9148389EA0EFA2"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\IndexList.cs",
+    "Sha256": "B49968AE54EC01B3F3F692CF091D664D8C3DC198D735A2E54A0E9F012D17E75B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\IHasName.cs",
+    "Sha256": "06BABFE95AE3802407393B5594DE8E31246FAE8AD935EBFAE0D950FC62E6394C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\ICloneable.cs",
+    "Sha256": "54BEA45EA5D55C632F6A6141C4E12596353097ED4AFBAFE89B4D579E7F73CF29"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\ICanBePointerType.cs",
+    "Sha256": "C3945667B6BE89E5E61840C4218AA4B2F0F595BD0D641AF553B7377CA055A7C1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\Operations\\ISizeCompareOperation.cs",
+    "Sha256": "D2F7D9671843F80A3A749863F296DCA604E306FCFD79313B7E4648263ADBC566"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\Operations\\IOperation.cs",
+    "Sha256": "8F94DCD147F1E60251393CC19184A2BBF928BC70DA1F142C8BADA06C83A319F8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\Operations\\ILogicalOperation.cs",
+    "Sha256": "EC5C19E95E23054D397204963F28BE41547B6EFEBED0C3A716B515F55D02DF9F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\Operations\\IEqualOperation.cs",
+    "Sha256": "A2B8D6EB3C0DDE3E2B6AC37C61E90532B41681BF1DC6A6FA25CAA09B5AA73F90"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\Operations\\IBitwiseOperation.cs",
+    "Sha256": "DBC953A10CF732F59D3902BA1255F5C87E2DFED537904EA00FA8C78B4B248F07"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\Operations\\IAssignOperation.cs",
+    "Sha256": "C29DA4F58C93C89F1368170FEC29AF214BB4619614D40E30F67400720AB57BB5"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\Operations\\IArithmeticOperation.cs",
+    "Sha256": "FD758255624D60E59C7A04C1056D7B212DF2138CF25B2BB5990DCBC9687AF946"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\IntType.cs",
+    "Sha256": "FD5FA66834DF11564F9F7B164184E6FC30FA31E0FA1AC513FF6A070BB6A99D50"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\IntegerType.cs",
+    "Sha256": "E0E480426913128D4CED4F7A41847E46A116E7447440E452ACB4E01E1BE2AAF8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\DoubleType.cs",
+    "Sha256": "604FBCF1DD139D935524761A9C46AA0376147DCB6821BE226CEB1D4A766CE41B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\ByteType.cs",
+    "Sha256": "BD5697205B235D0DED300FCF6123039A66753584420EACDEECA0AC78F8AA92AE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Types\\BitType.cs",
+    "Sha256": "0D03E1B1449095F92DEE5A1290C557DA7A4B08A7D52B7B2F2AB888642AE41BD3"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\EventArgs\\ParsingCompletedEventArgs.cs",
+    "Sha256": "1B2BA7B52A076D7A8740C004FBAF877942D3FC8AE3EFF7B20285D28C8ABB43E4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\EventArgs\\AlarmEventArgs.cs",
+    "Sha256": "D268EEC2BED067BCC8AADFA1BD878173F64EE4EF6487FF9814B34E9D13423389"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Support\\EventArgs\\AlarmCollection.cs",
+    "Sha256": "8041A3643E2F68BF39DA80B6704F45A2976025CA24C8B8700DCB46B2508E1C31"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\RegexGenerator.cs",
+    "Sha256": "7C850F976DF01E8B827F13AAAEA4EF2102F0BE056BFF380B37F92D136643A4A8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Range.cs",
+    "Sha256": "EE296FE04F52A088F0158BF2F2E4D12D439B5ABBFAB38025C490DA19E4DAD685"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Parse.csproj",
+    "Sha256": "E73C59290ABA49021953909CC405E4C43A1E0F7A1BFB32A9A74FFEE2F7EDCEA5"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\IROperation.cs",
+    "Sha256": "63AB77810FC1D0BEFF77F560BEBE05255B68CA6B8B6AD9CFD44575C5768180D1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\SelectionTokensContainer.cs",
+    "Sha256": "F3B3D379E6E8B5B3AE3322C420DB1DEA51D15B548F9FCF22A78DBD3D5BBA4FDB"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\ScopeSyntax.cs",
+    "Sha256": "994A017299FC3CC9BB4763FE41A79BB0114C93A4F03EB3252D4CF66654D9B781"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\Datas\\ToBuild.cs",
+    "Sha256": "30E1C08DFAB4FB41E4FC893C0B8F5A91457A52FC8E260586A9FC8C8EBC6565E7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\Datas\\ToBuild [Type].cs",
+    "Sha256": "4F17C76676BB51D904584FCEC542201BF01EBE81DB9E52EA167E7F2FC0ABB9B7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\Datas\\SymbolTable.cs",
+    "Sha256": "3A7D311D83EE4473EFBA38A37B9216F0CFB92E6008C171351D16D982BCFEAE91"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\Datas\\RootData.cs",
+    "Sha256": "CFB13CCF0ED48E72750EEC0FC0CED7DDE4F6A5AAD9D6BDCB7A8955559FFF89F2"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\Datas\\IHasVarInfos.cs",
+    "Sha256": "6E6D22F39679428349FA33907DD8C00E756DC8BBCE0BF4D56893A686D34C95F9"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\Datas\\IHasFuncInfos.cs",
+    "Sha256": "EBDFB0D32644C5A6F944645468572074954B51A736A40F014901F76643C387E0"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\Datas\\IConvertable.cs",
+    "Sha256": "35855A0B0CAE6140AB3C62DFA711D51E92E838A37AC3478B41674E1F5C45499B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\Datas\\DefinePrepData.cs",
+    "Sha256": "AD887B08092510E0FA259DE9EEE5A4128CD3D230335F2E3A9B4614526C450175"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\Datas\\DefaultExprData.cs",
+    "Sha256": "75F7D8A1B1A1EF4E6EF679C91516024F8D37FC7C07460896BD09F658490C0E9A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\Datas\\Array.cs",
+    "Sha256": "4650DAB3A4343801D05B8B9F253F9479BE6F55F9894E1DE32E3E67A3181602AE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\PracticeGrammars\\LRTest1Grammar.cs",
+    "Sha256": "F4F611060913C4476BC728A190561D92CEBF6286CD56CC9ADA14E19D8D008015"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\Parse.FrontEnd.Grammars.csproj",
+    "Sha256": "5D8EFCE53FF8F9F699B1E518A4624DA86EFD040AE8A68A0C15D8E8A5457C0A1E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\IStorableToHashTable.cs",
+    "Sha256": "86AA1FF3C1A382C8D3F5CD3AB886AE19ABFC4FE52437E8692CA4F1627951AD0E"
+  },
+  {
+    "Path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target.ARM\\ARMv7\\MSeries\\ARMv7_M.cs",
+    "Sha256": "E4BE82BEB0B762953DD13D5A4309B28B1ACB4AA47E827F4A1A8F1B832293A1D8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Check.cs",
+    "Sha256": "B02F9147AA86A9BCD130FD3726315BDF5E27292DAB857B85D49286ACC5FB4013"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\ExampleGrammars\\ThesisGrammar.cs",
+    "Sha256": "7CFEAC60D7F6DF429FD01C8D9258646BD69AF000B3BD990C00EFBB89846B88D7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\ExampleGrammars\\Thesis2Grammar.cs",
+    "Sha256": "CE9325BC3F5AF6BE03F4CDE3CF5193F5C13C4B5A6D8276A19D74DAA58C7D33B1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\ExampleGrammars\\Ex8_9Grammar.cs",
+    "Sha256": "028B2C36D151BF910FF63C7CF53D67FD88A6F7B2C8B90A8EE133EDCA7A7810DB"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\ExampleGrammars\\Ex8_8Grammar.cs",
+    "Sha256": "229CEEBB1EE2DD0E62AA7D241737E0E3F8F67A621428529C988C75E3C6FD8E39"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\ExampleGrammars\\Ex8_1Grammar.cs",
+    "Sha256": "13FA4890E8BDE5E45C029EC62396A9DCD36D3FB180E4A090DFA0550BBC136A3B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\ExampleGrammars\\Ex8_15Grammar.cs",
+    "Sha256": "5F45AC1C14DCADA32ABF0AE768336B7C72FFABC3BF8361907ED96D3404750613"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\ExampleGrammars\\Ex8_10Grammar.cs",
+    "Sha256": "8DCB917C81F8DCC19E65C37B2F84B5856AE58C441B5620ECA6E28A03CF6CC86B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\ExampleGrammars\\Ex7_15Grammar.cs",
+    "Sha256": "A9AF1B51FD46D33DCDFF86F3ED8CC6F10071C71C56F995DB2B8034346364EC2C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\ExampleGrammars\\Ex7_14Grammar.cs",
+    "Sha256": "E1EDA860BD40568E151AE2D5EDC98D48BE5CF58CA5A2D9541F2DE839C9BEB288"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars\\ExampleGrammars\\Ex1Grammar.cs",
+    "Sha256": "E07C196DB6CE81A59FC873B0C2447B1364E52E4D3FCCA1CA2BCBCACCFD4B5F38"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\IErrorHandlable.cs",
+    "Sha256": "B52DDEB1ECAC0CE053B96A1F398C040AC19266CEC8DD144D439AE5674715EE46"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptUnicodeData.g.cs",
+    "Sha256": "D61B0FF96E301BA9C64F1E1A53930816930C7763D2137CF5525498F3A67C59EE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptUnicode.cs",
+    "Sha256": "2F7F2642E5AB47661AA78FC94982865A0EC97C00A75C0E989A00304C7310C58C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptTokenPatterns.cs",
+    "Sha256": "196C62B78B5EF07E84D8F9DD75543B1AD7BF803F5239DD48E41555ED300488C5"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptTemplateTokens.cs",
+    "Sha256": "2A60298B3736FC32C9C6C776EAA8399BA8597467266CE3F438E3B7DC7F05535B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptSyntaxException.cs",
+    "Sha256": "B2D417AC64BB63B59686962C326554785CB2E65C4920DBB297979DE250F7390E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptSyntax.cs",
+    "Sha256": "445C921DD59A78AC949362F7A1F7777E62D88B1A835476BD821E62A55728A07C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptStrictness.cs",
+    "Sha256": "B7E5BF3B7A2A968D6A52DCF21D4B689E3436DC92282895A493BE0A979AAAA628"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptStatementValidation.cs",
+    "Sha256": "03BC927F322D7298583C94F8A4599CDA317705353BD857D367BB921BC8513FC8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptStatementPredicates.cs",
+    "Sha256": "4FA8F83EE8E34AABFCCACB920442E5A4E93EB674E139C692EF5202FEE4F4ACF6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptSlashContext.cs",
+    "Sha256": "21C42EA48F25A087D18162DAFEF797705E940B8B055EADE79DBFF46C690B4FE0"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptRegExpValidation.cs",
+    "Sha256": "CCBA656C0E9D23C574742CC5BAF5C68C6E0D353A4402C0EB191B417F478CB468"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptRegExpSets.cs",
+    "Sha256": "EE93319FCFDD5D3BCA5B271DD05893834B976771EB475E7CD8CBD65D49CD1AA3"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptRegExpProperties.g.cs",
+    "Sha256": "E6D608FD111FD576DD7605EFD28C60C09A6957AFB22F3B875EBA272A3F1165A1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptRegExpProperties.cs",
+    "Sha256": "082DD4AD16AFCBD53B627680F036AB050721FA555262AD7D15BE9A7F607D889B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptNonStrictGrammar.cs",
+    "Sha256": "324AD8A0745B5DA5F105513EC6FE53FE4B42177A14FCE44FFABAC66D115713FE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptModuleValidation.cs",
+    "Sha256": "23FB44A0ED26ACF253161FE6D12AD2DB4B7C09A32740D7CFCD399685D3356C26"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptMode.cs",
+    "Sha256": "0BFD8883E353F3AFA55766B1DFA4B5878CBA2835B6213A99487773C636F483FA"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptInputKind.cs",
+    "Sha256": "807EE32A23D6FDE8F5F974AF7FD9D84B94ED42E329198749ACB79EAF4AF7D5AF"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptGrammar.cs",
+    "Sha256": "BECD20846A4C70241FEB215E623D7D0AAB88AB28AB4FA7C99FE3ECF489C7FE98"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptFunctionGrammar.cs",
+    "Sha256": "DAAADE15AAC589AB42AEF53CA49160F211B05965A2CAD7B4AB49F0B959ED3B44"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptExpressionValidation.cs",
+    "Sha256": "F7D74B1E8F8420E9C705DD491AFCAAC1E695079553397866ED1A90C36E0E183B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptDialect.cs",
+    "Sha256": "85F9DFF0D9F344A7A1620C4CC6F47B066058D37DA1E6CD24F6D6A56A41EC840C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptClassValidation.cs",
+    "Sha256": "7A980A2986903601EED0F80C288C8BBF5D9CECE1FE746AB34199CEE256FE6956"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptAssignmentPatterns.cs",
+    "Sha256": "139D319647191005E5A3295B93C5FB7E1EAC00A5D3054464DD228E77F8E8A3C6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\JavaScript\\JavaScriptArrowFunctions.cs",
+    "Sha256": "5295B53E8AF6D4E499D530B84BA7234B6B0BA5A6D8476B6B36F7E42D2FB60D87"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Models\\AJProject.cs",
+    "Sha256": "3F0B7C856507E305876137D92E92F9F4F84F0B562BD40706A197AA2EEC0F6145"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\TokenTrivia.cs",
+    "Sha256": "83F26A5219464441F15A632F6FB6BEDAB8F29F7286C1D4E332CA291E9E56FEE1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\TokenRead.cs",
+    "Sha256": "4F2DD8200CF11A853410459D4498CEE1EC9AC296DEF949D5984CA9F151F3EFB9"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\TokenPos.cs",
+    "Sha256": "230F3A20AD69512C715758D7733B1AC1AB47C3DFAF49A9A78F410F877048EBFC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\TokenPatternInfo.cs",
+    "Sha256": "D67ABC300B5FD260816FF755D7DEB7518D1AAA4AE0EAA82702034D0B2E0D7D06"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\Tokenizer.cs",
+    "Sha256": "B6428DA71E3B1E4EF49CADCC2DC0B0A3A17C479F11949E91B31DEB7A5D4E21D8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\TokenizeImpactRanges.cs",
+    "Sha256": "80EE94CD418CA80E11CC0609347EDF628821E463DB0EB3DF8FBEB51B7C332304"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\TokenCursor.cs",
+    "Sha256": "616535FD56596918F084B5D259FE208183D5B45086D5B2A672CB3AD62B03F29E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\TokenCellList.cs",
+    "Sha256": "B36CC0AD4A3D9CB38B2FBD9AE8940E0893B4A66A2505606893E81F42BBE520BD"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\TokenCell.cs",
+    "Sha256": "0FF69F8648D871AEB5371DF372478905BE276BED27B4F7F12F7B3E53D9115CC1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\ParsingData.cs",
+    "Sha256": "6B75370C8A573E4250196D96AD44DA8FC6C1B03AE12AC23A709478EE0D94F4C8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\LexingData.cs",
+    "Sha256": "9EB6495733124F7CEA03506EF37FA19A76448E2BCE03654EB2DBE202585F1E33"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\LexingData [Update].cs",
+    "Sha256": "874846A51192FF79DA186EA81FAEEAB6BFCCB8932DD713E8260261F00B34D216"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\LexingData [Trivia].cs",
+    "Sha256": "0975D82289B45E23C11F67A405FF6BE2BE817AAB2BED254E029190D2F71538E6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\LexingData [Indexer].cs",
+    "Sha256": "1A94BA2C349F8655BEFF26BFF323B735CA63B68DC2DE974BFBD5C5A4C6F36ECA"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\LexingData [Finder].cs",
+    "Sha256": "D561D28697BFE9FCEBFBAFF7B88A3DB213C4490D57D067C8AF7A5A7E21825893"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\LexicalRuleMatcher.cs",
+    "Sha256": "D5E947E0AEE05CAC28469F28D87F36CBE3713DCDD9BE36C93CD804A27B6E899A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\LexicalPolicy.cs",
+    "Sha256": "1B96752E7C5E7A20E520AC46419A4E08DC4C176193A21048BD94A5EEDB3D7AB5"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\LexicalGoal.cs",
+    "Sha256": "FC6C574B71730B53DEFB08B22F2095A6A8EE5176DC52D9ECC9828AF91786D68D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\Lexer [TokenSource].cs",
+    "Sha256": "9676BEEB995F4F61EEB5B3951C6CE4DB139E92E9783A44D5420904142980F4C1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\Lexer [Deletion].cs",
+    "Sha256": "1370DEE9132AFB1CCC17F3A1357F3E63E2BB03AD5EAAAD9557C6FDCB33667E68"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\Lexer [Common].cs",
+    "Sha256": "58E45317CC5A5813750F53912C4025F8D772DDC53890DD1A14FBA6382231F654"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\Lexer [Addition].cs",
+    "Sha256": "B391887219FE241F369FA3F7B38063C57C24982A5C601AA22C9C110BE911832A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\ITokenSource.cs",
+    "Sha256": "AD333B3DDE9B032375FBDDDA01F667C3110870E8E3B776B5BF3676B9EE984CC2"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\IndexMap.cs",
+    "Sha256": "B40F3B2561C359F5195B05ADFBFA573180A5BB8D6533E0CF9EB4186529B43478"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\EmptyTokenMatchException.cs",
+    "Sha256": "213AA830B7A1901371D0BB72B13FFF99C91E2DBFFF615EF05DFB7CBCB22BD179"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Tokenize\\ContextualTokenSource.cs",
+    "Sha256": "D0735C854FA93C5C542EA626CF626FB57F56B69D3A3E82EC5381731DA4A4E88E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\TokenInfo.cs",
+    "Sha256": "4FBDB1D2237A304FD50AC465845B82824AFE3AFB0727C27A01E4E3D9230BC02C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\TokenData.cs",
+    "Sha256": "49D06F93FF49E5B0D582414B842EDE7B7018816125B18C3743F53B99EEF7216C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\SdtsNode.cs",
+    "Sha256": "7EC7E8E6CCF848C34036C53122690C945B761A3282C3472E99A94F233A2B4532"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RelationData.cs",
+    "Sha256": "A8AB649C69B4E818939D584570A73D2EF3C79C649D0C8658940E6453E1903CA0"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Models\\Solution.cs",
+    "Sha256": "A4A654934FE59D6175B9202E8C7B1FEC453FC9CBF24301740CDDD5034F474C56"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Models\\PathModel.cs",
+    "Sha256": "48297C89F20803FD660681C21261C30814EBC1B21F92FA0702A93212EDC35C0A"
+  },
+  {
+    "Path": "src\\Cli\\CommandPrompt.Builder\\Models\\ExecuteModeModel.cs",
+    "Sha256": "3B7CEC1D64B51E0D40BF0A7EC6B9279DBA5DF1C25835201F96C4B5D439B43448"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\TokenTypes\\TokenType.cs",
+    "Sha256": "765F2EBEF208A5676682ACC0FB2D8052C11E8CBA7969EAF50152AEB66CCBC84B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\TokenTypes\\SpecialToken.cs",
+    "Sha256": "B4DA1CEEB7BADD5A3A3574173C26389F199B2A7CC97DB9934F2A518D52A3038D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\TokenTypes\\Preprocesser.cs",
+    "Sha256": "F7619DCC81508338A543BC35F6C37306CBC5D99D32DF3895CF1B13C50296DEBC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\TokenTypes\\Operator.cs",
+    "Sha256": "13B310B00887A473715C591ABA25F2C460357993F8845FD3046A17A00AE0E5C5"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\TokenTypes\\Literal.cs",
+    "Sha256": "F6092D1BBA9615AE376B9E4990A3128D8392642F1133696B4411D1A403D7F6C6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\TokenTypes\\Keyword.cs",
+    "Sha256": "40A5EB1B479DD606E7BABF96A539C52A94BBB2F1AF0FB2FB5CD82AA81771955E"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Common\\FirstEmptySequenceTests.cs",
+    "Sha256": "107554FB60E59F9C409DD3B40D273F16CF7B18F61E844C964F4847EA0FB5AC9E"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Common\\ContextualLexerTests.cs",
+    "Sha256": "F76BA5897DDB1A1722E3DB232FAEF4C7D733AB4FBFA5E954CCE51B238A1DF4A9"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Common\\FirstFollowTests.cs",
+    "Sha256": "5AA2889996CDC95C52184C6593EBDAAE511EEFC1D4A0FEFA1ED9ECAEFE69D6A8"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Common\\GrammarTests.cs",
+    "Sha256": "2C074284A90EE6A00BE454372B9E16F2CB1846BC5E60623A5495F315FDA6320D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\IData.cs",
+    "Sha256": "FDEC2DF0A489282533CA4A2DED9EDE954E83FD215D5F4EA6F4EC5310E7FA6E18"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\IConvertableEbnfString.cs",
+    "Sha256": "3499E5ECE3DEA32680A63ACF2E655138093769A6F6879AAAB028B4DABBC92FEB"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\GrammarNormalization.cs",
+    "Sha256": "5CC8A6D265FE49E0BD0BC030A0207DCF19F187858A5C268997C5E5761E713110"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\FirstFollowAnalyzer [Follow].cs",
+    "Sha256": "E945F11F97D2A1425AC023BBBDB2E4AD1A920C0E802EF0F0B133F0A45C001A24"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\FirstFollowAnalyzer [First].cs",
+    "Sha256": "0BE6F524A007AD40683296284F51A7410488EEA07327119A7247B10A4FB0D3B4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Convert.cs",
+    "Sha256": "07BE3D235A1BD5EEBED7C85D8485E29D9FD2035780B6438E784DB64C1A09858B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\CompileParameter.cs",
+    "Sha256": "F2A51A470DDC426F26F3F0CAB3301CBE8BF502D6617B18ACB5575196925A5480"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\ChangeableDataSet.cs",
+    "Sha256": "81A2E049232D07155E40EFD05FFAEDFE79671E428273F2B499439D0927CE14D8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\AutoGenerator.cs",
+    "Sha256": "B0301F5F3227FE74E2648C555C36FE4B8F0A1B70A738B96EB371564D42B3925D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\AutoGeneratedNTStore.cs",
+    "Sha256": "FC2902D5B19F8123BB40E94C4AE90D44C6B2F3A028F36528CE49987FFE194DEB"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Common\\TokenTriviaTests.cs",
+    "Sha256": "85AAF8DDD05AD700350793A7009648924C9E001155DE2E18F2144AC533019EA7"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Common\\TextLiteralLexingTests.cs",
+    "Sha256": "BDCB7C8ED330C48D69CA3D23341D3A01528BD46084D9FE22C5D37D8F03FA88FD"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Common\\MaximalMunchLexingTests.cs",
+    "Sha256": "0DF002813C4832847D9A326AC303AA1B65735C15539B98B1DC52F9C50DDDB22C"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Common\\LexicalPolicyTests.cs",
+    "Sha256": "990078F3587EBD99ACECE59A578CEE500CC37491347D9CA7340678DF40D77B1D"
+  },
+  {
+    "Path": "Tests\\Parse.FrontEnd.Parsers.Tests\\Common\\LexerTests.cs",
+    "Sha256": "443982D3634D77E2B7BCB6516104D9052BE9DCEEE8C889382E06CCA670CCFB28"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Parse.FrontEnd.csproj",
+    "Sha256": "BF7950D465D1C643320B38085B438B528653A09A56FA39740E33F880D169C602"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\MeaningUnit.cs",
+    "Sha256": "46241BEC881E54164B687EAB415D09802B56384C642181B9248714C3B2F96AB4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\KeyManager.cs",
+    "Sha256": "7E218BC0FC7E882AD14FD5ECAB6822A78EEB515958192F87E304BA6B7D66D669"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\ITemplateCreatable.cs",
+    "Sha256": "AC67A8A4700752ADF65DBDE26DDE17B1DE4393689630E970BD0B5D043694D607"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\ISemantic.cs",
+    "Sha256": "E9D930D0042AC0E79EDD6D90920A4914FB4F29ADDCF204D44107849A25D41DA1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\ParsingErrorInfo.cs",
+    "Sha256": "0F8E0E1007966AB8FECB5F38B22B83FCD2992B4F5E550D14A8904DFC9D3C1D0D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Algorithms\\NaiveSimilarityComparison.cs",
+    "Sha256": "FB8D78A5EC6067F570E0ABEE3BE07693AADDA291E44BC3977AA367BE22D1F2C7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Algorithms\\LikeVSSimilarityComparison.cs",
+    "Sha256": "28CA6FD66B8C52F70936BF5BDA78443EB0FC34C7F90C20B16527399F3300FA7D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Algorithms\\ISimilarityComparison.cs",
+    "Sha256": "CE3856A5A017267BF264A01E8EDD14CC71442E93B966A4429BB2168CF15AC304"
+  },
+  {
+    "Path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target.ARM\\ARMv7\\MSeries\\CortexM3Models\\CortexM3.cs",
+    "Sha256": "0BBC9471151BBC7BA47C9B5572109B060D53E49387D62BC5AEDCFDF8F49781B1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Extensions\\EtcExtensionMethods.cs",
+    "Sha256": "515353A56543B0610E632557AE9AD0CC60FF1B90AE33463EBE24DB694B91B59D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Extensions\\DataTableExtensionMethods.cs",
+    "Sha256": "B6DB21E2D30352834DB21F28C8135D9FB6A1A7BF6FE91AB06BB995E3695D1256"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\DetailValue.cs",
+    "Sha256": "4CFFC13196BD8361C0FD2DB1EC55EB07E084176F160B80D9CB69799DF6531911"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Extensions\\HashSetExtensionMethods.cs",
+    "Sha256": "BB761FE578B116041E57E4A30588E201914D380A5E5A6412B4FE7CC5B114BCC0"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Extensions\\IntegerExtensionMethods.cs",
+    "Sha256": "2727C33F1F35BE6B78033827BDA06AAE30CF8FC67D76AE02B421DA04209B0B0D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\ParseCreatedArgs.cs",
+    "Sha256": "93FACCF6CCDE215AAE4E1DFF55A587E490199045D28150C077FA7B7A7C8D19AF"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Extensions\\ListExtensionMethods.cs",
+    "Sha256": "BECAD1DD98D06E6FEC3EACC7355E641E46619E55D255C778FC0636A8B2E9A5EC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\IDouble.cs",
+    "Sha256": "A3DDC1BE87A783C84F950C75D6276569406251E12B0769A7E2CF3529ED70A789"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\IDataTypeSpec.cs",
+    "Sha256": "2E419BF3703DF59B6CDFBCD1D468B6334D263F80CD705731DF9468EE2F3DA91D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\IByte.cs",
+    "Sha256": "AB801413AC2B09CDA38CFE36E18DB0FDAE2F2B5BBCF6CFD74E9C503C9FA39BC6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\IBit.cs",
+    "Sha256": "A29ADAD5F72F595EA5630ADE178E103423CE5458DA44F9EBCC4EDF3EBEC91A20"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\IArithmetic.cs",
+    "Sha256": "1B1B8EB29D2ED122DC9EFEAE1832082A6DA0F2BF77A38DE814A1ADF609EC481E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\IIntegerKind.cs",
+    "Sha256": "87297891FD2D52F1F08CCE885CE150900BE184C69FE227F16201E3DD979C2084"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\IInt.cs",
+    "Sha256": "D8091ED56EA343CC51EF30A3B387BAE674E212B884BF810B08227FB11F71669A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\IEnum.cs",
+    "Sha256": "139C18DFFED065EEFFF30344537D017ABC661D93E996AAE300B2145C22DAD369"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\IValue.cs",
+    "Sha256": "8C9C0208DA9F676FC0F30FA82AB86B845279B64BBB323850548D04D01A680FC0"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\IShort.cs",
+    "Sha256": "89C7542BCB7113CB8774BA11ACBE19ED8A9F8DEC1CAFFB0A365AE51C566C51DE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\RelationAnalyzers\\RelationAnalyzer.cs",
+    "Sha256": "CD342B001AD6A496076D2A4213D8E331C41123AF38F556B0AFE2DF5DF99EF3A3"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\SymbolTableStack.cs",
+    "Sha256": "228CF6AFEFE4CA17162EF1483FA683E4C29617E7EB7220185913708E6457B65B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\SymbolTable.cs",
+    "Sha256": "DDEE0B78FD48E202A2E1FFC16FAA96E79D7ADD8589426C6AD01F17D9C76FC6D6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\ParsingTable.cs",
+    "Sha256": "0899196E9A80C8AF742EF292BD785D725566CFCE6EB68C180778E6FE21C89CB3"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\ParsingLogger.cs",
+    "Sha256": "C9BCB2AD88F40EE48F078EE24BD5C8C5A5E7D55B360EBDEC7D07FFD02B788CA3"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\ParsingHistory.cs",
+    "Sha256": "8250A3750DE7F992A3E082779477EB3E5680560C42E2181CBBF36F492A846E13"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\ParsingDic.cs",
+    "Sha256": "E9EDADEC9F088EB69D54639520C89060775A21AF6BDF330B059FE8976E5A3453"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\LRParsingTable.cs",
+    "Sha256": "288165A57C9C69C154702E1CBC98DD2EDD8E6ED49870E3CE321621108A1C7DF3"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\FirstAndFollowCollection.cs",
+    "Sha256": "FDC20EFCBCF0EAF1165592F9437B875805FF3647D2C7D19A58DE15887798D01F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\CanonicalStateSet.cs",
+    "Sha256": "F58868B56792EA5EAA7504EE4B4FF7B1FD4B1605CC4DDBB39B7780C781BC5E0A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\CanonicalState.cs",
+    "Sha256": "2931E2DF5E9E333BA571350471034897E717B6C8CD6B10829C175C179143709F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\CanonicalRelation.cs",
+    "Sha256": "86B8F682607E33B4C5A3E9A38FCC99973698832373843D5EDEAE439ED0105A17"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\CanonicalLine.cs",
+    "Sha256": "E6CADB5A012A6046642D9FE4ACFB11D5FF72F752FEE719673C1E54F31D7A0385"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Collections\\CanonicalCollection.cs",
+    "Sha256": "E26EA9C0AD0B3E16E6A3455672B74AFD345BFE6620D22711FA76362D48C97B78"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Analyzer.cs",
+    "Sha256": "E2DB097B6C7603611FE9D2EB31BFC62A1EE3E4947F0C7262DDFFDA648F5BD6F7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\AmbiguityDeleter.cs",
+    "Sha256": "B6F2543BF7D0E8293D9C07EA4BFC847E89B9905AD16CAC4BAA96E710EAC17703"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\SymbolRowData.cs",
+    "Sha256": "D8BD74CDFD132989A7B4457BB6246572257CF650F20BC7856BCAFA44843B3724"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\ParsingUnitHistory.cs",
+    "Sha256": "731DC40F63359AC9BBDC692E8FB535E8197E5E476197BB550B77E8E48CA1C396"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\ParsingUnit.cs",
+    "Sha256": "67018CA2E19178B9909068B42E0021B856CB113A68AC459ECF45BA54BF35912E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\ParsingStackUnit.cs",
+    "Sha256": "F4C0D7F5190996DCD3D1BA9CDBBB5C6DF6FFBF2300159E959E04F38F47F9E959"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\ParsingRowDataFormat.cs",
+    "Sha256": "E770B51909C012DC1E10F65D22A8CBDA27BFF8026EF58611E056BE39FC9874F6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\ParsingResult.cs",
+    "Sha256": "4C501FAA3B6A87A2CA72F9AF8696A9372685867D194926E71E73377CA50D3C15"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\ParsingBlock.cs",
+    "Sha256": "5DC25C1A69BB028C61FC2BAEE0FD7813B4102ECD8A657C92F0D25B02ED0077C7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\ParseTrace.cs",
+    "Sha256": "52C04E03AB4980193CC51D5248C1FC70C85960BB72F20E84800E63937B93B9A6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\ParseTableEntry.cs",
+    "Sha256": "A82EFE942FCBE713C3D6D231A0A117DC7BB0E673D34AA108AA43EC42303309AA"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\ParseAction.cs",
+    "Sha256": "BC5CC7DBCD995B966464CCC6D3A110876C85681ACB69EB94DEDE062F456A387D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\TypeNodes\\UserDefTypeNode.cs",
+    "Sha256": "24D1BF753408F1F6D3F9BD28E31C678088FB43EC4BBB02D056A16F1965A3433B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\TypeNodes\\TypeDefNode.cs",
+    "Sha256": "7C34A30732852C18EE4E8604CD39822DCC00E0AC79C1F51E73B628F7E9904C6F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\TypeNodes\\TypeDeclareNode.cs",
+    "Sha256": "16A6A0B42A43315E325BA16736271C28242AA72A030458662F06CA595BC76657"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\TypeNodes\\StructDefNode.cs",
+    "Sha256": "2D9FD03B8B3F712F0C408177237AFEF354DB73454D0628CD72FAEAA0468F0C5D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\TypeNodes\\EnumDefNode.cs",
+    "Sha256": "5D348B70A4FD8C46684E8F95B20146ADA44BA1021DD06EB8A6DC19BD28565477"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\TypeNodes\\DataTypeNode.cs",
+    "Sha256": "CF29743360C9A56E60066091BDCB38B5EA9C6CAC6886452515E3B7F0925D25F8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\TypeNodes\\ClassDefNode.cs",
+    "Sha256": "A9704FE063F544B32FCCF924E521AC761D2A3AA35C7D500AF147F262F68A1F4C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\TypeNodes\\ClassDefNode [Data].cs",
+    "Sha256": "CBB07B0420BBDB6796A38134403D5C1BA701330D008CDF5738841EF6EE4B4618"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\TerminalNode.cs",
+    "Sha256": "714CC00422DC87A72A436B07B1BED8DA47D98FF40407ECDEBB77A8A2565AB603"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\TerminalSet.cs",
+    "Sha256": "640D32D6E60A6EF89EE39C1240C0BFFAA3595A9DE2011CC772BC85B5F89573EF"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\Terminal.cs",
+    "Sha256": "F16205F90DD0FF6A0B705B775296502C397E1F0A6FCBDE31A4C9F547FC8D9E41"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\SymbolSet.cs",
+    "Sha256": "7D9D867376033FB5109D4BF0EC85444873D9E26BDE0377B2AAF370DB861E86AE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\Symbol.cs",
+    "Sha256": "393D9098A0D87E687E617CC39DDDE79BECBC27683B7133F12CA16F1D30CCA71E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\PredicateContext.cs",
+    "Sha256": "13C6A16BC85B51FCEE9F7DF02DA7006AC574BA1D955EEAFFDD7A5F929940FE36"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\NonTerminalSingle.cs",
+    "Sha256": "C0E5386BF5F96A0C8B821D932CC52E23E7CE3B9BEF8DF9356B78C88450F89FF4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\NonTerminalConcat.cs",
+    "Sha256": "FA873D367A5FF2CED03077EAB82B01A59C5367F6CA0E27A874D3973E701ED21B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\NonTerminalAlter.cs",
+    "Sha256": "4D2A335A72A92A5D3933E61E23FB38B9DCEF4EE05F1E6BE635D7296B13ED7673"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\NonTerminal.cs",
+    "Sha256": "B035D8470882476B327614301E0D410886C23B6CC36497B0018C6EECDF6393FC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\IShowable.cs",
+    "Sha256": "645694D6216DFE81FAF1791440B1F8B0A106888488F07D5042B0B6C18F972212"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\IQuantifiable.cs",
+    "Sha256": "5C34928BB668188286B9749DCA068689C1F797B6FC2F485231406505AC336487"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\IBridgeable.cs",
+    "Sha256": "DB60E71FDD905F38FA235FA9966F1E962697D35EB344F7DF43DE9C96338D34D7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\RegularGrammar\\GrammarPredicate.cs",
+    "Sha256": "C5C5913C5397C94E6D5366FEFA10A973CED9ACFBF360A2A65A5439B08037BF93"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\ParseTree\\ParseTreeTerminal.cs",
+    "Sha256": "A750A0F001706E61D0DB8456618756BF0AF2DD057B3AB5B6BB199398739AC976"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Ast\\AstTerminal.cs",
+    "Sha256": "10E6818CB7AD80A330B8A78CAA533445C4B7C02F50F480ED0B5BD5CFF8590CE5"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Ast\\AstSymbol.cs",
+    "Sha256": "2073F758C2CF20A364F14F24162734EB7FEFD6AD104BC931338CA5E7B3228329"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\ParseTree\\ParseTreeSymbol.cs",
+    "Sha256": "6ECC35D19EA61D3B99D976A2DE04850CD73E8BBCDBD53D51D5EA372056703A22"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Ast\\AstNonTerminal.cs",
+    "Sha256": "861D78DF10F004F7CE1B383F855A1A27E54353317B75044C94AF48085994E28C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\ParseTree\\ParseTreeNonTerminal.cs",
+    "Sha256": "8EF9F1038CA88E45D0182BA14BF7EC811E00799D930E1E42AE9FC0BBF98E0E9D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\AJNode [NodeSearch].cs",
+    "Sha256": "A2F4BB2574E3BE69332E62D11B831E6DB3A4571FD06A54F29F94164A5AE04948"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\AJNode [Error].cs",
+    "Sha256": "319C709B9915FF3BCA25298FBAC5C0F0DBA23B03B24DC722831CB251D5F5353F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ActualParamNode.cs",
+    "Sha256": "4A95A077298E0A1D2934FA28162E4FE289479E62A69D4E4ABCC97349C773E99C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\AccesserNode.cs",
+    "Sha256": "8EB2FC53167AA4E3824CC94917C670BCA5737570E0FD228D26FCE66A7EB95D20"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AJUtilities.cs",
+    "Sha256": "A731B6380184B2A028DF288A2E15CB53A194449FABE83841C2C7B9DEC77A47AC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AJCreator.cs",
+    "Sha256": "18874278FA7D13F4923CA704BE9FBC90D2DD8FBB5946972454255186A7B102C0"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\EventArgs\\ParsingFailedEventArgs.cs",
+    "Sha256": "2B5429802E370DD38F758940A6A95387065DA0E9D0CCF09B5ED84F995F1CCA18"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\EventArgs\\LRParsingEventArgs.cs",
+    "Sha256": "9EE53F27661B9F781154C83E4A23BD94A25CC24A5E47217F88E1D8E395460CF5"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\ErrorHandlingResult.cs",
+    "Sha256": "88E250637DD6A5A7F9ACB8EC5ADA9ECE77678B8767C278499707069B2F8F58C0"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Parse.FrontEnd.Parsers.csproj",
+    "Sha256": "F910870FEFA773F8366D15A83FEAE74FFA565D77B849797DB84FCB92C17F55D0"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\VarTypes\\Variable.cs",
+    "Sha256": "844E42FC8F22DF53E6F3DC36A4B1C3FBF1AD9E4298071345E444B7F6B6470F58"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\VarTypes\\IVariable.cs",
+    "Sha256": "EACC05AA710FC4C2B1138428314D1019E5B1DE1E4F8AACD8B6BC33D5E1CBAA90"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\VarTypes\\IntVariable.cs",
+    "Sha256": "56026C06BA051C019F53C36EDFDC0A557880B0B9AB83E82F4ACE67C075EBFCBD"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\VarTypes\\BitVariable.cs",
+    "Sha256": "748563C1D847D536F5949C4E96A033F7F479A68C76D513F25222D84605A8F218"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\FuncDefNode [Data].cs",
+    "Sha256": "1F99EB2C90C74DBA8DFEEDD29DD3C10F04620F95D3D75350BF8AADDAF4E25C39"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\LL\\LLParsingRowDataFormat.cs",
+    "Sha256": "F1B9AA278CEDDE62746D86CB610361FAEFBFAD998661A01CD87F384C162BFD46"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\DataForRecovery.cs",
+    "Sha256": "41F139B3F100CDC04E5B705CB69E6048F93B180F358EE48781222D63AA52536A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\ConflictItem.cs",
+    "Sha256": "5158900EE234F99116A768C746008B6695349D368E97F561BB23632932BF09AD"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\ActionDicSymbolMatched.cs",
+    "Sha256": "8D2DDEBB333B01F40E73288352A775E91DB38A30E225D7B5A0162AE7D79BFB1F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\ActionData.cs",
+    "Sha256": "A9F11AC05AC60733B102C16C881130E996BAEE4710B5F61B89E94ADD8479FDA4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LLParser.cs",
+    "Sha256": "6170D473CE1A7F35043693FC9D91234E628A1A200AEF5DB3120A0CBFEAF23234"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\ParsingException.cs",
+    "Sha256": "D7A6EA707F57D9A602516A20D71D5992D84DB6BE2CC485C8F2E350B0A32747A4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Parser.cs",
+    "Sha256": "A7DC454A359BB9856BF40C1C827707C699B3A93CFD736DC485C75A84FA08DC8A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\ParsingRecoveryData.cs",
+    "Sha256": "FC7A81A111A717938494DF6A7EB5A96CAD96EA29C78DF2132EFD9294A0434BF3"
+  },
+  {
+    "Path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target.ARM\\ARMv7\\MSeries\\CortexM3Models\\Stm32L1Series\\Stm32L152VB.cs",
+    "Sha256": "BE8FBE7463937450F22797C26931EF9FBFA133B6233B3A002DE93BE18E5E3AF8"
+  },
+  {
+    "Path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target.ARM\\ARMv7\\MSeries\\CortexM3Models\\Stm32L1Series\\Stm32L152RB.cs",
+    "Sha256": "99A5F02DBF79A45142F3C91FD3B642F54CD8F1725EBE446DE4E7974E4771BFA3"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\Operations\\IArithmeticOperation.cs",
+    "Sha256": "037530F01BCBD84EE1E2DB3293A6E2F66EE8186A31F8857ADF43298B4D4B3A93"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\Operations\\IAssignOperation.cs",
+    "Sha256": "89D8FA86BEDE7D09DB8475DF6E66174F451226594BAAD8CC949FF31255318581"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Properties\\Resource.resx",
+    "Sha256": "1844AAF6A4F5F6460F569A6DA79E2E3809FE48F6D93A5BF434CFE369139DE85C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Properties\\Resource.ko-KR.resx",
+    "Sha256": "B46B256A970F8A129D8D19E6C158CE0132437C6FE5AC0AE740EE851EBFFF6BDF"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Properties\\Resource.Designer.cs",
+    "Sha256": "37964302DB55BDF06BC6F21D9EF2D73A935743FDD0E0A1A0E7C2ED655A79800A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Properties\\AlarmCodes.Designer.cs",
+    "Sha256": "9A7C48D6780B81C86938BD54F70A17EF8B8C3720EC983A8DDD346C6BFAB8D27B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Properties\\AlarmCodes.resx",
+    "Sha256": "C3AD83F0A7C736A23B7E30E19AD1BECE2E00F1C30FEF75E51997E9A11A79691C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Parse.FrontEnd.AJ.csproj",
+    "Sha256": "15822BA87B8D894D4142C3F31657A3BE9F0E7A855482BA28CABAEF0E4357B433"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Properties\\AlarmCodes.ko-KR.resx",
+    "Sha256": "385D38FD48B9391293DC4F64B157B3B368A0C84210C62A52CBE5CE084BAE9DE5"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\GlobalUsings.cs",
+    "Sha256": "8D91AF85198651FB6B772D2EB763D96FED0C5B1A6AD1A09A5C1BB333674A47A7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\DeclareIdentNode.cs",
+    "Sha256": "1D57AE530A8365F1E920F9E0F46BB110FF2682830446E7278CA82830AC4244A1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ConstNode.cs",
+    "Sha256": "CB0138F09F056B277C8847475BD8CFA3DF766BEE43F61C52B86739719269E8F8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\AJNode.cs",
+    "Sha256": "4E25ADA170A3BB8615D627F5C6BAF7831CA5AB720C7FE021A7F877747205C99B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\DefinitionNode.cs",
+    "Sha256": "6F460BDE3DED526615112D00CDB2904A76F596B04409889102005C8507C36CED"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\DeclareVarNode.cs",
+    "Sha256": "8338E92D6C7B97AD80F0212CA04F2312D3C5F0F20538739965E9A9B6DB29944B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\DefNameNode.cs",
+    "Sha256": "C081D754A7DA2E1DD617AD0DAEA4D25CF035F49F2CA564127AE6E16D945E0371"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.fr-FR.resx",
+    "Sha256": "793A4E05EC31397D3051F50BF7A3A0E5717B4917D22FA0557A61917898F2AA93"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.es-ES.resx",
+    "Sha256": "8BEF047ED04EC833D335DF4E773A52DEBFCE944FB820E7A843099AAA9EB20CD3"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.en-US.resx",
+    "Sha256": "5822C6CD9DA446667B3CF3C315B87DC65C457A41EAA46B1DEFB2E747A74461FD"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.Designer.cs",
+    "Sha256": "5E2F22CF3968B4589C817270A12DF69B7989A8C24970F8BA4FE1C7539E4EDD19"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.de-DE.resx",
+    "Sha256": "5B31885B725C025691A182691E6B5C5DA1A355A3FC4996C798867619D111D4EC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.ko-KR.resx",
+    "Sha256": "724F462DF511ED92561066F69B6871DF4495CCAD8727033BF6583F169E9202B2"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.ja-JP.resx",
+    "Sha256": "19199FF56B0C81A89765BA9A6CA7D485F061E6FF78DF5A1579604A0891276251"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.pt-PT.resx",
+    "Sha256": "7913E02AC76BDCC00F863CF483D24A4E954E9A8865C06773B5BF3D9044395B45"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.resx",
+    "Sha256": "B2D5D95C734C61B25197BE0A72E632D39ABAACB48B2CAEFF70A1975C98F3419A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\IRootable.cs",
+    "Sha256": "4D83FEA106AE6D7FD29D53900E6776FF88B9DE7C06D923F9879F2C2F0F7C7580"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\UnknownConstant.cs",
+    "Sha256": "F4EB8408A936CCBEB70BD3D7407C43CB97D895465F7705A33F79939080F11EF8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\InitDeclaratorNode.cs",
+    "Sha256": "F6BB5ADFDC763B03BA9272DB64C48D69370181677FB1875847E03B34B985B1C4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\ShortConstant.cs",
+    "Sha256": "744B0DEB50B9B126FAB83556E142F05895F40ACC3ACCE0A244E1DDCE0074994D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\IndexNode.cs",
+    "Sha256": "00B92248BA2ACE6720477DDC9715B0B7D2846B5AAB05B3779E0BC2AD9684BB1E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\PointerConstant.cs",
+    "Sha256": "51801FCE1595B28C91E74F3B67F189B0C00E6B83FE432128152847180CFDA3F5"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\FuncDefNode.cs",
+    "Sha256": "70E1DB3A3850BC4FDB7E956D4DE4DC68A1DF31938BF4C465C6CC4479601AB6B2"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\NotInitConstant.cs",
+    "Sha256": "FA6FF3ADC901D2682D473B28F10F02B36A48B64A634F22BA8D11F604BEF61821"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ParamListNode.cs",
+    "Sha256": "9D5D26CDA479E2BA6CA696EC21CC3767EBE54A697E8581364D32DF0FC5C1699D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\IntegerConstant.cs",
+    "Sha256": "48C46277310A10770ED953F87A6B71F57F14A80DF709CE344FFA29CB98C5A8EC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\NamespaceNode.cs",
+    "Sha256": "A13DB69FE47E27F9716F9376E8AA301AB3F297B94DD9D372F65B2A62E94581E9"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\IntConstant.cs",
+    "Sha256": "A2C1AACB311384C74C5A75D1A4248E9753140728F49249FAA5E9D0EFC626DF18"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ProgramNode.cs",
+    "Sha256": "3945F114AA5092934057A8BE7473CD5DA7DF0B033766612353C753D7912E1059"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\IConstant.cs",
+    "Sha256": "77586076BB42974EBCC7D19454B47ED2823FEDC71F9D3A7258E5DB2225EE884F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\ErrorConstant.cs",
+    "Sha256": "9B457486E5526D76D95E67CCCD227FBE58A181F741907DE6FD4525AB27D91B9B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.ru-RU.resx",
+    "Sha256": "E70C99A334DAAD167933210E2C201BFF86CA124F2D5916329B052CEF8D5BCCE1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\EnumConstant.cs",
+    "Sha256": "CD4DFA83DCFADE2CC9568AC596E5DE9BB5457847AB20F7E1FF6056D35C7A1F6F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\DoubleConstant.cs",
+    "Sha256": "2F61D2AF4ECAD2A83554C97B12247985D154CC758151AFF8E0EC6711CCB12AF8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\AJDefineTable.cs",
+    "Sha256": "5CA436AC3AE85245206ABC15234B50B7FDEC33792F6D43D78017EDBD057DAE93"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\Constant.cs",
+    "Sha256": "36AE12041B1EFA13B122461BE2DB1FCCA6F16D6E9CF0D63C52B7AA99F4DFF0D3"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\AJAlarmFactory.cs",
+    "Sha256": "D91BB375201B0673026A80B976C987E4965FF73DBE1BE2E951D9296A09F1FA57"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\ByteConstant.cs",
+    "Sha256": "6F7F605CF7A8884AACE8603E8708A92A9788F8896D12ADA1760CE4FD933B6634"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\AJGrammar.cs",
+    "Sha256": "AD421C154B114CDC10DA201A1B7E3FD83BF1C0B4DF0111B88BFF58CB79909056"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\ConstantTypes\\BitConstant.cs",
+    "Sha256": "069C0143D56FC2D71A0C9682EF27DA3C1AB08FEF6BA4519EF8320D9D71DEE14F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\DBContext.cs",
+    "Sha256": "AA8126FC234FEC7092F6E5D52D6FD2006D726864E79E876987EE8BC131E07B9C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\Operations\\IBitwiseOperation.cs",
+    "Sha256": "C305AE90E4D0049ED4BD8657CC7B541532AD4E1228E4483763C0A10EBC480FA1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\Operations\\ICompareOperation.cs",
+    "Sha256": "0E30F4226977F28819EC3AE68143AEDAFD0929E071F26230A0E120F484A9FB2D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\Operations\\Operation.cs",
+    "Sha256": "1D5EC0EA646C0778C01C30C2D42A011DC4056B172926DE4BEF933BD91F545089"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\Operations\\IOperation.cs",
+    "Sha256": "A46E1F3CAA3197957F459E4C46C1F891ED2541EDB4CA2BB723D72BE847863F33"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\Operations\\ILogicalOperation.cs",
+    "Sha256": "BCB9CA52B3C2EE55725BD55CA90650A56E4A33D69631CADAD012C08124257507"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse\\Types\\Operations\\IEqualOperation.cs",
+    "Sha256": "A41AA9BBBC5EBFF2EA162F05AB29D9EC9EBC29E6971D39DB28E15984C89F01BA"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.uk-UA.resx",
+    "Sha256": "E73A17A2791DEE2BD4408A1CF440860F7C5A6CC3869AD48DE10D2D52ABC3E077"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.th-TH.resx",
+    "Sha256": "A79FF9C44C66C5A7C937C070FA1B6A59354B6062586887D8EB75F56F134587E0"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.vi-VN.resx",
+    "Sha256": "13F93C0C3EF37A9FB875B73657C067BC81DAA791292D0F69E7BCA885D5322754"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.zh-CN.resx",
+    "Sha256": "D244E7C824429FDE51142F23783330001E0F6DDE99D09CF410EDB0C0F9052B9B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Properties\\AlarmCodes.zh-TW.resx",
+    "Sha256": "BCEF63AB20F263D05F2A409A14369AD60F11F2714341FAEAB2B37D505C5D4BC3"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd\\Preprocessing\\Preprocessor.cs",
+    "Sha256": "DFB9A84B54156BEB1BC97BC6B3D92D1CBA3A1932C982345AFF59C3052465A01F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.ko-KR.Designer.cs",
+    "Sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.ja-JP.resx",
+    "Sha256": "66A0FF840019339CC212311B19C4CCFB181F3B78E5FA7A1A037BF8638A814D4F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.fr-FR.resx",
+    "Sha256": "9DD67FAEE3F7566AAD9392C37050BD28718F4D92BA8FAA42AD86E56FB668B05B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.es-ES.resx",
+    "Sha256": "94E9A1A74D041B4EAD47F73E2894AF05CC01D996DAD2CBB7557C008D5A0C672D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.en-US.resx",
+    "Sha256": "48B0940DA83AB1C771908097C429A442CED47E636A0D82B97DB51C3944F3523F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.Designer.cs",
+    "Sha256": "A178A938C5DA0A83D8D3B851253732A45549FEAA47BB5032F1A33BC96E0AC670"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.de-DE.resx",
+    "Sha256": "B2D058772B18A39C8503F0829A1E02574072416F09AD54713ED94BD2F1D939C6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.resx",
+    "Sha256": "2F96C85567E51D35E62A9BEF5457FC5506EBA0C64276234044B71B3810B3E7FE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.pt-PT.resx",
+    "Sha256": "24518DF06364CE665CB06AA9E57CB36344D012AF82AD4FE268310944638E145F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.ko-KR.resx",
+    "Sha256": "82F77DC573378E90FE5EE37497CA99ADEC045966708A06BF2E7D2FFA5F278884"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.th-TH.resx",
+    "Sha256": "378AED933F3975A59E16734E63A5220B41A5B9E82A5ABBB02C4B29C607FA2529"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.ru-RU.resx",
+    "Sha256": "7BB5EA8E561D263FEA01715115D956223F4D687AA33072A7637E5772207B20C7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.uk-UA.resx",
+    "Sha256": "96D6163E8F391913671EC718944AB9E93BA697AC2912041771266594DF76121F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\LR\\LRParsingRowDataFormat.cs",
+    "Sha256": "FF742E75AFFEA7F57AC39342FA88EBC94AB8796D141DC04BE686B610477E3D39"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.zh-TW.resx",
+    "Sha256": "FD6F2005BBC68D94425F1657F3CBE1FEFD9684851A60600DD1D987AA6ACF3DF4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\LR\\LRItem.cs",
+    "Sha256": "A378AD87F3F09DC0C5FF3E3E5DABE356094952FC6443BFFF17BFEB7A13D62512"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.zh-CN.resx",
+    "Sha256": "79155A436A69E947DB1693B38B71AC246D4A4D232A682938326667CA41AE72BF"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Datas\\LR\\AmbiguityCheckResult.cs",
+    "Sha256": "000C09FF453A616D3F44F4055745F143DF83ACCE940624AD2E5C90EFAF951EE2"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.vi-VN.resx",
+    "Sha256": "6846B57035D59F38D6A7D93464E3DF1FF1AE29458D693E3527872E2178EE823D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.uk-UA.resx",
+    "Sha256": "BD9B8B3FBA59F55FEE531433BA26A779FB973E0EF35F2B78CC6CB87CD299630A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.th-TH.resx",
+    "Sha256": "8882136C7FD2B157A52BBBB38CB8616211524B4BD2077FCE8FE1FADA50F8B9A7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.ru-RU.resx",
+    "Sha256": "2A817EFC919D0D63AECD7AFBFC77D267F198B610F624988F605F8A7DD11AA345"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.resx",
+    "Sha256": "03339F3B963FDEED54241A76F8181F028315F1617EC5A98436F4A49E13A5A55A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.pt-PT.resx",
+    "Sha256": "1693D6D678007B09D4C0A2DB1387780112C4114E7ECF7E33F634C621C3674DC6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.ko-KR.resx",
+    "Sha256": "2A7BBDC6CC543165FB91BB01F838B77A93FAE339C7EA62D218C226332C0EFF3B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.ja-JP.resx",
+    "Sha256": "87620578CF21EC32DB0D601CB6DB31B05313025CC36696EF2DD8A08E399B41B2"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.Designer.cs",
+    "Sha256": "710827F09AEA8E73203DFFAFD32AC87C018F03ACDCF1DB86D76244059B147959"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.fr-FR.resx",
+    "Sha256": "A44E103123CE72618534960718736EB9093F7CC026D3FF8E7503B2D9C2AC1B5B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.es-ES.resx",
+    "Sha256": "A058AE317426DCB3A3FDAAEA2D25CD0F53B5D3E0813B4C8E0693DFAA33FA0084"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.de-DE.resx",
+    "Sha256": "FC91720FA0698DEFC208AF61C1AE45E4BD40E40D674BEFB7B27588E70BCD92F4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\Resource.en-US.resx",
+    "Sha256": "908BA53C63E8C1525CB4CFB0C0CCCA7B5ABE6617365DFBDD475BF8ABEF235041"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.zh-TW.resx",
+    "Sha256": "81059825E0749B53D0E0F36D597F36C59434C3157ADF86FCD68DEE4C82BC7AFE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.zh-CN.resx",
+    "Sha256": "77436B083F6E90240F39E5502AEABD47F12792031E123F2C91173989DF4EBBC2"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\Properties\\AlarmCodes.vi-VN.resx",
+    "Sha256": "89CC59BA569747B83167BF490FF5530BA6ECBB09656A5B46DD8FFF792E5386FD"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\UseSymbolChainNode.cs",
+    "Sha256": "5993507EB29BE3F238581E67F48AD7007FA4EBAAC49E3F0674632D942A7241B0"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\UseMemberNode.cs",
+    "Sha256": "AAB4F24F359CBD892227E832F8725D1E017C8558F4F95419945F72B42A0AE4EB"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\UseIdentNode.cs",
+    "Sha256": "BB8D74936AFA404AE11BC08EE7498759F160B8DF1A0E34EC8B914DC6C60885F3"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\WhileStatementNode.cs",
+    "Sha256": "DB3E2C5319129C708333019C0A28DE420F683EDB938708C4C4178E4DD27DE8D6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\UsingStNode.cs",
+    "Sha256": "35C065168D29AD3B906CF50894CCC28C21F96B29D18CF2A979FEB91250A0E544"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\StatListNode.cs",
+    "Sha256": "7C7220F9262D0F207666D6CD9B3D4B9B400C79C4AFB9613A4430FE9AF4B17701"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\StatementNode.cs",
+    "Sha256": "77870DBC4A76C46B48760F07B018B8DBEF97B1AA6E39B0C2B5AC1F54B26286DE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\RoopStatementNode.cs",
+    "Sha256": "E39F67DBE038F006788D6D4C79BCC819FEB26474E2E85C52904E1822822172BF"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\ReturnStatementNode.cs",
+    "Sha256": "5A2B31CD11863352CFC19C53E40A13FD5CB94F6403A6D8BE34A87102D297CF9B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\LambdaStNode.cs",
+    "Sha256": "148C4B4A35B53AAB71FE317CC4FA06104C0D0BC053A8602E60894CA2CEF89966"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\IfStatementNode.cs",
+    "Sha256": "E10FDDE8708CDF295FA35D56F0EAA94D164DD148CD63EA766206E3B995F67971"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\IfElseStatementNode.cs",
+    "Sha256": "FB3D88D1E8EA8C538CB4100F35DD402421118073C8EF0449AC69C511CAC04A5C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\ExprStatementNode.cs",
+    "Sha256": "0FE67E8FB356D577408F2D8F2A7053D0766F54D3C6E78ACEBDEFDBAD77E3B4EF"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\DeclareVarStNode.cs",
+    "Sha256": "4C5B7E9C7274628DD77479277AFBEFB844DC16996711FC57B7B1DAB5BCC54F3C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\ContinueStatementNode.cs",
+    "Sha256": "282EF9E0A8F26BE6043CA48E99DFCB2E955B8A471CB7FBB4D3D9F0AA10D9C343"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\CondStatementNode.cs",
+    "Sha256": "2DB1FB3B997F2F459A4690CD8A619D9AC2BC8F0C7D74E0C3F447741DCAFEFB6F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\CompoundStNode.cs",
+    "Sha256": "58AFCBEE38203CB4E230A372908472B90CF1989603AF1ED609C73FDF0A40DA0D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\StatementNodes\\BreakStatementNode.cs",
+    "Sha256": "9E12B9C4F151F3394BE2F8BBCCB86666B5E6DC6FBB977C3EED9E55CDB0147C71"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\ExprNode.cs",
+    "Sha256": "3462BAF8F14703500E734D9B95960C98B8F130A4E286288C23A5FD30821AF1EA"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\CallNode.cs",
+    "Sha256": "D32B9F7FEC8E3D36E2EAA753C18CF9A123785AEF3B9DAB3CBBEE2A7723A39BB5"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\Single\\SLogicalNode.cs",
+    "Sha256": "E16D41AD67294E724E20D32BF146B8487B59C90283334BA980456862F2C0DDD0"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\Single\\SingleExprNode.cs",
+    "Sha256": "1B50C6050A95F02787CDEB8D8B6BF168313EE15DB574C0F62E82647F416E1B85"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\Single\\IncDecNode.cs",
+    "Sha256": "D2D4A0D83F50523B6254A130C52B6C4A646C80FE441ACD513282E9A44A442E6D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\Single\\DeRefExprNode.cs",
+    "Sha256": "3CFFB83EC320303CEA43E00771E24F24082A0A545414959EBCBFBDA73CB6D22F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\ICanbeStatement.cs",
+    "Sha256": "ACF594DFEAFC6B9B8849540FEEE44475FEFAD261376B21DA437858658497D895"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\LiteralNodes\\StringLiteralNode.cs",
+    "Sha256": "E4EB272FF9C6C5DFB8BB45462B05924420F0B810D7AC1DAE443ACA67E67AE29C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\LiteralNodes\\NullLiteralNode.cs",
+    "Sha256": "9CDFB76A568D87B043D4C1D772F8C8DD2DAFE93AA2255143E71B5CE6CBD53601"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\LiteralNodes\\LiteralNode.cs",
+    "Sha256": "0537698897A20D200AFE1BAA24AC2960FAD3DBDFBED578D52C7A0C56FE55A033"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\LiteralNodes\\IntegerLiteralNode.cs",
+    "Sha256": "8FB534521E2A25FC436EDA53679BE3DF22ED0FEC68F316781B8071B3EA30BCD4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\LiteralNodes\\DoubleLiteralNode.cs",
+    "Sha256": "ECD3E977809235C088821298E9A1B0BABF649746A5D3C88D7821BC8D1310BB6A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\LiteralNodes\\CharLiteralNode.cs",
+    "Sha256": "5082F7D7F8E5C436152D52F3C84D90EA64583A5282F8A617672175F64B72C868"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\LiteralNodes\\BoolLiteralNode.cs",
+    "Sha256": "98DDB4B60393420F0D9F41F3E9D9C53A5D3A6FE4AE0FF48CE3C48EE97C44A713"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\While_ErrorHandler.cs",
+    "Sha256": "D1E58248E048654F17492CE8DDD1866850BCB33F450363A45DF26950C638AFE7"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\Void_ErrorHandler.cs",
+    "Sha256": "D3973F38EB81AE79D6C9FA02DED1CC13EA186134965FB5BEB97CACA57562C124"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\Return_ErrorHandler.cs",
+    "Sha256": "0452F74A8E4608F9DC715E387AA17B4FD1DC5E0289BBEBC662411DBE4FFFA4A2"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\OpenParenthesis_ErrorHandler.cs",
+    "Sha256": "ABC214BEB3CF608279A71DC2EB2095B02D1A7F09125FD0F7DAF1771D660BFF02"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\OpenCurlyBrace_ErrorHandler.cs",
+    "Sha256": "F859940794E218F19D3D2201453A201844A50A847A5F16A9C88A4BE8986BC99E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\Int_ErrorHandler.cs",
+    "Sha256": "902A80AB42C3E7F64A1CE28CCD08AE4C7484F44643DD61C33C41B9EA40F6E7F4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\If_ErrorHandler.cs",
+    "Sha256": "689C9AAC92286DA67A6864904FF9BA445F3E2C1F14543A231E5CA51F18053518"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\Ident_ErrorHandler.cs",
+    "Sha256": "3CC42D74B2EAEC81AAB14277A8ECB3E79357DF7CF45558AABDF0C6475EA9C7A4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\EndMarker_ErrorHandler.cs",
+    "Sha256": "C5621546AD3A609A001341F4D4B5DEFBAA190A25FA0AA7EF2358D1ACB02F5623"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\Else_ErrorHandler.cs",
+    "Sha256": "858D25FED7A26E7860EEAC0334FDCDD4E321A7CE240E55EC36B17002860335D0"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\DefaultErrorHandler.cs",
+    "Sha256": "14126A9E6366A1791FE7A8433854A34B0B22898EC80030945DBDCB2EC1671E9C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\Const_ErrorHandler.cs",
+    "Sha256": "2952B665D561BB3635BF7DF4FB71F531AAA0092339A8ECFFCD6A4E4F02681C4A"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\CloseParenthesis_ErrorHandler.cs",
+    "Sha256": "49D1F282D7782E74D053ABFB2D969DC6AC4D58DAEF54E1C549BC6F8AD7638430"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\CloseCurlyBrace_ErrorHandler.cs",
+    "Sha256": "5A25DD56240BCA304C04C92D4760727A05A8AFF0981F429B082452AEBAC7A707"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\AJ_LRErrorHandlerFactory.cs",
+    "Sha256": "FB6BEE16B6F1554E225535F50A375F7BBB832281FF0DDA6E661FDADC388A839D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\AJGrammarErrorHandler.cs",
+    "Sha256": "F8E2F1ED2904AB0F0B4309016E0D7B361B641B2C5DF5AF23B06E056E8A4B0B9B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\ErrorHandler\\AJErrorHandler.cs",
+    "Sha256": "FB3DAA22E3ADBE2F62E625A5B086E7B276536F4F827B1E8F90AF7BCFB9A9CF0B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\VariableAJ.cs",
+    "Sha256": "195E7C04D4FC78A9C73C05C88A041E97D1EB94F3F59D746338AC68CBEC84685B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\UsedVar.cs",
+    "Sha256": "902DF19881F9A108DA8AAFB01F89C47DCD450900AF27717908BCC25289B1BBAD"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\ProjectProperty.cs",
+    "Sha256": "ECE1CB4D1E4DDE5DD0EE6E93010A99079CAB68B9A36D2081053645DA655EF737"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\PreDefTypeData.cs",
+    "Sha256": "D7751C93ABDB18CD3E0FA1A5A8A54A7268DE4F27D5008EE6822A52E211A6A84F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\IUseable.cs",
+    "Sha256": "0BD7B9039025B2FC6C2A5A52BDE7270A313105CF4F083909F998F5F3ABE9714D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\ISymbolData.cs",
+    "Sha256": "12AF56E36A8637D9FC2560CFF2F5078EB9D6C7C514BA05EBFBCF6F6983942FA6"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\IRepeatable.cs",
+    "Sha256": "EBE7A30D77D9CB25CC9B7C425A4E9652CC9D942ECF4D9AC5EF8F3FDE8577296B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\IHasType.cs",
+    "Sha256": "D4DB3CE422326B233E4B30F5A6A7B783ECE3E9CF913D32DB03CC2BEEC2F66535"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\IDefineable.cs",
+    "Sha256": "41558BB4A3037BF7644B0896D3522B22C0F76052C16D2AF8E7BE1ACF745615F1"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\IDeclareable.cs",
+    "Sha256": "56E0984A0D01594E910BBEC66768835FBC80EDE68755B650314FC2E6CF8C66EC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\FunctionAJ.cs",
+    "Sha256": "854A4F1F16D844DFD1AF318E6C208EB1FFFE111A2F63525ADBCB59B89872B876"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\AJVoidType.cs",
+    "Sha256": "14F59EB17AC6C6F3D6F7115C6B618B4645D24C258E461AE202E08B8CFDEE42BC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\AJUserDefType.cs",
+    "Sha256": "EBBCFA2D26F8DC40A547DD9F1A6DE8D1F0CE4370372A29C2E6E79B83A04EC560"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\AJUnknownType.cs",
+    "Sha256": "2089FDC488FE14F70B20D82C91F48861B59D04B631FC2CC49CC7FD06B729E578"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\AJType.cs",
+    "Sha256": "898937BC974BE0EBFEFDBFD9255A6C150D93160F1A73DD938ACE46FE8A0D7FAD"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\AJProject.cs",
+    "Sha256": "D012D3969D66AD52F3C628718ED2222AF6CA71A3D5CA35146B8EF1DC5010FC5C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\AJPreDefType.cs",
+    "Sha256": "E9CA65AE950E4D16C8BE5C83B85E98F0B1420B6B604F88B4284D7DE13955F981"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Data\\Access.cs",
+    "Sha256": "099856722ED4E5F5D72FFE5BD4455734310864339F169A3C150338D1C0B2285F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\SLRParser.cs",
+    "Sha256": "087A0B973A8FDEEE2EEBD048F03ECD6538FA9C26448E9751CDC453D9CEF675DC"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\PredictionLimits.cs",
+    "Sha256": "1E567C0052234A3AF428279C6318D4A071D54A3BB7896947B89D0B2E93D9BCDE"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\PredictionExceptions.cs",
+    "Sha256": "F9733B94468A963C3A08C318E66F30909D082C8AD6BB5E5F0C999BE0492D663B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser[TokenSource].cs",
+    "Sha256": "94B4C586F6045BE63427236FC51C2C195E3C9BB0EA1D1154031E13496C7ED594"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser[Recovery].cs",
+    "Sha256": "8901F69C932DC1875F636094AFCA07B049B899E919BD1DCB6DC02EFAD83C6E2B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser[Predicates].cs",
+    "Sha256": "4B5DE2FBB02687A8345FA46F39AA11FA9087D43F54D35BCB7C51E7D28DC94262"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser[Parsing].cs",
+    "Sha256": "B08035BB2583392A9C383A345C953B64F4C350AA3DE5B7EF054C9A9E993655F9"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser[DecideParsingDirection].cs",
+    "Sha256": "D42D8BF05679DA06631B54332D2E614428D9955735915E685D58AEF3F006900F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser[BuildStackAndTree].cs",
+    "Sha256": "A9D0304A6227FC83A330907A11EE8AF1492FAF64B9EB7D765F9F03E894394442"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRParser.cs",
+    "Sha256": "5DD812F48E131B32FA43F0F599EF3B35ADCBCCC100DD76DB515A29536637002F"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LRConflictPredictor.cs",
+    "Sha256": "ACFAD89A27216643B0E110BD4BDC9FA26C192F097E5E6F0E2B2B073E3C00AE2B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\LALRParser.cs",
+    "Sha256": "6962B373819004BD59A7F4F2FD217D534227646068D6DED56A77A0800D8EEB13"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\GrammarPredicateEvaluationException.cs",
+    "Sha256": "3144C216BEAFFC329D62D396FC56DF882E684308B20D798D00B998D86F9BE249"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\GrammarConflictException.cs",
+    "Sha256": "F1E3C70C117170C28152DA388D5E626C5DC1936C1EC7646F4E6AC9FDF2AFF3D4"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\DefaultLRErrorHandler.cs",
+    "Sha256": "E1D77CF2DECA97B8791EF60A062A45F7EA1C2827ABD21EEEC45EF97E71A28ED8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\ContextualInput.cs",
+    "Sha256": "B55613589BC4D41CAFBF0182262E37DBEDA7DE3EF103B8A6C3CDF1139F3C6B57"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\ContextualConflictPredictor.cs",
+    "Sha256": "3E07548F2935910870DAD4F69085722DFA069253E23F656B47EA959232C9356C"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Parsers\\LR\\CLRParser.cs",
+    "Sha256": "6E274845181D5B888FB2F928F9CAF9520E9539C73C80774649F2E70EF7F4AEE8"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\Binary\\CompareNode.cs",
+    "Sha256": "1CB9D83FEB728D937C759F20C8FC7E89AC03F24447616217D5573AEACBA6BC92"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\Binary\\BinLogicalNode.cs",
+    "Sha256": "0F3B8F9D8A3C71BBA1F70A06D5FE1B94E55B05F7BF7524A2C38A113F2B61C095"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\Binary\\BinBitwiseLogicalNode.cs",
+    "Sha256": "ED6173DC383BF0CF4FAA0B90949F4DAFFCF63AE5B0FA0738599D678C6769D391"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\Binary\\BinBitwiseAssignNode.cs",
+    "Sha256": "76F025FAEA89686D404B92A23D023864441DDACB881F8C12524125101849609D"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\Binary\\BinaryExprNode.cs",
+    "Sha256": "E5E506592D95F2702A5ACB517F4E7208CA6A0ECFE48C43D66C7B2346A663BFBD"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\Binary\\AssignNode.cs",
+    "Sha256": "756A7D9F38206DA588CD8AB5A407E841F996F34F0F050E918AE5CB720A41072E"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\Binary\\ArithmeticNode.cs",
+    "Sha256": "20CEFA7A9786C0667C14CAAE6E261C9068CCD86DE420E54CED35892EAC1665B9"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Sdts\\AstNodes\\ExprNodes\\Binary\\ArithmeticAssignNode.cs",
+    "Sha256": "CC6D08F457282231DE8CC6858D51A7AA3D33B5D0673E6725E6B1E36CB2C195E0"
+  }
+]

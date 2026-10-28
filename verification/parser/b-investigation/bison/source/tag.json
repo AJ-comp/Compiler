@@ -1,0 +1,10 @@
+{
+  "ref": "refs/tags/v3.8.2",
+  "node_id": "MDM6UmVmMTQ3MjA5NDM4OnJlZnMvdGFncy92My44LjI=",
+  "url": "https://api.github.com/repos/akimd/bison/git/refs/tags/v3.8.2",
+  "object": {
+    "sha": "b52f86cba46eb6fe5f44ccea415f7a143811280b",
+    "type": "tag",
+    "url": "https://api.github.com/repos/akimd/bison/git/tags/b52f86cba46eb6fe5f44ccea415f7a143811280b"
+  }
+}

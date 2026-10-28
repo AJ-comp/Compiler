@@ -1,0 +1,1 @@
+{"format":"janglim-workspace","version":1,"grammar":"Expr : Expr '+' Term | Term ;\nTerm : Term '*' Factor | Factor ;\nFactor : '(' Expr ')' | id ;\nid := \"[a-zA-Z]+\" ;","input":"(a + b) * c"}

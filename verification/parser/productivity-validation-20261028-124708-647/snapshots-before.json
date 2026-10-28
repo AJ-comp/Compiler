@@ -1,0 +1,46 @@
+[
+  {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.ebnf.approved.txt",
+    "Hash": "329E6746BB7478AC8FFC58EBF00679006BEC7D3594A3829F0B8620F23A42BA1D"
+  },
+  {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.first-follow.approved.txt",
+    "Hash": "01AF48F89D0DBDFC3FFAAA1E6C94D89B42D8442900B66AA221C7E06174D92FE5"
+  },
+  {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.lalr.canonical.approved.txt",
+    "Hash": "A133F2409D43299AB8EEB780B4CF713C7F75964E2946CF06B8FD5A8E45A662BF"
+  },
+  {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.lalr.canonical.received.txt",
+    "Hash": "4501567B05E97EEEFDCEBFBAB5C37B7819F2EA7FBAA3252265C3A29FE501D5FE"
+  },
+  {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.lalr.parse-trace.a-equals-e.approved.txt",
+    "Hash": "3E9B3CD6E377D38109D4246FA2791292FF491A64479D84BC96A039B70E82F15A"
+  },
+  {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.lalr.parsing-table.approved.txt",
+    "Hash": "A73312A1E721554B8013FF1B209EA5130D3D7A8DC92795365F0A0A559F0A9E04"
+  },
+  {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.slr.ambiguity.approved.txt",
+    "Hash": "D0706EF4897BE17EEC69EF2355C5B426AFF64B1B78676D59E1E48DEFC84ADD3F"
+  },
+  {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.slr.canonical.approved.txt",
+    "Hash": "FDB42DAC27F18272474C20BB4F451C89F2B1113060C4B2D1D11D53381FC2779A"
+  },
+  {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex1.slr.parsing-table.approved.txt",
+    "Hash": "346782385AD942D11F2280BA86487ED1755FDA68D8478CC5E515B100E4CC4378"
+  },
+  {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\Ex8_10.lalr.parsing-table.approved.txt",
+    "Hash": "30B1DBC9B21289A63A8560C5E317D013F3620D32935C40BEBE9344A640154CA1"
+  },
+  {
+    "Path": "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\Tests\\Parse.FrontEnd.Parsers.Tests\\Infra\\__snapshots__\\PaperConflict.lalr.parsing-table.approved.txt",
+    "Hash": "80476D48E58B39E86FFF66E6E009DC3E83A9BDFE84610A6ED8C0A393FF8432FF"
+  }
+]

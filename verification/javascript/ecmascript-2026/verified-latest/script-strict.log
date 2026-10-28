@@ -1,0 +1,7 @@
+
+COMMAND ["C:\\Users\\AhjLv\\.dotnet\\dotnet.exe", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\runner-asi-final\\Janglim.Test262.dll", "--input", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-latest-es2026.jsonl", "--output", "artifacts\\ecmascript-2026\\verified-latest\\script-strict.jsonl", "--profile", "script-strict", "--skip", "0", "--timeout-ms", "120000"]
+Preparing script-strict (web=True) ...
+Ready script-strict at 00:00:15.0851084.
+250 cases, 250 passed, 0 mismatches/errors; 00:00:24.0956391.
+500 cases, 500 passed, 0 mismatches/errors; 00:00:31.4376328.
+750 cases, 750 passed, 0 mismatches/errors; 00:00:37.6167145.

@@ -1,0 +1,12 @@
+{
+  "status": "reference-discrepancy-no-product-change",
+  "specification": "https://tc39.es/ecma262/2026/multipage/ecmascript-language-functions-and-classes.html#prod-FieldDefinition",
+  "normativeProduction": "FieldDefinition[Yield, Await] : ClassElementName[?Yield, ?Await] Initializer[+In, ?Yield, ?Await]opt",
+  "decision": "Keep the fixed ECMAScript 2026 rejection: inherited +Await does not permit await as a bare IdentifierReference. Node v24.12.0 accepts some instance-field cases but rejects static-field counterparts; Node is a secondary oracle, not the normative target.",
+  "nodeAcceptedExample": "async function f(value = class { field = await; }) {}",
+  "nodeRejectedCounterpart": "async function f(value = class { static field = await; }) {}",
+  "stagingFixture": "test/staging/sm/fields/await-identifier-script.js",
+  "stagingStatus": "esid: pending; excluded from the standard corpus",
+  "evidence": "context-results.jsonl.failures.jsonl (10 unexpected rejections against Node-derived expectations)",
+  "correction": "The initial audit interpretation that FieldDefinition resets ~Await was incorrect; the official 2026 grammar explicitly inherits ?Await. No product change retained."
+}

@@ -1,0 +1,17 @@
+{
+  "verifiedAtUtc": "2026-10-21T06:56:32.411948+00:00",
+  "documentation": "docs/ko/javascript-non-strict.html#api",
+  "exampleCopiedVerbatim": true,
+  "verificationSuffixOnly": true,
+  "targetFramework": "net8.0",
+  "fileReferenceSnapshots": 8,
+  "repositoryProjectReferences": 0,
+  "productProjectsBuilt": false,
+  "isolatedReleaseBuildSucceeded": true,
+  "runExitCode": 0,
+  "parsedSuccess": true,
+  "validateDiagnosticCount": 0,
+  "originalInputPrintedAndMatched": true,
+  "originalInput": "<!-- 이전 웹 문서의 주석\nvar total = 077;\nwith (settings) {\n    total = value;\n}",
+  "originalReadmeAuthorAttributionUnchanged": true
+}

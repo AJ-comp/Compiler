@@ -1,0 +1,959 @@
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Release\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Release\netstandard2.1\Parse.dll
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Release\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Release\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:03.06]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Both_delimiters_reach_intermediate_and_completed_items(lateSecondContext: False) [FAIL]
+[xUnit.net 00:00:03.06]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Both_delimiters_reach_intermediate_and_completed_items(lateSecondContext: True) [FAIL]
+[xUnit.net 00:00:03.06]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Every_public_lookahead_entry_contains_the_same_set_published_on_its_LR_item(lateSecondContext: True) [FAIL]
+[xUnit.net 00:00:03.06]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Every_public_lookahead_entry_contains_the_same_set_published_on_its_LR_item(lateSecondContext: False) [FAIL]
+[xUnit.net 00:00:03.07]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Calculate_keeps_the_caller_assigned_dictionary_and_publishes_the_actual_item_sets [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Both_delimiters_reach_intermediate_and_completed_items(lateSecondContext: False) [31 ms]
+  오류 메시지:
+   Assert.Equal() Failure: Collections differ
+                                             ↓ (pos 0)
+Expected: OrderedEnumerable<string, string> ["!", "?"]
+Actual:   string[]                          []
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.AssertTerminals(TerminalSet actual, String[] expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadContractTests.cs:line 147
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Both_delimiters_reach_intermediate_and_completed_items(Boolean lateSecondContext) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadContractTests.cs:line 85
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Both_delimiters_reach_intermediate_and_completed_items(lateSecondContext: True) [< 1 ms]
+  오류 메시지:
+   Assert.Equal() Failure: Collections differ
+                                             ↓ (pos 0)
+Expected: OrderedEnumerable<string, string> ["!", "?"]
+Actual:   string[]                          []
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.AssertTerminals(TerminalSet actual, String[] expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadContractTests.cs:line 147
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Both_delimiters_reach_intermediate_and_completed_items(Boolean lateSecondContext) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadContractTests.cs:line 85
+   at InvokeStub_LalrLookaheadContractTests.Both_delimiters_reach_intermediate_and_completed_items(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Every_public_lookahead_entry_contains_the_same_set_published_on_its_LR_item(lateSecondContext: True) [2 ms]
+  오류 메시지:
+   System.Collections.Generic.KeyNotFoundException : The given key '(0, S ->•A !)' was not present in the dictionary.
+  스택 추적:
+     at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Every_public_lookahead_entry_contains_the_same_set_published_on_its_LR_item(Boolean lateSecondContext) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadContractTests.cs:line 67
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Every_public_lookahead_entry_contains_the_same_set_published_on_its_LR_item(lateSecondContext: False) [< 1 ms]
+  오류 메시지:
+   System.Collections.Generic.KeyNotFoundException : The given key '(0, S ->•A !)' was not present in the dictionary.
+  스택 추적:
+     at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Every_public_lookahead_entry_contains_the_same_set_published_on_its_LR_item(Boolean lateSecondContext) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadContractTests.cs:line 67
+   at InvokeStub_LalrLookaheadContractTests.Every_public_lookahead_entry_contains_the_same_set_published_on_its_LR_item(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Calculate_keeps_the_caller_assigned_dictionary_and_publishes_the_actual_item_sets [1 ms]
+  오류 메시지:
+   System.Collections.Generic.KeyNotFoundException : The given key '-100' was not present in the dictionary.
+  스택 추적:
+     at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at Janglim.FrontEnd.Parsers.Collections.CanonicalRelation.ConvertC0ToC1(RelationData relationData) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Collections\CanonicalRelation.cs:line 145
+   at Janglim.FrontEnd.Parsers.Collections.CanonicalRelation.Calculate(NonTerminal virtualStartSymbol, FirstFollowAnalyzer ffAnalyzer, CanonicalType canonicalType) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\Collections\CanonicalRelation.cs:line 99
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadContractTests.Calculate_keeps_the_caller_assigned_dictionary_and_publishes_the_actual_item_sets() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadContractTests.cs:line 42
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:03.31]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 57) [FAIL]
+[xUnit.net 00:00:03.32]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 37) [FAIL]
+[xUnit.net 00:00:03.32]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 39) [FAIL]
+[xUnit.net 00:00:03.32]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 29) [FAIL]
+[xUnit.net 00:00:03.32]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 23) [FAIL]
+[xUnit.net 00:00:03.32]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 12) [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 57) [49 ms]
+  오류 메시지:
+   seed=57
+S -> a | A d | e
+A -> b | d A | e
+B -> c | f S | f B: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 37) [2 ms]
+  오류 메시지:
+   seed=37
+S -> a | d A
+A -> b | B
+B -> c | f B | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 39) [2 ms]
+  오류 메시지:
+   seed=39
+S -> a | B
+A -> b | B f | g A
+B -> c | epsilon | S g: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 29) [< 1 ms]
+  오류 메시지:
+   seed=29
+S -> a | S f
+A -> b | B
+B -> c | e A | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 23) [< 1 ms]
+  오류 메시지:
+   seed=23
+S -> a | e A
+A -> b | B
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 12) [< 1 ms]
+  오류 메시지:
+   seed=12
+S -> a | A
+A -> b | d
+B -> c | B d | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:03.32]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 43) [FAIL]
+[xUnit.net 00:00:03.32]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 16) [FAIL]
+[xUnit.net 00:00:03.33]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 25) [FAIL]
+[xUnit.net 00:00:03.33]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 41) [FAIL]
+[xUnit.net 00:00:03.33]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 63) [FAIL]
+[xUnit.net 00:00:03.33]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 0) [FAIL]
+[xUnit.net 00:00:03.33]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 54) [FAIL]
+[xUnit.net 00:00:03.33]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 31) [FAIL]
+[xUnit.net 00:00:03.33]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 58) [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 43) [< 1 ms]
+  오류 메시지:
+   seed=43
+S -> a | S e
+A -> b | B
+B -> c | epsilon | B g: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 16) [< 1 ms]
+  오류 메시지:
+   seed=16
+S -> a | A
+A -> b | A d | g S
+B -> c | A g: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 25) [1 ms]
+  오류 메시지:
+   seed=25
+S -> a | A
+A -> b | B
+B -> c | S e | d S: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 41) [< 1 ms]
+  오류 메시지:
+   seed=41
+S -> a | g
+A -> b | B
+B -> c | S f: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 63) [< 1 ms]
+  오류 메시지:
+   seed=63
+S -> a | A | f
+A -> b | f
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 0) [< 1 ms]
+  오류 메시지:
+   seed=0
+S -> a | e B
+A -> b | e A | d A
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 54) [< 1 ms]
+  오류 메시지:
+   seed=54
+S -> a | A
+A -> b | d A | g
+B -> c | f A: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 31) [< 1 ms]
+  오류 메시지:
+   seed=31
+S -> a | g
+A -> b | B | g
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 58) [< 1 ms]
+  오류 메시지:
+   seed=58
+S -> a | A
+A -> b | B
+B -> c | B d | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:03.33]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 62) [FAIL]
+[xUnit.net 00:00:03.33]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 10) [FAIL]
+[xUnit.net 00:00:03.33]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 2) [FAIL]
+[xUnit.net 00:00:03.33]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 59) [FAIL]
+[xUnit.net 00:00:03.34]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 32) [FAIL]
+[xUnit.net 00:00:03.34]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 27) [FAIL]
+[xUnit.net 00:00:03.34]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 7) [FAIL]
+[xUnit.net 00:00:03.34]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 6) [FAIL]
+[xUnit.net 00:00:03.36]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 40) [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 62) [< 1 ms]
+  오류 메시지:
+   seed=62
+S -> a | B f
+A -> b | B d | d
+B -> c | f B: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 10) [< 1 ms]
+  오류 메시지:
+   seed=10
+S -> a | A e
+A -> b | g S
+B -> c | B e | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 2) [< 1 ms]
+  오류 메시지:
+   seed=2
+S -> a | B
+A -> b | B
+B -> c | S f: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 59) [< 1 ms]
+  오류 메시지:
+   seed=59
+S -> a | f | d
+A -> b | B | d B
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 32) [1 ms]
+  오류 메시지:
+   seed=32
+S -> a | f S | A
+A -> b | B
+B -> c | e S | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 27) [< 1 ms]
+  오류 메시지:
+   seed=27
+S -> a | d
+A -> b | B
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 7) [< 1 ms]
+  오류 메시지:
+   seed=7
+S -> a | A
+A -> b | d | f
+B -> c | e S | A g: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 6) [1 ms]
+  오류 메시지:
+   seed=6
+S -> a | A e
+A -> b | d B | B
+B -> c | g A: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 40) [17 ms]
+  오류 메시지:
+   seed=40
+S -> a | A | e A
+A -> b | f
+B -> c | S g | A f: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:03.36]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 48) [FAIL]
+[xUnit.net 00:00:03.36]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 45) [FAIL]
+[xUnit.net 00:00:03.36]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 9) [FAIL]
+[xUnit.net 00:00:03.36]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 1) [FAIL]
+[xUnit.net 00:00:03.36]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 14) [FAIL]
+[xUnit.net 00:00:03.36]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 52) [FAIL]
+[xUnit.net 00:00:03.36]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 38) [FAIL]
+[xUnit.net 00:00:03.36]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 34) [FAIL]
+[xUnit.net 00:00:03.37]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 42) [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 48) [1 ms]
+  오류 메시지:
+   seed=48
+S -> a | B g
+A -> b | g A | A g
+B -> c | S e: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 45) [1 ms]
+  오류 메시지:
+   seed=45
+S -> a | f | B
+A -> b | d
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 9) [< 1 ms]
+  오류 메시지:
+   seed=9
+S -> a | f S | S e
+A -> b | B | d S
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 1) [< 1 ms]
+  오류 메시지:
+   seed=1
+S -> a | B g | e
+A -> b | f | g
+B -> c | S d: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 14) [< 1 ms]
+  오류 메시지:
+   seed=14
+S -> a | d B
+A -> b | f B
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 52) [< 1 ms]
+  오류 메시지:
+   seed=52
+S -> a | B f
+A -> b | f B
+B -> c | e S | e B: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 38) [< 1 ms]
+  오류 메시지:
+   seed=38
+S -> a | B g | S f
+A -> b | d S
+B -> c | S d: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 34) [1 ms]
+  오류 메시지:
+   seed=34
+S -> a | A d | A
+A -> b | d B | B
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 42) [< 1 ms]
+  오류 메시지:
+   seed=42
+S -> a | f B | d B
+A -> b | f A
+B -> c | d S: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:03.37]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 22) [FAIL]
+[xUnit.net 00:00:03.37]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 61) [FAIL]
+[xUnit.net 00:00:03.37]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 13) [FAIL]
+[xUnit.net 00:00:03.37]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 24) [FAIL]
+[xUnit.net 00:00:03.37]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 35) [FAIL]
+[xUnit.net 00:00:03.37]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 20) [FAIL]
+[xUnit.net 00:00:03.37]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 60) [FAIL]
+[xUnit.net 00:00:03.38]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 21) [FAIL]
+[xUnit.net 00:00:03.38]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 30) [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 22) [< 1 ms]
+  오류 메시지:
+   seed=22
+S -> a | f
+A -> b | d B | S e
+B -> c | g S | S g: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 61) [1 ms]
+  오류 메시지:
+   seed=61
+S -> a | g A | B
+A -> b | A d
+B -> c | S e: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 13) [1 ms]
+  오류 메시지:
+   seed=13
+S -> a | e | g B
+A -> b | B | d
+B -> c | epsilon | A d: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 24) [< 1 ms]
+  오류 메시지:
+   seed=24
+S -> a | B d | f B
+A -> b | g
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 35) [< 1 ms]
+  오류 메시지:
+   seed=35
+S -> a | B
+A -> b | f
+B -> c | g B: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 20) [1 ms]
+  오류 메시지:
+   seed=20
+S -> a | A e
+A -> b | e S | f
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 60) [1 ms]
+  오류 메시지:
+   seed=60
+S -> a | d
+A -> b | B d
+B -> c | S e | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 21) [2 ms]
+  오류 메시지:
+   seed=21
+S -> a | A
+A -> b | B | A f
+B -> c | B f | f A: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 30) [2 ms]
+  오류 메시지:
+   seed=30
+S -> a | A | g B
+A -> b | d S
+B -> c | g B | e S: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:03.38]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 18) [FAIL]
+[xUnit.net 00:00:03.38]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 3) [FAIL]
+[xUnit.net 00:00:03.39]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 47) [FAIL]
+[xUnit.net 00:00:03.39]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 51) [FAIL]
+[xUnit.net 00:00:03.39]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 8) [FAIL]
+[xUnit.net 00:00:03.39]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 4) [FAIL]
+[xUnit.net 00:00:03.39]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 50) [FAIL]
+[xUnit.net 00:00:03.39]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 55) [FAIL]
+[xUnit.net 00:00:03.40]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 53) [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 18) [1 ms]
+  오류 메시지:
+   seed=18
+S -> a | g B
+A -> b | e S
+B -> c | epsilon | A f: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 3) [1 ms]
+  오류 메시지:
+   seed=3
+S -> a | e | B
+A -> b | e | g
+B -> c | B f: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 47) [1 ms]
+  오류 메시지:
+   seed=47
+S -> a | d A | S f
+A -> b | B
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 51) [2 ms]
+  오류 메시지:
+   seed=51
+S -> a | g A | d B
+A -> b | B | S g
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 8) [1 ms]
+  오류 메시지:
+   seed=8
+S -> a | g
+A -> b | g A | d
+B -> c | A e | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 4) [1 ms]
+  오류 메시지:
+   seed=4
+S -> a | d B
+A -> b | d S | f B
+B -> c | epsilon | B e: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 50) [< 1 ms]
+  오류 메시지:
+   seed=50
+S -> a | d
+A -> b | f S | f
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 55) [< 1 ms]
+  오류 메시지:
+   seed=55
+S -> a | f
+A -> b | B | B g
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 53) [1 ms]
+  오류 메시지:
+   seed=53
+S -> a | S e | g B
+A -> b | f S | f
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:03.40]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 11) [FAIL]
+[xUnit.net 00:00:03.40]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 36) [FAIL]
+[xUnit.net 00:00:03.40]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 56) [FAIL]
+[xUnit.net 00:00:03.40]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 17) [FAIL]
+[xUnit.net 00:00:03.40]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 19) [FAIL]
+[xUnit.net 00:00:03.41]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 26) [FAIL]
+[xUnit.net 00:00:03.41]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 49) [FAIL]
+[xUnit.net 00:00:03.41]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 5) [FAIL]
+[xUnit.net 00:00:03.41]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 44) [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 11) [1 ms]
+  오류 메시지:
+   seed=11
+S -> a | B
+A -> b | B
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 36) [1 ms]
+  오류 메시지:
+   seed=36
+S -> a | e | S g
+A -> b | B
+B -> c | epsilon | d B: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 56) [1 ms]
+  오류 메시지:
+   seed=56
+S -> a | e S
+A -> b | e A
+B -> c | B e: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 17) [1 ms]
+  오류 메시지:
+   seed=17
+S -> a | d | e
+A -> b | B
+B -> c | f A | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 19) [1 ms]
+  오류 메시지:
+   seed=19
+S -> a | f S | d
+A -> b | d B | d A
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 26) [3 ms]
+  오류 메시지:
+   seed=26
+S -> a | B | g S
+A -> b | d | g
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 49) [2 ms]
+  오류 메시지:
+   seed=49
+S -> a | A | B
+A -> b | g
+B -> c | d S | S f: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 5) [2 ms]
+  오류 메시지:
+   seed=5
+S -> a | g S | B
+A -> b | B
+B -> c | epsilon | B e: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 44) [2 ms]
+  오류 메시지:
+   seed=44
+S -> a | B | d B
+A -> b | f | B
+B -> c | S e: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:03.42]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 28) [FAIL]
+[xUnit.net 00:00:03.42]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 15) [FAIL]
+[xUnit.net 00:00:03.42]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 46) [FAIL]
+[xUnit.net 00:00:03.42]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 33) [FAIL]
+[xUnit.net 00:00:03.43]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "lalr-not-slr") [FAIL]
+[xUnit.net 00:00:03.43]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "expression-precedence") [FAIL]
+[xUnit.net 00:00:03.44]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "lr1-not-lalr") [FAIL]
+[xUnit.net 00:00:03.44]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "nullable-left-recursion") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 28) [1 ms]
+  오류 메시지:
+   seed=28
+S -> a | g B | d
+A -> b | B
+B -> c | epsilon: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 15) [1 ms]
+  오류 메시지:
+   seed=15
+S -> a | S g | f B
+A -> b | f S | e A
+B -> c | g B: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 46) [1 ms]
+  오류 메시지:
+   seed=46
+S -> a | e S
+A -> b | g B | d
+B -> c | epsilon | S g: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(seed: 33) [4 ms]
+  오류 메시지:
+   seed=33
+S -> a | e A
+A -> b | B | S e
+B -> c | g A | e A: no lookahead entry for I0 S ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Int32 seed) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 93
+   at InvokeStub_LalrLookaheadReferenceTests.Deterministic_small_productive_grammars_match_the_independent_reference(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "lalr-not-slr") [2 ms]
+  오류 메시지:
+   lalr-not-slr: no lookahead entry for I0 S ->•L = R
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 56
+   at InvokeStub_LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "expression-precedence") [4 ms]
+  오류 메시지:
+   expression-precedence: no lookahead entry for I0 E ->•E + T
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 56
+   at InvokeStub_LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "lr1-not-lalr") [1 ms]
+  오류 메시지:
+   lr1-not-lalr: no lookahead entry for I0 S ->•a A d
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 56
+   at InvokeStub_LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "nullable-left-recursion") [1 ms]
+  오류 메시지:
+   nullable-left-recursion: no lookahead entry for I0 S ->•A z
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 56
+   at InvokeStub_LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:03.44]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "nullable-shared-child") [FAIL]
+[xUnit.net 00:00:03.44]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "nullable-chain") [FAIL]
+[xUnit.net 00:00:03.44]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "unproductive-suffix-with-nullable-prefix") [FAIL]
+[xUnit.net 00:00:03.44]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "nullable-prefix-cycle") [FAIL]
+[xUnit.net 00:00:03.44]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "balanced-nullable-recursion") [FAIL]
+[xUnit.net 00:00:03.45]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "unproductive-suffix") [FAIL]
+[xUnit.net 00:00:03.45]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "late-eof-and-two-delimiters") [FAIL]
+[xUnit.net 00:00:03.45]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Equivalent_nullable_cycle_is_independent_of_symbol_and_alternative_registration_order(reverse: False) [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "nullable-shared-child") [1 ms]
+  오류 메시지:
+   nullable-shared-child: no lookahead entry for I0 S ->•A a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 56
+   at InvokeStub_LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "nullable-chain") [1 ms]
+  오류 메시지:
+   nullable-chain: no lookahead entry for I0 A ->•a
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 56
+   at InvokeStub_LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "unproductive-suffix-with-nullable-prefix") [1 ms]
+  오류 메시지:
+   unproductive-suffix-with-nullable-prefix: no lookahead entry for I0 S ->•G A U
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 56
+   at InvokeStub_LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "nullable-prefix-cycle") [1 ms]
+  오류 메시지:
+   nullable-prefix-cycle: no lookahead entry for I0 S ->•G C
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 56
+   at InvokeStub_LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "balanced-nullable-recursion") [< 1 ms]
+  오류 메시지:
+   balanced-nullable-recursion: no lookahead entry for I0 S ->•( S ) S
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 56
+   at InvokeStub_LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "unproductive-suffix") [< 1 ms]
+  오류 메시지:
+   unproductive-suffix: no lookahead entry for I0 A ->•B x
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 56
+   at InvokeStub_LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(name: "late-eof-and-two-delimiters") [1 ms]
+  오류 메시지:
+   late-eof-and-two-delimiters: no lookahead entry for I0 S ->•G C
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(String name) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 56
+   at InvokeStub_LalrLookaheadReferenceTests.Every_LR_item_matches_independent_canonical_LR1_core_merging(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Equivalent_nullable_cycle_is_independent_of_symbol_and_alternative_registration_order(reverse: False) [2 ms]
+  오류 메시지:
+   registration-order=False: no lookahead entry for I0 S ->•G C
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Equivalent_nullable_cycle_is_independent_of_symbol_and_alternative_registration_order(Boolean reverse) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 78
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+[xUnit.net 00:00:03.45]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Equivalent_nullable_cycle_is_independent_of_symbol_and_alternative_registration_order(reverse: True) [FAIL]
+[xUnit.net 00:00:03.46]     Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Existing_Ex1_canonical_snapshot_has_independently_verified_intermediate_item_lookaheads [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Equivalent_nullable_cycle_is_independent_of_symbol_and_alternative_registration_order(reverse: True) [2 ms]
+  오류 메시지:
+   registration-order=True: no lookahead entry for I0 S ->•G C
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Equivalent_nullable_cycle_is_independent_of_symbol_and_alternative_registration_order(Boolean reverse) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 78
+   at InvokeStub_LalrLookaheadReferenceTests.Equivalent_nullable_cycle_is_independent_of_symbol_and_alternative_registration_order(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Existing_Ex1_canonical_snapshot_has_independently_verified_intermediate_item_lookaheads [5 ms]
+  오류 메시지:
+   Ex1Grammar: no lookahead entry for I0 A ->•a B = e
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.AssertMatches(String label, LALRParser parser, Reference reference)
+   at Janglim.FrontEnd.Parsers.Tests.LalrLookaheadReferenceTests.Existing_Ex1_canonical_snapshot_has_independently_verified_intermediate_item_lookaheads() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\LalrLookaheadReferenceTests.cs:line 67
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\recursive-lookahead-targets\focused.trx
+
+실패!  - 실패:    83, 통과:    81, 건너뜀:     0, 전체:   164, 기간: 562 ms - Parse.FrontEnd.Parsers.Tests.dll (net8.0)

@@ -1,0 +1,10 @@
+{
+  "input": "artifacts/ecmascript-audit/static/probes.jsonl",
+  "skip": 0,
+  "processed": 1895,
+  "outcomes": {
+    "pass": 1895
+  },
+  "elapsedSeconds": 27.8413638,
+  "syntaxOnly": true
+}

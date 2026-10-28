@@ -1,0 +1,74 @@
+[
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptDeclarationTests.Namespace_and_ambient_declarations_preserve_their_context(source: \"declare interface Box<T> { value: T; }\")",
+    "message": "declare interface Box<T> { value: T; }\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptDeclarationTests.Namespace_and_ambient_declarations_preserve_their_context(source: \"declare const label = `ready`;\")",
+    "message": "declare const label = `ready`;\r\ntypescript_ambient_initializer: An ambient initializer requires an unannotated const or readonly declaration and a literal or enum reference."
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptDeclarationTests.Alias_bodies_retain_generics_mapped_types_and_ASI(source: \"type Nested = Map<string, Array<Map<number, Value>\"···)",
+    "message": "type Nested = Map<string, Array<Map<number, Value>>>;\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: \"namespace Outer { export interface Options { debug\"···)",
+    "message": "namespace Outer { export interface Options { debug: boolean; } export const value: Options = { debug: true }; }\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptDeclarationTests.Interface_members_and_heritage_reuse_the_type_grammar(source: \"interface Derived<T> extends Base<T>, Other.X<T> {\"···)",
+    "message": "interface Derived<T> extends Base<T>, Other.X<T> {}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: \"import { value } from 'lib'; export interface Resu\"···)",
+    "message": "import { value } from 'lib'; export interface Result { value: typeof value; }\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {IdentifierName} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: \"export default interface Box<T> { value: T; }\")",
+    "message": "export default interface Box<T> { value: T; }\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {function, class, async, IdentifierName, of, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, NumericLiteral, StringLiteral, RegularExpressionLiteral, null, true, false, this, (, [, {, NoSubstitutionTemplate, TemplateHead, super, new, import, ++, --, delete, void, typeof, +, -, ~, !, await, PrivateIdentifier, yield} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptDeclarationTests.Declaration_grammar_restrictions_are_checked_after_parsing(source: \"module 'external';\")",
+    "message": "Assert.NotEmpty() Failure: Collection was empty"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptDeclarationTests.Namespace_and_ambient_declarations_preserve_their_context(source: \"declare function identity<T>(value: T): T;\")",
+    "message": "declare function identity<T>(value: T): T;\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptDeclarationTests.Interface_members_and_heritage_reuse_the_type_grammar(source: \"interface Box<T> { readonly value: T; optional?: T\"···)",
+    "message": "interface Box<T> { readonly value: T; optional?: T; run(x: T): T; }\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptDeclarationTests.Alias_bodies_retain_generics_mapped_types_and_ASI(source: \"type Box<T extends Base = Base> = { value: T };\")",
+    "message": "type Box<T extends Base = Base> = { value: T };\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptDeclarationTests.Alias_bodies_retain_generics_mapped_types_and_ASI(source: \"type Transform<T> = { readonly [K in keyof T as `g\"···)",
+    "message": "type Transform<T> = { readonly [K in keyof T as `get${Capitalize<string & K>}`]-?: T[K] };\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: \"export declare namespace Tools { function run(): v\"···)",
+    "message": "export declare namespace Tools { function run(): void; }\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {{} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptDeclarationTests.Alias_bodies_retain_generics_mapped_types_and_ASI(source: \"type Select<T> = T extends infer U ? U : never;\")",
+    "message": "type Select<T> = T extends infer U ? U : never;\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: \"export type Pair<T> = [T, T];\")",
+    "message": "export type Pair<T> = [T, T];\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., &, |, extends, [, ?, <, is} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptModuleDeclarationTests.Module_exports_compose_with_TypeScript_declarations(source: \"export interface Box<T> { value: T; }\")",
+    "message": "export interface Box<T> { value: T; }\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptDeclarationTests.Namespace_and_ambient_declarations_preserve_their_context(source: \"declare namespace Tools { function run<T>(value: T\"···)",
+    "message": "declare namespace Tools { function run<T>(value: T): T; }\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)"
+  },
+  {
+    "test": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptDeclarationTests.Interface_members_and_heritage_reuse_the_type_grammar(source: \"interface Callable { (x: number): string; new(x: n\"···)",
+    "message": "interface Callable { (x: number): string; new(x: number): Callable; }\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, {, ,, ?} 와야 합니다)"
+  }
+]

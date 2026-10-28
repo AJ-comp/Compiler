@@ -1,0 +1,286 @@
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Release\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Release\netstandard2.1\Parse.dll
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Release\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Release\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs(279,26): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Parse.FrontEnd.Parsers.Tests.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs(263,9): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Parse.FrontEnd.Parsers.Tests.csproj]
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs(272,24): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\Parse.FrontEnd.Parsers.Tests.csproj]
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:05.69]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionTests.Member_call_new_and_optional_chains_are_accepted(input: "(value)++") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionTests.Member_call_new_and_optional_chains_are_accepted(input: "(value)++") [3 ms]
+  오류 메시지:
+   (value)++
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptExpressionTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionTests.Member_call_new_and_optional_chains_are_accepted(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptExpressionTests.cs:line 159
+   at InvokeStub_JavaScriptExpressionTests.Member_call_new_and_optional_chains_are_accepted(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:05.79]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionTests.Strict_script_expression_forms_are_accepted(input: "value--") [FAIL]
+[xUnit.net 00:00:05.79]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionTests.Strict_script_expression_forms_are_accepted(input: "value++") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionTests.Strict_script_expression_forms_are_accepted(input: "value--") [1 ms]
+  오류 메시지:
+   value--
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptExpressionTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionTests.Strict_script_expression_forms_are_accepted(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptExpressionTests.cs:line 128
+   at InvokeStub_JavaScriptExpressionTests.Strict_script_expression_forms_are_accepted(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionTests.Strict_script_expression_forms_are_accepted(input: "value++") [1 ms]
+  오류 메시지:
+   value++
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptExpressionTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionTests.Strict_script_expression_forms_are_accepted(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptExpressionTests.cs:line 128
+   at InvokeStub_JavaScriptExpressionTests.Strict_script_expression_forms_are_accepted(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:06.73]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Postfix_update_allows_trivia_without_line_terminators(input: "value \t ++") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Postfix_update_allows_trivia_without_line_terminators(input: "value \t ++") [2 ms]
+  오류 메시지:
+   value 	 ++
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptExpressionTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Postfix_update_allows_trivia_without_line_terminators(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptLexicalTests.cs:line 227
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+[xUnit.net 00:00:06.73]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Postfix_update_allows_trivia_without_line_terminators(input: "value ++") [FAIL]
+[xUnit.net 00:00:06.73]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Postfix_update_allows_trivia_without_line_terminators(input: "value/* gap */++") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Postfix_update_allows_trivia_without_line_terminators(input: "value ++") [1 ms]
+  오류 메시지:
+   value ++
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptExpressionTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Postfix_update_allows_trivia_without_line_terminators(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptLexicalTests.cs:line 227
+   at InvokeStub_JavaScriptLexicalTests.Postfix_update_allows_trivia_without_line_terminators(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Postfix_update_allows_trivia_without_line_terminators(input: "value/* gap */++") [1 ms]
+  오류 메시지:
+   value/* gap */++
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptExpressionTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Postfix_update_allows_trivia_without_line_terminators(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptLexicalTests.cs:line 227
+   at InvokeStub_JavaScriptLexicalTests.Postfix_update_allows_trivia_without_line_terminators(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:06.90]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Parser_context_selects_division_or_regexp_without_rewriting_the_source(input: "x++/y", expected: "x|++|/|y") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Parser_context_selects_division_or_regexp_without_rewriting_the_source(input: "x++/y", expected: "x|++|/|y") [2 ms]
+  오류 메시지:
+   x++/y
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptExpressionTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Parser_context_selects_division_or_regexp_without_rewriting_the_source(String input, String expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptLexicalTests.cs:line 186
+   at InvokeStub_JavaScriptLexicalTests.Parser_context_selects_division_or_regexp_without_rewriting_the_source(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:06.95]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Maximal_munch_preserves_punctuators_and_decimal_lookahead_exceptions(input: "a+++b", expected: "a|++|+|b") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Maximal_munch_preserves_punctuators_and_decimal_lookahead_exceptions(input: "a+++b", expected: "a|++|+|b") [1 ms]
+  오류 메시지:
+   a+++b
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptExpressionTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptLexicalTests.Maximal_munch_preserves_punctuators_and_decimal_lookahead_exceptions(String input, String expected) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptLexicalTests.cs:line 221
+   at InvokeStub_JavaScriptLexicalTests.Maximal_munch_preserves_punctuators_and_decimal_lookahead_exceptions(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:07.52]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptTemplateTests.Member_access_after_a_template_can_be_an_assignment_target(input: "tag`text`[index]++") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptTemplateTests.Member_access_after_a_template_can_be_an_assignment_target(input: "tag`text`[index]++") [1 ms]
+  오류 메시지:
+   tag`text`[index]++
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptExpressionFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptExpressionTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptTemplateTests.Member_access_after_a_template_can_be_an_assignment_target(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptTemplateTests.cs:line 228
+   at InvokeStub_JavaScriptTemplateTests.Member_access_after_a_template_can_be_an_assignment_target(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:08.24]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(input: "try {} catch (error) { let error; }") [FAIL]
+[xUnit.net 00:00:08.24]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(input: "{ function value() {} function value() {} }") [FAIL]
+[xUnit.net 00:00:08.24]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(input: "function f(value) { let value; }") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(input: "try {} catch (error) { let error; }") [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: try {} catch (error) { let error; }
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs:line 226
+   at InvokeStub_JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(input: "{ function value() {} function value() {} }") [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: { function value() {} function value() {} }
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs:line 226
+   at InvokeStub_JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(input: "function f(value) { let value; }") [2 ms]
+  오류 메시지:
+   Unexpectedly accepted: function f(value) { let value; }
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs:line 226
+   at InvokeStub_JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:08.24]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(input: "function f([value]) { const value = 1; }") [FAIL]
+[xUnit.net 00:00:08.25]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(input: "switch (value) { case 0: let item; break; default:"···) [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(input: "function f([value]) { const value = 1; }") [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: function f([value]) { const value = 1; }
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs:line 226
+   at InvokeStub_JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(input: "switch (value) { case 0: let item; break; default:"···) [2 ms]
+  오류 메시지:
+   Unexpectedly accepted: switch (value) { case 0: let item; break; default: let item; }
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs:line 226
+   at InvokeStub_JavaScriptBindingTests.Lexical_declarations_conflict_only_with_names_in_their_own_scope(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:08.41]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(input: "function f(...rest) { 'use strict'; }") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(input: "function f(...rest) { 'use strict'; }") [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: function f(...rest) { 'use strict'; }
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs:line 180
+   at InvokeStub_JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:08.43]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(input: "function f(a = 0) { 'first'; 'use strict'; }") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(input: "function f(a = 0) { 'first'; 'use strict'; }") [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: function f(a = 0) { 'first'; 'use strict'; }
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs:line 180
+   at InvokeStub_JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:08.44]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(input: "function f({a}) { 'use strict'; }") [FAIL]
+[xUnit.net 00:00:08.44]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(input: "function f(a = 0) { 'use strict'; }") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(input: "function f({a}) { 'use strict'; }") [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: function f({a}) { 'use strict'; }
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs:line 180
+   at InvokeStub_JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(input: "function f(a = 0) { 'use strict'; }") [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: function f(a = 0) { 'use strict'; }
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs:line 180
+   at InvokeStub_JavaScriptBindingTests.Strict_binding_names_duplicates_and_non_simple_strict_directives_are_rejected(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:08.44]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Loop_heads_and_catch_parameters_use_their_specific_binding_or_assignment_context(input: "for ({name = fallback} in object) ;") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Loop_heads_and_catch_parameters_use_their_specific_binding_or_assignment_context(input: "for ({name = fallback} in object) ;") [2 ms]
+  오류 메시지:
+   for ({name = fallback} in object) ;
+invalid_cover_initializer: A shorthand initializer is only valid in an assignment pattern.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 36
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Loop_heads_and_catch_parameters_use_their_specific_binding_or_assignment_context(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs:line 241
+   at InvokeStub_JavaScriptBindingTests.Loop_heads_and_catch_parameters_use_their_specific_binding_or_assignment_context(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:08.54]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Loop_and_catch_bindings_reject_initializers_members_and_invalid_rest_patterns(input: "for ({...{value}} in object) ;") [FAIL]
+[xUnit.net 00:00:08.54]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Loop_and_catch_bindings_reject_initializers_members_and_invalid_rest_patterns(input: "for ([...rest,] of values) ;") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Loop_and_catch_bindings_reject_initializers_members_and_invalid_rest_patterns(input: "for ({...{value}} in object) ;") [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: for ({...{value}} in object) ;
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Loop_and_catch_bindings_reject_initializers_members_and_invalid_rest_patterns(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs:line 255
+   at InvokeStub_JavaScriptBindingTests.Loop_and_catch_bindings_reject_initializers_members_and_invalid_rest_patterns(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Loop_and_catch_bindings_reject_initializers_members_and_invalid_rest_patterns(input: "for ([...rest,] of values) ;") [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: for ([...rest,] of values) ;
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptBindingTests.Loop_and_catch_bindings_reject_initializers_members_and_invalid_rest_patterns(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptBindingTests.cs:line 255
+   at InvokeStub_JavaScriptBindingTests.Loop_and_catch_bindings_reject_initializers_members_and_invalid_rest_patterns(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:09.23]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Ordinary_functions_and_statement_forms_are_accepted(input: "var of = 1; of++; object.of; ({of});") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Ordinary_functions_and_statement_forms_are_accepted(input: "var of = 1; of++; object.of; ({of});") [1 ms]
+  오류 메시지:
+   var of = 1; of++; object.of; ({of});
+Janglim.FrontEnd.Parsers.LR.PredictionFailedException: No candidate can continue through the predicate conflict (state 2, token index 6). Source offset 14.
+   at Janglim.FrontEnd.Parsers.LR.ContextualConflictPredictor.SelectFirstAction(IReadOnlyList`1 initialActions, IReadOnlyList`1 actualStates, ContextualInput actualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualConflictPredictor.cs:line 69
+   at Janglim.FrontEnd.Parsers.LR.LRParser.ShiftOrReduce(ParsingUnit parsingUnit, TokenData inputValue, ConflictItem& conflictItem, IReadOnlyList`1 tokens, Int32 tokenIndex, ContextualInput contextualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[DecideParsingDirection].cs:line 90
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Ordinary_functions_and_statement_forms_are_accepted(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 140
+   at InvokeStub_JavaScriptStatementTests.Ordinary_functions_and_statement_forms_are_accepted(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:09.27]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Ordinary_functions_and_statement_forms_are_accepted(input: "for (var i = 0, j = 1; i < j; i++) {}") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Ordinary_functions_and_statement_forms_are_accepted(input: "for (var i = 0, j = 1; i < j; i++) {}") [1 ms]
+  오류 메시지:
+   for (var i = 0, j = 1; i < j; i++) {}
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Ordinary_functions_and_statement_forms_are_accepted(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 140
+   at InvokeStub_JavaScriptStatementTests.Ordinary_functions_and_statement_forms_are_accepted(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:09.28]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Ordinary_functions_and_statement_forms_are_accepted(input: "for (i = 0; i < 10; i++) step(i);") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Ordinary_functions_and_statement_forms_are_accepted(input: "for (i = 0; i < 10; i++) step(i);") [1 ms]
+  오류 메시지:
+   for (i = 0; i < 10; i++) step(i);
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Ordinary_functions_and_statement_forms_are_accepted(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 140
+   at InvokeStub_JavaScriptStatementTests.Ordinary_functions_and_statement_forms_are_accepted(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:09.34]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Invalid_syntax_control_contexts_and_ASI_locations_are_rejected(input: "for (call() of values) ;") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Invalid_syntax_control_contexts_and_ASI_locations_are_rejected(input: "for (call() of values) ;") [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: for (call() of values) ;
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Invalid_syntax_control_contexts_and_ASI_locations_are_rejected(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 227
+   at InvokeStub_JavaScriptStatementTests.Invalid_syntax_control_contexts_and_ASI_locations_are_rejected(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:09.36]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Invalid_syntax_control_contexts_and_ASI_locations_are_rejected(input: "for (a?.b in object) ;") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Invalid_syntax_control_contexts_and_ASI_locations_are_rejected(input: "for (a?.b in object) ;") [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: for (a?.b in object) ;
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Invalid_syntax_control_contexts_and_ASI_locations_are_rejected(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 227
+   at InvokeStub_JavaScriptStatementTests.Invalid_syntax_control_contexts_and_ASI_locations_are_rejected(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:09.37]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Invalid_syntax_control_contexts_and_ASI_locations_are_rejected(input: "for (eval of values) ;") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Invalid_syntax_control_contexts_and_ASI_locations_are_rejected(input: "for (eval of values) ;") [1 ms]
+  오류 메시지:
+   Unexpectedly accepted: for (eval of values) ;
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Invalid(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 50
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Invalid_syntax_control_contexts_and_ASI_locations_are_rejected(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 227
+   at InvokeStub_JavaScriptStatementTests.Invalid_syntax_control_contexts_and_ASI_locations_are_rejected(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:09.39]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Semicolons_are_inserted_only_at_statement_boundaries(input: "a++\nb++") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Semicolons_are_inserted_only_at_statement_boundaries(input: "a++\nb++") [1 ms]
+  오류 메시지:
+   a++
+b++
+Janglim.FrontEnd.Parsers.LR.PredictionFailedException: No candidate can continue through the predicate conflict (state 0, token index 1). Source offset 1.
+   at Janglim.FrontEnd.Parsers.LR.ContextualConflictPredictor.SelectFirstAction(IReadOnlyList`1 initialActions, IReadOnlyList`1 actualStates, ContextualInput actualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualConflictPredictor.cs:line 69
+   at Janglim.FrontEnd.Parsers.LR.LRParser.ShiftOrReduce(ParsingUnit parsingUnit, TokenData inputValue, ConflictItem& conflictItem, IReadOnlyList`1 tokens, Int32 tokenIndex, ContextualInput contextualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[DecideParsingDirection].cs:line 90
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.Semicolons_are_inserted_only_at_statement_boundaries(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 172
+   at InvokeStub_JavaScriptStatementTests.Semicolons_are_inserted_only_at_statement_boundaries(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\functions\tests\functions-initial.trx
+
+실패!  - 실패:    28, 통과:  1323, 건너뜀:     0, 전체:  1351, 기간: 6 s - Parse.FrontEnd.Parsers.Tests.dll (net8.0)

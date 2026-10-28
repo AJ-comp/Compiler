@@ -1,0 +1,165 @@
+{
+  "capturedAtUtc": "2026-10-19T03:51:37.7998999Z",
+  "purpose": "Public production baseline captured before Janglim0.4.0 deployment; no new-release claim.",
+  "records": [
+    {
+      "path": "/",
+      "url": "https://janglim.mythosia.net/",
+      "status": 200,
+      "contentType": "text/html",
+      "bytes": 3537,
+      "sha256": "fc4f9db5da32a9259d73d3a2d31248b7a3c0f852607c83dfbd941cdaa2f00d1a",
+      "etag": "\"13600986\"",
+      "lastModified": "10/10/2026 21:01:34 +00:00",
+      "cacheControl": "public, must-revalidate, max-age=30"
+    },
+    {
+      "path": "/_framework/dotnet.e31htgzvz0.js",
+      "url": "https://janglim.mythosia.net/_framework/dotnet.e31htgzvz0.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bytes": 63173,
+      "sha256": "367326097bf5a084fb755eb73437010876d69bc84f1ee1b39fa62f783f36e704",
+      "etag": "\"13600986\"",
+      "lastModified": "10/10/2026 21:01:34 +00:00",
+      "cacheControl": "public, must-revalidate, max-age=30"
+    },
+    {
+      "path": "/_framework/blazor.webassembly.958z1vx7fr.js",
+      "url": "https://janglim.mythosia.net/_framework/blazor.webassembly.958z1vx7fr.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bytes": 60576,
+      "sha256": "039f53afd1ea1211ccbbc914ee4aee2c8f5acb0e4c452e8bbdceb3ee309b8219",
+      "etag": "\"13600986\"",
+      "lastModified": "10/10/2026 21:01:34 +00:00",
+      "cacheControl": "public, must-revalidate, max-age=30"
+    },
+    {
+      "path": "/_framework/blazor.boot.json",
+      "url": "https://janglim.mythosia.net/_framework/blazor.boot.json",
+      "status": 404,
+      "contentType": "text/html",
+      "bytes": 2400,
+      "sha256": "0a76274e99e285c9d7e18d094e71ea6fca1b0274e30c28492a24218e53c61cb3",
+      "etag": "",
+      "lastModified": "",
+      "cacheControl": ""
+    },
+    {
+      "path": "/ui/playground.js",
+      "url": "https://janglim.mythosia.net/ui/playground.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bytes": 872871,
+      "sha256": "9944c14528902dca67d0ef0eea595db8890c0be92702b764c9db82090fcf5e92",
+      "etag": "\"13600986\"",
+      "lastModified": "10/10/2026 21:01:34 +00:00",
+      "cacheControl": "public, must-revalidate, max-age=30"
+    },
+    {
+      "path": "/ui/style.css",
+      "url": "https://janglim.mythosia.net/ui/style.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bytes": 55822,
+      "sha256": "00c44837a1ff6f03083ae288545950a44954de6a425250e1baac988cc08c402a",
+      "etag": "\"13600986\"",
+      "lastModified": "10/10/2026 21:01:34 +00:00",
+      "cacheControl": "public, must-revalidate, max-age=30"
+    },
+    {
+      "path": "/ui/locale.js",
+      "url": "https://janglim.mythosia.net/ui/locale.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bytes": 219952,
+      "sha256": "f2859ad5b01399c5de1d969508a310b24fe28a79dd64d48db597872f21bd2f13",
+      "etag": "\"13600986\"",
+      "lastModified": "10/10/2026 21:01:34 +00:00",
+      "cacheControl": "public, must-revalidate, max-age=30"
+    },
+    {
+      "path": "/css/app.css",
+      "url": "https://janglim.mythosia.net/css/app.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bytes": 1217,
+      "sha256": "82adadcf1e87830dda818df88436c8020b4ebd8a3f0a8127275f29c100193a0b",
+      "etag": "\"13600986\"",
+      "lastModified": "10/10/2026 21:01:34 +00:00",
+      "cacheControl": "public, must-revalidate, max-age=30"
+    },
+    {
+      "path": "/_framework/Janglim.Playground.1eoe40q16h.wasm",
+      "url": "https://janglim.mythosia.net/_framework/Janglim.Playground.1eoe40q16h.wasm",
+      "status": 200,
+      "contentType": "application/wasm",
+      "bytes": 95509,
+      "sha256": "07295f504345eaa58ebfee493b88710662be42fe0df849f9cac36a1b6887626a",
+      "etag": "\"13600986\"",
+      "lastModified": "10/10/2026 21:01:34 +00:00",
+      "cacheControl": "public, must-revalidate, max-age=30"
+    },
+    {
+      "path": "/_framework/Parse.FrontEnd.d1aznho0xq.wasm",
+      "url": "https://janglim.mythosia.net/_framework/Parse.FrontEnd.d1aznho0xq.wasm",
+      "status": 200,
+      "contentType": "application/wasm",
+      "bytes": 85781,
+      "sha256": "6f0732d5d1c9ab75cd6a2f117155fccc170ed720b10f083a3996959703d95e39",
+      "etag": "\"13600986\"",
+      "lastModified": "10/10/2026 21:01:34 +00:00",
+      "cacheControl": "public, must-revalidate, max-age=30"
+    },
+    {
+      "path": "/_framework/Parse.FrontEnd.Grammars.Ebnf.y53s4f3jwk.wasm",
+      "url": "https://janglim.mythosia.net/_framework/Parse.FrontEnd.Grammars.Ebnf.y53s4f3jwk.wasm",
+      "status": 200,
+      "contentType": "application/wasm",
+      "bytes": 14613,
+      "sha256": "faf05992b2a8dd2995a134ac17cb0790f9ef45a20978d1c64b6a677372f2842f",
+      "etag": "\"13600986\"",
+      "lastModified": "10/10/2026 21:01:34 +00:00",
+      "cacheControl": "public, must-revalidate, max-age=30"
+    },
+    {
+      "path": "/_framework/Parse.FrontEnd.Grammars.z4rwc33vgi.wasm",
+      "url": "https://janglim.mythosia.net/_framework/Parse.FrontEnd.Grammars.z4rwc33vgi.wasm",
+      "status": 200,
+      "contentType": "application/wasm",
+      "bytes": 20245,
+      "sha256": "9d4606cb139d74f8c7fac4bd68ce5027ce69ddbe6ce89530db3a6336afc03a36",
+      "etag": "\"13600986\"",
+      "lastModified": "10/10/2026 21:01:34 +00:00",
+      "cacheControl": "public, must-revalidate, max-age=30"
+    },
+    {
+      "path": "/_framework/Parse.FrontEnd.Parsers.kngaug8wk9.wasm",
+      "url": "https://janglim.mythosia.net/_framework/Parse.FrontEnd.Parsers.kngaug8wk9.wasm",
+      "status": 200,
+      "contentType": "application/wasm",
+      "bytes": 84245,
+      "sha256": "d0103bcdf219865e060b76e77a99fe27c78ab0c5cdc59858d6eecc5efc348459",
+      "etag": "\"13600986\"",
+      "lastModified": "10/10/2026 21:01:34 +00:00",
+      "cacheControl": "public, must-revalidate, max-age=30"
+    }
+  ],
+  "loaderReferences": [
+    "dotnet_runtime",
+    "dotnet.boot.js",
+    "dotnet.native.b6l13xorvf.js",
+    "dotnet.native.rw4kynp763.wasm",
+    "dotnet.native.wasm",
+    "dotnet.runtime.v06hirbjsv.js"
+  ],
+  "embeddedManifestFingerprinting": [
+    "Janglim.Playground.1eoe40q16h.wasm",
+    "Parse.FrontEnd.d1aznho0xq.wasm",
+    "Parse.FrontEnd.Grammars.Ebnf.y53s4f3jwk.wasm",
+    "Parse.FrontEnd.Grammars.z4rwc33vgi.wasm",
+    "Parse.FrontEnd.Parsers.kngaug8wk9.wasm"
+  ],
+  "manifestNote": "Current production loader embeds the resource manifest/fingerprinting. Standalone blazor.boot.json and dotnet.boot.js return404."
+}

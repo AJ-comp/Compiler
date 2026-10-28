@@ -1,0 +1,17 @@
+
+COMMAND ["C:\\Users\\AhjLv\\.dotnet\\dotnet.exe", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\runner-asi-final\\Janglim.Test262.dll", "--input", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-latest-es2026.jsonl", "--output", "artifacts\\ecmascript-2026\\verified-latest\\module.jsonl", "--profile", "module", "--skip", "0", "--timeout-ms", "120000"]
+Preparing module (web=True) ...
+Ready module at 00:00:15.7796371.
+250 cases, 250 passed, 0 mismatches/errors; 00:00:22.5464728.
+500 cases, 500 passed, 0 mismatches/errors; 00:00:27.3223880.
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-latest-es2026.jsonl",
+  "profile": "module",
+  "skip": 0,
+  "processed": 696,
+  "outcomes": {
+    "pass": 696
+  },
+  "elapsedSeconds": 30.4594833,
+  "syntaxOnly": true
+}

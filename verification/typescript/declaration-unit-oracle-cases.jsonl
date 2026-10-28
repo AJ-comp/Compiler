@@ -1,0 +1,92 @@
+{"id": "Interface_members_and_heritage_reuse_the_type_grammar:0", "source": "interface Empty {}", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Interface_members_and_heritage_reuse_the_type_grammar:1", "source": "interface Box<T> { readonly value: T; optional?: T; run(x: T): T; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Interface_members_and_heritage_reuse_the_type_grammar:2", "source": "interface Derived<T> extends Base<T>, Other.X<T> {}", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Interface_members_and_heritage_reuse_the_type_grammar:3", "source": "interface Derived extends Base\n<string> {}", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Interface_members_and_heritage_reuse_the_type_grammar:4", "source": "interface Callable { (x: number): string; new(x: number): Callable; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Interface_members_and_heritage_reuse_the_type_grammar:5", "source": "interface Store { [key: string]: number; get size(): number; set size(value: number); }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Interface_members_and_heritage_reuse_the_type_grammar:6", "source": "interface RecordLike { [key: `item-${string}`]: number; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Interface_members_and_heritage_reuse_the_type_grammar:7", "source": "interface NewLines { first: string\nsecond?: number\nrun(): void }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Alias_bodies_retain_generics_mapped_types_and_ASI:8", "source": "type Name = string;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Alias_bodies_retain_generics_mapped_types_and_ASI:9", "source": "type Box<T extends Base = Base> = { value: T };", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Alias_bodies_retain_generics_mapped_types_and_ASI:10", "source": "type Transform<T> = { readonly [K in keyof T as `get${Capitalize<string & K>}`]-?: T[K] };", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Alias_bodies_retain_generics_mapped_types_and_ASI:11", "source": "type Select<T> = T extends infer U ? U : never;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Alias_bodies_retain_generics_mapped_types_and_ASI:12", "source": "type Tuple = [first: string, second?: number, ...rest: boolean[]];", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Alias_bodies_retain_generics_mapped_types_and_ASI:13", "source": "type Ref = import('lib').Value<string>;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Alias_bodies_retain_generics_mapped_types_and_ASI:14", "source": "type Name = string\n | number;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Alias_bodies_retain_generics_mapped_types_and_ASI:15", "source": "type Nested = Map<string, Array<Map<number, Value>>>;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Alias_bodies_retain_generics_mapped_types_and_ASI:16", "source": "type A = string\ntype B = number", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Enum_initializers_use_JavaScript_expressions:17", "source": "enum Direction {}", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Enum_initializers_use_JavaScript_expressions:18", "source": "enum Direction { Up, Down = 3, Left, }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Enum_initializers_use_JavaScript_expressions:19", "source": "enum Flag { On = 'on', Off = 'off' }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Enum_initializers_use_JavaScript_expressions:20", "source": "enum\nDirection { Up }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Enum_initializers_use_JavaScript_expressions:21", "source": "const enum Flag { On = 1, Off = 0 }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Enum_initializers_use_JavaScript_expressions:22", "source": "enum Bits { First = 1 << 0, Second = 1 << 1, All = First | Second }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Enum_initializers_use_JavaScript_expressions:23", "source": "enum Names { default = 1, while = 2, 'literal-name' = 3 }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:24", "source": "namespace Tools { const value: number = 1; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:25", "source": "namespace Outer.Inner { export function run(): void {} }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:26", "source": "namespace Outer.default { export const x = 1; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:27", "source": "module Tools { export type Name = string; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:28", "source": "declare interface Box<T> { value: T; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:29", "source": "declare type Name = string;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:30", "source": "declare enum Flag { On = 1, Off = 0 }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:31", "source": "declare const enum Flag { On = 1, Off = 0 }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:32", "source": "declare namespace Tools { function run<T>(value: T): T; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:33", "source": "declare module 'external' { export const version: string; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:34", "source": "declare module 'external';", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:35", "source": "declare function identity<T>(value: T): T;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:36", "source": "declare const version: string;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:37", "source": "declare let ready: boolean;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Namespace_and_ambient_declarations_preserve_their_context:38", "source": "declare var count: number;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Contextual_declaration_words_remain_runtime_identifiers:39", "source": "type = string;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Contextual_declaration_words_remain_runtime_identifiers:40", "source": "const type = 1; const namespace = 2; type + namespace;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Contextual_declaration_words_remain_runtime_identifiers:41", "source": "const module = { type: 1, declare: 2 }; module.type + module.declare;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Contextual_declaration_words_remain_runtime_identifiers:42", "source": "function f(type: string, namespace: number) { return type + namespace; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Declaration_end_restores_the_runtime_RegExp_context:43", "source": "interface I {} /ab/.test(value);", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Declaration_end_restores_the_runtime_RegExp_context:44", "source": "type T = { value: string }; /ab/.test(value);", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Declaration_end_restores_the_runtime_RegExp_context:45", "source": "type T = string\n/ab/.test(value);", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Declaration_end_restores_the_runtime_RegExp_context:46", "source": "enum E { A } /ab/.test(value);", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Declaration_end_restores_the_runtime_RegExp_context:47", "source": "namespace N {} /ab/.test(value);", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Declaration_end_restores_the_runtime_RegExp_context:48", "source": "declare namespace N {} /ab/.test(value);", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Declaration_end_restores_the_runtime_RegExp_context:49", "source": "declare function f(): void; /ab/.test(value);", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Declaration_end_restores_the_runtime_RegExp_context:50", "source": "const before = value / divisor; interface I {} /after/.test(value);", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:51", "source": "interface {}", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:52", "source": "interface Box<T {}", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:53", "source": "interface Box extends {}", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:54", "source": "interface Box extends Base, Other, {}", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:55", "source": "interface Box { value: ; }", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:56", "source": "type Name string;", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:57", "source": "type Name = ;", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:58", "source": "enum {}", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:59", "source": "enum E { A = }", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:60", "source": "enum E { , }", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:61", "source": "namespace {}", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:62", "source": "namespace Outer.Inner;", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:63", "source": "namespace\nTools {}", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:64", "source": "module\nTools {}", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:65", "source": "declare function f(value: );", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Malformed_or_prerelease_declarations_are_rejected:66", "source": "declare module 'external' with { type: 'json' } {}", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Declaration_grammar_restrictions_are_checked_after_parsing:67", "source": "declare function f() {}", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Declaration_grammar_restrictions_are_checked_after_parsing:68", "source": "declare const value: number = compute();", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Declaration_grammar_restrictions_are_checked_after_parsing:69", "source": "declare let value: number = 1;", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Declaration_grammar_restrictions_are_checked_after_parsing:70", "source": "declare namespace N { value(); }", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Declaration_grammar_restrictions_are_checked_after_parsing:71", "source": "module 'external';", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Declaration_grammar_restrictions_are_checked_after_parsing:72", "source": "enum E { [key] = 1 }", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Declaration_grammar_restrictions_are_checked_after_parsing:73", "source": "interface Bad { run(x?: string, y: number): void; }", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Declaration_grammar_restrictions_are_checked_after_parsing:74", "source": "interface Bad { set value(): void; }", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:75", "source": "export interface Box<T> { value: T; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:76", "source": "export default interface Box<T> { value: T; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:77", "source": "export type Pair<T> = [T, T];", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:78", "source": "export enum Direction { Up, Down }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:79", "source": "export const enum Direction { Up, Down }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:80", "source": "export namespace Tools { export type Name = string; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:81", "source": "export declare namespace Tools { function run(): void; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:82", "source": "export declare const version: string;", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:83", "source": "declare global { interface Window { version: string; } } export {};", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:84", "source": "namespace Outer { export interface Options { debug: boolean; } export const value: Options = { debug: true }; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:85", "source": "import { value } from 'lib'; export interface Result { value: typeof value; }", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:86", "source": "export interface I {} /ab/.test(value);", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Module_exports_compose_with_TypeScript_declarations:87", "source": "export namespace N {} /ab/.test(value);", "expectedGrammarAccept": true, "kind": "ts"}
+{"id": "Invalid_exported_declarations_are_rejected:88", "source": "export default interface {}", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Invalid_exported_declarations_are_rejected:89", "source": "export interface I extends {}", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Invalid_exported_declarations_are_rejected:90", "source": "export type Name = ;", "expectedGrammarAccept": false, "kind": "ts"}
+{"id": "Invalid_exported_declarations_are_rejected:91", "source": "export declare namespace N { function run() {} }", "expectedGrammarAccept": false, "kind": "ts"}

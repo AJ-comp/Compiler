@@ -1,0 +1,1 @@
+declare function run(value: number = 1): void; export {};

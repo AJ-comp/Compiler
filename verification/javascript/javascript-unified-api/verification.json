@@ -1,0 +1,19 @@
+{
+  "PublicGrammar": "JavaScriptGrammar",
+  "DefaultInputKind": "Script",
+  "DefaultMode": "Strict",
+  "CommonEngineChanged": false,
+  "UnifiedApiCases": 43,
+  "UnifiedApiPassed": 43,
+  "NonStrictCases": 585,
+  "NonStrictPassed": 585,
+  "EnginePassed": 5604,
+  "EngineFailed": 0,
+  "EngineKnownSkipped": 1,
+  "McpPassed": 69,
+  "McpFailed": 0,
+  "DocumentationExamplesCompiled": 10,
+  "RepresentativeExamplesExecuted": 3,
+  "DocfxErrors": 0,
+  "DocfxExistingWarnings": 11
+}

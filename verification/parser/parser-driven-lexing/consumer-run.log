@@ -1,0 +1,3 @@
+result = a / 2; -> result | = | a | / | 2 | ;
+result = /ab+/g; -> result | = | /ab+/g | ;
+Public constructor and source interface: OK

@@ -1,0 +1,30 @@
+{"total":1788,"counts":{"Script:true":573,"Script:false":683,"Module:true":81,"Module:false":247,"Expression:true":90,"Expression:false":114}}
+{"input":"class A { static field = await; }","goal":"Script","category":"targeted-boundary","expected":false,"nodeMessage":"Unexpected reserved word"}
+{"input":"class A { static field = () => await; }","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"class A { static field = (await) => 1; }","goal":"Script","category":"targeted-boundary","expected":false,"nodeMessage":"Unexpected reserved word"}
+{"input":"class A { static field = ({[await](){}}); }","goal":"Script","category":"targeted-boundary","expected":false,"nodeMessage":"Unexpected reserved word"}
+{"input":"class A { static field = ({m(){return await;}}); }","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"class A { static field = class { field = await; }; }","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"class A { static { class B { field = await; } } }","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"const f = async (a = () => await) => a;","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"const f = async (a = (await) => 1) => a;","goal":"Script","category":"targeted-boundary","expected":false,"nodeMessage":"'await' is not a valid identifier name in an async function"}
+{"input":"const f = async (a = class await {}) => a;","goal":"Script","category":"targeted-boundary","expected":false,"nodeMessage":"'await' is not a valid identifier name in an async function"}
+{"input":"const f = async (a = class { field = await; }) => a;","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"for (let f = async () => key in object;;) {}","goal":"Script","category":"targeted-boundary","expected":false,"nodeMessage":"for-in loop variable declaration may not have an initializer."}
+{"input":"for (let f = (async () => key in object);;) {}","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"function* f() { for (let i = yield key in source;;) {} }","goal":"Script","category":"targeted-boundary","expected":false,"nodeMessage":"for-in loop variable declaration may not have an initializer."}
+{"input":"function* f() { for (let i = (yield (key in source));;) {} }","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"async function f() { for (let i = await key in source;;) {} }","goal":"Script","category":"targeted-boundary","expected":false,"nodeMessage":"for-in loop variable declaration may not have an initializer."}
+{"input":"async function f() { for (let i = (await (key in source));;) {} }","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"async\nfunction f() {} /regexp/.test(value);","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"function* f() {} /regexp/.test(value);","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"async function* f() {} /regexp/.test(value);","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"const f = async function* () {} / divisor;","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"const f = async () => /regexp/;","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"const object = { async run() {} } / divisor;","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"async: while (ready) { break async; }","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"async(value); async(value, other); async({run(){}});","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"const object = {\\u0061sync run(){}};","goal":"Script","category":"targeted-boundary","expected":false,"nodeMessage":"Keyword must not contain escaped characters"}
+{"input":"const object = {async \\u0072un(){await task;}};","goal":"Script","category":"targeted-boundary","expected":true}
+{"input":"const object = {\\u0067et value(){}};","goal":"Script","category":"targeted-boundary","expected":false,"nodeMessage":"Keyword must not contain escaped characters"}
+{"input":"const object = {get \\u0076alue(){}};","goal":"Script","category":"targeted-boundary","expected":true}

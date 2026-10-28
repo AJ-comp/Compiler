@@ -1,0 +1,302 @@
+{
+  "generator": "GNU Bison 3.8.2 / Win flex-bison 2.5.25",
+  "tableType": "lalr",
+  "input": "a",
+  "reports": {
+    "explicit-epsilon": {
+      "accepted": true,
+      "trace": [
+        {
+          "state": 0,
+          "token": "ID",
+          "action": "reduce",
+          "lhs": "G1",
+          "rhs": []
+        },
+        {
+          "state": 2,
+          "token": "ID",
+          "action": "shift",
+          "next": 4
+        },
+        {
+          "state": 4,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "G5",
+          "rhs": []
+        },
+        {
+          "state": 8,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "R",
+          "rhs": [
+            "ID",
+            "G5"
+          ]
+        },
+        {
+          "state": 7,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "G4",
+          "rhs": []
+        },
+        {
+          "state": 12,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "P",
+          "rhs": [
+            "R",
+            "G4"
+          ]
+        },
+        {
+          "state": 6,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "G2",
+          "rhs": []
+        },
+        {
+          "state": 10,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "C",
+          "rhs": [
+            "P",
+            "G2"
+          ]
+        },
+        {
+          "state": 5,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "S",
+          "rhs": [
+            "G1",
+            "C"
+          ]
+        },
+        {
+          "state": 1,
+          "token": "$end",
+          "action": "shift",
+          "next": 3
+        },
+        {
+          "state": 3,
+          "token": "$end",
+          "action": "accept"
+        }
+      ]
+    },
+    "plain-bnf": {
+      "accepted": true,
+      "trace": [
+        {
+          "state": 0,
+          "token": "ID",
+          "action": "shift",
+          "next": 1
+        },
+        {
+          "state": 1,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "R",
+          "rhs": [
+            "ID"
+          ]
+        },
+        {
+          "state": 5,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "P",
+          "rhs": [
+            "R"
+          ]
+        },
+        {
+          "state": 4,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "C",
+          "rhs": [
+            "P"
+          ]
+        },
+        {
+          "state": 3,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "S",
+          "rhs": [
+            "C"
+          ]
+        },
+        {
+          "state": 2,
+          "token": "$end",
+          "action": "shift",
+          "next": 7
+        },
+        {
+          "state": 7,
+          "token": "$end",
+          "action": "accept"
+        }
+      ]
+    },
+    "zero-conflict-epsilon": {
+      "accepted": true,
+      "trace": [
+        {
+          "state": 0,
+          "token": "'a'",
+          "action": "reduce",
+          "lhs": "G1",
+          "rhs": []
+        },
+        {
+          "state": 2,
+          "token": "'a'",
+          "action": "shift",
+          "next": 4
+        },
+        {
+          "state": 4,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "G5",
+          "rhs": []
+        },
+        {
+          "state": 10,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "R",
+          "rhs": [
+            "'a'",
+            "G5"
+          ]
+        },
+        {
+          "state": 8,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "G4",
+          "rhs": []
+        },
+        {
+          "state": 13,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "P",
+          "rhs": [
+            "R",
+            "G4"
+          ]
+        },
+        {
+          "state": 7,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "G2",
+          "rhs": []
+        },
+        {
+          "state": 12,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "C",
+          "rhs": [
+            "P",
+            "G2"
+          ]
+        },
+        {
+          "state": 6,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "S",
+          "rhs": [
+            "G1",
+            "C"
+          ]
+        },
+        {
+          "state": 1,
+          "token": "$end",
+          "action": "shift",
+          "next": 3
+        },
+        {
+          "state": 3,
+          "token": "$end",
+          "action": "accept"
+        }
+      ]
+    },
+    "tiny-bnf": {
+      "accepted": true,
+      "trace": [
+        {
+          "state": 0,
+          "token": "'a'",
+          "action": "reduce",
+          "lhs": "G",
+          "rhs": []
+        },
+        {
+          "state": 2,
+          "token": "'a'",
+          "action": "shift",
+          "next": 5
+        },
+        {
+          "state": 5,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "R",
+          "rhs": [
+            "'a'"
+          ]
+        },
+        {
+          "state": 8,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "C",
+          "rhs": [
+            "R"
+          ]
+        },
+        {
+          "state": 7,
+          "token": "$end",
+          "action": "reduce",
+          "lhs": "S",
+          "rhs": [
+            "G",
+            "C"
+          ]
+        },
+        {
+          "state": 1,
+          "token": "$end",
+          "action": "shift",
+          "next": 3
+        },
+        {
+          "state": 3,
+          "token": "$end",
+          "action": "accept"
+        }
+      ]
+    }
+  }
+}

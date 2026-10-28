@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "syntaxOnly": true,
+  "nodeVersion": "v24.12.0",
+  "input": "artifacts/ecmascript-audit/static/asi-matrix.jsonl",
+  "total": 980,
+  "expectAccept": 938,
+  "expectReject": 42,
+  "execution": "vm.Script constructor only; no source execution"
+}

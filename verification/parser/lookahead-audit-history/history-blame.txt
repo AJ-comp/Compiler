@@ -1,0 +1,54 @@
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 237)         private void CalculateLookAhead()
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 238)         {
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 239)             foreach (var item in GetStateSetHasReachedHandle())
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 240)             {
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 241)                 foreach (var reduceItem in item.ReachedHandleItem) LookAhead(item, reduceItem);
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 242)             }
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 243)         }
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 244) 
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 245) 
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 246)         private TerminalSet LookAhead(CanonicalState state, LRItem item)
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 247)         {
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 248)             if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 249)             LookAheadTable.Add((state.StateNumber, item), new TerminalSet());
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 250) 
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 251)             var result = new TerminalSet();
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 252)             var newMarkSymbol = item.SingleNT.ToNonTerminal();
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 253) 
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 254)             if (newMarkSymbol == virtualStartSymbol)
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 255)             {
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 256)                 result.Add(new EndMarker());
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 257)                 LookAheadTable[(state.StateNumber, item)] = result;
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 258)                 return result;
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 259)             }
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 260) 
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 261)             // ex :
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 262)             // item : R -> aL.
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 263)             // Pred func inner : R -> .aL
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 264)             // newMarkSymbol : R
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 265)             // newState: X -> .R, Y -> ac.R
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 266) 
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 267)             var predStates = PredEx(state, item);
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 268) 
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 269)             foreach (var predState in predStates)
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 270)             {
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 271)                 foreach (var newLRItem in predState)
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 272)                 {
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 273)                     if (newLRItem.MarkSymbol != newMarkSymbol) continue;
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 274) 
+b10a9aea Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (AJ-comp 2022-04-27 275)                     var alpha2 = _ffAnalyzer.First(newLRItem.SymbolListAfterMarkSymbol);
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 276)                     if (alpha2.Contains(new Epsilon()) || alpha2.Count == 0)
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 277)                     {
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 278)                         var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 279)                                                    ? LookAheadTable[(predState.StateNumber, newLRItem)]
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 280)                                                    : LookAhead(predState, newLRItem);
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 281) 
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 282)                         result.UnionWith(alpha2.RingSum(laTerminalSet));
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 283)                     }
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 284)                     else result.UnionWith(alpha2);
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 285)                 }
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 286)             }
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 287) 
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 288)             LookAheadTable[(state.StateNumber, item)] = result;
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 289) 
+481dd40f Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs (JJW     2022-01-24 290)             return result;

@@ -1,0 +1,412 @@
+[
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const pattern = /(?<name>a)\\k<name>/u;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "let value = /[\\p{ASCII}&&\\p{Letter}]/v;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "/a|b/; /[\\q{ab|cd}]/v;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "if (value) /(?i:a)/.test(value);"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "if (value) {} /(?<x>a)|(?<x>b)/u.test(value);"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "function f() { return /(?<=prefix)value/u; }"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const f = () => /(?:a{2})/;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const f = () => { return /\\p{RGI_Emoji}/v; };"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const f = () => {}; /(?i:a)/;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const f = ({value = /[a-z]/u} = {}) => value;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const [first = /a+/u] = values;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "let {value: local = /[a--b]/v} = object;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "class A { field = /[a-z]/u; static value = /(?-i:a)/i; }"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "class A { #value = /(?<name>a)/u; method() { return this.#value; } }"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "class A { static { /[\\q{ab}]/v; } }"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "class A extends Base { method() { return /a+/; } }"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const value = `${/(?<name>a)/u}`;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "const value = tag`outer ${/[[a-z]--[aeiou]]/v} tail`;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "import(path, {with: {pattern: /[a-z]/u}});"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "for (const value of /a/.source) {}"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "for (let value = /(?:a)/; value; value = /b/) {}"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "switch (value) { case /[a-z]/u: break; default: /a/; }"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "try {} catch (error) { /a{1,2}/u; } finally { /b/; }"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "({[/a/.source]: /b/});"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "value / /(?<name>a)\\k<name>/u.source;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "value /= /a/.source;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "value\n/other/divisor;"
+  },
+  {
+    "goal": "Script",
+    "expected": true,
+    "input": "function f() { return\n/[a-z]/u; }"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const pattern = /(/;"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "let value = /\\q/u;"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "/a/; /[z-a]/u;"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "if (value) /a{3,2}/.test(value);"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "if (value) {} /(?<x>a)(?<x>b)/u.test(value);"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "function f() { return /(?g:a)/; }"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const f = () => /(?=a)*/u;"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const f = () => { return /\\P{RGI_Emoji}/v; };"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const f = () => {}; /\\k<missing>/u;"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const f = ({value = /[!!]/v} = {}) => value;"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const [first = /\\p{greek}/u] = values;"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "let {value: local = /[a&&]/v} = object;"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "class A { field = /\\8/u; }"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "class A { #value = /(?<>a)/u; }"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "class A { static { /[^\\q{ab}]/v; } }"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "class A extends Base { method() { return /a++/; } }"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const value = `${/a{2,1}/u}`;"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "const value = tag`outer ${/[\\d-a]/u} tail`;"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "import(path, {with: {pattern: /\\p{Invalid}/u}});"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "for (const value of /\\9/u.source) {}"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "for (let value = /a}/u; value; value = /b/) {}"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "switch (value) { case /[a-\\d]/u: break; }"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "try {} catch (error) { /(?-:a)/; }"
+  },
+  {
+    "goal": "Script",
+    "expected": false,
+    "input": "({[/a/.source]: /(?<a>x)(?<a>y)/});"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export const pattern = /(?<name>a)\\k<name>/u;"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export default /[\\q{ab|cd}]/v;"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export default class { field = /[a-z]/u; }"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export default function() { return /(?i:a)/; }"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export function f(value = /(?<=a)b/u) { return value; }"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "const pattern = /\\p{RGI_Emoji}/v; export {pattern};"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "import value from \"module\"; /(?<name>a)/u.test(value);"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "import \"module\"; /[a--b]/v;"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "await /(?<name>a)\\k<name>/u;"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "for await (const value of source) { /[a-z]/u; }"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "const value = import.meta.url + /a/.source;"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "import(/a/.source);"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export class A { static { /(?s:.)/; } }"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "export const f = () => /(?<name>a)|(?<name>b)/v;"
+  },
+  {
+    "goal": "Module",
+    "expected": true,
+    "input": "const value = `${/[\\p{Letter}&&\\p{ASCII}]/v}`; export {value};"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export const pattern = /(/;"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export default /[z-a]/u;"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export default class { field = /\\p{Unknown}/u; }"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export default function() { return /\\q/u; }"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export function f(value = /(?<=a)*/) { return value; }"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "const pattern = /[^\\q{ab}]/v; export {pattern};"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "import value from \"module\"; /(?<name>a)(?<name>b)/u.test(value);"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "import \"module\"; /[a&&b--c]/v;"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "await /(?<name>a)\\k<missing>/u;"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "for await (const value of source) { /[\\d-a]/u; }"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "const value = import.meta.url + /a{3,2}/.source;"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "import(/\\p{RGI_Emoji}/u.source);"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export class A { static { /(?ii:.)/; } }"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "export const f = () => /(?<name>a)(?<name>b)/v;"
+  },
+  {
+    "goal": "Module",
+    "expected": false,
+    "input": "const value = `${/\\8/u}`; export {value};"
+  }
+]

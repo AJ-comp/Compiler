@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="602e40f3-af5b-496d-921d-3ebd9db23aad" name="AhjLv@JJW-PC 2026-10-20 11:39:34" runUser="JJW-PC\AhjLv" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-20T11:39:34.6473049+09:00" queuing="2026-10-20T11:39:34.6473051+09:00" start="2026-10-20T11:39:33.9967935+09:00" finish="2026-10-20T11:39:34.6515569+09:00" />
+  <TestSettings name="default" id="215323c7-79fe-4610-88ea-70be4b08cc05">
+    <Deployment runDeploymentRoot="AhjLv_JJW-PC_2026-10-20_11_39_34" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="7bf2d231-6fc3-445a-a2d9-1a0a40baf81e" testId="d315b60b-55cb-ac8c-fc37-5338f89f6d0d" testName="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests.Repeated_parses_do_not_share_tree_nodes_or_mutable_token_annotations" computerName="JJW-PC" duration="00:00:00.0061380" startTime="2026-10-20T11:39:34.5411307+09:00" endTime="2026-10-20T11:39:34.5411308+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7bf2d231-6fc3-445a-a2d9-1a0a40baf81e" />
+    <UnitTestResult executionId="09c5885c-5667-4e0d-b6f0-1f2a160293b7" testId="e4fd7dbe-9f42-1eb0-d885-c7cd95a60085" testName="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests.An_aliased_lookahead_is_rejected_before_a_reduce_can_reuse_it" computerName="JJW-PC" duration="00:00:00.0041935" startTime="2026-10-20T11:39:34.5477971+09:00" endTime="2026-10-20T11:39:34.5477972+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="09c5885c-5667-4e0d-b6f0-1f2a160293b7" />
+    <UnitTestResult executionId="eeb90f5b-e47a-4757-9b79-a2a248f925f8" testId="c737ab96-be7c-d523-30dc-b34aab5eccd3" testName="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests.A_source_cannot_alias_a_grammar_terminal_by_its_numeric_key(anotherGrammar: True)" computerName="JJW-PC" duration="00:00:00.0018967" startTime="2026-10-20T11:39:34.5431140+09:00" endTime="2026-10-20T11:39:34.5431144+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eeb90f5b-e47a-4757-9b79-a2a248f925f8" />
+    <UnitTestResult executionId="6221d018-7a64-4bfa-85ff-78d7f0784413" testId="bc5c5e30-c58e-7996-1e8b-6c1c3dd5836b" testName="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests.Source_and_list_inputs_preserve_tree_shape_precedence_and_errors_with_or_without_logging(logging: True)" computerName="JJW-PC" duration="00:00:00.0061630" startTime="2026-10-20T11:39:34.5660068+09:00" endTime="2026-10-20T11:39:34.5660070+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6221d018-7a64-4bfa-85ff-78d7f0784413" />
+    <UnitTestResult executionId="6c1ebeed-0541-4bf7-acff-c6d99478a90f" testId="d7eeb2cc-2e5d-2777-0e34-2ed4076deae0" testName="Janglim.FrontEnd.Parsers.Tests.ParserDrivenContractTests.Null_token_text_is_a_positioned_contract_error_for_physical_tokens_and_eof(atEof: True)" computerName="JJW-PC" duration="00:00:00.0035632" startTime="2026-10-20T11:39:34.5339780+09:00" endTime="2026-10-20T11:39:34.5339781+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6c1ebeed-0541-4bf7-acff-c6d99478a90f" />
+    <UnitTestResult executionId="13cb0eda-be7e-413d-bdb0-e45bf561e73a" testId="de35e645-f48e-861f-67cb-c502cbce400b" testName="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests.Source_and_list_inputs_preserve_tree_shape_precedence_and_errors_with_or_without_logging(logging: False)" computerName="JJW-PC" duration="00:00:00.0120229" startTime="2026-10-20T11:39:34.5598111+09:00" endTime="2026-10-20T11:39:34.5598113+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="13cb0eda-be7e-413d-bdb0-e45bf561e73a" />
+    <UnitTestResult executionId="c824262f-04d3-4c09-a9f0-8cc65c7618ab" testId="17995dd4-4541-3500-b079-7340da6cf300" testName="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests.A_source_cannot_alias_a_grammar_terminal_by_its_numeric_key(anotherGrammar: False)" computerName="JJW-PC" duration="00:00:00.0004172" startTime="2026-10-20T11:39:34.5435109+09:00" endTime="2026-10-20T11:39:34.5435109+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c824262f-04d3-4c09-a9f0-8cc65c7618ab" />
+    <UnitTestResult executionId="9f5b9fc1-2b06-4f58-b056-d84104b90b1e" testId="9aae46fb-4641-ce13-2d9d-093fadd4d9ff" testName="Janglim.FrontEnd.Parsers.Tests.ParserDrivenContractTests.Null_token_text_is_a_positioned_contract_error_for_physical_tokens_and_eof(atEof: False)" computerName="JJW-PC" duration="00:00:00.0385951" startTime="2026-10-20T11:39:34.5308785+09:00" endTime="2026-10-20T11:39:34.5308877+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9f5b9fc1-2b06-4f58-b056-d84104b90b1e" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.ParserDrivenContractTests.Null_token_text_is_a_positioned_contract_error_for_physical_tokens_and_eof(atEof: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\tests\parse.frontend.parsers.tests\bin\release\net8.0\parse.frontend.parsers.tests.dll" id="9aae46fb-4641-ce13-2d9d-093fadd4d9ff">
+      <Execution id="9f5b9fc1-2b06-4f58-b056-d84104b90b1e" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.ParserDrivenContractTests" name="Null_token_text_is_a_positioned_contract_error_for_physical_tokens_and_eof" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests.Source_and_list_inputs_preserve_tree_shape_precedence_and_errors_with_or_without_logging(logging: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\tests\parse.frontend.parsers.tests\bin\release\net8.0\parse.frontend.parsers.tests.dll" id="bc5c5e30-c58e-7996-1e8b-6c1c3dd5836b">
+      <Execution id="6221d018-7a64-4bfa-85ff-78d7f0784413" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests" name="Source_and_list_inputs_preserve_tree_shape_precedence_and_errors_with_or_without_logging" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests.Source_and_list_inputs_preserve_tree_shape_precedence_and_errors_with_or_without_logging(logging: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\tests\parse.frontend.parsers.tests\bin\release\net8.0\parse.frontend.parsers.tests.dll" id="de35e645-f48e-861f-67cb-c502cbce400b">
+      <Execution id="13cb0eda-be7e-413d-bdb0-e45bf561e73a" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests" name="Source_and_list_inputs_preserve_tree_shape_precedence_and_errors_with_or_without_logging" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests.A_source_cannot_alias_a_grammar_terminal_by_its_numeric_key(anotherGrammar: False)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\tests\parse.frontend.parsers.tests\bin\release\net8.0\parse.frontend.parsers.tests.dll" id="17995dd4-4541-3500-b079-7340da6cf300">
+      <Execution id="c824262f-04d3-4c09-a9f0-8cc65c7618ab" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests" name="A_source_cannot_alias_a_grammar_terminal_by_its_numeric_key" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests.A_source_cannot_alias_a_grammar_terminal_by_its_numeric_key(anotherGrammar: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\tests\parse.frontend.parsers.tests\bin\release\net8.0\parse.frontend.parsers.tests.dll" id="c737ab96-be7c-d523-30dc-b34aab5eccd3">
+      <Execution id="eeb90f5b-e47a-4757-9b79-a2a248f925f8" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests" name="A_source_cannot_alias_a_grammar_terminal_by_its_numeric_key" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.ParserDrivenContractTests.Null_token_text_is_a_positioned_contract_error_for_physical_tokens_and_eof(atEof: True)" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\tests\parse.frontend.parsers.tests\bin\release\net8.0\parse.frontend.parsers.tests.dll" id="d7eeb2cc-2e5d-2777-0e34-2ed4076deae0">
+      <Execution id="6c1ebeed-0541-4bf7-acff-c6d99478a90f" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.ParserDrivenContractTests" name="Null_token_text_is_a_positioned_contract_error_for_physical_tokens_and_eof" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests.An_aliased_lookahead_is_rejected_before_a_reduce_can_reuse_it" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\tests\parse.frontend.parsers.tests\bin\release\net8.0\parse.frontend.parsers.tests.dll" id="e4fd7dbe-9f42-1eb0-d885-c7cd95a60085">
+      <Execution id="09c5885c-5667-4e0d-b6f0-1f2a160293b7" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests" name="An_aliased_lookahead_is_rejected_before_a_reduce_can_reuse_it" />
+    </UnitTest>
+    <UnitTest name="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests.Repeated_parses_do_not_share_tree_nodes_or_mutable_token_annotations" storage="c:\users\ahjlv\onedrive\바탕 화면\개인 프로젝트\ajpgs\tests\parse.frontend.parsers.tests\bin\release\net8.0\parse.frontend.parsers.tests.dll" id="d315b60b-55cb-ac8c-fc37-5338f89f6d0d">
+      <Execution id="7bf2d231-6fc3-445a-a2d9-1a0a40baf81e" />
+      <TestMethod codeBase="C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Janglim.FrontEnd.Parsers.Tests.ParserDrivenRegressionTests" name="Repeated_parses_do_not_share_tree_nodes_or_mutable_token_annotations" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="d315b60b-55cb-ac8c-fc37-5338f89f6d0d" executionId="7bf2d231-6fc3-445a-a2d9-1a0a40baf81e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e4fd7dbe-9f42-1eb0-d885-c7cd95a60085" executionId="09c5885c-5667-4e0d-b6f0-1f2a160293b7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c737ab96-be7c-d523-30dc-b34aab5eccd3" executionId="eeb90f5b-e47a-4757-9b79-a2a248f925f8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bc5c5e30-c58e-7996-1e8b-6c1c3dd5836b" executionId="6221d018-7a64-4bfa-85ff-78d7f0784413" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d7eeb2cc-2e5d-2777-0e34-2ed4076deae0" executionId="6c1ebeed-0541-4bf7-acff-c6d99478a90f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="de35e645-f48e-861f-67cb-c502cbce400b" executionId="13cb0eda-be7e-413d-bdb0-e45bf561e73a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17995dd4-4541-3500-b079-7340da6cf300" executionId="c824262f-04d3-4c09-a9f0-8cc65c7618ab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9aae46fb-4641-ce13-2d9d-093fadd4d9ff" executionId="9f5b9fc1-2b06-4f58-b056-d84104b90b1e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="목록에 없는 결과" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="로드된 모든 결과" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="8" executed="8" passed="8" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)&#xD;
+[xUnit.net 00:00:00.06]   Discovering: Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:00.17]   Discovered:  Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:00.17]   Starting:    Parse.FrontEnd.Parsers.Tests&#xD;
+[xUnit.net 00:00:00.27]   Finished:    Parse.FrontEnd.Parsers.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

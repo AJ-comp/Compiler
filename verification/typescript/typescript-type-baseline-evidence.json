@@ -1,0 +1,828 @@
+{
+  "RunMode": "Frozen original baseline DLL, dotnet vstest; no compilation or source changes",
+  "Filter": "FullyQualifiedName~TypeScriptTypeTests",
+  "OriginalCoreSHA256": "FB389B9756053AC05436A8265E3A022B733B8BE901D8088BC406148F100CC205",
+  "TestDLLSHA256": "7954BF7A7078D54FAD6A57671C4AAD02E685E2D4A2BC90ACE50DFA9B9F30798D",
+  "CurrentTypeScriptTypeTestsSHA256": "1C59543D58AA7A6FB4C05774EC31C8E6B6199F7F2BA63EFFB1014B8EF0911932",
+  "SourceChecksumFoundInFrozenPortablePDB": true,
+  "Total": 110,
+  "Passed": 67,
+  "Failed": 43,
+  "Skipped": 0,
+  "Methods": [
+    {
+      "Method": "Concrete_tree_keeps_type_roles_and_original_source_positions",
+      "Total": 1,
+      "Passed": 0,
+      "Failed": 1
+    },
+    {
+      "Method": "Function_construct_call_and_predicate_types",
+      "Total": 16,
+      "Passed": 5,
+      "Failed": 11
+    },
+    {
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Total": 20,
+      "Passed": 20,
+      "Failed": 0
+    },
+    {
+      "Method": "Mapped_template_and_import_types",
+      "Total": 11,
+      "Passed": 3,
+      "Failed": 8
+    },
+    {
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Total": 17,
+      "Passed": 6,
+      "Failed": 11
+    },
+    {
+      "Method": "Primitive_literal_and_reference_types",
+      "Total": 28,
+      "Passed": 20,
+      "Failed": 8
+    },
+    {
+      "Method": "Tuple_and_object_members",
+      "Total": 17,
+      "Passed": 13,
+      "Failed": 4
+    }
+  ],
+  "Tests": [
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Concrete_tree_keeps_type_roles_and_original_source_positions",
+      "Method": "Concrete_tree_keeps_type_roles_and_original_source_positions",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "Outer<Middle<Inner<User>>>",
+      "FailureMessage": "Outer<Middle<Inner<User>>>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(...args: string[]) => void\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"((input: string) => number)[]\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"() => void\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"({name}: User, [value]: [number]) => string\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "({name}: User, [value]: [number]) => string",
+      "FailureMessage": "({name}: User, [value]: [number]) => string\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(input: string) => number\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(this: Receiver, input?: string) => void\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "(this: Receiver, input?: string) => void",
+      "FailureMessage": "(this: Receiver, input?: string) => void\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value is string\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "(value: unknown) => asserts value is string",
+      "FailureMessage": "(value: unknown) => asserts value is string\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => asserts value\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "(value: unknown) => asserts value",
+      "FailureMessage": "(value: unknown) => asserts value\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {&, |, extends, [, ?, is} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"(value: unknown) => value is string\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "(value: unknown) => value is string",
+      "FailureMessage": "(value: unknown) => value is string\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"{(input: string): number; <T>(value: T): T; new ()\"···)",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "{(input: string): number; <T>(value: T): T; new (): Result}",
+      "FailureMessage": "{(input: string): number; <T>(value: T): T; new (): Result}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"{check(): this is Derived}\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "{check(): this is Derived}",
+      "FailureMessage": "{check(): this is Derived}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"{transform<T>(input: T): T; optional?(input: strin\"···)",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "{transform<T>(input: T): T; optional?(input: string): void}",
+      "FailureMessage": "{transform<T>(input: T): T; optional?(input: string): void}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"<T extends Entity = User>(value: T) => T\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "<T extends Entity = User>(value: T) => T",
+      "FailureMessage": "<T extends Entity = User>(value: T) => T\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"abstract new <T>(value: T) => Container<T>\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "abstract new <T>(value: T) => Container<T>",
+      "FailureMessage": "abstract new <T>(value: T) => Container<T>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"new (input: string) => Result\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "new (input: string) => Result",
+      "FailureMessage": "new (input: string) => Result\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Function_construct_call_and_predicate_types(input: \"string | (() => number)\")",
+      "Method": "Function_construct_call_and_predicate_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"(value: string) =>\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"(value: string)\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"[name:]\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"{[K in]: T[K]}\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"{name:}\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"<T>()\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"A &\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"A |\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"abstract () => T\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"Array<>\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"Array<string\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"Array<string>>\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"import()\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"infer\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"keyof\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"new ()\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"T extends ? X : Y\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"T extends U ? X\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Malformed_type_syntax_is_rejected(input: \"typeof\")",
+      "Method": "Malformed_type_syntax_is_rejected",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"{-readonly [K in keyof T]-?: T[K]}\")",
+      "Method": "Mapped_template_and_import_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "{-readonly [K in keyof T]-?: T[K]}",
+      "FailureMessage": "{-readonly [K in keyof T]-?: T[K]}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"{[K in keyof T as `get${K}`]: T[K]}\")",
+      "Method": "Mapped_template_and_import_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "{[K in keyof T as `get${K}`]: T[K]}",
+      "FailureMessage": "{[K in keyof T as `get${K}`]: T[K]}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"{[K in keyof T]: T[K]}\")",
+      "Method": "Mapped_template_and_import_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "{[K in keyof T]: T[K]}",
+      "FailureMessage": "{[K in keyof T]: T[K]}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"{+readonly [K in keyof T]+?: T[K];}\")",
+      "Method": "Mapped_template_and_import_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "{+readonly [K in keyof T]+?: T[K];}",
+      "FailureMessage": "{+readonly [K in keyof T]+?: T[K];}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"{readonly [K in keyof T]?: T[K]}\")",
+      "Method": "Mapped_template_and_import_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "{readonly [K in keyof T]?: T[K]}",
+      "FailureMessage": "{readonly [K in keyof T]?: T[K]}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"`${A}-${B}-${C}`\")",
+      "Method": "Mapped_template_and_import_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "`${A}-${B}-${C}`",
+      "FailureMessage": "`${A}-${B}-${C}`\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"`prefix${T}suffix`\")",
+      "Method": "Mapped_template_and_import_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "`prefix${T}suffix`",
+      "FailureMessage": "`prefix${T}suffix`\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"import('library', {with: {'resolution-mode': 'impo\"···)",
+      "Method": "Mapped_template_and_import_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"import('library').Factory<User>\")",
+      "Method": "Mapped_template_and_import_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "import('library').Factory<User>",
+      "FailureMessage": "import('library').Factory<User>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"import('library').User\")",
+      "Method": "Mapped_template_and_import_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Mapped_template_and_import_types(input: \"typeof import('library')\")",
+      "Method": "Mapped_template_and_import_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"(A | B)[]\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "(A | B)[]",
+      "FailureMessage": "(A | B)[]\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"& A & B\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "& A & B",
+      "FailureMessage": "& A & B\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"| A | B\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "| A | B",
+      "FailureMessage": "| A | B\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"A | B & C\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "A | B & C",
+      "FailureMessage": "A | B & C\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"A[][]\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"keyof T\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "keyof T",
+      "FailureMessage": "keyof T\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"readonly string[]\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"T extends infer U ? U : never\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "T extends infer U ? U : never",
+      "FailureMessage": "T extends infer U ? U : never\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"T extends infer U extends string ? U : never\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "T extends infer U extends string ? U : never",
+      "FailureMessage": "T extends infer U extends string ? U : never\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"T extends U ? X : Y\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "T extends U ? X : Y",
+      "FailureMessage": "T extends U ? X : Y\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"T extends U ? X extends Y ? A : B : C\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "T extends U ? X extends Y ? A : B : C",
+      "FailureMessage": "T extends U ? X extends Y ? A : B : C\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"T[K]\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "T[K]",
+      "FailureMessage": "T[K]\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"T[keyof T][number][]\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "T[keyof T][number][]",
+      "FailureMessage": "T[keyof T][number][]\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"typeof factory<string>\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"typeof service.current\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"typeof this\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Operators_precedence_conditional_and_queries(input: \"unique symbol\")",
+      "Method": "Operators_precedence_conditional_and_queries",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"-123n\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"-42\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"'literal'\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"`literal`\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"123n\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"42\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"any.Qualified\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "any.Qualified",
+      "FailureMessage": "any.Qualified\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"any\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"Array<string>\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "Array<string>",
+      "FailureMessage": "Array<string>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"bigint\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"boolean\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"Domain.User\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "Domain.User",
+      "FailureMessage": "Domain.User\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"false\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"Map<string, Array<User>>\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "Map<string, Array<User>>",
+      "FailureMessage": "Map<string, Array<User>>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"never\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"null\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"number\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"object\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"Outer<Middle<Inner<User>>>\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "Outer<Middle<Inner<User>>>",
+      "FailureMessage": "Outer<Middle<Inner<User>>>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"string\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"symbol\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"this\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "this",
+      "FailureMessage": "this\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {&, |, extends, [, ?, is} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"true\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"Tuple<string, number,>\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "Tuple<string, number,>",
+      "FailureMessage": "Tuple<string, number,>\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {&, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"undefined\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"unknown\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"User\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "User",
+      "FailureMessage": "User\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Primitive_literal_and_reference_types(input: \"void\")",
+      "Method": "Primitive_literal_and_reference_types",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"[...Head, Last]\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "[...Head, Last]",
+      "FailureMessage": "[...Head, Last]\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"[]\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"[A,]\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "[A,]",
+      "FailureMessage": "[A,]\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"[first: A, B, ...C[]]\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "[first: A, B, ...C[]]",
+      "FailureMessage": "[first: A, B, ...C[]]\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"[name: string, count?: number, ...rest: boolean[]]\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"[string, number?, ...boolean[]]\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"[string, number]\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"{[key: string]: unknown}\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"{[Symbol.iterator](): Iterator<User>}\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Failed",
+      "InputFromFailureMessage": "{[Symbol.iterator](): Iterator<User>}",
+      "FailureMessage": "{[Symbol.iterator](): Iterator<User>}\r\nJanglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.\r\n(shift 할 수 없습니다 {., <, is, &, |, extends, [, ?} 와야 합니다)"
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"{}\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"{get value(): string; set value(input: string);}\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"{name: string; count?: number}\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"{name: string\\ncount: number}\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"{readonly [key: string]: number}\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"{readonly name: string, count: number,}\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"{readonly: boolean; get: string; set: number; new:\"···)",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    },
+    {
+      "TestName": "Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptTypeTests.Tuple_and_object_members(input: \"readonly [name: string, count?: number]\")",
+      "Method": "Tuple_and_object_members",
+      "Outcome": "Passed",
+      "InputFromFailureMessage": null,
+      "FailureMessage": null
+    }
+  ]
+}

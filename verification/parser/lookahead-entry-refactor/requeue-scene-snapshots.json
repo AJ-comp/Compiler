@@ -1,0 +1,131 @@
+[
+  {
+    "number": "01",
+    "title": "둘째 경로의 A Entry를 꺼냅니다.",
+    "subtitle": "source = pending.Dequeue(); source.IsQueued = false;",
+    "mobile_title": [
+      "둘째 경로의 A Entry를",
+      "큐에서 꺼냅니다."
+    ],
+    "source": 0,
+    "target": 1,
+    "middle_two": false,
+    "complete_two": false,
+    "queued": [
+      false,
+      false,
+      false
+    ],
+    "pending": [
+      "s"
+    ],
+    "description": "둘째 경로의 A 시작 Entry를 꺼낸 직후입니다. 이 Entry의 LookAhead에는 f가 있고, 중간과 완료 Entry에는 아직 e만 있습니다. 세 Entry의 IsQueued는 false이며 pending에는 S 완료 Entry 참조 하나가 남아 있습니다."
+  },
+  {
+    "number": "02",
+    "title": "f를 중간 Entry에 합칩니다.",
+    "subtitle": "target.LookAhead.UnionWith(source.LookAhead);",
+    "mobile_title": [
+      "f를 중간 Entry의",
+      "LookAhead에 합칩니다."
+    ],
+    "source": 0,
+    "target": 1,
+    "middle_two": true,
+    "complete_two": false,
+    "queued": [
+      false,
+      false,
+      false
+    ],
+    "pending": [
+      "s"
+    ],
+    "description": "둘째 경로 Entry의 f를 중간 Entry의 LookAhead에 합쳤습니다. 중간 집합의 크기는 1에서 2로 늘었지만 IsQueued는 아직 false입니다. 완료 Entry는 e만 가지고 있으며 pending에는 S 완료 Entry 참조 하나만 있습니다."
+  },
+  {
+    "number": "03",
+    "title": "중간 Entry를 큐에 다시 넣습니다.",
+    "subtitle": "target.IsQueued = true; pending.Enqueue(target);",
+    "mobile_title": [
+      "중간 Entry를",
+      "큐에 다시 넣습니다."
+    ],
+    "source": 0,
+    "target": 1,
+    "middle_two": true,
+    "complete_two": false,
+    "queued": [
+      false,
+      true,
+      false
+    ],
+    "pending": [
+      "s",
+      "middle"
+    ],
+    "description": "집합이 증가했고 큐 밖에 있던 중간 Entry의 IsQueued를 true로 바꾸고 pending 뒤에 등록했습니다. pending은 S 완료 Entry 참조, 중간 Entry 참조 순서입니다. 중간 Entry 참조는 위에 그려진 동일한 객체를 가리키며 완료 집합은 아직 e뿐입니다."
+  },
+  {
+    "number": "04",
+    "title": "중간 Entry를 다시 꺼냅니다.",
+    "subtitle": "source = pending.Dequeue(); source.IsQueued = false;",
+    "mobile_title": [
+      "중간 Entry를",
+      "다시 꺼냅니다."
+    ],
+    "source": 1,
+    "target": 2,
+    "middle_two": true,
+    "complete_two": false,
+    "queued": [
+      false,
+      false,
+      false
+    ],
+    "pending": [],
+    "description": "먼저 앞에 있던 S 완료 Entry를 처리한 다음 중간 Entry를 꺼낸 시점입니다. source는 중간 Entry, target은 완료 Entry이며 세 Entry의 IsQueued는 false입니다. pending은 비었지만 source의 전달 작업은 진행 중입니다."
+  },
+  {
+    "number": "05",
+    "title": "완료 Entry도 갱신하고 등록합니다.",
+    "subtitle": "집합을 합친 뒤, 같은 큐 등록 조건을 적용합니다.",
+    "mobile_title": [
+      "완료 Entry도 갱신하고",
+      "큐에 등록합니다."
+    ],
+    "source": 1,
+    "target": 2,
+    "middle_two": true,
+    "complete_two": true,
+    "queued": [
+      false,
+      false,
+      true
+    ],
+    "pending": [
+      "complete"
+    ],
+    "description": "중간 Entry의 집합을 완료 Entry에 합치면 완료 Entry에도 f가 추가됩니다. 같은 큐 등록 조건에 따라 완료 Entry의 IsQueued는 true이고 pending에는 이 완료 Entry를 가리키는 참조 하나가 있습니다. 중간 Entry는 현재 처리 중이므로 IsQueued가 false입니다."
+  },
+  {
+    "number": "06",
+    "title": "완료 Entry까지 처리하면 끝납니다.",
+    "subtitle": "완료 Entry의 Dependencies가 비어 있어 추가 전달은 없습니다.",
+    "mobile_title": [
+      "완료 Entry까지",
+      "처리하면 끝납니다."
+    ],
+    "source": 2,
+    "target": null,
+    "middle_two": true,
+    "complete_two": true,
+    "queued": [
+      false,
+      false,
+      false
+    ],
+    "pending": [],
+    "description": "완료 Entry를 큐에서 꺼내 IsQueued를 false로 바꿨습니다. 이 Entry의 Dependencies는 빈 목록이어서 추가 전달은 없습니다. 현재 Entry 처리가 끝났고 pending도 비었으므로 계산이 종료됩니다. 완료 Entry의 LookAhead에는 e와 f가 모두 있습니다."
+  }
+]

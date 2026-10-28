@@ -1,0 +1,3 @@
+  복원할 프로젝트를 확인하는 중...
+  C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\templates\consumer\TemplateConsumer.csproj을(를) 271밀리초 동안 복원했습니다.
+PASS: 15 NuGet consumer cases; four goals, template helpers and embedded EBNF loaded from the package; zero grammar conflicts.

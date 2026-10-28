@@ -1,0 +1,533 @@
+  복원할 프로젝트를 확인하는 중...
+  C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\tests\Janglim.Mcp.Tests\Janglim.Mcp.Tests.csproj을(를) 1.57초 동안 복원했습니다.
+  복원할 8 프로젝트의 7이(가) 최신 상태입니다.
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Release\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Release\netstandard2.1\Parse.dll
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Release\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Release\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Janglim.Mcp -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\services\Janglim.Mcp\bin\Release\net10.0\Janglim.Mcp.dll
+  Janglim.Mcp.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\tests\Janglim.Mcp.Tests\bin\Release\net10.0\Janglim.Mcp.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\tests\Janglim.Mcp.Tests\bin\Release\net10.0\Janglim.Mcp.Tests.dll(.NETCoreApp,Version=v10.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 10.0.13)
+[xUnit.net 00:00:00.38]   Discovering: Janglim.Mcp.Tests
+[xUnit.net 00:00:00.51]   Discovered:  Janglim.Mcp.Tests
+[xUnit.net 00:00:00.51]   Starting:    Janglim.Mcp.Tests
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: "Start : 'a'? ;", input: "", expected: True) [1 s]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: "Start : 'a'? ;", input: " \t\r\n", expected: True) [3 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: "Start : 'a'? ; comment := Comment \"/\\*[\\s\\S]*?"···, input: " /* only a comment */ ", expected: True) [3 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: "Start : 'a' ; comment := Comment \"/\\*[\\s\\S]*?\"···, input: " /* only a comment */ ", expected: False) [18 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: "Start : 'a' ;", input: "", expected: False) [1 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_uses_the_parse_table_to_decide_empty_or_trivia_only_inputs(grammar: "Start : 'a' ;", input: " \t\r\n", expected: False) [< 1 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: "if $name;", firstSymbol: "if", identifierSymbol: "id", identifierText: "$name", identifierStart: 3) [13 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: "ifx;", firstSymbol: "id", identifierSymbol: "id", identifierText: "ifx", identifierStart: 0) [1 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: "if$;", firstSymbol: "id", identifierSymbol: "id", identifierText: "if$", identifierStart: 0) [< 1 ms]
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\AhjLv\OneDrive\���� ȭ��\���� ������Ʈ\AJPGS\services\Janglim.Mcp
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0), Client (janglim-integration-tests 1.0) method 'initialize' request handler completed in 25.248ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: "if value;", firstSymbol: "if", identifierSymbol: "id", identifierText: "value", identifierStart: 3) [< 1 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: "$name;", firstSymbol: "id", identifierSymbol: "id", identifierText: "$name", identifierStart: 0) [< 1 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: "name$;", firstSymbol: "id", identifierSymbol: "id", identifierText: "name$", identifierStart: 0) [1 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Engine_returns_complete_dollar_identifiers_and_keeps_keywords_reserved(input: "if name$;", firstSymbol: "if", identifierSymbol: "id", identifierText: "name$", identifierStart: 3) [1 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Regex_execution_timeout_cannot_pass_a_negative_grammar_test [1 s]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Zero_length_token_matches_keep_the_invalid_grammar_diagnostic_contract(grammar: "Start : id ; id := \"x*\" ;", input: "y") [1 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Zero_length_token_matches_keep_the_invalid_grammar_diagnostic_contract(grammar: "Start : id ; id := \"(?=x)\" ;", input: "x") [1 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Physical_end_marker_in_user_input_still_reports_the_reserved_marker_diagnostic [1 ms]
+  통과 Janglim.Mcp.Tests.MaximalMunchEngineTests.Regex_execution_timeout_is_a_runtime_limit_and_does_not_break_the_next_request [997 ms]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 2887.9647ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.C11CoreHttpTests.Unterminated_block_comments_are_positioned_lexical_errors_instead_of_operators(input: "int value; /* unterminated") [2 s]
+  통과 Janglim.Mcp.Tests.WorkerLifecycleTests.Deadline_terminates_synchronous_regex_work_and_allows_the_next_job [6 s]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 2552.755ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.C11CoreHttpTests.Unterminated_block_comments_are_positioned_lexical_errors_instead_of_operators(input: "int f(void) { return 1/*x; }") [2 s]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "validate_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 2665.3563ms.
+  통과 Janglim.Mcp.Tests.WorkerLifecycleTests.Cancellation_stops_the_worker_and_releases_its_slot [3 s]
+  통과 Janglim.Mcp.Tests.C11CoreHttpTests.Canonical_C_profile_compiles_without_conflicts_within_service_limits [2 s]
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 2133.6506ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 2461.5777ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 2534.0064ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1939.4431ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1456.6455ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1575.5152ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1175.7476ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1274.5885ms.
+  통과 Janglim.Mcp.Tests.C11CoreHttpTests.Entire_canonical_C_corpus_passes_in_bounded_real_worker_batches [14 s]
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1845.3399ms.
+  통과 Janglim.Mcp.Tests.C11CoreHttpTests.C_literals_remain_whole_positioned_tokens_and_comments_are_skipped [1 s]
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 2046.2915ms.
+  통과 Janglim.Mcp.Tests.C11CoreHttpTests.C_tree_binds_else_to_the_nearest_unbraced_if [2 s]
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/list' request handler completed in 13.2314ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1.6231ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.5835ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2521ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.195ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.308ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2213ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1918ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2417ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2084ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2796ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2505ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.3288ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.5174ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2327ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2028ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.3351ms.
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Preset_tools_are_discoverable_read_only_closed_world_and_idempotent [22 ms]
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: " ") [9 ms]
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: "\t\r\n") [4 ms]
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: "../../grammars/c/c11-core.ebnf") [4 ms]
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: "C11-CORE") [7 ms]
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: "c11-core ") [5 ms]
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: "../c11-core") [4 ms]
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: "missing-preset") [5 ms]
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: null) [6 ms]
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2594ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.3179ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2479ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.1791ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2898ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.2451ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 5.9737ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: "C:\\Windows\\win.ini") [4 ms]
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: "") [3 ms]
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Unknown_or_invalid_ids_return_a_generic_bounded_diagnostic_without_loading_files(grammarId: "/etc/passwd") [5 ms]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 2111.7495ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.8406ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.644ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1998.6225ms.
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Editing_a_fetched_copy_changes_only_that_request_and_other_clients_get_the_unchanged_baseline [4 s]
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "list_grammars" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 1.6605ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.4762ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "validate_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 2076.5058ms.
+  통과 Janglim.Mcp.Tests.GrammarPresetHttpTests.Listing_and_fetching_return_the_canonical_versioned_scoped_grammar_with_matching_hash [2 s]
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+fail: ModelContextProtocol.Server.McpServer[1433779783]
+      "run_tests" threw an unhandled exception.
+      System.Text.Json.JsonException: JSON deserialization for type 'Janglim.Mcp.GrammarTestCase' was missing required properties including: 'expectSuccess'.
+         at System.Text.Json.ThrowHelper.ThrowJsonException_JsonRequiredPropertyMissing(JsonTypeInfo parent, BitArray assignedOrNotRequiredPropertiesSet)
+         at System.Text.Json.Serialization.Converters.ObjectWithParameterizedConstructorConverter`1.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value)
+         at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, TCollection& value)
+         at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, T& value, JsonSerializerOptions options, ReadStack& state)
+         at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.DeserializeAsObject(Utf8JsonReader& reader, ReadStack& state)
+         at System.Text.Json.JsonSerializer.Deserialize(JsonElement element, JsonTypeInfo jsonTypeInfo)
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunctionDescriptor.<>c__DisplayClass40_0.<GetParameterMarshaller>b__3(AIFunctionArguments arguments, CancellationToken _)
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunction.InvokeCoreAsync(AIFunctionArguments arguments, CancellationToken cancellationToken)
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunction.InvokeCoreAsync(AIFunctionArguments arguments, CancellationToken cancellationToken)
+         at ModelContextProtocol.Server.AIFunctionMcpServerTool.InvokeAsync(RequestContext`1 request, CancellationToken cancellationToken)
+         at ModelContextProtocol.Server.McpServerImpl.<>c__DisplayClass85_1.<<BuildComposedCallToolHandler>g__InvokeOrdinaryPipelineAsync|1>d.MoveNext()
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 29.7369ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 855.4484ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.McpHttpTests.Missing_test_expectation_is_an_error_not_an_implicit_negative_test [35 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Untrusted_browser_origin_is_rejected_even_with_valid_credentials [5 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Requested_tree_has_connected_nodes_and_input_spans [860 ms]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 980.735ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 612.6033ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.McpHttpTests.Empty_input_is_decided_by_the_grammar(grammar: "Start : 'a' ;", expected: False) [984 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Empty_input_is_decided_by_the_grammar(grammar: "Start : 'a'? ;", expected: True) [614 ms]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 552.5014ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 0.3974ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "validate_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 484.5555ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 631.1181ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.McpHttpTests.Table_conflicts_are_reported_and_prevent_parsing [555 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Oversized_input_is_rejected_before_compilation [3 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Valid_grammar_returns_a_compiled_conflict_free_report [487 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Regression_cases_distinguish_expected_rejection_from_failed_expectations [634 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Tools_require_authentication_but_health_remains_available(key: "unknown-key") [10 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Tools_require_authentication_but_health_remains_available(key: null) [2 ms]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "validate_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 664.1874ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 591.3947ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.McpHttpTests.Undefined_symbol_returns_actionable_grammar_diagnostics [667 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Parse_returns_tokens_without_a_tree_by_default [594 ms]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 802.1447ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 624.8756ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 597.677ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/list' request handler completed in 0.2564ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.McpHttpTests.Resource_failure_does_not_pass_a_negative_test [806 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Invalid_input_including_unknown_characters_is_rejected(input: "a +") [627 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Invalid_input_including_unknown_characters_is_rejected(input: "a @") [600 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Tools_discoverable_with_read_only_metadata_and_required_schemas [9 ms]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 763.102ms.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 830.3773ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 622.0698ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.McpHttpTests.Concurrent_different_grammars_have_isolated_parser_state [834 ms]
+  통과 Janglim.Mcp.Tests.McpHttpTests.Oversized_http_body_is_rejected_before_mcp_dispatch [4 ms]
+  통과 Janglim.Mcp.Tests.TypedTokenHttpTests.Explicit_and_default_identifier_kinds_keep_named_token_output(grammar: "Start : id ; id := \"[a-z]+\" ;") [625 ms]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 554.1067ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 655.3991ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.TypedTokenHttpTests.Explicit_and_default_identifier_kinds_keep_named_token_output(grammar: "Start : id ; id := Identifier \"[a-z]+\" ;") [556 ms]
+  통과 Janglim.Mcp.Tests.TypedTokenHttpTests.Quoted_tokens_preserve_text_and_utf16_spans_in_tokens_and_tree [659 ms]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 394.1145ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 417.4101ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "validate_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 368.1294ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "run_tests" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 468.3151ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.TypedTokenHttpTests.Unsupported_token_kind_is_a_grammar_error_for_every_tool(tool: "parse_input") [397 ms]
+  통과 Janglim.Mcp.Tests.TypedTokenHttpTests.Unsupported_token_kind_is_a_grammar_error_for_every_tool(tool: "run_tests") [419 ms]
+  통과 Janglim.Mcp.Tests.TypedTokenHttpTests.Unsupported_token_kind_is_a_grammar_error_for_every_tool(tool: "validate_grammar") [370 ms]
+  통과 Janglim.Mcp.Tests.TypedTokenHttpTests.Typed_token_regressions_distinguish_complete_quotes_from_malformed_input [471 ms]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "validate_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 2137.48ms.
+  통과 Janglim.Mcp.Tests.TypedTokenHttpTests.Typed_quoted_tokens_compile_through_the_mcp_worker [2 s]
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "parse_input" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 856.4666ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (janglim 0.1.0) method 'tools/call' request handler called.
+  통과 Janglim.Mcp.Tests.TypedTokenHttpTests.Escaped_quotes_and_backslashes_remain_in_the_returned_token_text [861 ms]
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "validate_grammar" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (janglim 0.1.0) method 'tools/call' request handler completed in 654.5712ms.
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:51.33]   Finished:    Janglim.Mcp.Tests
+  통과 Janglim.Mcp.Tests.TypedTokenHttpTests.Invalid_typed_regex_preserves_the_invalid_regex_diagnostic_contract [658 ms]
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\class-extensions-20261028-155659-971\mcp-final.trx
+
+테스트를 실행했습니다.
+총 테스트 수: 69
+     통과: 69
+ 총 시간: 53.3913 초

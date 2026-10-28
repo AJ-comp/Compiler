@@ -1,0 +1,1212 @@
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Release\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Release\netstandard2.1\Parse.dll
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Release\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Release\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)
+[xUnit.net 00:00:01.93]   Discovering: Parse.FrontEnd.Parsers.Tests
+[xUnit.net 00:00:03.14]   Discovered:  Parse.FrontEnd.Parsers.Tests
+[xUnit.net 00:00:03.15]   Starting:    Parse.FrontEnd.Parsers.Tests
+[xUnit.net 00:00:35.54]       let result = value satisfies User as Named;
+[xUnit.net 00:00:35.54]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.54]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.54]       Stack Trace:
+[xUnit.net 00:00:35.54]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.54]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.54]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:35.54]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+[xUnit.net 00:00:35.54]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User as Named;") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User as Named;") [32 s]
+  오류 메시지:
+   let result = value satisfies User as Named;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+[xUnit.net 00:00:35.55]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = [input as User, other satisfies Named"···) [FAIL]
+[xUnit.net 00:00:35.56]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as T extends U ? X : Y;") [FAIL]
+[xUnit.net 00:00:35.57]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User & Named;") [FAIL]
+[xUnit.net 00:00:35.58]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as readonly string[];") [FAIL]
+[xUnit.net 00:00:35.55]       let result = [input as User, other satisfies Named];
+[xUnit.net 00:00:35.55]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.55]       (shift 할 수 없습니다 {], ,} 와야 합니다)
+[xUnit.net 00:00:35.55]       Stack Trace:
+[xUnit.net 00:00:35.55]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.55]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.55]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.55]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.56]       let result = value as T extends U ? X : Y;
+[xUnit.net 00:00:35.56]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.56]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.56]       Stack Trace:
+[xUnit.net 00:00:35.56]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.56]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.56]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.56]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.57]       let result = value satisfies User & Named;
+[xUnit.net 00:00:35.57]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.57]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.57]       Stack Trace:
+[xUnit.net 00:00:35.57]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.57]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.57]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.57]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.58]       let result = value as readonly string[];
+[xUnit.net 00:00:35.58]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.58]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.58]       Stack Trace:
+[xUnit.net 00:00:35.58]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.58]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.58]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.58]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.59]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as number == other;") [FAIL]
+[xUnit.net 00:00:35.59]       let result = value as number == other;
+[xUnit.net 00:00:35.59]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.59]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.59]       Stack Trace:
+[xUnit.net 00:00:35.59]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.59]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.60]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value as number) / divisor;") [FAIL]
+[xUnit.net 00:00:35.59]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.59]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.60]       let result = (value as number) / divisor;
+[xUnit.net 00:00:35.60]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.60]       (shift 할 수 없습니다 {), ,} 와야 합니다)
+[xUnit.net 00:00:35.60]       Stack Trace:
+[xUnit.net 00:00:35.60]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.60]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.60]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.60]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.62]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as User satisfies Named;") [FAIL]
+[xUnit.net 00:00:35.62]       let result = value as User satisfies Named;
+[xUnit.net 00:00:35.62]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.62]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.62]       Stack Trace:
+[xUnit.net 00:00:35.62]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.62]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.62]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.62]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.63]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = flag && value as User;") [FAIL]
+[xUnit.net 00:00:35.63]       let result = flag && value as User;
+[xUnit.net 00:00:35.63]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.63]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.63]       Stack Trace:
+[xUnit.net 00:00:35.63]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.63]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.63]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.63]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.64]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as number + other;") [FAIL]
+[xUnit.net 00:00:35.64]       let result = value as number + other;
+[xUnit.net 00:00:35.64]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.64]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.64]       Stack Trace:
+[xUnit.net 00:00:35.64]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.64]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.64]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.64]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = [input as User, other satisfies Named"···) [15 ms]
+  오류 메시지:
+   let result = [input as User, other satisfies Named];
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {], ,} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as T extends U ? X : Y;") [9 ms]
+  오류 메시지:
+   let result = value as T extends U ? X : Y;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User & Named;") [9 ms]
+  오류 메시지:
+   let result = value satisfies User & Named;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as readonly string[];") [8 ms]
+  오류 메시지:
+   let result = value as readonly string[];
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as number == other;") [9 ms]
+  오류 메시지:
+   let result = value as number == other;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value as number) / divisor;") [9 ms]
+  오류 메시지:
+   let result = (value as number) / divisor;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {), ,} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as User satisfies Named;") [21 ms]
+  오류 메시지:
+   let result = value as User satisfies Named;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = flag && value as User;") [9 ms]
+  오류 메시지:
+   let result = flag && value as User;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as number + other;") [8 ms]
+  오류 메시지:
+   let result = value as number + other;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.65]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User;") [FAIL]
+[xUnit.net 00:00:35.65]       let result = value satisfies User;
+[xUnit.net 00:00:35.65]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.65]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.65]       Stack Trace:
+[xUnit.net 00:00:35.65]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.65]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.65]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.65]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.66]       let result = value as User;
+[xUnit.net 00:00:35.66]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as User;") [FAIL]
+[xUnit.net 00:00:35.66]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.66]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.66]       Stack Trace:
+[xUnit.net 00:00:35.66]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.66]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.66]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.66]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.67]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value as Handler)(argument);") [FAIL]
+[xUnit.net 00:00:35.67]       let result = (value as Handler)(argument);
+[xUnit.net 00:00:35.67]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.67]       (shift 할 수 없습니다 {), ,} 와야 합니다)
+[xUnit.net 00:00:35.67]       Stack Trace:
+[xUnit.net 00:00:35.67]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.67]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.67]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.67]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.71]       let value = input satisfies
+[xUnit.net 00:00:35.71]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input satisfies\nUser;") [FAIL]
+User;
+[xUnit.net 00:00:35.71]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.71]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.71]       Stack Trace:
+[xUnit.net 00:00:35.71]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.71]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.71]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.71]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.72]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = ({name: 'test'} as const);") [FAIL]
+[xUnit.net 00:00:35.72]       let result = ({name: 'test'} as const);
+[xUnit.net 00:00:35.72]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.72]       (shift 할 수 없습니다 {), ,} 와야 합니다)
+[xUnit.net 00:00:35.72]       Stack Trace:
+[xUnit.net 00:00:35.72]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.72]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.72]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.72]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.74]       let result = flag ? value as User : fallback;
+[xUnit.net 00:00:35.74]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = flag ? value as User : fallback;") [FAIL]
+[xUnit.net 00:00:35.74]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.74]       (shift 할 수 없습니다 {:} 와야 합니다)
+[xUnit.net 00:00:35.74]       Stack Trace:
+[xUnit.net 00:00:35.74]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.74]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.74]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.74]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.75]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value as User).name;") [FAIL]
+[xUnit.net 00:00:35.75]       let result = (value as User).name;
+[xUnit.net 00:00:35.75]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.75]       (shift 할 수 없습니다 {), ,} 와야 합니다)
+[xUnit.net 00:00:35.75]       Stack Trace:
+[xUnit.net 00:00:35.75]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.75]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.75]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.75]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User;") [8 ms]
+  오류 메시지:
+   let result = value satisfies User;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as User;") [8 ms]
+  오류 메시지:
+   let result = value as User;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value as Handler)(argument);") [9 ms]
+  오류 메시지:
+   let result = (value as Handler)(argument);
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {), ,} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input /*\n*/ as(User);") [28 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input satisfies\nUser;") [11 ms]
+  오류 메시지:
+   let value = input satisfies
+User;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = ({name: 'test'} as const);") [11 ms]
+  오류 메시지:
+   let result = ({name: 'test'} as const);
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {), ,} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = object.as + object.satisfies;") [11 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = flag ? value as User : fallback;") [10 ms]
+  오류 메시지:
+   let result = flag ? value as User : fallback;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {:} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value as User).name;") [8 ms]
+  오류 메시지:
+   let result = (value as User).name;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {), ,} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.76]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as User | undefined;") [FAIL]
+[xUnit.net 00:00:35.76]       let result = value as User | undefined;
+[xUnit.net 00:00:35.76]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.76]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.76]       Stack Trace:
+[xUnit.net 00:00:35.76]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.76]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.76]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.76]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.77]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as {name: string};") [FAIL]
+[xUnit.net 00:00:35.77]       let result = value as {name: string};
+[xUnit.net 00:00:35.77]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.77]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.77]       Stack Trace:
+[xUnit.net 00:00:35.77]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.77]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.77]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.77]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.79]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value => value) satisfies Handler;") [FAIL]
+[xUnit.net 00:00:35.79]       let result = (value => value) satisfies Handler;
+[xUnit.net 00:00:35.79]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.79]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.79]       Stack Trace:
+[xUnit.net 00:00:35.79]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.79]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.79]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.79]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.80]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies Box<User> >>> shift;") [FAIL]
+[xUnit.net 00:00:35.80]       let result = value satisfies Box<User> >>> shift;
+[xUnit.net 00:00:35.80]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.80]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.80]       Stack Trace:
+[xUnit.net 00:00:35.80]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.80]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.80]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.80]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.81]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as (() => number);") [FAIL]
+[xUnit.net 00:00:35.81]       let result = value as (() => number);
+[xUnit.net 00:00:35.81]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.81]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.81]       Stack Trace:
+[xUnit.net 00:00:35.81]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.81]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.81]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.81]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.82]       let result = object[key as string];
+[xUnit.net 00:00:35.82]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.82]       (shift 할 수 없습니다 {], ,} 와야 합니다)
+[xUnit.net 00:00:35.82]       Stack Trace:
+[xUnit.net 00:00:35.82]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = object[key as string];") [FAIL]
+[xUnit.net 00:00:35.82]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.82]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.82]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.82]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.83]       let result = value as unknown as User;
+[xUnit.net 00:00:35.83]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.83]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.83]       Stack Trace:
+[xUnit.net 00:00:35.83]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as unknown as User;") [FAIL]
+[xUnit.net 00:00:35.83]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.83]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.83]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.83]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.84]       let result = value satisfies readonly string[];
+[xUnit.net 00:00:35.84]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies readonly string[];") [FAIL]
+[xUnit.net 00:00:35.84]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.84]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.84]       Stack Trace:
+[xUnit.net 00:00:35.84]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.84]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.84]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.84]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as User | undefined;") [8 ms]
+  오류 메시지:
+   let result = value as User | undefined;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as {name: string};") [10 ms]
+  오류 메시지:
+   let result = value as {name: string};
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input\nsatisfies(User);") [11 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value => value) satisfies Handler;") [9 ms]
+  오류 메시지:
+   let result = (value => value) satisfies Handler;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies Box<User> >>> shift;") [10 ms]
+  오류 메시지:
+   let result = value satisfies Box<User> >>> shift;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as (() => number);") [8 ms]
+  오류 메시지:
+   let result = value as (() => number);
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = object[key as string];") [8 ms]
+  오류 메시지:
+   let result = object[key as string];
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {], ,} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as unknown as User;") [8 ms]
+  오류 메시지:
+   let result = value as unknown as User;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies readonly string[];") [9 ms]
+  오류 메시지:
+   let result = value satisfies readonly string[];
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.85]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User satisfies Named;") [FAIL]
+[xUnit.net 00:00:35.85]       let result = value satisfies User satisfies Named;
+[xUnit.net 00:00:35.85]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.85]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.85]       Stack Trace:
+[xUnit.net 00:00:35.85]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.85]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.85]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.85]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.86]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as Map<string, Array<User>>;") [FAIL]
+[xUnit.net 00:00:35.86]       let result = value as Map<string, Array<User>>;
+[xUnit.net 00:00:35.86]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.86]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.86]       Stack Trace:
+[xUnit.net 00:00:35.86]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.86]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.86]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.86]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.88]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies const;") [FAIL]
+[xUnit.net 00:00:35.88]       let result = value satisfies const;
+[xUnit.net 00:00:35.88]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.88]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.88]       Stack Trace:
+[xUnit.net 00:00:35.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.88]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.88]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.88]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.89]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "function f(value: unknown) { return value as User;"···) [FAIL]
+[xUnit.net 00:00:35.89]       function f(value: unknown) { return value as User; }
+[xUnit.net 00:00:35.89]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.89]       (shift 할 수 없습니다 {IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, {, [, this, ..., )} 와야 합니다)
+[xUnit.net 00:00:35.89]       Stack Trace:
+[xUnit.net 00:00:35.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.89]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.89]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.89]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.90]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input as /*\n*/ User;") [FAIL]
+[xUnit.net 00:00:35.90]       let value = input as /*
+*/ User;
+[xUnit.net 00:00:35.90]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.90]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.90]       Stack Trace:
+[xUnit.net 00:00:35.90]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.90]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.90]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.90]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.91]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = {value: input as User};") [FAIL]
+[xUnit.net 00:00:35.91]       let result = {value: input as User};
+[xUnit.net 00:00:35.91]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.91]       (shift 할 수 없습니다 {}, ,} 와야 합니다)
+[xUnit.net 00:00:35.91]       Stack Trace:
+[xUnit.net 00:00:35.91]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.91]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.91]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.91]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.92]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies {name: string};") [FAIL]
+[xUnit.net 00:00:35.92]       let result = value satisfies {name: string};
+[xUnit.net 00:00:35.92]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.92]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.92]       Stack Trace:
+[xUnit.net 00:00:35.92]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.92]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.92]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.92]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.93]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value satisfies User).name;") [FAIL]
+[xUnit.net 00:00:35.93]       let result = (value satisfies User).name;
+[xUnit.net 00:00:35.93]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.93]       (shift 할 수 없습니다 {), ,} 와야 합니다)
+[xUnit.net 00:00:35.93]       Stack Trace:
+[xUnit.net 00:00:35.93]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.93]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.93]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.93]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User satisfies Named;") [9 ms]
+  오류 메시지:
+   let result = value satisfies User satisfies Named;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as Map<string, Array<User>>;") [9 ms]
+  오류 메시지:
+   let result = value as Map<string, Array<User>>;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "for (let item = value as Item; check; step) {}") [13 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies const;") [10 ms]
+  오류 메시지:
+   let result = value satisfies const;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "function f(value: unknown) { return value as User;"···) [8 ms]
+  오류 메시지:
+   function f(value: unknown) { return value as User; }
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {IdentifierName, await, of, async, any, unknown, string, number, bigint, symbol, boolean, undefined, never, object, intrinsic, keyof, unique, readonly, infer, abstract, accessor, as, assert, asserts, constructor, declare, from, get, global, is, module, namespace, out, override, require, satisfies, set, type, using, {, [, this, ..., )} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input as /*\n*/ User;") [10 ms]
+  오류 메시지:
+   let value = input as /*
+*/ User;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = {value: input as User};") [9 ms]
+  오류 메시지:
+   let result = {value: input as User};
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {}, ,} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies {name: string};") [8 ms]
+  오류 메시지:
+   let result = value satisfies {name: string};
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = (value satisfies User).name;") [10 ms]
+  오류 메시지:
+   let result = (value satisfies User).name;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {), ,} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.94]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input as\nUser;") [FAIL]
+[xUnit.net 00:00:35.94]       let value = input as
+User;
+[xUnit.net 00:00:35.94]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.94]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.94]       Stack Trace:
+[xUnit.net 00:00:35.94]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.94]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.94]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.94]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.96]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as boolean || fallback;") [FAIL]
+[xUnit.net 00:00:35.96]       let result = value as boolean || fallback;
+[xUnit.net 00:00:35.96]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.96]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.96]       Stack Trace:
+[xUnit.net 00:00:35.96]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.96]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.96]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.96]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.98]       let result = typeof value as string;
+[xUnit.net 00:00:35.97]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = typeof value as string;") [FAIL]
+[xUnit.net 00:00:35.98]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.98]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.98]       Stack Trace:
+[xUnit.net 00:00:35.98]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.98]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.98]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.98]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.99]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as Box<User> > other;") [FAIL]
+[xUnit.net 00:00:35.99]       let result = value as Box<User> > other;
+[xUnit.net 00:00:35.99]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.99]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.99]       Stack Trace:
+[xUnit.net 00:00:35.99]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:35.99]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:35.99]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:35.99]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:35.99]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as Box<User> >> shift;") [FAIL]
+[xUnit.net 00:00:35.99]       let result = value as Box<User> >> shift;
+[xUnit.net 00:00:35.99]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:35.99]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:35.99]       Stack Trace:
+[xUnit.net 00:00:35.99]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:36.00]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:36.00]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:36.00]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.01]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as `prefix${Name}`;") [FAIL]
+[xUnit.net 00:00:36.01]       let result = value as `prefix${Name}`;
+[xUnit.net 00:00:36.01]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.01]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.01]       Stack Trace:
+[xUnit.net 00:00:36.02]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:36.02]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:36.02]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:36.02]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.02]       let result = left + right as number;
+[xUnit.net 00:00:36.02]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.02]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.02]       Stack Trace:
+[xUnit.net 00:00:36.02]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:36.02]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:36.02]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = left + right as number;") [FAIL]
+[xUnit.net 00:00:36.02]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:36.02]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input as\nUser;") [9 ms]
+  오류 메시지:
+   let value = input as
+User;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let value = input\nas(User);") [12 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as boolean || fallback;") [8 ms]
+  오류 메시지:
+   let result = value as boolean || fallback;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = typeof value as string;") [11 ms]
+  오류 메시지:
+   let result = typeof value as string;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as Box<User> > other;") [11 ms]
+  오류 메시지:
+   let result = value as Box<User> > other;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as Box<User> >> shift;") [8 ms]
+  오류 메시지:
+   let result = value as Box<User> >> shift;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "for (let item = value satisfies Item; check; step)"···) [12 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value as `prefix${Name}`;") [7 ms]
+  오류 메시지:
+   let result = value as `prefix${Name}`;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = left + right as number;") [7 ms]
+  오류 메시지:
+   let result = left + right as number;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.03]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = [1, 2] as const;") [FAIL]
+[xUnit.net 00:00:36.03]       let result = [1, 2] as const;
+[xUnit.net 00:00:36.03]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.03]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.03]       Stack Trace:
+[xUnit.net 00:00:36.03]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:36.03]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:36.03]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:36.03]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.04]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = left == value as number;") [FAIL]
+[xUnit.net 00:00:36.04]       let result = left == value as number;
+[xUnit.net 00:00:36.04]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.04]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.04]       Stack Trace:
+[xUnit.net 00:00:36.04]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:36.04]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:36.04]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:36.04]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.06]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User ? yes : no;") [FAIL]
+[xUnit.net 00:00:36.06]       let result = value satisfies User ? yes : no;
+[xUnit.net 00:00:36.06]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.06]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.06]       Stack Trace:
+[xUnit.net 00:00:36.06]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(23,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input)
+[xUnit.net 00:00:36.06]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(68,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source)
+[xUnit.net 00:00:36.06]            at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+[xUnit.net 00:00:36.06]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = [1, 2] as const;") [9 ms]
+  오류 메시지:
+   let result = [1, 2] as const;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = left == value as number;") [6 ms]
+  오류 메시지:
+   let result = left == value as number;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let as = 1; let satisfies = 2; as + satisfies;") [8 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(source: "let result = value satisfies User ? yes : no;") [6 ms]
+  오류 메시지:
+   let result = value satisfies User ? yes : no;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Accept(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 23
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 68
+   at InvokeStub_TypeScriptAsSatisfiesTests.Accepts_runtime_assertions_without_performing_type_checking(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value as const Type;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value satisfies;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = left + right as T * third;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value as T |;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = left + right satisfies T * third;") [7 ms]
+[xUnit.net 00:00:36.14]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = left < right satisfies T + third;") [FAIL]
+[xUnit.net 00:00:36.14]       An internal parser failure must not count as a rejected TypeScript program: Janglim.FrontEnd.Tokenize.ContextualLexingException: Token source failed: Unrecognized or malformed JavaScript token (source offset 18). (state 131, source offset 17, token index 4).
+[xUnit.net 00:00:36.14]        ---> Janglim.FrontEnd.Grammars.JavaScript.JavaScriptSyntaxException: Unrecognized or malformed JavaScript token (source offset 18).
+[xUnit.net 00:00:36.14]          at Janglim.FrontEnd.Grammars.JavaScript.JavaScriptGrammar.CheckedSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\JavaScript\JavaScriptGrammar.cs:line 235
+[xUnit.net 00:00:36.14]          at Janglim.FrontEnd.Grammars.TypeScript.TypeScriptTokenSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\TypeScript\TypeScriptTokenSource.cs:line 25
+[xUnit.net 00:00:36.14]          at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 54
+[xUnit.net 00:00:36.14]          --- End of inner exception stack trace ---
+[xUnit.net 00:00:36.14]          at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 57
+[xUnit.net 00:00:36.14]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(ITokenSource source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[TokenSource].cs:line 48
+[xUnit.net 00:00:36.14]       Stack Trace:
+[xUnit.net 00:00:36.14]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(35,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Reject(String input)
+[xUnit.net 00:00:36.14]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(88,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(String source)
+[xUnit.net 00:00:36.14]            at InvokeStub_TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(Object, Span`1)
+[xUnit.net 00:00:36.14]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value as <User>;") [7 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = left < right satisfies T + third;") [42 ms]
+  오류 메시지:
+   An internal parser failure must not count as a rejected TypeScript program: Janglim.FrontEnd.Tokenize.ContextualLexingException: Token source failed: Unrecognized or malformed JavaScript token (source offset 18). (state 131, source offset 17, token index 4).
+ ---> Janglim.FrontEnd.Grammars.JavaScript.JavaScriptSyntaxException: Unrecognized or malformed JavaScript token (source offset 18).
+   at Janglim.FrontEnd.Grammars.JavaScript.JavaScriptGrammar.CheckedSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\JavaScript\JavaScriptGrammar.cs:line 235
+   at Janglim.FrontEnd.Grammars.TypeScript.TypeScriptTokenSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\TypeScript\TypeScriptTokenSource.cs:line 25
+   at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 54
+   --- End of inner exception stack trace ---
+   at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 57
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(ITokenSource source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[TokenSource].cs:line 48
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Reject(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 35
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 88
+   at InvokeStub_TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value satisfies Array<>;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value as Box<User;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value satisfies T &;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value as;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value as Array<>;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = satisfies User;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = as User;") [7 ms]
+[xUnit.net 00:00:36.21]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = left < right as T + third;") [FAIL]
+[xUnit.net 00:00:36.21]       An internal parser failure must not count as a rejected TypeScript program: Janglim.FrontEnd.Tokenize.ContextualLexingException: Token source failed: Unrecognized or malformed JavaScript token (source offset 18). (state 131, source offset 17, token index 4).
+[xUnit.net 00:00:36.21]        ---> Janglim.FrontEnd.Grammars.JavaScript.JavaScriptSyntaxException: Unrecognized or malformed JavaScript token (source offset 18).
+[xUnit.net 00:00:36.21]          at Janglim.FrontEnd.Grammars.JavaScript.JavaScriptGrammar.CheckedSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\JavaScript\JavaScriptGrammar.cs:line 235
+[xUnit.net 00:00:36.21]          at Janglim.FrontEnd.Grammars.TypeScript.TypeScriptTokenSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\TypeScript\TypeScriptTokenSource.cs:line 25
+[xUnit.net 00:00:36.21]          at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 54
+[xUnit.net 00:00:36.21]          --- End of inner exception stack trace ---
+[xUnit.net 00:00:36.21]          at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 57
+[xUnit.net 00:00:36.21]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(ITokenSource source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[TokenSource].cs:line 48
+[xUnit.net 00:00:36.21]       Stack Trace:
+[xUnit.net 00:00:36.21]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs(35,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Reject(String input)
+[xUnit.net 00:00:36.21]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(88,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(String source)
+[xUnit.net 00:00:36.21]            at InvokeStub_TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(Object, Span`1)
+[xUnit.net 00:00:36.21]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.22]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left satisfies T && right;", assertionRole: "TSSatisfiesExpression", expectedOperand: "left") [FAIL]
+[xUnit.net 00:00:36.22]       left satisfies T && right;
+[xUnit.net 00:00:36.22]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.22]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.22]       Stack Trace:
+[xUnit.net 00:00:36.22]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(135,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source)
+[xUnit.net 00:00:36.22]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(104,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand)
+[xUnit.net 00:00:36.22]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:36.22]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+[xUnit.net 00:00:36.23]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "value as A satisfies B;", assertionRole: "TSSatisfiesExpression", expectedOperand: "valueasA") [FAIL]
+[xUnit.net 00:00:36.23]       value as A satisfies B;
+[xUnit.net 00:00:36.23]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.23]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.23]       Stack Trace:
+[xUnit.net 00:00:36.23]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(135,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source)
+[xUnit.net 00:00:36.23]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(104,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand)
+[xUnit.net 00:00:36.23]            at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+[xUnit.net 00:00:36.23]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.24]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left + right satisfies T;", assertionRole: "TSSatisfiesExpression", expectedOperand: "left+right") [FAIL]
+[xUnit.net 00:00:36.24]       left + right satisfies T;
+[xUnit.net 00:00:36.24]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.24]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.24]       Stack Trace:
+[xUnit.net 00:00:36.24]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(135,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source)
+[xUnit.net 00:00:36.24]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(104,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand)
+[xUnit.net 00:00:36.24]            at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+[xUnit.net 00:00:36.24]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.24]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "value as A as B;", assertionRole: "TSAsExpression", expectedOperand: "valueasA") [FAIL]
+[xUnit.net 00:00:36.24]       value as A as B;
+[xUnit.net 00:00:36.24]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.24]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.24]       Stack Trace:
+[xUnit.net 00:00:36.24]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(135,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source)
+[xUnit.net 00:00:36.24]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(104,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand)
+[xUnit.net 00:00:36.24]            at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+[xUnit.net 00:00:36.24]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.25]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left as T + right;", assertionRole: "TSAsExpression", expectedOperand: "left") [FAIL]
+[xUnit.net 00:00:36.25]       left as T + right;
+[xUnit.net 00:00:36.25]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.25]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.25]       Stack Trace:
+[xUnit.net 00:00:36.25]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(135,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source)
+[xUnit.net 00:00:36.25]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(104,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand)
+[xUnit.net 00:00:36.25]            at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+[xUnit.net 00:00:36.25]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.26]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left < right as T;", assertionRole: "TSAsExpression", expectedOperand: "left<right") [FAIL]
+[xUnit.net 00:00:36.26]       left < right as T;
+[xUnit.net 00:00:36.26]       Janglim.FrontEnd.Tokenize.ContextualLexingException: Token source failed: Unrecognized or malformed JavaScript token (source offset 5). (state 131, source offset 4, token index 1).
+[xUnit.net 00:00:36.26]        ---> Janglim.FrontEnd.Grammars.JavaScript.JavaScriptSyntaxException: Unrecognized or malformed JavaScript token (source offset 5).
+[xUnit.net 00:00:36.26]          at Janglim.FrontEnd.Grammars.JavaScript.JavaScriptGrammar.CheckedSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\JavaScript\JavaScriptGrammar.cs:line 235
+[xUnit.net 00:00:36.26]          at Janglim.FrontEnd.Grammars.TypeScript.TypeScriptTokenSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\TypeScript\TypeScriptTokenSource.cs:line 25
+[xUnit.net 00:00:36.26]          at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 54
+[xUnit.net 00:00:36.26]          --- End of inner exception stack trace ---
+[xUnit.net 00:00:36.26]          at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 57
+[xUnit.net 00:00:36.26]          at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(ITokenSource source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[TokenSource].cs:line 48
+[xUnit.net 00:00:36.26]       Token source failed: Unrecognized or malformed JavaScript token (source offset 5). (state 131, source offset 4, token index 1).
+[xUnit.net 00:00:36.26]       Stack Trace:
+[xUnit.net 00:00:36.26]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(135,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source)
+[xUnit.net 00:00:36.26]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(104,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand)
+[xUnit.net 00:00:36.26]            at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+[xUnit.net 00:00:36.26]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.26]       left + right as T;
+[xUnit.net 00:00:36.26]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.26]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.26]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left + right as T;", assertionRole: "TSAsExpression", expectedOperand: "left+right") [FAIL]
+[xUnit.net 00:00:36.26]       Stack Trace:
+[xUnit.net 00:00:36.26]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(135,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source)
+[xUnit.net 00:00:36.26]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(104,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand)
+[xUnit.net 00:00:36.26]            at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+[xUnit.net 00:00:36.26]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = value satisfies <User>;") [8 ms]
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(source: "let result = left < right as T + third;") [7 ms]
+  오류 메시지:
+   An internal parser failure must not count as a rejected TypeScript program: Janglim.FrontEnd.Tokenize.ContextualLexingException: Token source failed: Unrecognized or malformed JavaScript token (source offset 18). (state 131, source offset 17, token index 4).
+ ---> Janglim.FrontEnd.Grammars.JavaScript.JavaScriptSyntaxException: Unrecognized or malformed JavaScript token (source offset 18).
+   at Janglim.FrontEnd.Grammars.JavaScript.JavaScriptGrammar.CheckedSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\JavaScript\JavaScriptGrammar.cs:line 235
+   at Janglim.FrontEnd.Grammars.TypeScript.TypeScriptTokenSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\TypeScript\TypeScriptTokenSource.cs:line 25
+   at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 54
+   --- End of inner exception stack trace ---
+   at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 57
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(ITokenSource source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[TokenSource].cs:line 48
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptRuntimeFixture.Reject(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptRuntimeTests.cs:line 35
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 88
+   at InvokeStub_TypeScriptAsSatisfiesTests.Rejects_malformed_types_and_operators_that_change_erased_precedence(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left satisfies T && right;", assertionRole: "TSSatisfiesExpression", expectedOperand: "left") [7 ms]
+  오류 메시지:
+   left satisfies T && right;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 135
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 104
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "value as A satisfies B;", assertionRole: "TSSatisfiesExpression", expectedOperand: "valueasA") [10 ms]
+  오류 메시지:
+   value as A satisfies B;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 135
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 104
+   at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left + right satisfies T;", assertionRole: "TSSatisfiesExpression", expectedOperand: "left+right") [7 ms]
+  오류 메시지:
+   left + right satisfies T;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 135
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 104
+   at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "value as A as B;", assertionRole: "TSAsExpression", expectedOperand: "valueasA") [6 ms]
+  오류 메시지:
+   value as A as B;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 135
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 104
+   at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left as T + right;", assertionRole: "TSAsExpression", expectedOperand: "left") [6 ms]
+  오류 메시지:
+   left as T + right;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 135
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 104
+   at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left < right as T;", assertionRole: "TSAsExpression", expectedOperand: "left<right") [6 ms]
+  오류 메시지:
+   left < right as T;
+Janglim.FrontEnd.Tokenize.ContextualLexingException: Token source failed: Unrecognized or malformed JavaScript token (source offset 5). (state 131, source offset 4, token index 1).
+ ---> Janglim.FrontEnd.Grammars.JavaScript.JavaScriptSyntaxException: Unrecognized or malformed JavaScript token (source offset 5).
+   at Janglim.FrontEnd.Grammars.JavaScript.JavaScriptGrammar.CheckedSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\JavaScript\JavaScriptGrammar.cs:line 235
+   at Janglim.FrontEnd.Grammars.TypeScript.TypeScriptTokenSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\TypeScript\TypeScriptTokenSource.cs:line 25
+   at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 54
+   --- End of inner exception stack trace ---
+   at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 57
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(ITokenSource source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[TokenSource].cs:line 48
+Token source failed: Unrecognized or malformed JavaScript token (source offset 5). (state 131, source offset 4, token index 1).
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 135
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 104
+   at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left + right as T;", assertionRole: "TSAsExpression", expectedOperand: "left+right") [7 ms]
+  오류 메시지:
+   left + right as T;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 135
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 104
+   at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.27]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "value satisfies A as B;", assertionRole: "TSAsExpression", expectedOperand: "valuesatisfiesA") [FAIL]
+[xUnit.net 00:00:36.27]       value satisfies A as B;
+[xUnit.net 00:00:36.27]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.27]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.27]       Stack Trace:
+[xUnit.net 00:00:36.27]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(135,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source)
+[xUnit.net 00:00:36.27]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(104,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand)
+[xUnit.net 00:00:36.27]            at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+[xUnit.net 00:00:36.27]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.28]       left == right as T;
+[xUnit.net 00:00:36.28]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left == right as T;", assertionRole: "TSAsExpression", expectedOperand: "right") [FAIL]
+[xUnit.net 00:00:36.28]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.28]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.28]       Stack Trace:
+[xUnit.net 00:00:36.28]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(135,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source)
+[xUnit.net 00:00:36.28]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(104,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand)
+[xUnit.net 00:00:36.28]            at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+[xUnit.net 00:00:36.28]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.29]       left as T > right;
+[xUnit.net 00:00:36.29]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left as T > right;", assertionRole: "TSAsExpression", expectedOperand: "left") [FAIL]
+[xUnit.net 00:00:36.29]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.29]       Grammar predicate ExpressionEnd evaluated to false.
+[xUnit.net 00:00:36.29]       Stack Trace:
+[xUnit.net 00:00:36.29]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(135,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source)
+[xUnit.net 00:00:36.29]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(104,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand)
+[xUnit.net 00:00:36.29]            at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+[xUnit.net 00:00:36.29]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:36.30]     Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parsed_assertions_keep_the_original_tokens_positions_and_parent_links_during_validation [FAIL]
+[xUnit.net 00:00:36.30]       const result = (value as Box<User>) satisfies Named;
+[xUnit.net 00:00:36.30]       Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+[xUnit.net 00:00:36.30]       (shift 할 수 없습니다 {), ,} 와야 합니다)
+[xUnit.net 00:00:36.30]       Stack Trace:
+[xUnit.net 00:00:36.30]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(135,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source)
+[xUnit.net 00:00:36.30]         C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs(117,0): at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parsed_assertions_keep_the_original_tokens_positions_and_parent_links_during_validation()
+[xUnit.net 00:00:36.30]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:36.30]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "value satisfies A as B;", assertionRole: "TSAsExpression", expectedOperand: "valuesatisfiesA") [7 ms]
+  오류 메시지:
+   value satisfies A as B;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 135
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 104
+   at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left == right as T;", assertionRole: "TSAsExpression", expectedOperand: "right") [10 ms]
+  오류 메시지:
+   left == right as T;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 135
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 104
+   at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(source: "left as T > right;", assertionRole: "TSAsExpression", expectedOperand: "left") [8 ms]
+  오류 메시지:
+   left as T > right;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+Grammar predicate ExpressionEnd evaluated to false.
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 135
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(String source, String assertionRole, String expectedOperand) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 104
+   at InvokeStub_TypeScriptAsSatisfiesTests.Precedence_and_left_association_keep_the_correct_runtime_operand(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  실패 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parsed_assertions_keep_the_original_tokens_positions_and_parent_links_during_validation [8 ms]
+  오류 메시지:
+   const result = (value as Box<User>) satisfies Named;
+Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+(shift 할 수 없습니다 {), ,} 와야 합니다)
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parse(String source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 135
+   at Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptAsSatisfiesTests.Parsed_assertions_keep_the_original_tokens_positions_and_parent_links_during_validation() in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\TypeScript\TypeScriptAsSatisfiesTests.cs:line 117
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "(value + other)!;") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "value!;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "!value!;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "new C!();") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "f()!();") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "value !;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "/ab/!.test(text);") [11 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "f()!.property;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "({ property: 1 })!.property;") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "value!!;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "value![index];") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "f()!;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "f!();") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "value/* comment */!;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "tag!`value ${value!}`;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "value!.property;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "f!.property![index]!;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "new C!.Nested();") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "new C()!;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_allow_member_call_constructor_and_template_continuations(source: "tag!`text`;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "++value!;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "value! += 1;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "([value!] = source);") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "object!.property!++;") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "({ target: value! } = source);") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "value!++;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "object!.property = next;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_valid_assignment_and_update_targets(source: "value! = next;") [10 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value!!==other;", assertionCount: 1) [12 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value!\n.property;", assertionCount: 1) [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value !== other;", assertionCount: 0) [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "!!value;", assertionCount: 0) [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value/*\n*/!other;", assertionCount: 0) [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "f!\n();", assertionCount: 1) [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value\n!other!;", assertionCount: 1) [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value != other;", assertionCount: 0) [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value!!!=other;", assertionCount: 2) [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value\n!other;", assertionCount: 0) [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value!!=other;", assertionCount: 1) [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Line_breaks_and_longest_match_distinguish_assertions_from_logical_and_equality_operators(source: "value!\n++other;", assertionCount: 1) [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "1! = value;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "new base?.tag!`text`.Ctor();") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "++base?.property!;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "let result = value\n!.property;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "1!++;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "base?.property!++;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "base?.property!.next = next;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "(value + other)! = next;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "delete value!;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "let result = value\n!;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "base?.property! = next;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "f()! = value;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "new base?.tag!`text`();") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "new base?.Ctor!();") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_do_not_make_invalid_runtime_syntax_or_targets_valid(source: "f()!++;") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "(base?.property)!.next = value;") [9 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "(base?.property)!();") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "base?.property!.next;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "base?.tag!`text`;") [6 ms]
+[xUnit.net 00:00:36.84]   Finished:    Parse.FrontEnd.Parsers.Tests
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "new (base?.tag!`text`)();") [7 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "new (base?.Ctor)!();") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "base?.property!;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "(base?.property)!`text`;") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "base?.method!();") [8 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Non_null_assertions_preserve_optional_chains_and_parenthesized_chain_boundaries(source: "base!.property?.next;") [6 ms]
+  통과 Janglim.FrontEnd.Parsers.Tests.TypeScript.TypeScriptNonNullTests.Optional_asserted_tag_projection_preserves_the_callers_tree_tokens_and_parent_links [14 ms]
+
+테스트 실행이 실패했습니다.
+총 테스트 수: 143
+     통과: 87
+     실패: 56
+ 총 시간: 37.7576 초
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\expression-assertions-20261028-145541-815\focused.trx

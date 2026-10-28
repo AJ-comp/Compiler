@@ -1,0 +1,10 @@
+[
+  {
+    "Path": "Tests/Parse.FrontEnd.Parsers.Tests/TypeScript/TypeScriptAssertionRegressionTests.cs",
+    "Sha256": "8EF5A522D78AE2C0EB84280D40B0D5F7655BF1E92D1D9ECCCBEC2308EAC2511F"
+  },
+  {
+    "Path": "Tests/Parse.FrontEnd.Parsers.Tests/TypeScript/TypeScriptAmbientFunctionRegressionTests.cs",
+    "Sha256": "81C642460CE116DF31718AF36345744EDA01E02F37A06524769C443CBB6C8C3D"
+  }
+]

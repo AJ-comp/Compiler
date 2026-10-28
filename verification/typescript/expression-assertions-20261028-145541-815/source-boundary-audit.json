@@ -1,0 +1,14 @@
+{
+  "CapturedAt": "2026-10-28T15:39:55.6071569+09:00",
+  "Compared": 722,
+  "ExistingTests": 112,
+  "Snapshots": 11,
+  "Changed": [
+    "grammars\\typescript\\typescript-types.ebnf",
+    "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptValidation.cs",
+    "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptProjection.cs",
+    "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptGrammar.cs",
+    "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptDialect.cs"
+  ],
+  "Unexpected": []
+}

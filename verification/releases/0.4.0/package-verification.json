@@ -1,0 +1,18 @@
+{
+  "package": "Janglim.0.4.0.nupkg",
+  "version": "0.4.0",
+  "engine_assemblies": [
+    "AJ.Common.dll",
+    "Janglim.dll",
+    "Parse.FrontEnd.ErrorHandler.dll",
+    "Parse.FrontEnd.Grammars.Ebnf.dll",
+    "Parse.FrontEnd.Grammars.dll",
+    "Parse.FrontEnd.Parsers.dll",
+    "Parse.FrontEnd.Support.dll",
+    "Parse.FrontEnd.dll",
+    "Parse.dll"
+  ],
+  "resource_assembly_count": 40,
+  "metadata_and_readme": "verified",
+  "sha256": "594c64e6f1e9b24896b053fb44fe6bd0cb043e4024842f4867c6c3541c8ad46a"
+}

@@ -1,0 +1,85 @@
+LALR LookAhead verification audit — 2026-10-22 (Asia/Seoul)
+
+Conclusion
+The current CanonicalRelation.LookAhead calculation omits required EOF lookaheads.
+This is reproducible with an ordinary conflict-free grammar, without TypeScript,
+semantic predicates, the EBNF reader, or parser-driven lexical policies.
+No engine or product source was changed during this audit.
+
+Minimal ordinary BNF (epsilon means empty input)
+    S : G C ;
+    C : R | 'e' S ;
+    R : 'a' | 'b' S ;
+    G : epsilon ;
+Start: S. Input: a. Language: (e|b)*a.
+Derivation: S => G C => C => R => 'a'.
+
+Current-source result
+Fresh project-reference build; the grammar is constructed through the C# tree API.
+LALR states: 10. Reported conflicts: 0. Input a: rejected.
+After shifting a, I5 contains R -> a . with lookahead {}.
+EOF is missing, so the table cannot reduce R -> a on EOF.
+Manually supplied TokenCell objects, bypassing the lexer entirely, fail identically.
+Evidence: lookahead-audit-plain/results.log, section tiny-0.
+
+Independent canonical LR(1) reference
+Independent Python implementation constructs FIRST/nullable, canonical LR(1)
+closure and goto, then merges identical LR(0) cores. It does not reuse Janglim's
+PredEx, FIRST/FOLLOW analyzer, lookahead code, or table construction.
+Canonical states: 10. Merged LALR states: 10. Current LR(0) states: 10.
+Unmatched state cores: 0. FIRST differences: 0. FOLLOW differences: 0.
+Hash collisions: 0. Current lookaheads omit EOF in five compared LR items.
+Reference input a: accepted. Current input a: rejected.
+Evidence: lookahead-audit-reference/plain-small-reference-report.json.
+Normalized grammar/source-assembly evidence: plain-small-dump.json.
+
+GNU Bison cross-check
+Portable Win flex-bison 2.5.25 contains GNU Bison 3.8.2.
+Source: https://github.com/lexxmark/winflexbison/releases/tag/v2.5.25
+Downloaded archive SHA256:
+8D324B62BE33604B2C45AD1DD34AB93D722534448F55A16CA7292DE32B6AC135
+Bison was explicitly configured with lr.type=lalr and
+lr.default-reduction=accepting, so reductions are visible in its XML report.
+tiny-bnf.stderr is empty (no conflicts/warnings).
+Bison State 5: R -> 'a' . [$end], with an enabled EOF reduction.
+Executing the enabled XML table actions accepts a in seven steps.
+The eight lookahead-bearing items in Bison's tiny grammar report agree exactly
+with the independent canonical-LR(1)-then-merge reference.
+Evidence: lookahead-audit-bison/tiny-bnf.{y,xml,output,stderr},
+bison-table-verification.json, and verify_tables.py.
+The generated C parser was not compiled; execution here means XML-table simulation.
+
+Control case: equivalent grammar shape
+Inline R into C:
+    S : G C ;
+    C : 'a' | 'b' S | 'e' S ;
+    G : epsilon ;
+The same current engine accepts a with zero conflicts (results.log, tiny-1).
+Thus the observed failure depends on grammar structure, not the input language.
+
+Calculation-order control on the earlier predicate repro
+The unchanged algorithm was replayed in a separate in-memory cache over the
+same LR graph. Original order exactly matches every cached original result.
+Original order: target I6 has {e}, omitting EOF.
+Reversed order / ascending state order / I6-first: I6 has {EOF, :, e}.
+Randomized starting orders also differ. Original parser tables were not mutated.
+Evidence: lookahead-audit-history/order-results.json and replay-order.ps1.
+
+History and prior coverage
+The empty-cache / recursive-read / final-replacement structure was introduced
+in 481dd40f0ef1dc4aebdc3017711da171f27d9559 on 2022-01-24.
+The current method body and the v0.3.0 body are identical after CRLF-to-LF only:
+SHA256 7bf5b12791f49d85ce75e9d821e1120623aa20324471d4fde2a6ac99682e1618.
+This is source-history evidence, not an execution of every historical binary.
+Existing Ex1 snapshots and behavior tests did not cover this minimal counterexample
+or compare cyclic propagation/order independence to an independent LR(1) oracle.
+Previous JavaScript regression record: 5,098/5,098 passed.
+Previous Test262 record: 48,375/48,375 passed, for the pinned ECMAScript grammar
+and selected source variants. These historical pass records were inspected;
+they were not rerun as part of this audit and do not prove all possible grammars.
+
+Reproduction from repository root (PowerShell)
+    & C:\Users\AhjLv\.dotnet\dotnet.exe run --project artifacts/typescript/lookahead-audit-plain/PlainAudit.csproj -c Release
+    & C:\Users\AhjLv\.dotnet\dotnet.exe run --project artifacts/typescript/lookahead-audit-reference/ReferenceDump.csproj -c Release -- --plain-small
+    python artifacts/typescript/lookahead-audit-bison/verify_tables.py
+See the reference tool's source for its independent construction and input dumps.

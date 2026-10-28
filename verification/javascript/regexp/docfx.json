@@ -1,0 +1,21 @@
+{"severity":"info","message":"Searching built-in plugins in directory C:\\Users\\AhjLv\\.dotnet\\tools\\.store\\docfx\\2.78.5\\docfx\\2.78.5\\tools\\net10.0\\any\\...","date_time":"2026-10-20T07:51:46.3691573Z"}
+{"severity":"info","message":"Post processor ExtractSearchIndex loaded.","date_time":"2026-10-20T07:51:46.499925Z"}
+{"severity":"info","message":"7 plug-in(s) loaded.","date_time":"2026-10-20T07:51:46.5676658Z"}
+{"severity":"info","message":"ExtractSearchIndex: UseMetadata = False, UseMetadataTitle = True","date_time":"2026-10-20T07:51:46.5791958Z"}
+{"severity":"info","message":"Building 115 file(s) in ConceptualDocumentProcessor(BuildConceptualDocument=>ValidateConceptualDocumentMetadata)...","date_time":"2026-10-20T07:51:47.1592386Z"}
+{"severity":"info","message":"Building 11 file(s) in ResourceDocumentProcessor(ValidateResourceMetadata)...","date_time":"2026-10-20T07:51:47.1596965Z"}
+{"severity":"info","message":"Building 4 file(s) in TocDocumentProcessor(BuildTocDocument)...","date_time":"2026-10-20T07:51:47.1601524Z"}
+{"severity":"warning","message":"Invalid file link:(~/services/Janglim.Mcp/infra/Deploy-Azure.ps1).","file":"docs/MCP.md","line":"495","date_time":"2026-10-20T07:51:48.0108302Z","code":"InvalidFileLink"}
+{"severity":"warning","message":"Invalid file link:(~/grammars/c/README.md).","file":"docs/MCP.md","line":"64","date_time":"2026-10-20T07:51:48.0109971Z","code":"InvalidFileLink"}
+{"severity":"warning","message":"Invalid file link:(~/grammars/c/README.md).","file":"docs/MCP.md","line":"228","date_time":"2026-10-20T07:51:48.0110612Z","code":"InvalidFileLink"}
+{"severity":"warning","message":"Invalid file link:(~/RELEASE_NOTES.md).","file":"docs/TODO.md","line":"8","date_time":"2026-10-20T07:51:48.0129633Z","code":"InvalidFileLink"}
+{"severity":"warning","message":"Invalid file link:(~/README.md#ebnf-text-token-declarations).","file":"docs/TODO.md","line":"341","date_time":"2026-10-20T07:51:48.0130923Z","code":"InvalidFileLink"}
+{"severity":"warning","message":"Invalid file link:(~/grammars/c/README.md).","file":"docs/TODO.md","line":"340","date_time":"2026-10-20T07:51:48.0131905Z","code":"InvalidFileLink"}
+{"severity":"warning","message":"Invalid file link:(~/docs/ja/index.html).","file":"docs/index.md","line":"0","date_time":"2026-10-20T07:51:48.0137398Z","code":"InvalidFileLink"}
+{"severity":"warning","message":"Invalid file link:(~/docs/ko/index.html).","file":"docs/index.md","line":"0","date_time":"2026-10-20T07:51:48.0138284Z","code":"InvalidFileLink"}
+{"severity":"warning","message":"Invalid file link:(~/docs/ko/index.html).","file":"docs/index.md","line":"0","date_time":"2026-10-20T07:51:48.0139016Z","code":"InvalidFileLink"}
+{"severity":"warning","message":"Invalid file link:(~/docs/ko/getting-started.html).","file":"docs/index.md","line":"0","date_time":"2026-10-20T07:51:48.0139764Z","code":"InvalidFileLink"}
+{"severity":"warning","message":"Invalid file link:(~/docs/en/index.html).","file":"docs/index.md","line":"0","date_time":"2026-10-20T07:51:48.0140322Z","code":"InvalidFileLink"}
+{"severity":"info","message":"Applying templates to 130 model(s)...","date_time":"2026-10-20T07:51:48.2012579Z"}
+{"severity":"info","message":"XRef map exported.","date_time":"2026-10-20T07:51:48.792307Z"}
+{"severity":"info","message":"Extracting index data from 115 html files","date_time":"2026-10-20T07:51:49.6144905Z"}

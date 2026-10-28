@@ -1,0 +1,193 @@
+{
+  "designModelOnly": true,
+  "originalTableUnchanged": true,
+  "originalStillRejectsA": true,
+  "nodes": 20,
+  "edges": 19,
+  "dequeued": 20,
+  "items": [
+    {
+      "state": 0,
+      "rule": 0,
+      "dot": 0,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 0,
+      "rule": 3,
+      "dot": 0,
+      "lookahead": [
+        "T:a:a",
+        "T:b:b",
+        "T:e:e"
+      ]
+    },
+    {
+      "state": 0,
+      "rule": 6,
+      "dot": 0,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 1,
+      "rule": 0,
+      "dot": 1,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 2,
+      "rule": 1,
+      "dot": 0,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 2,
+      "rule": 2,
+      "dot": 0,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 2,
+      "rule": 4,
+      "dot": 0,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 2,
+      "rule": 5,
+      "dot": 0,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 2,
+      "rule": 6,
+      "dot": 1,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 3,
+      "rule": 6,
+      "dot": 2,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 4,
+      "rule": 1,
+      "dot": 1,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 5,
+      "rule": 4,
+      "dot": 1,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 6,
+      "rule": 3,
+      "dot": 0,
+      "lookahead": [
+        "T:a:a",
+        "T:b:b",
+        "T:e:e"
+      ]
+    },
+    {
+      "state": 6,
+      "rule": 5,
+      "dot": 1,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 6,
+      "rule": 6,
+      "dot": 0,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 7,
+      "rule": 2,
+      "dot": 1,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 7,
+      "rule": 3,
+      "dot": 0,
+      "lookahead": [
+        "T:a:a",
+        "T:b:b",
+        "T:e:e"
+      ]
+    },
+    {
+      "state": 7,
+      "rule": 6,
+      "dot": 0,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 8,
+      "rule": 5,
+      "dot": 2,
+      "lookahead": [
+        "$"
+      ]
+    },
+    {
+      "state": 9,
+      "rule": 2,
+      "dot": 2,
+      "lookahead": [
+        "$"
+      ]
+    }
+  ],
+  "updates": [
+    "I0 Accept -\u003E\u2022S -\u003E I0 S -\u003E\u2022G C: {This is EndMarker! char : \u0449}",
+    "I0 Accept -\u003E\u2022S -\u003E I2 S -\u003E G\u2022C: {This is EndMarker! char : \u0449}",
+    "I0 Accept -\u003E\u2022S -\u003E I3 S -\u003E G C\u2022: {This is EndMarker! char : \u0449}",
+    "I2 S -\u003E G\u2022C -\u003E I2 C -\u003E\u2022R: {This is EndMarker! char : \u0449}",
+    "I2 S -\u003E G\u2022C -\u003E I2 C -\u003E\u2022e S: {This is EndMarker! char : \u0449}",
+    "I2 S -\u003E G\u2022C -\u003E I4 C -\u003E R\u2022: {This is EndMarker! char : \u0449}",
+    "I2 S -\u003E G\u2022C -\u003E I7 C -\u003E e\u2022S: {This is EndMarker! char : \u0449}",
+    "I2 S -\u003E G\u2022C -\u003E I9 C -\u003E e S\u2022: {This is EndMarker! char : \u0449}",
+    "I2 C -\u003E\u2022R -\u003E I2 R -\u003E\u2022a: {This is EndMarker! char : \u0449}",
+    "I2 C -\u003E\u2022R -\u003E I2 R -\u003E\u2022b S: {This is EndMarker! char : \u0449}",
+    "I2 C -\u003E\u2022R -\u003E I5 R -\u003E a\u2022: {This is EndMarker! char : \u0449}",
+    "I2 C -\u003E\u2022R -\u003E I6 R -\u003E b\u2022S: {This is EndMarker! char : \u0449}",
+    "I2 C -\u003E\u2022R -\u003E I8 R -\u003E b S\u2022: {This is EndMarker! char : \u0449}",
+    "I7 C -\u003E e\u2022S -\u003E I7 S -\u003E\u2022G C: {This is EndMarker! char : \u0449}",
+    "I6 R -\u003E b\u2022S -\u003E I6 S -\u003E\u2022G C: {This is EndMarker! char : \u0449}"
+  ]
+}

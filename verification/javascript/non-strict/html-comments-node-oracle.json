@@ -1,0 +1,67 @@
+{
+  "node": "v24.12.0",
+  "evaluation": false,
+  "rows": [
+    {
+      "input": "<!-- hidden\n1;",
+      "accepted": true
+    },
+    {
+      "input": "1;<!-- hidden\n2;",
+      "accepted": true
+    },
+    {
+      "input": "--> hidden\n1;",
+      "accepted": true
+    },
+    {
+      "input": " \t--> hidden\n1;",
+      "accepted": true
+    },
+    {
+      "input": "/* first */ --> hidden\n1;",
+      "accepted": true
+    },
+    {
+      "input": "1;/*\n*/ --> hidden\n2;",
+      "accepted": true
+    },
+    {
+      "input": "1;\n/* first */ --> hidden\n2;",
+      "accepted": true
+    },
+    {
+      "input": "1;\n/* first\n*/ /* second */ /* third */ --> hidden\n2;",
+      "accepted": true
+    },
+    {
+      "input": "'use strict';\n<!-- hidden\n1;",
+      "accepted": true
+    },
+    {
+      "input": "'use strict';\n--> hidden\n1;",
+      "accepted": true
+    },
+    {
+      "input": "let a = 1, b = 2; a /* same line */ --> b;",
+      "accepted": true
+    },
+    {
+      "input": "<!-- only comment",
+      "accepted": true
+    },
+    {
+      "input": "--> only comment",
+      "accepted": true
+    },
+    {
+      "input": "/* first\nsecond */ --> only comment",
+      "accepted": true
+    },
+    {
+      "input": "/* unterminated\n--> ignored",
+      "accepted": false,
+      "error": "Invalid or unexpected token"
+    }
+  ]
+}

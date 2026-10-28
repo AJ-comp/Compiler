@@ -1,0 +1,134 @@
+[
+  {
+    "input": "const value = async function named(value = class { field = await; }) { return value; };",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.6/§15.8: Async function and async generator FormalParameters have +Await, independent of the surrounding function kind. The default ClassExpression passes ?Await through FieldDefinition to Initializer, so await is reserved as a field initializer identifier."
+  },
+  {
+    "input": "async function outer() { const value = async function named(value = class { field = await; }) { return value; }; }",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.6/§15.8: Async function and async generator FormalParameters have +Await, independent of the surrounding function kind. The default ClassExpression passes ?Await through FieldDefinition to Initializer, so await is reserved as a field initializer identifier."
+  },
+  {
+    "input": "function* outer() { const value = async function named(value = class { field = await; }) { return value; }; }",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.6/§15.8: Async function and async generator FormalParameters have +Await, independent of the surrounding function kind. The default ClassExpression passes ?Await through FieldDefinition to Initializer, so await is reserved as a field initializer identifier."
+  },
+  {
+    "input": "async function* outer() { const value = async function named(value = class { field = await; }) { return value; }; }",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.6/§15.8: Async function and async generator FormalParameters have +Await, independent of the surrounding function kind. The default ClassExpression passes ?Await through FieldDefinition to Initializer, so await is reserved as a field initializer identifier."
+  },
+  {
+    "input": "async function named(value = class { field = await; }) { return value; }",
+    "goal": "Expression",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.6/§15.8: Async function and async generator FormalParameters have +Await, independent of the surrounding function kind. The default ClassExpression passes ?Await through FieldDefinition to Initializer, so await is reserved as a field initializer identifier."
+  },
+  {
+    "input": "const value = async function* named(value = class { field = await; }) { return value; };",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.6/§15.8: Async function and async generator FormalParameters have +Await, independent of the surrounding function kind. The default ClassExpression passes ?Await through FieldDefinition to Initializer, so await is reserved as a field initializer identifier."
+  },
+  {
+    "input": "async function outer() { const value = async function* named(value = class { field = await; }) { return value; }; }",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.6/§15.8: Async function and async generator FormalParameters have +Await, independent of the surrounding function kind. The default ClassExpression passes ?Await through FieldDefinition to Initializer, so await is reserved as a field initializer identifier."
+  },
+  {
+    "input": "function* outer() { const value = async function* named(value = class { field = await; }) { return value; }; }",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.6/§15.8: Async function and async generator FormalParameters have +Await, independent of the surrounding function kind. The default ClassExpression passes ?Await through FieldDefinition to Initializer, so await is reserved as a field initializer identifier."
+  },
+  {
+    "input": "async function* outer() { const value = async function* named(value = class { field = await; }) { return value; }; }",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.6/§15.8: Async function and async generator FormalParameters have +Await, independent of the surrounding function kind. The default ClassExpression passes ?Await through FieldDefinition to Initializer, so await is reserved as a field initializer identifier."
+  },
+  {
+    "input": "async function* named(value = class { field = await; }) { return value; }",
+    "goal": "Expression",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.6/§15.8: Async function and async generator FormalParameters have +Await, independent of the surrounding function kind. The default ClassExpression passes ?Await through FieldDefinition to Initializer, so await is reserved as a field initializer identifier."
+  },
+  {
+    "input": "async function outer() { const value = (value = class { field = await; }) => { return value; }; }",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.3: The ordinary arrow parameter list inherits +Await from its enclosing async function or async generator. Its default class passes that ?Await through FieldDefinition to Initializer, so await is reserved. Only the arrow concise body resets Await; this field is in the parameter list."
+  },
+  {
+    "input": "async function* outer() { const value = (value = class { field = await; }) => { return value; }; }",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.3: The ordinary arrow parameter list inherits +Await from its enclosing async function or async generator. Its default class passes that ?Await through FieldDefinition to Initializer, so await is reserved. Only the arrow concise body resets Await; this field is in the parameter list."
+  },
+  {
+    "input": "const value = async (value = class { field = await; }) => { return value; };",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.9 supplemental AsyncArrowHead reparses the parameter list with +Await. ClassExpression and FieldDefinition pass that ?Await to the field Initializer; await therefore cannot be an identifier there. This applies even if the initial call-expression cover was parsed in a ~Await Script context."
+  },
+  {
+    "input": "async function outer() { const value = async (value = class { field = await; }) => { return value; }; }",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.9 supplemental AsyncArrowHead reparses the parameter list with +Await. ClassExpression and FieldDefinition pass that ?Await to the field Initializer; await therefore cannot be an identifier there. This applies even if the initial call-expression cover was parsed in a ~Await Script context."
+  },
+  {
+    "input": "function* outer() { const value = async (value = class { field = await; }) => { return value; }; }",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.9 supplemental AsyncArrowHead reparses the parameter list with +Await. ClassExpression and FieldDefinition pass that ?Await to the field Initializer; await therefore cannot be an identifier there. This applies even if the initial call-expression cover was parsed in a ~Await Script context."
+  },
+  {
+    "input": "async function* outer() { const value = async (value = class { field = await; }) => { return value; }; }",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.9 supplemental AsyncArrowHead reparses the parameter list with +Await. ClassExpression and FieldDefinition pass that ?Await to the field Initializer; await therefore cannot be an identifier there. This applies even if the initial call-expression cover was parsed in a ~Await Script context."
+  },
+  {
+    "input": "async (value = class { field = await; }) => { return value; }",
+    "goal": "Expression",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.9 supplemental AsyncArrowHead reparses the parameter list with +Await. ClassExpression and FieldDefinition pass that ?Await to the field Initializer; await therefore cannot be an identifier there. This applies even if the initial call-expression cover was parsed in a ~Await Script context."
+  },
+  {
+    "input": "class A { static field = await; }",
+    "goal": "Script",
+    "expected": true,
+    "specReason": "ECMAScript 2026 §15.7: This strict Script class is in ~Await. Both static and instance FieldDefinition pass ?Await to Initializer; no separate static-field-only await restriction exists. The identifier await, the ordinary arrow parameter await, and the computed property identifier await therefore remain permitted here. Existing project policy follows this published grammar rather than the Node 24 static-field restriction."
+  },
+  {
+    "input": "class A { static field = (await) => 1; }",
+    "goal": "Script",
+    "expected": true,
+    "specReason": "ECMAScript 2026 §15.7: This strict Script class is in ~Await. Both static and instance FieldDefinition pass ?Await to Initializer; no separate static-field-only await restriction exists. The identifier await, the ordinary arrow parameter await, and the computed property identifier await therefore remain permitted here. Existing project policy follows this published grammar rather than the Node 24 static-field restriction."
+  },
+  {
+    "input": "class A { static field = ({[await](){}}); }",
+    "goal": "Script",
+    "expected": true,
+    "specReason": "ECMAScript 2026 §15.7: This strict Script class is in ~Await. Both static and instance FieldDefinition pass ?Await to Initializer; no separate static-field-only await restriction exists. The identifier await, the ordinary arrow parameter await, and the computed property identifier await therefore remain permitted here. Existing project policy follows this published grammar rather than the Node 24 static-field restriction."
+  },
+  {
+    "input": "class A { static { class B { field = await; } } }",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.7: ClassStaticBlockStatementList has +Await. Its nested class passes ?Await through FieldDefinition to Initializer, so await is reserved in this field initializer. Existing project policy follows this published grammar rather than the Node 24 reset."
+  },
+  {
+    "input": "const f = async (a = class { field = await; }) => a;",
+    "goal": "Script",
+    "expected": false,
+    "specReason": "ECMAScript 2026 §15.9 supplemental AsyncArrowHead reparses the parameter list with +Await. ClassExpression and FieldDefinition pass that ?Await to the field Initializer; await therefore cannot be an identifier there. This applies even if the initial call-expression cover was parsed in a ~Await Script context."
+  }
+]

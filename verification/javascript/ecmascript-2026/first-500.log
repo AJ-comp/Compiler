@@ -1,0 +1,16 @@
+Preparing script-nonstrict (web=True) ...
+Ready script-nonstrict at 00:00:21.5385739.
+Preparing script-strict (web=True) ...
+Ready script-strict at 00:00:27.6800999.
+250 cases, 250 passed, 0 mismatches/errors; 00:00:30.9022357.
+500 cases, 500 passed, 0 mismatches/errors; 00:00:33.6758679.
+{
+  "input": "artifacts/ecmascript-2026/first-500.jsonl",
+  "skip": 0,
+  "processed": 500,
+  "outcomes": {
+    "pass": 500
+  },
+  "elapsedSeconds": 33.6765735,
+  "syntaxOnly": true
+}

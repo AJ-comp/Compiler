@@ -1,0 +1,98 @@
+Nonterminals useless in grammar
+
+    U
+    B
+    A
+
+
+Terminals unused in grammar
+
+    'u'
+
+
+Rules useless in grammar
+
+    3 U: U 'u'
+
+    4 B: 'a'
+
+    5 A: B 'x'
+
+    6 S: A U
+
+
+Grammar
+
+    0 $accept: S $end
+
+    1 C: 'a'
+
+    2 S: C 'x'
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    'a' (97) 1
+    'u' (117)
+    'x' (120) 2
+    error (256)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (6)
+        on left: 0
+    C (7)
+        on left: 1
+        on right: 2
+    S (8)
+        on left: 2
+        on right: 0
+
+
+State 0
+
+    0 $accept: . S $end
+    1 C: . 'a'
+    2 S: . C 'x'
+
+    'a'  shift, and go to state 1
+
+    C  go to state 2
+    S  go to state 3
+
+
+State 1
+
+    1 C: 'a' .
+
+    $default  reduce using rule 1 (C)
+
+
+State 2
+
+    2 S: C . 'x'
+
+    'x'  shift, and go to state 4
+
+
+State 3
+
+    0 $accept: S . $end
+
+    $end  shift, and go to state 5
+
+
+State 4
+
+    2 S: C 'x' .
+
+    $default  reduce using rule 2 (S)
+
+
+State 5
+
+    0 $accept: S $end .
+
+    $default  accept

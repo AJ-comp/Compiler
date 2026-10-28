@@ -1,0 +1,28 @@
+Searching built-in plugins in directory C:\Users\AhjLv\.dotnet\tools\.store\docfx\2.78.5\docfx\2.78.5\tools\net10.0\any\...
+Post processor ExtractSearchIndex loaded.
+7 plug-in(s) loaded.
+ExtractSearchIndex: UseMetadata = False, UseMetadataTitle = True
+Building 9 file(s) in ResourceDocumentProcessor(ValidateResourceMetadata)...
+Building 115 file(s) in ConceptualDocumentProcessor(BuildConceptualDocument=>ValidateConceptualDocumentMetadata)...
+Building 4 file(s) in TocDocumentProcessor(BuildTocDocument)...
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\docs\MCP.md(64,1): warning InvalidFileLink: Invalid file link:(~/grammars/c/README.md).
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\docs\MCP.md(228,1): warning InvalidFileLink: Invalid file link:(~/grammars/c/README.md).
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\docs\MCP.md(495,1): warning InvalidFileLink: Invalid file link:(~/services/Janglim.Mcp/infra/Deploy-Azure.ps1).
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\docs\TODO.md(286,1): warning InvalidFileLink: Invalid file link:(~/grammars/c/README.md).
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\docs\TODO.md(8,1): warning InvalidFileLink: Invalid file link:(~/RELEASE_NOTES.md).
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\docs\TODO.md(287,1): warning InvalidFileLink: Invalid file link:(~/README.md#ebnf-text-token-declarations).
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\docs\index.md(0,1): warning InvalidFileLink: Invalid file link:(~/docs/ko/index.html).
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\docs\index.md(0,1): warning InvalidFileLink: Invalid file link:(~/docs/ko/index.html).
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\docs\index.md(0,1): warning InvalidFileLink: Invalid file link:(~/docs/ja/index.html).
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\docs\index.md(0,1): warning InvalidFileLink: Invalid file link:(~/docs/en/index.html).
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\docs\index.md(0,1): warning InvalidFileLink: Invalid file link:(~/docs/ko/getting-started.html).
+Applying templates to 128 model(s)...
+XRef map exported.
+Extracting index data from 115 html files
+
+
+Build succeeded with warning.
+
+    11 warning(s)
+    0 error(s)
+

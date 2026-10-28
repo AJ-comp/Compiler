@@ -1,0 +1,25 @@
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(1,41): error TS2389: Function implementation name must be '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(2,79): error TS2389: Function implementation name must be '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(4,55): error TS2389: Function implementation name must be '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(6,45): error TS2389: Function implementation name must be '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(7,45): error TS2389: Function implementation name must be '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(7,89): error TS2389: Function implementation name must be '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(8,71): error TS2389: Function implementation name must be '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(11,42): error TS2389: Function implementation name must be '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(11,55): error TS2339: Property '#missing' does not exist on type 'C'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(12,30): error TS2391: Function implementation is missing or not immediately following the declaration.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(12,67): error TS2339: Property '#m' does not exist on type 'D'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(13,30): error TS2300: Duplicate identifier '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(13,30): error TS2391: Function implementation is missing or not immediately following the declaration.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(13,42): error TS2300: Duplicate identifier '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(13,42): error TS2564: Property '#m' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(14,37): error TS2804: Duplicate identifier '#m'. Static and instance elements cannot share the same private name.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(14,49): error TS2387: Function overload must be static.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(14,49): error TS2804: Duplicate identifier '#m'. Static and instance elements cannot share the same private name.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(15,30): error TS2804: Duplicate identifier '#m'. Static and instance elements cannot share the same private name.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(15,49): error TS2388: Function overload must not be static.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(15,49): error TS2804: Duplicate identifier '#m'. Static and instance elements cannot share the same private name.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(16,30): error TS1222: An overload signature cannot be declared as a generator.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(16,31): error TS2391: Function implementation is missing or not immediately following the declaration.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(17,30): error TS1222: An overload signature cannot be declared as a generator.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-tests.ts(17,31): error TS2391: Function implementation is missing or not immediately following the declaration.

@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "createdUtc": "2026-10-21T08:59:46.138433+00:00",
+  "kind": "test262-corpus-delta",
+  "baseline": {
+    "path": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\test262-es2026-archive.jsonl",
+    "sha256": "c180ed67bb922873a470d21206aec9a4fb1b6b6e2ee98ad26245a995ec7e880b",
+    "manifestPath": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\test262-es2026-archive.manifest.json",
+    "manifestSha256": "a5a6a85050a79e501dcdee1d0358a046a495b86bbe9f7d51faf13616d7e02566",
+    "snapshot": {
+      "repository": "https://github.com/tc39/test262",
+      "commit": "6eec1ac9ee144dafd8f344d73a21f36bfc9f6755",
+      "commitDate": "2026-06-29T14:09:27Z",
+      "selectionCutoff": "2026-06-30T23:59:59Z",
+      "archiveUrl": "https://codeload.github.com/tc39/test262/zip/6eec1ac9ee144dafd8f344d73a21f36bfc9f6755",
+      "archiveSha256": "a7e725c2f18975b432b371ba67a489737c6a59afc78f9d4d02f42b8d947d36c2"
+    },
+    "featureFilter": {
+      "path": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\tools\\Test262\\ecmascript-2026-features.json",
+      "sha256": "665b7b77324267ca3e332d708155d8dbf58f4ff98824922c84dba98db8fa36c6"
+    }
+  },
+  "latest": {
+    "path": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-latest-es2026.jsonl",
+    "sha256": "41d6a1e99cd7579240049aeb8ecdff190a56efd4c8f1b1131636a6ea2f5507cf",
+    "manifestPath": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-latest-es2026.manifest.json",
+    "manifestSha256": "63492436e54ca822a304274984523fa85058474782d13a1d933e5931d4a5034a",
+    "snapshot": {
+      "repository": "https://github.com/tc39/test262",
+      "commit": "d53ebc8b1931d9f1541e43d59650776e4b766248",
+      "commitDate": "2026-10-13T22:44:04Z",
+      "selectionCutoff": null,
+      "archiveUrl": "https://codeload.github.com/tc39/test262/zip/d53ebc8b1931d9f1541e43d59650776e4b766248",
+      "archiveSha256": "8fbdcb0afe5d5c24168123dd6c7d410f70f03babdab3154231fb9339bf6b85f0",
+      "commitMetadataUrl": "https://api.github.com/repos/tc39/test262/commits/d53ebc8b1931d9f1541e43d59650776e4b766248"
+    },
+    "featureFilter": {
+      "path": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\tools\\Test262\\ecmascript-2026-features.json",
+      "sha256": "665b7b77324267ca3e332d708155d8dbf58f4ff98824922c84dba98db8fa36c6"
+    }
+  },
+  "signatureFields": [
+    "id",
+    "sourceSha256",
+    "expectAccept",
+    "inputKind",
+    "mode",
+    "webCompatibility",
+    "variant"
+  ],
+  "counts": {
+    "addedVariants": 20,
+    "baselineVariants": 48361,
+    "changedVariants": 6,
+    "deltaVariants": 26,
+    "latestVariants": 48375,
+    "removedVariants": 6,
+    "reusableVariants": 48349
+  },
+  "profileCounts": {
+    "added": {
+      "script-nonstrict": 10,
+      "script-strict": 10
+    },
+    "changed": {
+      "script-nonstrict": 3,
+      "script-strict": 3
+    },
+    "reusable": {
+      "module": 696,
+      "script-nonstrict": 24703,
+      "script-strict": 22950
+    }
+  },
+  "changedFieldCounts": {
+    "sourceSha256": 6
+  },
+  "output": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-latest-delta.jsonl",
+  "casesSha256": "8cb410ef30f80984c8fe75c10a2f0397149d2dce0423dade42274cf46b5238ce",
+  "comparisonAudit": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\latest-head-audit\\test262-latest-delta.comparison.jsonl",
+  "comparisonAuditSha256": "dda087a10eec20f52e745824984e6b2bb3b92b33a59f9818f34c09db58815bc8",
+  "reuseCondition": "case signature identical; product/runner binaries and execution options must also match the earlier run before reusing its result"
+}

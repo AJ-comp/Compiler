@@ -1,0 +1,30 @@
+[
+  {
+    "Path": "grammars\\typescript\\typescript-types.ebnf",
+    "Sha256": "ED973D7CC1E7D439584AD288D60F42AE00398996480ACE945765916B17C6B0A3"
+  },
+  {
+    "Path": "grammars\\typescript\\typescript-declarations.ebnf",
+    "Sha256": "13C17D2DAEFBF6B753724C5DB017F8F3C18A7D80DCFB11F62569BA29FBA3DEDA"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptValidation.cs",
+    "Sha256": "DC4B498AFA6045EB90CBFDCAEB2FBE184D10F62CD833D6319BD408F1633518DF"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptTypes.cs",
+    "Sha256": "AE3E9F5D937C821DC5AC276DE8901DBD71EF0D851297821658306B38A7272FC9"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptProjection.cs",
+    "Sha256": "0C412C89229F67288647FADA5D38DE344ADBE931089E63C8E37DDA0873522D66"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptLookahead.cs",
+    "Sha256": "C0876223C5910E5CE00FFE26752582014AD7155F80AB5BC1B1137B356DDC752B"
+  },
+  {
+    "Path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptDialect.cs",
+    "Sha256": "3BDF3CA704DAA6B975573CFF85171ABBE5486AFFA7B80D9093D790EB9C556BC2"
+  }
+]

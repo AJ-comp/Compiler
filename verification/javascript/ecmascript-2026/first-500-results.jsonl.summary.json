@@ -1,0 +1,10 @@
+{
+  "input": "artifacts/ecmascript-2026/first-500.jsonl",
+  "skip": 0,
+  "processed": 500,
+  "outcomes": {
+    "pass": 500
+  },
+  "elapsedSeconds": 33.6765735,
+  "syntaxOnly": true
+}

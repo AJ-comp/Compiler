@@ -1,0 +1,27 @@
+S : {Always()}? C ;
+C : P {Always()}? | P {Never()}? 'e' 'x' '?' S ':' S ;
+P : R {Always()}? ;
+R : id {Always()}? | id {Never()}? 'i' S ;
+id := "[a-z]+" ;
+Input: a; expected: accept; observed: False
+Predicate evaluations before failure: Always=1, Never=0
+a: epsilon reduce __predicate1 -> epsilon 
+a: goto 2 
+a: shift 6 
+щ: failed null (shift 할 수 없습니다 {e, i} 와야 합니다)
+ACTION[I4, EOF]=epsilon reduce __predicate2 -> epsilon
+  [This is EndMarker! char : щ] epsilon reduce __predicate2 -> epsilon
+  [e] epsilon reduce __predicate2 -> epsilon;epsilon reduce __predicate3 -> epsilon
+  [:] epsilon reduce __predicate2 -> epsilon
+ACTION[I5, EOF]=MISSING
+  [e] epsilon reduce __predicate4 -> epsilon
+ACTION[I6, EOF]=MISSING
+  [e] epsilon reduce __predicate5 -> epsilon
+  [i] epsilon reduce __predicate6 -> epsilon
+Independent fixed-point rounds: 3
+STALE DEPENDENCY: I2 C ->•P __predicate2 original={} depends on I2 S -> __predicate1•C original={This is EndMarker! char : щ, e, :}
+STALE DEPENDENCY: I18 C -> P __predicate3 e x ? S :•S original={} depends on I2 S -> __predicate1•C original={This is EndMarker! char : щ, e, :}
+I4 __predicate2 ->•; original LA={This is EndMarker! char : щ, e, :}; reference LA={:,This is EndMarker! char : щ,e}
+I5 __predicate4 ->•; original LA={e}; reference LA={e,:,This is EndMarker! char : щ}
+I6 __predicate5 ->•; original LA={e}; reference LA={e,:,This is EndMarker! char : щ}
+CONFIRMED: EOF action is absent before predicate evaluation; fixed-point propagation recovers EOF.

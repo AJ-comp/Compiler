@@ -1,0 +1,35 @@
+  AJ.Common -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\Common\AJ.Common\bin\Release\netstandard2.1\AJ.Common.dll
+  Parse -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse\bin\Release\netstandard2.1\Parse.dll
+  Parse.FrontEnd -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd\bin\Release\netstandard2.1\Parse.FrontEnd.dll
+  Parse.FrontEnd.Grammars -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.dll
+  Parse.FrontEnd.Parsers -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\bin\Release\netstandard2.1\Parse.FrontEnd.Parsers.dll
+  Parse.FrontEnd.Grammars.Ebnf -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\bin\Release\netstandard2.1\Parse.FrontEnd.Grammars.Ebnf.dll
+  Parse.FrontEnd.Parsers.Tests -> C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll
+C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\bin\Release\net8.0\Parse.FrontEnd.Parsers.Tests.dll(.NETCoreApp,Version=v8.0)에 대한 테스트 실행
+지정된 패턴과 일치한 총 테스트 파일 수는 1개입니다.
+[xUnit.net 00:00:04.48]     Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.A_valid_expression_continuation_remains_a_single_statement(input: "value\n/other/divisor;") [FAIL]
+  실패 Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.A_valid_expression_continuation_remains_a_single_statement(input: "value\n/other/divisor;") [22 ms]
+  오류 메시지:
+   value
+/other/divisor;
+Janglim.FrontEnd.Tokenize.ContextualLexingException: Token source failed: Invalid or duplicate regular-expression flag. (source offset 16). (state 37, source offset 5, token index 1).
+ ---> Janglim.FrontEnd.Grammars.JavaScript.JavaScriptSyntaxException: Invalid or duplicate regular-expression flag. (source offset 16).
+   at Janglim.FrontEnd.Grammars.JavaScript.JavaScriptTokenPatterns.ValidateRegExpFlags(TokenData token) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\JavaScript\JavaScriptTokenPatterns.cs:line 169
+   at Janglim.FrontEnd.Grammars.JavaScript.JavaScriptTokenPatterns.Validate(TokenData token) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\JavaScript\JavaScriptTokenPatterns.cs:line 72
+   at Janglim.FrontEnd.Grammars.JavaScript.JavaScriptExpressionGrammar.CheckedSource.Peek(TokenCursor start, LexicalGoal goal) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\JavaScript\JavaScriptExpressionGrammar.cs:line 137
+   at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 54
+   --- End of inner exception stack trace ---
+   at Janglim.FrontEnd.Parsers.LR.ContextualInput.Read(IReadOnlyList`1 states, LRParsingTable table) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualInput.cs:line 57
+   at Janglim.FrontEnd.Parsers.LR.ContextualConflictPredictor.AdvanceOneToken(IReadOnlyList`1 frontier, HashSet`1 acceptedOrigins, PredictionBudget budget) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualConflictPredictor.cs:line 99
+   at Janglim.FrontEnd.Parsers.LR.ContextualConflictPredictor.SelectFirstAction(IReadOnlyList`1 initialActions, IReadOnlyList`1 actualStates, ContextualInput actualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\ContextualConflictPredictor.cs:line 64
+   at Janglim.FrontEnd.Parsers.LR.LRParser.ShiftOrReduce(ParsingUnit parsingUnit, TokenData inputValue, ConflictItem& conflictItem, IReadOnlyList`1 tokens, Int32 tokenIndex, ContextualInput contextualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[DecideParsingDirection].cs:line 90
+   at Janglim.FrontEnd.Parsers.LR.LRParser.UnitParsing(ParsingUnit unit, TokenData seeingToken, IReadOnlyList`1 tokens, Int32 tokenIndex, ContextualInput contextualInput) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[Parsing].cs:line 111
+   at Janglim.FrontEnd.Parsers.LR.LRParser.Parsing(ITokenSource source) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\src\FrontEnd\Parse.FrontEnd.Parsers\LR\LRParser[TokenSource].cs:line 68
+  스택 추적:
+     at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptScriptFixture.Success(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 32
+   at Janglim.FrontEnd.Parsers.Tests.JavaScript.JavaScriptStatementTests.A_valid_expression_continuation_remains_a_single_statement(String input) in C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\Tests\Parse.FrontEnd.Parsers.Tests\JavaScript\JavaScriptStatementTests.cs:line 328
+   at InvokeStub_JavaScriptStatementTests.A_valid_expression_continuation_remains_a_single_statement(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+결과 파일: C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\functions\tests\functions-round4.trx
+
+실패!  - 실패:     1, 통과:  1425, 건너뜀:     0, 전체:  1426, 기간: 5 s - Parse.FrontEnd.Parsers.Tests.dll (net8.0)

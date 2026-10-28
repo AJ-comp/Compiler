@@ -17,5 +17,6 @@
 **/*.log
 **/TestResults
 artifacts
+verification
 _site
 samples/Playground/wwwroot/ui

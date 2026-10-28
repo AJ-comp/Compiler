@@ -1,0 +1,44 @@
+<main>
+  <header>
+    <h1>왜 같은 항목을<br>다시 큐에 넣는가</h1>
+    <p class="lead"><strong>이미 전달한 항목에 새 룩어헤드가 추가되면, 그 항목을 다시 처리해야 뒤쪽 항목도 갱신됩니다.</strong> 이번 큐 구현은 이 재처리를 관리합니다.</p>
+  </header>
+
+  <section id="connections">
+    <h2>이 예제의 전달 경로를 보겠습니다.</h2>
+    <figure class="code-block grammar">
+      <pre><code>S : A '!'              // 첫 경로
+  | 'b' 'c' 'd' A '?' ; // 둘째 경로
+A : 'a' 'z' ;</code></pre>
+    </figure>
+    <p>두 경로의 A 시작 항목은 서로 다른 상태에 있지만, a에 대한 Goto 뒤에는 같은 중간 항목으로 합류합니다. 따라서 <code>!</code>와 <code>?</code>가 이 중간 항목에 각각 전달됩니다.</p>
+    <figure class="illustration">
+      <picture>
+        <source media="(max-width:650px)" srcset="../images/lalr-lookahead-connections-mobile.svg">
+        <img src="../images/lalr-lookahead-connections.svg" width="1000" height="440" alt="서로 다른 두 A 시작 항목이 같은 A 중간 항목에 합류하고, 그 중간 항목에서 완료 항목으로 룩어헤드가 전달되는 연결입니다.">
+      </picture>
+      <figcaption>화살표는 룩어헤드를 전달할 연결입니다. 각 상자는 자신의 집합을 가진 별도 항목 객체입니다.</figcaption>
+    </figure>
+    <p><code>BuildLookAheadEntries()</code>가 이 연결들을 미리 기록합니다. <strong>그림의 상자에 해당하는 계산 정보가 <code>LookAheadEntry</code>, 화살표 목록이 <code>Dependencies</code></strong>입니다.</p>
+  </section>
+
+  <section id="requeue">
+    <h2>!를 전달한 뒤, ?가 늦게 도착했다고 하겠습니다.</h2>
+    <p>중간 항목은 이미 <code>!</code>를 완료 항목에 전달했습니다. 그런데 나중에 <code>?</code>가 추가되면, 완료 항목에는 아직 <code>!</code>만 남아 있습니다. 그래서 중간 항목을 큐에 다시 넣고 한 번 더 전달해야 합니다.</p>
+    <p>그림의 <code>IsQueued</code>는 <strong>중간 항목 객체가 현재 큐에서 대기 중인지</strong> 나타냅니다. 큐에서 꺼낼 때 false로 바꿉니다.</p>
+    <figure class="illustration">
+      <picture>
+        <source media="(max-width:650px)" srcset="../images/lalr-lookahead-requeue-mobile.svg">
+        <img src="../images/lalr-lookahead-requeue.svg" width="1000" height="940" alt="처음에는 중간과 완료 항목의 집합이 모두 느낌표 하나입니다. 새 물음표가 중간 항목에 추가되면 중간 항목을 큐에 다시 넣습니다. 이 객체를 다시 꺼내 전달하면 완료 항목의 집합에도 물음표가 추가됩니다.">
+      </picture>
+      <figcaption>중간 항목을 다시 처리해야, 늦게 들어온 ?가 완료 항목에도 반영됩니다.</figcaption>
+    </figure>
+    <p>두 번째 장면의 큐 등록을 수행하는 코드가 아래 부분입니다. <code>target</code>은 새 토큰을 받은 중간 항목이고, <code>before</code>는 추가 전 집합 크기입니다. <strong>크기가 1에서 2로 늘었고 큐 밖에 있으므로 재등록합니다.</strong></p>
+    <figure class="code-block">
+      <figcaption>현재 코드의 재등록 조건</figcaption>
+      <pre><code data-requeue-source></code></pre>
+    </figure>
+    <p>이미 큐에서 대기 중이라면 중복 등록은 생략합니다. 나중에 같은 객체를 꺼낼 때 갱신된 집합을 읽습니다. 이렇게 새 정보를 전달하다가 큐가 비면 계산이 끝납니다.</p>
+  </section>
+  <footer><p><a href="../../src/FrontEnd/Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs">CanonicalRelation.cs</a> · <code>BuildLookAheadEntries</code> / <code>CalculateLookAhead</code></p></footer>
+</main>

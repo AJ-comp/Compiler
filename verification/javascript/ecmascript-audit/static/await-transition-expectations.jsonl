@@ -1,0 +1,79 @@
+{"id": "An_await_keyword_keeps_its_function_or_class_operand_in_expression_context-0", "source": "async function outer() { return await\nclass {} / divisor; }", "expect": true, "module": false}
+{"id": "An_await_keyword_keeps_its_function_or_class_operand_in_expression_context-1", "source": "async function* outer() { yield await\nfunction() {} / divisor; }", "expect": true, "module": false}
+{"id": "An_await_keyword_keeps_its_function_or_class_operand_in_expression_context-2", "source": "const outer = async () => await\nasync function() {} / divisor;", "expect": true, "module": false}
+{"id": "An_await_keyword_keeps_its_function_or_class_operand_in_expression_context-3", "source": "({ async outer() { await\nclass {} / divisor; } });", "expect": true, "module": false}
+{"id": "An_await_keyword_keeps_its_function_or_class_operand_in_expression_context-4", "source": "class Outer { async method() { await\nfunction() {} / divisor; } }", "expect": true, "module": false}
+{"id": "An_await_keyword_keeps_its_function_or_class_operand_in_expression_context-5", "source": "async function outer() { await await\nclass {} / divisor; }", "expect": true, "module": false}
+{"id": "An_await_keyword_keeps_its_function_or_class_operand_in_expression_context-6", "source": "async function outer() { await\nclass Named {} / divisor / denominator; }", "expect": true, "module": false}
+{"id": "An_await_keyword_keeps_its_function_or_class_operand_in_expression_context-7", "source": "async function outer() { return `value ${await\nclass {} / divisor}`; }", "expect": true, "module": false}
+{"id": "An_await_identifier_or_label_can_end_before_a_declaration-0", "source": "await\nclass Next {}\n/ab/.test(text);", "expect": true, "module": false}
+{"id": "An_await_identifier_or_label_can_end_before_a_declaration-1", "source": "await\nfunction next() {}\n/ab/.test(text);", "expect": true, "module": false}
+{"id": "An_await_identifier_or_label_can_end_before_a_declaration-2", "source": "await\nasync function next() {}\n/ab/.test(text);", "expect": true, "module": false}
+{"id": "An_await_identifier_or_label_can_end_before_a_declaration-3", "source": "var await\nclass Next {}\n/ab/.test(text);", "expect": true, "module": false}
+{"id": "An_await_identifier_or_label_can_end_before_a_declaration-4", "source": "var await\nfunction next() {}\n/ab/.test(text);", "expect": true, "module": false}
+{"id": "An_await_identifier_or_label_can_end_before_a_declaration-5", "source": "var await\nasync function next() {}\n/ab/.test(text);", "expect": true, "module": false}
+{"id": "An_await_identifier_or_label_can_end_before_a_declaration-6", "source": "function outer() { return await\nclass Next {}\n/ab/.test(text); }", "expect": true, "module": false}
+{"id": "An_await_identifier_or_label_can_end_before_a_declaration-7", "source": "function* outer() { yield await\nclass Next {}\n/ab/.test(text); }", "expect": true, "module": false}
+{"id": "An_await_identifier_or_label_can_end_before_a_declaration-8", "source": "await: while (false) { break await\nclass Next {}\n/ab/.test(text); }", "expect": true, "module": false}
+{"id": "An_await_identifier_or_label_can_end_before_a_declaration-9", "source": "await: while (false) { continue await\nasync function next() {}\n/ab/.test(text); }", "expect": true, "module": false}
+{"id": "An_await_identifier_or_label_can_end_before_a_declaration-10", "source": "\\u0061wait\nclass Next {}\n/ab/.test(text);", "expect": true, "module": false}
+{"id": "An_await_identifier_or_label_can_end_before_a_declaration-11", "source": "var \\u0061wait\nfunction next() {}\n/ab/.test(text);", "expect": true, "module": false}
+{"id": "Await_bindings_property_names_and_initializers_keep_their_original_roles-0", "source": "var await = function() {} / divisor;", "expect": true, "module": false}
+{"id": "Await_bindings_property_names_and_initializers_keep_their_original_roles-1", "source": "let await = class {} / divisor;", "expect": true, "module": false}
+{"id": "Await_bindings_property_names_and_initializers_keep_their_original_roles-2", "source": "function outer(await = function() {} / divisor) {}", "expect": true, "module": false}
+{"id": "Await_bindings_property_names_and_initializers_keep_their_original_roles-3", "source": "const outer = (await = function() {} / divisor) => await;", "expect": true, "module": false}
+{"id": "Await_bindings_property_names_and_initializers_keep_their_original_roles-4", "source": "var {await = function() {} / divisor} = source;", "expect": true, "module": false}
+{"id": "Await_bindings_property_names_and_initializers_keep_their_original_roles-5", "source": "var [await = class {} / divisor] = source;", "expect": true, "module": false}
+{"id": "Await_bindings_property_names_and_initializers_keep_their_original_roles-6", "source": "try {} catch (await) { await / divisor; }", "expect": true, "module": false}
+{"id": "Await_bindings_property_names_and_initializers_keep_their_original_roles-7", "source": "class Outer { await = class {} / divisor; }", "expect": true, "module": false}
+{"id": "Await_bindings_property_names_and_initializers_keep_their_original_roles-8", "source": "({await: function() {} / divisor});", "expect": true, "module": false}
+{"id": "Await_bindings_property_names_and_initializers_keep_their_original_roles-9", "source": "({await} = source); await / divisor;", "expect": true, "module": false}
+{"id": "Await_bindings_property_names_and_initializers_keep_their_original_roles-10", "source": "for (var await of source) { await / divisor; }", "expect": true, "module": false}
+{"id": "A_missing_operand_or_reserved_await_identifier_remains_invalid-0", "source": "async function outer() { await\n; }", "expect": false, "module": false}
+{"id": "A_missing_operand_or_reserved_await_identifier_remains_invalid-1", "source": "async function outer() { await\n}", "expect": false, "module": false}
+{"id": "A_missing_operand_or_reserved_await_identifier_remains_invalid-2", "source": "async function outer() { \\u0061wait\nclass {} / divisor; }", "expect": false, "module": false}
+{"id": "A_missing_operand_or_reserved_await_identifier_remains_invalid-3", "source": "async function outer(await = class {} / divisor) {}", "expect": false, "module": false}
+{"id": "A_missing_operand_or_reserved_await_identifier_remains_invalid-4", "source": "async function outer() { var await = function() {} / divisor; }", "expect": false, "module": false}
+{"id": "A_missing_operand_or_reserved_await_identifier_remains_invalid-5", "source": "async function outer() { await: while (false) { break await; } }", "expect": false, "module": false}
+{"id": "Module_await_keeps_its_operand_across_every_line_terminator-0", "source": "async function outer() { return await\nclass {} / divisor; }", "expect": true, "module": true}
+{"id": "Module_await_keeps_its_operand_across_every_line_terminator-1", "source": "async function* outer() { yield await\nfunction() {} / divisor; }", "expect": true, "module": true}
+{"id": "Module_await_keeps_its_operand_across_every_line_terminator-2", "source": "const value = `value ${await\nclass {} / divisor}`;", "expect": true, "module": true}
+{"id": "Module_reserved_await_and_missing_operands_remain_invalid-0", "source": "await\n;", "expect": false, "module": true}
+{"id": "Module_reserved_await_and_missing_operands_remain_invalid-1", "source": "var await = class {} / divisor;", "expect": false, "module": true}
+{"id": "Module_reserved_await_and_missing_operands_remain_invalid-2", "source": "function outer(await = function() {} / divisor) {}", "expect": false, "module": true}
+{"id": "Module_reserved_await_and_missing_operands_remain_invalid-3", "source": "\\u0061wait\nclass {} / divisor;", "expect": false, "module": true}
+{"id": "generated-keyword-44", "source": "async function outer() { await\nclass {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-45", "source": "async function outer() { await\nfunction() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-46", "source": "async function outer() { await\nasync function() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-47", "source": "async function outer() { await\nfunction*() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-module-48", "source": "await\nclass {} / divisor;", "expect": true, "module": true}
+{"id": "generated-module-49", "source": "await\nfunction() {} / divisor;", "expect": true, "module": true}
+{"id": "generated-module-50", "source": "await\nasync function() {} / divisor;", "expect": true, "module": true}
+{"id": "generated-keyword-51", "source": "async function outer() { await\r\nclass {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-52", "source": "async function outer() { await\r\nfunction() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-53", "source": "async function outer() { await\r\nasync function() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-54", "source": "async function outer() { await\r\nfunction*() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-module-55", "source": "await\r\nclass {} / divisor;", "expect": true, "module": true}
+{"id": "generated-module-56", "source": "await\r\nfunction() {} / divisor;", "expect": true, "module": true}
+{"id": "generated-module-57", "source": "await\r\nasync function() {} / divisor;", "expect": true, "module": true}
+{"id": "generated-keyword-58", "source": "async function outer() { await /*\n*/ class {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-59", "source": "async function outer() { await /*\n*/ function() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-60", "source": "async function outer() { await /*\n*/ async function() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-61", "source": "async function outer() { await /*\n*/ function*() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-module-62", "source": "await /*\n*/ class {} / divisor;", "expect": true, "module": true}
+{"id": "generated-module-63", "source": "await /*\n*/ function() {} / divisor;", "expect": true, "module": true}
+{"id": "generated-module-64", "source": "await /*\n*/ async function() {} / divisor;", "expect": true, "module": true}
+{"id": "generated-keyword-65", "source": "async function outer() { await class {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-66", "source": "async function outer() { await function() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-67", "source": "async function outer() { await async function() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-68", "source": "async function outer() { await function*() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-module-69", "source": "await class {} / divisor;", "expect": true, "module": true}
+{"id": "generated-module-70", "source": "await function() {} / divisor;", "expect": true, "module": true}
+{"id": "generated-module-71", "source": "await async function() {} / divisor;", "expect": true, "module": true}
+{"id": "generated-keyword-72", "source": "async function outer() { await class {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-73", "source": "async function outer() { await function() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-74", "source": "async function outer() { await async function() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-keyword-75", "source": "async function outer() { await function*() {} / divisor; }", "expect": true, "module": false}
+{"id": "generated-module-76", "source": "await class {} / divisor;", "expect": true, "module": true}
+{"id": "generated-module-77", "source": "await function() {} / divisor;", "expect": true, "module": true}
+{"id": "generated-module-78", "source": "await async function() {} / divisor;", "expect": true, "module": true}

@@ -1,0 +1,11 @@
+{
+  "input": "artifacts/ecmascript-audit/static/await-asi-probes.jsonl",
+  "skip": 0,
+  "processed": 18,
+  "outcomes": {
+    "unexpected-reject": 12,
+    "pass": 6
+  },
+  "elapsedSeconds": 62.5208391,
+  "syntaxOnly": true
+}

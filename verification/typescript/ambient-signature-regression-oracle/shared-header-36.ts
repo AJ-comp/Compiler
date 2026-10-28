@@ -1,0 +1,1 @@
+export declare namespace Tools { function run(...values: number[], next: number): void; }

@@ -1,0 +1,751 @@
+Janglim.FrontEnd.Parsers.AmbiguityDeleter | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.AmbiguityDeleter | METHOD Public, Static, HideBySig Standard System.Void Operate(None Janglim.FrontEnd.RegularGrammar.NonTerminal target req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.AmbiguityDeleter | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Analyzer | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Analyzer | METHOD Public, Static, HideBySig Standard Janglim.FrontEnd.Parsers.Collections.CanonicalState Closure(None Janglim.FrontEnd.Parsers.Collections.CanonicalState iStatus req() opt(),Optional, HasDefault System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal> exploredSet= req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Analyzer | METHOD Public, Static, HideBySig Standard Janglim.FrontEnd.Parsers.Collections.CanonicalState Goto(None Janglim.FrontEnd.Parsers.Collections.CanonicalState iStatus req() opt(),None Janglim.FrontEnd.RegularGrammar.Symbol toSeeSymbol req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Analyzer | METHOD Public, Static, HideBySig Standard Janglim.FrontEnd.RegularGrammar.TerminalSet SecondTerminalSet(None Janglim.FrontEnd.RegularGrammar.NonTerminal nonTerminal req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Analyzer | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalCollection | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Collections.CanonicalCollection | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.List`1<Janglim.FrontEnd.Parsers.Collections.CanonicalState> INTERFACES System.Collections.Generic.ICollection`1<Janglim.FrontEnd.Parsers.Collections.CanonicalState>,System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Collections.CanonicalState>,System.Collections.Generic.IList`1<Janglim.FrontEnd.Parsers.Collections.CanonicalState>,System.Collections.Generic.IReadOnlyCollection`1<Janglim.FrontEnd.Parsers.Collections.CanonicalState>,System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Collections.CanonicalState>,System.Collections.ICollection,System.Collections.IEnumerable,System.Collections.IList GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalLine | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Int32 prevStatusIndex req() opt(),None Janglim.FrontEnd.RegularGrammar.Symbol seeingMarkSymbol req() opt(),None Janglim.FrontEnd.Parsers.Collections.CanonicalState currentCanonical req() opt())
+Janglim.FrontEnd.Parsers.Collections.CanonicalLine | METHOD Public, HideBySig Standard, HasThis System.String GetDebuggerDisplay() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalLine | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Collections.CanonicalState get_CurrentCanonical() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalLine | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.Symbol get_SeeingMarkSymbol() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalLine | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_CurrentStatusIndex() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalLine | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_PrevStatusIndex() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalLine | PROPERTY Janglim.FrontEnd.Parsers.Collections.CanonicalState CurrentCanonical()
+Janglim.FrontEnd.Parsers.Collections.CanonicalLine | PROPERTY Janglim.FrontEnd.RegularGrammar.Symbol SeeingMarkSymbol()
+Janglim.FrontEnd.Parsers.Collections.CanonicalLine | PROPERTY System.Int32 CurrentStatusIndex()
+Janglim.FrontEnd.Parsers.Collections.CanonicalLine | PROPERTY System.Int32 PrevStatusIndex()
+Janglim.FrontEnd.Parsers.Collections.CanonicalLine | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | FIELD Public System.Collections.Generic.Dictionary`2<System.ValueTuple`2<System.Int32,Janglim.FrontEnd.Parsers.Datas.LR.LRItem>,Janglim.FrontEnd.RegularGrammar.TerminalSet> LookAheadTable
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Collections.CanonicalCollection ToCanonicalCollection() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Collections.CanonicalState GetStatusFromIxIndex(None System.Int32 IxIndex req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ActionDicSymbolMatched GetCanSeeMatchValue(None System.Int32 ixIndex req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, HideBySig Standard, HasThis System.Boolean Add(None Janglim.FrontEnd.Parsers.Collections.CanonicalState prevStatus req() opt(),None Janglim.FrontEnd.RegularGrammar.Symbol markSymbol req() opt(),None Janglim.FrontEnd.Parsers.Collections.CanonicalState curStatus req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, HideBySig Standard, HasThis System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Collections.CanonicalLine> ToCanonicalLineList() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, HideBySig Standard, HasThis System.Data.DataTable ToDataTable() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, HideBySig Standard, HasThis System.Void Calculate(None Janglim.FrontEnd.RegularGrammar.NonTerminal virtualStartSymbol req() opt(),None Janglim.FrontEnd.FirstFollowAnalyzer ffAnalyzer req() opt(),None Janglim.FrontEnd.Parsers.Collections.CanonicalType canonicalType req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Collections.CanonicalStateSet get_AllCanonicalStates() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Collections.ReduceParameter get_ReduceParameter() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.Dictionary`2<System.Int32,Janglim.FrontEnd.Parsers.Collections.CanonicalState> get_IndexStateDic() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.IEnumerable`1<System.String> get_ConflictLogs() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_NextIxIndex() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | METHOD Public, Virtual, HideBySig Standard, HasThis System.String ToString() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | PROPERTY Janglim.FrontEnd.Parsers.Collections.CanonicalStateSet AllCanonicalStates()
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | PROPERTY Janglim.FrontEnd.Parsers.Collections.ReduceParameter ReduceParameter()
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | PROPERTY System.Collections.Generic.Dictionary`2<System.Int32,Janglim.FrontEnd.Parsers.Collections.CanonicalState> IndexStateDic()
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | PROPERTY System.Collections.Generic.IEnumerable`1<System.String> ConflictLogs()
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | PROPERTY System.Int32 NextIxIndex()
+Janglim.FrontEnd.Parsers.Collections.CanonicalRelation | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.Dictionary`2<System.Int32,System.Collections.Generic.HashSet`1<System.ValueTuple`2<Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Collections.CanonicalState>>> INTERFACES System.Collections.Generic.ICollection`1<System.Collections.Generic.KeyValuePair`2<System.Int32,System.Collections.Generic.HashSet`1<System.ValueTuple`2<Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Collections.CanonicalState>>>>,System.Collections.Generic.IDictionary`2<System.Int32,System.Collections.Generic.HashSet`1<System.ValueTuple`2<Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Collections.CanonicalState>>>,System.Collections.Generic.IEnumerable`1<System.Collections.Generic.KeyValuePair`2<System.Int32,System.Collections.Generic.HashSet`1<System.ValueTuple`2<Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Collections.CanonicalState>>>>,System.Collections.Generic.IReadOnlyCollection`1<System.Collections.Generic.KeyValuePair`2<System.Int32,System.Collections.Generic.HashSet`1<System.ValueTuple`2<Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Collections.CanonicalState>>>>,System.Collections.Generic.IReadOnlyDictionary`2<System.Int32,System.Collections.Generic.HashSet`1<System.ValueTuple`2<Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Collections.CanonicalState>>>,System.Collections.ICollection,System.Collections.IDictionary,System.Collections.IEnumerable,System.Runtime.Serialization.IDeserializationCallback,System.Runtime.Serialization.ISerializable GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Int32 stateNumber req() opt(),None Janglim.FrontEnd.Parsers.Datas.LR.LRItem item req() opt())
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Int32 stateNumber req() opt())
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Collections.CanonicalState GetNewStateHasMarkSymbol(None Janglim.FrontEnd.RegularGrammar.Symbol markSymbol req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.LR.LRItem GetItem(None Janglim.FrontEnd.Parsers.Datas.LR.LRItem toFindItem req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.LR.LRItem GetMatchedItem(None Janglim.FrontEnd.RegularGrammar.SymbolSet seenSymbols req() opt(),None Janglim.FrontEnd.RegularGrammar.Terminal markSymbol req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet GetAllFollowSet() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet GetAllLookAheadSet() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig Standard, HasThis System.Boolean HasItem(None Janglim.FrontEnd.Parsers.Datas.LR.LRItem toFindItem req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig Standard, HasThis System.Boolean IsReduceReduceConflict(None Janglim.FrontEnd.Parsers.Collections.ReduceParameter reduceParameter req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig Standard, HasThis System.Boolean IsShiftReduceConflict(None Janglim.FrontEnd.Parsers.Collections.ReduceParameter reduceParameter req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig Standard, HasThis System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal> GetAllNonTerminalSet() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig Standard, HasThis System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminalSingle> GetNTSingleHasMarkSymbol(None Janglim.FrontEnd.RegularGrammar.Symbol markSymbol req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig Standard, HasThis System.String ToLineString() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Collections.CanonicalState get_ReachedHandleItem() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.SymbolSet get_MarkSymbolSet() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_IsReachedHandle() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminalSingle> get_ReachedHandleSet() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminalSingle> get_ShiftItemList() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_StateNumber() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, Static, HideBySig, SpecialName Standard System.Boolean op_Equality(None Janglim.FrontEnd.Parsers.Collections.CanonicalState left req() opt(),None Janglim.FrontEnd.Parsers.Collections.CanonicalState right req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, Static, HideBySig, SpecialName Standard System.Boolean op_Inequality(None Janglim.FrontEnd.Parsers.Collections.CanonicalState left req() opt(),None Janglim.FrontEnd.Parsers.Collections.CanonicalState right req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, Virtual, HideBySig Standard, HasThis System.Boolean Equals(None System.Object obj req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, Virtual, HideBySig Standard, HasThis System.Int32 GetHashCode() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | METHOD Public, Virtual, HideBySig Standard, HasThis System.String ToString() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | PROPERTY Janglim.FrontEnd.Parsers.Collections.CanonicalState ReachedHandleItem()
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | PROPERTY Janglim.FrontEnd.RegularGrammar.SymbolSet MarkSymbolSet()
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | PROPERTY System.Boolean IsReachedHandle()
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | PROPERTY System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminalSingle> ReachedHandleSet()
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | PROPERTY System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminalSingle> ShiftItemList()
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | PROPERTY System.Int32 StateNumber()
+Janglim.FrontEnd.Parsers.Collections.CanonicalState | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.HashSet`1<Janglim.FrontEnd.Parsers.Datas.LR.LRItem> INTERFACES System.Collections.Generic.ICollection`1<Janglim.FrontEnd.Parsers.Datas.LR.LRItem>,System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.LR.LRItem>,System.Collections.Generic.IReadOnlyCollection`1<Janglim.FrontEnd.Parsers.Datas.LR.LRItem>,System.Collections.Generic.IReadOnlySet`1<Janglim.FrontEnd.Parsers.Datas.LR.LRItem>,System.Collections.Generic.ISet`1<Janglim.FrontEnd.Parsers.Datas.LR.LRItem>,System.Collections.IEnumerable,System.Runtime.Serialization.IDeserializationCallback,System.Runtime.Serialization.ISerializable GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalStateSet | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Collections.CanonicalStateSet | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Collections.CanonicalStateSet GetStateSetHasSpecifiedMarkSymbol(None Janglim.FrontEnd.RegularGrammar.Symbol markSymbol req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalStateSet | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.HashSet`1<Janglim.FrontEnd.Parsers.Collections.CanonicalState> INTERFACES System.Collections.Generic.ICollection`1<Janglim.FrontEnd.Parsers.Collections.CanonicalState>,System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Collections.CanonicalState>,System.Collections.Generic.IReadOnlyCollection`1<Janglim.FrontEnd.Parsers.Collections.CanonicalState>,System.Collections.Generic.IReadOnlySet`1<Janglim.FrontEnd.Parsers.Collections.CanonicalState>,System.Collections.Generic.ISet`1<Janglim.FrontEnd.Parsers.Collections.CanonicalState>,System.Collections.IEnumerable,System.Runtime.Serialization.IDeserializationCallback,System.Runtime.Serialization.ISerializable GENERICS 
+Janglim.FrontEnd.Parsers.Collections.CanonicalType | FIELD Public, SpecialName, RTSpecialName System.Int32 value__
+Janglim.FrontEnd.Parsers.Collections.CanonicalType | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Collections.CanonicalType C0=0
+Janglim.FrontEnd.Parsers.Collections.CanonicalType | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Collections.CanonicalType C1=2
+Janglim.FrontEnd.Parsers.Collections.CanonicalType | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Collections.CanonicalType LALRC1=1
+Janglim.FrontEnd.Parsers.Collections.CanonicalType | TYPE Public, Sealed BASE System.Enum INTERFACES System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable GENERICS 
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowCollection | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowCollection | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Data.DataTable get_ToTableFormat() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowCollection | PROPERTY System.Data.DataTable ToTableFormat()
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowCollection | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.List`1<Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem> INTERFACES System.Collections.Generic.ICollection`1<Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem>,System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem>,System.Collections.Generic.IList`1<Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem>,System.Collections.Generic.IReadOnlyCollection`1<Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem>,System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem>,System.Collections.ICollection,System.Collections.IEnumerable,System.Collections.IList GENERICS 
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.RegularGrammar.Symbol symbol req() opt(),None Janglim.FrontEnd.RegularGrammar.TerminalSet first req() opt(),None Janglim.FrontEnd.RegularGrammar.TerminalSet follow req() opt())
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem | METHOD Public, HideBySig Standard, HasThis System.String GetDebuggerDisplay() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.Symbol get_Symbol() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet get_First() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet get_Follow() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem | PROPERTY Janglim.FrontEnd.RegularGrammar.Symbol Symbol()
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem | PROPERTY Janglim.FrontEnd.RegularGrammar.TerminalSet First()
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem | PROPERTY Janglim.FrontEnd.RegularGrammar.TerminalSet Follow()
+Janglim.FrontEnd.Parsers.Collections.FirstAndFollowItem | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Collections.IParsingTable | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract Standard, HasThis System.Void CreateParsingTable(None System.Object[] datas req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.IParsingTable | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ParseTableEntry> get_Entries() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.IParsingTable | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.RegularGrammar.Symbol> get_AllSymbols() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.IParsingTable | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis System.Data.DataTable get_ToTableFormat() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.IParsingTable | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis System.String get_Introduce() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.IParsingTable | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis System.Void set_Introduce(None System.String value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.IParsingTable | PROPERTY System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ParseTableEntry> Entries()
+Janglim.FrontEnd.Parsers.Collections.IParsingTable | PROPERTY System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.RegularGrammar.Symbol> AllSymbols()
+Janglim.FrontEnd.Parsers.Collections.IParsingTable | PROPERTY System.Data.DataTable ToTableFormat()
+Janglim.FrontEnd.Parsers.Collections.IParsingTable | PROPERTY System.String Introduce()
+Janglim.FrontEnd.Parsers.Collections.IParsingTable | TYPE Public, ClassSemanticsMask, Abstract, BeforeFieldInit BASE  INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask Standard, HasThis System.Void CreateParsingTable(None System.Object[] datas req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName Standard, HasThis System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ParseTableEntry> get_Entries() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName Standard, HasThis System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.RegularGrammar.Symbol> get_AllSymbols() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName Standard, HasThis System.Data.DataTable get_ToTableFormat() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName Standard, HasThis System.String get_Introduce() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName Standard, HasThis System.Void set_Introduce(None System.String value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet get_RefTerminalSet() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal> get_RefNonTerminalSet() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | PROPERTY Janglim.FrontEnd.RegularGrammar.TerminalSet RefTerminalSet()
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | PROPERTY System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal> RefNonTerminalSet()
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | PROPERTY System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ParseTableEntry> Entries()
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | PROPERTY System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.RegularGrammar.Symbol> AllSymbols()
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | PROPERTY System.Data.DataTable ToTableFormat()
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | PROPERTY System.String Introduce()
+Janglim.FrontEnd.Parsers.Collections.LRParsingTable | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.List`1<Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat> INTERFACES Janglim.FrontEnd.Parsers.Collections.IParsingTable,System.Collections.Generic.ICollection`1<Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat>,System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat>,System.Collections.Generic.IList`1<Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat>,System.Collections.Generic.IReadOnlyCollection`1<Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat>,System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat>,System.Collections.ICollection,System.Collections.IEnumerable,System.Collections.IList GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingDic | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Collections.ParsingDic | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet PossibleTerminalSet(None Janglim.FrontEnd.RegularGrammar.NonTerminal curStatus req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingDic | METHOD Public, HideBySig Standard, HasThis System.Boolean ContainsKey(None Janglim.FrontEnd.RegularGrammar.Terminal item1 req() opt(),None Janglim.FrontEnd.RegularGrammar.NonTerminal item2 req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingDic | METHOD Public, HideBySig Standard, HasThis System.Data.DataTable ToDataTable(None System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal> nonTerminals req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingDic | METHOD Public, HideBySig Standard, HasThis System.Void Replace(None System.Tuple`2<Janglim.FrontEnd.RegularGrammar.Terminal,Janglim.FrontEnd.RegularGrammar.NonTerminal> key req() opt(),None Janglim.FrontEnd.RegularGrammar.NonTerminalSingle replaceVaue req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingDic | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.NonTerminalSingle get_Item(None Janglim.FrontEnd.RegularGrammar.Terminal item1 req() opt(),None Janglim.FrontEnd.RegularGrammar.NonTerminal item2 req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingDic | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void set_Item(None Janglim.FrontEnd.RegularGrammar.Terminal item1 req() opt(),None Janglim.FrontEnd.RegularGrammar.NonTerminal item2 req() opt(),None Janglim.FrontEnd.RegularGrammar.NonTerminalSingle value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingDic | PROPERTY Janglim.FrontEnd.RegularGrammar.NonTerminalSingle Item(None Janglim.FrontEnd.RegularGrammar.Terminal item1 req() opt(),None Janglim.FrontEnd.RegularGrammar.NonTerminal item2 req() opt())
+Janglim.FrontEnd.Parsers.Collections.ParsingDic | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.Dictionary`2<System.Tuple`2<Janglim.FrontEnd.RegularGrammar.Terminal,Janglim.FrontEnd.RegularGrammar.NonTerminal>,Janglim.FrontEnd.RegularGrammar.NonTerminalSingle> INTERFACES System.Collections.Generic.ICollection`1<System.Collections.Generic.KeyValuePair`2<System.Tuple`2<Janglim.FrontEnd.RegularGrammar.Terminal,Janglim.FrontEnd.RegularGrammar.NonTerminal>,Janglim.FrontEnd.RegularGrammar.NonTerminalSingle>>,System.Collections.Generic.IDictionary`2<System.Tuple`2<Janglim.FrontEnd.RegularGrammar.Terminal,Janglim.FrontEnd.RegularGrammar.NonTerminal>,Janglim.FrontEnd.RegularGrammar.NonTerminalSingle>,System.Collections.Generic.IEnumerable`1<System.Collections.Generic.KeyValuePair`2<System.Tuple`2<Janglim.FrontEnd.RegularGrammar.Terminal,Janglim.FrontEnd.RegularGrammar.NonTerminal>,Janglim.FrontEnd.RegularGrammar.NonTerminalSingle>>,System.Collections.Generic.IReadOnlyCollection`1<System.Collections.Generic.KeyValuePair`2<System.Tuple`2<Janglim.FrontEnd.RegularGrammar.Terminal,Janglim.FrontEnd.RegularGrammar.NonTerminal>,Janglim.FrontEnd.RegularGrammar.NonTerminalSingle>>,System.Collections.Generic.IReadOnlyDictionary`2<System.Tuple`2<Janglim.FrontEnd.RegularGrammar.Terminal,Janglim.FrontEnd.RegularGrammar.NonTerminal>,Janglim.FrontEnd.RegularGrammar.NonTerminalSingle>,System.Collections.ICollection,System.Collections.IDictionary,System.Collections.IEnumerable,System.Runtime.Serialization.IDeserializationCallback,System.Runtime.Serialization.ISerializable GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingHistory | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Collections.ParsingHistory | METHOD Public, HideBySig Standard, HasThis System.Void AddColumn(None System.String columnName req() opt(),None System.Type type req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingHistory | METHOD Public, HideBySig Standard, HasThis System.Void AddColumn(None System.String columnName req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingHistory | METHOD Public, HideBySig Standard, HasThis System.Void AddRow(None System.Object[] datas req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingHistory | METHOD Public, HideBySig Standard, HasThis System.Void AddTreeInfo(None Janglim.FrontEnd.RegularGrammar.NonTerminalSingle singleNT req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingHistory | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.List`1<Janglim.FrontEnd.RegularGrammar.NonTerminalSingle> get_TreeInfo() GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingHistory | PROPERTY System.Collections.Generic.List`1<Janglim.FrontEnd.RegularGrammar.NonTerminalSingle> TreeInfo()
+Janglim.FrontEnd.Parsers.Collections.ParsingHistory | TYPE Public, BeforeFieldInit BASE System.Data.DataTable INTERFACES System.ComponentModel.IComponent,System.ComponentModel.IListSource,System.ComponentModel.ISupportInitialize,System.ComponentModel.ISupportInitializeNotification,System.IDisposable,System.IServiceProvider,System.Runtime.Serialization.ISerializable,System.Xml.Serialization.IXmlSerializable GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ParsingLogger | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Collections.ParsingLogger | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.List`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory> INTERFACES System.Collections.Generic.ICollection`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory>,System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory>,System.Collections.Generic.IList`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory>,System.Collections.Generic.IReadOnlyCollection`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory>,System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory>,System.Collections.ICollection,System.Collections.IEnumerable,System.Collections.IList GENERICS 
+Janglim.FrontEnd.Parsers.Collections.ReduceParameter | FIELD Public, SpecialName, RTSpecialName System.Int32 value__
+Janglim.FrontEnd.Parsers.Collections.ReduceParameter | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Collections.ReduceParameter Follow=0
+Janglim.FrontEnd.Parsers.Collections.ReduceParameter | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Collections.ReduceParameter LalrLookAhead=1
+Janglim.FrontEnd.Parsers.Collections.ReduceParameter | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Collections.ReduceParameter LookAhead1=2
+Janglim.FrontEnd.Parsers.Collections.ReduceParameter | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Collections.ReduceParameter LookAhead2=3
+Janglim.FrontEnd.Parsers.Collections.ReduceParameter | TYPE Public, Sealed BASE System.Enum INTERFACES System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable GENERICS 
+Janglim.FrontEnd.Parsers.Collections.SymbolTable | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Collections.SymbolTable | METHOD Public, HideBySig Standard, HasThis System.Boolean Contains(None Janglim.FrontEnd.TokenData token req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.SymbolTable | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.HashSet`1<Janglim.FrontEnd.Parsers.Datas.SymbolRowData> INTERFACES System.Collections.Generic.ICollection`1<Janglim.FrontEnd.Parsers.Datas.SymbolRowData>,System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.SymbolRowData>,System.Collections.Generic.IReadOnlyCollection`1<Janglim.FrontEnd.Parsers.Datas.SymbolRowData>,System.Collections.Generic.IReadOnlySet`1<Janglim.FrontEnd.Parsers.Datas.SymbolRowData>,System.Collections.Generic.ISet`1<Janglim.FrontEnd.Parsers.Datas.SymbolRowData>,System.Collections.IEnumerable,System.Runtime.Serialization.IDeserializationCallback,System.Runtime.Serialization.ISerializable GENERICS 
+Janglim.FrontEnd.Parsers.Collections.SymbolTableStack | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Collections.SymbolTableStack | METHOD Public, HideBySig Standard, HasThis System.Boolean Contains(None Janglim.FrontEnd.TokenData[] tokenList req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Collections.SymbolTableStack | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.Stack`1<Janglim.FrontEnd.Parsers.Collections.SymbolTable> INTERFACES System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Collections.SymbolTable>,System.Collections.Generic.IReadOnlyCollection`1<Janglim.FrontEnd.Parsers.Collections.SymbolTable>,System.Collections.ICollection,System.Collections.IEnumerable GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ActionData | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Datas.ActionData | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir actionDir req() opt(),None System.Object actionDest req() opt())
+Janglim.FrontEnd.Parsers.Datas.ActionData | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir get_Direction() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ActionData | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParseAction get_Action() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ActionData | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Object get_Dest() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ActionData | METHOD Public, Virtual, HideBySig Standard, HasThis System.String ToString() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ActionData | PROPERTY Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir Direction()
+Janglim.FrontEnd.Parsers.Datas.ActionData | PROPERTY Janglim.FrontEnd.Parsers.Datas.ParseAction Action()
+Janglim.FrontEnd.Parsers.Datas.ActionData | PROPERTY System.Object Dest()
+Janglim.FrontEnd.Parsers.Datas.ActionData | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ActionDataList | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Datas.ActionDataList | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir get_DefaultDirection() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ActionDataList | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Object get_DefaultDest() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ActionDataList | PROPERTY Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir DefaultDirection()
+Janglim.FrontEnd.Parsers.Datas.ActionDataList | PROPERTY System.Object DefaultDest()
+Janglim.FrontEnd.Parsers.Datas.ActionDataList | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.List`1<Janglim.FrontEnd.Parsers.Datas.ActionData> INTERFACES System.Collections.Generic.ICollection`1<Janglim.FrontEnd.Parsers.Datas.ActionData>,System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ActionData>,System.Collections.Generic.IList`1<Janglim.FrontEnd.Parsers.Datas.ActionData>,System.Collections.Generic.IReadOnlyCollection`1<Janglim.FrontEnd.Parsers.Datas.ActionData>,System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ActionData>,System.Collections.ICollection,System.Collections.IEnumerable,System.Collections.IList GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ActionDicSymbolMatched | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Datas.ActionDicSymbolMatched | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.Dictionary`2<Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Datas.ActionDataList> INTERFACES System.Collections.Generic.ICollection`1<System.Collections.Generic.KeyValuePair`2<Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Datas.ActionDataList>>,System.Collections.Generic.IDictionary`2<Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Datas.ActionDataList>,System.Collections.Generic.IEnumerable`1<System.Collections.Generic.KeyValuePair`2<Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Datas.ActionDataList>>,System.Collections.Generic.IReadOnlyCollection`1<System.Collections.Generic.KeyValuePair`2<Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Datas.ActionDataList>>,System.Collections.Generic.IReadOnlyDictionary`2<Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Datas.ActionDataList>,System.Collections.ICollection,System.Collections.IDictionary,System.Collections.IEnumerable,System.Runtime.Serialization.IDeserializationCallback,System.Runtime.Serialization.ISerializable GENERICS 
+Janglim.FrontEnd.Parsers.Datas.AstListViewer | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Datas.AstListViewer | METHOD Public, Static, HideBySig Standard System.String ToString(None System.Collections.Generic.IEnumerable`1<System.Object> list req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.AstListViewer | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictAction | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Int32 state req() opt(),None System.Int32 ambiguousBlockIndex req() opt(),None Janglim.FrontEnd.Parsers.Datas.ActionData action req() opt())
+Janglim.FrontEnd.Parsers.Datas.ConflictAction | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ActionData get_Action() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictAction | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_AmbiguousBlockIndex() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictAction | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_State() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictAction | PROPERTY Janglim.FrontEnd.Parsers.Datas.ActionData Action()
+Janglim.FrontEnd.Parsers.Datas.ConflictAction | PROPERTY System.Int32 AmbiguousBlockIndex()
+Janglim.FrontEnd.Parsers.Datas.ConflictAction | PROPERTY System.Int32 State()
+Janglim.FrontEnd.Parsers.Datas.ConflictAction | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Int32 state req() opt(),None Janglim.FrontEnd.Parsers.Datas.ActionDataList actions req() opt())
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Int32 state req() opt(),None System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ActionData> actions req() opt())
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ActionDataList get_Actions() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_AmbiguousBlockIndex() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_State() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_UnitIndexInBlock() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void set_State(None System.Int32 value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | METHOD Public, Static, HideBySig, SpecialName Standard System.Boolean op_Equality(None Janglim.FrontEnd.Parsers.Datas.ConflictItem left req() opt(),None Janglim.FrontEnd.Parsers.Datas.ConflictItem right req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | METHOD Public, Static, HideBySig, SpecialName Standard System.Boolean op_Inequality(None Janglim.FrontEnd.Parsers.Datas.ConflictItem left req() opt(),None Janglim.FrontEnd.Parsers.Datas.ConflictItem right req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | METHOD Public, Virtual, HideBySig Standard, HasThis System.Boolean Equals(None System.Object obj req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | METHOD Public, Virtual, HideBySig Standard, HasThis System.Int32 GetHashCode() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | PROPERTY Janglim.FrontEnd.Parsers.Datas.ActionDataList Actions()
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | PROPERTY System.Int32 AmbiguousBlockIndex()
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | PROPERTY System.Int32 State()
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | PROPERTY System.Int32 UnitIndexInBlock()
+Janglim.FrontEnd.Parsers.Datas.ConflictItem | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Parsers.Parser parser req() opt(),None Janglim.FrontEnd.Parsers.Datas.ParsingResult parsingResult req() opt(),None System.Int32 seeingTokenIndex req() opt(),None System.Boolean useBackTracking req() opt())
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.ErrorHandlingResult ToErrorHandlingResult(None System.Boolean bSuccess req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.ErrorHandlingResult ToErrorHandlingResult(None System.Int32 seeingTokenIndex req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingBlock get_CurBlock() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingResult get_ParsingResult() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Parser get_Parser() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.TokenData get_NextToken() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.TokenData get_PrevToken() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_UseBackTracking() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_SeeingTokenIndex() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | PROPERTY Janglim.FrontEnd.Parsers.Datas.ParsingBlock CurBlock()
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | PROPERTY Janglim.FrontEnd.Parsers.Datas.ParsingResult ParsingResult()
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | PROPERTY Janglim.FrontEnd.Parsers.Parser Parser()
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | PROPERTY Janglim.FrontEnd.TokenData NextToken()
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | PROPERTY Janglim.FrontEnd.TokenData PrevToken()
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | PROPERTY System.Boolean UseBackTracking()
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | PROPERTY System.Int32 SeeingTokenIndex()
+Janglim.FrontEnd.Parsers.Datas.DataForRecovery | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.Direction | FIELD Public, SpecialName, RTSpecialName System.Int32 value__
+Janglim.FrontEnd.Parsers.Datas.Direction | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Datas.Direction Backward=0
+Janglim.FrontEnd.Parsers.Datas.Direction | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Datas.Direction Forward=1
+Janglim.FrontEnd.Parsers.Datas.Direction | TYPE Public, Sealed BASE System.Enum INTERFACES System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LL.LLParsingRowDataFormat | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.RegularGrammar.NonTerminal row req() opt(),None System.Collections.Generic.Dictionary`2<Janglim.FrontEnd.RegularGrammar.Terminal,Janglim.FrontEnd.RegularGrammar.NonTerminalSingle> matchedValueSet req() opt())
+Janglim.FrontEnd.Parsers.Datas.LL.LLParsingRowDataFormat | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet get_PossibleTerminalSet() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LL.LLParsingRowDataFormat | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal> get_PossibleNonTerminalSet() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LL.LLParsingRowDataFormat | PROPERTY Janglim.FrontEnd.RegularGrammar.TerminalSet PossibleTerminalSet()
+Janglim.FrontEnd.Parsers.Datas.LL.LLParsingRowDataFormat | PROPERTY System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal> PossibleNonTerminalSet()
+Janglim.FrontEnd.Parsers.Datas.LL.LLParsingRowDataFormat | TYPE Public, BeforeFieldInit BASE Janglim.FrontEnd.Parsers.Datas.ParsingRowDataFormat`3<Janglim.FrontEnd.RegularGrammar.NonTerminal,Janglim.FrontEnd.RegularGrammar.Terminal,Janglim.FrontEnd.RegularGrammar.NonTerminalSingle> INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Parsers.Collections.CanonicalLine line req() opt(),None Janglim.FrontEnd.Parsers.Collections.ReduceParameter reduceParameter req() opt())
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | METHOD Public, HideBySig Standard, HasThis System.String GetDebuggerDisplay() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Collections.CanonicalLine get_CanonicalLine() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_IsReduceReduceConflict() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_IsShiftReduceConflict() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_Result() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_AmbiguityContent() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | PROPERTY Janglim.FrontEnd.Parsers.Collections.CanonicalLine CanonicalLine()
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | PROPERTY System.Boolean IsReduceReduceConflict()
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | PROPERTY System.Boolean IsShiftReduceConflict()
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | PROPERTY System.Boolean Result()
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | PROPERTY System.String AmbiguityContent()
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckResult | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckResult | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Data.DataTable get_ToTableFormat() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckResult | PROPERTY System.Data.DataTable ToTableFormat()
+Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckResult | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.List`1<Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem> INTERFACES System.Collections.Generic.ICollection`1<Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem>,System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem>,System.Collections.Generic.IList`1<Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem>,System.Collections.Generic.IReadOnlyCollection`1<Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem>,System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem>,System.Collections.ICollection,System.Collections.IEnumerable,System.Collections.IList GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.RegularGrammar.NonTerminalSingle singleNT req() opt(),None System.SByte markIdx req() opt())
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.RegularGrammar.NonTerminalSingle singleNT req() opt())
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask Standard, HasThis System.Object Clone() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.LR.LRItem FirstLRItem() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.LR.LRItem PrevLRItem() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.RegularGrammar.Symbol GetSymbolFarMarkIndex(None System.Int32 index req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig Standard, HasThis System.Boolean Equals(None Janglim.FrontEnd.Parsers.Datas.LR.LRItem other req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig Standard, HasThis System.Void MoveMarkSymbol() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.NonTerminalConcat get_SymbolListAfterMarkSymbol() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.NonTerminalConcat get_SymbolListBeforeMarkSymbol() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.NonTerminalSingle get_SingleNT() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.Symbol get_MarkSymbol() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.Symbol get_PrevMarkSymbol() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet get_Follow() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet get_LookAhead() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_IsFirst() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_IsReachedHandle() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, Static, HideBySig, SpecialName Standard System.Boolean op_Equality(None Janglim.FrontEnd.Parsers.Datas.LR.LRItem left req() opt(),None Janglim.FrontEnd.Parsers.Datas.LR.LRItem right req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, Static, HideBySig, SpecialName Standard System.Boolean op_Inequality(None Janglim.FrontEnd.Parsers.Datas.LR.LRItem left req() opt(),None Janglim.FrontEnd.Parsers.Datas.LR.LRItem right req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, Virtual, HideBySig Standard, HasThis System.Boolean Equals(None System.Object obj req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, Virtual, HideBySig Standard, HasThis System.Int32 GetHashCode() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | METHOD Public, Virtual, HideBySig Standard, HasThis System.String ToString() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | PROPERTY Janglim.FrontEnd.RegularGrammar.NonTerminalConcat SymbolListAfterMarkSymbol()
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | PROPERTY Janglim.FrontEnd.RegularGrammar.NonTerminalConcat SymbolListBeforeMarkSymbol()
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | PROPERTY Janglim.FrontEnd.RegularGrammar.NonTerminalSingle SingleNT()
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | PROPERTY Janglim.FrontEnd.RegularGrammar.Symbol MarkSymbol()
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | PROPERTY Janglim.FrontEnd.RegularGrammar.Symbol PrevMarkSymbol()
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | PROPERTY Janglim.FrontEnd.RegularGrammar.TerminalSet Follow()
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | PROPERTY Janglim.FrontEnd.RegularGrammar.TerminalSet LookAhead()
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | PROPERTY System.Boolean IsFirst()
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | PROPERTY System.Boolean IsReachedHandle()
+Janglim.FrontEnd.Parsers.Datas.LR.LRItem | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES System.ICloneable GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Parsers.Collections.CanonicalState ix req() opt(),None Janglim.FrontEnd.Parsers.Datas.ActionDicSymbolMatched matchedValueSet req() opt())
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet get_PossibleTerminalSet() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal> get_PossibleNonTerminalSet() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat | PROPERTY Janglim.FrontEnd.RegularGrammar.TerminalSet PossibleTerminalSet()
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat | PROPERTY System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal> PossibleNonTerminalSet()
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat | TYPE Public, BeforeFieldInit BASE Janglim.FrontEnd.Parsers.Datas.ParsingRowDataFormat`3<Janglim.FrontEnd.Parsers.Collections.CanonicalState,Janglim.FrontEnd.RegularGrammar.Symbol,Janglim.FrontEnd.Parsers.Datas.ActionDataList> INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir | FIELD Public, SpecialName, RTSpecialName System.Int32 value__
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir Accept=4
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir EpsilonReduce=2
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir Failed=6
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir Goto=3
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir NotProcessed=5
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir Reduce=1
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir Shift=0
+Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat+ActionDir | TYPE NestedPublic, Sealed BASE System.Enum INTERFACES System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseAction | TYPE Public, Abstract, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Accept | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.RegularGrammar.NonTerminalSingle production req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Accept | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.NonTerminalSingle get_Production() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Accept | PROPERTY Janglim.FrontEnd.RegularGrammar.NonTerminalSingle Production()
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Accept | TYPE NestedPublic, Sealed, BeforeFieldInit BASE Janglim.FrontEnd.Parsers.Datas.ParseAction INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Goto | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Int32 state req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Goto | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_State() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Goto | PROPERTY System.Int32 State()
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Goto | TYPE NestedPublic, Sealed, BeforeFieldInit BASE Janglim.FrontEnd.Parsers.Datas.ParseAction INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Reduce | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.RegularGrammar.NonTerminalSingle production req() opt(),Optional, HasDefault System.Boolean isEpsilon=False req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Reduce | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.NonTerminalSingle get_Production() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Reduce | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_IsEpsilon() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Reduce | PROPERTY Janglim.FrontEnd.RegularGrammar.NonTerminalSingle Production()
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Reduce | PROPERTY System.Boolean IsEpsilon()
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Reduce | TYPE NestedPublic, Sealed, BeforeFieldInit BASE Janglim.FrontEnd.Parsers.Datas.ParseAction INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Shift | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Int32 state req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Shift | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_State() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Shift | PROPERTY System.Int32 State()
+Janglim.FrontEnd.Parsers.Datas.ParseAction+Shift | TYPE NestedPublic, Sealed, BeforeFieldInit BASE Janglim.FrontEnd.Parsers.Datas.ParseAction INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseStackFrame | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Int32 state req() opt(),None Janglim.FrontEnd.ParseTree.ParseTreeSymbol symbol req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParseStackFrame | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.ParseTree.ParseTreeSymbol get_Symbol() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseStackFrame | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_State() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseStackFrame | PROPERTY Janglim.FrontEnd.ParseTree.ParseTreeSymbol Symbol()
+Janglim.FrontEnd.Parsers.Datas.ParseStackFrame | PROPERTY System.Int32 State()
+Janglim.FrontEnd.Parsers.Datas.ParseStackFrame | TYPE Public, Sealed, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseStep | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Int32 index req() opt(),None Janglim.FrontEnd.Parsers.Datas.ParseAction action req() opt(),None Janglim.FrontEnd.TokenData lookahead req() opt(),None System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParseStackFrame> stackBefore req() opt(),None System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParseStackFrame> stackAfter req() opt(),None System.Boolean isError req() opt(),None System.String errorMessage req() opt(),None System.String recoveryMessage req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParseStep | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParseAction get_Action() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseStep | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.TokenData get_Lookahead() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseStep | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_IsError() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseStep | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParseStackFrame> get_StackAfter() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseStep | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParseStackFrame> get_StackBefore() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseStep | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_Index() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseStep | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_ErrorMessage() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseStep | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_RecoveryMessage() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseStep | PROPERTY Janglim.FrontEnd.Parsers.Datas.ParseAction Action()
+Janglim.FrontEnd.Parsers.Datas.ParseStep | PROPERTY Janglim.FrontEnd.TokenData Lookahead()
+Janglim.FrontEnd.Parsers.Datas.ParseStep | PROPERTY System.Boolean IsError()
+Janglim.FrontEnd.Parsers.Datas.ParseStep | PROPERTY System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParseStackFrame> StackAfter()
+Janglim.FrontEnd.Parsers.Datas.ParseStep | PROPERTY System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParseStackFrame> StackBefore()
+Janglim.FrontEnd.Parsers.Datas.ParseStep | PROPERTY System.Int32 Index()
+Janglim.FrontEnd.Parsers.Datas.ParseStep | PROPERTY System.String ErrorMessage()
+Janglim.FrontEnd.Parsers.Datas.ParseStep | PROPERTY System.String RecoveryMessage()
+Janglim.FrontEnd.Parsers.Datas.ParseStep | TYPE Public, Sealed, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseTableEntry | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Int32 state req() opt(),None Janglim.FrontEnd.RegularGrammar.Symbol symbol req() opt(),None Janglim.FrontEnd.Parsers.Datas.ParseAction action req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParseTableEntry | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParseAction get_Action() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseTableEntry | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.Symbol get_Symbol() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseTableEntry | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_State() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseTableEntry | PROPERTY Janglim.FrontEnd.Parsers.Datas.ParseAction Action()
+Janglim.FrontEnd.Parsers.Datas.ParseTableEntry | PROPERTY Janglim.FrontEnd.RegularGrammar.Symbol Symbol()
+Janglim.FrontEnd.Parsers.Datas.ParseTableEntry | PROPERTY System.Int32 State()
+Janglim.FrontEnd.Parsers.Datas.ParseTableEntry | TYPE Public, Sealed, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseTrace | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParseStep> steps req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParseTrace | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParseStep> get_Steps() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseTrace | METHOD Public, Static, HideBySig Standard Janglim.FrontEnd.Parsers.Datas.ParseTrace From(None Janglim.FrontEnd.Parsers.Collections.ParsingLogger logger req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParseTrace | PROPERTY System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParseStep> Steps()
+Janglim.FrontEnd.Parsers.Datas.ParseTrace | TYPE Public, Sealed, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingBlock Clone() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask Standard, HasThis System.Collections.Generic.IEnumerator`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> GetEnumerator() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Boolean IsUnitConnected(None System.Int32 unitIndex req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void AddEtcMessageToLastHistory(None System.String message req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void AddItem(None Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit initStack req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void AddItem(None Janglim.FrontEnd.Parsers.Datas.ParsingUnit parsingUnit req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void AddItem(None Janglim.FrontEnd.TokenData tokenData req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void AddRecoveryMessageToLastHistory(None System.String recoveryMessage req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void Clear() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void Commit() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void CopyHistoryItem() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void RemoveAllToken() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void RemoveLastToken(Optional, HasDefault System.Boolean bRemoveIfFailed=False req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void RemoveRange(None System.Int32 startIndex req() opt(),None System.Int32 count req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void RollBack() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig Standard, HasThis System.Void Try() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet get_PossibleTerminalSet() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.TokenData get_LastUnitToken() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.TokenData get_Token() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_IsAllUnitConnected() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_IsIgnore() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> get_ErrorUnits() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory> get_History() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> get_Units() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.ParsingErrorInfo> get_ErrorInfos() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.TokenData> get_UnitTokenList() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.List`1<Janglim.FrontEnd.ParsingErrorInfo> get__errorInfos() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_FirstDisconnectedIndex() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void set_IsIgnore(None System.Boolean value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | PROPERTY Janglim.FrontEnd.RegularGrammar.TerminalSet PossibleTerminalSet()
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | PROPERTY Janglim.FrontEnd.TokenData LastUnitToken()
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | PROPERTY Janglim.FrontEnd.TokenData Token()
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | PROPERTY System.Boolean IsAllUnitConnected()
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | PROPERTY System.Boolean IsIgnore()
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | PROPERTY System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> ErrorUnits()
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | PROPERTY System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory> History()
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | PROPERTY System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> Units()
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | PROPERTY System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.ParsingErrorInfo> ErrorInfos()
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | PROPERTY System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.TokenData> UnitTokenList()
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | PROPERTY System.Collections.Generic.List`1<Janglim.FrontEnd.ParsingErrorInfo> _errorInfos()
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | PROPERTY System.Int32 FirstDisconnectedIndex()
+Janglim.FrontEnd.Parsers.Datas.ParsingBlock | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES Janglim.ICloneable`1<Janglim.FrontEnd.Parsers.Datas.ParsingBlock>,System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit>,System.Collections.IEnumerable GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Boolean bLogging req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ParsingBlock> parsingBlocks req() opt(),None System.Boolean bLogging req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask Standard, HasThis System.Object Clone() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ConflictAction BackTracking() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingBlock GetBlockSameStack(None Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit target req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingBlock GetFrontBlock(None System.Int32 index req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingBlock GetNotIgnoredBlockOnFlow(None System.Int32 blockIndex req() opt(),None Janglim.FrontEnd.Parsers.Datas.Direction direction req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingUnit AddUnitOnCurBlock(None System.Int32 blockIndex req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.TokenData GetNextTokenData(None System.Int32 stdBlockIndex req() opt(),None System.Int32 indexToGet req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.TokenData GetPrevTokenData(None System.Int32 stdBlockIndex req() opt(),None System.Int32 indexToGet req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis System.Boolean IsBlockConnected(None System.Int32 blockIndexToCheck req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis System.Boolean JoinBlock(None System.Int32 stdBlockIndex req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis System.Void AddAt(None System.Int32 index req() opt(),None Janglim.FrontEnd.TokenData tokenData req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis System.Void AddNewBlock(None Janglim.FrontEnd.TokenData tokenData req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis System.Void AddToConfilctStateStack(None Janglim.FrontEnd.Parsers.Datas.ConflictItem item req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis System.Void ChangeBlock(None System.Int32 index req() opt(),None Janglim.FrontEnd.Parsers.Datas.ParsingUnit parsingUnit req() opt(),None Janglim.FrontEnd.TokenData token req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig Standard, HasThis System.Void ChangeBlock(None System.Int32 index req() opt(),None Janglim.FrontEnd.TokenData tokenData req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Ast.AstSymbol get_AstRoot() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Collections.ParsingLogger get_Logger() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParseTrace get_Trace() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.ParseTree.ParseTreeSymbol get_ToParseTree() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Tokenize.LexingData get_LexingData() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_HasError() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_Success() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.ParsingErrorInfo> get_AllErrors() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Data.DataTable get_ToParsingHistory() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void set_LexingData(None Janglim.FrontEnd.Tokenize.LexingData value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | PROPERTY Janglim.FrontEnd.Ast.AstSymbol AstRoot()
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | PROPERTY Janglim.FrontEnd.Parsers.Collections.ParsingLogger Logger()
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | PROPERTY Janglim.FrontEnd.Parsers.Datas.ParseTrace Trace()
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | PROPERTY Janglim.FrontEnd.ParseTree.ParseTreeSymbol ToParseTree()
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | PROPERTY Janglim.FrontEnd.Tokenize.LexingData LexingData()
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | PROPERTY System.Boolean HasError()
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | PROPERTY System.Boolean Success()
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | PROPERTY System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.ParsingErrorInfo> AllErrors()
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | PROPERTY System.Data.DataTable ToParsingHistory()
+Janglim.FrontEnd.Parsers.Datas.ParsingResult | TYPE Public, BeforeFieldInit BASE System.Collections.Generic.List`1<Janglim.FrontEnd.Parsers.Datas.ParsingBlock> INTERFACES System.Collections.Generic.ICollection`1<Janglim.FrontEnd.Parsers.Datas.ParsingBlock>,System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.Datas.ParsingBlock>,System.Collections.Generic.IList`1<Janglim.FrontEnd.Parsers.Datas.ParsingBlock>,System.Collections.Generic.IReadOnlyCollection`1<Janglim.FrontEnd.Parsers.Datas.ParsingBlock>,System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.ParsingBlock>,System.Collections.ICollection,System.Collections.IEnumerable,System.Collections.IList,System.ICloneable GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingRowDataFormat`3<!0:ROW,!1:COL,!2:VAL> | CTOR Family, HideBySig, SpecialName, RTSpecialName(None !0:ROW row req() opt(),None System.Collections.Generic.Dictionary`2<!1:COL,!2:VAL> matchedValueSet req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParsingRowDataFormat`3<!0:ROW,!1:COL,!2:VAL> | METHOD Public, HideBySig, SpecialName Standard, HasThis !0:ROW get_Row() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingRowDataFormat`3<!0:ROW,!1:COL,!2:VAL> | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.Dictionary`2<!1:COL,!2:VAL> get_MatchedValueSet() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingRowDataFormat`3<!0:ROW,!1:COL,!2:VAL> | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet get_PossibleTerminalSet() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingRowDataFormat`3<!0:ROW,!1:COL,!2:VAL> | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal> get_PossibleNonTerminalSet() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingRowDataFormat`3<!0:ROW,!1:COL,!2:VAL> | PROPERTY !0:ROW Row()
+Janglim.FrontEnd.Parsers.Datas.ParsingRowDataFormat`3<!0:ROW,!1:COL,!2:VAL> | PROPERTY Janglim.FrontEnd.RegularGrammar.TerminalSet PossibleTerminalSet()
+Janglim.FrontEnd.Parsers.Datas.ParsingRowDataFormat`3<!0:ROW,!1:COL,!2:VAL> | PROPERTY System.Collections.Generic.Dictionary`2<!1:COL,!2:VAL> MatchedValueSet()
+Janglim.FrontEnd.Parsers.Datas.ParsingRowDataFormat`3<!0:ROW,!1:COL,!2:VAL> | PROPERTY System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal> PossibleNonTerminalSet()
+Janglim.FrontEnd.Parsers.Datas.ParsingRowDataFormat`3<!0:ROW,!1:COL,!2:VAL> | TYPE Public, Abstract, BeforeFieldInit BASE System.Object INTERFACES  GENERICS !0:ROW:None:;!1:COL:None:;!2:VAL:None:
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Collections.Generic.Stack`1<System.Object> stack req() opt(),None System.Collections.Generic.Stack`1<System.Object> astListStack req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit Clone() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit Reverse() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | METHOD Public, HideBySig Standard, HasThis System.Boolean ApproxEqual(None Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit target req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | METHOD Public, HideBySig Standard, HasThis System.Boolean SyncParent(None Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit src req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | METHOD Public, HideBySig Standard, HasThis System.Tuple`2<Janglim.FrontEnd.ParseTree.ParseTreeSymbol,Janglim.FrontEnd.Ast.AstSymbol> EpsilonReduce(None Janglim.FrontEnd.RegularGrammar.NonTerminalSingle reduceDest req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | METHOD Public, HideBySig Standard, HasThis System.Tuple`2<Janglim.FrontEnd.ParseTree.ParseTreeSymbol,Janglim.FrontEnd.Ast.AstSymbol> Reduce(None Janglim.FrontEnd.RegularGrammar.NonTerminalSingle reduceDest req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | METHOD Public, HideBySig Standard, HasThis System.Tuple`2<Janglim.FrontEnd.ParseTree.ParseTreeSymbol,Janglim.FrontEnd.Ast.AstSymbol> Shift(None Janglim.FrontEnd.TokenData seeingToken req() opt(),None System.Object state req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | METHOD Public, HideBySig Standard, HasThis System.Void Goto(None System.Int32 state req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | METHOD Public, HideBySig Standard, HasThis System.Void Pop() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.Stack`1<System.Object> get_AstListStack() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.Stack`1<System.Object> get_Stack() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | PROPERTY System.Collections.Generic.Stack`1<System.Object> AstListStack()
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | PROPERTY System.Collections.Generic.Stack`1<System.Object> Stack()
+Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES Janglim.ICloneable`1<Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit> GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit beforeStack req() opt(),None Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit afterStack req() opt(),None Janglim.FrontEnd.TokenData token req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit beforeStack req() opt(),None Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit afterStack req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit beforeStack req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.TokenData token req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingUnit Clone() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig Standard, HasThis System.Void ChangeToFailedState(None System.String errorMessage req() opt(),Optional, HasDefault Janglim.FrontEnd.Parsers.IErrorHandlable errorHandler= req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig Standard, HasThis System.Void ChangeToFailedState(Optional, HasDefault Janglim.FrontEnd.Parsers.IErrorHandlable errorHandler= req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig Standard, HasThis System.Void CopyBeforeStackToAfterStack() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ActionData get_Action() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit get_AfterStack() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit get_BeforeStack() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.EventArgs.ErrorPosition get_ErrorPosition() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.IErrorHandlable get_ErrorHandler() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet get_PossibleTerminalSet() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.TokenData get_InputValue() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_IsError() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_ErrorMessage() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void set_AfterStack(None Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void set_InputValue(None Janglim.FrontEnd.TokenData value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void set_IsError(None System.Boolean value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | METHOD Public, Static, HideBySig, SpecialName Standard Janglim.FrontEnd.Parsers.Datas.ParsingUnit get_FirstParsingUnit() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | PROPERTY Janglim.FrontEnd.Parsers.Datas.ActionData Action()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | PROPERTY Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit AfterStack()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | PROPERTY Janglim.FrontEnd.Parsers.Datas.ParsingStackUnit BeforeStack()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | PROPERTY Janglim.FrontEnd.Parsers.Datas.ParsingUnit FirstParsingUnit()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | PROPERTY Janglim.FrontEnd.Parsers.EventArgs.ErrorPosition ErrorPosition()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | PROPERTY Janglim.FrontEnd.Parsers.IErrorHandlable ErrorHandler()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | PROPERTY Janglim.FrontEnd.RegularGrammar.TerminalSet PossibleTerminalSet()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | PROPERTY Janglim.FrontEnd.TokenData InputValue()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | PROPERTY System.Boolean IsError()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | PROPERTY System.String ErrorMessage()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnit | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES Janglim.ICloneable`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Parsers.Datas.ParsingUnit unit req() opt(),None System.String recoveryMessage req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Parsers.Datas.ParsingUnit unit req() opt())
+Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory | METHOD Public, HideBySig Standard, HasThis System.Void UnitCopy() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingUnit get_Unit() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_EtcMessage() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_RecoveryMessage() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void set_EtcMessage(None System.String value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void set_RecoveryMessage(None System.String value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory | PROPERTY Janglim.FrontEnd.Parsers.Datas.ParsingUnit Unit()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory | PROPERTY System.String EtcMessage()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory | PROPERTY System.String RecoveryMessage()
+Janglim.FrontEnd.Parsers.Datas.ParsingUnitHistory | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Datas.SymbolRowData | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.Datas.SymbolRowData | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_Name() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.SymbolRowData | METHOD Public, HideBySig, SpecialName Standard, HasThis System.UInt32 get_ArrayLevel() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.SymbolRowData | METHOD Public, HideBySig, SpecialName Standard, HasThis System.UInt32 get_RelativeAddress() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.SymbolRowData | METHOD Public, HideBySig, SpecialName Standard, HasThis System.UInt32 get_Type() GENERICS 
+Janglim.FrontEnd.Parsers.Datas.SymbolRowData | PROPERTY System.String Name()
+Janglim.FrontEnd.Parsers.Datas.SymbolRowData | PROPERTY System.UInt32 ArrayLevel()
+Janglim.FrontEnd.Parsers.Datas.SymbolRowData | PROPERTY System.UInt32 RelativeAddress()
+Janglim.FrontEnd.Parsers.Datas.SymbolRowData | PROPERTY System.UInt32 Type()
+Janglim.FrontEnd.Parsers.Datas.SymbolRowData | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.ErrorHandlingResult | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Parsers.Datas.ParsingResult parsingResult req() opt(),None System.Int32 tokenIndexToSee req() opt(),None System.Boolean successRecover req() opt())
+Janglim.FrontEnd.Parsers.ErrorHandlingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingResult get_ParsingResult() GENERICS 
+Janglim.FrontEnd.Parsers.ErrorHandlingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_SuccessRecover() GENERICS 
+Janglim.FrontEnd.Parsers.ErrorHandlingResult | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_TokenIndexToSee() GENERICS 
+Janglim.FrontEnd.Parsers.ErrorHandlingResult | METHOD Public, Virtual, HideBySig Standard, HasThis System.String ToString() GENERICS 
+Janglim.FrontEnd.Parsers.ErrorHandlingResult | PROPERTY Janglim.FrontEnd.Parsers.Datas.ParsingResult ParsingResult()
+Janglim.FrontEnd.Parsers.ErrorHandlingResult | PROPERTY System.Boolean SuccessRecover()
+Janglim.FrontEnd.Parsers.ErrorHandlingResult | PROPERTY System.Int32 TokenIndexToSee()
+Janglim.FrontEnd.Parsers.ErrorHandlingResult | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.EventArgs.ErrorPosition | FIELD Public, SpecialName, RTSpecialName System.Int32 value__
+Janglim.FrontEnd.Parsers.EventArgs.ErrorPosition | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.EventArgs.ErrorPosition OnEndMarker=1
+Janglim.FrontEnd.Parsers.EventArgs.ErrorPosition | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.EventArgs.ErrorPosition OnNormalToken=0
+Janglim.FrontEnd.Parsers.EventArgs.ErrorPosition | TYPE Public, Sealed BASE System.Enum INTERFACES System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable GENERICS 
+Janglim.FrontEnd.Parsers.EventArgs.LRParsingEventArgs | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Parsers.Datas.ParsingUnit stackItem req() opt(),None Janglim.FrontEnd.TokenData inputValue req() opt(),None Janglim.FrontEnd.Parsers.Datas.ActionData actionData req() opt())
+Janglim.FrontEnd.Parsers.EventArgs.LRParsingEventArgs | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ActionData get_ActionData() GENERICS 
+Janglim.FrontEnd.Parsers.EventArgs.LRParsingEventArgs | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingUnit get_StackItem() GENERICS 
+Janglim.FrontEnd.Parsers.EventArgs.LRParsingEventArgs | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.TokenData get_InputValue() GENERICS 
+Janglim.FrontEnd.Parsers.EventArgs.LRParsingEventArgs | PROPERTY Janglim.FrontEnd.Parsers.Datas.ActionData ActionData()
+Janglim.FrontEnd.Parsers.EventArgs.LRParsingEventArgs | PROPERTY Janglim.FrontEnd.Parsers.Datas.ParsingUnit StackItem()
+Janglim.FrontEnd.Parsers.EventArgs.LRParsingEventArgs | PROPERTY Janglim.FrontEnd.TokenData InputValue()
+Janglim.FrontEnd.Parsers.EventArgs.LRParsingEventArgs | TYPE Public, BeforeFieldInit BASE System.EventArgs INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.TokenData inputValue req() opt(),None Janglim.FrontEnd.RegularGrammar.TerminalSet possibleSet req() opt())
+Janglim.FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.EventArgs.ErrorPosition get_ErrorPosition() GENERICS 
+Janglim.FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet get_PossibleSet() GENERICS 
+Janglim.FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.TokenData get_InputValue() GENERICS 
+Janglim.FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_ErrorIndex() GENERICS 
+Janglim.FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_ErrorMessage() GENERICS 
+Janglim.FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs | PROPERTY Janglim.FrontEnd.Parsers.EventArgs.ErrorPosition ErrorPosition()
+Janglim.FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs | PROPERTY Janglim.FrontEnd.RegularGrammar.TerminalSet PossibleSet()
+Janglim.FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs | PROPERTY Janglim.FrontEnd.TokenData InputValue()
+Janglim.FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs | PROPERTY System.Int32 ErrorIndex()
+Janglim.FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs | PROPERTY System.String ErrorMessage()
+Janglim.FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.IErrorHandlable | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract Standard, HasThis Janglim.FrontEnd.Parsers.ErrorHandlingResult Call(None Janglim.FrontEnd.Parsers.Datas.DataForRecovery dataForRecovery req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.IErrorHandlable | TYPE Public, ClassSemanticsMask, Abstract, BeforeFieldInit BASE  INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Grammars.Grammar grammar req() opt())
+Janglim.FrontEnd.Parsers.LLParser | EVENT System.EventHandler`1<Janglim.FrontEnd.Ast.AstSymbol> ASTCreated
+Janglim.FrontEnd.Parsers.LLParser | EVENT System.EventHandler`1<Janglim.FrontEnd.ParseCreatedArgs> ParseTreeCreated
+Janglim.FrontEnd.Parsers.LLParser | METHOD Public, HideBySig Standard, HasThis System.Void SetGrammar(None Janglim.FrontEnd.Grammars.Grammar grammar req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.TerminalSet get_PossibleTerminalSet() GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_ShowStack() GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | METHOD Public, Virtual, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Collections.FirstAndFollowCollection GetFirstAndFollow() GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | METHOD Public, Virtual, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingResult Parsing(None Janglim.FrontEnd.Tokenize.LexingData lexingData req() opt(),None Janglim.FrontEnd.Parsers.Datas.ParsingResult prevParsingInfo req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | METHOD Public, Virtual, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingResult Parsing(None System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Tokenize.TokenCell> tokens req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Collections.IParsingTable get_ParsingTable() GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis System.String get_AnalysisResult() GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis System.Void add_ASTCreated(None System.EventHandler`1<Janglim.FrontEnd.Ast.AstSymbol> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis System.Void add_ParseTreeCreated(None System.EventHandler`1<Janglim.FrontEnd.ParseCreatedArgs> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis System.Void remove_ASTCreated(None System.EventHandler`1<Janglim.FrontEnd.Ast.AstSymbol> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis System.Void remove_ParseTreeCreated(None System.EventHandler`1<Janglim.FrontEnd.ParseCreatedArgs> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LLParser | PROPERTY Janglim.FrontEnd.Parsers.Collections.IParsingTable ParsingTable()
+Janglim.FrontEnd.Parsers.LLParser | PROPERTY Janglim.FrontEnd.RegularGrammar.TerminalSet PossibleTerminalSet()
+Janglim.FrontEnd.Parsers.LLParser | PROPERTY System.String AnalysisResult()
+Janglim.FrontEnd.Parsers.LLParser | PROPERTY System.String ShowStack()
+Janglim.FrontEnd.Parsers.LLParser | TYPE Public, BeforeFieldInit BASE Janglim.FrontEnd.Parsers.Parser INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.LR.CLRParser | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Grammars.Grammar grammar req() opt(),None System.Boolean bLogging req() opt())
+Janglim.FrontEnd.Parsers.LR.CLRParser | METHOD Public, Virtual, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckResult CheckAmbiguity() GENERICS 
+Janglim.FrontEnd.Parsers.LR.CLRParser | TYPE Public, BeforeFieldInit BASE Janglim.FrontEnd.Parsers.LR.LRParser INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.LR.DefaultLRErrorHandler | CTOR Public, HideBySig, SpecialName, RTSpecialName()
+Janglim.FrontEnd.Parsers.LR.DefaultLRErrorHandler | METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask Standard, HasThis Janglim.FrontEnd.Parsers.ErrorHandlingResult Call(None Janglim.FrontEnd.Parsers.Datas.DataForRecovery dataForRecovery req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.DefaultLRErrorHandler | TYPE Public, Sealed, BeforeFieldInit BASE System.Object INTERFACES Janglim.FrontEnd.Parsers.IErrorHandlable GENERICS 
+Janglim.FrontEnd.Parsers.LR.GrammarConflictException | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.String report req() opt())
+Janglim.FrontEnd.Parsers.LR.GrammarConflictException | TYPE Public, Sealed, BeforeFieldInit BASE System.Exception INTERFACES System.Runtime.Serialization.ISerializable GENERICS 
+Janglim.FrontEnd.Parsers.LR.GrammarPredicateEvaluationException | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.RegularGrammar.PredicateContext get_Context() GENERICS 
+Janglim.FrontEnd.Parsers.LR.GrammarPredicateEvaluationException | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_PredicateName() GENERICS 
+Janglim.FrontEnd.Parsers.LR.GrammarPredicateEvaluationException | PROPERTY Janglim.FrontEnd.RegularGrammar.PredicateContext Context()
+Janglim.FrontEnd.Parsers.LR.GrammarPredicateEvaluationException | PROPERTY System.String PredicateName()
+Janglim.FrontEnd.Parsers.LR.GrammarPredicateEvaluationException | TYPE Public, Sealed, BeforeFieldInit BASE System.InvalidOperationException INTERFACES System.Runtime.Serialization.ISerializable GENERICS 
+Janglim.FrontEnd.Parsers.LR.LALRParser | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Grammars.Grammar grammar req() opt(),Optional, HasDefault System.Boolean bLogging=False req() opt())
+Janglim.FrontEnd.Parsers.LR.LALRParser | METHOD Public, Virtual, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckResult CheckAmbiguity() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LALRParser | TYPE Public, BeforeFieldInit BASE Janglim.FrontEnd.Parsers.LR.LRParser INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | CTOR Family, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Grammars.Grammar grammar req() opt(),None Janglim.FrontEnd.Parsers.Collections.CanonicalType canonicalType req() opt(),Optional, HasDefault System.Boolean logging=False req() opt())
+Janglim.FrontEnd.Parsers.LR.LRParser | EVENT System.EventHandler`1<Janglim.FrontEnd.Ast.AstSymbol> ASTCreated
+Janglim.FrontEnd.Parsers.LR.LRParser | EVENT System.EventHandler`1<Janglim.FrontEnd.ParseCreatedArgs> ParseTreeCreated
+Janglim.FrontEnd.Parsers.LR.LRParser | EVENT System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> ActionFailed
+Janglim.FrontEnd.Parsers.LR.LRParser | EVENT System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> ActionSuccessed
+Janglim.FrontEnd.Parsers.LR.LRParser | EVENT System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> GotoAction
+Janglim.FrontEnd.Parsers.LR.LRParser | EVENT System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> ReduceAction
+Janglim.FrontEnd.Parsers.LR.LRParser | EVENT System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> ShiftAction
+Janglim.FrontEnd.Parsers.LR.LRParser | FIELD Family Janglim.FrontEnd.FirstFollowAnalyzer _followAnalyzer
+Janglim.FrontEnd.Parsers.LR.LRParser | FIELD Family System.Collections.Generic.Stack`1<System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Ast.AstSymbol>> _astStack
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Family, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind ParsingSuccessedProcess(None Janglim.FrontEnd.Parsers.Datas.ParsingUnit successResult req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Family, HideBySig Standard, HasThis System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.TokenData> ToTokenDataList(None System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Tokenize.TokenCell> tokenCells req() opt(),None Janglim.FrontEnd.Tokenize.TokenizeImpactRanges changedRanges req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Family, HideBySig Standard, HasThis System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.TokenData> ToTokenDataList(None System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Tokenize.TokenCell> tokenCells req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Family, HideBySig Standard, HasThis System.Void BuildStackAndParseTree(None Janglim.FrontEnd.Parsers.Datas.ParsingUnit unitToParsing req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingResult Parsing(None Janglim.FrontEnd.Tokenize.ITokenSource source req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.LR.LRParser AddErrorHandler(None Janglim.FrontEnd.Parsers.IErrorHandlable errorHandler req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.LR.LRParser ThrowIfConflicts() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.LR.LRParser UseBackTrackingOnConflict() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind BlockFullParsing(None Janglim.FrontEnd.Parsers.Datas.ParsingResult parsingResult req() opt(),None System.Int32 indexToParsing req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind BlockPartialParsing(None Janglim.FrontEnd.Parsers.Datas.ParsingResult parsingResult req() opt(),None System.Int32 indexToParsing req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind ParseUnitCore(None Janglim.FrontEnd.Parsers.Datas.ParsingUnit unit req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind RecoveryBlockParsing(None Janglim.FrontEnd.Parsers.Datas.DataForRecovery parsingData req() opt(),None System.Collections.Generic.IEnumerable`1<Janglim.FrontEnd.Parsers.ParsingRecoveryData> recoveryTokenInfos req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind RecoveryWithSpecifiedAction(None Janglim.FrontEnd.Parsers.Datas.DataForRecovery parsingData req() opt(),None Janglim.FrontEnd.Parsers.Datas.ConflictAction conflictAction req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig Standard, HasThis System.ValueTuple`2<Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind,Janglim.FrontEnd.Parsers.Datas.ConflictItem> UnitParsing(None Janglim.FrontEnd.Parsers.Datas.ParsingUnit unit req() opt(),None Janglim.FrontEnd.TokenData seeingToken req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig Standard, HasThis System.ValueTuple`2<Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind,Janglim.FrontEnd.Parsers.Datas.ConflictItem> UnitParsing(None Janglim.FrontEnd.Parsers.Datas.ParsingUnit unit req() opt(),None System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.TokenData> tokens req() opt(),None System.Int32 tokenIndex req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig Standard, HasThis System.Void PartialParsing(None Janglim.FrontEnd.Parsers.Datas.ParsingResult target req() opt(),None System.Collections.Generic.IReadOnlyList`1<Janglim.RangePair> rangesToParse req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Collections.CanonicalRelation get_Canonical() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.IErrorHandlable get_ErrorHandler() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Action`2<Janglim.FrontEnd.TokenData,System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal>> get_GotoFailed() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_BackTrackingOnConflict() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Boolean get_HasConflicts() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem> get_Conflicts() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Exception get_FiredException() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_ConflictReport() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void add_ActionFailed(None System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void add_ActionSuccessed(None System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void add_GotoAction(None System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void add_ReduceAction(None System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void add_ShiftAction(None System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void remove_ActionFailed(None System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void remove_ActionSuccessed(None System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void remove_GotoAction(None System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void remove_ReduceAction(None System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void remove_ShiftAction(None System.EventHandler`1<Janglim.FrontEnd.Parsers.Datas.ParsingUnit> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void set_GotoFailed(None System.Action`2<Janglim.FrontEnd.TokenData,System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal>> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, Virtual, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Collections.FirstAndFollowCollection GetFirstAndFollow() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, Virtual, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingResult Parsing(None Janglim.FrontEnd.Tokenize.LexingData lexingData req() opt(),None Janglim.FrontEnd.Parsers.Datas.ParsingResult prevParsingInfo req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, Virtual, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingResult Parsing(None System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Tokenize.TokenCell> tokenCells req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Collections.IParsingTable get_ParsingTable() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis System.String get_AnalysisResult() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis System.Void add_ASTCreated(None System.EventHandler`1<Janglim.FrontEnd.Ast.AstSymbol> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis System.Void add_ParseTreeCreated(None System.EventHandler`1<Janglim.FrontEnd.ParseCreatedArgs> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis System.Void remove_ASTCreated(None System.EventHandler`1<Janglim.FrontEnd.Ast.AstSymbol> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, Virtual, HideBySig, SpecialName Standard, HasThis System.Void remove_ParseTreeCreated(None System.EventHandler`1<Janglim.FrontEnd.ParseCreatedArgs> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract Standard, HasThis Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckResult CheckAmbiguity() GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser | PROPERTY Janglim.FrontEnd.Parsers.Collections.CanonicalRelation Canonical()
+Janglim.FrontEnd.Parsers.LR.LRParser | PROPERTY Janglim.FrontEnd.Parsers.Collections.IParsingTable ParsingTable()
+Janglim.FrontEnd.Parsers.LR.LRParser | PROPERTY Janglim.FrontEnd.Parsers.IErrorHandlable ErrorHandler()
+Janglim.FrontEnd.Parsers.LR.LRParser | PROPERTY System.Action`2<Janglim.FrontEnd.TokenData,System.Collections.Generic.HashSet`1<Janglim.FrontEnd.RegularGrammar.NonTerminal>> GotoFailed()
+Janglim.FrontEnd.Parsers.LR.LRParser | PROPERTY System.Boolean BackTrackingOnConflict()
+Janglim.FrontEnd.Parsers.LR.LRParser | PROPERTY System.Boolean HasConflicts()
+Janglim.FrontEnd.Parsers.LR.LRParser | PROPERTY System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckItem> Conflicts()
+Janglim.FrontEnd.Parsers.LR.LRParser | PROPERTY System.Exception FiredException()
+Janglim.FrontEnd.Parsers.LR.LRParser | PROPERTY System.String AnalysisResult()
+Janglim.FrontEnd.Parsers.LR.LRParser | PROPERTY System.String ConflictReport()
+Janglim.FrontEnd.Parsers.LR.LRParser | TYPE Public, Abstract, BeforeFieldInit BASE Janglim.FrontEnd.Parsers.Parser INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind | FIELD Public, SpecialName, RTSpecialName System.Int32 value__
+Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind Completed=0
+Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind NotApplicable=3
+Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind ReduceOrGoto=1
+Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind | FIELD Public, Static, Literal, HasDefault Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind Shift=2
+Janglim.FrontEnd.Parsers.LR.LRParser+SuccessedKind | TYPE NestedPublic, Sealed BASE System.Enum INTERFACES System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable GENERICS 
+Janglim.FrontEnd.Parsers.LR.SLRParser | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Grammars.Grammar grammar req() opt(),None System.Boolean bLogging req() opt())
+Janglim.FrontEnd.Parsers.LR.SLRParser | METHOD Public, Virtual, HideBySig Standard, HasThis Janglim.FrontEnd.Parsers.Datas.LR.AmbiguityCheckResult CheckAmbiguity() GENERICS 
+Janglim.FrontEnd.Parsers.LR.SLRParser | TYPE Public, BeforeFieldInit BASE Janglim.FrontEnd.Parsers.LR.LRParser INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Parser | CTOR Family, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.Grammars.Grammar grammar req() opt(),Optional, HasDefault System.Boolean bLogging=False req() opt())
+Janglim.FrontEnd.Parsers.Parser | EVENT System.EventHandler`1<Janglim.FrontEnd.Ast.AstSymbol> ASTCreated
+Janglim.FrontEnd.Parsers.Parser | EVENT System.EventHandler`1<Janglim.FrontEnd.ParseCreatedArgs> ParseTreeCreated
+Janglim.FrontEnd.Parsers.Parser | FIELD Family System.Boolean _logging
+Janglim.FrontEnd.Parsers.Parser | METHOD Family, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Collections.SymbolTableStack get_SymbolTableStack() GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.Grammars.Grammar get_Grammar() GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Action`2<Janglim.FrontEnd.RegularGrammar.NonTerminal,Janglim.FrontEnd.TokenData> get_ExpandFailed() GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Action`2<Janglim.FrontEnd.RegularGrammar.Terminal,Janglim.FrontEnd.TokenData> get_MatchFailed() GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Collections.Generic.List`1<System.String> get_DelimiterList() GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_OptimizeList() GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void set_ExpandFailed(None System.Action`2<Janglim.FrontEnd.RegularGrammar.NonTerminal,Janglim.FrontEnd.TokenData> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Void set_MatchFailed(None System.Action`2<Janglim.FrontEnd.RegularGrammar.Terminal,Janglim.FrontEnd.TokenData> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract Standard, HasThis Janglim.FrontEnd.Parsers.Collections.FirstAndFollowCollection GetFirstAndFollow() GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingResult Parsing(None Janglim.FrontEnd.Tokenize.LexingData lexingData req() opt(),None Janglim.FrontEnd.Parsers.Datas.ParsingResult prevParsingInfo req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract Standard, HasThis Janglim.FrontEnd.Parsers.Datas.ParsingResult Parsing(None System.Collections.Generic.IReadOnlyList`1<Janglim.FrontEnd.Tokenize.TokenCell> tokens req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis Janglim.FrontEnd.Parsers.Collections.IParsingTable get_ParsingTable() GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis System.String get_AnalysisResult() GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis System.Void add_ASTCreated(None System.EventHandler`1<Janglim.FrontEnd.Ast.AstSymbol> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis System.Void add_ParseTreeCreated(None System.EventHandler`1<Janglim.FrontEnd.ParseCreatedArgs> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis System.Void remove_ASTCreated(None System.EventHandler`1<Janglim.FrontEnd.Ast.AstSymbol> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Parser | METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName Standard, HasThis System.Void remove_ParseTreeCreated(None System.EventHandler`1<Janglim.FrontEnd.ParseCreatedArgs> value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Parser | PROPERTY Janglim.FrontEnd.Grammars.Grammar Grammar()
+Janglim.FrontEnd.Parsers.Parser | PROPERTY Janglim.FrontEnd.Parsers.Collections.IParsingTable ParsingTable()
+Janglim.FrontEnd.Parsers.Parser | PROPERTY Janglim.FrontEnd.Parsers.Collections.SymbolTableStack SymbolTableStack()
+Janglim.FrontEnd.Parsers.Parser | PROPERTY System.Action`2<Janglim.FrontEnd.RegularGrammar.NonTerminal,Janglim.FrontEnd.TokenData> ExpandFailed()
+Janglim.FrontEnd.Parsers.Parser | PROPERTY System.Action`2<Janglim.FrontEnd.RegularGrammar.Terminal,Janglim.FrontEnd.TokenData> MatchFailed()
+Janglim.FrontEnd.Parsers.Parser | PROPERTY System.Collections.Generic.List`1<System.String> DelimiterList()
+Janglim.FrontEnd.Parsers.Parser | PROPERTY System.String AnalysisResult()
+Janglim.FrontEnd.Parsers.Parser | PROPERTY System.String OptimizeList()
+Janglim.FrontEnd.Parsers.Parser | TYPE Public, Abstract, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.ParsingException | CTOR Public, HideBySig, SpecialName, RTSpecialName(None System.Int32 seeingIndex req() opt())
+Janglim.FrontEnd.Parsers.ParsingException | METHOD Public, HideBySig, SpecialName Standard, HasThis System.Int32 get_SeeingIndex() GENERICS 
+Janglim.FrontEnd.Parsers.ParsingException | PROPERTY System.Int32 SeeingIndex()
+Janglim.FrontEnd.Parsers.ParsingException | TYPE Public, BeforeFieldInit BASE System.Exception INTERFACES System.Runtime.Serialization.ISerializable GENERICS 
+Janglim.FrontEnd.Parsers.ParsingRecoveryData | CTOR Public, HideBySig, SpecialName, RTSpecialName(None Janglim.FrontEnd.TokenData recoveryToken req() opt(),None System.String reconveryMessage req() opt())
+Janglim.FrontEnd.Parsers.ParsingRecoveryData | METHOD Public, HideBySig, SpecialName Standard, HasThis Janglim.FrontEnd.TokenData get_RecoveryToken() GENERICS 
+Janglim.FrontEnd.Parsers.ParsingRecoveryData | METHOD Public, HideBySig, SpecialName Standard, HasThis System.String get_RecoveryMessage() GENERICS 
+Janglim.FrontEnd.Parsers.ParsingRecoveryData | METHOD Public, Virtual, HideBySig Standard, HasThis System.String ToString() GENERICS 
+Janglim.FrontEnd.Parsers.ParsingRecoveryData | PROPERTY Janglim.FrontEnd.TokenData RecoveryToken()
+Janglim.FrontEnd.Parsers.ParsingRecoveryData | PROPERTY System.String RecoveryMessage()
+Janglim.FrontEnd.Parsers.ParsingRecoveryData | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | METHOD Public, Static, HideBySig, SpecialName Standard System.Globalization.CultureInfo get_Culture() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | METHOD Public, Static, HideBySig, SpecialName Standard System.Resources.ResourceManager get_ResourceManager() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_CE0000() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_CE0001() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_CE0002() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_CE0003() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_CE0004() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | METHOD Public, Static, HideBySig, SpecialName Standard System.Void set_Culture(None System.Globalization.CultureInfo value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | PROPERTY System.Globalization.CultureInfo Culture()
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | PROPERTY System.Resources.ResourceManager ResourceManager()
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | PROPERTY System.String CE0000()
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | PROPERTY System.String CE0001()
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | PROPERTY System.String CE0002()
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | PROPERTY System.String CE0003()
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | PROPERTY System.String CE0004()
+Janglim.FrontEnd.Parsers.Properties.AlarmCodes | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.Globalization.CultureInfo get_Culture() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.Resources.ResourceManager get_ResourceManager() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_ActionInfo() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_BackTracking() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_CantShift() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_InputSymbol() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_InsertVirtualToken() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_MustCome() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_RecoverWithLRHandler() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_RecoverWithPanicMode() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_RecoveryFailed() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_RecoveryInfo() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_RecoverySuccessed() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_RemoveParsingUnits() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_ReplaceVirtualToken() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_SkipToken() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_StackAfterParsing() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_StackBeforeParsing() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_StackForAst() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.String get_TryAdjustStackWithThisToken() GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | METHOD Public, Static, HideBySig, SpecialName Standard System.Void set_Culture(None System.Globalization.CultureInfo value req() opt()) GENERICS 
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.Globalization.CultureInfo Culture()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.Resources.ResourceManager ResourceManager()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String ActionInfo()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String BackTracking()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String CantShift()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String InputSymbol()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String InsertVirtualToken()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String MustCome()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String RecoverWithLRHandler()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String RecoverWithPanicMode()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String RecoveryFailed()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String RecoveryInfo()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String RecoverySuccessed()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String RemoveParsingUnits()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String ReplaceVirtualToken()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String SkipToken()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String StackAfterParsing()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String StackBeforeParsing()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String StackForAst()
+Janglim.FrontEnd.Parsers.Properties.Resource | PROPERTY System.String TryAdjustStackWithThisToken()
+Janglim.FrontEnd.Parsers.Properties.Resource | TYPE Public, BeforeFieldInit BASE System.Object INTERFACES  GENERICS 

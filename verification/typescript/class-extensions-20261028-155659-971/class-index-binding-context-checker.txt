@@ -1,0 +1,6 @@
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-context.ts(1,24): error TS1109: Expression expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-context.ts(1,32): error TS1442: Expected '=' for property initializer.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-context.ts(1,33): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-context.ts(2,38): error TS1109: Expression expected.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-context.ts(2,46): error TS1442: Expected '=' for property initializer.
+artifacts/typescript/class-extensions-20261028-155659-971/class-index-binding-context.ts(2,47): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.

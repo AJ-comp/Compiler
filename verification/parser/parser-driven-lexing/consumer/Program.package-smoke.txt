@@ -1,0 +1,58 @@
+using Janglim.FrontEnd.Grammars.Ebnf;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Tokenize;
+
+var read = EbnfGrammarReader.Read("""
+    S : id '=' Expr ';' ;
+    Expr : Expr '+' Term | Term ;
+    Term : Term '/' Atom | Atom ;
+    Atom : id | num | rx ;
+    id := Identifier "[a-z]+" ;
+    num := NumberLiteral "[0-9]+" ;
+    rx := StringLiteral "/[a-z+]+/[a-z]*" ;
+    """);
+if (!read.Success) throw new Exception(string.Join("; ", read.Errors));
+var grammar = read.Grammar;
+var terminals = grammar.TerminalSet.Where(t => t is not EndMarker && t is not Epsilon).ToArray();
+var regex = terminals.Single(t => t.Caption == "rx");
+var slash = terminals.Single(t => t.Value == "/");
+var common = terminals.Where(t => !ReferenceEquals(t, regex) && !ReferenceEquals(t, slash));
+var div = new LexicalGoal("Div", common.Append(slash));
+var regexp = new LexicalGoal("RegExp", common.Append(regex));
+var lexer = new Lexer();
+foreach (var terminal in terminals) lexer.AddTokenRule(terminal);
+var parser = new LALRParser(grammar, true);
+
+Check("result = a / 2;", "result = a / 2 ;");
+Check("result = /ab+/g;", "result = /ab+/g ;");
+var token = new TokenCell(3, 1, 1, "x", null, " \n ");
+if (token.LeadingTrivia.Text != " \n " || !token.HasLineBreakBefore)
+    throw new Exception("External custom-source trivia construction failed.");
+Console.WriteLine("Public constructor and source interface: OK");
+
+void Check(string text, string expected)
+{
+    var source = new CountingSource(lexer.CreateTokenSource(text, div, regexp));
+    var result = parser.Parsing(source, new LexicalPolicy());
+    if (!result.Success) throw new Exception(parser.FiredException?.ToString());
+    var shifted = result.Trace.Steps.Where(s => s.Action is ParseAction.Shift)
+        .Select(s => s.Lookahead.Input).ToArray();
+    if (string.Join(" ", shifted) != expected || source.Reads != shifted.Length + 1)
+        throw new Exception("Unexpected token boundaries or repeated reads.");
+    Console.WriteLine(text + " -> " + string.Join(" | ", shifted));
+}
+
+sealed class CountingSource(ITokenSource inner) : ITokenSource
+{
+    public int Reads { get; private set; }
+    public TokenCursor Start => inner.Start;
+    public int Length => inner.Length;
+    public IReadOnlyList<LexicalGoal> Goals => inner.Goals;
+    public TokenRead Peek(TokenCursor start, LexicalGoal goal)
+    {
+        Reads++;
+        return inner.Peek(start, goal);
+    }
+}

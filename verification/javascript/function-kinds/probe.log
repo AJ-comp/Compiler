@@ -1,0 +1,416 @@
+INPUT async value => await value
+SUCCESS False Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+async: shift 27 
+value: reduce IdentifierReference -> async 
+value: goto 23 
+value: reduce PrimaryExpression -> IdentifierReference 
+value: goto 22 
+value: reduce MemberExpression -> PrimaryExpression 
+value: goto 21 
+value: reduce NewExpression -> MemberExpression 
+value: goto 20 
+value: reduce LeftHandSideExpression -> NewExpression 
+value: goto 19 
+value: epsilon reduce __predicate1 -> epsilon 
+value: goto 113 
+value: reduce SimpleUpdateExpression -> LeftHandSideExpression __predicate1 
+value: goto 18 
+value: reduce UpdateExpression -> SimpleUpdateExpression 
+value: goto 17 
+value: reduce UnaryExpression -> UpdateExpression 
+value: goto 16 
+value: reduce ExponentiationExpression -> UnaryExpression 
+value: goto 15 
+value: reduce MultiplicativeExpression -> ExponentiationExpression 
+value: goto 14 
+value: reduce AdditiveExpression -> MultiplicativeExpression 
+value: goto 13 
+value: reduce ShiftExpression -> AdditiveExpression 
+value: goto 12 
+value: reduce RelationalExpression -> ShiftExpression 
+value: goto 11 
+value: reduce EqualityExpression -> RelationalExpression 
+value: goto 10 
+value: reduce BitwiseANDExpression -> EqualityExpression 
+value: goto 9 
+value: reduce BitwiseXORExpression -> BitwiseANDExpression 
+value: goto 8 
+value: reduce BitwiseORExpression -> BitwiseXORExpression 
+value: goto 7 
+value: reduce LogicalANDExpression -> BitwiseORExpression 
+value: goto 6 
+value: reduce LogicalORExpression -> LogicalANDExpression 
+value: goto 5 
+value: reduce ShortCircuitExpression -> LogicalORExpression 
+value: goto 4 
+value: reduce ConditionalExpression -> ShortCircuitExpression 
+value: goto 3 
+value: reduce AssignmentExpression -> ConditionalExpression 
+value: goto 2 
+value: reduce Expression -> AssignmentExpression 
+value: goto 1 
+value: failed null (shift 할 수 없습니다 {,, This is EndMarker! char : щ} 와야 합니다)
+INPUT async function() {}
+SUCCESS False Janglim.FrontEnd.Parsers.ParsingException: Exception of type 'Janglim.FrontEnd.Parsers.ParsingException' was thrown.
+async: shift 27 
+function: reduce IdentifierReference -> async 
+function: goto 23 
+function: reduce PrimaryExpression -> IdentifierReference 
+function: goto 22 
+function: reduce MemberExpression -> PrimaryExpression 
+function: goto 21 
+function: reduce NewExpression -> MemberExpression 
+function: goto 20 
+function: reduce LeftHandSideExpression -> NewExpression 
+function: goto 19 
+function: epsilon reduce __predicate1 -> epsilon 
+function: goto 113 
+function: reduce SimpleUpdateExpression -> LeftHandSideExpression __predicate1 
+function: goto 18 
+function: reduce UpdateExpression -> SimpleUpdateExpression 
+function: goto 17 
+function: reduce UnaryExpression -> UpdateExpression 
+function: goto 16 
+function: reduce ExponentiationExpression -> UnaryExpression 
+function: goto 15 
+function: reduce MultiplicativeExpression -> ExponentiationExpression 
+function: goto 14 
+function: reduce AdditiveExpression -> MultiplicativeExpression 
+function: goto 13 
+function: reduce ShiftExpression -> AdditiveExpression 
+function: goto 12 
+function: reduce RelationalExpression -> ShiftExpression 
+function: goto 11 
+function: reduce EqualityExpression -> RelationalExpression 
+function: goto 10 
+function: reduce BitwiseANDExpression -> EqualityExpression 
+function: goto 9 
+function: reduce BitwiseXORExpression -> BitwiseANDExpression 
+function: goto 8 
+function: reduce BitwiseORExpression -> BitwiseXORExpression 
+function: goto 7 
+function: reduce LogicalANDExpression -> BitwiseORExpression 
+function: goto 6 
+function: reduce LogicalORExpression -> LogicalANDExpression 
+function: goto 5 
+function: reduce ShortCircuitExpression -> LogicalORExpression 
+function: goto 4 
+function: reduce ConditionalExpression -> ShortCircuitExpression 
+function: goto 3 
+function: reduce AssignmentExpression -> ConditionalExpression 
+function: goto 2 
+function: reduce Expression -> AssignmentExpression 
+function: goto 1 
+function: failed null (shift 할 수 없습니다 {,, This is EndMarker! char : щ} 와야 합니다)
+INPUT async (value) => await value
+SUCCESS True 
+async: shift 27 
+(: reduce IdentifierReference -> async 
+(: goto 23 
+(: reduce PrimaryExpression -> IdentifierReference 
+(: goto 22 
+(: reduce MemberExpression -> PrimaryExpression 
+(: goto 21 
+(: shift 140 
+value: shift 24 
+): reduce IdentifierReference -> IdentifierName 
+): goto 23 
+): reduce PrimaryExpression -> IdentifierReference 
+): goto 22 
+): reduce MemberExpression -> PrimaryExpression 
+): goto 21 
+): reduce NewExpression -> MemberExpression 
+): goto 20 
+): reduce LeftHandSideExpression -> NewExpression 
+): goto 19 
+): epsilon reduce __predicate1 -> epsilon 
+): goto 113 
+): reduce SimpleUpdateExpression -> LeftHandSideExpression __predicate1 
+): goto 18 
+): reduce UpdateExpression -> SimpleUpdateExpression 
+): goto 17 
+): reduce UnaryExpression -> UpdateExpression 
+): goto 16 
+): reduce ExponentiationExpression -> UnaryExpression 
+): goto 15 
+): reduce MultiplicativeExpression -> ExponentiationExpression 
+): goto 14 
+): reduce AdditiveExpression -> MultiplicativeExpression 
+): goto 13 
+): reduce ShiftExpression -> AdditiveExpression 
+): goto 12 
+): reduce RelationalExpression -> ShiftExpression 
+): goto 11 
+): reduce EqualityExpression -> RelationalExpression 
+): goto 10 
+): reduce BitwiseANDExpression -> EqualityExpression 
+): goto 9 
+): reduce BitwiseXORExpression -> BitwiseANDExpression 
+): goto 8 
+): reduce BitwiseORExpression -> BitwiseXORExpression 
+): goto 7 
+): reduce LogicalANDExpression -> BitwiseORExpression 
+): goto 6 
+): reduce LogicalORExpression -> LogicalANDExpression 
+): goto 5 
+): reduce ShortCircuitExpression -> LogicalORExpression 
+): goto 4 
+): reduce ConditionalExpression -> ShortCircuitExpression 
+): goto 3 
+): reduce AssignmentExpression -> ConditionalExpression 
+): goto 292 
+): reduce Argument -> AssignmentExpression 
+): goto 291 
+): reduce ArgumentList -> Argument 
+): goto 290 
+): shift 374 
+=>: reduce Arguments -> ( ArgumentList ) 
+=>: goto 139 
+=>: reduce CallExpression -> MemberExpression Arguments 
+=>: goto 59 
+=>: epsilon reduce __predicate3 -> epsilon 
+=>: goto 115 
+=>: reduce NoLineTerminator -> __predicate3 
+=>: goto 252 
+=>: shift 367 
+await: epsilon reduce __predicate25 -> epsilon 
+await: goto 451 
+await: shift 673 
+value: shift 604 
+: reduce IdentifierReference__Await -> IdentifierName 
+: goto 881 
+: reduce PrimaryExpression__Await -> IdentifierReference__Await 
+: goto 639 
+: reduce MemberExpression__Await -> PrimaryExpression__Await 
+: goto 638 
+: reduce NewExpression__Await -> MemberExpression__Await 
+: goto 637 
+: reduce LeftHandSideExpression__Await -> NewExpression__Await 
+: goto 894 
+: epsilon reduce __predicate2 -> epsilon 
+: goto 830 
+: reduce SimpleUpdateExpression__Await -> LeftHandSideExpression__Await __predicate2 
+: goto 635 
+: reduce UpdateExpression__Await -> SimpleUpdateExpression__Await 
+: goto 893 
+: reduce UnaryExpression__Await -> UpdateExpression__Await 
+: goto 897 
+: reduce AwaitExpression__Await -> await UnaryExpression__Await 
+: goto 672 
+: reduce UnaryExpression__Await -> AwaitExpression__Await 
+: goto 633 
+: reduce ExponentiationExpression__Await -> UnaryExpression__Await 
+: goto 632 
+: reduce MultiplicativeExpression__Await -> ExponentiationExpression__Await 
+: goto 631 
+: reduce AdditiveExpression__Await -> MultiplicativeExpression__Await 
+: goto 630 
+: reduce ShiftExpression__Await -> AdditiveExpression__Await 
+: goto 629 
+: reduce RelationalExpression__Await -> ShiftExpression__Await 
+: goto 628 
+: reduce EqualityExpression__Await -> RelationalExpression__Await 
+: goto 627 
+: reduce BitwiseANDExpression__Await -> EqualityExpression__Await 
+: goto 626 
+: reduce BitwiseXORExpression__Await -> BitwiseANDExpression__Await 
+: goto 625 
+: reduce BitwiseORExpression__Await -> BitwiseXORExpression__Await 
+: goto 624 
+: reduce LogicalANDExpression__Await -> BitwiseORExpression__Await 
+: goto 623 
+: reduce LogicalORExpression__Await -> LogicalANDExpression__Await 
+: goto 622 
+: reduce ShortCircuitExpression__Await -> LogicalORExpression__Await 
+: goto 621 
+: reduce ConditionalExpression__Await -> ShortCircuitExpression__Await 
+: goto 620 
+: reduce AssignmentExpression__Await -> ConditionalExpression__Await 
+: goto 619 
+: reduce AsyncConciseBody -> __predicate25 AssignmentExpression__Await 
+: goto 448 
+: reduce AsyncArrowFunction -> CallExpression NoLineTerminator => AsyncConciseBody 
+: goto 78 
+: reduce AssignmentExpression -> AsyncArrowFunction 
+: goto 2 
+: reduce Expression -> AssignmentExpression 
+: goto 1 
+: accept Accept -> Expression 
+
+INPUT value => value
+SUCCESS True 
+value: shift 24 
+=>: reduce IdentifierReference -> IdentifierName 
+=>: goto 23 
+=>: epsilon reduce __predicate3 -> epsilon 
+=>: goto 115 
+=>: reduce NoLineTerminator -> __predicate3 
+=>: goto 144 
+=>: shift 300 
+value: epsilon reduce __predicate6 -> epsilon 
+value: goto 380 
+value: shift 24 
+: reduce IdentifierReference -> IdentifierName 
+: goto 23 
+: reduce PrimaryExpression -> IdentifierReference 
+: goto 22 
+: reduce MemberExpression -> PrimaryExpression 
+: goto 21 
+: reduce NewExpression -> MemberExpression 
+: goto 20 
+: reduce LeftHandSideExpression -> NewExpression 
+: goto 19 
+: epsilon reduce __predicate1 -> epsilon 
+: goto 113 
+: reduce SimpleUpdateExpression -> LeftHandSideExpression __predicate1 
+: goto 18 
+: reduce UpdateExpression -> SimpleUpdateExpression 
+: goto 17 
+: reduce UnaryExpression -> UpdateExpression 
+: goto 16 
+: reduce ExponentiationExpression -> UnaryExpression 
+: goto 15 
+: reduce MultiplicativeExpression -> ExponentiationExpression 
+: goto 14 
+: reduce AdditiveExpression -> MultiplicativeExpression 
+: goto 13 
+: reduce ShiftExpression -> AdditiveExpression 
+: goto 12 
+: reduce RelationalExpression -> ShiftExpression 
+: goto 11 
+: reduce EqualityExpression -> RelationalExpression 
+: goto 10 
+: reduce BitwiseANDExpression -> EqualityExpression 
+: goto 9 
+: reduce BitwiseXORExpression -> BitwiseANDExpression 
+: goto 8 
+: reduce BitwiseORExpression -> BitwiseXORExpression 
+: goto 7 
+: reduce LogicalANDExpression -> BitwiseORExpression 
+: goto 6 
+: reduce LogicalORExpression -> LogicalANDExpression 
+: goto 5 
+: reduce ShortCircuitExpression -> LogicalORExpression 
+: goto 4 
+: reduce ConditionalExpression -> ShortCircuitExpression 
+: goto 3 
+: reduce AssignmentExpression -> ConditionalExpression 
+: goto 509 
+: reduce ConciseBody -> __predicate6 AssignmentExpression 
+: goto 377 
+: reduce ArrowFunction -> IdentifierReference NoLineTerminator => ConciseBody 
+: goto 77 
+: reduce AssignmentExpression -> ArrowFunction 
+: goto 2 
+: reduce Expression -> AssignmentExpression 
+: goto 1 
+: accept Accept -> Expression 
+
+INPUT async(value)
+SUCCESS True 
+async: shift 27 
+(: reduce IdentifierReference -> async 
+(: goto 23 
+(: reduce PrimaryExpression -> IdentifierReference 
+(: goto 22 
+(: reduce MemberExpression -> PrimaryExpression 
+(: goto 21 
+(: shift 140 
+value: shift 24 
+): reduce IdentifierReference -> IdentifierName 
+): goto 23 
+): reduce PrimaryExpression -> IdentifierReference 
+): goto 22 
+): reduce MemberExpression -> PrimaryExpression 
+): goto 21 
+): reduce NewExpression -> MemberExpression 
+): goto 20 
+): reduce LeftHandSideExpression -> NewExpression 
+): goto 19 
+): epsilon reduce __predicate1 -> epsilon 
+): goto 113 
+): reduce SimpleUpdateExpression -> LeftHandSideExpression __predicate1 
+): goto 18 
+): reduce UpdateExpression -> SimpleUpdateExpression 
+): goto 17 
+): reduce UnaryExpression -> UpdateExpression 
+): goto 16 
+): reduce ExponentiationExpression -> UnaryExpression 
+): goto 15 
+): reduce MultiplicativeExpression -> ExponentiationExpression 
+): goto 14 
+): reduce AdditiveExpression -> MultiplicativeExpression 
+): goto 13 
+): reduce ShiftExpression -> AdditiveExpression 
+): goto 12 
+): reduce RelationalExpression -> ShiftExpression 
+): goto 11 
+): reduce EqualityExpression -> RelationalExpression 
+): goto 10 
+): reduce BitwiseANDExpression -> EqualityExpression 
+): goto 9 
+): reduce BitwiseXORExpression -> BitwiseANDExpression 
+): goto 8 
+): reduce BitwiseORExpression -> BitwiseXORExpression 
+): goto 7 
+): reduce LogicalANDExpression -> BitwiseORExpression 
+): goto 6 
+): reduce LogicalORExpression -> LogicalANDExpression 
+): goto 5 
+): reduce ShortCircuitExpression -> LogicalORExpression 
+): goto 4 
+): reduce ConditionalExpression -> ShortCircuitExpression 
+): goto 3 
+): reduce AssignmentExpression -> ConditionalExpression 
+): goto 292 
+): reduce Argument -> AssignmentExpression 
+): goto 291 
+): reduce ArgumentList -> Argument 
+): goto 290 
+): shift 374 
+: reduce Arguments -> ( ArgumentList ) 
+: goto 139 
+: reduce CallExpression -> MemberExpression Arguments 
+: goto 59 
+: reduce LeftHandSideExpression -> CallExpression 
+: goto 19 
+: epsilon reduce __predicate1 -> epsilon 
+: goto 113 
+: reduce SimpleUpdateExpression -> LeftHandSideExpression __predicate1 
+: goto 18 
+: reduce UpdateExpression -> SimpleUpdateExpression 
+: goto 17 
+: reduce UnaryExpression -> UpdateExpression 
+: goto 16 
+: reduce ExponentiationExpression -> UnaryExpression 
+: goto 15 
+: reduce MultiplicativeExpression -> ExponentiationExpression 
+: goto 14 
+: reduce AdditiveExpression -> MultiplicativeExpression 
+: goto 13 
+: reduce ShiftExpression -> AdditiveExpression 
+: goto 12 
+: reduce RelationalExpression -> ShiftExpression 
+: goto 11 
+: reduce EqualityExpression -> RelationalExpression 
+: goto 10 
+: reduce BitwiseANDExpression -> EqualityExpression 
+: goto 9 
+: reduce BitwiseXORExpression -> BitwiseANDExpression 
+: goto 8 
+: reduce BitwiseORExpression -> BitwiseXORExpression 
+: goto 7 
+: reduce LogicalANDExpression -> BitwiseORExpression 
+: goto 6 
+: reduce LogicalORExpression -> LogicalANDExpression 
+: goto 5 
+: reduce ShortCircuitExpression -> LogicalORExpression 
+: goto 4 
+: reduce ConditionalExpression -> ShortCircuitExpression 
+: goto 3 
+: reduce AssignmentExpression -> ConditionalExpression 
+: goto 2 
+: reduce Expression -> AssignmentExpression 
+: goto 1 
+: accept Accept -> Expression 
+

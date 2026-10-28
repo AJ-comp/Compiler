@@ -1,0 +1,38 @@
+[
+  {
+    "id": "readme-ebnf",
+    "source": "README.md",
+    "kind": "ebnf",
+    "sha256": "d13992a7f6cef291d440b2a3cc8d9634ec14c19fd96b53bcad3f0ba55f705d27"
+  },
+  {
+    "id": "readme-javascript",
+    "source": "README.md",
+    "kind": "javascript",
+    "sha256": "f01353f74fd2d605a20585cbf1fcda3edf96e76023be963e5bb965d3b3410f71"
+  },
+  {
+    "id": "readme-typescript",
+    "source": "README.md",
+    "kind": "typescript",
+    "sha256": "00904629044e48682ee0093af85d6d812f84f2c7239b7659611a24f9ba7620cc"
+  },
+  {
+    "id": "package-readme-ebnf",
+    "source": "src/Janglim/README.md",
+    "kind": "ebnf",
+    "sha256": "d13992a7f6cef291d440b2a3cc8d9634ec14c19fd96b53bcad3f0ba55f705d27"
+  },
+  {
+    "id": "package-readme-javascript",
+    "source": "src/Janglim/README.md",
+    "kind": "javascript",
+    "sha256": "6d07c2df1262e3628e75b9273950c545ce6ff992278335b6d215ed97c8610af3"
+  },
+  {
+    "id": "package-readme-typescript",
+    "source": "src/Janglim/README.md",
+    "kind": "typescript",
+    "sha256": "00904629044e48682ee0093af85d6d812f84f2c7239b7659611a24f9ba7620cc"
+  }
+]

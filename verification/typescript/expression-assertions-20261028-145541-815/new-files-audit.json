@@ -1,0 +1,12 @@
+[
+  "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptNonNullTests.cs",
+  "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptAssertionLoopTests.cs",
+  "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptAssertionLexicalTests.cs",
+  "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptAssertionEntryPointTests.cs",
+  "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptAssertionCompositionTests.cs",
+  "Tests\\Parse.FrontEnd.Parsers.Tests\\TypeScript\\TypeScriptAsSatisfiesTests.cs",
+  "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptTokenSource.cs",
+  "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptNonNullExpressions.cs",
+  "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptLexicalPolicy.cs",
+  "src\\FrontEnd\\Parse.FrontEnd.Grammars.Ebnf\\TypeScript\\TypeScriptExpressions.cs"
+]

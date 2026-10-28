@@ -1,0 +1,187 @@
+[
+  {
+    "project": "ApplicationLayer.Common",
+    "path": "legacy\\Applications\\ApplicationLayer.Common\\ApplicationLayer.Common.csproj",
+    "exitCode": 1,
+    "log": "artifacts\\build-status\\ApplicationLayer.Common.log",
+    "errors": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Applications\\ApplicationLayer.Common\\LanguageExtensions.cs(1,13): error CS0234: 'Parse' 네임스페이스에 'FrontEnd' 형식 또는 네임스페이스 이름이 없습니다. 어셈블리 참조가 있는지 확인하세요. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Applications\\ApplicationLayer.Common\\ApplicationLayer.Common.csproj]"
+    ]
+  },
+  {
+    "project": "ApplicationLayer.Define",
+    "path": "legacy\\Applications\\ApplicationLayer.Define\\ApplicationLayer.Define.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\ApplicationLayer.Define.log",
+    "errors": []
+  },
+  {
+    "project": "ApplicationLayer.Models",
+    "path": "legacy\\Applications\\ApplicationLayer.Model\\ApplicationLayer.Models.csproj",
+    "exitCode": 1,
+    "log": "artifacts\\build-status\\ApplicationLayer.Models.log",
+    "errors": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Applications\\ApplicationLayer.Common\\LanguageExtensions.cs(1,13): error CS0234: 'Parse' 네임스페이스에 'FrontEnd' 형식 또는 네임스페이스 이름이 없습니다. 어셈블리 참조가 있는지 확인하세요. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Applications\\ApplicationLayer.Common\\ApplicationLayer.Common.csproj]"
+    ]
+  },
+  {
+    "project": "ApplicationLayer.ViewModels",
+    "path": "legacy\\Applications\\ApplicationLayer.ViewModels\\ApplicationLayer.ViewModels.csproj",
+    "exitCode": 1,
+    "log": "artifacts\\build-status\\ApplicationLayer.ViewModels.log",
+    "errors": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Applications\\ApplicationLayer.Common\\LanguageExtensions.cs(1,13): error CS0234: 'Parse' 네임스페이스에 'FrontEnd' 형식 또는 네임스페이스 이름이 없습니다. 어셈블리 참조가 있는지 확인하세요. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Applications\\ApplicationLayer.Common\\ApplicationLayer.Common.csproj]"
+    ]
+  },
+  {
+    "project": "AJStudio",
+    "path": "legacy\\Applications\\WpfApp\\AJStudio\\AJStudio.csproj",
+    "exitCode": 1,
+    "log": "artifacts\\build-status\\AJStudio.log",
+    "errors": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Applications\\ApplicationLayer.Common\\LanguageExtensions.cs(1,13): error CS0234: 'Parse' 네임스페이스에 'FrontEnd' 형식 또는 네임스페이스 이름이 없습니다. 어셈블리 참조가 있는지 확인하세요. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Applications\\ApplicationLayer.Common\\ApplicationLayer.Common.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\CompletionList.xaml(71,12): error MC3050: 'host:CompletionList' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 71 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\Editor.xaml(8,12): error MC3050: 'host:Editor' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 8 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\HighlightTextBox.xaml(11,12): error MC3050: 'host:HighlightTextBox' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 11 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]"
+    ]
+  },
+  {
+    "project": "ApplicationLayer.Views",
+    "path": "legacy\\Applications\\WpfApp\\ApplicationLayer.Views\\ApplicationLayer.Views.csproj",
+    "exitCode": 1,
+    "log": "artifacts\\build-status\\ApplicationLayer.Views.log",
+    "errors": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Applications\\ApplicationLayer.Common\\LanguageExtensions.cs(1,13): error CS0234: 'Parse' 네임스페이스에 'FrontEnd' 형식 또는 네임스페이스 이름이 없습니다. 어셈블리 참조가 있는지 확인하세요. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Applications\\ApplicationLayer.Common\\ApplicationLayer.Common.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\CompletionList.xaml(71,12): error MC3050: 'host:CompletionList' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 71 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\Editor.xaml(8,12): error MC3050: 'host:Editor' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 8 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\HighlightTextBox.xaml(11,12): error MC3050: 'host:HighlightTextBox' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 11 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]"
+    ]
+  },
+  {
+    "project": "Parse.WpfControls.SyntaxEditor",
+    "path": "legacy\\Parse.WpfControls.SyntaxEditor\\Parse.WpfControls.SyntaxEditor.csproj",
+    "exitCode": 1,
+    "log": "artifacts\\build-status\\Parse.WpfControls.SyntaxEditor.log",
+    "errors": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\CompletionList.xaml(71,12): error MC3050: 'host:CompletionList' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 71 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\Editor.xaml(8,12): error MC3050: 'host:Editor' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 8 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\HighlightTextBox.xaml(11,12): error MC3050: 'host:HighlightTextBox' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 11 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\TextViewWindow.xaml(5,12): error MC3050: 'host:TextViewWindow' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 5 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]"
+    ]
+  },
+  {
+    "project": "Parse.WpfControls",
+    "path": "legacy\\Parse.WpfControls\\Parse.WpfControls.csproj",
+    "exitCode": 1,
+    "log": "artifacts\\build-status\\Parse.WpfControls.log",
+    "errors": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\CompletionList.xaml(71,12): error MC3050: 'host:CompletionList' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 71 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\Editor.xaml(8,12): error MC3050: 'host:Editor' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 8 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\HighlightTextBox.xaml(11,12): error MC3050: 'host:HighlightTextBox' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 11 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Themes\\TextViewWindow.xaml(5,12): error MC3050: 'host:TextViewWindow' 형식을 찾을 수 없습니다. 형식 이름은 대/소문자를 구분합니다. 줄 5 위치 12. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\legacy\\Parse.WpfControls\\Parse.WpfControls.csproj]"
+    ]
+  },
+  {
+    "project": "ParsingLibrary",
+    "path": "legacy\\ParsingLibrary\\ParsingLibrary.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\ParsingLibrary.log",
+    "errors": []
+  },
+  {
+    "project": "Wpf.UI.Advance",
+    "path": "legacy\\Wpf.UI.Themes\\Wpf.UI.Advance\\Wpf.UI.Advance.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\Wpf.UI.Advance.log",
+    "errors": []
+  },
+  {
+    "project": "Wpf.UI.Basic",
+    "path": "legacy\\Wpf.UI.Themes\\Wpf.UI.Basic\\Wpf.UI.Basic.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\Wpf.UI.Basic.log",
+    "errors": []
+  },
+  {
+    "project": "Parse.BackEnd.Target.ARM",
+    "path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target.ARM\\Parse.BackEnd.Target.ARM.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\Parse.BackEnd.Target.ARM.log",
+    "errors": []
+  },
+  {
+    "project": "Parse.BackEnd.Target.AVR",
+    "path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target.AVR\\Parse.BackEnd.Target.AVR.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\Parse.BackEnd.Target.AVR.log",
+    "errors": []
+  },
+  {
+    "project": "Parse.BackEnd.Target",
+    "path": "src\\BackEnd\\Parse.BackEnd\\Parse.BackEnd.Target\\Parse.BackEnd.Target.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\Parse.BackEnd.Target.log",
+    "errors": []
+  },
+  {
+    "project": "CommandPrompt.Builder",
+    "path": "src\\Cli\\CommandPrompt.Builder\\CommandPrompt.Builder.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\CommandPrompt.Builder.log",
+    "errors": []
+  },
+  {
+    "project": "CommandPrompt.Compiler",
+    "path": "src\\Cli\\CommandPrompt.Compiler\\CommandPrompt.Compiler.csproj",
+    "exitCode": 1,
+    "log": "artifacts\\build-status\\CommandPrompt.Compiler.log",
+    "errors": [
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\Cli\\CommandPrompt.Compiler\\Commands\\CreateSource.cs(25,55): error CS0103: 'SourceModel' 이름이 현재 컨텍스트에 없습니다. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\Cli\\CommandPrompt.Compiler\\CommandPrompt.Compiler.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\Cli\\CommandPrompt.Compiler\\Commands\\UnloadSource.cs(22,59): error CS0103: 'SourceModel' 이름이 현재 컨텍스트에 없습니다. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\Cli\\CommandPrompt.Compiler\\CommandPrompt.Compiler.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\Cli\\CommandPrompt.Compiler\\Commands\\UnloadSource.cs(28,31): error CS0103: 'ProjectModel' 이름이 현재 컨텍스트에 없습니다. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\Cli\\CommandPrompt.Compiler\\CommandPrompt.Compiler.csproj]",
+      "C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\Cli\\CommandPrompt.Compiler\\Commands\\UnloadSource.cs(29,68): error CS0246: 'PathModel' 형식 또는 네임스페이스 이름을 찾을 수 없습니다. using 지시문 또는 어셈블리 참조가 있는지 확인하세요. [C:\\Users\\AhjLv\\OneDrive\\바탕 화면\\개인 프로젝트\\AJPGS\\src\\Cli\\CommandPrompt.Compiler\\CommandPrompt.Compiler.csproj]"
+    ]
+  },
+  {
+    "project": "CommandPrompt.Lint",
+    "path": "src\\Cli\\CommandPrompt.Lint\\CommandPrompt.Lint.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\CommandPrompt.Lint.log",
+    "errors": []
+  },
+  {
+    "project": "CommandPrompt.Util",
+    "path": "src\\Cli\\CommandPrompt.Util\\CommandPrompt.Util.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\CommandPrompt.Util.log",
+    "errors": []
+  },
+  {
+    "project": "Compile",
+    "path": "src\\Compile\\Compile.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\Compile.log",
+    "errors": []
+  },
+  {
+    "project": "Parse.FrontEnd.AJ",
+    "path": "src\\FrontEnd\\Parse.FrontEnd.AJ\\Parse.FrontEnd.AJ.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\Parse.FrontEnd.AJ.log",
+    "errors": []
+  },
+  {
+    "project": "Parse.FrontEnd.Grammars.MiniC",
+    "path": "src\\FrontEnd\\Parse.FrontEnd.Grammars.MiniC\\Parse.FrontEnd.Grammars.MiniC.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\Parse.FrontEnd.Grammars.MiniC.log",
+    "errors": []
+  },
+  {
+    "project": "Parse.MiddleEnd.IR",
+    "path": "src\\MiddleEnd\\Parse.MiddleEnd.IR\\Parse.MiddleEnd.IR.csproj",
+    "exitCode": 0,
+    "log": "artifacts\\build-status\\Parse.MiddleEnd.IR.log",
+    "errors": []
+  }
+]

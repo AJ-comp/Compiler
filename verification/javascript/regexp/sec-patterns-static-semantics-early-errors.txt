@@ -1,0 +1,97 @@
+22.2.1.1 Static Semantics: Early Errors
+Note
+This section is amended in B.1.2.1.
+Pattern :: Disjunction
+It is a Syntax Error if CountLeftCapturingParensWithin(Pattern) ≥ 232 - 1.
+It is a Syntax Error if Pattern contains two distinct GroupSpecifiers x and y such that the CapturingGroupName of x is the CapturingGroupName of y and such that MightBothParticipate(x, y) is true.
+QuantifierPrefix ::
+{
+DecimalDigits
+,
+DecimalDigits
+}
+It is a Syntax Error if the MV of the first DecimalDigits is strictly greater than the MV of the second DecimalDigits.
+Atom ::
+(?
+RegularExpressionModifiers
+:
+Disjunction
+)
+It is a Syntax Error if the source text matched by RegularExpressionModifiers contains the same code point more than once.
+Atom ::
+(?
+RegularExpressionModifiers
+-
+RegularExpressionModifiers
+:
+Disjunction
+)
+It is a Syntax Error if the source text matched by the first RegularExpressionModifiers and the source text matched by the second RegularExpressionModifiers are both empty.
+It is a Syntax Error if the source text matched by the first RegularExpressionModifiers contains the same code point more than once.
+It is a Syntax Error if the source text matched by the second RegularExpressionModifiers contains the same code point more than once.
+It is a Syntax Error if any code point in the source text matched by the first RegularExpressionModifiers is also contained in the source text matched by the second RegularExpressionModifiers.
+AtomEscape ::
+k
+GroupName
+It is a Syntax Error if GroupSpecifiersThatMatch(GroupName) is empty.
+AtomEscape :: DecimalEscape
+It is a Syntax Error if the CapturingGroupNumber of DecimalEscape is strictly greater than CountLeftCapturingParensWithin(the Pattern containing AtomEscape).
+NonemptyClassRanges ::
+ClassAtom
+-
+ClassAtom
+ClassContents
+It is a Syntax Error if IsCharacterClass of the first ClassAtom is true or IsCharacterClass of the second ClassAtom is true.
+It is a Syntax Error if IsCharacterClass of the first ClassAtom is false, IsCharacterClass of the second ClassAtom is false, and the CharacterValue of the first ClassAtom is strictly greater than the CharacterValue of the second ClassAtom.
+NonemptyClassRangesNoDash ::
+ClassAtomNoDash
+-
+ClassAtom
+ClassContents
+It is a Syntax Error if IsCharacterClass of ClassAtomNoDash is true or IsCharacterClass of ClassAtom is true.
+It is a Syntax Error if IsCharacterClass of ClassAtomNoDash is false, IsCharacterClass of ClassAtom is false, and the CharacterValue of ClassAtomNoDash is strictly greater than the CharacterValue of ClassAtom.
+RegExpIdentifierStart ::
+\
+RegExpUnicodeEscapeSequence
+It is a Syntax Error if the CharacterValue of RegExpUnicodeEscapeSequence is not the numeric value of some code point matched by the IdentifierStartChar lexical grammar production.
+RegExpIdentifierStart ::
+UnicodeLeadSurrogate
+UnicodeTrailSurrogate
+It is a Syntax Error if the RegExpIdentifierCodePoint of RegExpIdentifierStart is not matched by the UnicodeIDStart lexical grammar production.
+RegExpIdentifierPart ::
+\
+RegExpUnicodeEscapeSequence
+It is a Syntax Error if the CharacterValue of RegExpUnicodeEscapeSequence is not the numeric value of some code point matched by the IdentifierPartChar lexical grammar production.
+RegExpIdentifierPart ::
+UnicodeLeadSurrogate
+UnicodeTrailSurrogate
+It is a Syntax Error if the RegExpIdentifierCodePoint of RegExpIdentifierPart is not matched by the UnicodeIDContinue lexical grammar production.
+UnicodePropertyValueExpression ::
+UnicodePropertyName
+=
+UnicodePropertyValue
+It is a Syntax Error if the source text matched by UnicodePropertyName is not a Unicode property name or property alias listed in the “Property name and aliases” column of Table 64.
+It is a Syntax Error if the source text matched by UnicodePropertyValue is not a property value or property value alias for the Unicode property or property alias given by the source text matched by UnicodePropertyName listed in PropertyValueAliases.txt.
+UnicodePropertyValueExpression :: LoneUnicodePropertyNameOrValue
+It is a Syntax Error if the source text matched by LoneUnicodePropertyNameOrValue is not a Unicode property value or property value alias for the General_Category (gc) property listed in PropertyValueAliases.txt, nor a binary property or binary property alias listed in the “Property name and aliases” column of Table 65, nor a binary property of strings listed in the “Property name” column of Table 66.
+It is a Syntax Error if the enclosing Pattern does not have a [UnicodeSetsMode] parameter and the source text matched by LoneUnicodePropertyNameOrValue is a binary property of strings listed in the “Property name” column of Table 66.
+CharacterClassEscape ::
+P{
+UnicodePropertyValueExpression
+}
+It is a Syntax Error if MayContainStrings of the UnicodePropertyValueExpression is true.
+CharacterClass ::
+[^
+ClassContents
+]
+It is a Syntax Error if MayContainStrings of the ClassContents is true.
+NestedClass ::
+[^
+ClassContents
+]
+It is a Syntax Error if MayContainStrings of the ClassContents is true.
+ClassSetRange ::
+ClassSetCharacter
+-
+ClassSetCharacter
+It is a Syntax Error if the CharacterValue of the first ClassSetCharacter is strictly greater than the CharacterValue of the second ClassSetCharacter.

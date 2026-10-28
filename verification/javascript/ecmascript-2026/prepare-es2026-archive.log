@@ -1,0 +1,27 @@
+{
+  "output": "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\test262-es2026-archive.jsonl",
+  "snapshot": {
+    "repository": "https://github.com/tc39/test262",
+    "commit": "6eec1ac9ee144dafd8f344d73a21f36bfc9f6755",
+    "commitDate": "2026-06-29T14:09:27Z",
+    "selectionCutoff": "2026-06-30T23:59:59Z",
+    "archiveUrl": "https://codeload.github.com/tc39/test262/zip/6eec1ac9ee144dafd8f344d73a21f36bfc9f6755",
+    "archiveSha256": "a7e725c2f18975b432b371ba67a489737c6a59afc78f9d4d02f42b8d947d36c2"
+  },
+  "counts": {
+    "candidateFiles": 26676,
+    "candidateSourceBytes": 48351006,
+    "discoveredFiles": 53683,
+    "emittedVariants": 48361,
+    "excluded:feature_filter": 701,
+    "excluded:fixture_not_standalone": 271,
+    "excluded:intl402_outside_ecma262": 3341,
+    "excluded:outside_selected_prefixes": 21905,
+    "excluded:staging_not_standard_corpus": 1490,
+    "excludedVariants:feature_filter": 1247,
+    "expectedAccept": 40286,
+    "expectedReject": 8075,
+    "plannedVariants": 48361,
+    "selectedFiles": 25975
+  }
+}

@@ -1,0 +1,6 @@
+artifacts/typescript/class-extensions-20261028-155659-971/class-final-boundary-native.ts(1,22): error TS1213: Identifier expected. 'public' is a reserved word in strict mode. Class definitions are automatically in strict mode.
+artifacts/typescript/class-extensions-20261028-155659-971/class-final-boundary-native.ts(2,23): error TS1213: Identifier expected. 'private' is a reserved word in strict mode. Class definitions are automatically in strict mode.
+artifacts/typescript/class-extensions-20261028-155659-971/class-final-boundary-native.ts(4,19): error TS1213: Identifier expected. 'let' is a reserved word in strict mode. Class definitions are automatically in strict mode.
+artifacts/typescript/class-extensions-20261028-155659-971/class-final-boundary-native.ts(5,26): error TS1213: Identifier expected. 'implements' is a reserved word in strict mode. Class definitions are automatically in strict mode.
+artifacts/typescript/class-extensions-20261028-155659-971/class-final-boundary-native.ts(8,55): error TS1039: Initializers are not allowed in ambient contexts.
+artifacts/typescript/class-extensions-20261028-155659-971/class-final-boundary-native.ts(9,52): error TS1254: A 'const' initializer in an ambient context must be a string or numeric literal or literal enum reference.

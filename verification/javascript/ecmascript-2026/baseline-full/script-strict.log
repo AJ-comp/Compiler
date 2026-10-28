@@ -1,0 +1,124 @@
+
+COMMAND ["C:\\Users\\AhjLv\\.dotnet\\dotnet.exe", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\tools\\Janglim.Test262\\bin\\Release\\net8.0\\Janglim.Test262.dll", "--input", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\test262-es2026-archive.jsonl", "--output", "artifacts\\ecmascript-2026\\baseline-full\\script-strict.jsonl", "--profile", "script-strict", "--skip", "0", "--timeout-ms", "120000"]
+Preparing script-strict (web=True) ...
+Ready script-strict at 00:00:10.5471721.
+250 cases, 250 passed, 0 mismatches/errors; 00:00:18.0472545.
+500 cases, 500 passed, 0 mismatches/errors; 00:00:24.1517682.
+750 cases, 750 passed, 0 mismatches/errors; 00:00:29.3532289.
+1000 cases, 1000 passed, 0 mismatches/errors; 00:07:18.5980293.
+1250 cases, 1250 passed, 0 mismatches/errors; 00:08:08.0119371.
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-2026\\test262-es2026-archive.jsonl",
+  "profile": "script-strict",
+  "skip": 0,
+  "processed": 1286,
+  "outcomes": {
+    "pass": 1285,
+    "timeout": 1
+  },
+  "elapsedSeconds": 764.4487739,
+  "syntaxOnly": true
+}
+
+COMMAND ["C:\\Users\\AhjLv\\.dotnet\\dotnet.exe", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\tools\\Janglim.Test262\\bin\\Release\\net8.0\\Janglim.Test262.dll", "--input", "C:\\Users\\AhjLv\\OneDrive\\\ubc14\ud0d5 \ud654\uba74\\\uac1c\uc778 \ud504\ub85c\uc81d\ud2b8\\AJPGS\\artifacts\\ecmascript-2026\\test262-es2026-archive.jsonl", "--output", "artifacts\\ecmascript-2026\\baseline-full\\script-strict.jsonl", "--profile", "script-strict", "--skip", "1286", "--timeout-ms", "120000", "--append"]
+Preparing script-strict (web=True) ...
+Ready script-strict at 00:00:12.4499432.
+250 cases, 250 passed, 0 mismatches/errors; 00:00:55.4959118.
+500 cases, 500 passed, 0 mismatches/errors; 00:01:00.6587437.
+750 cases, 750 passed, 0 mismatches/errors; 00:01:05.0011833.
+1000 cases, 1000 passed, 0 mismatches/errors; 00:01:12.3263255.
+1250 cases, 1250 passed, 0 mismatches/errors; 00:01:15.7222471.
+1500 cases, 1500 passed, 0 mismatches/errors; 00:01:18.9135632.
+1750 cases, 1750 passed, 0 mismatches/errors; 00:01:27.0481047.
+2000 cases, 2000 passed, 0 mismatches/errors; 00:01:29.9717579.
+2250 cases, 2250 passed, 0 mismatches/errors; 00:01:33.6803723.
+2500 cases, 2500 passed, 0 mismatches/errors; 00:01:34.9098676.
+2750 cases, 2750 passed, 0 mismatches/errors; 00:01:36.2516995.
+3000 cases, 3000 passed, 0 mismatches/errors; 00:01:40.1764331.
+3250 cases, 3250 passed, 0 mismatches/errors; 00:01:44.5053878.
+3500 cases, 3500 passed, 0 mismatches/errors; 00:01:55.8875674.
+3750 cases, 3750 passed, 0 mismatches/errors; 00:02:03.3394899.
+4000 cases, 4000 passed, 0 mismatches/errors; 00:02:11.4945194.
+4250 cases, 4250 passed, 0 mismatches/errors; 00:02:15.3254115.
+4500 cases, 4500 passed, 0 mismatches/errors; 00:02:19.3439069.
+4750 cases, 4750 passed, 0 mismatches/errors; 00:02:23.7084945.
+5000 cases, 5000 passed, 0 mismatches/errors; 00:02:26.6439092.
+5250 cases, 5250 passed, 0 mismatches/errors; 00:02:29.9303204.
+5500 cases, 5500 passed, 0 mismatches/errors; 00:02:33.1909932.
+5750 cases, 5750 passed, 0 mismatches/errors; 00:02:36.9716300.
+6000 cases, 6000 passed, 0 mismatches/errors; 00:02:42.5668881.
+6250 cases, 6250 passed, 0 mismatches/errors; 00:02:58.7377524.
+6500 cases, 6500 passed, 0 mismatches/errors; 00:03:15.8657712.
+6750 cases, 6750 passed, 0 mismatches/errors; 00:03:34.3522720.
+7000 cases, 7000 passed, 0 mismatches/errors; 00:03:46.9518436.
+7250 cases, 7250 passed, 0 mismatches/errors; 00:03:51.8738933.
+7500 cases, 7500 passed, 0 mismatches/errors; 00:03:55.4219735.
+7750 cases, 7750 passed, 0 mismatches/errors; 00:03:58.8106363.
+8000 cases, 8000 passed, 0 mismatches/errors; 00:04:04.1210111.
+8250 cases, 8250 passed, 0 mismatches/errors; 00:04:09.5386920.
+8500 cases, 8500 passed, 0 mismatches/errors; 00:04:12.6036311.
+8750 cases, 8750 passed, 0 mismatches/errors; 00:04:14.1791343.
+9000 cases, 9000 passed, 0 mismatches/errors; 00:04:17.7094236.
+9250 cases, 9250 passed, 0 mismatches/errors; 00:04:19.7735038.
+9500 cases, 9500 passed, 0 mismatches/errors; 00:04:24.6161381.
+9750 cases, 9750 passed, 0 mismatches/errors; 00:04:39.3981093.
+10000 cases, 10000 passed, 0 mismatches/errors; 00:04:48.3489135.
+10250 cases, 10250 passed, 0 mismatches/errors; 00:04:51.6118935.
+10500 cases, 10500 passed, 0 mismatches/errors; 00:04:54.6500945.
+10750 cases, 10750 passed, 0 mismatches/errors; 00:04:57.0559700.
+11000 cases, 11000 passed, 0 mismatches/errors; 00:05:02.2322712.
+11250 cases, 11250 passed, 0 mismatches/errors; 00:05:20.7339358.
+11500 cases, 11500 passed, 0 mismatches/errors; 00:05:26.6788973.
+11750 cases, 11749 passed, 1 mismatches/errors; 00:05:43.4467283.
+12000 cases, 11999 passed, 1 mismatches/errors; 00:06:36.9944942.
+12250 cases, 12249 passed, 1 mismatches/errors; 00:06:39.1848397.
+12500 cases, 12499 passed, 1 mismatches/errors; 00:06:41.2667678.
+12750 cases, 12749 passed, 1 mismatches/errors; 00:06:44.0189848.
+13000 cases, 12999 passed, 1 mismatches/errors; 00:06:45.8149493.
+13250 cases, 13249 passed, 1 mismatches/errors; 00:06:50.3527703.
+13500 cases, 13499 passed, 1 mismatches/errors; 00:06:57.9225135.
+13750 cases, 13749 passed, 1 mismatches/errors; 00:07:02.5696497.
+14000 cases, 13999 passed, 1 mismatches/errors; 00:07:05.7624761.
+14250 cases, 14249 passed, 1 mismatches/errors; 00:07:09.5857618.
+14500 cases, 14499 passed, 1 mismatches/errors; 00:07:12.9720865.
+14750 cases, 14749 passed, 1 mismatches/errors; 00:07:16.8893656.
+15000 cases, 14999 passed, 1 mismatches/errors; 00:29:34.1542218.
+15250 cases, 15248 passed, 2 mismatches/errors; 01:04:56.0803224.
+15500 cases, 15498 passed, 2 mismatches/errors; 01:05:01.2927295.
+15750 cases, 15748 passed, 2 mismatches/errors; 01:05:14.7102434.
+16000 cases, 15998 passed, 2 mismatches/errors; 01:05:42.6672856.
+16250 cases, 16248 passed, 2 mismatches/errors; 01:06:04.1879948.
+16500 cases, 16498 passed, 2 mismatches/errors; 01:06:15.7572517.
+16750 cases, 16748 passed, 2 mismatches/errors; 01:06:26.9091657.
+17000 cases, 16998 passed, 2 mismatches/errors; 01:06:32.9142221.
+17250 cases, 17248 passed, 2 mismatches/errors; 01:06:36.3490788.
+17500 cases, 17498 passed, 2 mismatches/errors; 01:06:38.9426126.
+17750 cases, 17748 passed, 2 mismatches/errors; 01:06:41.0694919.
+18000 cases, 17998 passed, 2 mismatches/errors; 01:06:45.5271704.
+18250 cases, 18248 passed, 2 mismatches/errors; 01:06:50.5716380.
+18500 cases, 18498 passed, 2 mismatches/errors; 01:06:55.4946191.
+18750 cases, 18748 passed, 2 mismatches/errors; 01:07:00.1286744.
+19000 cases, 18998 passed, 2 mismatches/errors; 01:07:04.3205509.
+19250 cases, 19248 passed, 2 mismatches/errors; 01:07:07.9857558.
+19500 cases, 19498 passed, 2 mismatches/errors; 01:07:10.7179431.
+19750 cases, 19748 passed, 2 mismatches/errors; 01:07:15.4209468.
+20000 cases, 19998 passed, 2 mismatches/errors; 01:07:18.4078054.
+20250 cases, 20248 passed, 2 mismatches/errors; 01:07:21.3575798.
+20500 cases, 20498 passed, 2 mismatches/errors; 01:07:24.6467745.
+20750 cases, 20748 passed, 2 mismatches/errors; 01:07:27.7633060.
+21000 cases, 20998 passed, 2 mismatches/errors; 01:07:30.0455852.
+21250 cases, 21248 passed, 2 mismatches/errors; 01:07:35.0019143.
+21500 cases, 21498 passed, 2 mismatches/errors; 01:07:36.9184920.
+{
+  "input": "C:\\Users\\AhjLv\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\\AJPGS\\artifacts\\ecmascript-2026\\test262-es2026-archive.jsonl",
+  "profile": "script-strict",
+  "skip": 1286,
+  "processed": 21670,
+  "outcomes": {
+    "pass": 21668,
+    "unexpected-reject": 1,
+    "error": 1
+  },
+  "elapsedSeconds": 4058.4329495,
+  "syntaxOnly": true
+}

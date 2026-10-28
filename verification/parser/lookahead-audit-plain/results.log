@@ -1,0 +1,412 @@
+CASE predicate-original READ=True
+predicate-original RESULT=False CONFLICTS=1 NT=11 STATES=20
+1 grammar conflict(s):
+  state I4: reduce-reduce conflict (on 'P')
+TOKENS=Janglim.FrontEnd.Tokenize.TokenCell
+a epsilon reduce __predicate1 -> epsilon 
+a goto 2 
+a shift 6 
+щ failed null (shift 할 수 없습니다 {e, i} 와야 합니다)
+LA I0 __predicate1 ->• {id}
+LA I1 Accept -> S• {This is EndMarker! char : щ}
+LA I3 S -> __predicate1 C• {This is EndMarker! char : щ, e, :}
+LA I4 __predicate2 ->• {This is EndMarker! char : щ, e, :}
+LA I4 __predicate3 ->• {e}
+LA I5 __predicate4 ->• {e}
+LA I6 __predicate5 ->• {e}
+LA I6 __predicate6 ->• {i}
+LA I7 C -> P __predicate2• {This is EndMarker! char : щ, e, :}
+LA I9 P -> R __predicate4• {e}
+LA I10 R -> id __predicate5• {e}
+LA I13 __predicate1 ->• {id}
+LA I15 R -> id __predicate6 i S• {e}
+LA I16 __predicate1 ->• {id}
+LA I18 __predicate1 ->• {id}
+LA I19 C -> P __predicate3 e x ? S : S• {This is EndMarker! char : щ, e, :}
+ASSEMBLY C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-audit-plain\bin\Release\net8.0\Parse.FrontEnd.Parsers.dll
+CASE plain-no-predicates READ=True
+plain-no-predicates RESULT=True CONFLICTS=4 NT=5 STATES=14
+4 grammar conflict(s):
+  state I3: shift-reduce conflict (on 'P')
+  state I3: shift-reduce conflict (on 'P')
+  state I3: shift-reduce conflict (on 'P')
+  state I3: shift-reduce conflict (on 'P')
+TOKENS=Janglim.FrontEnd.Tokenize.TokenCell
+a shift 5 
+щ reduce R -> id 
+щ goto 4 
+щ reduce P -> R 
+щ goto 3 
+щ reduce C -> P 
+щ goto 2 
+щ reduce S -> C 
+щ goto 1 
+щ accept Accept -> S 
+LA I1 Accept -> S• {This is EndMarker! char : щ}
+LA I2 S -> C• {This is EndMarker! char : щ, e, :}
+LA I3 C -> P• {This is EndMarker! char : щ, e, :}
+LA I4 P -> R• {This is EndMarker! char : щ, e, :}
+LA I5 R -> id• {This is EndMarker! char : щ, e, :}
+LA I9 R -> id i S• {This is EndMarker! char : щ, e, :}
+LA I13 C -> P e x ? S : S• {This is EndMarker! char : щ, e, :}
+ASSEMBLY C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-audit-plain\bin\Release\net8.0\Parse.FrontEnd.Parsers.dll
+CASE explicit-epsilon READ=False
+line 1: empty alternative
+CASE plain-short-cycle READ=True
+plain-short-cycle RESULT=True CONFLICTS=4 NT=5 STATES=12
+4 grammar conflict(s):
+  state I3: shift-reduce conflict (on 'P')
+  state I3: shift-reduce conflict (on 'P')
+  state I3: shift-reduce conflict (on 'P')
+  state I3: shift-reduce conflict (on 'P')
+TOKENS=Janglim.FrontEnd.Tokenize.TokenCell
+a shift 5 
+щ reduce R -> a 
+щ goto 4 
+щ reduce P -> R 
+щ goto 3 
+щ reduce C -> P 
+щ goto 2 
+щ reduce S -> C 
+щ goto 1 
+щ accept Accept -> S 
+LA I1 Accept -> S• {This is EndMarker! char : щ}
+LA I2 S -> C• {This is EndMarker! char : щ, :, e}
+LA I3 C -> P• {This is EndMarker! char : щ, :, e}
+LA I4 P -> R• {This is EndMarker! char : щ, e, :}
+LA I5 R -> a• {This is EndMarker! char : щ, e, :}
+LA I9 R -> a i S• {This is EndMarker! char : щ, e, :}
+LA I11 C -> P e S : S• {This is EndMarker! char : щ, :, e}
+ASSEMBLY C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-audit-plain\bin\Release\net8.0\Parse.FrontEnd.Parsers.dll
+CASE plain-recursive-chain READ=True
+plain-recursive-chain RESULT=True CONFLICTS=0 NT=5 STATES=11
+no grammar conflicts
+TOKENS=Janglim.FrontEnd.Tokenize.TokenCell
+a shift 5 
+щ reduce R -> a 
+щ goto 4 
+щ reduce P -> R 
+щ goto 3 
+щ reduce C -> P 
+щ goto 2 
+щ reduce S -> C 
+щ goto 1 
+щ accept Accept -> S 
+LA I1 Accept -> S• {This is EndMarker! char : щ}
+LA I2 S -> C• {This is EndMarker! char : щ, )}
+LA I3 C -> P• {This is EndMarker! char : щ, )}
+LA I4 P -> R• {This is EndMarker! char : щ, )}
+LA I5 R -> a• {This is EndMarker! char : щ, )}
+LA I9 R -> a i S• {This is EndMarker! char : щ, )}
+LA I10 C -> ( S )• {This is EndMarker! char : щ, )}
+ASSEMBLY C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-audit-plain\bin\Release\net8.0\Parse.FrontEnd.Parsers.dll
+CASE explicit-epsilon-no-r-tail READ=False
+line 1: empty alternative
+CASE epsilon-only-SC READ=False
+line 1: empty alternative
+CASE epsilon-only-tail READ=False
+line 1: empty alternative
+direct-tree-no-predicates RESULT=True CONFLICTS=4 NT=5 STATES=14
+4 grammar conflict(s):
+  state I3: shift-reduce conflict (on 'P')
+  state I3: shift-reduce conflict (on 'P')
+  state I3: shift-reduce conflict (on 'P')
+  state I3: shift-reduce conflict (on 'P')
+TOKENS=Janglim.FrontEnd.Tokenize.TokenCell
+a shift 5 
+щ reduce R -> a 
+щ goto 4 
+щ reduce P -> R 
+щ goto 3 
+щ reduce C -> P 
+щ goto 2 
+щ reduce S -> C 
+щ goto 1 
+щ accept Accept -> S 
+LA I1 Accept -> S• {This is EndMarker! char : щ}
+LA I2 S -> C• {This is EndMarker! char : щ, e, :}
+LA I3 C -> P• {This is EndMarker! char : щ, e, :}
+LA I4 P -> R• {This is EndMarker! char : щ, e, :}
+LA I5 R -> a• {This is EndMarker! char : щ, e, :}
+LA I9 R -> a i S• {This is EndMarker! char : щ, e, :}
+LA I13 C -> P e x ? S : S• {This is EndMarker! char : щ, e, :}
+ASSEMBLY C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-audit-plain\bin\Release\net8.0\Parse.FrontEnd.Parsers.dll
+direct-tree-explicit-epsilon RESULT=False CONFLICTS=1 NT=11 STATES=20
+1 grammar conflict(s):
+  state I4: reduce-reduce conflict (on 'P')
+TOKENS=Janglim.FrontEnd.Tokenize.TokenCell
+a epsilon reduce G1 -> epsilon 
+a goto 2 
+a shift 6 
+щ failed null (shift 할 수 없습니다 {e, i} 와야 합니다)
+LA I0 G1 ->• {a}
+LA I1 Accept -> S• {This is EndMarker! char : щ}
+LA I3 S -> G1 C• {This is EndMarker! char : щ, e, :}
+LA I4 G2 ->• {This is EndMarker! char : щ, e, :}
+LA I4 G3 ->• {e}
+LA I5 G4 ->• {e}
+LA I6 G5 ->• {e}
+LA I6 G6 ->• {i}
+LA I7 C -> P G2• {This is EndMarker! char : щ, e, :}
+LA I9 P -> R G4• {e}
+LA I10 R -> a G5• {e}
+LA I13 G1 ->• {a}
+LA I15 R -> a G6 i S• {e}
+LA I16 G1 ->• {a}
+LA I18 G1 ->• {a}
+LA I19 C -> P G3 e x ? S : S• {This is EndMarker! char : щ, e, :}
+ASSEMBLY C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-audit-plain\bin\Release\net8.0\Parse.FrontEnd.Parsers.dll
+direct-tree-epsilon-no-r-tail RESULT=True CONFLICTS=0 NT=11 STATES=17
+no grammar conflicts
+TOKENS=Janglim.FrontEnd.Tokenize.TokenCell
+a epsilon reduce G1 -> epsilon 
+a goto 2 
+a shift 6 
+щ epsilon reduce G5 -> epsilon 
+щ goto 10 
+щ reduce R -> a G5 
+щ goto 5 
+щ epsilon reduce G4 -> epsilon 
+щ goto 9 
+щ reduce P -> R G4 
+щ goto 4 
+щ epsilon reduce G2 -> epsilon 
+щ goto 7 
+щ reduce C -> P G2 
+щ goto 3 
+щ reduce S -> G1 C 
+щ goto 1 
+щ accept Accept -> S 
+LA I0 G1 ->• {a}
+LA I1 Accept -> S• {This is EndMarker! char : щ}
+LA I3 S -> G1 C• {This is EndMarker! char : щ, :}
+LA I4 G2 ->• {This is EndMarker! char : щ, :}
+LA I4 G3 ->• {e}
+LA I5 G4 ->• {This is EndMarker! char : щ, :, e}
+LA I6 G5 ->• {This is EndMarker! char : щ, :, e}
+LA I7 C -> P G2• {This is EndMarker! char : щ, :}
+LA I9 P -> R G4• {This is EndMarker! char : щ, :, e}
+LA I10 R -> a G5• {This is EndMarker! char : щ, :, e}
+LA I13 G1 ->• {a}
+LA I15 G1 ->• {a}
+LA I16 C -> P G3 e x ? S : S• {This is EndMarker! char : щ, :}
+ASSEMBLY C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-audit-plain\bin\Release\net8.0\Parse.FrontEnd.Parsers.dll
+MATRIX prefix=0 rsuffix=0 csuffix=0 rstart=0 success=False conflicts=1
+MATRIX prefix=0 rsuffix=0 csuffix=0 rstart=1 success=False conflicts=1
+MATRIX prefix=0 rsuffix=0 csuffix=1 rstart=0 success=False conflicts=1
+MATRIX prefix=0 rsuffix=0 csuffix=1 rstart=1 success=False conflicts=1
+MATRIX prefix=0 rsuffix=1 csuffix=0 rstart=0 success=True conflicts=0
+MATRIX prefix=0 rsuffix=1 csuffix=0 rstart=1 success=True conflicts=0
+MATRIX prefix=0 rsuffix=1 csuffix=1 rstart=0 success=True conflicts=0
+MATRIX prefix=0 rsuffix=1 csuffix=1 rstart=1 success=True conflicts=0
+MATRIX prefix=1 rsuffix=0 csuffix=0 rstart=0 success=False conflicts=0
+ZERO CONFLICT REJECTION S : G1 C ;
+C : P G2 | G3 e x ? S : S ;
+P : R G4 ;
+R : a G5 | a G6 i S ;
+G1 :  ;
+G2 :  ;
+G3 :  ;
+G4 :  ;
+G5 :  ;
+G6 :  ;
+MATRIX prefix=1 rsuffix=0 csuffix=0 rstart=1 success=False conflicts=0
+ZERO CONFLICT REJECTION S : G1 C ;
+C : P G2 | G3 e x ? S : S ;
+P : R G4 ;
+R : a G5 | b G6 i S ;
+G1 :  ;
+G2 :  ;
+G3 :  ;
+G4 :  ;
+G5 :  ;
+G6 :  ;
+MATRIX prefix=1 rsuffix=0 csuffix=1 rstart=0 success=False conflicts=0
+ZERO CONFLICT REJECTION S : G1 C ;
+C : P G2 | G3 e x ? S : S k ;
+P : R G4 ;
+R : a G5 | a G6 i S ;
+G1 :  ;
+G2 :  ;
+G3 :  ;
+G4 :  ;
+G5 :  ;
+G6 :  ;
+MATRIX prefix=1 rsuffix=0 csuffix=1 rstart=1 success=False conflicts=0
+ZERO CONFLICT REJECTION S : G1 C ;
+C : P G2 | G3 e x ? S : S k ;
+P : R G4 ;
+R : a G5 | b G6 i S ;
+G1 :  ;
+G2 :  ;
+G3 :  ;
+G4 :  ;
+G5 :  ;
+G6 :  ;
+MATRIX prefix=1 rsuffix=1 csuffix=0 rstart=0 success=True conflicts=0
+MATRIX prefix=1 rsuffix=1 csuffix=0 rstart=1 success=True conflicts=0
+MATRIX prefix=1 rsuffix=1 csuffix=1 rstart=0 success=True conflicts=0
+MATRIX prefix=1 rsuffix=1 csuffix=1 rstart=1 success=True conflicts=0
+SMALL-FAIL shape=0 mask=1 rules=S:G1 C / C:P|e x ? S : S / P:R / R:a|b i S / G1:
+SMALL-FAIL shape=0 mask=3 rules=S:G1 C / C:P G2|e x ? S : S / P:R / R:a|b i S / G1: / G2:
+SMALL-FAIL shape=0 mask=5 rules=S:G1 C / C:P|G3 e x ? S : S / P:R / R:a|b i S / G1: / G3:
+SMALL-FAIL shape=0 mask=7 rules=S:G1 C / C:P G2|G3 e x ? S : S / P:R / R:a|b i S / G1: / G2: / G3:
+SMALL-FAIL shape=0 mask=9 rules=S:G1 C / C:P|e x ? S : S / P:R G4 / R:a|b i S / G1: / G4:
+SMALL-FAIL shape=0 mask=11 rules=S:G1 C / C:P G2|e x ? S : S / P:R G4 / R:a|b i S / G1: / G2: / G4:
+SMALL-FAIL shape=0 mask=13 rules=S:G1 C / C:P|G3 e x ? S : S / P:R G4 / R:a|b i S / G1: / G3: / G4:
+SMALL-FAIL shape=0 mask=15 rules=S:G1 C / C:P G2|G3 e x ? S : S / P:R G4 / R:a|b i S / G1: / G2: / G3: / G4:
+SMALL-FAIL shape=0 mask=17 rules=S:G1 C / C:P|e x ? S : S / P:R / R:a G5|b i S / G1: / G5:
+SMALL-FAIL shape=0 mask=19 rules=S:G1 C / C:P G2|e x ? S : S / P:R / R:a G5|b i S / G1: / G2: / G5:
+SMALL-FAIL shape=0 mask=21 rules=S:G1 C / C:P|G3 e x ? S : S / P:R / R:a G5|b i S / G1: / G3: / G5:
+SMALL-FAIL shape=0 mask=23 rules=S:G1 C / C:P G2|G3 e x ? S : S / P:R / R:a G5|b i S / G1: / G2: / G3: / G5:
+SMALL-FAIL shape=0 mask=25 rules=S:G1 C / C:P|e x ? S : S / P:R G4 / R:a G5|b i S / G1: / G4: / G5:
+SMALL-FAIL shape=0 mask=27 rules=S:G1 C / C:P G2|e x ? S : S / P:R G4 / R:a G5|b i S / G1: / G2: / G4: / G5:
+SMALL-FAIL shape=0 mask=29 rules=S:G1 C / C:P|G3 e x ? S : S / P:R G4 / R:a G5|b i S / G1: / G3: / G4: / G5:
+SMALL-FAIL shape=0 mask=31 rules=S:G1 C / C:P G2|G3 e x ? S : S / P:R G4 / R:a G5|b i S / G1: / G2: / G3: / G4: / G5:
+SMALL-FAIL shape=0 mask=33 rules=S:G1 C / C:P|e x ? S : S / P:R / R:a|b G6 i S / G1: / G6:
+SMALL-FAIL shape=0 mask=35 rules=S:G1 C / C:P G2|e x ? S : S / P:R / R:a|b G6 i S / G1: / G2: / G6:
+SMALL-FAIL shape=0 mask=37 rules=S:G1 C / C:P|G3 e x ? S : S / P:R / R:a|b G6 i S / G1: / G3: / G6:
+SMALL-FAIL shape=0 mask=39 rules=S:G1 C / C:P G2|G3 e x ? S : S / P:R / R:a|b G6 i S / G1: / G2: / G3: / G6:
+SMALL-FAIL shape=0 mask=41 rules=S:G1 C / C:P|e x ? S : S / P:R G4 / R:a|b G6 i S / G1: / G4: / G6:
+SMALL-FAIL shape=0 mask=43 rules=S:G1 C / C:P G2|e x ? S : S / P:R G4 / R:a|b G6 i S / G1: / G2: / G4: / G6:
+SMALL-FAIL shape=0 mask=45 rules=S:G1 C / C:P|G3 e x ? S : S / P:R G4 / R:a|b G6 i S / G1: / G3: / G4: / G6:
+SMALL-FAIL shape=0 mask=47 rules=S:G1 C / C:P G2|G3 e x ? S : S / P:R G4 / R:a|b G6 i S / G1: / G2: / G3: / G4: / G6:
+SMALL-FAIL shape=0 mask=49 rules=S:G1 C / C:P|e x ? S : S / P:R / R:a G5|b G6 i S / G1: / G5: / G6:
+SMALL-FAIL shape=0 mask=51 rules=S:G1 C / C:P G2|e x ? S : S / P:R / R:a G5|b G6 i S / G1: / G2: / G5: / G6:
+SMALL-FAIL shape=0 mask=53 rules=S:G1 C / C:P|G3 e x ? S : S / P:R / R:a G5|b G6 i S / G1: / G3: / G5: / G6:
+SMALL-FAIL shape=0 mask=55 rules=S:G1 C / C:P G2|G3 e x ? S : S / P:R / R:a G5|b G6 i S / G1: / G2: / G3: / G5: / G6:
+SMALL-FAIL shape=0 mask=57 rules=S:G1 C / C:P|e x ? S : S / P:R G4 / R:a G5|b G6 i S / G1: / G4: / G5: / G6:
+SMALL-FAIL shape=0 mask=59 rules=S:G1 C / C:P G2|e x ? S : S / P:R G4 / R:a G5|b G6 i S / G1: / G2: / G4: / G5: / G6:
+SMALL-FAIL shape=0 mask=61 rules=S:G1 C / C:P|G3 e x ? S : S / P:R G4 / R:a G5|b G6 i S / G1: / G3: / G4: / G5: / G6:
+SMALL-FAIL shape=0 mask=63 rules=S:G1 C / C:P G2|G3 e x ? S : S / P:R G4 / R:a G5|b G6 i S / G1: / G2: / G3: / G4: / G5: / G6:
+SMALL-FAIL shape=1 mask=5 rules=S:G1 C / C:P|G3 e S / P:R / R:a|b i S / G1: / G3:
+SMALL-FAIL shape=1 mask=7 rules=S:G1 C / C:P G2|G3 e S / P:R / R:a|b i S / G1: / G2: / G3:
+SMALL-FAIL shape=1 mask=13 rules=S:G1 C / C:P|G3 e S / P:R G4 / R:a|b i S / G1: / G3: / G4:
+SMALL-FAIL shape=1 mask=15 rules=S:G1 C / C:P G2|G3 e S / P:R G4 / R:a|b i S / G1: / G2: / G3: / G4:
+SMALL-FAIL shape=1 mask=21 rules=S:G1 C / C:P|G3 e S / P:R / R:a G5|b i S / G1: / G3: / G5:
+SMALL-FAIL shape=1 mask=23 rules=S:G1 C / C:P G2|G3 e S / P:R / R:a G5|b i S / G1: / G2: / G3: / G5:
+SMALL-FAIL shape=1 mask=29 rules=S:G1 C / C:P|G3 e S / P:R G4 / R:a G5|b i S / G1: / G3: / G4: / G5:
+SMALL-FAIL shape=1 mask=31 rules=S:G1 C / C:P G2|G3 e S / P:R G4 / R:a G5|b i S / G1: / G2: / G3: / G4: / G5:
+SMALL-FAIL shape=2 mask=1 rules=S:G1 C / C:P|e S / P:R / R:a|b S / G1:
+SMALL-FAIL shape=2 mask=3 rules=S:G1 C / C:P G2|e S / P:R / R:a|b S / G1: / G2:
+SMALL-FAIL shape=2 mask=5 rules=S:G1 C / C:P|G3 e S / P:R / R:a|b S / G1: / G3:
+SMALL-FAIL shape=2 mask=7 rules=S:G1 C / C:P G2|G3 e S / P:R / R:a|b S / G1: / G2: / G3:
+SMALL-FAIL shape=2 mask=9 rules=S:G1 C / C:P|e S / P:R G4 / R:a|b S / G1: / G4:
+SMALL-FAIL shape=2 mask=11 rules=S:G1 C / C:P G2|e S / P:R G4 / R:a|b S / G1: / G2: / G4:
+SMALL-FAIL shape=2 mask=13 rules=S:G1 C / C:P|G3 e S / P:R G4 / R:a|b S / G1: / G3: / G4:
+SMALL-FAIL shape=2 mask=15 rules=S:G1 C / C:P G2|G3 e S / P:R G4 / R:a|b S / G1: / G2: / G3: / G4:
+SMALL-FAIL shape=2 mask=17 rules=S:G1 C / C:P|e S / P:R / R:a G5|b S / G1: / G5:
+SMALL-FAIL shape=2 mask=19 rules=S:G1 C / C:P G2|e S / P:R / R:a G5|b S / G1: / G2: / G5:
+SMALL-FAIL shape=2 mask=21 rules=S:G1 C / C:P|G3 e S / P:R / R:a G5|b S / G1: / G3: / G5:
+SMALL-FAIL shape=2 mask=23 rules=S:G1 C / C:P G2|G3 e S / P:R / R:a G5|b S / G1: / G2: / G3: / G5:
+SMALL-FAIL shape=2 mask=25 rules=S:G1 C / C:P|e S / P:R G4 / R:a G5|b S / G1: / G4: / G5:
+SMALL-FAIL shape=2 mask=27 rules=S:G1 C / C:P G2|e S / P:R G4 / R:a G5|b S / G1: / G2: / G4: / G5:
+SMALL-FAIL shape=2 mask=29 rules=S:G1 C / C:P|G3 e S / P:R G4 / R:a G5|b S / G1: / G3: / G4: / G5:
+SMALL-FAIL shape=2 mask=31 rules=S:G1 C / C:P G2|G3 e S / P:R G4 / R:a G5|b S / G1: / G2: / G3: / G4: / G5:
+SMALL-FAIL shape=2 mask=37 rules=S:G1 C / C:P|G3 e S / P:R / R:a|b G6 S / G1: / G3: / G6:
+SMALL-FAIL shape=2 mask=39 rules=S:G1 C / C:P G2|G3 e S / P:R / R:a|b G6 S / G1: / G2: / G3: / G6:
+SMALL-FAIL shape=2 mask=45 rules=S:G1 C / C:P|G3 e S / P:R G4 / R:a|b G6 S / G1: / G3: / G4: / G6:
+SMALL-FAIL shape=2 mask=47 rules=S:G1 C / C:P G2|G3 e S / P:R G4 / R:a|b G6 S / G1: / G2: / G3: / G4: / G6:
+SMALL-FAIL shape=2 mask=53 rules=S:G1 C / C:P|G3 e S / P:R / R:a G5|b G6 S / G1: / G3: / G5: / G6:
+SMALL-FAIL shape=2 mask=55 rules=S:G1 C / C:P G2|G3 e S / P:R / R:a G5|b G6 S / G1: / G2: / G3: / G5: / G6:
+SMALL-FAIL shape=2 mask=61 rules=S:G1 C / C:P|G3 e S / P:R G4 / R:a G5|b G6 S / G1: / G3: / G4: / G5: / G6:
+SMALL-FAIL shape=2 mask=63 rules=S:G1 C / C:P G2|G3 e S / P:R G4 / R:a G5|b G6 S / G1: / G2: / G3: / G4: / G5: / G6:
+tiny-0 RESULT=False CONFLICTS=0 NT=5 STATES=10
+no grammar conflicts
+TOKENS=Janglim.FrontEnd.Tokenize.TokenCell
+a epsilon reduce G -> epsilon 
+a goto 2 
+a shift 5 
+щ failed null (shift 할 수 없습니다 {} 와야 합니다)
+LA I0 G ->• {a, b, e}
+LA I1 Accept -> S• {This is EndMarker! char : щ}
+LA I3 S -> G C• {This is EndMarker! char : щ}
+LA I4 C -> R• {This is EndMarker! char : щ}
+LA I5 R -> a• {}
+LA I6 G ->• {a, b, e}
+LA I7 G ->• {a, b, e}
+LA I8 R -> b S• {}
+LA I9 C -> e S• {This is EndMarker! char : щ}
+ASSEMBLY C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-audit-plain\bin\Release\net8.0\Parse.FrontEnd.Parsers.dll
+MANUAL TOKEN NO LEXER RESULT=False INPUT=a TERMINAL=a
+MANUAL a epsilon reduce G -> epsilon 
+MANUAL a goto 2 
+MANUAL a shift 5 
+MANUAL щ failed null (shift 할 수 없습니다 {} 와야 합니다)
+tiny-1 RESULT=True CONFLICTS=0 NT=4 STATES=9
+no grammar conflicts
+TOKENS=Janglim.FrontEnd.Tokenize.TokenCell
+a epsilon reduce G -> epsilon 
+a goto 2 
+a shift 4 
+щ reduce C -> a 
+щ goto 3 
+щ reduce S -> G C 
+щ goto 1 
+щ accept Accept -> S 
+LA I0 G ->• {a, b, e}
+LA I1 Accept -> S• {This is EndMarker! char : щ}
+LA I3 S -> G C• {This is EndMarker! char : щ}
+LA I4 C -> a• {This is EndMarker! char : щ}
+LA I5 G ->• {a, b, e}
+LA I6 G ->• {a, b, e}
+LA I7 C -> b S• {This is EndMarker! char : щ}
+LA I8 C -> e S• {This is EndMarker! char : щ}
+ASSEMBLY C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-audit-plain\bin\Release\net8.0\Parse.FrontEnd.Parsers.dll
+tiny-2 RESULT=True CONFLICTS=0 NT=4 STATES=7
+no grammar conflicts
+TOKENS=Janglim.FrontEnd.Tokenize.TokenCell
+a epsilon reduce G -> epsilon 
+a goto 2 
+a shift 4 
+щ reduce C -> a 
+щ goto 3 
+щ reduce S -> G C 
+щ goto 1 
+щ accept Accept -> S 
+LA I0 G ->• {a, b}
+LA I1 Accept -> S• {This is EndMarker! char : щ}
+LA I3 S -> G C• {This is EndMarker! char : щ}
+LA I4 C -> a• {This is EndMarker! char : щ}
+LA I5 G ->• {a, b}
+LA I6 C -> b S• {This is EndMarker! char : щ}
+ASSEMBLY C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-audit-plain\bin\Release\net8.0\Parse.FrontEnd.Parsers.dll
+tiny-3 RESULT=True CONFLICTS=0 NT=5 STATES=8
+no grammar conflicts
+TOKENS=Janglim.FrontEnd.Tokenize.TokenCell
+a epsilon reduce G -> epsilon 
+a goto 2 
+a shift 5 
+щ reduce R -> a 
+щ goto 4 
+щ reduce C -> R 
+щ goto 3 
+щ reduce S -> G C 
+щ goto 1 
+щ accept Accept -> S 
+LA I0 G ->• {a, b}
+LA I1 Accept -> S• {This is EndMarker! char : щ}
+LA I3 S -> G C• {This is EndMarker! char : щ}
+LA I4 C -> R• {This is EndMarker! char : щ}
+LA I5 R -> a• {This is EndMarker! char : щ}
+LA I6 G ->• {a, b}
+LA I7 R -> b S• {This is EndMarker! char : щ}
+ASSEMBLY C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-audit-plain\bin\Release\net8.0\Parse.FrontEnd.Parsers.dll
+tiny-4 RESULT=True CONFLICTS=0 NT=4 STATES=9
+no grammar conflicts
+TOKENS=Janglim.FrontEnd.Tokenize.TokenCell
+a shift 4 
+щ reduce R -> a 
+щ goto 3 
+щ reduce C -> R 
+щ goto 2 
+щ reduce S -> C 
+щ goto 1 
+щ accept Accept -> S 
+LA I1 Accept -> S• {This is EndMarker! char : щ}
+LA I2 S -> C• {This is EndMarker! char : щ}
+LA I3 C -> R• {This is EndMarker! char : щ}
+LA I4 R -> a• {This is EndMarker! char : щ}
+LA I7 R -> b S• {This is EndMarker! char : щ}
+LA I8 C -> e S• {This is EndMarker! char : щ}
+ASSEMBLY C:\Users\AhjLv\OneDrive\바탕 화면\개인 프로젝트\AJPGS\artifacts\typescript\lookahead-audit-plain\bin\Release\net8.0\Parse.FrontEnd.Parsers.dll

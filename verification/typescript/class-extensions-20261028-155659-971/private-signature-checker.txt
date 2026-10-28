@@ -1,0 +1,12 @@
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-cases.ts(1,26): error TS2389: Function implementation name must be '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-cases.ts(3,72): error TS2389: Function implementation name must be '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-cases.ts(4,27): error TS2389: Function implementation name must be '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-cases.ts(5,31): error TS2804: Duplicate identifier '#m'. Static and instance elements cannot share the same private name.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-cases.ts(5,43): error TS2387: Function overload must be static.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-cases.ts(5,43): error TS2804: Duplicate identifier '#m'. Static and instance elements cannot share the same private name.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-cases.ts(6,23): error TS2300: Duplicate identifier '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-cases.ts(6,23): error TS2391: Function implementation is missing or not immediately following the declaration.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-cases.ts(6,35): error TS2300: Duplicate identifier '#m'.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-cases.ts(6,35): error TS2564: Property '#m' has no initializer and is not definitely assigned in the constructor.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-cases.ts(7,28): error TS1222: An overload signature cannot be declared as a generator.
+artifacts/typescript/class-extensions-20261028-155659-971/private-signature-cases.ts(7,29): error TS2391: Function implementation is missing or not immediately following the declaration.

@@ -1,0 +1,1 @@
+async function load({path}){const text=await read(path);return /ab/g.test(text);}
