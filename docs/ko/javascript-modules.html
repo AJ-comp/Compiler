@@ -50,29 +50,29 @@
       <section id="purpose">
         <p class="kind">ECMAScript 2026 · JavaScript 언어 지원</p>
         <h1>모듈의 import·export를 파싱하고,<br>선언한 이름과 사용 문맥을 검사합니다.</h1>
-        <p class="lead"><code>JavaScriptModuleGrammar</code>는 다른 모듈에서 이름을 가져오는 <code>import</code>와 현재 모듈의 이름을 공개하는 <code>export</code>를 읽을 문법과 토큰 규칙을 준비합니다. 개발자는 입력을 파싱한 뒤 <code>Validate</code>를 호출해 중복된 이름, 선언하지 않은 이름의 export, 잘못된 <code>await</code> 사용을 검사합니다.</p>
+        <p class="lead"><code>JavaScriptGrammar</code>에서 Module 입력을 선택하면 다른 모듈에서 이름을 가져오는 <code>import</code>와 현재 모듈의 이름을 공개하는 <code>export</code>를 읽습니다. 개발자는 입력을 파싱한 뒤 <code>Validate</code>를 호출해 중복된 이름, 선언하지 않은 이름의 export, 잘못된 <code>await</code> 사용을 검사합니다.</p>
         <p>예를 들어 <code>import {calculate} from './math.js'; export const answer = calculate(6, 7);</code>을 입력하면, 파서는 import 선언과 변수 선언·함수 호출·export의 구조를 하나의 구문 트리로 만듭니다. 그다음 <code>Validate</code>는 가져온 이름 <code>calculate</code>와 새로 선언한 이름 <code>answer</code>가 이 모듈의 다른 선언과 충돌하는지 확인합니다.</p>
         <p><span class="core">Module도 문법 준비 → 입력 파싱 → 정적 오류 검사 순서로 사용합니다.</span> 먼저 Module 입력을 따로 선택하는 이유와 C# 사용 코드를 살펴본 뒤, import와 export의 각 형태를 차례로 설명합니다.</p>
       </section>
 
       <section id="api">
         <h2>1. import·export가 있는 파일은 Module 문법으로 읽습니다.</h2>
-        <p>JavaScript 명세는 일반 Script와 Module을 서로 다른 시작 문법으로 정합니다. Module에서는 최상위 import·export와 <code>import.meta</code>를 사용할 수 있고, 함수 밖에서도 <code>await</code>를 사용할 수 있습니다. 따라서 개발자는 파일을 어떤 문맥으로 읽을지 먼저 선택합니다.</p>
+        <p>JavaScript 명세는 일반 Script와 Module을 서로 다른 시작 문법으로 정합니다. Module에서는 최상위 import·export와 <code>import.meta</code>를 사용할 수 있고, 함수 밖에서도 <code>await</code>를 사용할 수 있습니다. Janglim에서는 클래스 하나를 사용하되, 생성자의 <code>inputKind</code>로 이 검사 문맥을 선택합니다.</p>
         <div class="table-wrap"><table>
-          <caption>입력 단위에 따라 선택하는 공개 클래스</caption>
-          <thead><tr><th scope="col">입력</th><th scope="col">클래스</th></tr></thead>
+          <caption>JavaScriptGrammar에서 선택하는 입력 종류</caption>
+          <thead><tr><th scope="col">입력</th><th scope="col">JavaScriptInputKind</th></tr></thead>
           <tbody>
-            <tr><td>엄격 모드 Script 문맥의 표현식 하나</td><td><code>JavaScriptExpressionGrammar</code></td></tr>
-            <tr><td>엄격 모드 Script의 선언·문장 목록</td><td><code>JavaScriptScriptGrammar</code></td></tr>
-            <tr><td>Module의 import·export와 선언·문장 목록</td><td><code>JavaScriptModuleGrammar</code></td></tr>
+            <tr><td>Script의 선언·문장 목록</td><td><code>Script</code> — 기본값</td></tr>
+            <tr><td>Module의 import·export와 선언·문장 목록</td><td><code>Module</code> — 항상 엄격 모드</td></tr>
+            <tr><td>Script 문맥의 표현식 하나</td><td><code>Expression</code></td></tr>
           </tbody>
         </table></div>
-        <p>세 클래스는 같은 사용 순서를 제공합니다. 다음 C# 코드는 Module 문법으로 파서를 만들고, 모듈 원문을 입력한 뒤 정적 오류까지 검사합니다.</p>
+        <p>어떤 입력 종류를 선택해도 파싱과 검사의 사용 순서는 같습니다. 다음 C# 코드는 <code>inputKind: JavaScriptInputKind.Module</code>로 모듈 문법을 준비하고, 모듈 원문을 입력한 뒤 정적 오류까지 검사합니다.</p>
         <pre><code>using System;
 using Janglim.FrontEnd.Grammars.JavaScript;
 using Janglim.FrontEnd.Parsers.LR;
 
-var language = new JavaScriptModuleGrammar();
+var language = new JavaScriptGrammar(inputKind: JavaScriptInputKind.Module);
 var parser = new LALRParser(language.Grammar);
 var input = @"
 import {calculate} from './math.js';
@@ -178,7 +178,7 @@ export {default as data} from './data.json' with {type: 'json'};</code></pre>
 const loadData = () =&gt;
     import('./data.json', {with: {type: 'json'}});</code></pre>
         <p>ECMAScript 실행 환경에서 이 표현식은 모듈을 불러오는 작업의 Promise를 만듭니다. Janglim은 호출의 구조와 인수 표현식을 파싱합니다. 따라서 위 예제의 함수나 동적 import를 실행하지 않고도 구문을 검사할 수 있습니다.</p>
-        <p><span class="core">동적 import는 세 공개 API에서 모두 사용할 수 있습니다.</span> 표현식 API에는 <code>import('./feature.js')</code> 자체를, Script·Module API에는 위와 같이 선언·문장과 함께 입력합니다.</p>
+        <p><span class="core">동적 import는 세 입력 종류에서 모두 사용할 수 있습니다.</span> Expression 입력에는 <code>import('./feature.js')</code> 자체를, Script·Module 입력에는 위와 같이 선언·문장과 함께 전달합니다.</p>
         <p>인수는 한 개 또는 두 개이며, 끝의 쉼표를 허용합니다. 첫 번째 인수는 모듈 경로를 계산할 표현식이고, 두 번째 인수는 옵션을 계산할 표현식입니다.</p>
         <pre><code>import(path)
 import(path,)
@@ -259,8 +259,8 @@ const answer = 42;</code></pre>
           <thead><tr><th scope="col">파일</th><th scope="col">담당하는 일</th></tr></thead>
           <tbody>
             <tr><td><a href="../../grammars/javascript/ecmascript-2026-modules.ebnf">ecmascript-2026-modules.ebnf</a></td><td>모듈 항목, import·export·속성, 동적 import·import.meta·await와 for-await-of 생성 규칙</td></tr>
-            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptModuleGrammar.cs">JavaScriptModuleGrammar.cs</a></td><td>Module을 시작 문법으로 선택하는 공개 클래스</td></tr>
-            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptExpressionGrammar.cs">JavaScriptExpressionGrammar.cs</a></td><td>공통 JavaScript 리소스를 연결하고 입력 문맥에 맞는 문법·정책·source를 준비</td></tr>
+            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptInputKind.cs">JavaScriptInputKind.cs</a></td><td>Script·Module·Expression 입력 종류</td></tr>
+            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptGrammar.cs">JavaScriptGrammar.cs</a></td><td>공통 JavaScript 리소스를 연결하고 선택한 입력 종류의 시작 규칙·정책·source·검사기를 준비</td></tr>
             <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptModuleValidation.cs">JavaScriptModuleValidation.cs</a></td><td>공개 이름·local export·import 속성과 import.meta·await의 문맥 검사</td></tr>
             <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptStatementValidation.cs">JavaScriptStatementValidation.cs</a></td><td>import·선언 이름을 포함한 Module 범위와 반복문의 제어문 검사</td></tr>
             <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptStatementPredicates.cs">JavaScriptStatementPredicates.cs</a></td><td>문맥 단어 as·from과 export 형태, 모듈 선언의 문장 경계 조건</td></tr>

@@ -102,6 +102,11 @@ jobs:
       - name: Test release infrastructure helpers
         run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
 
+      - name: Test language verification helpers
+        run: |
+          python3 -m unittest discover -s tools/Test262 -p 'test_*.py'
+          python3 -m unittest discover -s tools/TypeScript -p 'test_*.py'
+
       - name: Set up Node.js
         if: steps.frontend.outputs.enabled == 'true'
         uses: actions/setup-node@v4

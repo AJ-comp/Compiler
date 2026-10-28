@@ -19,7 +19,7 @@ public sealed class JavaScriptScriptCollection : ICollectionFixture<JavaScriptSc
 
 public sealed class JavaScriptScriptFixture
 {
-    public JavaScriptScriptGrammar Language { get; } = new JavaScriptScriptGrammar();
+    public JavaScriptGrammar Language { get; } = new JavaScriptGrammar();
     public LALRParser Parser { get; }
 
     public JavaScriptScriptFixture() => Parser = new LALRParser(Language.Grammar, false);
@@ -396,7 +396,7 @@ public sealed class JavaScriptStatementTests
     [Fact]
     public void Public_factory_contract_keeps_strict_Script_distinct_from_expression_input()
     {
-        Assert.Equal(2026, JavaScriptScriptGrammar.Edition);
+        Assert.Equal(2026, JavaScriptGrammar.Edition);
         Assert.False(string.IsNullOrWhiteSpace(_fixture.Language.GrammarText));
         Assert.Equal("input", Assert.Throws<ArgumentNullException>(
             () => _fixture.Language.CreateTokenSource(null)).ParamName);

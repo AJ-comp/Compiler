@@ -1,7 +1,7 @@
 # ECMAScript 2026 (17th edition), section 13: strict Script expression grammar.
 # Source: https://tc39.es/ecma262/2026/multipage/ecmascript-language-expressions.html
 # Entry context: strict Script. JavaScriptFunctionGrammar expands Await contexts.
-# Lexical pattern placeholders are filled by JavaScriptExpressionGrammar.
+# Lexical pattern placeholders are filled by JavaScriptGrammar.
 # Assignment/update targets, destructuring patterns, and escaped reserved words require
 # the host's early-error checks. Array/Object literals cover assignment patterns for '='.
 
@@ -83,7 +83,12 @@ ReservedWord : 'await' | 'break' | 'case' | 'catch' | 'class' | 'const' | 'conti
 
 # Elisions are represented by commas without elements: [,], [,,], and [a,,b].
 ArrayLiteral : '[' ']' | '[' ArrayElements ']' ;
-ArrayElements : ArrayElement | ArrayElement ',' | ArrayElement ',' ArrayElements | ',' | ',' ArrayElements ;
+# Reduce completed elements as the list grows. Elisions retain every comma,
+# including holes and trailing commas, without accumulating a pending LR stack.
+ArrayElements : ArrayElementList | ArrayElision | ArrayElementList ',' | ArrayElementList ',' ArrayElision ;
+ArrayElementList : ArrayElement | ArrayElision ArrayElement
+                 | ArrayElementList ',' ArrayElement | ArrayElementList ',' ArrayElision ArrayElement ;
+ArrayElision : ',' | ArrayElision ',' ;
 ArrayElement : AssignmentExpression | SpreadElement ;
 
 # Object data properties, shorthand properties, computed keys, and spread properties.

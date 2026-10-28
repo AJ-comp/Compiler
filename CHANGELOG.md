@@ -2,6 +2,61 @@
 
 The engine, web application, MCP service, and built-in grammar baselines use independent version numbers. The entries below describe each version's scope and changes.
 
+## Janglim engine 0.6.0 — 2026-10-28
+
+Unifies the JavaScript API, adds non-strict and optional browser-compatible syntax, introduces partial TypeScript support, and fixes LALR lookahead propagation. The package targets .NET Standard 2.1. Playground remains 1.1.0; MCP remains 0.1.0.
+
+### Unified JavaScript API, non-strict mode and browser compatibility
+
+- Consolidate the three JavaScript grammar classes into `JavaScriptGrammar`. The default reads strict Script input; `JavaScriptInputKind.Module` and `.Expression` select the other syntax roots through the `inputKind` constructor option. Module checks, strictness and browser compatibility stay scoped to the selected input kind.
+- Add selectable initial Script/expression strictness with `JavaScriptMode`, preserving strict defaults and always-strict Module input.
+- Apply directive prologues, inherited function strictness and class strictness before checking bindings, targets and legacy numeric/string forms.
+- Add opt-in Annex B syntax and early-error exceptions: Script HTML comments, labelled/if functions, ordinary block-function duplicates, catch/var, for-in initializers and specified non-strict call targets.
+- Preserve strict and context-specific errors for classes, async/generator bodies, arrows, logical assignments and destructuring targets.
+- Implement the feature entirely in the JavaScript grammar layer using existing lexical policies, token-source requests and predicates. Add regression tests and the [mode/compatibility guide](docs/ko/javascript-non-strict.html).
+
+The previous grammar class names are replaced in the source API. Migrate constructors as follows; `Grammar`, `Policy`, `GrammarText`, `CreateTokenSource(input)` and `Validate(tree)` keep their usage.
+
+| Previous constructor | Unified constructor |
+| --- | --- |
+| `new JavaScriptScriptGrammar()` | `new JavaScriptGrammar()` |
+| `new JavaScriptScriptGrammar(mode, web)` | `new JavaScriptGrammar(mode, web)` |
+| `new JavaScriptModuleGrammar()` | `new JavaScriptGrammar(inputKind: JavaScriptInputKind.Module)` |
+| `new JavaScriptModuleGrammar(web)` | `new JavaScriptGrammar(webCompatibility: web, inputKind: JavaScriptInputKind.Module)` |
+| `new JavaScriptExpressionGrammar()` | `new JavaScriptGrammar(inputKind: JavaScriptInputKind.Expression)` |
+| `new JavaScriptExpressionGrammar(mode, web)` | `new JavaScriptGrammar(mode, web, JavaScriptInputKind.Expression)` |
+
+### ECMAScript 2026 conformance verification
+
+- Map the frozen 2026 specification's lexical/syntactic productions and static early-error clauses to JavaScript implementation and regression tests. Add pinned Test262 preparation, source-only execution, and hash-verified result aggregation tools.
+- Accumulate array literal and binding lists with left recursion so large flat arrays keep bounded LR stack depth. Preserve holes, commas, nested patterns, rest restrictions, source tokens, and directive handling.
+- Recognize template continuation tokens as boundaries for a bare `yield`; distinguish non-strict identifier statements from `let` declarations according to their grammar position.
+- Restore declaration slash context after ASI, including async declarations. Preserve keyword `await` operand context separately from identifier, binding and label uses, with independent state for speculative reads.
+- Add boundary, scale, static-error and Script/Module regression tests. Reuse the common lexer, LR parser and EBNF reader unchanged. See the [verification report](docs/ko/javascript-conformance.html) for the exact snapshots, scope, results and reproduction steps.
+
+### TypeScript support
+
+- Add `TypeScriptGrammar` with Script, Module, Expression and Type input kinds, reusing the JavaScript grammar, token source and static validation. Script defaults to non-strict mode; Module remains strict.
+- Embed type/declaration EBNF resources. Support annotations, type aliases, interfaces, enum/namespace/ambient declarations, generic types, conditional/mapped types, and `as`, `satisfies` and non-null assertions.
+- Add TypeScript class modifiers, optional/definite properties, generic heritage and implements clauses, method/constructor signatures, overload declarations, parameter properties, index signatures and abstract/ambient accessors. Preserve original type nodes, tokens and source spans while validating a separate JavaScript view.
+- Include pinned TypeScript 7.0.2 development oracles and provenance. The runtime has no dependency on the upstream compiler.
+- Full TypeScript support remains follow-up work: runtime generic calls/new, typed/generic arrows, angle-bracket assertions, type-only import/export forms, import=/export=, decorators and TSX. Type resolution and assignability require a separate type checker. See the [scope and examples](grammars/typescript/README.md).
+
+### LALR lookahead and grammar validation
+
+- Retain recursive lookahead calculation while recording propagation targets. After recursion, propagate growing sets through the recorded relations until stable so late lookahead additions reach dependent Reduce items.
+- Change `CanonicalRelation.LookAheadTable` values from `TerminalSet` to `CanonicalRelation.LookAheadEntry`. **API migration:** read the set through `table[key].LookAhead`; `Targets` contains dependent state/item keys.
+- Return `{epsilon}` for FIRST of an empty symbol sequence. Inherit parent lookaheads only for nullable suffixes, distinguishing an empty FIRST set from an empty sequence.
+- Validate productivity during `Grammar.Optimization()`. Report nonterminals without a finite derivation through `GrammarProductivityException`; expose EBNF diagnostics through the reader.
+- Add completed-item lookahead, cyclic propagation, nullable suffix, productivity and parsing regression tests. Keep the approved snapshot focused on completed Reduce items.
+
+### Release preparation and verification
+
+- Update the engine version, NuGet description/tags/release notes, repository/package READMEs and installation guides to 0.6.0. Document both public API migrations and current language support boundaries.
+- Include TypeScript EBNF resources in the MCP container build context and add a Korean TypeScript usage guide. Preserve human author/designer attribution.
+- The 2026-10-28 regression checkpoint passed 7,384 parser tests (one existing SLR skip), including all 975 TypeScript tests, plus 69 MCP tests. Release solution build: zero warnings/errors. The recorded 48,375-case Test262 audit is from 2026-10-21 with its original input/binary hashes, rather than a rerun of the final release binaries.
+- Feature-branch pushes validate artifacts. Only master verification feeds NuGet publication and Playground deployment. See [release notes](RELEASE_NOTES.md) for scope and upgrade guidance.
+
 ## Janglim engine 0.5.0 — 2026-10-21
 
 Engine 0.5.0 adds parser-driven lexical input, longest-match token selection and ECMAScript 2026-based JavaScript language APIs. The package still targets .NET Standard 2.1; the web Playground remains 1.1.0 and MCP remains 0.1.0.

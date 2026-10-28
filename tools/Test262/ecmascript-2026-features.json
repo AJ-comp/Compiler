@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "edition": "ECMAScript 2026 (17th edition)",
+  "specification": "https://tc39.es/ecma262/2026/multipage/",
+  "reviewDate": "2026-10-21",
+  "policy": "Exclude only tests requiring syntax absent from the frozen 2026 edition. Keep runtime/builtin-only proposals when their original source uses standard 2026 syntax; their runtime and module-resolution assertions are not executed by this parser audit.",
+  "excludedFeatures": {
+    "decorators": "Stage 2.7 in the TC39 active proposals list on 2026-10-21; decorator syntax is absent from the frozen ECMAScript 2026 ClassDefinition and ClassElement productions. Sources: https://github.com/tc39/proposals#stage-27 ; https://tc39.es/ecma262/2026/multipage/ecmascript-language-functions-and-classes.html#sec-class-definitions",
+    "explicit-resource-management": "Stage 4, expected publication 2027 in TC39 finished proposals; using/await using declarations are absent from the frozen ECMAScript 2026 Declaration and ForInOfStatement productions. Source: https://github.com/tc39/proposals/blob/main/finished-proposals.md ; https://tc39.es/ecma262/2026/multipage/ecmascript-language-statements-and-declarations.html",
+    "import-defer": "Stage 3; import defer and import.defer syntax is absent from the frozen ECMAScript 2026 ImportDeclaration and ImportCall productions. Sources: https://github.com/tc39/proposal-defer-import-eval ; https://tc39.es/ecma262/2026/multipage/ecmascript-language-scripts-and-modules.html#sec-imports",
+    "source-phase-imports": "Stage 3; import source and import.source syntax is absent from the frozen ECMAScript 2026 ImportDeclaration and ImportCall productions. Sources: https://github.com/tc39/proposal-source-phase-imports ; https://tc39.es/ecma262/2026/multipage/ecmascript-language-scripts-and-modules.html#sec-imports",
+    "source-phase-imports-module-source": "ESM Phase Imports is Stage 2.7; this feature depends on Source Phase Imports syntax, which is absent from the frozen ECMAScript 2026 edition. Sources: https://github.com/tc39/proposal-esm-phase-imports ; https://github.com/tc39/proposal-source-phase-imports"
+  },
+  "featureReviews": {
+    "decorators": {
+      "tc39Stage": "2.7",
+      "expectedPublicationYear": null,
+      "decision": "exclude-new-syntax",
+      "reason": "The active TC39 proposals list is the current status authority; an older individual proposal README may still describe an earlier stage.",
+      "sources": [
+        "https://github.com/tc39/proposals#stage-27",
+        "https://github.com/tc39/proposal-decorators",
+        "https://tc39.es/ecma262/2026/multipage/ecmascript-language-functions-and-classes.html#sec-class-definitions"
+      ]
+    },
+    "explicit-resource-management": {
+      "tc39Stage": "4",
+      "expectedPublicationYear": 2027,
+      "decision": "exclude-new-syntax",
+      "reason": "The finished proposals list gives expected publication year 2027. Stage 4 alone does not imply inclusion in the already frozen 2026 edition.",
+      "sources": [
+        "https://github.com/tc39/proposals/blob/main/finished-proposals.md",
+        "https://tc39.es/ecma262/2026/multipage/ecmascript-language-statements-and-declarations.html"
+      ]
+    },
+    "import-defer": {
+      "tc39Stage": "3",
+      "expectedPublicationYear": null,
+      "decision": "exclude-new-syntax",
+      "sources": [
+        "https://github.com/tc39/proposals#stage-3",
+        "https://github.com/tc39/proposal-defer-import-eval"
+      ]
+    },
+    "source-phase-imports": {
+      "tc39Stage": "3",
+      "expectedPublicationYear": null,
+      "decision": "exclude-new-syntax",
+      "sources": [
+        "https://github.com/tc39/proposals#stage-3",
+        "https://github.com/tc39/proposal-source-phase-imports"
+      ]
+    },
+    "source-phase-imports-module-source": {
+      "tc39Stage": "2.7",
+      "expectedPublicationYear": null,
+      "decision": "exclude-new-syntax",
+      "sources": [
+        "https://github.com/tc39/proposals#stage-27",
+        "https://github.com/tc39/proposal-esm-phase-imports"
+      ]
+    },
+    "import-bytes": {
+      "tc39Stage": "2.7",
+      "expectedPublicationYear": null,
+      "decision": "retain-original-source-syntax-only",
+      "reason": "The proposal uses existing import attributes, for example with { type: 'bytes' }, rather than adding a lexical token or syntactic production. The parser audit does not perform host loading or inspect the imported value.",
+      "sources": [
+        "https://github.com/tc39/proposal-import-bytes",
+        "https://tc39.es/ecma262/2026/multipage/ecmascript-language-scripts-and-modules.html#prod-ImportAttributes"
+      ]
+    },
+    "import-text": {
+      "tc39Stage": "3",
+      "expectedPublicationYear": null,
+      "decision": "retain-original-source-syntax-only",
+      "reason": "The proposal assigns host semantics to an existing import attribute type value. Its import syntax is standard import-attributes syntax; module loading is not run.",
+      "sources": [
+        "https://github.com/tc39/proposal-import-text",
+        "https://tc39.es/ecma262/2026/multipage/ecmascript-language-scripts-and-modules.html#prod-ImportAttributes"
+      ]
+    },
+    "immutable-arraybuffer": {
+      "tc39Stage": "2.7",
+      "expectedPublicationYear": null,
+      "decision": "retain-original-source-syntax-only",
+      "reason": "The proposal adds ArrayBuffer APIs and execution semantics. Calling a proposed method uses existing member/call grammar, so its source remains useful as a positive syntax input.",
+      "sources": [
+        "https://github.com/tc39/proposals#stage-27",
+        "https://github.com/tc39/proposal-immutable-arraybuffer"
+      ]
+    },
+    "nonextensible-applies-to-private": {
+      "tc39Stage": "3",
+      "expectedPublicationYear": null,
+      "decision": "retain-original-source-syntax-only",
+      "reason": "The proposal changes when adding a private field throws at execution time. Its class/private-field syntax already exists in the 2026 edition. Runtime exception expectations do not change source parsing.",
+      "sources": [
+        "https://github.com/tc39/proposal-nonextensible-applies-to-private",
+        "https://tc39.es/ecma262/2026/multipage/ecmascript-language-functions-and-classes.html#sec-class-definitions"
+      ]
+    }
+  }
+}

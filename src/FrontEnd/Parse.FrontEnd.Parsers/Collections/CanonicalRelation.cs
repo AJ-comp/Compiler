@@ -35,6 +35,17 @@ namespace Janglim.FrontEnd.Parsers.Collections
     /// </summary>
     public class CanonicalRelation : Dictionary<int, HashSet<(Symbol, CanonicalState)>>
     {
+        /// <summary>
+        /// 한 (상태 번호, LR 항목)의 룩어헤드 집합과 그 집합을 전달할 대상들을 보관합니다.
+        /// 재귀 계산과 후처리 전파는 같은 LookAhead 집합을 사용합니다.
+        /// </summary>
+        public sealed class LookAheadEntry
+        {
+            public TerminalSet LookAhead { get; } = new TerminalSet();
+            public HashSet<(int State, LRItem Item)> Targets { get; }
+                = new HashSet<(int State, LRItem Item)>();
+        }
+
         private NonTerminal virtualStartSymbol = null;
         private FirstFollowAnalyzer _ffAnalyzer;
 
@@ -43,7 +54,7 @@ namespace Janglim.FrontEnd.Parsers.Collections
 
         public int NextIxIndex { get; private set; } = 0;
         public Dictionary<int, CanonicalState> IndexStateDic { get; } = new Dictionary<int, CanonicalState>();
-        public Dictionary<(int, LRItem), TerminalSet> LookAheadTable = new Dictionary<(int, LRItem), TerminalSet>();
+        public Dictionary<(int, LRItem), LookAheadEntry> LookAheadTable = new Dictionary<(int, LRItem), LookAheadEntry>();
 
         public IEnumerable<string> ConflictLogs => _conflictLogs;
         public ReduceParameter ReduceParameter { get; private set; } = ReduceParameter.LalrLookAhead;
@@ -132,7 +143,7 @@ namespace Janglim.FrontEnd.Parsers.Collections
             foreach (var item in LookAheadTable)
             {
                 var state = IndexStateDic[item.Key.Item1];
-                state.GetItem(item.Key.Item2).LookAhead = item.Value;
+                state.GetItem(item.Key.Item2).LookAhead = item.Value.LookAhead;
             }
         }
 
@@ -240,21 +251,23 @@ namespace Janglim.FrontEnd.Parsers.Collections
             {
                 foreach (var reduceItem in item.ReachedHandleItem) LookAhead(item, reduceItem);
             }
+
+            PropagateLookAhead();
         }
 
 
         private TerminalSet LookAhead(CanonicalState state, LRItem item)
         {
-            if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)];
-            LookAheadTable.Add((state.StateNumber, item), new TerminalSet());
+            if (LookAheadTable.ContainsKey((state.StateNumber, item))) return LookAheadTable[(state.StateNumber, item)].LookAhead;
+            var entry = new LookAheadEntry();
+            LookAheadTable.Add((state.StateNumber, item), entry);
 
-            var result = new TerminalSet();
+            var result = entry.LookAhead;
             var newMarkSymbol = item.SingleNT.ToNonTerminal();
 
             if (newMarkSymbol == virtualStartSymbol)
             {
                 result.Add(new EndMarker());
-                LookAheadTable[(state.StateNumber, item)] = result;
                 return result;
             }
 
@@ -273,11 +286,16 @@ namespace Janglim.FrontEnd.Parsers.Collections
                     if (newLRItem.MarkSymbol != newMarkSymbol) continue;
 
                     var alpha2 = _ffAnalyzer.First(newLRItem.SymbolListAfterMarkSymbol);
-                    if (alpha2.Contains(new Epsilon()) || alpha2.Count == 0)
+                    // 뒤의 기호열이 빈 입력으로 끝날 수 있을 때만 상위 룩어헤드를 전달합니다.
+                    if (alpha2.Contains(new Epsilon()))
                     {
                         var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))
-                                                   ? LookAheadTable[(predState.StateNumber, newLRItem)]
+                                                   ? LookAheadTable[(predState.StateNumber, newLRItem)].LookAhead
                                                    : LookAhead(predState, newLRItem);
+
+                        RecordLookAheadTarget(
+                            source: (predState.StateNumber, newLRItem),
+                            target: (state.StateNumber, item));
 
                         result.UnionWith(alpha2.RingSum(laTerminalSet));
                     }
@@ -285,9 +303,52 @@ namespace Janglim.FrontEnd.Parsers.Collections
                 }
             }
 
-            LookAheadTable[(state.StateNumber, item)] = result;
-
             return result;
+        }
+
+
+        private void RecordLookAheadTarget(
+            (int State, LRItem Item) source,
+            (int State, LRItem Item) target)
+        {
+            LookAheadTable[source].Targets.Add(target);
+        }
+
+
+        /// <summary>
+        /// 재귀 계산이 끝난 뒤 Targets를 따라 늦게 추가된 룩어헤드를 전달합니다.
+        /// 새 토큰을 얻은 항목을 다시 처리하여, 모든 집합이 더 이상 늘지 않을 때 종료합니다.
+        /// </summary>
+        private void PropagateLookAhead()
+        {
+            // 재귀에서 계산한 집합들을 출발점으로 사용합니다.
+            // 관계를 기록하기 전에 얻었던 토큰도 대상에게 전달해야 하므로
+            // 처음에는 테이블의 모든 항목을 큐에 넣습니다.
+            var pending = new Queue<LookAheadEntry>(LookAheadTable.Values);
+
+            while (pending.Count > 0)
+            {
+                var source = pending.Dequeue();
+
+                // Targets에는 source의 집합을 필요로 하는 항목들의 키가 들어 있습니다.
+                foreach (var targetKey in source.Targets)
+                {
+                    var target = LookAheadTable[targetKey];
+                    int beforeCount = target.LookAhead.Count;
+
+                    // 대상이 이미 가진 토큰은 유지하고, 없던 토큰만 추가합니다.
+                    target.LookAhead.UnionWith(source.LookAhead);
+
+                    // 집합이 그대로라면 다음 대상으로 넘어갑니다.
+                    // 순환 관계에서도 같은 토큰 때문에 작업이 끝없이 반복되지 않습니다.
+                    if (target.LookAhead.Count == beforeCount)
+                        continue;
+
+                    // 예: C의 새 토큰이 A에 추가됐다면, 이제 A의 대상들에게도
+                    // 그 토큰을 전달해야 하므로 A를 다시 큐에 넣습니다.
+                    pending.Enqueue(target);
+                }
+            }
         }
 
 

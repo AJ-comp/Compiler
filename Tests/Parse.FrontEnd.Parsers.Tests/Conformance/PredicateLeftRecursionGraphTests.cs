@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 using Janglim.FrontEnd.Grammars;
 using Janglim.FrontEnd.Grammars.Ebnf;
@@ -208,6 +209,19 @@ public class PredicateLeftRecursionGraphTests
         internal readonly Terminal BValue = new Terminal(TokenType.Keyword, "b", "b", true, false);
         internal readonly Terminal CValue = new Terminal(TokenType.Keyword, "c", "c", true, false);
         public override NonTerminal EbnfRoot => Start;
-        public NativeGraphGrammar(Action<NativeGraphGrammar> configure) { configure(this); }
+        public NativeGraphGrammar(Action<NativeGraphGrammar> configure)
+        {
+            configure(this);
+
+            // Unconfigured helper fields that no production references are not
+            // part of the configured test grammar. Keep referenced empty rules.
+            var referenced = NonTerminalMultiples
+                .SelectMany(rule => rule)
+                .SelectMany(production => production)
+                .OfType<NonTerminal>()
+                .ToHashSet();
+            NonTerminalMultiples.RemoveWhere(rule =>
+                rule.Count == 0 && !rule.IsStartSymbol && !referenced.Contains(rule));
+        }
     }
 }

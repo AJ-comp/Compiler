@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Janglim.FrontEnd.Grammars.JavaScript
 {
     /// <summary>
-    /// Checks strict Script/Module/function bindings, declaration scopes and control-flow targets.
+    /// Checks Script/Module/function bindings, declaration scopes and control-flow targets.
     /// Binding-name collection stops at initializers and property names, so expressions
     /// inside defaults and computed keys keep their ordinary expression meaning.
     /// All traversal and diagnostic state belongs to a single validation call.
@@ -14,16 +14,15 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
     /// </summary>
     internal static class JavaScriptStatementValidation
     {
-        private static readonly HashSet<string> Reserved = new HashSet<string>(
-            ("break case catch class const continue debugger default delete do else enum export extends false " +
-             "finally for function if import in instanceof new null return super switch this throw true try typeof " +
-             "var void while with yield let static implements interface package private protected public").Split(' '),
-            StringComparer.Ordinal);
-
         internal static void Validate(ParseTreeSymbol tree, List<JavaScriptDiagnostic> diagnostics)
+            => Validate(tree, diagnostics, JavaScriptStrictness.Analyze(tree, JavaScriptMode.Strict));
+
+        internal static void Validate(ParseTreeSymbol tree, List<JavaScriptDiagnostic> diagnostics,
+            JavaScriptStrictness strictness)
         {
             if (ReferenceEquals(tree, null)) throw new ArgumentNullException(nameof(tree));
             if (diagnostics == null) throw new ArgumentNullException(nameof(diagnostics));
+            if (strictness == null) throw new ArgumentNullException(nameof(strictness));
             var pending = new Stack<Visit>();
             pending.Push(new Visit(tree, new Flow()));
             while (pending.Count != 0)
@@ -36,13 +35,14 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                 if (name == "BindingIdentifier")
                 {
                     string identifier = Identifier(node);
-                    if (identifier == "eval" || identifier == "arguments" || Reserved.Contains(identifier) ||
+                    if (strictness.IsStrict(node) && (identifier == "eval" || identifier == "arguments") ||
+                        strictness.IsReserved(identifier, node) ||
                         identifier == "await" && JavaScriptSyntax.HasAwaitContext(node))
-                        Add(diagnostics, "invalid_binding_identifier", "This name cannot be bound in strict JavaScript code.", node);
+                        Add(diagnostics, "invalid_binding_identifier", "This name cannot be bound in this JavaScript context.", node);
                 }
                 if (IsFunction(name))
                 {
-                    CheckFunction(node, diagnostics);
+                    CheckFunction(node, diagnostics, strictness);
                     // A function establishes its own return, loop and label context.
                     // A loop/label outside this function cannot receive its break/continue.
                     var inner = new Flow(inFunction: true, yieldAllowed: JavaScriptSyntax.IsGenerator(node));
@@ -61,15 +61,15 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                 {
                     // Static initialization blocks have their own var/lexical scope,
                     // but they are not functions and therefore cannot return.
-                    CheckScope(node, diagnostics);
+                    CheckScope(node, diagnostics, strictness);
                     flow = new Flow();
                 }
-                else if (IsScope(name)) CheckScope(node, diagnostics);
+                else if (IsScope(name)) CheckScope(node, diagnostics, strictness);
 
                 if (name == "LexicalDeclaration") CheckLexicalInitializers(node, diagnostics);
-                else if (name == "ForStatement" || name == "ForInStatement" || name == "ForOfStatement" || name == "ForInOfStatement" || name == "ForAwaitOfStatement")
+                else if (name == "ForStatement" || name == "ForInStatement" || name == "ForOfStatement" || name == "ForInOfStatement" || name == "ForAwaitOfStatement" || name == "WebForInStatement")
                     CheckFor(node, diagnostics);
-                else if (name == "CatchClause" || name == "Catch") CheckCatch(node, diagnostics);
+                else if (name == "CatchClause" || name == "Catch") CheckCatch(node, diagnostics, strictness);
                 else if (name == "CaseBlock") CheckDefaultClauses(node, diagnostics);
                 else if (name == "ReturnStatement" && !flow.InFunction)
                     Add(diagnostics, "invalid_return", "A return statement must be inside a function body.", node);
@@ -77,8 +77,15 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                     Add(diagnostics, "invalid_yield", "A yield expression requires a generator function body.", node);
                 else if (name == "BreakStatement") CheckTransfer(node, flow, isContinue: false, diagnostics);
                 else if (name == "ContinueStatement") CheckTransfer(node, flow, isContinue: true, diagnostics);
-                else if (name == "WithStatement")
+                else if (name == "WithStatement" && strictness.IsStrict(node))
                     Add(diagnostics, "strict_with", "A with statement is not allowed in strict JavaScript code.", node);
+
+                if (name == "LegacyFunctionDeclaration" && strictness.IsStrict(node))
+                    Add(diagnostics, "strict_legacy_function", "A labelled or unbraced if function declaration requires non-strict code.", node);
+                if (name == "IfStatement" || name == "WithStatement" || IsIteration(name))
+                    foreach (var child in node.Items)
+                        if ((Name(child) == "Statement" || Name(child) == "StatementOrFunction") && IsLabelledFunction(child))
+                            Add(diagnostics, "invalid_labelled_function", "An if, iteration or with body cannot be a labelled function declaration.", child);
 
                 if (name == "LabelledStatement")
                 {
@@ -105,17 +112,23 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             }
         }
 
-        private static void CheckFunction(ParseTreeNonTerminal function, List<JavaScriptDiagnostic> diagnostics)
+        private static void CheckFunction(ParseTreeNonTerminal function, List<JavaScriptDiagnostic> diagnostics,
+            JavaScriptStrictness strictness)
         {
             var parameters = FirstChild(function, "FormalParameters");
             var body = FirstChild(function, "FunctionBody");
             if (parameters == null || body == null) return;
             CheckParameterExpressions(parameters, diagnostics, JavaScriptSyntax.IsAsync(function), JavaScriptSyntax.IsGenerator(function));
             var names = Bindings(parameters);
-            CheckDuplicates(names, "duplicate_parameter", "A strict function cannot bind the same parameter name twice.", diagnostics);
+            bool simple = IsSimpleParameters(parameters);
+            // Ordinary, async and generator FunctionDeclarations/Expressions all use
+            // FormalParameters. Only a non-strict simple list can repeat a name.
+            // Methods use UniqueFormalParameters even when their bodies are non-strict.
+            if (strictness.IsStrict(parameters) || !simple || JavaScriptSyntax.IsMethod(Name(function)))
+                CheckDuplicates(names, "duplicate_parameter", "This function cannot bind the same parameter name twice.", diagnostics);
             var declarations = DirectDeclarations(body);
             CheckIntersection(names, declarations.Lexical, "A parameter name cannot also be a lexical declaration in the function body.", diagnostics);
-            if (!IsSimpleParameters(parameters) && HasUseStrictDirective(body))
+            if (!simple && HasUseStrictDirective(body))
                 Add(diagnostics, "non_simple_strict_directive", "A function with default, rest or destructured parameters cannot contain a use strict directive.", parameters);
         }
 
@@ -179,10 +192,14 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                 Add(diagnostics, "non_simple_strict_directive", "A function with default, rest or destructured parameters cannot contain a use strict directive.", parameterList);
         }
 
-        private static void CheckScope(ParseTreeNonTerminal scope, List<JavaScriptDiagnostic> diagnostics)
+        private static void CheckScope(ParseTreeNonTerminal scope, List<JavaScriptDiagnostic> diagnostics,
+            JavaScriptStrictness strictness)
         {
             var declared = DirectDeclarations(scope);
-            CheckDuplicates(declared.Lexical, "duplicate_binding", "A lexical scope cannot bind the same name twice.", diagnostics);
+            bool legacyFunctions = strictness.WebCompatibility && !strictness.IsStrict(scope) &&
+                (Name(scope) == "Block" || Name(scope) == "CaseBlock");
+            if (legacyFunctions) CheckLegacyFunctionDuplicates(declared.Lexical, diagnostics);
+            else CheckDuplicates(declared.Lexical, "duplicate_binding", "A lexical scope cannot bind the same name twice.", diagnostics);
             var variables = VarBindings(scope);
             variables.AddRange(declared.Functions);
             CheckIntersection(declared.Lexical, variables, "A lexical declaration conflicts with a var or function declaration in this scope.", diagnostics);
@@ -230,7 +247,8 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                 {
                     var identifier = FirstChild(node, "BindingIdentifier");
                     if (identifier != null)
-                        (functionsAreVar ? result.Functions : result.Lexical).Add(new BoundName(identifier));
+                        (functionsAreVar ? result.Functions : result.Lexical).Add(new BoundName(identifier,
+                            ordinaryFunction: name == "FunctionDeclaration"));
                     continue;
                 }
                 if (name == "ClassDeclaration")
@@ -239,9 +257,22 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                     if (identifier != null) result.Lexical.Add(new BoundName(identifier));
                     continue;
                 }
+                if (name == "Statement" || name == "LabelledStatement")
+                {
+                    // A chain of labels ending directly in a FunctionDeclaration is
+                    // part of this StatementList's declaration set (8.2.4/8.2.8).
+                    // Its name is var-scoped in Script/FunctionBody, lexical in a
+                    // Block/CaseBlock. Do not descend through blocks or if/loop bodies.
+                    var function = LabelledFunctionDeclaration(node);
+                    var identifier = function == null ? null : FirstChild(function, "BindingIdentifier");
+                    if (identifier != null)
+                        (functionsAreVar ? result.Functions : result.Lexical).Add(new BoundName(identifier,
+                            ordinaryFunction: true));
+                    continue;
+                }
                 // Only declarations directly contained by this StatementList belong to
                 // this lexical scope. Blocks and statement bodies establish other paths.
-                if (name == "Statement" || IsScope(name) || IsFunction(name) || IsClass(name)) continue;
+                if (IsScope(name) || IsFunction(name) || IsClass(name)) continue;
                 PushChildren(pending, node);
             }
             return result;
@@ -292,6 +323,17 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                     if (FirstToken(node)?.Token.Input == "var") result.AddRange(Bindings(node));
                     continue;
                 }
+                if (name == "WebForInStatement")
+                {
+                    // Annex B.3.5 contributes the one header BindingIdentifier and
+                    // the body's VarDeclaredNames. Initializer expressions and any
+                    // functions they contain do not declare names in this scope.
+                    var identifier = FirstChild(node, "BindingIdentifier");
+                    if (identifier != null) result.Add(new BoundName(identifier));
+                    var statement = LastChild(node, "Statement");
+                    if (statement != null) pending.Push(statement);
+                    continue;
+                }
                 PushChildren(pending, node);
             }
             return result;
@@ -304,6 +346,7 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
 
         private static void CheckLexicalInitializers(ParseTreeNonTerminal declaration, List<JavaScriptDiagnostic> diagnostics)
         {
+            CheckLexicalBindingNames(Bindings(declaration), diagnostics);
             if (FirstToken(declaration)?.Token.Input != "const") return;
             var pending = new Stack<ParseTreeSymbol>();
             PushChildren(pending, declaration);
@@ -334,12 +377,22 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             string keyword = FirstToken(declaration)?.Token.Input;
             if (keyword != "let" && keyword != "const") return;
             var names = Bindings(declaration);
+            CheckLexicalBindingNames(names, diagnostics);
             CheckDuplicates(names, "duplicate_binding", "A lexical for declaration cannot bind the same name twice.", diagnostics);
             var statement = LastChild(loop, "Statement");
             if (statement != null)
                 CheckIntersection(names, VarBindings(statement), "A lexical for binding conflicts with a var declaration in the loop body.", diagnostics);
             if (Name(loop) == "ForStatement" && keyword == "const")
                 CheckForConstInitializers(declaration, diagnostics);
+        }
+
+        private static void CheckLexicalBindingNames(List<BoundName> names, List<JavaScriptDiagnostic> diagnostics)
+        {
+            // `let` can be an identifier in non-strict var/parameter bindings, but
+            // LexicalDeclaration and lexical for bindings prohibit it in every mode.
+            foreach (var binding in names)
+                if (binding.Name == "let")
+                    Add(diagnostics, "invalid_binding_identifier", "A lexical declaration cannot bind the name let.", binding.Node);
         }
 
         private static void CheckForConstInitializers(ParseTreeNonTerminal declaration, List<JavaScriptDiagnostic> diagnostics)
@@ -361,7 +414,8 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             }
         }
 
-        private static void CheckCatch(ParseTreeNonTerminal clause, List<JavaScriptDiagnostic> diagnostics)
+        private static void CheckCatch(ParseTreeNonTerminal clause, List<JavaScriptDiagnostic> diagnostics,
+            JavaScriptStrictness strictness)
         {
             var parameter = FirstChild(clause, "CatchParameter");
             var block = FirstChild(clause, "Block");
@@ -369,9 +423,13 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             var names = Bindings(parameter);
             CheckDuplicates(names, "duplicate_binding", "A catch pattern cannot bind the same name twice.", diagnostics);
             CheckIntersection(names, DirectDeclarations(block).Lexical, "A catch parameter conflicts with a lexical declaration in the catch block.", diagnostics);
-            // This grammar follows the main specification. The Annex B host extension
-            // for `catch (name) { var name; }` is deliberately not enabled here.
-            CheckIntersection(names, VarBindings(block), "A catch parameter conflicts with a var declaration in the catch block.", diagnostics);
+            // Annex B.3.4 is an independent host option, not a sloppy-only rule.
+            // It applies to a single BindingIdentifier even in strict code, while
+            // catch destructuring retains the normal var-name collision check.
+            bool legacyCatch = strictness.WebCompatibility && parameter.Count == 1 &&
+                FirstChild(parameter, "BindingIdentifier") != null;
+            if (!legacyCatch)
+                CheckIntersection(names, VarBindings(block), "A catch parameter conflicts with a var declaration in the catch block.", diagnostics);
         }
 
         private static List<BoundName> Bindings(ParseTreeSymbol root)
@@ -494,6 +552,28 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             return false;
         }
 
+        private static bool IsLabelledFunction(ParseTreeSymbol symbol)
+            => LabelledFunctionDeclaration(symbol) != null;
+
+        private static ParseTreeNonTerminal LabelledFunctionDeclaration(ParseTreeSymbol symbol)
+        {
+            bool labelled = false;
+            while (symbol is ParseTreeNonTerminal node)
+            {
+                string name = Name(node);
+                if (name == "FunctionDeclaration") return labelled ? node : null;
+                if (name == "LabelledStatement")
+                {
+                    labelled = true;
+                    symbol = node[node.Count - 1];
+                    continue;
+                }
+                if (node.Count != 1) return null;
+                symbol = node[0];
+            }
+            return null;
+        }
+
         private static bool IsFunction(string name)
             => JavaScriptSyntax.IsFunction(name);
         private static bool IsClass(string name)
@@ -503,13 +583,31 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                name == "FunctionBody" || name == "Block" || name == "CaseBlock" || name == "ClassStaticBlock";
         private static bool IsIteration(string name)
             => name == "ForStatement" || name == "ForInStatement" || name == "ForOfStatement" || name == "ForInOfStatement" ||
-               name == "ForAwaitOfStatement" || name == "WhileStatement" || name == "DoWhileStatement";
+               name == "ForAwaitOfStatement" || name == "WebForInStatement" || name == "WhileStatement" || name == "DoWhileStatement";
 
         private static void CheckDuplicates(List<BoundName> names, string code, string message, List<JavaScriptDiagnostic> diagnostics)
         {
             var found = new HashSet<string>(StringComparer.Ordinal);
             foreach (var name in names)
                 if (!found.Add(name.Name)) Add(diagnostics, code, message, name.Node);
+        }
+
+        private static void CheckLegacyFunctionDuplicates(List<BoundName> names, List<JavaScriptDiagnostic> diagnostics)
+        {
+            // ECMA-262 14.2.1/14.12.1 permit duplicates only when every declaration
+            // of that name is an ordinary FunctionDeclaration. The declarations
+            // stay lexical, preserving all let/const/class/var collision checks.
+            var found = new Dictionary<string, bool>(StringComparer.Ordinal);
+            foreach (var name in names)
+            {
+                if (found.TryGetValue(name.Name, out bool allOrdinaryFunctions))
+                {
+                    if (!allOrdinaryFunctions || !name.OrdinaryFunction)
+                        Add(diagnostics, "duplicate_binding", "Only ordinary function declarations may repeat a block-scoped name in non-strict web-compatible code.", name.Node);
+                    found[name.Name] = allOrdinaryFunctions && name.OrdinaryFunction;
+                }
+                else found.Add(name.Name, name.OrdinaryFunction);
+            }
         }
 
         private static void CheckIntersection(List<BoundName> left, List<BoundName> right, string message, List<JavaScriptDiagnostic> diagnostics)
@@ -581,9 +679,11 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
 
         private sealed class BoundName
         {
-            internal BoundName(ParseTreeNonTerminal node) { Node = node; Name = Identifier(node); }
+            internal BoundName(ParseTreeNonTerminal node, bool ordinaryFunction = false)
+            { Node = node; Name = Identifier(node); OrdinaryFunction = ordinaryFunction; }
             internal string Name { get; }
             internal ParseTreeNonTerminal Node { get; }
+            internal bool OrdinaryFunction { get; }
         }
 
         private sealed class Declarations

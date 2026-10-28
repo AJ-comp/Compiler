@@ -1,0 +1,52 @@
+# TypeScript 7.0.2 declarations, composed with the JavaScript runtime grammar.
+# Reference: microsoft/typescript-go 2bd066d87f5bafd315be9f40889d0a60b9e58e0b,
+# internal/parser/parser.go parseInterfaceDeclaration, parseTypeAliasDeclaration,
+# parseEnumDeclaration, parseModuleDeclaration and parseModuleOrNamespaceDeclaration.
+# Host predicates select contextual declarations before these productions are entered.
+# Declaration names use the shared runtime BindingIdentifier; type syntax after a
+# type boundary uses the separate TS type productions and their lexical input goal.
+
+TSInterfaceDeclaration : 'interface' NoLineTerminator BindingIdentifier TSTypeParameters?
+                         TSInterfaceHeritage? TSObjectType ;
+TSInterfaceHeritage : 'extends' TSInterfaceHeritageList ;
+TSInterfaceHeritageList : TSInterfaceHeritageReference
+                        | TSInterfaceHeritageList ',' TSInterfaceHeritageReference ;
+# Unlike a type reference inside a type annotation, heritage type arguments may
+# begin on a new line: interface I extends Base \n <Value> {}.
+TSInterfaceHeritageReference : TSQualifiedName TSTypeArguments? ;
+
+TSTypeAliasDeclaration : 'type' NoLineTerminator BindingIdentifier TSTypeParameters? '=' TSType StatementEnd ;
+
+TSEnumDeclaration : 'enum' BindingIdentifier TSEnumBody
+                   | 'const' 'enum' BindingIdentifier TSEnumBody ;
+TSEnumBody : '{' '}' | '{' TSEnumMembers '}' | '{' TSEnumMembers ',' '}' ;
+TSEnumMembers : TSEnumMember | TSEnumMembers ',' TSEnumMember ;
+TSEnumMember : PropertyName | PropertyName '=' AssignmentExpression ;
+
+TSNamespaceDeclaration : TSNamespaceKeyword NoLineTerminator BindingIdentifier TSNamespaceTail
+                        | TSAmbientModuleDeclaration | TSGlobalAugmentation ;
+TSNamespaceKeyword : 'namespace' | 'module' ;
+# Nested dotted namespace components are IdentifierName, so A.default is valid.
+TSNamespaceTail : TSNamespaceBody | '.' PropertyIdentifierName TSNamespaceTail ;
+TSNamespaceBody : '{' '}' | '{' ModuleItemList '}' ;
+TSAmbientModuleDeclaration : 'module' NoLineTerminator StringLiteral TSNamespaceBody
+                            | 'module' NoLineTerminator StringLiteral StatementEnd ;
+TSGlobalAugmentation : 'global' NoLineTerminator TSNamespaceBody ;
+
+# Ambient context is retained in its own concrete-tree wrapper for validation.
+# The host also supplies ambient context for .d.ts input without an explicit declare.
+TSAmbientDeclaration : 'declare' NoLineTerminator TSAmbientTarget ;
+TSAmbientTarget : TSInterfaceDeclaration | TSTypeAliasDeclaration | TSEnumDeclaration
+                 | TSNamespaceDeclaration | TSAmbientFunctionDeclaration
+                 | ClassDeclaration | 'abstract' ClassDeclaration
+                 | VariableStatement | LexicalDeclaration ;
+# Reuse the complete function header and its signature/body decision. Ambient
+# validation rejects a body, including a body starting after a line break.
+TSAmbientFunctionDeclaration : FunctionDeclaration ;
+# A following opening brace belongs to a function implementation even across a
+# line break. Do not split that implementation into a signature and a block.
+TSFunctionSignatureEnd : ';' | {TSFunctionSignatureEnd()}? ;
+
+# This UMD declaration has no runtime expression and is restricted to declaration
+# files by TypeScript validation. It is connected by the host's export production.
+TSNamespaceExportDeclaration : 'export' 'as' 'namespace' BindingIdentifier StatementEnd ;

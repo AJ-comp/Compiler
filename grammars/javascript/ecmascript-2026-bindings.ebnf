@@ -23,16 +23,19 @@ BindingProperty : SingleNameBinding | PropertyName ':' BindingElement ;
 BindingRestProperty : '...' BindingIdentifier ;
 
 # Commas stay in the tree, including elisions such as [,] and [first,,last].
-# The rest production can appear only at the end of the right-recursive list.
+# Completed bindings and elisions reduce through left-recursive lists. The rest
+# production appears only in a final ArrayBindingElements alternative.
 # Therefore [...rest,], [...rest, next], and [...rest = value] have no production.
 # Array rest can contain a nested binding pattern: [...[first, second]].
 ArrayBindingPattern : '[' ']' | '[' ArrayBindingElements ']' ;
-ArrayBindingElements : BindingElement
-                     | BindingElement ','
-                     | BindingElement ',' ArrayBindingElements
-                     | ','
-                     | ',' ArrayBindingElements
-                     | BindingRestElement ;
+ArrayBindingElements : BindingElementList | BindingElision
+                     | BindingElementList ',' | BindingElementList ',' BindingElision
+                     | BindingRestElement | BindingElision BindingRestElement
+                     | BindingElementList ',' BindingRestElement
+                     | BindingElementList ',' BindingElision BindingRestElement ;
+BindingElementList : BindingElement | BindingElision BindingElement
+                   | BindingElementList ',' BindingElement | BindingElementList ',' BindingElision BindingElement ;
+BindingElision : ',' | BindingElision ',' ;
 BindingRestElement : '...' BindingIdentifier | '...' BindingPattern ;
 
 # The EBNF reader spells the empty parameter list with an optional group.

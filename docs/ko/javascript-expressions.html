@@ -49,14 +49,14 @@
       <section id="purpose">
         <p class="kind">ECMAScript 2026 · JavaScript 언어 지원</p>
         <h1>JavaScript 표현식 하나를 파싱하고,<br>정적 문법 오류를 검사합니다.</h1>
-        <p class="lead"><code>JavaScriptExpressionGrammar</code>는 JavaScript 표현식을 읽는 데 필요한 <strong>문법과 토큰 규칙</strong>을 준비합니다. 개발자는 이 문법으로 <code>LALRParser</code>를 만들고, 입력 문자열을 파싱한 뒤 <code>Validate</code>로 정적 문법 오류를 검사합니다.</p>
+        <p class="lead"><code>JavaScriptGrammar</code>에서 Expression 입력을 선택하면 JavaScript 표현식 하나를 읽습니다. 개발자는 이 클래스가 준비한 <strong>문법과 토큰 규칙</strong>으로 <code>LALRParser</code>를 만들고, 입력 문자열을 파싱한 뒤 <code>Validate</code>로 정적 문법 오류를 검사합니다.</p>
         <p>예를 들어 <code>a + b * c</code>를 입력하면 파서는 곱셈이 덧셈보다 먼저 묶이는 구문 트리를 만듭니다. <code>object?.value = 1</code>을 입력하면, 파싱 후 검사가 선택적 체이닝 결과에 대입하려는 오류를 찾아냅니다.</p>
         <p><span class="core">문법 준비 → 입력 파싱 → 정적 오류 검사</span>가 전체 사용 순서입니다. 먼저 어떤 입력을 받는지 확인한 다음, 이 세 단계를 C# 코드로 살펴보겠습니다.</p>
       </section>
 
       <section id="context">
-        <h2>1. 입력은 엄격 모드 Script 문맥의 표현식 하나입니다.</h2>
-        <p>이 문법은 <a href="https://tc39.es/ecma262/2026/multipage/ecmascript-language-expressions.html">ECMAScript 2026, 제17판의 표현식 문법</a>을 기준으로 구성했습니다. 입력 전체를 <strong>엄격 모드 Script 문맥의 표현식 하나</strong>로 읽습니다. 그 표현식 안에 일반·async·제너레이터 함수나 화살표 함수가 나오면 함수의 매개변수와 본문을, 클래스 표현식이 나오면 클래스의 멤버와 본문을 함께 파싱합니다.</p>
+        <h2>1. 이 문서에서는 엄격 모드 Script 문맥의 표현식 하나를 읽습니다.</h2>
+        <p>이 문법은 <a href="https://tc39.es/ecma262/2026/multipage/ecmascript-language-expressions.html">ECMAScript 2026, 제17판의 표현식 문법</a>을 기준으로 구성했습니다. 아래 예제는 <code>inputKind: JavaScriptInputKind.Expression</code>과 기본 엄격 모드를 선택합니다. 따라서 입력 전체를 <strong>엄격 모드 Script 문맥의 표현식 하나</strong>로 읽습니다. 그 표현식 안에 일반·async·제너레이터 함수나 화살표 함수가 나오면 함수의 매개변수와 본문을, 클래스 표현식이 나오면 클래스의 멤버와 본문을 함께 파싱합니다.</p>
         <p>문맥을 정하는 이유는 같은 단어도 사용 위치에 따라 의미가 달라지기 때문입니다. 표현식 최상위와 일반 함수 본문에서 <code>await</code>는 식별자로 사용할 수 있습니다. async 함수·async 화살표 본문에서는 await 표현식의 키워드로 읽습니다. 반면 <code>yield</code>와 <code>let</code>은 엄격 모드에서 예약된 단어이므로 식별자 참조로 사용할 수 없습니다. <code>object.yield</code>처럼 속성 이름으로 쓰는 경우에는 허용합니다.</p>
         <p>입력 문자열에는 다음처럼 표현식 하나를 전달합니다. 여기서 대입식도 표현식에 해당합니다.</p>
         <pre><code>a + b * c
@@ -66,7 +66,7 @@ object?.items[index] ?? fallback
 `안녕하세요, ${name}님!`
 tag`값: ${value}`
 ({name = 'guest'}) =&gt; name</code></pre>
-        <p>위 예제의 각 줄은 별도의 입력입니다. <code>result = 1;</code>처럼 세미콜론으로 끝나는 코드는 표현식 문장이므로, 이 클래스에는 세미콜론을 제외한 <code>result = 1</code>을 전달합니다. 선언과 문장을 여러 개 함께 입력하려면 <a href="javascript-statements.html#usage"><code>JavaScriptScriptGrammar</code></a>를 사용합니다.</p>
+        <p>위 예제의 각 줄은 별도의 입력입니다. <code>result = 1;</code>처럼 세미콜론으로 끝나는 코드는 표현식 문장이므로, Expression 입력에는 세미콜론을 제외한 <code>result = 1</code>을 전달합니다. 선언과 문장을 여러 개 함께 입력하려면 <a href="javascript-statements.html#usage">같은 클래스의 기본 입력 종류인 Script</a>를 사용합니다.</p>
         <div class="table-wrap"><table>
           <caption>이번 표현식 문법이 다루는 구문</caption>
           <thead><tr><th scope="col">구문</th><th scope="col">지원하는 형태</th></tr></thead>
@@ -94,7 +94,7 @@ tag`값: ${value}`
 using Janglim.FrontEnd.Grammars.JavaScript;
 using Janglim.FrontEnd.Parsers.LR;
 
-var language = new JavaScriptExpressionGrammar();
+var language = new JavaScriptGrammar(inputKind: JavaScriptInputKind.Expression);
 var parser = new LALRParser(language.Grammar);</code></pre>
         <p><code>language.Grammar</code>는 EBNF를 읽어 만든 문법 객체입니다. <code>LALRParser</code>는 이 객체로 파싱 테이블을 만듭니다. 다음으로, 입력 문자열을 읽을 <code>source</code>를 준비하고 파서에 전달합니다.</p>
         <pre><code>var input = "result = /ab/g.test(value)";
@@ -152,7 +152,7 @@ Console.WriteLine(tree.AllInputDatas);</code></pre>
 
       <section id="slash">
         <h2>4. 정책은 파싱 문맥에 맞춰 /를 읽을 규칙 묶음을 선택합니다.</h2>
-        <p>지금까지의 사용 코드에는 규칙 묶음을 선택하는 코드가 보이지 않았습니다. <code>JavaScriptExpressionGrammar</code>가 그 설정을 <code>Policy</code>에 미리 준비하고, <code>CreateTokenSource</code>가 반환하는 입력 공급자에 연결하기 때문입니다.</p>
+        <p>지금까지의 사용 코드에는 규칙 묶음을 선택하는 코드가 보이지 않았습니다. <code>JavaScriptGrammar</code>가 그 설정을 <code>Policy</code>에 미리 준비하고, <code>CreateTokenSource</code>가 반환하는 입력 공급자에 연결하기 때문입니다.</p>
         <p>먼저 <code>/</code>의 처리에 필요한 차이부터 보겠습니다. 식별자·숫자·문자열·기호 등의 공통 규칙에 나눗셈 <code>/</code>·대입 <code>/=</code> 규칙을 더하면 <strong>Div 계열</strong>의 묶음이 됩니다. 공통 규칙에 정규식 리터럴 규칙을 더하면 <strong>RegExp 계열</strong>의 묶음이 됩니다.</p>
         <pre><code>a / b</code></pre>
         <p>이 입력에서 파서가 식별자 <code>a</code>를 소비한 상태라고 하겠습니다. 파서는 현재 상태에서 받을 수 있는 토큰 종류와 입력 위치를 <code>context</code>에 담아 정책에 전달합니다. 정책은 그 문맥에서 나눗셈 토큰을 받을 수 있다는 사실을 확인하고 Div 계열의 묶음을 반환합니다. 그러면 파서는 반환된 묶음을 그대로 <code>source.Peek(cursor, goal)</code>에 전달하고, <code>source</code>는 원문의 <code class="token">/</code>를 토큰 하나로 만듭니다.</p>
@@ -276,7 +276,7 @@ AdditiveOperator : '+' | '-' ;</code></pre>
         <p>덧셈식이 곱셈식을 하위 규칙으로 사용하므로 곱셈을 먼저 묶습니다. 같은 덧셈식이 생성 규칙의 왼쪽에 다시 나오므로, 연속된 덧셈과 뺄셈은 왼쪽부터 묶습니다. 이런 구조적 관계는 EBNF 파일에서 확인하고 수정할 수 있습니다.</p>
         <p>식별자의 Unicode 문자 범위처럼 긴 토큰 정규식은 <code>JavaScriptTokenPatterns</code>가 준비합니다. 템플릿 구간의 정규식과 보간 문맥 처리는 <code>JavaScriptTemplateTokens</code>가 담당합니다. 기준 EBNF에는 다음처럼 토큰 정규식이 들어갈 위치를 표시합니다.</p>
         <pre><code>IdentifierName := Identifier "{{IdentifierName}}" ;</code></pre>
-        <p><code>JavaScriptExpressionGrammar</code> 생성자는 표현식 EBNF에 <code>ecmascript-2026-bindings.ebnf</code>·<code>ecmascript-2026-statements.ebnf</code>·<code>ecmascript-2026-classes.ebnf</code>·<code>ecmascript-2026-modules.ebnf</code>·<code>ecmascript-2026-functions.ebnf</code>를 연결합니다. 이어서 <code>JavaScriptFunctionGrammar</code>로 Await 문맥별 규칙을 연결하고, 위 표시를 실제 정규식으로 바꾼 뒤 <code>EbnfGrammarReader</code>에 전달합니다. 함수·클래스의 본문과 동적 import까지 같은 언어 문법으로 읽기 위해 이 파일들을 함께 준비합니다. <code>language.GrammarText</code>로 치환을 마친 EBNF 전체를 확인할 수 있습니다.</p>
+        <p><code>JavaScriptGrammar</code> 생성자는 표현식 EBNF에 <code>ecmascript-2026-bindings.ebnf</code>·<code>ecmascript-2026-statements.ebnf</code>·<code>ecmascript-2026-classes.ebnf</code>·<code>ecmascript-2026-modules.ebnf</code>·<code>ecmascript-2026-functions.ebnf</code>를 연결합니다. 이어서 <code>JavaScriptFunctionGrammar</code>로 Await 문맥별 규칙을 연결하고, 위 표시를 실제 정규식으로 바꾼 뒤 <code>EbnfGrammarReader</code>에 전달합니다. 함수·클래스의 본문과 동적 import까지 같은 언어 문법으로 읽기 위해 이 파일들을 함께 준비합니다. <code>language.GrammarText</code>로 치환을 마친 EBNF 전체를 확인할 수 있습니다.</p>
         <p>기준 파일을 직접 읽어 사용하는 도구도 여섯 문법 파일의 연결·Await 문맥별 전개·토큰 정규식 치환이 필요합니다. 문장 종료 조건을 검사하는 C# 프레디케이트도 등록해야 하므로, 일반 사용에서는 이 구성을 준비하는 공개 클래스를 사용합니다. 연결되는 파일별 역할은 <a href="javascript-statements.html#implementation">함수·문장 문법의 구현 안내</a>에 정리했습니다.</p>
         <h3>Unicode 데이터는 버전을 고정해 빌드 결과를 유지합니다.</h3>
         <p>식별자 문자 범위는 Unicode 17.0.0의 <code>ID_Start</code>·<code>ID_Continue</code>를 사용합니다. 여기에 ECMAScript의 <code>$</code>·<code>_</code> 규칙을 적용합니다. 생성된 문자 범위가 저장소에 포함되어 있으므로, 일반 빌드 중에 데이터를 내려받거나 .NET 런타임의 Unicode 버전에 따라 문자 범위를 바꾸지 않습니다.</p>
@@ -284,9 +284,9 @@ AdditiveOperator : '+' | '-' ;</code></pre>
       </section>
 
       <section id="next-stages">
-        <h2>8. 입력 단위에 따라 Script·Module API를 선택합니다.</h2>
-        <p>앞에서 살펴본 표현식에는 일반 함수·화살표 함수의 본문과 클래스 표현식을 함께 넣을 수 있습니다. 표현식 하나를 넘어서 함수 선언과 여러 문장을 입력하려면 <a href="javascript-statements.html#usage"><code>JavaScriptScriptGrammar</code></a>를 사용합니다. 클래스의 일반 메서드·접근자·필드·private 이름과 <code>super</code>·<code>new.target</code> 검사는 <a href="javascript-classes.html">클래스 문서</a>에서 설명합니다.</p>
-        <p>입력에 정적 import·export가 있다면 시작 문법을 Module로 선택합니다. <a href="javascript-modules.html#api"><code>JavaScriptModuleGrammar</code></a>는 같은 Parsing·Validate 순서로 모듈을 검사하며, <code>import.meta</code>와 top-level await도 그 Module 문맥에서 처리합니다. 동적 import는 표현식이므로 이 문서의 표현식 API와 Script·Module API에서 모두 사용할 수 있습니다.</p>
+        <h2>8. 같은 클래스에서 입력 종류를 바꾸면 Script·Module도 읽습니다.</h2>
+        <p>앞에서 살펴본 표현식에는 일반 함수·화살표 함수의 본문과 클래스 표현식을 함께 넣을 수 있습니다. 표현식 하나를 넘어서 함수 선언과 여러 문장을 입력하려면 <a href="javascript-statements.html#usage"><code>new JavaScriptGrammar()</code></a>로 기본값인 Script를 선택합니다. 클래스의 일반 메서드·접근자·필드·private 이름과 <code>super</code>·<code>new.target</code> 검사는 <a href="javascript-classes.html">클래스 문서</a>에서 설명합니다.</p>
+        <p>입력에 정적 import·export가 있다면 <a href="javascript-modules.html#api"><code>inputKind: JavaScriptInputKind.Module</code></a>을 선택합니다. 같은 Parsing·Validate 순서로 모듈을 검사하며, <code>import.meta</code>와 top-level await도 그 Module 문맥에서 처리합니다. 동적 import는 표현식이므로 Expression·Script·Module 입력에서 모두 사용할 수 있습니다.</p>
         <p>정규식 리터럴도 <code>Validate</code>에서 본문의 <code>RegExpPattern</code> 문법을 검사합니다. 일반·u·v 모드의 그룹·역참조·Unicode 속성과 집합 조건은 <a href="javascript-regexp.html">정규식 본문 문서</a>에서 설명합니다. async 함수·async 화살표와 제너레이터, 객체·클래스의 메서드도 같은 API로 검사합니다. <a href="javascript-functions.html">함수 종류별 문법 문서</a>에서 각 표기를 먼저 설명하고, await·yield의 본문 경계를 차례로 비교합니다.</p>
         <p>각 단계는 문법 파일·토큰 정책·정적 검사와 테스트를 함께 확장합니다. 테스트는 새 구문뿐 아니라 기존 표현식·템플릿·구조 분해와의 조합, 원문·구문 트리의 보존과 입력 간 문맥 분리도 확인합니다.</p>
       </section>

@@ -209,7 +209,12 @@ namespace Janglim.FrontEnd.Grammars
             // and First/Follow calculation can obscure or recursively enter an empty loop.
             GrammarProgressValidation.Validate(this.NonTerminalMultiples);
             PredicateLeftRecursionValidation.Validate(this.NonTerminalMultiples, this.NamedRulesForDiagnostics);
-            if (_normalized) return;
+            if (_normalized)
+            {
+                // 공개된 규칙을 수정한 뒤 다시 호출한 경우에도 검증을 건너뛰지 않습니다.
+                ValidateProductivity(this.NonTerminalMultiples);
+                return;
+            }
 
             // After every rule is defined, normalize the whole grammar once (auto-triggered by the
             // parser before the table is built, so authors need not call it). MeaningUnit/Priority
@@ -223,7 +228,63 @@ namespace Janglim.FrontEnd.Grammars
             }
 
             this.DelNotRefAGSymbols();
+            ValidateProductivity(this.NonTerminalMultiples);
             _normalized = true;
+        }
+
+        private static void ValidateProductivity(IReadOnlyCollection<NonTerminal> rules)
+        {
+            // 유한한 입력(빈 입력 포함)으로 끝낼 수 있다고 확인된 비단말입니다.
+            var finishable = new HashSet<NonTerminal>();
+            bool changed;
+            do
+            {
+                changed = AddFinishableRules(rules, finishable);
+            }
+            while (changed);
+
+            // 추가가 멈춘 뒤에도 남은 비단말에는 종료 가능한 생성 규칙이 없습니다.
+            var invalid = rules
+                .Where(rule => !finishable.Contains(rule))
+                .Select(rule => rule.Name)
+                .ToArray();
+            if (invalid.Length == 0) return;
+
+            throw new GrammarProductivityException(invalid);
+        }
+
+        private static bool AddFinishableRules(
+            IReadOnlyCollection<NonTerminal> rules,
+            HashSet<NonTerminal> finishable)
+        {
+            bool changed = false;
+            foreach (var rule in rules)
+            {
+                if (finishable.Contains(rule)) continue;
+                if (!rule.Any(production => CanFinish(production, finishable))) continue;
+
+                // 종료 가능한 생성 규칙이 하나라도 있으면 그 비단말도 종료 가능합니다.
+                finishable.Add(rule);
+                changed = true;
+            }
+
+            return changed;
+        }
+
+        private static bool CanFinish(
+            NonTerminalConcat production,
+            HashSet<NonTerminal> finishable)
+        {
+            foreach (var symbol in production)
+            {
+                // 단말에는 명시적인 ε도 포함됩니다. 조건 함수는 실행하지 않습니다.
+                if (symbol is Terminal) continue;
+                if (symbol is NonTerminal rule && finishable.Contains(rule)) continue;
+                return false;
+            }
+
+            // 기호가 없는 빈 생성 규칙도 종료 가능합니다.
+            return true;
         }
 
         /// <summary>

@@ -19,7 +19,7 @@ public sealed class JavaScriptExpressionCollection : ICollectionFixture<JavaScri
 
 public sealed class JavaScriptExpressionFixture
 {
-    public JavaScriptExpressionGrammar Language { get; } = new JavaScriptExpressionGrammar();
+    public JavaScriptGrammar Language { get; } = new JavaScriptGrammar(inputKind: JavaScriptInputKind.Expression);
     public LALRParser Parser { get; }
 
     public JavaScriptExpressionFixture() => Parser = new LALRParser(Language.Grammar, false);
@@ -346,7 +346,7 @@ public sealed class JavaScriptExpressionTests
     [Fact]
     public void Fresh_language_factories_own_separate_grammar_terminals_policy_and_sources()
     {
-        var language = new JavaScriptExpressionGrammar();
+        var language = new JavaScriptGrammar(inputKind: JavaScriptInputKind.Expression);
         var first = _fixture.Language.CreateTokenSource("value");
         var repeated = _fixture.Language.CreateTokenSource("value");
         var other = language.CreateTokenSource("value");

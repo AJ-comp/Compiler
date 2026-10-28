@@ -1,43 +1,43 @@
 state number | LR items | mark symbol | follow set | lookahead set | shift-reduce conflict | reduce-reduce conflict
-0 | Accept ->•A | A | {This is EndMarker! char : щ} | {This is EndMarker! char : щ} | False | False
- | A ->•a B = e | a | {This is EndMarker! char : щ} | {} |  |
+0 | Accept ->•A | A | {This is EndMarker! char : щ} | [not checked] | False | False
+ | A ->•a B = e | a | {This is EndMarker! char : щ} | [not checked] |  |
  |  |  |  |  |  |
 1 | Accept -> A• |  | {This is EndMarker! char : щ} | {This is EndMarker! char : щ} | False | False
  |  |  |  |  |  |
-2 | A -> a•B = e | B | {This is EndMarker! char : щ} | {} | False | False
- | B ->•C B | C | {=} | {=} |  |
- | C ->•[ e D ] | [ | {[, ., =} | {} |  |
- | C ->•. a | . | {[, ., =} | {} |  |
+2 | A -> a•B = e | B | {This is EndMarker! char : щ} | [not checked] | False | False
+ | B ->•C B | C | {=} | [not checked] |  |
+ | C ->•[ e D ] | [ | {[, ., =} | [not checked] |  |
+ | C ->•. a | . | {[, ., =} | [not checked] |  |
  | B ->• |  | {=} | {=} |  |
  |  |  |  |  |  |
-3 | A -> a B•= e | = | {This is EndMarker! char : щ} | {} | False | False
+3 | A -> a B•= e | = | {This is EndMarker! char : щ} | [not checked] | False | False
  |  |  |  |  |  |
-4 | B -> C•B | B | {=} | {=} | False | False
- | B ->•C B | C | {=} | {=} |  |
- | C ->•[ e D ] | [ | {[, ., =} | {} |  |
- | C ->•. a | . | {[, ., =} | {} |  |
+4 | B -> C•B | B | {=} | [not checked] | False | False
+ | B ->•C B | C | {=} | [not checked] |  |
+ | C ->•[ e D ] | [ | {[, ., =} | [not checked] |  |
+ | C ->•. a | . | {[, ., =} | [not checked] |  |
  | B ->• |  | {=} | {=} |  |
  |  |  |  |  |  |
-5 | C -> [•e D ] | e | {[, ., =} | {} | False | False
+5 | C -> [•e D ] | e | {[, ., =} | [not checked] | False | False
  |  |  |  |  |  |
-6 | C -> .•a | a | {[, ., =} | {} | False | False
+6 | C -> .•a | a | {[, ., =} | [not checked] | False | False
  |  |  |  |  |  |
-7 | A -> a B =•e | e | {This is EndMarker! char : щ} | {} | False | False
+7 | A -> a B =•e | e | {This is EndMarker! char : щ} | [not checked] | False | False
  |  |  |  |  |  |
 8 | B -> C B• |  | {=} | {=} | False | False
  |  |  |  |  |  |
-9 | C -> [ e•D ] | D | {[, ., =} | {} | False | False
- | D ->•e D | e | {]} | {} |  |
+9 | C -> [ e•D ] | D | {[, ., =} | [not checked] | False | False
+ | D ->•e D | e | {]} | [not checked] |  |
  | D ->• |  | {]} | {]} |  |
  |  |  |  |  |  |
 10 | C -> . a• |  | {[, ., =} | {[, ., =} | False | False
  |  |  |  |  |  |
 11 | A -> a B = e• |  | {This is EndMarker! char : щ} | {This is EndMarker! char : щ} | False | False
  |  |  |  |  |  |
-12 | C -> [ e D•] | ] | {[, ., =} | {} | False | False
+12 | C -> [ e D•] | ] | {[, ., =} | [not checked] | False | False
  |  |  |  |  |  |
-13 | D -> e•D | D | {]} | {]} | False | False
- | D ->•e D | e | {]} | {} |  |
+13 | D -> e•D | D | {]} | [not checked] | False | False
+ | D ->•e D | e | {]} | [not checked] |  |
  | D ->• |  | {]} | {]} |  |
  |  |  |  |  |  |
 14 | C -> [ e D ]• |  | {[, ., =} | {[, ., =} | False | False

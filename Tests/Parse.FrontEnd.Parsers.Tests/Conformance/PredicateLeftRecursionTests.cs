@@ -644,6 +644,16 @@ public class PredicateLeftRecursionTests
         {
             this.absorbOptionals = absorbOptionals;
             configure(this);
+
+            // Unconfigured helper fields that no production references are not
+            // part of the configured test grammar. Keep referenced empty rules.
+            var referenced = NonTerminalMultiples
+                .SelectMany(rule => rule)
+                .SelectMany(production => production)
+                .OfType<NonTerminal>()
+                .ToHashSet();
+            NonTerminalMultiples.RemoveWhere(rule =>
+                rule.Count == 0 && !rule.IsStartSymbol && !referenced.Contains(rule));
         }
     }
 }

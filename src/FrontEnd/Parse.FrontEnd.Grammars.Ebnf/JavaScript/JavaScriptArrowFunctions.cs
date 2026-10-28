@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 namespace Janglim.FrontEnd.Grammars.JavaScript
 {
     /// <summary>
-    /// Refines arrow parameter cover trees into strict binding identifiers and patterns.
+    /// Refines arrow parameter cover trees into context-appropriate binding identifiers and patterns.
     /// Exact-node sets distinguish parameters from ordinary object/array expressions;
     /// defaults and computed property names keep their expression validation rules.
     /// The original concrete tree is preserved and analysis state belongs to one call.
@@ -19,15 +19,24 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
         private readonly HashSet<ParseTreeNonTerminal> patterns = new HashSet<ParseTreeNonTerminal>(NodeIdentity.Instance);
         private readonly HashSet<ParseTreeNonTerminal> initializers = new HashSet<ParseTreeNonTerminal>(NodeIdentity.Instance);
         private readonly List<JavaScriptDiagnostic> diagnostics;
+        private readonly JavaScriptStrictness strictness;
 
-        private JavaScriptArrowFunctions(List<JavaScriptDiagnostic> diagnostics)
+        private JavaScriptArrowFunctions(List<JavaScriptDiagnostic> diagnostics, JavaScriptStrictness strictness)
         {
             this.diagnostics = diagnostics;
+            this.strictness = strictness;
         }
 
         internal static JavaScriptArrowFunctions Analyze(ParseTreeSymbol tree, List<JavaScriptDiagnostic> diagnostics)
+            => Analyze(tree, diagnostics, JavaScriptStrictness.Analyze(tree, JavaScriptMode.Strict));
+
+        internal static JavaScriptArrowFunctions Analyze(ParseTreeSymbol tree, List<JavaScriptDiagnostic> diagnostics,
+            JavaScriptStrictness strictness)
         {
-            var result = new JavaScriptArrowFunctions(diagnostics);
+            if (ReferenceEquals(tree, null)) throw new ArgumentNullException(nameof(tree));
+            if (diagnostics == null) throw new ArgumentNullException(nameof(diagnostics));
+            if (strictness == null) throw new ArgumentNullException(nameof(strictness));
+            var result = new JavaScriptArrowFunctions(diagnostics, strictness);
             var parentheses = new List<ParseTreeNonTerminal>();
             var pending = new Stack<ParseTreeSymbol>();
             pending.Push(tree);
@@ -138,9 +147,11 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                     if (IsIdentifier(node))
                     {
                         names.Add(node);
-                        if (!JavaScriptExpressionValidation.IsSimpleTarget(node) || async &&
-                            JavaScriptTokenPatterns.DecodeIdentifier(node.AllTokens[0].Input) == "await")
-                            Add("invalid_binding_identifier", "This name cannot be bound in strict JavaScript code.", node);
+                        string identifier = JavaScriptTokenPatterns.DecodeIdentifier(node.AllTokens[0].Input);
+                        if (strictness.IsStrict(node) && (identifier == "eval" || identifier == "arguments") ||
+                            strictness.IsReserved(identifier, node) || identifier == "await" &&
+                            (async || JavaScriptSyntax.HasAwaitContext(node)))
+                            Add("invalid_binding_identifier", "This name cannot be bound in this JavaScript context.", node);
                         continue;
                     }
                     if (item.AllowPattern && (name == "ArrayLiteral" || name == "ObjectLiteral"))
@@ -263,7 +274,9 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             while (pending.Count != 0)
             {
                 var symbol = pending.Pop();
-                if (symbol is ParseTreeNonTerminal node && Name(node) == listName) PushChildren(pending, node);
+                if (symbol is ParseTreeNonTerminal node && (Name(node) == listName ||
+                    listName == "ArrayElements" && (Name(node) == "ArrayElementList" || Name(node) == "ArrayElision")))
+                    PushChildren(pending, node);
                 else result.Add(symbol);
             }
             return result;

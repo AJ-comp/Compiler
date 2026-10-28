@@ -191,6 +191,11 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
                 // an ordinary grammar diagnostic, before constructing the parsing table.
                 throw new EbnfException(ex.Message);
             }
+            catch (GrammarProductivityException ex)
+            {
+                // An unproductive rule is an ordinary grammar error, not an internal reader error.
+                throw new EbnfException(ex.Message);
+            }
             foreach (var nt in NonTerminalMultiples)
                 foreach (var single in nt)
                     NonTerminalSingles.Add(single as NonTerminalSingle);

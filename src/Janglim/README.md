@@ -8,22 +8,28 @@ Define a grammar in C# — or in plain EBNF text — and get a full LR pipeline 
 look inside: parse tables, FIRST/FOLLOW, step-by-step parse traces, conflict reports,
 grammar normalization, incremental reparsing, and pluggable error recovery.
 
-> **Engine `0.5.0`.** `LALRParser` is the supported parser.
+> **Engine `0.6.0`.** `LALRParser` is the supported parser.
 > The public API may evolve across `0.x`; SLR and CLR remain experimental and incomplete.
 
 Install the engine:
 
 ```bash
-dotnet add package Janglim --version 0.5.0
+dotnet add package Janglim --version 0.6.0
 ```
 
 See the [release notes](https://github.com/AJ-comp/Compiler/blob/master/RELEASE_NOTES.md) and
 [changelog](https://github.com/AJ-comp/Compiler/blob/master/CHANGELOG.md) for release scope and history.
 
-Version `0.5.0` adds longest-match registered-rule lexing, parser-driven lexical policies and
-independent input cursors, plus ECMAScript 2026 profiles for strict Script expressions, Scripts,
-and Modules. The JavaScript language layer includes templates, destructuring, functions,
-async functions, generators, object methods, classes, modules, and regular-expression validation.
+Version `0.6.0` unifies the JavaScript API, adds non-strict and optional Annex B browser-compatible
+syntax, and introduces TypeScript types, declarations, expression assertions and class extensions.
+It also fixes late LALR lookahead propagation and empty-sequence FIRST results, and rejects
+nonterminals that cannot derive finite input. The JavaScript verification report records the
+pinned ECMAScript 2026 specification and Test262 syntax/early-error audit.
+
+**Upgrade from `0.5.0`:** use `JavaScriptGrammar` in place of `JavaScriptScriptGrammar`.
+For the former Module and Expression classes, select `JavaScriptInputKind.Module` or `.Expression`
+in that constructor. `CanonicalRelation.LookAheadTable` now stores `LookAheadEntry` values;
+read each value's `.LookAhead` property for its terminal set. See the release notes for details.
 
 ## Quick start
 
@@ -126,19 +132,21 @@ consumed-token history.
 The [illustrated guide](https://github.com/AJ-comp/Compiler/blob/master/docs/ko/parser-driven-lexing.html)
 explains the setup, division/regular-expression example, cursor fields, and responsibilities.
 
-## JavaScript profiles
+## JavaScript grammar
 
-Use `Janglim.FrontEnd.Grammars.JavaScript.JavaScriptExpressionGrammar` for one expression in a
-strict Script context, `JavaScriptScriptGrammar` for strict declarations and statements, or
-`JavaScriptModuleGrammar` for Module input. The profiles target ECMAScript 2026 with Unicode 17
-identifiers and provide their own lexical policies and registered predicates.
+Use `Janglim.FrontEnd.Grammars.JavaScript.JavaScriptGrammar` for JavaScript input.
+Its default input kind is Script, which accepts declarations and statements. Set
+`inputKind: JavaScriptInputKind.Module` for a Module, or
+`inputKind: JavaScriptInputKind.Expression` for one expression. The grammar targets
+ECMAScript 2026 with Unicode 17 identifiers and prepares its own lexical policy and
+registered predicates. All input kinds use the same parsing and validation methods.
 
 ```csharp
 using System;
 using Janglim.FrontEnd.Grammars.JavaScript;
 using Janglim.FrontEnd.Parsers.LR;
 
-var language = new JavaScriptScriptGrammar();
+var language = new JavaScriptGrammar();
 var parser = new LALRParser(language.Grammar);
 var parsed = parser.Parsing(language.CreateTokenSource(
     "async function load({path}) { return /ab/g.test(await read(path)); }"));
@@ -165,11 +173,51 @@ JavaScript. Diagnostic offsets and lengths use .NET UTF-16 code units.
 Supported syntax includes templates, destructuring assignments and bindings, ordinary/arrow/async
 functions, generators and async generators, object methods and accessors, classes, imports and
 exports, dynamic import, `import.meta`, top-level await, and automatic semicolon insertion.
-Regular-expression bodies are validated in ordinary, `u`, and `v` modes. The current profile scope
-is strict Script and Module syntax with the documented static checks; non-strict syntax and
-full specification conformance remain follow-up work. See the
-[profile guide](https://github.com/AJ-comp/Compiler/blob/master/grammars/javascript/README.md)
+Regular-expression bodies are validated in ordinary, `u`, and `v` modes. For Script or Expression
+input, the constructor accepts `JavaScriptMode.NonStrict` and the independent `webCompatibility: true`
+option for Annex B browser-compatible syntax. Directive prologues, containing strict code,
+classes and Modules retain their strict rules. `InputKind` exposes the selected input kind;
+Module input always uses `Mode == JavaScriptMode.Strict`. The
+[ECMAScript 2026 verification report](https://github.com/AJ-comp/Compiler/blob/master/docs/ko/javascript-conformance.html)
+records specification traceability, Test262 source-syntax/early-error results, and the tested snapshots.
+See the
+[grammar guide](https://github.com/AJ-comp/Compiler/blob/master/grammars/javascript/README.md)
 for the support matrix, examples, Unicode licensing, and authorship context.
+
+## TypeScript grammar
+
+`Janglim.FrontEnd.Grammars.TypeScript.TypeScriptGrammar` reuses the JavaScript language layer
+and provides `Script`, `Module`, `Expression`, and `Type` input kinds. Script is the default,
+with non-strict mode; Module always applies strict rules.
+
+```csharp
+using System;
+using Janglim.FrontEnd.Grammars.TypeScript;
+using Janglim.FrontEnd.Parsers.LR;
+
+var language = new TypeScriptGrammar();
+var parser = new LALRParser(language.Grammar);
+var parsed = parser.Parsing(language.CreateTokenSource(
+    "class Box<T> { constructor(public value: T) {} }"));
+if (!parsed.Success)
+    throw new InvalidOperationException(parser.FiredException?.Message ?? "Parsing failed.");
+
+var diagnostics = language.Validate(parsed.ToParseTree);
+foreach (var diagnostic in diagnostics)
+    Console.WriteLine($"{diagnostic.Code}: {diagnostic.Message}");
+Console.WriteLine(diagnostics.Count == 0);
+```
+
+The current scope covers type annotations and composite types, interfaces, type aliases, enums,
+namespaces, ambient declarations, typed function signatures, `as`/`satisfies`/non-null assertions,
+and class modifiers, generic heritage, typed members, signatures and constructor parameter properties.
+The original concrete tree retains TypeScript nodes and source positions. Check both parsing and
+validation results; type resolution and assignability belong to a type checker.
+
+**TypeScript support is partial.** Runtime generic calls/construction, typed/generic arrows,
+angle-bracket assertions, type-only import/export forms, `import =`/`export =`, decorators and TSX
+remain follow-up work. See the [TypeScript guide](https://github.com/AJ-comp/Compiler/blob/master/grammars/typescript/README.md)
+for examples, supported type forms and the pinned TypeScript reference.
 
 ## Source trivia and registered predicates
 
@@ -235,9 +283,10 @@ for the detailed behavior and examples.
 - **Supported:** LALR table construction and parsing, FIRST/FOLLOW, conflict reports, parse traces,
   EBNF operators, grammar normalization, semantic tags and ASTs, incremental reparsing, and
   pluggable error recovery, typed EBNF tokens, token-boundary trivia, registered C# predicates,
-  selective guarded-conflict prediction, and grammar progress diagnostics. Version `0.5.0` adds
-  longest-match registered-rule lexing, parser-driven token sources and lexical policies, and
-  the documented ECMAScript 2026 strict Script/Module profiles.
+  selective guarded-conflict prediction, grammar progress/productivity diagnostics, longest-match
+  registered-rule lexing, and parser-driven token sources and lexical policies. The language layer
+  provides ECMAScript 2026 Script/Module/Expression input with selectable Script strictness and
+  browser compatibility, plus the TypeScript subset described above.
 - **Experimental and incomplete:** SLR builds reduce-deficient tables; CLR has unimplemented
   behavior. Use `LALRParser` for the supported parsing path.
 - **Build grammars sequentially:** grammar generation uses process-global state, so concurrent

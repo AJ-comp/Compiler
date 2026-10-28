@@ -57,12 +57,12 @@
 
       <section id="api">
         <h2>1. 기존 Parsing → Validate 순서로 새 함수 구문도 검사합니다.</h2>
-        <p>여러 선언과 문장을 포함한 엄격 모드 Script에는 <code>JavaScriptScriptGrammar</code>를 사용합니다. 다음 예제는 async 함수와 제너레이터를 같은 입력에서 파싱합니다.</p>
+        <p><code>JavaScriptGrammar</code>의 기본 입력은 여러 선언과 문장을 포함한 엄격 모드 Script입니다. 다음 예제는 이 기본 설정으로 async 함수와 제너레이터를 같은 입력에서 파싱합니다.</p>
         <pre><code>using System;
 using Janglim.FrontEnd.Grammars.JavaScript;
 using Janglim.FrontEnd.Parsers.LR;
 
-var language = new JavaScriptScriptGrammar();
+var language = new JavaScriptGrammar();
 var parser = new LALRParser(language.Grammar);
 var input = @"
 async function load(path) {
@@ -89,7 +89,7 @@ foreach (var diagnostic in diagnostics)
 if (diagnostics.Count == 0)
     Console.WriteLine("문법 검사 통과");</code></pre>
         <p>파싱이 성공하면 트리에 함수 종류, 매개변수와 본문이 남습니다. <code>Validate</code>는 그 구조를 사용해 정적 오류를 검사합니다. <span class="core">개발자는 파싱이 성공했고 정적 오류도 없는지 함께 확인해야 합니다.</span> 진단의 위치와 길이는 .NET 문자열의 UTF-16 코드 단위입니다.</p>
-        <p>함수 표현식 하나에는 <code>JavaScriptExpressionGrammar</code>를 사용하고, import·export가 있는 파일에는 <code>JavaScriptModuleGrammar</code>를 사용합니다. 세 진입점은 같은 사용 순서를 제공합니다. 이 계층이 만드는 결과는 구문 트리와 문법 진단이며, 입력한 함수를 호출하거나 비동기 작업을 실행하지 않습니다.</p>
+        <p>함수 표현식 하나를 읽을 때에는 같은 클래스의 <code>inputKind</code>를 <code>JavaScriptInputKind.Expression</code>으로 지정합니다. import·export가 있는 파일에는 <code>JavaScriptInputKind.Module</code>을 지정합니다. 입력 종류에 관계없이 Parsing과 Validate의 순서는 같으며, 그 결과로 구문 트리와 문법 진단을 받습니다. 입력한 함수를 호출하거나 비동기 작업을 실행하는 과정은 포함하지 않습니다.</p>
       </section>
 
       <section id="async">
